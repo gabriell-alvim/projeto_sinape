@@ -1,0 +1,2193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SINAPE — Painel de Licitações (Colaborativo)</title>
+<style>
+:root {
+  --teal:      #0d5c63;
+  --teal-mid:  #1a8a8a;
+  --teal-l:    #e6f4f4;
+  --teal-ll:   #f0fafa;
+  --amber:     #b45309;
+  --amber-l:   #fdf3e7;
+  --red:       #b91c1c;
+  --red-l:     #fef2f2;
+  --slate:     #1e293b;
+  --slate-mid: #475569;
+  --slate-l:   #94a3b8;
+  --border:    #d1dae6;
+  --bg:        #f1f5f9;
+  --white:     #ffffff;
+  --green:     #15803d;
+  --green-l:   #dcfce7;
+  --violet:    #6d28d9;
+  --violet-l:  #f3e8ff;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg); color: var(--slate); font-size:14px; min-height:100vh;
+}
+button { font-family:inherit; cursor:pointer; }
+input, select, textarea { font-family:inherit; }
+
+/* ── TOPBAR ── */
+.topbar {
+  background: var(--teal); color:#fff;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  padding:0 20px; height:52px; position:sticky; top:0; z-index:100;
+  box-shadow:0 2px 8px rgba(0,0,0,.18);
+}
+.topbar-brand { font-weight:700; font-size:1rem; letter-spacing:.04em; display:flex; align-items:center; gap:10px; cursor:pointer; white-space:nowrap; }
+.topbar-brand .dot { width:8px; height:8px; border-radius:50%; background:#5eead4; }
+.breadcrumb { font-size:.8rem; color:#bfe9e8; display:flex; align-items:center; gap:6px; flex:1; min-width:0; overflow:hidden; }
+.breadcrumb span.sep { opacity:.5; }
+.breadcrumb span.current { color:#fff; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.breadcrumb span.link { cursor:pointer; white-space:nowrap; }
+.breadcrumb span.link:hover { text-decoration:underline; }
+.sync-pill {
+  display:flex; align-items:center; gap:6px; font-size:.72rem; font-weight:600;
+  padding:4px 10px; border-radius:20px; background:rgba(255,255,255,.12); color:#e6fffb; white-space:nowrap;
+}
+.sync-pill .sdot { width:8px; height:8px; border-radius:50%; background:#94a3b8; flex:none; }
+.sync-pill.ok .sdot   { background:#4ade80; box-shadow:0 0 6px #4ade80; }
+.sync-pill.err .sdot  { background:#f87171; box-shadow:0 0 6px #f87171; }
+.sync-pill.busy .sdot { background:#fbbf24; }
+.content { padding:20px 24px 60px; max-width:1160px; margin:0 auto; }
+.view { display:none; }
+.view.active { display:block; }
+
+/* ── HOME ── */
+.home-hero { text-align:center; margin:34px 0 26px; }
+.home-hero h1 { font-size:1.5rem; color:var(--teal); }
+.home-hero p  { color:var(--slate-mid); margin-top:6px; font-size:.9rem; }
+.home-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; max-width:760px; margin:0 auto; }
+.home-card {
+  background:var(--white); border:1px solid var(--border); border-radius:14px;
+  padding:28px 24px; text-align:center; cursor:pointer; transition:all .15s;
+}
+.home-card:hover { border-color:var(--teal-mid); box-shadow:0 6px 18px rgba(13,92,99,.12); transform:translateY(-2px); }
+.home-card .hc-icon { font-size:2rem; }
+.home-card h3 { margin-top:10px; color:var(--teal); }
+.home-card p { font-size:.8rem; color:var(--slate-mid); margin-top:6px; }
+.home-card .hc-count { display:inline-block; margin-top:12px; background:var(--teal-l); color:var(--teal); font-weight:700; padding:3px 12px; border-radius:14px; font-size:.78rem; }
+.home-fluxo { max-width:760px; margin:26px auto 0; background:var(--white); border:1px dashed var(--border); border-radius:12px; padding:14px 18px; display:flex; gap:14px; align-items:center; flex-wrap:wrap; justify-content:center; }
+.home-fluxo .passo { font-size:.78rem; color:var(--slate-mid); display:flex; align-items:center; gap:6px; }
+.home-fluxo .passo b { color:var(--teal); }
+.home-fluxo .seta { color:var(--slate-l); }
+
+/* ── LISTA ── */
+.list-header { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:16px; flex-wrap:wrap; }
+.list-header h2 { color:var(--teal); font-size:1.15rem; }
+.list-header .lh-actions { display:flex; gap:8px; flex-wrap:wrap; }
+.search-box { border:1px solid var(--border); border-radius:8px; padding:8px 12px; font-size:.82rem; min-width:220px; background:var(--white); }
+.process-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:14px; }
+.proc-card {
+  background:var(--white); border:1px solid var(--border); border-radius:12px; padding:16px;
+  cursor:pointer; transition:all .15s; position:relative; display:flex; flex-direction:column; gap:8px;
+}
+.proc-card:hover { border-color:var(--teal-mid); box-shadow:0 4px 14px rgba(13,92,99,.1); }
+.proc-card .pc-nome { font-weight:700; font-size:.9rem; color:var(--slate); padding-right:26px; }
+.proc-card .pc-meta { font-size:.72rem; color:var(--slate-l); display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+.chip { display:inline-flex; align-items:center; gap:4px; font-size:.68rem; font-weight:700; padding:2px 9px; border-radius:12px; }
+.chip.st-pendente      { background:#e2e8f0; color:#475569; }
+.chip.st-em_analise    { background:var(--amber-l); color:var(--amber); }
+.chip.st-participar    { background:var(--green-l); color:var(--green); }
+.chip.st-nao_participar{ background:#f1f5f9; color:#64748b; text-decoration:line-through; }
+.chip.st-em_disputa    { background:#e0f2fe; color:#0369a1; }
+.chip.st-vencido       { background:var(--green-l); color:var(--green); }
+.chip.st-perdido       { background:var(--red-l); color:var(--red); }
+.chip.ia               { background:var(--violet-l); color:var(--violet); }
+.chip.ref              { background:var(--teal-ll); color:var(--teal); font-weight:600; }
+.pc-prog { height:5px; background:#e2e8f0; border-radius:4px; overflow:hidden; }
+.pc-prog .fill { height:100%; background:linear-gradient(90deg,var(--teal-mid),var(--teal)); border-radius:4px; transition:width .3s; }
+.pc-actions { display:flex; gap:6px; margin-top:2px; }
+.pc-del { position:absolute; top:10px; right:10px; border:none; background:none; color:var(--slate-l); font-size:1rem; padding:2px 6px; border-radius:6px; }
+.pc-del:hover { background:var(--red-l); color:var(--red); }
+.empty-state { text-align:center; padding:60px 20px; color:var(--slate-l); }
+.empty-state .icon { font-size:2.4rem; margin-bottom:10px; }
+.banner-info {
+  background:var(--teal-ll); border:1px solid var(--teal-mid); color:var(--teal);
+  border-radius:10px; padding:12px 16px; font-size:.82rem; margin-bottom:16px;
+  display:flex; align-items:center; gap:12px; flex-wrap:wrap; justify-content:space-between;
+}
+.banner-warn { background:var(--amber-l); border-color:var(--amber); color:var(--amber); }
+
+/* ── BOTÕES ── */
+.btn-primary { background:var(--teal); color:#fff; border:none; border-radius:8px; padding:9px 16px; font-weight:700; font-size:.82rem; }
+.btn-primary:hover { background:var(--teal-mid); }
+.btn-outline { background:var(--white); color:var(--teal); border:1px solid var(--teal-mid); border-radius:8px; padding:8px 14px; font-weight:700; font-size:.8rem; }
+.btn-outline:hover { background:var(--teal-ll); }
+.btn-ghost { background:none; color:var(--slate-mid); border:1px solid var(--border); border-radius:8px; padding:8px 14px; font-size:.8rem; }
+.btn-ghost:hover { background:#f8fafc; }
+.btn-sm { border:1px solid var(--border); background:var(--white); color:var(--slate-mid); border-radius:7px; padding:5px 10px; font-size:.72rem; font-weight:600; }
+.btn-sm:hover { background:#f8fafc; }
+.btn-sm.danger { color:var(--red); border-color:#fecaca; }
+.btn-sm.danger:hover { background:var(--red-l); }
+.btn-sm.violet { color:var(--violet); border-color:#ddd6fe; }
+.btn-sm.violet:hover { background:var(--violet-l); }
+.btn-add-row { border:1px dashed var(--teal-mid); color:var(--teal); background:var(--teal-ll); border-radius:8px; padding:6px 12px; font-size:.75rem; font-weight:700; margin-top:8px; }
+.btn-add-row:hover { background:var(--teal-l); }
+
+/* ── PROCESSO: ABAS ── */
+.main-tabs { display:flex; gap:6px; border-bottom:2px solid var(--border); margin-bottom:14px; flex-wrap:wrap; }
+.main-tab {
+  border:none; background:none; padding:10px 16px; font-size:.84rem; font-weight:700; color:var(--slate-mid);
+  border-bottom:3px solid transparent; margin-bottom:-2px;
+}
+.main-tab.active { color:var(--teal); border-bottom-color:var(--teal); }
+.panel { display:none; }
+.panel.active { display:block; }
+.save-row { display:flex; align-items:center; justify-content:flex-end; gap:10px; margin-bottom:10px; flex-wrap:wrap; }
+.save-status { font-size:.72rem; color:var(--slate-l); font-weight:600; }
+.save-status.saving { color:var(--amber); }
+.save-status.saved  { color:var(--green); }
+.save-status.error  { color:var(--red); }
+.source-banner {
+  background:var(--violet-l); border:1px solid #ddd6fe; color:var(--violet);
+  border-radius:10px; padding:10px 14px; font-size:.76rem; margin-bottom:12px; line-height:1.5;
+}
+.anexos-box {
+  background:var(--white); border:1px solid var(--border); border-radius:10px;
+  padding:10px 14px; font-size:.78rem; margin-bottom:12px; line-height:1.6;
+}
+.anexo-item { padding:3px 0; }
+.filter-bar { display:flex; gap:6px; flex-wrap:wrap; align-items:center; margin-bottom:14px; }
+.filter-bar-label { font-size:.74rem; color:var(--slate-l); font-weight:700; margin-right:2px; }
+.fbtn { border:1px solid var(--border); background:var(--white); color:var(--slate-mid); border-radius:16px; padding:5px 12px; font-size:.72rem; font-weight:600; }
+.fbtn.active { background:var(--teal); border-color:var(--teal); color:#fff; }
+
+/* ── SEÇÕES ── */
+.sec-card { background:var(--white); border:1px solid var(--border); border-radius:12px; margin-bottom:14px; overflow:hidden; }
+.sec-card.hidden { display:none; }
+.sec-head {
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  padding:12px 16px; cursor:pointer; background:var(--teal-ll); border-bottom:1px solid var(--border);
+}
+.sec-head.amber { background:var(--amber-l); }
+.sec-head.red   { background:var(--red-l); }
+.sec-head.violet{ background:var(--violet-l); }
+.sec-title { font-weight:700; font-size:.86rem; color:var(--slate); display:flex; gap:8px; align-items:center; }
+.sec-badge { font-size:.66rem; font-weight:700; background:var(--teal-l); color:var(--teal); padding:2px 9px; border-radius:12px; white-space:nowrap; }
+.sec-badge.amber { background:#fde8cf; color:var(--amber); }
+.sec-badge.red   { background:#fee2e2; color:var(--red); }
+.sec-badge.violet{ background:#ede9fe; color:var(--violet); }
+.sec-chevron { color:var(--slate-l); transition:transform .2s; }
+.sec-card.collapsed .sec-body { display:none; }
+.sec-card.collapsed .sec-chevron { transform:rotate(-90deg); }
+.sec-body { padding:4px 16px 16px; }
+.sec-divider { font-size:.72rem; font-weight:800; color:var(--teal); text-transform:uppercase; letter-spacing:.05em; border-bottom:1px solid var(--border); padding:14px 0 6px; margin-bottom:4px; }
+
+/* ── CAMPOS ── */
+.field-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px 14px; padding-top:14px; }
+.field-grid.cols-2 { grid-template-columns:repeat(2,1fr); }
+.field { display:flex; flex-direction:column; gap:4px; }
+.field.span2 { grid-column:span 2; }
+.field.span-full { grid-column:1 / -1; }
+.field label { font-size:.7rem; font-weight:700; color:var(--slate-mid); }
+.field input, .field select, .field textarea {
+  border:1px solid var(--border); border-radius:7px; padding:7px 9px; font-size:.8rem; background:var(--white); color:var(--slate);
+}
+.field textarea { min-height:64px; resize:vertical; }
+.field input:focus, .field select:focus, .field textarea:focus { outline:none; border-color:var(--teal-mid); box-shadow:0 0 0 2px rgba(26,138,138,.15); }
+.auto-filled { background:var(--violet-l) !important; border-color:#c4b5fd !important; }
+.field .hint-ia { font-size:.64rem; color:var(--violet); }
+
+/* ── TABELAS EDITÁVEIS ── */
+.tbl-wrap { overflow-x:auto; margin-top:8px; border:1px solid var(--border); border-radius:8px; }
+.edit-table { width:100%; border-collapse:collapse; font-size:.76rem; min-width:640px; }
+.edit-table th { background:#f8fafc; text-align:left; padding:7px 8px; border-bottom:1px solid var(--border); font-size:.68rem; color:var(--slate-mid); white-space:nowrap; }
+.edit-table td { padding:4px 5px; border-bottom:1px solid #eef2f7; vertical-align:top; }
+.edit-table input, .edit-table select { width:100%; border:1px solid transparent; border-radius:5px; padding:5px 6px; font-size:.76rem; background:transparent; }
+.edit-table input:focus, .edit-table select:focus { outline:none; border-color:var(--teal-mid); background:var(--white); }
+.row-del { border:none; background:none; color:var(--slate-l); font-size:.9rem; padding:2px 6px; border-radius:5px; }
+.row-del:hover { color:var(--red); background:var(--red-l); }
+
+/* ── RISCOS ── */
+.risk-grid { display:flex; flex-direction:column; gap:10px; padding-top:12px; }
+.risk-item { display:flex; gap:10px; align-items:flex-start; background:#fafbfd; border:1px solid var(--border); border-radius:10px; padding:10px; }
+.risk-item select { border:1px solid var(--border); border-radius:6px; padding:6px; font-size:.76rem; font-weight:700; width:100px; flex:none; }
+.risk-item select.n-Alto  { color:var(--red); background:var(--red-l); border-color:#fecaca; }
+.risk-item select.n-Médio { color:var(--amber); background:var(--amber-l); border-color:#fde0b8; }
+.risk-item select.n-Baixo { color:var(--green); background:var(--green-l); border-color:#bbf7d0; }
+.risk-item textarea { flex:1; border:1px solid var(--border); border-radius:6px; padding:7px 9px; font-size:.78rem; min-height:44px; resize:vertical; }
+
+/* ── CHECKLIST ── */
+.prog-wrap { height:8px; background:#e2e8f0; border-radius:6px; overflow:hidden; }
+.prog-fill { height:100%; width:0; background:linear-gradient(90deg,var(--teal-mid),var(--teal)); border-radius:6px; transition:width .3s; }
+.prog-label { font-size:.72rem; color:var(--slate-mid); font-weight:600; margin-top:6px; }
+.chk-item { border-bottom:1px solid #eef2f7; padding:12px 0; }
+.chk-item:last-child { border-bottom:none; }
+.chk-text { font-size:.8rem; color:var(--slate); line-height:1.5; }
+.chk-refrow { display:flex; gap:6px; margin-top:5px; flex-wrap:wrap; }
+.chk-controls { display:flex; gap:8px; margin-top:8px; flex-wrap:wrap; }
+.chk-lbl {
+  display:inline-flex; align-items:center; gap:5px; font-size:.72rem; font-weight:600; color:var(--slate-mid);
+  border:1px solid var(--border); border-radius:16px; padding:4px 10px; cursor:pointer; user-select:none; background:var(--white);
+}
+.chk-lbl input { accent-color:var(--teal); }
+.chk-lbl.checked { background:var(--green-l); border-color:#86efac; color:var(--green); }
+.chk-lbl.checked-neg { background:var(--red-l); border-color:#fca5a5; color:var(--red); }
+.nota-field { width:100%; margin-top:8px; border:1px dashed var(--border); border-radius:7px; padding:6px 9px; font-size:.74rem; min-height:34px; resize:vertical; background:#fcfdff; }
+.nota-field:focus { outline:none; border-color:var(--teal-mid); border-style:solid; }
+.obrig-star { color:var(--amber); font-weight:800; }
+
+/* ── MODAIS ── */
+.modal-overlay { display:none; position:fixed; inset:0; background:rgba(15,23,42,.5); z-index:200; align-items:center; justify-content:center; padding:16px; }
+.modal-overlay.open { display:flex; }
+.modal-box { background:var(--white); border-radius:14px; padding:22px; width:100%; max-width:520px; max-height:92vh; overflow-y:auto; box-shadow:0 20px 50px rgba(0,0,0,.25); }
+.modal-box.wide { max-width:720px; }
+.modal-box h3 { color:var(--teal); margin-bottom:6px; }
+.modal-box .hint { font-size:.76rem; color:var(--slate-mid); margin-bottom:12px; line-height:1.5; }
+.modal-box input[type=text], .modal-box select, .modal-box textarea {
+  width:100%; border:1px solid var(--border); border-radius:8px; padding:9px 11px; font-size:.82rem; margin-bottom:10px;
+}
+.modal-box textarea.json-area { min-height:220px; font-family:ui-monospace,Consolas,monospace; font-size:.72rem; }
+.modal-actions { display:flex; justify-content:flex-end; gap:8px; margin-top:6px; }
+.import-preview { background:var(--teal-ll); border:1px solid var(--teal-mid); border-radius:8px; padding:10px 12px; font-size:.76rem; color:var(--teal); margin-bottom:10px; display:none; line-height:1.6; }
+.import-error { background:var(--red-l); border:1px solid #fca5a5; border-radius:8px; padding:10px 12px; font-size:.76rem; color:var(--red); margin-bottom:10px; display:none; }
+.radio-row { display:flex; gap:14px; margin-bottom:12px; font-size:.8rem; }
+.radio-row label { display:flex; gap:6px; align-items:center; cursor:pointer; }
+
+/* ── TOAST ── */
+#toast {
+  position:fixed; bottom:22px; left:50%; transform:translateX(-50%) translateY(80px);
+  background:var(--slate); color:#fff; padding:10px 18px; border-radius:10px; font-size:.8rem; font-weight:600;
+  box-shadow:0 8px 24px rgba(0,0,0,.25); opacity:0; transition:all .25s; z-index:300; max-width:90vw; text-align:center;
+}
+#toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+
+@media (max-width:860px){
+  .field-grid, .field-grid.cols-2 { grid-template-columns:1fr 1fr; }
+  .content { padding:14px 12px 60px; }
+}
+@media (max-width:620px){
+  .home-grid { grid-template-columns:1fr; }
+  .field-grid, .field-grid.cols-2 { grid-template-columns:1fr; }
+  .field.span2 { grid-column:auto; }
+  .breadcrumb { display:none; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-brand" onclick="goHome()"><span class="dot"></span> SINAPE · Painel de Licitações</div>
+  <div class="breadcrumb" id="breadcrumb"></div>
+  <div class="sync-pill" id="sync-pill"><span class="sdot"></span><span id="sync-text">Iniciando…</span></div>
+</div>
+
+<div class="content">
+
+  <!-- ═══════════ VIEW: HOME ═══════════ -->
+  <div class="view active" id="view-home">
+    <div class="home-hero">
+      <h1>Portfólio de Processos Comerciais</h1>
+      <p>Painel colaborativo — licitações públicas (Lei 14.133/2021) e contratações privadas (concessionárias)</p>
+    </div>
+    <div class="home-grid">
+      <div class="home-card" onclick="openList('publico')">
+        <div class="hc-icon">🏛️</div>
+        <h3>Processos Públicos</h3>
+        <p>Pregões, concorrências e dispensas — órgãos e entidades públicas</p>
+        <span class="hc-count" id="count-publico">0 processos</span>
+      </div>
+      <div class="home-card" onclick="openList('privado')">
+        <div class="hc-icon">🏢</div>
+        <h3>Processos Privados</h3>
+        <p>Cartas-convite, RFQs e cotações — concessionárias e empresas</p>
+        <span class="hc-count" id="count-privado">0 processos</span>
+      </div>
+    </div>
+    <div class="home-fluxo">
+      <span class="passo"><b>1.</b> Envie o edital/TR para a IA com o prompt do painel</span>
+      <span class="seta">→</span>
+      <span class="passo"><b>2.</b> A IA devolve o processo em JSON, com campos e checklist próprios do edital</span>
+      <span class="seta">→</span>
+      <span class="passo"><b>3.</b> Importe aqui (ou via API) e toda a equipe vê na hora</span>
+    </div>
+  </div>
+
+  <!-- ═══════════ VIEW: LISTA ═══════════ -->
+  <div class="view" id="view-list">
+    <div id="list-banner-area"></div>
+    <div class="list-header">
+      <h2 id="list-title">Processos</h2>
+      <div class="lh-actions">
+        <input type="text" class="search-box" id="search-box" placeholder="🔎 Buscar por nome, órgão, nº…" oninput="renderProcessGrid()">
+        <button class="btn-outline" onclick="openImportModal()">📥 Importar da IA (JSON)</button>
+        <button class="btn-outline" onclick="copiarPromptIA()">🤖 Copiar prompt p/ IA</button>
+        <button class="btn-primary" onclick="openNewProcessModal()">+ Novo processo</button>
+      </div>
+    </div>
+    <div class="process-grid" id="process-grid"></div>
+    <div class="empty-state" id="empty-state" style="display:none;">
+      <div class="icon">📂</div>
+      <p>Nenhum processo cadastrado nesta categoria.</p>
+      <p style="font-size:.76rem;margin-top:6px;">Crie manualmente ou importe um JSON gerado pela IA a partir do edital.</p>
+    </div>
+  </div>
+
+  <!-- ═══════════ VIEW: PROCESSO ═══════════ -->
+  <div class="view" id="view-process">
+    <div class="main-tabs">
+      <button class="main-tab active" id="tab-analise" onclick="switchProcessTab('analise')">📋 Análise Crítica</button>
+      <button class="main-tab" id="tab-checklist" onclick="switchProcessTab('checklist')">✅ Checklist do Edital</button>
+    </div>
+    <div id="source-banner-area"></div>
+    <div id="anexos-area"></div>
+
+    <div class="panel active" id="panel-analise">
+      <div class="save-row">
+        <span class="save-status" id="save-status">Pronto</span>
+        <button class="btn-sm violet" onclick="exportarProcesso()">⬇ Exportar JSON</button>
+        <button class="btn-sm" onclick="sincronizarAgora()">🔄 Sincronizar</button>
+      </div>
+      <div class="filter-bar" id="filter-bar"></div>
+      <div id="analise-root"></div>
+    </div>
+
+    <div class="panel" id="panel-checklist">
+      <div class="save-row">
+        <span class="save-status" id="save-status-chk">&nbsp;</span>
+      </div>
+      <div class="prog-wrap"><div class="prog-fill" id="prog-fill"></div></div>
+      <div class="prog-label" id="prog-label"></div>
+      <div style="height:14px;"></div>
+      <div id="checklist-root"></div>
+    </div>
+  </div>
+
+</div><!-- /content -->
+
+<!-- MODAL: NOVO PROCESSO MANUAL -->
+<div class="modal-overlay" id="modal-novo">
+  <div class="modal-box">
+    <h3>Novo processo (manual)</h3>
+    <p class="hint">O processo será criado com o modelo padrão SINAPE de análise e checklist. Para um processo com campos específicos do edital, use <b>Importar da IA</b>.</p>
+    <input type="text" id="input-novo-nome" placeholder='Nome do processo — ex.: "Pregão 525/2026 — DETRAN/PR"' maxlength="140">
+    <div class="radio-row">
+      <label><input type="radio" name="novo-tipo" value="publico" checked> 🏛️ Público</label>
+      <label><input type="radio" name="novo-tipo" value="privado"> 🏢 Privado</label>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-ghost" onclick="fecharModal('modal-novo')">Cancelar</button>
+      <button class="btn-primary" onclick="confirmNewProcess()">Criar processo</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: IMPORTAR JSON DA IA -->
+<div class="modal-overlay" id="modal-import">
+  <div class="modal-box wide">
+    <h3>📥 Importar processo gerado por IA</h3>
+    <p class="hint">Cole abaixo o JSON gerado pelo Claude (ou outra IA) a partir do edital / termo de referência. O painel cria o processo com os campos e o checklist específicos identificados nos documentos. Aceita um processo ou uma lista de processos.</p>
+    <textarea class="json-area" id="import-json" placeholder='{ "nome": "Pregão Eletrônico nº ...", "type": "publico", ... }'></textarea>
+    <div class="import-error" id="import-error"></div>
+    <div class="import-preview" id="import-preview"></div>
+    <div class="modal-actions">
+      <button class="btn-ghost" onclick="fecharModal('modal-import')">Cancelar</button>
+      <button class="btn-outline" onclick="validarImport()">Validar</button>
+      <button class="btn-primary" id="btn-confirm-import" onclick="confirmarImport()" disabled>Importar</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+/* ════════════════════════════════════════════════════════════════
+   CONFIGURAÇÃO — ver GUIA_DOCKER.md
+   ════════════════════════════════════════════════════════════════ */
+const CONFIG = {
+  API_URL: '',    // backend no mesmo container (Docker) — deixe '' para modo local (só no navegador)
+  API_TOKEN: '',      // mesmo valor da variável de ambiente TOKEN do container
+  POLL_SEGUNDOS: 20,  // intervalo de sincronização automática entre usuários
+  USUARIO: ''         // opcional: nome de quem usa este navegador (ex.: 'Gabriel')
+};
+</script>
+
+<script>
+/* ════════════════════════════════════════════════════════════════
+   MODELO PADRÃO SINAPE — seções da Análise Crítica
+   Processos criados por IA podem ACRESCENTAR seções (schemaCustom.secoesExtras),
+   OCULTAR campos/seções que não se aplicam e SUBSTITUIR o checklist.
+   ════════════════════════════════════════════════════════════════ */
+const OPC = {
+  modalidade: ['Selecionar...','Pregão Eletrônico','Concorrência Eletrônica','Dispensa de Licitação','Inexigibilidade','Carta-convite (privado)','RFQ / Cotação privada'],
+  portal: ['Selecionar...','Compras.gov.br','BLL','Licitações-e (BB)','Portal próprio estadual','Coupa','SAP Ariba','Nimbi','Outro'],
+  statusProc: ['Selecionar...','Em análise','Decidido participar','Decidido não participar','Impugnado','Em disputa','Vencido','Perdido'],
+  refPreco: ['Selecionar...','SINAPI','SICRO','DNIT','ORSE','Composição própria do órgão/contratante'],
+  desone: ['Selecionar...','Desonerado','Não desonerado','Ambas as versões','Não aplicável'],
+  esRegime: ['Selecionar...','Horista — desonerado','Horista — não desonerado','Mensalista — desonerado','Mensalista — não desonerado','Não informado no edital'],
+  criterio: ['Selecionar...','Menor preço global','Menor preço por lote','Menor preço unitário','Técnica e preço','Maior desconto','Preço Unitário (RFQ privado)'],
+  prorroga: ['Selecionar...','Sim — até 10 anos (serviços contínuos)','Sim — prazo definido no edital','Não previsto'],
+  simNao: ['Sim','Não'],
+  simNaoMenc: ['Selecionar...','Sim','Não','Não menciona'],
+  simNaoVer: [{value:'',label:'—'},'Sim','Não','Verificar'],
+  atendeParc: [{value:'',label:'—'},'Sim','Não','Parcialmente'],
+  porte: [{value:'',label:'Sem restrição'},'ME/EPP obrigatório','Qualquer porte'],
+  subcontr: ['Selecionar...','Sim — até % definido','Não','Não menciona'],
+  decisao: [{value:'',label:'Aguardando análise'},'✅ Participar — sem ressalvas','⚡ Participar — com ressalvas','❌ Não participar','🔄 Impugnar/questionar antes de decidir']
+};
+
+const TEMPLATE_PADRAO = [
+  { id:'geral', tag:'geral', icone:'📌', titulo:'1. Dados Gerais do Processo', badge:'Identificação',
+    campos:[
+      {key:'geral_orgao', label:'Órgão / Entidade contratante', tipo:'text', placeholder:'Ex.: DETRAN/PR, Motiva/RioSP'},
+      {key:'geral_modalidade', label:'Modalidade', tipo:'select', opcoes:OPC.modalidade},
+      {key:'geral_numero', label:'Nº do Edital / Processo', tipo:'text', placeholder:'Ex.: 90010/2026'},
+      {key:'geral_portal', label:'Portal / Plataforma', tipo:'select', opcoes:OPC.portal},
+      {key:'geral_uf', label:'UF de execução', tipo:'text', placeholder:'Ex.: RJ/SP'},
+      {key:'geral_municipios', label:'Município(s) de execução', tipo:'text'},
+      {key:'geral_objeto', label:'Objeto (resumo)', tipo:'text'},
+      {key:'geral_lotes', label:'Nº de lotes', tipo:'number', placeholder:'Ex.: 3'},
+      {key:'geral_valor', label:'Valor global estimado (R$)', tipo:'text'},
+      {key:'geral_responsavel', label:'Responsável interno pela análise', tipo:'text', placeholder:'Ex.: Gabriel'},
+      {key:'geral_abertura', label:'Data de abertura / entrega da proposta', tipo:'date'},
+      {key:'geral_status', label:'Status', tipo:'select', opcoes:OPC.statusProc},
+      {key:'geral_obs', label:'Observações gerais', tipo:'textarea', span:'span-full', placeholder:'Notas iniciais sobre o processo, contexto, histórico com o contratante...'}
+    ]},
+  { id:'quantitativos', tag:'quantitativos', icone:'📊', titulo:'2. Quadro de Quantitativos por Lote', badge:'Quantitativos',
+    campos:[
+      {key:'quant_referencia', label:'Referência de preços (sistema)', tipo:'select', opcoes:OPC.refPreco},
+      {key:'quant_mesref', label:'Mês/ano da tabela de referência', tipo:'text', placeholder:'Ex.: Maio/2026'},
+      {key:'quant_desone', label:'Fator de desoneração', tipo:'select', opcoes:OPC.desone},
+      {key:'quant_pmr', label:'Parcela de maior relevância técnica', tipo:'text'}
+    ],
+    tabela:{ key:'tbl_quant', titulo:'Itens do quadro de quantidades', nota:'Registre os itens principais conforme Planilha/Anexo de quantidades do processo.', addLabel:'+ Adicionar item',
+      colunas:[
+        {label:'Lote', tipo:'text'},{label:'Cód./Item', tipo:'text'},{label:'Descrição do serviço', tipo:'text'},
+        {label:'Un.', tipo:'text'},{label:'Quant.', tipo:'text'},{label:'PMR?', tipo:'select', opcoes:['','Sim','Não']},{label:'Observação', tipo:'text'}
+      ]}},
+  { id:'custos', tag:'custos', icone:'💰', titulo:'3. Composição de Custos e Preços', badge:'Custos', cor:'amber',
+    campos:[
+      {key:'custo_bdi_ref', label:'BDI referencial do edital (%)', tipo:'text'},
+      {key:'custo_bdi_sinape', label:'BDI SINAPE pretendido (%)', tipo:'text'},
+      {key:'custo_es_regime', label:'Encargos sociais (regime)', tipo:'select', opcoes:OPC.esRegime},
+      {key:'custo_es_pct', label:'Encargos sociais (%)', tipo:'text'},
+      {key:'custo_preco_max', label:'Preço máximo / estimado global (R$)', tipo:'text'},
+      {key:'custo_inexeq', label:'Limite de inexequibilidade (R$ ou %)', tipo:'text'},
+      {key:'custo_criterio', label:'Critério de julgamento / modalidade comercial', tipo:'select', opcoes:OPC.criterio},
+      {key:'custo_reajuste', label:'Forma de reajuste', tipo:'text'},
+      {divisorAntes:'Observações sobre custos', key:'custo_obs', label:'', tipo:'textarea', span:'span-full', placeholder:'Ex.: ICMS, frete, insumos críticos, taxas de portal...'}
+    ],
+    tabela:{ key:'tbl_custo', titulo:'Composição estimada por lote', addLabel:'+ Adicionar lote', antesDosCamposFinais:true,
+      colunas:[
+        {label:'Lote', tipo:'text'},{label:'Valor estimado (R$)', tipo:'text'},{label:'Preço SINAPE (R$)', tipo:'text'},
+        {label:'Desconto/ágio (%)', tipo:'text'},{label:'Margem estimada (%)', tipo:'text'},{label:'Viável?', tipo:'select', opcoes:['','Sim','Não','Verificar']}
+      ]}},
+  { id:'prazos', tag:'prazos', icone:'📅', titulo:'4. Prazos e Cronograma', badge:'Prazos', gridCols:2,
+    campos:[
+      {key:'prazo_publicacao', label:'Publicação / envio da carta-convite', tipo:'date'},
+      {key:'prazo_esclarecimento', label:'Prazo p/ esclarecimentos (até)', tipo:'date'},
+      {key:'prazo_impugnacao', label:'Prazo p/ impugnação (até)', tipo:'date'},
+      {key:'prazo_abertura', label:'Data de abertura / entrega da proposta', tipo:'date'},
+      {key:'prazo_habilitacao', label:'Prazo p/ envio de habilitação', tipo:'date'},
+      {key:'prazo_contrato', label:'Prazo p/ assinatura do contrato', tipo:'text'},
+      {key:'prazo_execucao', label:'Prazo de execução (total)', tipo:'text'},
+      {key:'prazo_vigencia', label:'Prazo de vigência do contrato', tipo:'text'},
+      {key:'prazo_prorroga', label:'Prorrogabilidade', tipo:'select', opcoes:OPC.prorroga},
+      {key:'prazo_validade_prop', label:'Validade da proposta (dias)', tipo:'number'},
+      {key:'prazo_obs', label:'Observações sobre prazos', tipo:'textarea', span:'span2'}
+    ],
+    tabela:{ key:'tbl_prazo', titulo:'Cronograma / marcos', addLabel:'+ Adicionar etapa',
+      colunas:[
+        {label:'Marco / Etapa', tipo:'text'},{label:'Início', tipo:'text'},{label:'Término', tipo:'text'},
+        {label:'% financeiro', tipo:'text'},{label:'Observação', tipo:'text'}
+      ]}},
+  { id:'habilitacao', tag:'habilitacao', icone:'📂', titulo:'5. Exigências de Habilitação', badge:'Habilitação',
+    campos:[
+      {divisorAntes:'Habilitação Jurídica', key:'hab_jur_porte', label:'Porte exigido', tipo:'select', opcoes:OPC.porte},
+      {key:'hab_jur_consorcio', label:'Permite consórcio?', tipo:'select', opcoes:OPC.simNaoMenc},
+      {key:'hab_jur_lider', label:'% mínimo líder do consórcio', tipo:'text'},
+      {key:'hab_jur_sub', label:'Permite subcontratação?', tipo:'select', opcoes:OPC.subcontr},
+      {key:'hab_jur_obs', label:'Observações jurídicas', tipo:'textarea', span:'span-full'},
+      {divisorAntes:'Habilitação Fiscal e Trabalhista', key:'hab_fis_estadual', label:'Exige regularidade estadual (UF execução)?', tipo:'select', opcoes:OPC.simNao},
+      {key:'hab_fis_municipal', label:'Exige regularidade municipal?', tipo:'select', opcoes:OPC.simNao},
+      {key:'hab_fis_obs', label:'Observações fiscais', tipo:'textarea', span:'span-full'},
+      {divisorAntes:'Qualificação Econômico-Financeira', key:'hab_ef_lc', label:'Índice LC mínimo exigido', tipo:'text'},
+      {key:'hab_ef_lg', label:'Índice LG mínimo exigido', tipo:'text'},
+      {key:'hab_ef_sg', label:'Índice SG mínimo exigido', tipo:'text'},
+      {key:'hab_ef_capital', label:'Capital social / PL mínimo (R$)', tipo:'text'},
+      {key:'hab_ef_lc_ok', label:'SINAPE atende LC?', tipo:'select', opcoes:OPC.simNaoVer},
+      {key:'hab_ef_cap_ok', label:'SINAPE atende PL?', tipo:'select', opcoes:OPC.simNaoVer},
+      {key:'hab_ef_obs', label:'Observações econômico-financeiras', tipo:'textarea', span:'span-full'},
+      {divisorAntes:'Qualificação Técnica', key:'hab_tec_pmr', label:'Parcela de maior relevância (PMR) definida', tipo:'text', span:'span-full'},
+      {key:'hab_tec_quant_min', label:'Quantitativo mínimo do atestado (PMR)', tipo:'text'},
+      {key:'hab_tec_atestado', label:'SINAPE possui atestado compatível?', tipo:'select', opcoes:OPC.atendeParc},
+      {key:'hab_tec_rt', label:'Exige RT indicado no CREA/CAU?', tipo:'select', opcoes:[{value:'',label:'—'},'Sim','Não']},
+      {key:'hab_tec_rt_nome', label:'RT disponível (nome)', tipo:'text', placeholder:'Ex.: Thiago Nishimura'},
+      {key:'hab_tec_obs', label:'Observações técnicas', tipo:'textarea', span:'span-full'}
+    ]},
+  { id:'riscos', tag:'riscos', icone:'⚠️', titulo:'6. Riscos e Pontos de Atenção', badge:'Riscos', cor:'red', tipoSecao:'riscos',
+    camposDecisao:[
+      {key:'risco_decisao', label:'Recomendação da equipe', tipo:'select', opcoes:OPC.decisao},
+      {key:'risco_resp_decisao', label:'Responsável pela decisão', tipo:'text', placeholder:'Ex.: Fabrício / Thiago'},
+      {key:'risco_justificativa', label:'Justificativa da decisão', tipo:'textarea', span:'span-full'}
+    ]}
+];
+
+/* Checklists padrão (usados quando o processo NÃO traz checklist próprio da IA) */
+const CHK_DATA = {
+  publico:[
+    {title:"1. Análise do Edital e Estratégia (Pré-disputa)",items:[
+      "Leitura integral do Edital, Termo de Referência e demais Anexos. Identificar lotes/itens, prazos, planilhas orçamentárias e elementos técnicos instrutores.",
+      "Pedido de esclarecimento. Protocolar no portal do certame dentro do prazo legal mínimo (em regra, 3 dias úteis antes da abertura).",
+      "Impugnação ao edital. Mesmo prazo e canal do esclarecimento; qualquer pessoa é parte legítima (art. 164, Lei 14.133/2021).",
+      "Conferência de limites legais das exigências habilitatórias. Atestados técnicos limitados à parcela de maior relevância; capital social/PL mínimo limitado a 10% do valor estimado (arts. 67 e 69).",
+      "Verificação de tratamento favorecido ME/EPP/MEI. Conferir aplicabilidade da LC 123/2006.",
+      "Decisão sobre participação isolada ou em consórcio (art. 15, Lei 14.133/2021).",
+      "Vistoria técnica facultativa ou obrigatória. Agendar conforme prazo e canal indicados no edital."
+    ]},
+    {title:"2. Cadastro, Credenciamento e Condições de Participação",items:[
+      "Cadastro/credenciamento no portal do certame (Compras.gov.br, BLL, Licitações-e, etc.).",
+      "Cadastro Unificado de Fornecedores (SICAF/CAUFPR/equivalente) e PNCP.",
+      "Certificado digital ICP-Brasil válido.",
+      "Verificação de impedimentos e sanções (inidoneidade).",
+      "Análise de vedações de participação (art. 14, Lei 14.133/2021).",
+      "Consórcio — conferir percentual mínimo de participação do líder (se permitido).",
+      "Subcontratação — conferir limites percentuais e aprovação prévia (se permitida)."
+    ]},
+    {title:"3. Proposta Comercial",items:[
+      "Carta Proposta de Preços conforme modelo do edital (preço em algarismos e por extenso, prazo de validade, assinatura).",
+      "Proposta registrada no sistema eletrônico com valor unitário e total/global.",
+      "Preço dentro do valor máximo/estimado do edital.",
+      "Planilha Orçamentária / Planilha de Custos e Formação de Preços — readequação ao lance vencedor.",
+      "Cronograma Físico-Financeiro conforme parcelas e percentuais mínimos.",
+      "Demonstrativo de BDI e de Encargos Sociais com composição detalhada.",
+      "Declaração de integralidade dos custos trabalhistas (art. 63, §1º, Lei 14.133/2021).",
+      "Prazo de validade da proposta conforme prazo mínimo fixado no edital (60 a 180 dias)."
+    ]},
+    {title:"4. Garantia de Proposta",items:[
+      "Garantia de proposta (bid bond) — verificar exigência e percentual no edital; apresentar antes da abertura das propostas."
+    ]},
+    {title:"5. Habilitação Jurídica",items:[
+      "Documento de identidade do representante legal / sócios.",
+      "Ato constitutivo / Contrato Social consolidado e alterações — objeto social compatível.",
+      "Procuração com poderes de representação.",
+      "CNPJ — Comprovante de inscrição e situação cadastral ativa.",
+      "Inscrição estadual/municipal compatível com o ramo de atividade."
+    ]},
+    {title:"6. Habilitação Fiscal, Social e Trabalhista",items:[
+      "Certidão Conjunta de Débitos Federais (inclui INSS) e Dívida Ativa da União.",
+      "Regularidade perante a Fazenda Estadual (inclusive UF do certame, se diferente da sede).",
+      "Regularidade perante a Fazenda Municipal (sede).",
+      "Certificado de Regularidade do FGTS — CRF.",
+      "Certidão Negativa de Débitos Trabalhistas — CNDT.",
+      "Declaração de cumprimento do art. 7º, XXXIII, CF (vedação a trabalho de menor).",
+      "Declaração de inexistência de fato impeditivo da habilitação."
+    ]},
+    {title:"7. Qualificação Econômico-Financeira",items:[
+      "Certidão Negativa de Falência, Recuperação Judicial e Concordata (distribuidor da sede).",
+      "Balanço Patrimonial dos 2 últimos exercícios registrado na Junta Comercial/SPED.",
+      "Índices contábeis (LG, LC, SG) com memória de cálculo e assinatura do contador.",
+      "Capital social ou patrimônio líquido mínimo (até 10% do valor estimado — art. 69)."
+    ]},
+    {title:"8. Qualificação Técnica — Empresa e Responsável Técnico",items:[
+      "Certidão de registro/quitação da empresa no CREA/CAU (com visto na UF de execução, quando exigido).",
+      "Certidão de registro do(s) Responsável(is) Técnico(s).",
+      "Declaração de Responsabilidade Técnica com indicação nominal e comprovação de vínculo.",
+      "Atestado(s) de Capacidade Técnica da empresa compatíveis com a PMR.",
+      "CAT(s) vinculada(s) ao(s) atestado(s), certificadas pelo CREA/CAU.",
+      "ART/RRT da execução dos serviços registrada em nome do RT indicado.",
+      "Quantitativos mínimos por parcela de relevância técnica (limite legal: 50% da PMR)."
+    ]},
+    {title:"9. Vistoria / Declaração de Ciência das Condições Locais",items:[
+      "Termo de Ciência das Condições Locais com vistoria realizada (se a empresa optou por vistoriar).",
+      "Termo de Ciência das Condições Locais sem vistoria (declaração obrigatória mesmo sem vistoria)."
+    ]},
+    {title:"10. Declarações Modelo do Edital",items:[
+      "Declaração de Microempresa ou EPP (quando aplicável ao enquadramento).",
+      "Declaração de Responsabilidade Técnica conforme Seção 8.",
+      "Declaração de Cumprimento de Exigências Legais e Constitucionais.",
+      "Declaração de utilização de produtos de madeira / gerenciamento de resíduos (normas ambientais).",
+      "Declaração de Atendimento aos Requisitos de Habilitação e Capacidade Financeira (quando exigida).",
+      "Declaração de LGPD — Conformidade com a Lei Geral de Proteção de Dados."
+    ]},
+    {title:"11. Após Lances / Julgamento e Assinatura",items:[
+      "Proposta e planilha ajustadas ao último lance (prazo fixado pelo pregoeiro, normalmente 2 dias úteis).",
+      "Demonstração de exequibilidade se houver diligência (limite: abaixo de 75% do valor orçado).",
+      "Garantia contratual de execução conforme percentual e modalidade do edital.",
+      "Manifestação de intenção de recurso e razões recursais dentro dos prazos, sob pena de preclusão.",
+      "Assinatura do Contrato / Ordem de Serviço dentro do prazo de convocação."
+    ]}
+  ],
+  privado:[
+    {title:"1. Análise da Carta-Convite / RFQ e Estratégia",items:[
+      "Leitura integral da carta-convite/RFQ e do Termo de Referência — identificar objeto, abrangência, prazos e elementos técnicos.",
+      "Identificação do canal oficial de comunicação (portal Coupa, SAP Ariba, e-mail formal).",
+      "Envio de esclarecimentos dentro do prazo fixado, no formato exigido.",
+      "Vistoria técnica (quando facultativa) — agendar com o contato técnico indicado.",
+      "Análise das Condições Gerais de Contratação do contratante."
+    ]},
+    {title:"2. Cadastro e Condições de Participação",items:[
+      "Cadastro no portal de fornecedores do contratante (verificar taxa de utilização, se houver).",
+      "Aceite dos Termos de Uso do portal de cotação (Coupa/Ariba ou similar).",
+      "Compartilhamento de dados cadastrais e financeiros com gestor do portal (quando exigido).",
+      "Subcontratação (em regra vedada ou restrita) — conferir aprovação prévia formal."
+    ]},
+    {title:"3. Proposta Técnica e Comercial",items:[
+      "Proposta Técnica (sem exposição de valores) — apresentada separadamente, em papel timbrado e PDF.",
+      "Proposta Comercial com razão social, referência ao nº da contratação, local, prazo e validade (mínimo 90 dias).",
+      "Planilha de Preços / LPU — preço unitário fixo com quantitativo estimado e variável.",
+      "Composições de Preços Unitários (CPUs) dos serviços relevantes no modelo Excel do contratante.",
+      "Destaque de tributos e alíquotas por item (inclusive ICMS na base PIS/COFINS).",
+      "Fórmula paramétrica de reajuste (preços fixos por mínimo 12 meses).",
+      "Declaração de conhecimento das condições locais para formação de preços."
+    ]},
+    {title:"4. Compliance e Integridade",items:[
+      "Declaração de cumprimento da Lei Anticorrupção (Lei nº 12.846/2013) e adesão ao Código de Ética do contratante.",
+      "Curso/certificado de compliance e integridade (quando exigido como condição pós-contratual).",
+      "Due diligence de integridade do fornecedor (formulário próprio do contratante, quando exigido)."
+    ]},
+    {title:"5. Habilitação Jurídica e Fiscal (Base Comercial)",items:[
+      "Contrato Social ou Estatuto com identificação dos representantes legais.",
+      "Comprovante de inscrição e regularidade no CNPJ — situação ativa.",
+      "Certidões de regularidade fiscal (Federal, Estadual, Municipal).",
+      "Certidão de Regularidade do FGTS e CNDT.",
+      "Consulta cadastral (ex.: Serasa) da proponente.",
+      "Certidão Negativa de Falência, Concordata e Execução Judicial."
+    ]},
+    {title:"6. Segurança do Trabalho e Saúde Ocupacional",items:[
+      "Atendimento à NR-4 (SESMT) — informar constituição ou enquadramento na isenção.",
+      "Comprovação de constituição da CIPA (própria e das subcontratadas, quando exigida).",
+      "PCMSO e demais programas correlatos (PPRA/PGR, PCMAT) quando aplicável.",
+      "Documentação individual dos trabalhadores alocados (contrato, CNH, EPI, capacitações, vacinas).",
+      "Análise Preliminar de Risco (APR) e Permissão de Trabalho (PT) conforme modelo do contratante.",
+      "Equipe de sinalização e dispositivos de segurança em via/rodovia (uniformes, câmeras, sinalização refletiva)."
+    ]},
+    {title:"7. Meio Ambiente",items:[
+      "Plano de Gerenciamento de Resíduos da Construção Civil (PGRCC).",
+      "Manifesto de Transporte de Resíduos (MTR) e Certificado de Destinação Final (CDF).",
+      "Licenciamento ambiental de áreas de apoio/canteiro (quando fora da faixa de domínio).",
+      "Profissional responsável pela gestão ambiental (indicação prévia ao contratante)."
+    ]},
+    {title:"8. Qualificação Técnica (quando exigida)",items:[
+      "Certidão de registro da empresa e do responsável técnico no CREA/CAU.",
+      "Relação de instalações industriais e equipamentos técnicos principais.",
+      "Relação e histórico profissional da equipe técnica.",
+      "Declaração de disponibilidade de equipamentos para execução do escopo."
+    ]},
+    {title:"9. Condições Contratuais e Faturamento",items:[
+      "Garantias contratuais (modalidade e percentual conforme o contratante).",
+      "Forma e prazo de pagamento — conferir prazos mínimos aceitos pela proponente.",
+      "Critério de medição e documentos de suporte (BM, relatório fotográfico, topografia, certificados).",
+      "Regras de faturamento e centralização de pagamentos (ex.: dia fixo da semana em concessionárias).",
+      "Vedação ou condições de cessão/subcontratação do contrato a terceiros."
+    ]}
+  ]
+};
+const CHK_LABELS = ["Atende","Não atende","Confere","Não confere"];
+const CHK_NEG = ["Não atende","Não confere"];
+
+const STATUS_LABELS = {
+  pendente:'Pendente', em_analise:'Em análise', participar:'Participar',
+  nao_participar:'Não participar', em_disputa:'Em disputa', vencido:'Vencido', perdido:'Perdido'
+};
+</script>
+
+<script>
+/* ════════════════════════════════════════════════════════════════
+   PROCESSOS PRÉ-CADASTRADOS (portados do painel anterior)
+   Em modo API: se o servidor estiver vazio, o painel oferece enviá-los.
+   ════════════════════════════════════════════════════════════════ */
+const MOTIVA_PROCESS_ID = 'motiva-sinalizacao-vertical-1806';
+const MOTIVA_PROCESS_META = {
+  id: MOTIVA_PROCESS_ID,
+  nome: 'Motiva — Sinalização Vertical 18/06',
+  type: 'privado', status: 'em_analise', progress: 35,
+  createdAt: Date.parse('2026-06-30'), updatedAt: Date.now()
+};
+const MOTIVA_AUTOFILLED_KEYS = [
+  'geral_orgao','geral_modalidade','geral_numero','geral_portal','geral_uf',
+  'geral_municipios','geral_objeto','geral_lotes','geral_abertura','geral_status','geral_obs',
+  'quant_referencia','quant_desone','quant_pmr',
+  'custo_criterio','custo_reajuste','custo_obs','custo_es_regime',
+  'prazo_publicacao','prazo_esclarecimento','prazo_abertura','prazo_contrato',
+  'prazo_execucao','prazo_vigencia','prazo_prorroga','prazo_validade_prop','prazo_obs',
+  'hab_jur_sub','hab_jur_obs','hab_fis_obs','hab_tec_pmr','hab_tec_rt'
+];
+const MOTIVA_SEED_DATA = {
+  analise: {
+    _sourceFiles: 'Carta Convite 24299-26 (Motiva/RioSP) + Termo de Referência - Projeto de Sinalização Vertical + Anexo 04 - Planilha de Referência de Preços',
+    _autoFilledKeys: MOTIVA_AUTOFILLED_KEYS,
+    geral_orgao: 'Motiva — RIOSP (Concessionária do Sistema Rodoviário Rio-São Paulo S.A.)',
+    geral_modalidade: 'RFQ / Cotação privada',
+    geral_numero: 'Supply Chain – RioSP – 2026 – 24299 — Carta Convite 24299-26',
+    geral_portal: 'Coupa',
+    geral_uf: 'RJ/SP',
+    geral_municipios: 'Trecho concedido BR-116/RJ-SP e BR-101/RJ-SP (Seropédica/RJ até Marginal Tietê/SP; e até Ubatuba/SP)',
+    geral_objeto: 'Fornecimento de placas de sinalização vertical viária (regulamentação, advertência, indicação, dispositivos auxiliares e placas aéreas), em ACM, com películas retrorrefletivas conforme padrões exigidos.',
+    geral_lotes: '3',
+    geral_abertura: '2026-07-13',
+    geral_status: 'Em análise',
+    geral_obs: 'Proposta técnica APLICÁVEL (deve ser enviada separada da comercial, sem valores). Entrega exclusivamente via plataforma Coupa — propostas por e-mail são descartadas. Comprador(es): Andreia Marques Bergamo e Káira Amstalden.',
+    quant_referencia: 'Composição própria do órgão/contratante',
+    quant_mesref: '',
+    quant_desone: 'Não aplicável',
+    quant_pmr: 'Fornecimento de placas com película Tipo X (Grau Diamante Cúbico) — maior volume em Lote 2 (BR-116/SP)',
+    tbl_quant: [
+      ['Lote 1 - BR-116/RJ','1','Fornecimento de placa de sinalização com película Tipo III (AIP)','m²','1.571,98','Não',''],
+      ['Lote 1 - BR-116/RJ','2','Fornecimento de placa de sinalização com película Tipo X (GDC)','m²','1.418,57','Sim',''],
+      ['Lote 2 - BR-116/SP','1','Fornecimento de placa de sinalização com película Tipo III (AIP)','m²','2.724,46','Não',''],
+      ['Lote 2 - BR-116/SP','2','Fornecimento de placa de sinalização com película Tipo X (GDC)','m²','4.851,10','Sim','Maior quantitativo do processo'],
+      ['Lote 3 - BR-101/SP/RJ','1','Fornecimento de placa de sinalização com película Tipo III (AIP)','m²','1.394,93','Não',''],
+      ['Lote 3 - BR-101/SP/RJ','2','Fornecimento de placa de sinalização com película Tipo X (GDC)','m²','342,55','Não','']
+    ],
+    custo_bdi_ref: '',
+    custo_bdi_sinape: '',
+    custo_es_regime: 'Não informado no edital',
+    custo_es_pct: '',
+    custo_preco_max: '',
+    custo_inexeq: '',
+    custo_criterio: 'Preço Unitário (RFQ privado)',
+    custo_reajuste: 'Somente se execução exceder 365 dias; negociado entre as partes, limite máximo IPCA (12 últimos meses, data-base mês anterior ao início da vigência).',
+    custo_obs: 'Atenção à Reforma Tributária (CBS a partir de 01/01/2027 substituindo PIS/COFINS; IBS a partir de 01/01/2029 substituindo ISSQN/ICMS) — preços calculados na legislação vigente à época da proposta, com possibilidade de revisão via termo aditivo. Composições de Preços Unitários exigidas para serviços que somem ≥90% do valor da proposta (Anexo 09), com BDI e encargos sociais conforme Anexo 08, informando base de cálculo do ISSQN dos municípios de execução. Portal Coupa: taxa de utilização mensal isenta até abril/2026, depois proporcional ao faturamento (categorias de R$75 a R$20.000/mês conforme faixa).',
+    tbl_custo: [
+      ['Lote 1 - BR-116/RJ','','','','','Verificar'],
+      ['Lote 2 - BR-116/SP','','','','','Verificar'],
+      ['Lote 3 - BR-101/SP/RJ','','','','','Verificar']
+    ],
+    prazo_publicacao: '2026-06-18',
+    prazo_esclarecimento: '2026-06-30',
+    prazo_impugnacao: '',
+    prazo_abertura: '2026-07-13',
+    prazo_habilitacao: '',
+    prazo_contrato: 'Até 3 dias úteis após notificação de vencedora pela Área de Suprimentos',
+    prazo_execucao: 'Até 456 dias corridos, contados da Ordem de Serviço',
+    prazo_vigencia: '15 meses a partir da assinatura do contrato (prazo de execução de 9 meses a partir da OS, conforme TR)',
+    prazo_prorroga: 'Não previsto',
+    prazo_validade_prop: '60',
+    prazo_obs: 'Início dos serviços: até 7 dias corridos após emissão da OS. Entrega da ART: até 7 dias consecutivos da OS. Assinatura via certificado digital ICP-Brasil + plataforma DocuSign. Curso "Hands On ESG & Integridade" (Fundação Dom Cabral, 30h, gratuito) é diferencial competitivo na avaliação e exigido do vencedor em até 90 dias da formalização. Avaliação EcoVadis obrigatória ao vencedor, com assinatura ativa durante toda a vigência contratual.',
+    hab_jur_porte: '',
+    hab_jur_consorcio: 'Não menciona',
+    hab_jur_lider: '',
+    hab_jur_sub: 'Não — cessão/subcontratação vedada sem consentimento prévio e expresso da Motiva, sob pena de rescisão sumária',
+    hab_jur_obs: 'Não é permitida contratação de mão de obra temporária. Vedada afixação de propaganda em estruturas da concessionária.',
+    hab_fis_estadual: '',
+    hab_fis_municipal: '',
+    hab_fis_obs: 'Exigido Cadastro Técnico Federal (CTF) junto ao IBAMA (ou declaração de dispensa) até a Primeira Medição, sob pena de retenção de pagamento, conforme Lei 10.165/00 e IN 10/01 IBAMA.',
+    hab_ef_lc: '', hab_ef_lg: '', hab_ef_sg: '', hab_ef_capital: '',
+    hab_ef_lc_ok: '', hab_ef_cap_ok: '', hab_ef_obs: '',
+    hab_tec_pmr: 'Fornecimento de placas conforme NBR 14890/14891/16892/14962/14644/16179/16033/14428/14429 e Manuais CONTRAN (Vol. I, II, III, VI)',
+    hab_tec_quant_min: '',
+    hab_tec_atestado: 'Verificar',
+    hab_tec_rt: 'Não — TR não exige RT formal indicado em CREA/CAU para o escopo de fornecimento de placas',
+    hab_tec_rt_nome: '',
+    hab_tec_obs: 'NR-4 (SESMT): informar se possui SESMT próprio constituído ou enquadramento na isenção, conforme Portaria MTPS nº2.318/2022. Comprovação de constituição da CIPA própria (e de subcontratadas) obrigatória. Atendimento à NR-4 é condição de habilitação — desatendimento pode gerar desclassificação. Garantias: placas aéreas 12 anos, placas de solo 10 anos.',
+    risks: [
+      {nivel:'Alto', desc:'Penalidades pesadas: multa não compensatória de R$ 20.000,00 por descumprimento reincidente (Política de Consequência) e R$ 50.000,00 por evento de descumprimento de Regra de Ouro/Política de Segurança do Trabalho. Risco financeiro relevante em caso de não conformidade operacional.'},
+      {nivel:'Médio', desc:'Forma de pagamento com prazo longo e condicionado a dia fixo da semana (quarta-feira) — 25 dias fora o mês, com regras de prorrogação que podem alongar ainda mais o recebimento. Impacto no fluxo de caixa deve ser avaliado.'},
+      {nivel:'Médio', desc:'Reforma Tributária em transição (CBS a partir de 2027, IBS a partir de 2029) — preços formulados hoje não consideram esses efeitos; revisão depende de negociação e termo aditivo, sem garantia automática de reequilíbrio.'},
+      {nivel:'Baixo', desc:'Exigência de curso Hands On ESG & Integridade (Fundação Dom Cabral) e avaliação EcoVadis — sem custo financeiro direto, mas demanda tempo/organização interna e manutenção de assinatura ativa durante toda a vigência.'}
+    ],
+    risco_decisao: '',
+    risco_resp_decisao: '',
+    risco_justificativa: ''
+  },
+  checklist: {}
+};
+// ════════════════════════════════════════
+// DADOS FIXOS — PROCESSOS EPR (TR 1904, 1905, 1910)
+// ════════════════════════════════════════
+const EPR1904_PROCESS_ID = 'epr-tr-1904-defensas-l5l8';
+const EPR1904_META = {
+  id: EPR1904_PROCESS_ID,
+  nome: 'EPR — TR 1904 Defensas Metálicas Lotes 5 e 8',
+  type: 'privado', status: 'em_analise', progress: 30,
+  createdAt: Date.now(), updatedAt: Date.now()
+};
+const EPR1904_SEED_DATA = {
+  analise: {
+    _sourceFiles: 'EPR-LP-ENG-TR-1904-2026 + Anexo 01 (Planilha de Quantidades)',
+    _autoFilledKeys: ['geral_orgao','geral_modalidade','geral_numero','geral_portal','geral_uf','geral_municipios','geral_objeto','geral_lotes','geral_status','geral_obs','quant_referencia','quant_pmr','custo_criterio','custo_reajuste','custo_obs','prazo_esclarecimento','prazo_contrato','prazo_execucao','prazo_vigencia','prazo_prorroga','prazo_validade_prop','prazo_obs','hab_jur_sub','hab_jur_obs','hab_fis_obs','hab_tec_obs'],
+    geral_orgao: 'EPR Litoral Pioneiro S.A. (Concessionária de Rodovias — Lote 2 do Paraná) — CNPJ 51.137.031/0001-20',
+    geral_modalidade: 'RFQ / Cotação privada',
+    geral_numero: 'EPR-LP-ENG-TR-1904-2026 — Revisão 00 — 28/05/2026',
+    geral_portal: 'Outro',
+    geral_uf: 'PR',
+    geral_municipios: 'Lote 5: PR-407 (Paranaguá a Pontal do Paraná). Lote 8: BR-277 — Av. Ayrton Senna (Paranaguá) e trecho São José dos Pinhais.',
+    geral_objeto: 'Fornecimento de defensa metálica NBR 15486 H1AW4 simples e acessórios (terminais, módulos de transição, ancoragens) para os Lotes 5 (PR-407) e 8 (BR-277) — Ano 4. Não inclui a instalação, apenas o fornecimento.',
+    geral_lotes: '2',
+    geral_abertura: '',
+    geral_status: 'Em análise',
+    geral_obs: 'Proposta entregue via plataforma Nimbi, em PDF e XLS, numerada e datada. Homologação prévia obrigatória na plataforma G-Certifica. Preço deve ser apresentado COM e SEM desoneração de REIDI (benefício da EPR, não desconto comercial). Obrigatório apresentar CPU, BDI, Encargos Sociais e valores de horas extras (dias úteis, domingos e feriados).',
+    quant_referencia: 'Composição própria do órgão/contratante',
+    quant_mesref: '',
+    quant_desone: 'Ambas as versões',
+    quant_pmr: 'Defensa metálica NBR 15486 H1AW4 simples — maior volume em metros lineares nos dois lotes',
+    tbl_quant: [
+      ['Lote 5 - PR-407','1','Defensa metálica NBR 15486 H1AW4 simples','m','10.111,96',''],
+      ['Lote 5 - PR-407','2','Terminal Abatido de Defensa Metálica Simples H1W4','m','416,00',''],
+      ['Lote 5 - PR-407','3','Módulo de transição de defensa metálica para barreira rígida','un','12,00',''],
+      ['Lote 5 - PR-407','4','Terminal absorvedor de energia (não abertura) TL3','un','25,00',''],
+      ['Lote 5 - PR-407','5','Ancoragem de defensa semimaleável simples','m','336,00',''],
+      ['Lote 8 - BR-277','1','Defensa metálica NBR 15486 H1AW4 simples','ud','7.074,78','Maior quantitativo do lote'],
+      ['Lote 8 - BR-277','2','Módulo de transição de defensa metálica p/ barreira rígida','un','27,00','soma dos dois subtrechos'],
+      ['Lote 8 - BR-277','3','Terminal absorvedor de energia (abertura) TL3','un','34,00','']
+    ],
+    custo_bdi_ref: '',
+    custo_bdi_sinape: '',
+    custo_es_regime: 'Não informado no edital',
+    custo_es_pct: '',
+    custo_preco_max: '',
+    custo_inexeq: '',
+    custo_criterio: 'Preço Unitário (RFQ privado)',
+    custo_reajuste: 'Preços irreajustáveis por 12 meses a partir da assinatura do contrato. Após esse período, reajuste anual pelo índice de menor alíquota entre IPCA e IGPM, data-base na assinatura do contrato.',
+    custo_obs: 'Materiais adquiridos e pagos conforme consumo real da CONTRATANTE — não há pagamento por materiais não adquiridos (típico de contrato de fornecimento por demanda/preço unitário, sem volume mínimo garantido). Retenção de 5% em cada medição a título de caução, devolvida ao final do contrato sem pendências fiscais/trabalhistas — sem substituição por seguro garantia.',
+    tbl_custo: [
+      ['Lote 5 - PR-407','','','','','Verificar'],
+      ['Lote 8 - BR-277','','','','','Verificar']
+    ],
+    prazo_publicacao: '',
+    prazo_esclarecimento: 'Até 10 dias corridos após o recebimento do TR',
+    prazo_impugnacao: '',
+    prazo_abertura: '',
+    prazo_habilitacao: '',
+    prazo_contrato: 'Assinatura após apresentação integral da documentação exigida pela EPR; OS emitida a critério da EPR após assinatura',
+    prazo_execucao: 'Entrega de cada solicitação em até 15 dias corridos do recebimento da demanda (fornecimento parcelado conforme consumo)',
+    prazo_vigencia: '15 meses a partir da emissão da Ordem de Serviço',
+    prazo_prorroga: 'Sim — prazo definido no edital (até 6 meses adicionais, respeitando limite de aditivos de 30% do valor original)',
+    prazo_validade_prop: '60',
+    prazo_obs: 'Proposta técnica e comercial entregues em documentos separados em até 15 dias corridos do recebimento do TR, via plataforma Nimbi. Garantia dos materiais: mínimo 10 anos contra defeitos de fabricação, falhas de galvanização e corrosão prematura. Medição: período do dia 21 ao dia 20 do mês seguinte; BM em até 2 dias úteis após o ciclo; pagamento mínimo 30 dias após NF, processado nos dias 05, 15 e 25.',
+    hab_jur_porte: '',
+    hab_jur_consorcio: 'Não menciona',
+    hab_jur_lider: '',
+    hab_jur_sub: 'Não mencionado neste TR especificamente — exige homologação prévia da empresa no G-Certifica',
+    hab_jur_obs: 'Necessário cadastro/homologação prévia na plataforma G-Certifica para participar do certame.',
+    hab_fis_estadual: '', hab_fis_municipal: '',
+    hab_fis_obs: 'Declarar conhecimento e cumprimento da legislação anticorrupção (Lei 12.846/13, Anexo 05). Termo de Aceite e Compromisso assinado (Anexo 02) e de acordo com a minuta contratual (Anexo 07) são exigências de habilitação no envio da proposta.',
+    hab_ef_lc: '', hab_ef_lg: '', hab_ef_sg: '', hab_ef_capital: '',
+    hab_ef_lc_ok: '', hab_ef_cap_ok: '', hab_ef_obs: '',
+    hab_tec_pmr: 'Defensas metálicas e acessórios conforme ABNT NBR 15486:2016, com laudos e certificados de ensaio dos materiais',
+    hab_tec_quant_min: '',
+    hab_tec_atestado: 'Verificar',
+    hab_tec_rt: 'Não — escopo é apenas fornecimento de materiais, sem exigência explícita de RT formal',
+    hab_tec_rt_nome: '',
+    hab_tec_obs: 'CONTRATANTE pode solicitar catálogos técnicos, fichas técnicas, certificados, laudos, relatórios de ensaio e/ou amostras a qualquer momento, podendo recusar materiais fora de especificação. Em caso de ações judiciais trabalhistas em que a EPR for citada como ré/corresponsável, os custos jurídicos da EPR são descontados da CONTRATADA.',
+    risks: [
+      {nivel:'Médio', desc:'Sem garantia de volume mínimo de compra — pagamento estritamente vinculado ao consumo efetivo da CONTRATANTE, o que dificulta previsibilidade de receita e diluição de custos fixos de produção.'},
+      {nivel:'Médio', desc:'Prazo de entrega curto por solicitação (15 dias corridos por chamada), exigindo estoque ou capacidade de produção ágil para atender múltiplas demandas parceladas ao longo de 15 meses.'},
+      {nivel:'Baixo', desc:'Retenção de 5% por medição a título de caução, sem possibilidade de substituição por seguro garantia — imobiliza capital de giro até o encerramento do contrato.'},
+      {nivel:'Baixo', desc:'Garantia mínima de 10 anos contra defeitos de fabricação e corrosão — compromisso de longo prazo que deve ser considerado na precificação e na escolha de fornecedores de matéria-prima.'}
+    ],
+    risco_decisao: '', risco_resp_decisao: '', risco_justificativa: ''
+  },
+  checklist: {}
+};
+const EPR1905_PROCESS_ID = 'epr-tr-1905-defensas-l6l7';
+const EPR1905_META = {
+  id: EPR1905_PROCESS_ID,
+  nome: 'EPR — TR 1905 Defensas Metálicas Lotes 6 e 7',
+  type: 'privado', status: 'em_analise', progress: 30,
+  createdAt: Date.now(), updatedAt: Date.now()
+};
+const EPR1905_SEED_DATA = {
+  analise: {
+    _sourceFiles: 'EPR-LP-ENG-TR-1905-2026 + Anexo 01 (Planilha de Quantidades)',
+    _autoFilledKeys: ['geral_orgao','geral_modalidade','geral_numero','geral_portal','geral_uf','geral_municipios','geral_objeto','geral_lotes','geral_status','geral_obs','quant_referencia','quant_pmr','custo_criterio','custo_reajuste','custo_obs','prazo_esclarecimento','prazo_contrato','prazo_execucao','prazo_vigencia','prazo_prorroga','prazo_validade_prop','prazo_obs','hab_jur_sub','hab_jur_obs','hab_fis_obs','hab_tec_obs'],
+    geral_orgao: 'EPR Litoral Pioneiro S.A. (Concessionária de Rodovias — Lote 2 do Paraná) — CNPJ 51.137.031/0001-20',
+    geral_modalidade: 'RFQ / Cotação privada',
+    geral_numero: 'EPR-LP-ENG-TR-1905-2026 — Revisão 00',
+    geral_portal: 'Outro',
+    geral_uf: 'PR',
+    geral_municipios: 'Lote 6: BR-369 (Bandeirantes/Andirá/Cambará) e PR-855 (Bandeirantes). Lote 7: PR-092 (Jaguariaíva) e PR-151 (Jaguariaíva a Piraí do Sul).',
+    geral_objeto: 'Fornecimento de defensa metálica NBR 15486 H1AW4 simples, defensa semimaleável dupla e acessórios (terminais, ancoragens, módulos de transição) para os Lotes 6 (BR-369/PR-855) e 7 (PR-092/PR-151) — Ano 4. Apenas fornecimento, sem instalação.',
+    geral_lotes: '2',
+    geral_abertura: '',
+    geral_status: 'Em análise',
+    geral_obs: 'Mesma estrutura comercial do TR 1904 (mesmo contratante, mesmo programa): plataforma Nimbi, homologação prévia no G-Certifica, preço COM e SEM REIDI, CPU/BDI/Encargos Sociais obrigatórios.',
+    quant_referencia: 'Composição própria do órgão/contratante',
+    quant_mesref: '',
+    quant_desone: 'Ambas as versões',
+    quant_pmr: 'Defensa metálica NBR 15486 H1AW4 simples — maior volume entre os dois lotes (>56.000 m somados)',
+    tbl_quant: [
+      ['Lote 6 - BR-369/PR-855','1','Defensa metálica NBR 15486 H1AW4 simples','m','31.688,00','Maior item do lote'],
+      ['Lote 6 - BR-369/PR-855','2','Defensa semimaleável dupla','m','3.948,00','soma de duas linhas do PQ'],
+      ['Lote 6 - BR-369/PR-855','3','Ancoragem de defensa semimaleável simples','m','2.176,00',''],
+      ['Lote 6 - BR-369/PR-855','4','Terminal absorvedor de energia (abertura) TL3','un','104,00',''],
+      ['Lote 6 - BR-369/PR-855','5','Módulo de transição p/ barreira rígida','un','16,00',''],
+      ['Lote 6 - BR-369/PR-855','6','Terminal de ancoragem em barreira New Jersey','un','48,00',''],
+      ['Lote 7 - PR-092/PR-151','1','Defensa metálica NBR 15486 H1AW4 simples','m','24.923,79','Maior item do lote'],
+      ['Lote 7 - PR-092/PR-151','2','Ancoragem de defensa semimaleável simples','m','1.536,00',''],
+      ['Lote 7 - PR-092/PR-151','3','Módulo de transição p/ barreira rígida','un','34,00',''],
+      ['Lote 7 - PR-092/PR-151','4','Terminal absorvedor de energia bidirecional P3 (100km/h)','un','84,00','']
+    ],
+    custo_bdi_ref: '', custo_bdi_sinape: '',
+    custo_es_regime: 'Não informado no edital', custo_es_pct: '',
+    custo_preco_max: '', custo_inexeq: '',
+    custo_criterio: 'Preço Unitário (RFQ privado)',
+    custo_reajuste: 'Preços irreajustáveis por 12 meses a partir da assinatura do contrato. Após esse período, reajuste anual pelo índice de menor alíquota entre IPCA e IGPM, data-base na assinatura do contrato.',
+    custo_obs: 'Maior quantitativo entre os processos EPR de defensas (TR 1904/1905) — Lote 6 e 7 somam mais de 56.000 m de defensa metálica simples. Mesmas condições de caução (retenção de 5% por medição) e REIDI do TR 1904.',
+    tbl_custo: [
+      ['Lote 6 - BR-369/PR-855','','','','','Verificar'],
+      ['Lote 7 - PR-092/PR-151','','','','','Verificar']
+    ],
+    prazo_publicacao: '',
+    prazo_esclarecimento: 'Até 10 dias corridos após o recebimento do TR',
+    prazo_impugnacao: '', prazo_abertura: '', prazo_habilitacao: '',
+    prazo_contrato: 'Assinatura após apresentação integral da documentação exigida pela EPR; OS emitida a critério da EPR após assinatura',
+    prazo_execucao: 'Entrega de cada solicitação em até 15 dias corridos do recebimento da demanda (fornecimento parcelado conforme consumo)',
+    prazo_vigencia: '15 meses a partir da emissão da Ordem de Serviço',
+    prazo_prorroga: 'Sim — prazo definido no edital (até 6 meses adicionais, respeitando limite de aditivos de 30% do valor original)',
+    prazo_validade_prop: '60',
+    prazo_obs: 'Proposta técnica e comercial em documentos separados, em até 15 dias corridos do recebimento do TR, via plataforma Nimbi. Garantia mínima de 10 anos contra defeitos de fabricação. Mesmo rito de medição/pagamento do TR 1904 (ciclo 21 a 20, pagamento dias 05/15/25).',
+    hab_jur_porte: '', hab_jur_consorcio: 'Não menciona', hab_jur_lider: '',
+    hab_jur_sub: 'Não mencionado neste TR especificamente — exige homologação prévia da empresa no G-Certifica',
+    hab_jur_obs: 'Necessário cadastro/homologação prévia na plataforma G-Certifica para participar do certame.',
+    hab_fis_estadual: '', hab_fis_municipal: '',
+    hab_fis_obs: 'Declarar conhecimento e cumprimento da Lei Anticorrupção (12.846/13, Anexo 05). Termo de Aceite e Compromisso (Anexo 02) e de acordo com a minuta contratual (Anexo 07) exigidos no envio da proposta.',
+    hab_ef_lc: '', hab_ef_lg: '', hab_ef_sg: '', hab_ef_capital: '',
+    hab_ef_lc_ok: '', hab_ef_cap_ok: '', hab_ef_obs: '',
+    hab_tec_pmr: 'Defensas metálicas e acessórios conforme ABNT NBR 15486:2016, com laudos e certificados de ensaio dos materiais',
+    hab_tec_quant_min: '', hab_tec_atestado: 'Verificar',
+    hab_tec_rt: 'Não — escopo é apenas fornecimento de materiais, sem exigência explícita de RT formal',
+    hab_tec_rt_nome: '',
+    hab_tec_obs: 'Mesmas condições de inspeção/recusa de materiais do TR 1904. Acompanhamento jurídico de ações trabalhistas em que a EPR for corresponsabilizada é descontado da CONTRATADA.',
+    risks: [
+      {nivel:'Alto', desc:'Maior volume entre os processos de defensa metálica da EPR (mais de 56.000 m somados nos dois lotes) — exige capacidade de produção e logística compatível; atraso recorrente pode gerar exposição comercial relevante junto à EPR em múltiplos contratos simultâneos.'},
+      {nivel:'Médio', desc:'Sem garantia de volume mínimo de compra — mesmo risco de diluição de custos fixos do TR 1904.'},
+      {nivel:'Baixo', desc:'Retenção de 5% por medição a título de caução, sem substituição por seguro garantia.'},
+      {nivel:'Baixo', desc:'Garantia mínima de 10 anos contra defeitos de fabricação e corrosão prematura.'}
+    ],
+    risco_decisao: '', risco_resp_decisao: '', risco_justificativa: ''
+  },
+  checklist: {}
+};
+const EPR1910_PROCESS_ID = 'epr-tr-1910-sinalizacao-vertical-l5l8';
+const EPR1910_META = {
+  id: EPR1910_PROCESS_ID,
+  nome: 'EPR — TR 1910 Sinalização Vertical Lotes 5 e 8',
+  type: 'privado', status: 'em_analise', progress: 35,
+  createdAt: Date.now(), updatedAt: Date.now()
+};
+const EPR1910_SEED_DATA = {
+  analise: {
+    _sourceFiles: 'EPR-LP-ENG-TR-1910-2026 (rev00) + Anexo 01 (PQ) + Anexo 13 (Quadro de Profissionais Técnicos)',
+    _autoFilledKeys: ['geral_orgao','geral_modalidade','geral_numero','geral_portal','geral_uf','geral_municipios','geral_objeto','geral_lotes','geral_status','geral_obs','quant_referencia','quant_pmr','custo_criterio','custo_reajuste','custo_obs','prazo_esclarecimento','prazo_contrato','prazo_execucao','prazo_vigencia','prazo_prorroga','prazo_validade_prop','prazo_obs','hab_jur_sub','hab_jur_obs','hab_fis_obs','hab_tec_obs','hab_tec_rt'],
+    geral_orgao: 'EPR Litoral Pioneiro S.A. (Concessionária de Rodovias — Lote 2 do Paraná) — CNPJ 51.137.031/0001-20',
+    geral_modalidade: 'RFQ / Cotação privada',
+    geral_numero: 'EPR-LP-ENG-TR-1910-2026 — Revisão 00 — 02/06/2026',
+    geral_portal: 'Outro',
+    geral_uf: 'PR',
+    geral_municipios: 'Lote 5: PR-407 km 00+000 a 18+850. Lote 8: BR-277 km 4+700 a 6+500 (Paranaguá), Av. Ayrton Senna km 0 a 8+000 (Paranaguá), e km 54+600 a 67+800 (São José dos Pinhais).',
+    geral_objeto: 'Contratação de empresa especializada para fornecimento E implantação (execução completa) de sinalização vertical nos Lotes 5 e 8 — Ano 4: placas em ACM/alumínio/aço, suportes metálicos/madeira/poliméricos, pórticos, semipórticos, braços projetados, balizadores e dispositivos auxiliares.',
+    geral_lotes: '2',
+    geral_abertura: '',
+    geral_status: 'Em análise',
+    geral_obs: 'Diferente dos TRs 1904/1905 (apenas fornecimento), este TR é de execução completa (fornecimento + implantação), com escopo de obra civil (fundações, içamento de pórticos) e exigência de suporte técnico (topografia, laboratório, sala técnica) até a conclusão da obra. Proposta via plataforma Nimbi. Visita técnica facultativa, a cargo da PROPONENTE — se realizada, exige Declaração de Visita Técnica (Anexo 22) anexada à Proposta Técnica.',
+    quant_referencia: 'Composição própria do órgão/contratante',
+    quant_mesref: '',
+    quant_desone: 'Ambas as versões',
+    quant_pmr: 'Fornecimento e implantação de placas em alumínio (Lote 8: 879,15 m² em película III+X) e estruturas de suporte/pórticos — maior relevância técnica em obra civil de fundações',
+    tbl_quant: [
+      ['Lote 5 - PR-407','1','Placa ACM 3mm modulada aérea pelíc. III+III','m²','167,47',''],
+      ['Lote 5 - PR-407','2','Placa ACM 3mm modulada aérea pelíc. X+SI','m²','45,49',''],
+      ['Lote 5 - PR-407','3','Suporte madeira de lei tratada 8x8cm','un','154,00',''],
+      ['Lote 5 - PR-407','4','Suporte polimérico ecológico colapsível 10cm','un','19,00',''],
+      ['Lote 5 - PR-407','5','Suporte duplo metálico galvanizado 4,0x3,0m','un','8,00',''],
+      ['Lote 5 - PR-407','6','Braço Projetado','un','2,00',''],
+      ['Lote 5 - PR-407','7','Semipórtico metálico vão 8,3m / 12,45m²','un','6,00','soma de 2 modelos similares'],
+      ['Lote 5 - PR-407','8','Pórtico metálico vão 15,9m / 23,85m²','un','2,00',''],
+      ['Lote 5 - PR-407','9','Balizador catadióptrico p/ Barreira Rígida','un','652,00',''],
+      ['Lote 5 - PR-407','10','Balizador catadióptrico p/ Defensa Metálica','un','698,00',''],
+      ['Lote 5 - PR-407','11','Placa aço pelíc. III+III / IV+X','m²','23,00','soma de 2 itens'],
+      ['Lote 8 - BR-277','1','Suporte madeira de lei tratada 8x8cm','un','800,00','Maior item do lote'],
+      ['Lote 8 - BR-277','2','Placa alumínio 1,5mm modulada aérea pelíc. III+X','m²','879,15','Maior quantitativo do processo'],
+      ['Lote 8 - BR-277','3','Recomposição de placa de sinalização','m²','177,92',''],
+      ['Lote 8 - BR-277','4','Dispositivo refletivo para defensa metálica','ud','2.517,38',''],
+      ['Lote 8 - BR-277','5','Semipórtico metálico vão 8,3m / vento 40m/s','un','2,00',''],
+      ['Lote 8 - BR-277','6','Pórtico metálico vão 15,9m / vento 40m/s','un','1,00','']
+    ],
+    custo_bdi_ref: '', custo_bdi_sinape: '',
+    custo_es_regime: 'Não informado no edital', custo_es_pct: '',
+    custo_preco_max: '', custo_inexeq: '',
+    custo_criterio: 'Preço Unitário (RFQ privado)',
+    custo_reajuste: 'Preços irreajustáveis por 12 meses a partir da assinatura do contrato. Após esse período, reajuste anual pelo índice de menor alíquota entre IPCA e IGPM, data-base na assinatura do contrato.',
+    custo_obs: 'Escopo inclui obra civil (fundações para pórticos/semipórticos/suportes), diferentemente dos TRs 1904/1905. Integra o escopo o suporte técnico contínuo (topografia, laboratório, sala técnica) até conclusão da obra. Retenção de 5% por medição a título de caução, sem substituição por seguro garantia.',
+    tbl_custo: [
+      ['Lote 5 - PR-407','','','','','Verificar'],
+      ['Lote 8 - BR-277','','','','','Verificar']
+    ],
+    prazo_publicacao: '',
+    prazo_esclarecimento: 'Até 10 dias corridos após o recebimento do TR',
+    prazo_impugnacao: '', prazo_abertura: '', prazo_habilitacao: '',
+    prazo_contrato: 'Assinatura após apresentação integral da documentação exigida pela EPR; OS emitida a critério da EPR após assinatura',
+    prazo_execucao: 'Até 120 dias corridos de execução efetiva (somatório de todas as mobilizações). Data limite improrrogável: 31/12/2027 para conclusão integral das obras.',
+    prazo_vigencia: '15 meses a partir da emissão da OS, podendo haver múltiplas mobilizações/desmobilizações conforme liberação de frentes pela CONTRATANTE',
+    prazo_prorroga: 'Sim — prazo definido no edital (vigência = prazo de execução + 6 meses)',
+    prazo_validade_prop: '60',
+    prazo_obs: 'Proposta técnica e comercial em documentos separados, em até 15 dias corridos do recebimento do TR. Plano de Qualidade a apresentar em até 10 dias após assinatura da OS. As Built em até 30 dias após conclusão dos serviços — condição obrigatória para liberação da caução, junto com entrega do Data Book completo.',
+    hab_jur_porte: '', hab_jur_consorcio: 'Não menciona', hab_jur_lider: '',
+    hab_jur_sub: 'Sim — até % definido (TR prevê quadro de subcontratações com justificativa e % de representatividade na execução, sujeito a aprovação)',
+    hab_jur_obs: 'Necessário cadastro/homologação prévia na plataforma G-Certifica. TR exige preenchimento de quadro de terceirizações/subcontratações (serviço, empresa, justificativa, % de representatividade).',
+    hab_fis_estadual: '', hab_fis_municipal: '',
+    hab_fis_obs: 'Diretrizes de Sustentabilidade (Anexo 06) e Lei Anticorrupção (12.846/13, Anexo 07) de observância obrigatória — descumprimento após contratação sujeita a penalidades contratuais/legais.',
+    hab_ef_lc: '', hab_ef_lg: '', hab_ef_sg: '', hab_ef_capital: '',
+    hab_ef_lc_ok: '', hab_ef_cap_ok: '', hab_ef_obs: '',
+    hab_tec_pmr: 'Fornecimento e implantação de sinalização vertical em conformidade com ABNT NBR 16179/14644/14428/14429/6123, normas DNIT/DER e Manuais de Sinalização vigentes',
+    hab_tec_quant_min: '',
+    hab_tec_atestado: 'Verificar',
+    hab_tec_rt: 'Sim — TR exige Responsabilidade Técnica formal (seção 10.1) e Quadro de Profissionais Técnicos (Anexo 13), compatível com obra civil de implantação',
+    hab_tec_rt_nome: '',
+    hab_tec_obs: 'Escopo de obra exige dispor de laboratório e laboratoristas (próprios ou contratados) com acesso irrestrito da EPR a usinas e registros de ensaio. Equipe de qualidade deve incluir engenheiro, técnicos, assistentes, inspetores de campo, encarregados de laboratório, topógrafos. Visita técnica facultativa, a cargo da PROPONENTE.',
+    risks: [
+      {nivel:'Alto', desc:'Escopo de obra civil (fundações para pórticos, semipórticos, braços projetados) eleva significativamente a complexidade de execução e exposição a riscos de canteiro em comparação com os processos de mero fornecimento (TR 1904/1905) — exige mobilização de equipe técnica, laboratório e topografia.'},
+      {nivel:'Alto', desc:'Prazo de conclusão improrrogável até 31/12/2027, independente do marco inicial de contagem — risco de descumprimento contratual caso a EPR atrase liberação de frentes ou ocorram imprevistos de campo, sem margem adicional de prazo.'},
+      {nivel:'Médio', desc:'Exigência de suporte técnico contínuo (topografia, laboratório, sala técnica) até a conclusão integral da obra, mesmo fora dos períodos de mobilização ativa — custo fixo relevante a considerar na composição de preços.'},
+      {nivel:'Médio', desc:'As Built e Data Book completo são condição obrigatória para liberação da caução — atraso na entrega desses documentos prende capital de giro retido (5% por medição) além do previsto.'},
+      {nivel:'Baixo', desc:'Retenção de 5% por medição a título de caução, sem substituição por seguro garantia (mesma condição dos demais processos EPR).'}
+    ],
+    risco_decisao: '', risco_resp_decisao: '', risco_justificativa: ''
+  },
+  checklist: {}
+};
+let currentProcessType = null;   // 'publico' | 'privado'
+let currentProcessId   = null;   // id do processo aberto
+let currentProcessData = { analise:{}, checklist:{} };
+let currentFilter = 'all';
+let saveTimers = {};
+let checklistBuilt = false;
+let analiseBuilt = false;
+function uid(){ return 'p' + Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
+// ════════════════════════════════════════
+// NAVEGAÇÃO ENTRE VIEWS
+// ════════════════════════════════════════
+function showView(id){
+  document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active', v.id===id));
+}
+function goHome(){
+  currentProcessType = null; currentProcessId = null;
+  showView('view-home');
+  updateBreadcrumb();
+  refreshHomeCounts();
+}
+function openList(type){
+  currentProcessType = type;
+  currentProcessId = null;
+  showView('view-list');
+  document.getElementById('list-title').textContent = type==='publico' ? '🏛️ Processos Públicos' : '🏢 Processos Privados';
+  const btn = document.getElementById('btn-novo-processo');
+  btn.className = 'btn-primary' + (type==='privado' ? ' amber' : '');
+  renderProcessGrid();
+  updateBreadcrumb();
+}
+function updateBreadcrumb(){
+  const bc = document.getElementById('breadcrumb');
+  let html = '<span class="link" onclick="goHome()">Início</span>';
+  if(currentProcessType){
+    const label = currentProcessType==='publico' ? 'Processos Públicos' : 'Processos Privados';
+    html += `<span class="sep">›</span><span class="link" onclick="openList('${currentProcessType}')">${label}</span>`;
+  }
+  if(currentProcessId){
+    const proc = findProcess(currentProcessId);
+    if(proc) html += `<span class="sep">›</span><span class="current">${proc.nome}</span>`;
+  }
+  bc.innerHTML = html;
+}
+// ════════════════════════════════════════
+// CRUD PROCESSOS
+// ════════════════════════════════════════
+function findProcess(id){
+  return [...processList.publico, ...processList.privado].find(p=>p.id===id);
+}
+function renderProcessGrid(){
+  const grid = document.getElementById('process-grid');
+  const empty = document.getElementById('empty-state');
+  const list = processList[currentProcessType] || [];
+  grid.innerHTML = '';
+  if(list.length===0){
+    grid.style.display='none'; empty.style.display='block';
+    return;
+  }
+  grid.style.display='grid'; empty.style.display='none';
+  list.slice().sort((a,b)=> (b.updatedAt||0)-(a.updatedAt||0)).forEach(proc=>{
+    const card = document.createElement('div');
+    card.className = 'process-card ' + currentProcessType;
+    card.onclick = (e)=>{ if(e.target.closest('.pc-del')) return; openProcess(proc.id); };
+    const statusMap = {
+      'em_analise': {cls:'analise', label:'Em análise'},
+      'participar': {cls:'participar', label:'Participar'},
+      'nao_participar': {cls:'naoparticipar', label:'Não participar'},
+      'pendente': {cls:'pendente', label:'Pendente'}
+    };
+    const st = statusMap[proc.status || 'pendente'];
+    card.innerHTML = `
+      <button class="pc-del" onclick="deleteProcess('${proc.id}')" title="Excluir processo">✕</button>
+      <div class="pc-top"><span class="pc-status ${st.cls}">${st.label}</span></div>
+      <div class="pc-title">${proc.nome}</div>
+      <div class="pc-meta">Criado em ${new Date(proc.createdAt).toLocaleDateString('pt-BR')}</div>
+      <div class="pc-progress-wrap"><div class="pc-progress-fill" style="width:${proc.progress||0}%"></div></div>
+      <div class="pc-progress-label">${proc.progress||0}% preenchido</div>
+    `;
+    grid.appendChild(card);
+  });
+}
+function refreshHomeCounts(){
+  document.getElementById('count-publico').textContent = processList.publico.length + ' processo' + (processList.publico.length!==1?'s':'');
+  document.getElementById('count-privado').textContent = processList.privado.length + ' processo' + (processList.privado.length!==1?'s':'');
+}
+function openNewProcessModal(){
+  document.getElementById('input-novo-nome').value = '';
+  document.getElementById('modal-novo').classList.add('active');
+  setTimeout(()=>document.getElementById('input-novo-nome').focus(), 50);
+}
+function closeNewProcessModal(){
+  document.getElementById('modal-novo').classList.remove('active');
+}
+async function confirmNewProcess(){
+  const nome = document.getElementById('input-novo-nome').value.trim();
+  if(!nome){ alert('Digite um nome para o processo.'); return; }
+  const proc = {
+    id: uid(),
+    nome,
+    type: currentProcessType,
+    status: 'em_analise',
+    progress: 0,
+    createdAt: Date.now(),
+    updatedAt: Date.now()
+  };
+  processList[currentProcessType].push(proc);
+  await persistProcessList();
+  closeNewProcessModal();
+  renderProcessGrid();
+  openProcess(proc.id);
+}
+async function deleteProcess(id){
+  const proc = findProcess(id);
+  if(!proc) return;
+  if(!confirm(`Excluir o processo "${proc.nome}"? Todos os dados preenchidos serão perdidos permanentemente.`)) return;
+  processList[currentProcessType] = processList[currentProcessType].filter(p=>p.id!==id);
+  await persistProcessList();
+  try{ await window.storage.delete('procdata:'+id, true); }catch(e){}
+  renderProcessGrid();
+}
+async function persistProcessList(retry){
+  try{
+    await window.storage.set('sinape:processlist', JSON.stringify(processList), true);
+  }catch(e){
+    console.error('Erro ao salvar lista de processos:', e);
+    if(!retry) setTimeout(()=>persistProcessList(true), 1000);
+  }
+}
+const SEED_PROCESSES = [
+  { id: MOTIVA_PROCESS_ID, meta: MOTIVA_PROCESS_META },
+  { id: EPR1904_PROCESS_ID, meta: EPR1904_META },
+  { id: EPR1905_PROCESS_ID, meta: EPR1905_META },
+  { id: EPR1910_PROCESS_ID, meta: EPR1910_META },
+];
+
+
+const SEEDS = SEED_PROCESSES.map(function(s){
+  var data = s.id===MOTIVA_PROCESS_ID ? MOTIVA_SEED_DATA
+           : s.id===EPR1904_PROCESS_ID ? EPR1904_SEED_DATA
+           : s.id===EPR1905_PROCESS_ID ? EPR1905_SEED_DATA
+           : EPR1910_SEED_DATA;
+  return {
+    id: s.id, nome: s.meta.nome, type: s.meta.type, status: s.meta.status || 'em_analise',
+    progress: s.meta.progress || 0, origem:'seed',
+    fontes: (data.analise && data.analise._sourceFiles) || '',
+    criadoEm: s.meta.createdAt || Date.now(), atualizadoEm: s.meta.updatedAt || Date.now(),
+    atualizadoPor:'', versao:1, schemaCustom:null,
+    analise: data.analise || {}, checklist: data.checklist || {}
+  };
+});
+</script>
+
+<script>
+/* ════════════════════════════════════════════════════════════════
+   PROMPT PARA IA — copiado pelo botão "🤖 Copiar prompt p/ IA"
+   (versão completa em PROMPT_PARA_IA.md)
+   ════════════════════════════════════════════════════════════════ */
+const PROMPT_IA =
+'Você é analista sênior de licitações da SINAPE Sinalização Viária. Analise os documentos anexados (edital, termo de referência, anexos, planilhas, minuta de contrato, carta-convite) e devolva UM ÚNICO JSON válido — nenhum texto antes ou depois — para importação no Painel de Licitações SINAPE.\n' +
+'\n' +
+'MÉTODO DE LEITURA (interno — nada disto aparece no output)\n' +
+'\n' +
+'1. Índice: antes de preencher, mapeie cada arquivo (papel: edital, TR, planilha orçamentária, minuta de contrato, anexo N) e onde cada tema é tratado: objeto, valores, quantitativos, habilitação, prazos, garantias, condições especiais. Tema tratado em mais de um documento entra na lista de cruzamento do passo 3.\n' +
+'\n' +
+'2. Interpretação: preencha pelo sentido, não pela forma. Distinga conceitos parecidos que geram exigências diferentes: capital social mínimo ≠ patrimônio líquido mínimo; garantia de proposta ≠ garantia contratual; prazo de execução ≠ vigência; índice contábil exigido ≠ sugerido; consórcio vedado ≠ consórcio não previsto; atestado de capacidade técnico-operacional (empresa) ≠ técnico-profissional (RT). Termo ambíguo ou definido de duas formas no mesmo documento: preencha com a leitura mais provável e registre a ambiguidade (passo 5).\n' +
+'\n' +
+'3. Cruzamento (obrigatório para os temas listados no passo 1):\n' +
+'   a. Confira toda referência cruzada usada em exigência ("conforme item X", "vide Anexo Y"). Destino inexistente ou incompatível com o que a remissão promete = achado (passo 5), nunca silêncio.\n' +
+'   b. Compare valores, quantitativos e prazos que aparecem em mais de um documento. Se divergirem: preencha o campo com a fonte que prevalece (ordem: edital > TR > demais anexos, salvo hierarquia expressa no próprio edital) e registre a divergência (passo 5) citando as duas fontes.\n' +
+'   c. Compare as exigências de habilitação do corpo do edital com as da minuta de contrato e anexos; divergência = achado.\n' +
+'\n' +
+'4. Auto-revisão: antes de fechar o JSON, teste o processo contra estes padrões de impugnação/esclarecimento; cada ocorrência vira risco com nível e refs:\n' +
+'   - consórcio vedado com objeto amplo/multidisciplinar que pressupõe capacidades combinadas;\n' +
+'   - exigências técnicas cumulativas ou quantitativo mínimo de atestado acima do usual (≈50% do licitado) — arts. 67 e 69 da Lei 14.133/2021;\n' +
+'   - prazos internamente inconsistentes (impugnação após a abertura, execução incompatível com o cronograma, validade de proposta menor que o rito);\n' +
+'   - índices econômico-financeiros empilhados (liquidez + capital/PL mínimo + garantias adicionais simultâneos);\n' +
+'   - contradição entre valor numérico e por extenso;\n' +
+'   - vedações que conflitam com o próprio objeto (ex.: subcontratação vedada, mas parcela exige especialidade distinta);\n' +
+'   - reajuste sem data-base clara ou critério de pagamento/medição ambíguo.\n' +
+'\n' +
+'5. Destino de cada achado — um lugar só, sem duplicar:\n' +
+'   - afeta a decisão de participar, custo, competitividade, ou fundamenta impugnação/esclarecimento → entrada em "risks" {nivel, desc}, desc curta com refs;\n' +
+'   - exige ação ou verificação da equipe → item de checklist {texto, ref, obrigatorio};\n' +
+'   - conflito entre fontes → ref no formato "Edital 9.5.2 × Anexo III 4.1 — quantitativos divergentes" (no risco ou no checklist, conforme o caso);\n' +
+'   - é dado do processo → campo correspondente da estrutura abaixo.\n' +
+'   Níveis: Alto = pode inabilitar/desclassificar a SINAPE ou fundamenta impugnação; Médio = afeta custo/prazo/competitividade ou ambiguidade que pede esclarecimento; Baixo = atenção operacional.\n' +
+'\n' +
+'REGRAS DE SAÍDA\n' +
+'1. Somente o JSON. Sem markdown, sem crases, sem comentários.\n' +
+'2. Português. Datas exatas em AAAA-MM-DD; demais prazos em texto ("30 dias após assinatura"). Células de tabelas como texto, na formatação do documento ("1.850", "R$ 155.000.000,00").\n' +
+'3. Só o que está nos documentos; nada inventado. Sem informação = "". Referências sempre curtas (número de item/cláusula/anexo) — nunca transcreva trechos dos documentos.\n' +
+'4. "_autoFilledKeys" = todas as chaves de "analise" preenchidas a partir dos documentos. "fontes" e "_sourceFiles" = nomes dos arquivos analisados.\n' +
+'5. Ficam VAZIOS por serem da equipe: risco_decisao, risco_resp_decisao, risco_justificativa, hab_ef_lc_ok, hab_ef_cap_ok, custo_bdi_sinape e as colunas Preço SINAPE / Desconto / Margem / Viável? de tbl_custo.\n' +
+'\n' +
+'ESTRUTURA DO JSON\n' +
+'{\n' +
+'  "nome": "título curto (ex.: Pregão Eletrônico 90010/2026 — SODF)",\n' +
+'  "type": "publico" ou "privado",\n' +
+'  "status": "em_analise",\n' +
+'  "origem": "ia",\n' +
+'  "fontes": "arquivos analisados",\n' +
+'  "analise": { chaves do modelo padrão + chaves das seções extras, "_autoFilledKeys": [...], "_sourceFiles": "..." },\n' +
+'  "schemaCustom": { "secoesExtras": [...], "camposOcultos": [...], "checklist": [...] }\n' +
+'}\n' +
+'\n' +
+'CHAVES DO MODELO PADRÃO ("analise")\n' +
+'- Gerais: geral_orgao, geral_modalidade, geral_numero, geral_portal, geral_uf, geral_municipios, geral_objeto, geral_lotes, geral_valor, geral_responsavel, geral_abertura, geral_status, geral_obs\n' +
+'- Quantitativos: quant_referencia, quant_mesref, quant_desone, quant_pmr; tbl_quant = [[Lote, Cód/Item, Descrição, Un, Quant, PMR? ("Sim"/"Não"/""), Observação], ...]\n' +
+'- Custos: custo_bdi_ref, custo_bdi_sinape, custo_es_regime, custo_es_pct, custo_preco_max, custo_inexeq, custo_criterio, custo_reajuste, custo_obs; tbl_custo = [[Lote, Valor estimado, Preço SINAPE, Desconto %, Margem %, Viável? ("","Sim","Não","Verificar")], ...]\n' +
+'- Prazos: prazo_publicacao, prazo_esclarecimento, prazo_impugnacao, prazo_abertura, prazo_habilitacao, prazo_contrato, prazo_execucao, prazo_vigencia, prazo_prorroga, prazo_validade_prop, prazo_obs; tbl_prazo = [[Marco, Início, Término, % financeiro, Observação], ...]\n' +
+'- Habilitação: hab_jur_porte, hab_jur_consorcio, hab_jur_lider, hab_jur_sub, hab_jur_obs, hab_fis_estadual, hab_fis_municipal, hab_fis_obs, hab_ef_lc, hab_ef_lg, hab_ef_sg, hab_ef_capital, hab_ef_lc_ok, hab_ef_cap_ok, hab_ef_obs, hab_tec_pmr, hab_tec_quant_min, hab_tec_atestado, hab_tec_rt, hab_tec_rt_nome, hab_tec_obs\n' +
+'- Riscos: risks = [{"nivel": "Alto" | "Médio" | "Baixo", "desc": "..."}]; risco_decisao, risco_resp_decisao, risco_justificativa = "".\n' +
+'\n' +
+'SEÇÕES EXTRAS ("schemaCustom.secoesExtras") — crie uma por exigência relevante que não cabe no modelo padrão (garantia de proposta, garantia contratual diferenciada, vistoria, amostras/catálogos, proposta técnica pontuada, credenciamento específico, programa de integridade, exigências ambientais):\n' +
+'{ "id": "snake", "titulo": "7. Título", "icone": "🧾", "badge": "rótulo curto", "tag": "snake",\n' +
+'  "campos": [{"key": "prefixo_campo", "label": "...", "tipo": "text|textarea|date|number|select", "opcoes": ["..."], "span": "span-full (opcional)", "placeholder": "(opcional)"}],\n' +
+'  "tabela": opcional {"key": "tbl_nome", "titulo": "...", "addLabel": "+ Adicionar", "colunas": [{"label": "...", "tipo": "text"}]} }\n' +
+'Os valores desses campos vão dentro de "analise" com as mesmas keys (snake_case, únicas, prefixadas pela seção).\n' +
+'\n' +
+'CAMPOS OCULTOS ("schemaCustom.camposOcultos") — chaves do modelo padrão comprovadamente inaplicáveis a este processo. Na dúvida, não oculte.\n' +
+'\n' +
+'CHECKLIST ("schemaCustom.checklist") — checklist operacional específico deste processo, varrendo edital/TR/anexos: condições de participação, credenciamento no portal, proposta, garantias, habilitação jurídica/fiscal/econômico-financeira/técnica, cada declaração exigida como item próprio, vistoria, amostras, prazos pós-lance, assinatura:\n' +
+'[{ "title": "1. Grupo", "items": [{"texto": "ação verificável e objetiva", "ref": "item 9.1.2 do Edital", "obrigatorio": true}] }]\n' +
+'Todo item tem "ref". "obrigatorio": true quando a falta inabilita ou desclassifica. Cláusulas conflitantes entre si: uma única entrada com ref cruzada ("Edital 9.5.2 × Anexo III 4.1") pedindo esclarecimento antes da sessão.\n' +
+'\n' +
+'LEGISLAÇÃO — público: Lei 14.133/2021 (art. 164 esclarecimento/impugnação; arts. 67 e 69 limites de exigência; LC 123/2006 ME/EPP). Privado: exclusivamente o documento do contratante e suas condições gerais.\n' +
+'\n' +
+'Devolva agora apenas o JSON.';
+</script>
+
+<script>
+/* ════════════════════════════════════════════════════════════════
+   CAMADA DE DADOS — modo LOCAL (teste) ou modo API (AWS)
+   ════════════════════════════════════════════════════════════════ */
+const Store = {
+  modo: (CONFIG.API_URL && CONFIG.API_URL.trim()) ? 'api' : 'local',
+  base: (CONFIG.API_URL || '').replace(/\/+$/,''),
+  headers(){
+    const h = {'Content-Type':'application/json'};
+    if(CONFIG.API_TOKEN) h['x-sinape-token'] = CONFIG.API_TOKEN;
+    return h;
+  },
+  async _req(metodo, caminho, corpo){
+    const res = await fetch(this.base + caminho, {
+      method: metodo, headers: this.headers(),
+      body: corpo !== undefined ? JSON.stringify(corpo) : undefined
+    });
+    if(res.status === 401) throw new Error('Token inválido — confira CONFIG.API_TOKEN');
+    if(res.status === 409){ const e = new Error('conflito'); e.conflito = true; e.doc = await res.json().catch(()=>null); throw e; }
+    if(!res.ok) throw new Error('Servidor respondeu ' + res.status);
+    if(res.status === 204) return null;
+    return res.json();
+  },
+  /* — LOCAL — */
+  _db: null,
+  _lsLoad(){
+    if(this._db) return this._db;
+    this._db = {};
+    try{
+      const raw = localStorage.getItem('sinape:paineldb:v2');
+      if(raw) this._db = JSON.parse(raw);
+    }catch(e){ /* ambiente sem localStorage (ex.: preview) — segue em memória */ }
+    return this._db;
+  },
+  _lsSave(){
+    try{ localStorage.setItem('sinape:paineldb:v2', JSON.stringify(this._db)); }catch(e){}
+  },
+  /* — API pública da camada — */
+  async listar(){
+    if(this.modo === 'api'){
+      const r = await this._req('GET','/processos');
+      return r.processos || [];
+    }
+    const db = this._lsLoad();
+    return Object.values(db).map(p => resumo(p));
+  },
+  async obter(id){
+    if(this.modo === 'api') return this._req('GET','/processos/' + encodeURIComponent(id));
+    const db = this._lsLoad();
+    if(!db[id]) throw new Error('Processo não encontrado');
+    return JSON.parse(JSON.stringify(db[id]));
+  },
+  async criar(proc){
+    if(this.modo === 'api') return this._req('POST','/processos', proc);
+    const db = this._lsLoad(); db[proc.id] = proc; this._lsSave(); return proc;
+  },
+  async substituir(proc){
+    if(this.modo === 'api') return this._req('PUT','/processos/' + encodeURIComponent(proc.id), proc);
+    const db = this._lsLoad(); db[proc.id] = proc; this._lsSave(); return proc;
+  },
+  async patch(id, corpo){
+    if(this.modo === 'api') return this._req('PATCH','/processos/' + encodeURIComponent(id), corpo);
+    const db = this._lsLoad(); const p = db[id]; if(!p) throw new Error('Processo não encontrado');
+    Object.assign(p, corpo.metaPatch || {});
+    Object.assign(p.analise = p.analise || {}, corpo.analisePatch || {});
+    Object.assign(p.checklist = p.checklist || {}, corpo.checklistPatch || {});
+    p.versao = (p.versao||1) + 1; p.atualizadoEm = Date.now(); p.atualizadoPor = CONFIG.USUARIO || '';
+    this._lsSave();
+    return { versao:p.versao, atualizadoEm:p.atualizadoEm };
+  },
+  async excluir(id){
+    if(this.modo === 'api') return this._req('DELETE','/processos/' + encodeURIComponent(id));
+    const db = this._lsLoad(); delete db[id]; this._lsSave();
+  },
+  /* — anexos (exigem modo API) — */
+  async listarAnexos(id){
+    if(this.modo !== 'api') return [];
+    const r = await this._req('GET','/processos/' + encodeURIComponent(id) + '/anexos');
+    return r.anexos || [];
+  },
+  async enviarAnexo(id, file){
+    if(this.modo !== 'api') throw new Error('Anexos exigem o backend configurado (CONFIG.API_URL)');
+    const form = new FormData();
+    form.append('arquivo', file);
+    form.append('enviadoPor', CONFIG.USUARIO || '');
+    const headers = {};
+    if(CONFIG.API_TOKEN) headers['x-sinape-token'] = CONFIG.API_TOKEN;
+    const res = await fetch(this.base + '/processos/' + encodeURIComponent(id) + '/anexos', {
+      method: 'POST', headers, body: form
+    });
+    if(res.status === 401) throw new Error('Token inválido — confira CONFIG.API_TOKEN');
+    if(!res.ok){ const e = await res.json().catch(()=>({})); throw new Error(e.erro || ('Servidor respondeu ' + res.status)); }
+    return res.json();
+  },
+  urlAnexo(id, anexoId){
+    return this.base + '/processos/' + encodeURIComponent(id) + '/anexos/' + encodeURIComponent(anexoId);
+  },
+  async excluirAnexo(id, anexoId){
+    if(this.modo !== 'api') return;
+    return this._req('DELETE','/processos/' + encodeURIComponent(id) + '/anexos/' + encodeURIComponent(anexoId));
+  }
+};
+
+function resumo(p){
+  return { id:p.id, nome:p.nome, type:p.type, status:p.status, progress:p.progress||0,
+           origem:p.origem||'manual', fontes:p.fontes||'', atualizadoEm:p.atualizadoEm||0,
+           atualizadoPor:p.atualizadoPor||'', versao:p.versao||1 };
+}
+
+/* ════════════════════════════════════════════════════════════════
+   ESTADO GLOBAL
+   ════════════════════════════════════════════════════════════════ */
+let listaResumos = [];            // resumos de todos os processos
+let currentType = null;           // 'publico' | 'privado'
+let currentProc = null;           // processo aberto (objeto completo)
+let currentFilter = 'all';
+let pend = null;                  // alterações pendentes de envio
+let saveTimer = null;
+let salvando = false;
+let pollTimer = null;
+
+function uid(nome){
+  const slug = (nome||'proc').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,50);
+  return slug + '-' + Date.now().toString(36);
+}
+function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function toast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  clearTimeout(t._tm); t._tm = setTimeout(()=>t.classList.remove('show'), 3200);
+}
+function setSync(estado, texto){
+  const pill = document.getElementById('sync-pill');
+  pill.className = 'sync-pill ' + estado;
+  document.getElementById('sync-text').textContent = texto;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   NAVEGAÇÃO
+   ════════════════════════════════════════════════════════════════ */
+function showView(id){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  updateBreadcrumb();
+}
+function goHome(){ currentType=null; currentProc=null; showView('view-home'); refreshHomeCounts(); }
+function openList(type){
+  currentType = type; currentProc = null;
+  document.getElementById('list-title').textContent = type==='publico' ? '🏛️ Processos Públicos' : '🏢 Processos Privados';
+  document.getElementById('search-box').value = '';
+  showView('view-list');
+  renderProcessGrid();
+}
+function updateBreadcrumb(){
+  const bc = document.getElementById('breadcrumb');
+  let html = '<span class="link" onclick="goHome()">Início</span>';
+  if(currentType){
+    const label = currentType==='publico' ? 'Processos Públicos' : 'Processos Privados';
+    if(currentProc){
+      html += '<span class="sep">/</span><span class="link" onclick="openList(\''+currentType+'\')">'+label+'</span>';
+      html += '<span class="sep">/</span><span class="current">'+esc(currentProc.nome)+'</span>';
+    } else {
+      html += '<span class="sep">/</span><span class="current">'+label+'</span>';
+    }
+  }
+  bc.innerHTML = html;
+}
+function refreshHomeCounts(){
+  const pub = listaResumos.filter(p=>p.type==='publico').length;
+  const pri = listaResumos.filter(p=>p.type==='privado').length;
+  document.getElementById('count-publico').textContent = pub + (pub===1?' processo':' processos');
+  document.getElementById('count-privado').textContent = pri + (pri===1?' processo':' processos');
+}
+
+/* ════════════════════════════════════════════════════════════════
+   LISTA DE PROCESSOS
+   ════════════════════════════════════════════════════════════════ */
+function renderProcessGrid(){
+  const grid = document.getElementById('process-grid');
+  const empty = document.getElementById('empty-state');
+  const busca = (document.getElementById('search-box').value||'').toLowerCase();
+  let list = listaResumos.filter(p=>p.type===currentType);
+  if(busca) list = list.filter(p => (p.nome+' '+(p.fontes||'')).toLowerCase().includes(busca));
+  list.sort((a,b)=>(b.atualizadoEm||0)-(a.atualizadoEm||0));
+  grid.innerHTML = '';
+  empty.style.display = list.length ? 'none' : 'block';
+  list.forEach(p=>{
+    const card = document.createElement('div');
+    card.className = 'proc-card';
+    card.onclick = ()=>openProcess(p.id);
+    const stLabel = STATUS_LABELS[p.status] || (p.status||'—');
+    const quando = p.atualizadoEm ? new Date(p.atualizadoEm).toLocaleDateString('pt-BR') : '';
+    card.innerHTML =
+      '<button class="pc-del" title="Excluir processo" onclick="event.stopPropagation();deleteProcess(\''+p.id+'\')">✕</button>' +
+      '<div class="pc-nome">'+esc(p.nome)+'</div>' +
+      '<div class="pc-meta">' +
+        '<span class="chip st-'+esc(p.status||'pendente')+'">'+esc(stLabel)+'</span>' +
+        (p.origem==='ia' ? '<span class="chip ia">🤖 gerado por IA</span>' : '') +
+        (quando ? '<span>Atualizado '+quando+(p.atualizadoPor?' · '+esc(p.atualizadoPor):'')+'</span>' : '') +
+      '</div>' +
+      '<div class="pc-prog"><div class="fill" style="width:'+(p.progress||0)+'%"></div></div>' +
+      '<div class="pc-meta"><span>'+(p.progress||0)+'% do checklist tratado</span></div>';
+    grid.appendChild(card);
+  });
+  renderListBanner();
+}
+function renderListBanner(){
+  const area = document.getElementById('list-banner-area');
+  area.innerHTML = '';
+  if(Store.modo==='api' && listaResumos.length===0 && SEEDS.length){
+    area.innerHTML =
+      '<div class="banner-info"><span>☁️ O servidor está vazio. Deseja enviar os '+SEEDS.length+' processos-exemplo (Motiva + EPR) para a nuvem?</span>' +
+      '<button class="btn-outline" onclick="enviarSeeds()">Enviar processos-exemplo</button></div>';
+  }
+  if(Store.modo==='local'){
+    area.innerHTML =
+      '<div class="banner-info banner-warn"><span>⚠️ Modo local (sem API configurada): os dados ficam apenas neste navegador. ' +
+      'Para uso colaborativo em tempo real, implante o backend e preencha CONFIG.API_URL — ver GUIA_IMPLANTACAO_AWS.md.</span></div>';
+  }
+}
+async function enviarSeeds(){
+  try{
+    setSync('busy','Enviando exemplos…');
+    for(const s of SEEDS){ await Store.criar(JSON.parse(JSON.stringify(s))); }
+    await recarregarLista();
+    setSync('ok','Nuvem sincronizada');
+    toast('Processos-exemplo enviados para o servidor.');
+  }catch(e){ setSync('err','Falha de conexão'); toast('Erro ao enviar: '+e.message); }
+}
+
+async function recarregarLista(){
+  listaResumos = await Store.listar();
+  refreshHomeCounts();
+  if(document.getElementById('view-list').classList.contains('active')) renderProcessGrid();
+}
+
+/* ── novo processo manual ── */
+function openNewProcessModal(){ document.getElementById('input-novo-nome').value=''; abrirModal('modal-novo'); }
+function abrirModal(id){ document.getElementById(id).classList.add('open'); }
+function fecharModal(id){ document.getElementById(id).classList.remove('open'); }
+async function confirmNewProcess(){
+  const nome = document.getElementById('input-novo-nome').value.trim();
+  if(!nome){ toast('Informe o nome do processo.'); return; }
+  const tipo = document.querySelector('input[name=novo-tipo]:checked').value;
+  const proc = novoProcessoVazio(nome, tipo, 'manual');
+  try{
+    await Store.criar(proc);
+    fecharModal('modal-novo');
+    await recarregarLista();
+    openProcess(proc.id);
+  }catch(e){ toast('Erro ao criar: '+e.message); }
+}
+function novoProcessoVazio(nome, tipo, origem){
+  return { id: uid(nome), nome, type: tipo, status:'em_analise', progress:0, origem: origem||'manual',
+           fontes:'', criadoEm:Date.now(), atualizadoEm:Date.now(), atualizadoPor:CONFIG.USUARIO||'',
+           versao:1, schemaCustom:null, analise:{}, checklist:{} };
+}
+async function deleteProcess(id){
+  const p = listaResumos.find(x=>x.id===id);
+  if(!p) return;
+  if(!confirm('Excluir o processo "'+p.nome+'"? Esta ação vale para toda a equipe e não pode ser desfeita.')) return;
+  try{
+    await Store.excluir(id);
+    if(currentProc && currentProc.id===id){ currentProc=null; openList(currentType); }
+    await recarregarLista();
+    toast('Processo excluído.');
+  }catch(e){ toast('Erro ao excluir: '+e.message); }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   ABRIR PROCESSO + RENDERIZAÇÃO DINÂMICA
+   ════════════════════════════════════════════════════════════════ */
+function getSecoes(proc){
+  const custom = proc.schemaCustom || {};
+  const ocultas = custom.secoesOcultas || [];
+  let secs = TEMPLATE_PADRAO.filter(s=>!ocultas.includes(s.id));
+  if(Array.isArray(custom.secoesExtras) && custom.secoesExtras.length){
+    // seções extras entram antes da seção de riscos
+    const idxRiscos = secs.findIndex(s=>s.tipoSecao==='riscos');
+    const extras = custom.secoesExtras.map(s=>Object.assign({cor:'violet', origemIA:true}, s));
+    if(idxRiscos>=0) secs = secs.slice(0,idxRiscos).concat(extras, secs.slice(idxRiscos));
+    else secs = secs.concat(extras);
+  }
+  return secs;
+}
+function getChecklistGrupos(proc){
+  const c = proc.schemaCustom && proc.schemaCustom.checklist;
+  if(Array.isArray(c) && c.length){
+    return c.map(g=>({ title:g.title||g.titulo||'Grupo', custom:true,
+      items:(g.items||g.itens||[]).map(it=> typeof it==='string' ? {texto:it} : {texto:it.texto||it.text||'', ref:it.ref||'', obrigatorio:!!it.obrigatorio, labels:it.labels}) }));
+  }
+  return CHK_DATA[proc.type].map(g=>({ title:g.title, items:g.items.map(t=>({texto:t})) }));
+}
+
+async function openProcess(id){
+  try{
+    setSync('busy','Carregando…');
+    currentProc = await Store.obter(id);
+    setSync(Store.modo==='api'?'ok':'', Store.modo==='api'?'Nuvem sincronizada':'Modo local');
+  }catch(e){ toast('Erro ao abrir: '+e.message); return; }
+  pend = null; salvando = false;
+  currentType = currentProc.type;
+  currentFilter = 'all';
+  showView('view-process');
+  switchProcessTab('analise');
+  renderSourceBanner();
+  renderAnexos();
+  buildFilterBar();
+  buildAnalise();
+  buildChecklist();
+  setSaveStatus('Pronto','');
+}
+function switchProcessTab(tab){
+  document.getElementById('tab-analise').classList.toggle('active', tab==='analise');
+  document.getElementById('tab-checklist').classList.toggle('active', tab==='checklist');
+  document.getElementById('panel-analise').classList.toggle('active', tab==='analise');
+  document.getElementById('panel-checklist').classList.toggle('active', tab==='checklist');
+}
+function renderSourceBanner(){
+  const area = document.getElementById('source-banner-area');
+  const a = currentProc.analise || {};
+  const fontes = currentProc.fontes || a._sourceFiles;
+  if(currentProc.origem==='ia' || (a._autoFilledKeys && a._autoFilledKeys.length)){
+    area.innerHTML = '<div class="source-banner">🤖 <b>Processo preenchido por IA'+(fontes?' a partir de:':'.')+'</b> '+esc(fontes||'')+
+      '<br>Os campos destacados em lilás vieram dos documentos — revise e ajuste; a marcação some ao editar.</div>';
+  } else if(fontes){
+    area.innerHTML = '<div class="source-banner" style="background:var(--teal-ll);border-color:var(--teal-mid);color:var(--teal);">📎 Fontes: '+esc(fontes)+'</div>';
+  } else area.innerHTML = '';
+}
+function formatBytes(n){
+  if(!n && n!==0) return '';
+  if(n < 1024) return n + ' B';
+  if(n < 1024*1024) return (n/1024).toFixed(1) + ' KB';
+  return (n/1024/1024).toFixed(1) + ' MB';
+}
+async function renderAnexos(){
+  const area = document.getElementById('anexos-area');
+  if(Store.modo !== 'api'){
+    area.innerHTML = '<div class="anexos-box"><b>📎 Anexos</b>'+
+      '<p class="hint" style="margin:4px 0 0;">Envio de arquivos exige o backend Docker configurado (CONFIG.API_URL) — ver GUIA_DOCKER.md.</p></div>';
+    return;
+  }
+  area.innerHTML = '<div class="anexos-box"><b>📎 Anexos</b>'+
+    '<input type="file" id="input-anexo" style="margin-left:10px;">'+
+    '<button class="btn-sm" onclick="enviarAnexoAtual()">Enviar</button>'+
+    '<div id="lista-anexos" style="margin-top:8px;">Carregando…</div></div>';
+  try{
+    const anexos = await Store.listarAnexos(currentProc.id);
+    const lista = document.getElementById('lista-anexos');
+    if(!anexos.length){ lista.innerHTML = '<span class="hint">Nenhum anexo enviado ainda.</span>'; return; }
+    lista.innerHTML = anexos.map(a =>
+      '<div class="anexo-item">📄 <a href="'+esc(Store.urlAnexo(currentProc.id, a.id))+'" target="_blank">'+esc(a.nome_original)+'</a>'+
+      ' <span class="hint">('+formatBytes(a.tamanho)+(a.enviado_por?' — '+esc(a.enviado_por):'')+')</span>'+
+      ' <button class="btn-sm" onclick="excluirAnexoAtual(\''+esc(a.id)+'\')">🗑</button></div>'
+    ).join('');
+  }catch(e){
+    document.getElementById('lista-anexos').innerHTML = '<span class="hint">Erro ao listar anexos: '+esc(e.message)+'</span>';
+  }
+}
+async function enviarAnexoAtual(){
+  const input = document.getElementById('input-anexo');
+  const file = input.files && input.files[0];
+  if(!file){ toast('Escolha um arquivo primeiro'); return; }
+  try{
+    toast('Enviando anexo…');
+    await Store.enviarAnexo(currentProc.id, file);
+    toast('Anexo enviado');
+    renderAnexos();
+  }catch(e){ toast('Erro ao enviar: ' + e.message); }
+}
+async function excluirAnexoAtual(anexoId){
+  try{
+    await Store.excluirAnexo(currentProc.id, anexoId);
+    toast('Anexo removido');
+    renderAnexos();
+  }catch(e){ toast('Erro ao remover: ' + e.message); }
+}
+function buildFilterBar(){
+  const bar = document.getElementById('filter-bar');
+  const secs = getSecoes(currentProc);
+  let html = '<span class="filter-bar-label">Visualizar:</span>' +
+    '<button class="fbtn active" data-f="all" onclick="setFilter(\'all\')">Tudo</button>';
+  secs.forEach(s=>{
+    html += '<button class="fbtn" data-f="'+esc(s.tag||s.id)+'" onclick="setFilter(\''+esc(s.tag||s.id)+'\')">'+(s.icone||'')+' '+esc((s.badge||s.titulo).replace(/^\d+\.\s*/,''))+'</button>';
+  });
+  bar.innerHTML = html;
+}
+function setFilter(f){
+  currentFilter = f;
+  document.querySelectorAll('.fbtn').forEach(b=>b.classList.toggle('active', b.dataset.f===f));
+  document.querySelectorAll('#analise-root .sec-card').forEach(card=>{
+    card.classList.toggle('hidden', f!=='all' && card.dataset.tag!==f);
+  });
+}
+function toggleSec(head){ head.closest('.sec-card').classList.toggle('collapsed'); }
+
+/* ── campos ── */
+function fieldHTML(c, ocultos){
+  if(ocultos && ocultos.includes(c.key)) return '';
+  let inner = '';
+  const ph = esc(c.placeholder||'');
+  if(c.tipo==='select'){
+    inner = '<select data-key="'+esc(c.key)+'">' + (c.opcoes||[]).map(o=>{
+      const v = (o && o.value!==undefined) ? o.value : o;
+      const l = (o && o.label!==undefined) ? o.label : o;
+      return '<option value="'+esc(v)+'">'+esc(l||'Selecionar...')+'</option>';
+    }).join('') + '</select>';
+  } else if(c.tipo==='textarea'){
+    inner = '<textarea data-key="'+esc(c.key)+'" placeholder="'+ph+'"></textarea>';
+  } else {
+    const t = (c.tipo==='date'||c.tipo==='number') ? c.tipo : 'text';
+    inner = '<input type="'+t+'" data-key="'+esc(c.key)+'" placeholder="'+ph+'">';
+  }
+  const span = c.span ? ' '+c.span : '';
+  const div = c.divisorAntes ? '<div class="sec-divider" style="grid-column:1/-1;">'+esc(c.divisorAntes)+'</div>' : '';
+  return div + '<div class="field'+span+'"><label>'+esc(c.label||'')+'</label>'+inner+'</div>';
+}
+function secaoHTML(s, ocultos){
+  const cor = s.cor ? ' '+s.cor : '';
+  const badgeCor = s.cor ? ' '+s.cor : '';
+  let body = '';
+  if(s.tipoSecao==='riscos'){
+    body = '<p style="font-size:.78rem;color:var(--slate-l);padding-top:14px;margin-bottom:6px;">Registre os riscos identificados. Classifique cada um como Alto, Médio ou Baixo.</p>' +
+      '<div class="risk-grid" id="risk-grid"></div>' +
+      '<button class="btn-add-row" onclick="addRisk()">+ Adicionar risco</button>' +
+      '<div class="sec-divider" style="margin-top:20px;">Decisão final sobre participação</div>' +
+      '<div class="field-grid cols-2">' + (s.camposDecisao||[]).map(c=>fieldHTML(c,ocultos)).join('') + '</div>';
+  } else {
+    const grid = 'field-grid' + (s.gridCols===2?' cols-2':'');
+    const camposHTML = (s.campos||[]).map(c=>fieldHTML(c,ocultos)).join('');
+    let tabelaHTML = '';
+    if(s.tabela){
+      tabelaHTML =
+        (s.tabela.titulo?'<div class="sec-divider">'+esc(s.tabela.titulo)+'</div>':'') +
+        (s.tabela.nota?'<p style="font-size:.78rem;color:var(--slate-l);margin:6px 0;">'+esc(s.tabela.nota)+'</p>':'') +
+        '<div class="tbl-wrap"><table class="edit-table"><thead><tr>' +
+        s.tabela.colunas.map(col=>'<th>'+esc(col.label)+'</th>').join('') +
+        '<th style="width:32px;"></th></tr></thead><tbody id="tbody-'+esc(s.tabela.key)+'"></tbody></table></div>' +
+        '<button class="btn-add-row" onclick="addRow(\''+esc(s.tabela.key)+'\')">'+esc(s.tabela.addLabel||'+ Adicionar linha')+'</button>';
+    }
+    // se a tabela vem antes dos campos finais (caso "custos"), separa o último bloco (obs)
+    if(s.tabela && s.tabela.antesDosCamposFinais){
+      const idxDiv = (s.campos||[]).findIndex(c=>c.divisorAntes);
+      const antes = (s.campos||[]).slice(0, idxDiv<0?s.campos.length:idxDiv).map(c=>fieldHTML(c,ocultos)).join('');
+      const depois = idxDiv<0 ? '' : (s.campos||[]).slice(idxDiv).map(c=>fieldHTML(c,ocultos)).join('');
+      body = '<div class="'+grid+'">'+antes+'</div>' + tabelaHTML + (depois?'<div class="'+grid+'">'+depois+'</div>':'');
+    } else {
+      body = '<div class="'+grid+'">'+camposHTML+'</div>' + tabelaHTML;
+    }
+  }
+  return '<div class="sec-card" data-tag="'+esc(s.tag||s.id)+'">' +
+    '<div class="sec-head'+cor+'" onclick="toggleSec(this)">' +
+      '<span class="sec-title">'+(s.icone||'')+' <span>'+esc(s.titulo)+(s.origemIA?' <span class="chip ia" style="margin-left:6px;">🤖 do edital</span>':'')+'</span></span>' +
+      '<div style="display:flex;align-items:center;gap:8px;"><span class="sec-badge'+badgeCor+'">'+esc(s.badge||'')+'</span><span class="sec-chevron">▾</span></div>' +
+    '</div><div class="sec-body">'+body+'</div></div>';
+}
+
+function buildAnalise(){
+  const root = document.getElementById('analise-root');
+  const custom = currentProc.schemaCustom || {};
+  const ocultos = custom.camposOcultos || [];
+  const secs = getSecoes(currentProc);
+  root.innerHTML = secs.map(s=>secaoHTML(s,ocultos)).join('');
+  // bind campos simples
+  root.querySelectorAll('[data-key]').forEach(el=>{
+    const fn = ()=>{
+      currentProc.analise[el.dataset.key] = el.value;
+      el.classList.remove('auto-filled');
+      marcarPend('analise', el.dataset.key, el.value);
+    };
+    el.addEventListener('input', fn);
+    el.addEventListener('change', fn);
+  });
+  aplicarValoresAnalise();
+  // tabelas + riscos
+  secs.forEach(s=>{ if(s.tabela) rebuildTabela(s.tabela); });
+  if(secs.some(s=>s.tipoSecao==='riscos')) rebuildRiscos();
+  setFilter(currentFilter);
+}
+function aplicarValoresAnalise(){
+  const auto = (currentProc.analise && currentProc.analise._autoFilledKeys) || [];
+  document.querySelectorAll('#analise-root [data-key]').forEach(el=>{
+    const v = currentProc.analise ? currentProc.analise[el.dataset.key] : undefined;
+    if(v===undefined || v===null) return;
+    setCampoValor(el, v);
+    if(auto.includes(el.dataset.key)) el.classList.add('auto-filled');
+  });
+}
+/* aplica valor respeitando o tipo do input; se um input date receber texto livre, vira texto para não perder dado */
+function setCampoValor(el, v){
+  if(el.tagName==='INPUT' && el.type==='date' && v && !/^\d{4}-\d{2}-\d{2}$/.test(v)){
+    el.type = 'text';
+  }
+  if(el.value !== String(v)) el.value = v;
+}
+
+/* ── tabelas editáveis ── */
+function tabelaDef(key){
+  const secs = getSecoes(currentProc);
+  for(const s of secs){ if(s.tabela && s.tabela.key===key) return s.tabela; }
+  return null;
+}
+function rebuildTabela(def){
+  const tbody = document.getElementById('tbody-'+def.key);
+  if(!tbody) return;
+  tbody.innerHTML = '';
+  const linhas = currentProc.analise[def.key] || [];
+  linhas.forEach((linha,ri)=>tbody.appendChild(linhaTR(def,linha,ri)));
+}
+function linhaTR(def, linha, ri){
+  const tr = document.createElement('tr');
+  def.colunas.forEach((col,ci)=>{
+    const td = document.createElement('td');
+    let el;
+    if(col.tipo==='select'){
+      el = document.createElement('select');
+      (col.opcoes||['']).forEach(o=>{ const op=document.createElement('option'); op.value=o; op.textContent=o||'—'; el.appendChild(op); });
+    } else {
+      el = document.createElement('input'); el.type='text';
+    }
+    el.value = linha[ci]!==undefined ? linha[ci] : '';
+    const fn = ()=>{
+      const arr = currentProc.analise[def.key] || (currentProc.analise[def.key]=[]);
+      arr[ri][ci] = el.value;
+      marcarPend('analise', def.key, arr);
+    };
+    el.addEventListener('input', fn); el.addEventListener('change', fn);
+    td.appendChild(el); tr.appendChild(td);
+  });
+  const tdDel = document.createElement('td');
+  const btn = document.createElement('button'); btn.className='row-del'; btn.textContent='✕'; btn.title='Remover linha';
+  btn.onclick = ()=>{
+    const arr = currentProc.analise[def.key]||[];
+    arr.splice(ri,1);
+    marcarPend('analise', def.key, arr);
+    rebuildTabela(def);
+  };
+  tdDel.appendChild(btn); tr.appendChild(tdDel);
+  return tr;
+}
+function addRow(key){
+  const def = tabelaDef(key); if(!def) return;
+  const arr = currentProc.analise[key] || (currentProc.analise[key]=[]);
+  arr.push(def.colunas.map(()=>''));
+  marcarPend('analise', key, arr);
+  rebuildTabela(def);
+}
+
+/* ── riscos ── */
+function rebuildRiscos(){
+  const grid = document.getElementById('risk-grid');
+  if(!grid) return;
+  grid.innerHTML = '';
+  const risks = currentProc.analise.risks || [];
+  risks.forEach((r,i)=>{
+    const item = document.createElement('div'); item.className='risk-item';
+    const sel = document.createElement('select');
+    ['Alto','Médio','Baixo'].forEach(n=>{ const o=document.createElement('option'); o.value=n; o.textContent=n; sel.appendChild(o); });
+    sel.value = r.nivel||'Médio'; sel.className='n-'+sel.value;
+    sel.onchange = ()=>{ r.nivel=sel.value; sel.className='n-'+sel.value; marcarPend('analise','risks',risks); };
+    const ta = document.createElement('textarea'); ta.value=r.desc||''; ta.placeholder='Descrição do risco…';
+    ta.oninput = ()=>{ r.desc=ta.value; marcarPend('analise','risks',risks); };
+    const del = document.createElement('button'); del.className='row-del'; del.textContent='✕'; del.title='Remover risco';
+    del.onclick = ()=>{ risks.splice(i,1); marcarPend('analise','risks',risks); rebuildRiscos(); };
+    item.appendChild(sel); item.appendChild(ta); item.appendChild(del);
+    grid.appendChild(item);
+  });
+}
+function addRisk(){
+  const risks = currentProc.analise.risks || (currentProc.analise.risks=[]);
+  risks.push({nivel:'Médio', desc:''});
+  marcarPend('analise','risks',risks);
+  rebuildRiscos();
+}
+
+/* ── checklist ── */
+function buildChecklist(){
+  const root = document.getElementById('checklist-root');
+  root.innerHTML = '';
+  const grupos = getChecklistGrupos(currentProc);
+  grupos.forEach((sec,si)=>{
+    const card = document.createElement('div'); card.className='sec-card';
+    const head = document.createElement('div'); head.className='sec-head' + (sec.custom?' violet':'');
+    head.onclick = ()=>card.classList.toggle('collapsed');
+    head.innerHTML = '<span class="sec-title"><span>'+esc(sec.title)+'</span>'+(sec.custom?' <span class="chip ia">🤖 do edital</span>':'')+'</span>' +
+      '<div style="display:flex;align-items:center;gap:8px;"><span class="sec-badge'+(sec.custom?' violet':'')+'" id="chkcount-'+si+'">0/'+sec.items.length+'</span><span class="sec-chevron">▾</span></div>';
+    card.appendChild(head);
+    const body = document.createElement('div'); body.className='sec-body';
+    sec.items.forEach((it,ii)=>{
+      const k = si+'-'+ii;
+      const item = document.createElement('div'); item.className='chk-item';
+      const p = document.createElement('div'); p.className='chk-text';
+      p.innerHTML = (it.obrigatorio?'<span class="obrig-star" title="Exigência obrigatória">★</span> ':'') + esc(it.texto);
+      item.appendChild(p);
+      if(it.ref){
+        const rr = document.createElement('div'); rr.className='chk-refrow';
+        rr.innerHTML = '<span class="chip ref">📎 '+esc(it.ref)+'</span>';
+        item.appendChild(rr);
+      }
+      const labels = it.labels && it.labels.length ? it.labels : CHK_LABELS;
+      const ctrl = document.createElement('div'); ctrl.className='chk-controls';
+      labels.forEach(lbl=>{
+        const lab = document.createElement('label'); lab.className='chk-lbl'; lab.dataset.k=k; lab.dataset.lbl=lbl;
+        const inp = document.createElement('input'); inp.type='checkbox';
+        inp.onchange = ()=>{
+          if(!currentProc.checklist[k]) currentProc.checklist[k]={checks:{},note:''};
+          currentProc.checklist[k].checks[lbl]=inp.checked;
+          lab.classList.toggle('checked', inp.checked && !CHK_NEG.includes(lbl));
+          lab.classList.toggle('checked-neg', inp.checked && CHK_NEG.includes(lbl));
+          marcarPend('checklist', k, currentProc.checklist[k]);
+          updateChkProgress();
+        };
+        lab.appendChild(inp); lab.appendChild(document.createTextNode(lbl));
+        ctrl.appendChild(lab);
+      });
+      item.appendChild(ctrl);
+      const ta = document.createElement('textarea'); ta.className='nota-field'; ta.placeholder='Tratativa / observação…'; ta.dataset.notaK=k;
+      ta.oninput = ()=>{
+        if(!currentProc.checklist[k]) currentProc.checklist[k]={checks:{},note:''};
+        currentProc.checklist[k].note = ta.value;
+        marcarPend('checklist', k, currentProc.checklist[k]);
+      };
+      item.appendChild(ta);
+      body.appendChild(item);
+    });
+    card.appendChild(body); root.appendChild(card);
+  });
+  aplicarChecklist();
+}
+function aplicarChecklist(){
+  const grupos = getChecklistGrupos(currentProc);
+  grupos.forEach((sec,si)=>{
+    sec.items.forEach((_,ii)=>{
+      const k = si+'-'+ii;
+      const st = currentProc.checklist[k];
+      document.querySelectorAll('.chk-lbl[data-k="'+k+'"]').forEach(lab=>{
+        const inp = lab.querySelector('input');
+        const on = !!(st && st.checks && st.checks[lab.dataset.lbl]);
+        inp.checked = on;
+        lab.classList.toggle('checked', on && !CHK_NEG.includes(lab.dataset.lbl));
+        lab.classList.toggle('checked-neg', on && CHK_NEG.includes(lab.dataset.lbl));
+      });
+      const ta = document.querySelector('.nota-field[data-nota-k="'+k+'"]');
+      if(ta && st && document.activeElement!==ta) ta.value = st.note||'';
+    });
+  });
+  updateChkProgress();
+}
+function updateChkProgress(){
+  const grupos = getChecklistGrupos(currentProc);
+  let total=0, feitos=0;
+  grupos.forEach((sec,si)=>{
+    let f=0;
+    sec.items.forEach((_,ii)=>{
+      total++;
+      const st = currentProc.checklist[si+'-'+ii];
+      const ok = st && ((st.checks && Object.values(st.checks).some(Boolean)) || (st.note && st.note.trim()));
+      if(ok){ feitos++; f++; }
+    });
+    const badge = document.getElementById('chkcount-'+si);
+    if(badge) badge.textContent = f+'/'+sec.items.length;
+  });
+  const pct = total ? Math.round(100*feitos/total) : 0;
+  document.getElementById('prog-fill').style.width = pct+'%';
+  document.getElementById('prog-label').textContent = feitos+' de '+total+' itens tratados ('+pct+'%)';
+  if(currentProc.progress !== pct){
+    currentProc.progress = pct;
+    marcarPend('meta','progress',pct);
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   SALVAMENTO (debounce) + SINCRONIZAÇÃO ENTRE USUÁRIOS
+   ════════════════════════════════════════════════════════════════ */
+function setSaveStatus(txt, cls){
+  const el = document.getElementById('save-status');
+  el.textContent = txt; el.className = 'save-status '+(cls||'');
+  const el2 = document.getElementById('save-status-chk');
+  el2.textContent = txt; el2.className = 'save-status '+(cls||'');
+}
+function marcarPend(escopo, chave, valor){
+  if(!currentProc) return;
+  if(!pend) pend = {metaPatch:{}, analisePatch:{}, checklistPatch:{}};
+  if(escopo==='meta') pend.metaPatch[chave]=valor;
+  if(escopo==='analise') pend.analisePatch[chave]=valor;
+  if(escopo==='checklist') pend.checklistPatch[chave]=valor;
+  setSaveStatus('Alterações não salvas…','saving');
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(flushPend, 900);
+}
+async function flushPend(){
+  if(!pend || !currentProc || salvando) return;
+  const corpo = pend; pend = null;
+  corpo.metaPatch = corpo.metaPatch || {};
+  corpo.metaPatch.atualizadoPor = CONFIG.USUARIO || '';
+  corpo.seVersao = currentProc.versao;
+  salvando = true;
+  setSaveStatus('Salvando…','saving');
+  try{
+    const r = await Store.patch(currentProc.id, corpo);
+    currentProc.versao = (r && r.versao) || (currentProc.versao+1);
+    currentProc.atualizadoEm = (r && r.atualizadoEm) || Date.now();
+    setSaveStatus('Salvo '+new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}),'saved');
+    if(Store.modo==='api') setSync('ok','Nuvem sincronizada');
+  }catch(e){
+    if(e.conflito){
+      // alguém salvou antes: recarrega, reaplica nossas alterações por cima e tenta 1 vez sem trava
+      try{
+        const remoto = await Store.obter(currentProc.id);
+        mesclarRemoto(remoto);
+        corpo.seVersao = undefined;
+        const r2 = await Store.patch(currentProc.id, corpo);
+        currentProc.versao = (r2 && r2.versao) || currentProc.versao+1;
+        setSaveStatus('Salvo (mesclado com edições da equipe)','saved');
+      }catch(e2){
+        pend = Object.assign(corpo, pend||{});
+        setSaveStatus('Erro ao salvar — tentando de novo…','error');
+        setTimeout(flushPend, 6000);
+      }
+    } else {
+      pend = Object.assign(corpo, pend||{});
+      setSaveStatus('Sem conexão — tentando de novo…','error');
+      if(Store.modo==='api') setSync('err','Falha de conexão');
+      setTimeout(flushPend, 8000);
+    }
+  } finally { salvando = false; }
+}
+function mesclarRemoto(remoto){
+  // aplica dados vindos de outro usuário, preservando o que está pendente aqui
+  const pAna = (pend && pend.analisePatch) || {};
+  const pChk = (pend && pend.checklistPatch) || {};
+  Object.keys(remoto.analise||{}).forEach(k=>{ if(!(k in pAna)) currentProc.analise[k]=remoto.analise[k]; });
+  Object.keys(remoto.checklist||{}).forEach(k=>{ if(!(k in pChk)) currentProc.checklist[k]=remoto.checklist[k]; });
+  currentProc.versao = remoto.versao; currentProc.nome = remoto.nome; currentProc.status = remoto.status;
+  currentProc.schemaCustom = remoto.schemaCustom || currentProc.schemaCustom;
+  // reaplica na tela sem mexer no campo em foco
+  const foco = document.activeElement;
+  document.querySelectorAll('#analise-root [data-key]').forEach(el=>{
+    if(el===foco) return;
+    const v = currentProc.analise[el.dataset.key];
+    if(v!==undefined && v!==null && !Array.isArray(v)) setCampoValor(el, v);
+  });
+  getSecoes(currentProc).forEach(s=>{ if(s.tabela && (!foco || !foco.closest('#tbody-'+s.tabela.key))) rebuildTabela(s.tabela); });
+  if(!foco || !foco.closest('#risk-grid')) rebuildRiscos();
+  aplicarChecklist();
+}
+async function sincronizarAgora(){
+  if(!currentProc) return;
+  try{
+    setSync('busy','Sincronizando…');
+    const remoto = await Store.obter(currentProc.id);
+    if(remoto.versao > currentProc.versao) { mesclarRemoto(remoto); toast('Atualizado com as edições da equipe.'); }
+    else toast('Você já está com a versão mais recente.');
+    setSync(Store.modo==='api'?'ok':'', Store.modo==='api'?'Nuvem sincronizada':'Modo local');
+  }catch(e){ setSync('err','Falha de conexão'); toast('Erro ao sincronizar: '+e.message); }
+}
+function iniciarPolling(){
+  if(Store.modo!=='api') return;
+  clearInterval(pollTimer);
+  pollTimer = setInterval(async ()=>{
+    try{
+      if(document.hidden) return;
+      if(currentProc){
+        if(pend || salvando) return; // não sobrescreve enquanto há edição local pendente
+        const remoto = await Store.obter(currentProc.id);
+        if(remoto.versao > currentProc.versao) mesclarRemoto(remoto);
+      } else {
+        await recarregarLista();
+      }
+      setSync('ok','Nuvem sincronizada');
+    }catch(e){ setSync('err','Falha de conexão'); }
+  }, Math.max(8, CONFIG.POLL_SEGUNDOS||20)*1000);
+  window.addEventListener('focus', ()=>{ if(currentProc) sincronizarAgora(); else recarregarLista().catch(()=>{}); });
+}
+
+/* ════════════════════════════════════════════════════════════════
+   IMPORTAR / EXPORTAR / PROMPT
+   ════════════════════════════════════════════════════════════════ */
+let importPronto = null;
+function openImportModal(){
+  document.getElementById('import-json').value='';
+  document.getElementById('import-error').style.display='none';
+  document.getElementById('import-preview').style.display='none';
+  document.getElementById('btn-confirm-import').disabled = true;
+  importPronto = null;
+  abrirModal('modal-import');
+}
+function validarImport(){
+  const errBox = document.getElementById('import-error');
+  const prev = document.getElementById('import-preview');
+  errBox.style.display='none'; prev.style.display='none';
+  document.getElementById('btn-confirm-import').disabled = true;
+  let raw = document.getElementById('import-json').value.trim();
+  // tolera colagem com cercas de código
+  raw = raw.replace(/^```[a-z]*\s*/i,'').replace(/```\s*$/,'').trim();
+  let obj;
+  try{ obj = JSON.parse(raw); }
+  catch(e){ errBox.textContent = 'JSON inválido: '+e.message; errBox.style.display='block'; return; }
+  const lista = Array.isArray(obj) ? obj : [obj];
+  const norm = [];
+  for(let i=0;i<lista.length;i++){
+    try{ norm.push(normalizarProcesso(lista[i])); }
+    catch(e){ errBox.textContent = 'Processo '+(i+1)+': '+e.message; errBox.style.display='block'; return; }
+  }
+  importPronto = norm;
+  prev.innerHTML = norm.map(p=>{
+    const nExtras = (p.schemaCustom && p.schemaCustom.secoesExtras || []).length;
+    const nChk = (p.schemaCustom && p.schemaCustom.checklist || []).reduce((a,g)=>a+((g.items||g.itens||[]).length),0);
+    const nCampos = Object.keys(p.analise).filter(k=>!k.startsWith('_') && p.analise[k]!=='' && p.analise[k]!=null).length;
+    return '✔ <b>'+esc(p.nome)+'</b> — '+(p.type==='publico'?'🏛️ público':'🏢 privado')+
+      ' · '+nCampos+' campos preenchidos · '+nExtras+' seção(ões) específica(s) do edital · '+
+      (nChk? nChk+' itens de checklist próprios' : 'checklist padrão SINAPE');
+  }).join('<br>');
+  prev.style.display='block';
+  document.getElementById('btn-confirm-import').disabled = false;
+}
+function normalizarProcesso(o){
+  if(!o || typeof o!=='object') throw new Error('estrutura inválida.');
+  const nome = (o.nome||o.name||'').toString().trim();
+  if(!nome) throw new Error('campo "nome" é obrigatório.');
+  let type = (o.type||o.tipo||'').toString().toLowerCase();
+  if(type!=='publico' && type!=='privado') throw new Error('campo "type" deve ser "publico" ou "privado".');
+  const analise = (o.analise && typeof o.analise==='object') ? o.analise : {};
+  const checklist = (o.checklist && typeof o.checklist==='object') ? o.checklist : {};
+  let schemaCustom = (o.schemaCustom && typeof o.schemaCustom==='object') ? o.schemaCustom : null;
+  if(schemaCustom){
+    if(schemaCustom.secoesExtras && !Array.isArray(schemaCustom.secoesExtras)) throw new Error('"schemaCustom.secoesExtras" deve ser lista.');
+    if(schemaCustom.checklist && !Array.isArray(schemaCustom.checklist)) throw new Error('"schemaCustom.checklist" deve ser lista.');
+  }
+  if(!analise._autoFilledKeys && (o.origem==='ia' || o.origem===undefined)){
+    analise._autoFilledKeys = Object.keys(analise).filter(k=>!k.startsWith('_') && analise[k]!=='' && analise[k]!=null && !Array.isArray(analise[k]));
+  }
+  const statusRaw = (o.status||'em_analise').toString();
+  const status = STATUS_LABELS[statusRaw] ? statusRaw : 'em_analise';
+  return {
+    id: (o.id && String(o.id).trim()) || uid(nome),
+    nome, type, status,
+    progress: 0,
+    origem: o.origem || 'ia',
+    fontes: o.fontes || analise._sourceFiles || '',
+    criadoEm: Date.now(), atualizadoEm: Date.now(), atualizadoPor: CONFIG.USUARIO||'',
+    versao: 1, schemaCustom, analise, checklist
+  };
+}
+async function confirmarImport(){
+  if(!importPronto) return;
+  try{
+    for(const p of importPronto){
+      const existe = listaResumos.find(x=>x.id===p.id);
+      if(existe){
+        if(!confirm('Já existe um processo com o id "'+p.id+'" ("'+existe.nome+'"). Sobrescrever com a versão importada?')) continue;
+        p.versao = (existe.versao||1)+1;
+        await Store.substituir(p);
+      } else {
+        await Store.criar(p);
+      }
+    }
+    fecharModal('modal-import');
+    await recarregarLista();
+    toast(importPronto.length===1 ? 'Processo importado.' : importPronto.length+' processos importados.');
+    if(importPronto.length===1){ currentType = importPronto[0].type; openProcess(importPronto[0].id); }
+    else if(currentType) renderProcessGrid();
+  }catch(e){ toast('Erro ao importar: '+e.message); }
+}
+function exportarProcesso(){
+  if(!currentProc) return;
+  const blob = new Blob([JSON.stringify(currentProc,null,2)],{type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = (currentProc.id||'processo')+'.json';
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+function copiarPromptIA(){
+  const fim = Store.modo==='api'
+    ? '\n\nOBS: alem de colar o JSON no painel, o processo pode ser criado direto via API: POST '+Store.base+'/processos com header x-sinape-token.'
+    : '';
+  const texto = PROMPT_IA + fim;
+  const done = ()=>toast('Prompt copiado! Cole na conversa com a IA junto com o edital/TR.');
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(texto).then(done).catch(()=>{ fallbackCopy(texto); done(); });
+  } else { fallbackCopy(texto); done(); }
+}
+function fallbackCopy(t){
+  const ta = document.createElement('textarea'); ta.value=t; document.body.appendChild(ta);
+  ta.select(); try{ document.execCommand('copy'); }catch(e){} document.body.removeChild(ta);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   INICIALIZAÇÃO
+   ════════════════════════════════════════════════════════════════ */
+async function init(){
+  if(Store.modo==='local'){
+    setSync('', 'Modo local (sem API)');
+    // garante que os processos-exemplo existem localmente
+    const db = Store._lsLoad();
+    let mudou = false;
+    SEEDS.forEach(s=>{ if(!db[s.id]){ db[s.id]=JSON.parse(JSON.stringify(s)); mudou=true; } });
+    if(mudou) Store._lsSave();
+  } else {
+    setSync('busy','Conectando…');
+  }
+  try{
+    await recarregarLista();
+    if(Store.modo==='api') setSync('ok','Nuvem sincronizada');
+  }catch(e){
+    if(Store.modo==='api'){ setSync('err','Falha de conexão'); toast('Não foi possível conectar à API: '+e.message); }
+  }
+  iniciarPolling();
+  updateBreadcrumb();
+}
+init();
+</script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      TOKEN: ${TOKEN}
+      DATABASE_URL: postgres://sinape:${POSTGRES_PASSWORD}@db:5432/sinape
+      UPLOAD_DIR: /app/uploads
+      MAX_UPLOAD_MB: ${MAX_UPLOAD_MB:-25}
+    volumes:
+      - uploads:/app/uploads
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: sinape
+      POSTGRES_USER: sinape
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sinape -d sinape"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+volumes:
+  uploads:
+  pgdata:

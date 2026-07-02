@@ -1,0 +1,452 @@
+{
+  "id": "pregao-90010-2026-sodf",
+  "nome": "Pregão Eletrônico 90010/2026 — SODF (Semaforização)",
+  "type": "publico",
+  "status": "em_analise",
+  "origem": "ia",
+  "fontes": "Edital PE 90010-2026.pdf; TR Anexo I.pdf; Planilha Orçamentária Anexo II.xlsx",
+  "analise": {
+    "geral_orgao": "SODF — Secretaria de Obras e Infraestrutura do Distrito Federal",
+    "geral_modalidade": "Pregão Eletrônico",
+    "geral_numero": "90010/2026",
+    "geral_portal": "Compras.gov.br",
+    "geral_uf": "DF",
+    "geral_municipios": "Brasília e regiões administrativas",
+    "geral_objeto": "Contratação de empresa especializada para modernização, manutenção e operação do sistema de semaforização do Distrito Federal, incluindo controladores adaptativos, botoeiras sonoras e central de controle.",
+    "geral_lotes": "Lote único",
+    "geral_valor": "R$ 155.000.000,00",
+    "geral_responsavel": "Gabriel",
+    "geral_abertura": "2026-08-12",
+    "geral_status": "Em análise",
+    "geral_obs": "Participação em consórcio permitida (máx. 3 empresas). Impugnação sobre botoeiras sonoras já protocolada em processo anterior semelhante.",
+    "quant_referencia": "Planilha Orçamentária — Anexo II",
+    "quant_mesref": "2026-03",
+    "quant_desone": "Não desonerada",
+    "quant_pmr": "Sim",
+    "tbl_quant": [
+      [
+        "Único",
+        "01",
+        "Controlador semafórico adaptativo com central",
+        "un",
+        "420",
+        "Sim",
+        "Item de maior relevância técnica"
+      ],
+      [
+        "Único",
+        "02",
+        "Botoeira sonora para travessia acessível",
+        "un",
+        "1.850",
+        "Sim",
+        "Objeto de questionamento de quantitativo mínimo"
+      ],
+      [
+        "Único",
+        "03",
+        "Manutenção preventiva e corretiva da rede semafórica",
+        "mês",
+        "36",
+        "",
+        "Medição mensal"
+      ]
+    ],
+    "custo_bdi_ref": "24,30%",
+    "custo_bdi_sinape": "",
+    "custo_es_regime": "Desoneração: Não",
+    "custo_es_pct": "",
+    "custo_preco_max": "Sim — valor estimado é o máximo aceitável",
+    "custo_inexeq": "Conforme art. 59 da Lei 14.133/2021",
+    "custo_criterio": "Menor preço global",
+    "custo_reajuste": "Anual — IPCA, contado da data do orçamento",
+    "custo_obs": "Verificar composição de custos da operação da central 24/7 antes de fechar margem.",
+    "tbl_custo": [
+      [
+        "Único",
+        "R$ 155.000.000,00",
+        "",
+        "",
+        "",
+        ""
+      ]
+    ],
+    "prazo_publicacao": "2026-06-26",
+    "prazo_esclarecimento": "2026-08-07",
+    "prazo_impugnacao": "2026-08-07",
+    "prazo_abertura": "2026-08-12",
+    "prazo_habilitacao": "Até 2h após convocação para envio de documentos complementares",
+    "prazo_contrato": "5 dias úteis após homologação",
+    "prazo_execucao": "36 meses",
+    "prazo_vigencia": "36 meses, prorrogável até 10 anos (serviço contínuo)",
+    "prazo_prorroga": "Sim — art. 107 da Lei 14.133/2021",
+    "prazo_validade_prop": "90 dias",
+    "prazo_obs": "",
+    "tbl_prazo": [
+      [
+        "Mobilização e plano de trabalho",
+        "Assinatura",
+        "60 dias",
+        "5%",
+        "Condição para primeira medição"
+      ],
+      [
+        "Modernização dos controladores",
+        "Mês 3",
+        "Mês 18",
+        "55%",
+        "Cronograma físico-financeiro Anexo IV"
+      ],
+      [
+        "Operação e manutenção",
+        "Mês 1",
+        "Mês 36",
+        "40%",
+        "Parcelas mensais"
+      ]
+    ],
+    "hab_jur_porte": "Aberta a qualquer porte",
+    "hab_jur_consorcio": "Permitido",
+    "hab_jur_lider": "Empresa líder com no mínimo 40% de participação",
+    "hab_jur_sub": "Permitida até 25%, vedada para parcela de maior relevância",
+    "hab_jur_obs": "",
+    "hab_fis_estadual": "Sim",
+    "hab_fis_municipal": "Sim",
+    "hab_fis_obs": "Certidões do DF para o consórcio; de cada consorciada em sua sede.",
+    "hab_ef_lc": "≥ 1,0",
+    "hab_ef_lg": "≥ 1,0",
+    "hab_ef_sg": "≥ 1,0",
+    "hab_ef_capital": "10% do valor estimado",
+    "hab_ef_lc_ok": "",
+    "hab_ef_cap_ok": "",
+    "hab_ef_obs": "Somatório proporcional no caso de consórcio.",
+    "hab_tec_pmr": "Sim",
+    "hab_tec_quant_min": "50% do quantitativo de controladores (210 un) e operação de central por 12 meses",
+    "hab_tec_atestado": "Atestado(s) com CAT, soma permitida",
+    "hab_tec_rt": "Sim",
+    "hab_tec_rt_nome": "",
+    "hab_tec_obs": "Quantitativo mínimo de botoeiras sonoras (925 un) parece superdimensionado — candidato a impugnação (arts. 67 e 69, Lei 14.133/2021).",
+    "risks": [
+      {
+        "nivel": "Alto",
+        "desc": "Quantitativo mínimo de botoeiras sonoras em atestado (925 un = 50% do licitado) restringe competição e fundamenta impugnação — Edital 9.5.2-c × arts. 67/69 da Lei 14.133/2021."
+      },
+      {
+        "nivel": "Médio",
+        "desc": "Operação de central 24/7 exige equipe dedicada — custo fixo alto se a margem for apertada (TR item 5.3; cronograma Anexo IV)."
+      },
+      {
+        "nivel": "Baixo",
+        "desc": "Reajuste anual pelo IPCA com data-base mar/2026 (Edital 11.2) — exposição inflacionária limitada."
+      }
+    ],
+    "risco_decisao": "",
+    "risco_resp_decisao": "",
+    "risco_justificativa": "",
+    "garantia_exigida": "Sim",
+    "garantia_modalidade": "Caução, seguro-garantia ou fiança bancária",
+    "garantia_pct": "5% do valor do contrato",
+    "garantia_prazo": "Até a assinatura do contrato, vigência até 90 dias após o término",
+    "garantia_obs": "Percentual pode subir a 10% em caso de inadimplemento anterior (cláusula 14.3 do edital).",
+    "vistoria_obrigatoria": "Facultativa",
+    "vistoria_data_limite": "2026-08-05",
+    "vistoria_contato": "GEOPE/SODF — agendamento pelo e-mail indicado no item 6.2 do edital",
+    "vistoria_declaracao": "Declaração de conhecimento das condições substitui a vistoria",
+    "_autoFilledKeys": [
+      "geral_orgao",
+      "geral_modalidade",
+      "geral_numero",
+      "geral_portal",
+      "geral_uf",
+      "geral_municipios",
+      "geral_objeto",
+      "geral_lotes",
+      "geral_valor",
+      "geral_abertura",
+      "quant_referencia",
+      "quant_mesref",
+      "quant_desone",
+      "quant_pmr",
+      "tbl_quant",
+      "custo_bdi_ref",
+      "custo_es_regime",
+      "custo_preco_max",
+      "custo_inexeq",
+      "custo_criterio",
+      "custo_reajuste",
+      "prazo_publicacao",
+      "prazo_esclarecimento",
+      "prazo_impugnacao",
+      "prazo_abertura",
+      "prazo_habilitacao",
+      "prazo_contrato",
+      "prazo_execucao",
+      "prazo_vigencia",
+      "prazo_prorroga",
+      "prazo_validade_prop",
+      "tbl_prazo",
+      "hab_jur_porte",
+      "hab_jur_consorcio",
+      "hab_jur_lider",
+      "hab_jur_sub",
+      "hab_fis_estadual",
+      "hab_fis_municipal",
+      "hab_fis_obs",
+      "hab_ef_lc",
+      "hab_ef_lg",
+      "hab_ef_sg",
+      "hab_ef_capital",
+      "hab_ef_obs",
+      "hab_tec_pmr",
+      "hab_tec_quant_min",
+      "hab_tec_atestado",
+      "hab_tec_rt",
+      "hab_tec_obs",
+      "risks",
+      "garantia_exigida",
+      "garantia_modalidade",
+      "garantia_pct",
+      "garantia_prazo",
+      "garantia_obs",
+      "vistoria_obrigatoria",
+      "vistoria_data_limite",
+      "vistoria_contato",
+      "vistoria_declaracao"
+    ],
+    "_sourceFiles": "Edital PE 90010-2026.pdf; TR Anexo I.pdf; Planilha Orçamentária Anexo II.xlsx"
+  },
+  "schemaCustom": {
+    "secoesExtras": [
+      {
+        "id": "garantia_proposta",
+        "titulo": "7. Garantia Contratual",
+        "icone": "🛡️",
+        "badge": "Cláusula 14",
+        "tag": "garantia_proposta",
+        "campos": [
+          {
+            "key": "garantia_exigida",
+            "label": "Garantia exigida?",
+            "tipo": "select",
+            "opcoes": [
+              "",
+              "Sim",
+              "Não"
+            ]
+          },
+          {
+            "key": "garantia_modalidade",
+            "label": "Modalidades aceitas",
+            "tipo": "text"
+          },
+          {
+            "key": "garantia_pct",
+            "label": "Percentual",
+            "tipo": "text"
+          },
+          {
+            "key": "garantia_prazo",
+            "label": "Prazo de apresentação / vigência",
+            "tipo": "text"
+          },
+          {
+            "key": "garantia_obs",
+            "label": "Observações",
+            "tipo": "textarea",
+            "span": "span-full"
+          }
+        ]
+      },
+      {
+        "id": "vistoria",
+        "titulo": "8. Vistoria Técnica",
+        "icone": "📍",
+        "badge": "Item 6 do Edital",
+        "tag": "vistoria",
+        "campos": [
+          {
+            "key": "vistoria_obrigatoria",
+            "label": "Vistoria",
+            "tipo": "select",
+            "opcoes": [
+              "",
+              "Obrigatória",
+              "Facultativa",
+              "Não prevista"
+            ]
+          },
+          {
+            "key": "vistoria_data_limite",
+            "label": "Data limite",
+            "tipo": "date"
+          },
+          {
+            "key": "vistoria_contato",
+            "label": "Agendamento / contato",
+            "tipo": "text",
+            "span": "span-full"
+          },
+          {
+            "key": "vistoria_declaracao",
+            "label": "Declaração substitutiva",
+            "tipo": "text",
+            "span": "span-full"
+          }
+        ]
+      }
+    ],
+    "camposOcultos": [],
+    "checklist": [
+      {
+        "title": "1. Condições de Participação",
+        "items": [
+          {
+            "texto": "Confirmar credenciamento ativo no Compras.gov.br e chaves de acesso da SINAPE",
+            "ref": "item 3.1 do Edital",
+            "obrigatorio": true
+          },
+          {
+            "texto": "Verificar inexistência de sanção impeditiva (CEIS/CNEP/TCU)",
+            "ref": "item 3.4 do Edital",
+            "obrigatorio": true
+          },
+          {
+            "texto": "Definir participação isolada ou em consórcio (máx. 3 empresas, líder ≥ 40%)",
+            "ref": "item 4 do Edital",
+            "obrigatorio": false
+          }
+        ]
+      },
+      {
+        "title": "2. Proposta de Preços",
+        "items": [
+          {
+            "texto": "Elaborar proposta com validade mínima de 90 dias",
+            "ref": "item 7.2 do Edital",
+            "obrigatorio": true
+          },
+          {
+            "texto": "Preencher planilha de composição de custos no modelo do Anexo II",
+            "ref": "Anexo II",
+            "obrigatorio": true
+          },
+          {
+            "texto": "Respeitar valor máximo global de R$ 155.000.000,00",
+            "ref": "item 7.5 do Edital",
+            "obrigatorio": true
+          },
+          {
+            "texto": "Detalhar BDI próprio com referência ao paradigma de 24,30%",
+            "ref": "Anexo II — item 3",
+            "obrigatorio": false
+          }
+        ]
+      },
+      {
+        "title": "3. Habilitação Jurídica e Fiscal",
+        "items": [
+          {
+            "texto": "Contrato social consolidado e atos de eleição dos administradores",
+            "ref": "item 9.2 do Edital",
+            "obrigatorio": true
+          },
+          {
+            "texto": "Certidões federais, estaduais (DF), municipais, FGTS e CNDT vigentes",
+            "ref": "item 9.3 do Edital",
+            "obrigatorio": true
+          },
+          {
+            "texto": "Se consórcio: compromisso de constituição com percentuais e liderança",
+            "ref": "item 4.2 do Edital",
+            "obrigatorio": true
+          }
+        ]
+      },
+      {
+        "title": "4. Habilitação Econômico-Financeira",
+        "items": [
+          {
+            "texto": "Balanço patrimonial com LC, LG e SG ≥ 1,0",
+            "ref": "item 9.4.1 do Edital",
+            "obrigatorio": true
+          },
+          {
+            "texto": "Comprovar capital social ou PL ≥ 10% do valor estimado",
+            "ref": "item 9.4.3 do Edital",
+            "obrigatorio": true
+          }
+        ]
+      },
+      {
+        "title": "5. Habilitação Técnica",
+        "items": [
+          {
+            "texto": "Atestado(s) com CAT: ≥ 210 controladores adaptativos instalados",
+            "ref": "item 9.5.2-a do Edital",
+            "obrigatorio": true
+          },
+          {
+            "texto": "Atestado de operação de central de controle por ≥ 12 meses",
+            "ref": "item 9.5.2-b do Edital",
+            "obrigatorio": true
+          },
+          {
+            "texto": "Avaliar impugnação do quantitativo mínimo de botoeiras sonoras (925 un)",
+            "ref": "item 9.5.2-c × arts. 67/69 da Lei 14.133/2021",
+            "obrigatorio": false
+          },
+          {
+            "texto": "Indicar responsável técnico com vínculo e registro no CREA",
+            "ref": "item 9.5.4 do Edital",
+            "obrigatorio": true
+          }
+        ]
+      },
+      {
+        "title": "6. Declarações Exigidas",
+        "items": [
+          {
+            "texto": "Declaração de que não emprega menor (art. 7º, XXXIII, CF)",
+            "ref": "item 9.6-a do Edital",
+            "obrigatorio": true
+          },
+          {
+            "texto": "Declaração de elaboração independente de proposta",
+            "ref": "item 9.6-b do Edital",
+            "obrigatorio": true
+          },
+          {
+            "texto": "Declaração de conhecimento das condições locais (substitui vistoria)",
+            "ref": "item 6.3 do Edital",
+            "obrigatorio": true
+          },
+          {
+            "texto": "Declaração de cumprimento da reserva de cargos (PcD/reabilitados)",
+            "ref": "item 9.6-d do Edital",
+            "obrigatorio": true
+          }
+        ]
+      },
+      {
+        "title": "7. Garantias e Assinatura",
+        "items": [
+          {
+            "texto": "Providenciar garantia contratual de 5% antes da assinatura",
+            "ref": "cláusula 14 do Edital",
+            "obrigatorio": true
+          },
+          {
+            "texto": "Assinar contrato em até 5 dias úteis após convocação",
+            "ref": "item 12.1 do Edital",
+            "obrigatorio": true
+          },
+          {
+            "texto": "Entregar plano de trabalho e mobilização em 60 dias",
+            "ref": "TR — item 8",
+            "obrigatorio": false
+          }
+        ]
+      }
+    ]
+  }
+}
