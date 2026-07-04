@@ -234,13 +234,22 @@ input, select, textarea { font-family:inherit; }
 .chk-lbl.checked-neg { background:var(--red-l); border-color:#fca5a5; color:var(--red); }
 
 /* ── EXIGÊNCIAS ── */
-.exig-table { width:100%; border-collapse:collapse; font-size:.78rem; margin-top:4px; }
-.exig-table th { text-align:left; font-size:.68rem; font-weight:800; color:var(--slate-l); text-transform:uppercase; letter-spacing:.04em; padding:8px 10px 6px; border-bottom:1px solid var(--border); }
-.exig-table td { padding:10px; border-bottom:1px solid #eef2f7; vertical-align:top; line-height:1.5; }
+.exig-table-wrap { overflow-x:auto; margin-top:4px; }
+.exig-table { width:100%; min-width:920px; border-collapse:collapse; font-size:.78rem; }
+.exig-table th { text-align:left; font-size:.68rem; font-weight:800; color:var(--slate-l); text-transform:uppercase; letter-spacing:.04em; padding:8px 10px 6px; border-bottom:1px solid var(--border); white-space:nowrap; }
+.exig-table th.exig-chk-th { text-align:center; font-size:.62rem; max-width:72px; white-space:normal; line-height:1.25; }
+.exig-table td { padding:10px 8px; border-bottom:1px solid #eef2f7; vertical-align:top; line-height:1.5; }
 .exig-table tr:last-child td { border-bottom:none; }
-.exig-desc { color:var(--slate); }
-.exig-ref { width:22%; white-space:nowrap; }
-.exig-ob { width:10%; white-space:nowrap; text-align:right; }
+.exig-desc { color:var(--slate); min-width:180px; }
+.exig-ref { width:14%; }
+.exig-ob { width:72px; white-space:nowrap; text-align:center; }
+.exig-chk-cell { text-align:center; width:72px; }
+.exig-chk { display:inline-flex; align-items:center; justify-content:center; border:1px solid var(--border); border-radius:8px; padding:4px 6px; cursor:pointer; user-select:none; background:var(--white); min-width:28px; min-height:28px; }
+.exig-chk input { accent-color:var(--teal); margin:0; }
+.exig-chk.checked { background:var(--green-l); border-color:#86efac; }
+.exig-chk.checked-neg { background:var(--red-l); border-color:#fca5a5; }
+.exig-tratativa { width:100%; min-width:160px; border:1px dashed var(--border); border-radius:7px; padding:6px 8px; font-size:.74rem; min-height:34px; resize:vertical; background:#fcfdff; font-family:inherit; }
+.exig-tratativa:focus { outline:none; border-color:var(--teal-mid); border-style:solid; }
 .exig-summary { font-size:.76rem; color:var(--slate-mid); margin-bottom:12px; }
 .nota-field { width:100%; margin-top:8px; border:1px dashed var(--border); border-radius:7px; padding:6px 9px; font-size:.74rem; min-height:34px; resize:vertical; background:#fcfdff; }
 .nota-field:focus { outline:none; border-color:var(--teal-mid); border-style:solid; }
@@ -363,6 +372,9 @@ input, select, textarea { font-family:inherit; }
     </div>
 
     <div class="panel" id="panel-exigencias">
+      <div class="save-row">
+        <span class="save-status" id="save-status-exig">&nbsp;</span>
+      </div>
       <div id="exigencias-root"></div>
     </div>
 
@@ -699,6 +711,7 @@ const CHK_DATA = {
 };
 const CHK_LABELS = ["Atende","Não atende","Confere","Não confere"];
 const CHK_NEG = ["Não atende","Não confere"];
+const EXIG_LABELS = CHK_LABELS;
 
 const STATUS_LABELS = {
   pendente:'Pendente', em_analise:'Em análise', participar:'Participar',
@@ -1759,6 +1772,15 @@ const ORDEM_CATEGORIAS_EXIG = [
 function getExigencias(proc){
   return Array.isArray(proc && proc.exigencias) ? proc.exigencias : [];
 }
+function ensureExigAval(ex){
+  if(!ex.checks || typeof ex.checks !== 'object') ex.checks = {};
+  if(ex.tratativa === undefined || ex.tratativa === null) ex.tratativa = '';
+  return ex;
+}
+function marcarPendExigencias(){
+  if(!currentProc) return;
+  marcarPend('meta', 'exigencias', currentProc.exigencias);
+}
 function buildExigencias(){
   const root = document.getElementById('exigencias-root');
   const lista = getExigencias(currentProc);
@@ -1768,6 +1790,7 @@ function buildExigencias(){
       '<p style="font-size:.76rem;margin-top:6px;">Use <b>Importar da IA</b> com o prompt atualizado — o Claude extrai as exigências do edital/TR para esta aba.</p></div>';
     return;
   }
+  lista.forEach(ensureExigAval);
   const obrig = lista.filter(x=>x.obrigatorio!==false).length;
   const porCat = {};
   lista.forEach((ex, i)=>{
@@ -1779,7 +1802,7 @@ function buildExigencias(){
     const ia = ORDEM_CATEGORIAS_EXIG.indexOf(a), ib = ORDEM_CATEGORIAS_EXIG.indexOf(b);
     return (ia<0?999:ia) - (ib<0?999:ib) || a.localeCompare(b);
   });
-  root.innerHTML = '<p class="exig-summary"><b>'+lista.length+'</b> exigência(s) · <b>'+obrig+'</b> obrigatória(s) · agrupadas por categoria</p>';
+  root.innerHTML = '<p class="exig-summary"><b>'+lista.length+'</b> exigência(s) · <b>'+obrig+'</b> obrigatória(s) · marque a avaliação e registre tratativas</p>';
   cats.forEach(cat=>{
     const card = document.createElement('div'); card.className='sec-card';
     const itens = porCat[cat];
@@ -1789,10 +1812,22 @@ function buildExigencias(){
       '<div style="display:flex;align-items:center;gap:8px;"><span class="sec-badge violet">'+itens.length+'</span><span class="sec-chevron">▾</span></div>';
     card.appendChild(head);
     const body = document.createElement('div'); body.className='sec-body';
+    const wrap = document.createElement('div'); wrap.className='exig-table-wrap';
     const table = document.createElement('table'); table.className='exig-table';
-    table.innerHTML = '<thead><tr><th>Exigência</th><th>Referência</th><th></th></tr></thead>';
+    const thead = document.createElement('thead');
+    const headRow = document.createElement('tr');
+    ['Exigência','Referência',''].concat(EXIG_LABELS, ['Tratativas']).forEach((label, ci)=>{
+      const th = document.createElement('th');
+      th.textContent = label;
+      if(ci >= 3 && ci < 3 + EXIG_LABELS.length) th.className = 'exig-chk-th';
+      headRow.appendChild(th);
+    });
+    thead.appendChild(headRow); table.appendChild(thead);
     const tbody = document.createElement('tbody');
     itens.forEach(ex=>{
+      const idx = ex._idx;
+      const item = currentProc.exigencias[idx];
+      ensureExigAval(item);
       const tr = document.createElement('tr');
       const desc = document.createElement('td'); desc.className='exig-desc';
       desc.textContent = ex.descricao || ex.texto || '';
@@ -1800,13 +1835,49 @@ function buildExigencias(){
       ref.innerHTML = ex.ref ? '<span class="chip ref">📎 '+esc(ex.ref)+'</span>' : '—';
       const ob = document.createElement('td'); ob.className='exig-ob';
       ob.innerHTML = ex.obrigatorio!==false
-        ? '<span class="chip obrig" title="Exigência obrigatória">★ Obrig.</span>'
-        : '<span class="chip opt">Facult.</span>';
+        ? '<span class="chip obrig" title="Exigência obrigatória">★</span>'
+        : '<span class="chip opt">—</span>';
       tr.appendChild(desc); tr.appendChild(ref); tr.appendChild(ob);
+      EXIG_LABELS.forEach(lbl=>{
+        const td = document.createElement('td'); td.className='exig-chk-cell';
+        const lab = document.createElement('label'); lab.className='exig-chk'; lab.dataset.exig=idx; lab.dataset.lbl=lbl;
+        const inp = document.createElement('input'); inp.type='checkbox';
+        inp.checked = !!item.checks[lbl];
+        lab.classList.toggle('checked', inp.checked && !CHK_NEG.includes(lbl));
+        lab.classList.toggle('checked-neg', inp.checked && CHK_NEG.includes(lbl));
+        inp.onchange = ()=>{
+          item.checks[lbl] = inp.checked;
+          lab.classList.toggle('checked', inp.checked && !CHK_NEG.includes(lbl));
+          lab.classList.toggle('checked-neg', inp.checked && CHK_NEG.includes(lbl));
+          marcarPendExigencias();
+        };
+        lab.appendChild(inp); td.appendChild(lab); tr.appendChild(td);
+      });
+      const tdTrat = document.createElement('td');
+      const ta = document.createElement('textarea'); ta.className='exig-tratativa'; ta.placeholder='Tratativa…'; ta.dataset.exig=idx;
+      ta.value = item.tratativa || '';
+      ta.oninput = ()=>{ item.tratativa = ta.value; marcarPendExigencias(); };
+      tdTrat.appendChild(ta); tr.appendChild(tdTrat);
       tbody.appendChild(tr);
     });
-    table.appendChild(tbody); body.appendChild(table); card.appendChild(body);
+    table.appendChild(tbody); wrap.appendChild(table); body.appendChild(wrap); card.appendChild(body);
     root.appendChild(card);
+  });
+}
+function aplicarExigencias(){
+  getExigencias(currentProc).forEach((ex, idx)=>{
+    ensureExigAval(ex);
+    EXIG_LABELS.forEach(lbl=>{
+      const lab = document.querySelector('.exig-chk[data-exig="'+idx+'"][data-lbl="'+lbl+'"]');
+      if(!lab) return;
+      const inp = lab.querySelector('input');
+      const on = !!ex.checks[lbl];
+      inp.checked = on;
+      lab.classList.toggle('checked', on && !CHK_NEG.includes(lbl));
+      lab.classList.toggle('checked-neg', on && CHK_NEG.includes(lbl));
+    });
+    const ta = document.querySelector('.exig-tratativa[data-exig="'+idx+'"]');
+    if(ta && document.activeElement !== ta) ta.value = ex.tratativa || '';
   });
 }
 
@@ -1914,6 +1985,8 @@ function setSaveStatus(txt, cls){
   el.textContent = txt; el.className = 'save-status '+(cls||'');
   const el2 = document.getElementById('save-status-chk');
   el2.textContent = txt; el2.className = 'save-status '+(cls||'');
+  const el3 = document.getElementById('save-status-exig');
+  if(el3){ el3.textContent = txt; el3.className = 'save-status '+(cls||''); }
 }
 function marcarPend(escopo, chave, valor){
   if(!currentProc) return;
@@ -1970,7 +2043,17 @@ function mesclarRemoto(remoto){
   Object.keys(remoto.checklist||{}).forEach(k=>{ if(!(k in pChk)) currentProc.checklist[k]=remoto.checklist[k]; });
   currentProc.versao = remoto.versao; currentProc.nome = remoto.nome; currentProc.status = remoto.status;
   currentProc.schemaCustom = remoto.schemaCustom || currentProc.schemaCustom;
-  if(remoto.exigencias) currentProc.exigencias = remoto.exigencias;
+  const pExig = pend && pend.metaPatch && pend.metaPatch.exigencias;
+  if(remoto.exigencias && !pExig){
+    const local = currentProc.exigencias || [];
+    currentProc.exigencias = remoto.exigencias.map(r=>{
+      const match = local.find(l=>l.descricao===r.descricao && l.ref===r.ref);
+      if(match && (match.checks || match.tratativa)){
+        return Object.assign({}, r, { checks: match.checks||{}, tratativa: match.tratativa||'' });
+      }
+      return r;
+    });
+  }
   // reaplica na tela sem mexer no campo em foco
   const foco = document.activeElement;
   document.querySelectorAll('#analise-root [data-key]').forEach(el=>{
@@ -1981,7 +2064,8 @@ function mesclarRemoto(remoto){
   getSecoes(currentProc).forEach(s=>{ if(s.tabela && (!foco || !foco.closest('#tbody-'+s.tabela.key))) rebuildTabela(s.tabela); });
   if(!foco || !foco.closest('#risk-grid')) rebuildRiscos();
   aplicarChecklist();
-  buildExigencias();
+  if(document.querySelector('.exig-table')) aplicarExigencias();
+  else buildExigencias();
 }
 async function sincronizarAgora(){
   if(!currentProc) return;
@@ -2077,7 +2161,7 @@ function normalizarProcesso(o){
       if(typeof ex === 'string'){
         const descricao = ex.trim();
         if(!descricao) throw new Error('exigencias['+i+']: texto vazio.');
-        return { categoria:'Outras', descricao, ref:'', obrigatorio:true };
+        return { categoria:'Outras', descricao, ref:'', obrigatorio:true, checks:{}, tratativa:'' };
       }
       if(!ex || typeof ex !== 'object') throw new Error('exigencias['+i+']: estrutura inválida.');
       const descricao = (ex.descricao||ex.texto||ex.desc||'').toString().trim();
@@ -2086,7 +2170,9 @@ function normalizarProcesso(o){
         categoria: (ex.categoria||ex.grupo||'Outras').toString().trim() || 'Outras',
         descricao,
         ref: (ex.ref||ex.referencia||'').toString().trim(),
-        obrigatorio: ex.obrigatorio !== false && ex.obrigatorio !== 'false'
+        obrigatorio: ex.obrigatorio !== false && ex.obrigatorio !== 'false',
+        checks: (ex.checks && typeof ex.checks === 'object') ? ex.checks : {},
+        tratativa: (ex.tratativa||ex.tratativas||'').toString()
       };
     });
   }
