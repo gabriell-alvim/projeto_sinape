@@ -59,7 +59,7 @@ Acesse `http://localhost:8080`. Com o servidor vazio, o painel mostra o botão *
 
 ## Anexos
 
-Dentro de um processo aberto, a caixa **📎 Anexos** permite enviar arquivos (edital, TR, planilhas, etc.) e baixá-los depois. Os arquivos ficam em `UPLOAD_DIR` (padrão `/app/uploads` dentro do container `app`), que é montado como volume Docker nomeado (`uploads`) — sobrevive a rebuilds e restarts do container.
+Dentro de um processo aberto, a caixa **Anexos** permite enviar arquivos (edital, TR, planilhas, etc.) e baixá-los depois. Os arquivos ficam em `UPLOAD_DIR` (padrão `/app/uploads` dentro do container `app`), que é montado como volume Docker nomeado (`uploads`) — sobrevive a rebuilds e restarts do container.
 
 Tamanho máximo por arquivo: `MAX_UPLOAD_MB` no `.env` (padrão 25 MB).
 
@@ -89,7 +89,7 @@ Tamanho máximo por arquivo: `MAX_UPLOAD_MB` no `.env` (padrão 25 MB).
 | Ver logs do banco | `docker compose logs -f db` |
 | Reiniciar só a API (após editar `index.html`/`app.py`) | `docker compose up -d --build app` |
 | Parar tudo | `docker compose down` |
-| Parar e apagar dados (⚠️ irreversível) | `docker compose down -v` |
+| Parar e apagar dados (irreversível) | `docker compose down -v` |
 
 ## Problemas comuns
 

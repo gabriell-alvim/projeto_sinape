@@ -282,7 +282,7 @@
       {
         "id": "garantia_proposta",
         "titulo": "7. Garantia Contratual",
-        "icone": "🛡️",
+        "icone": "",
         "badge": "Cláusula 14",
         "tag": "garantia_proposta",
         "campos": [
@@ -322,7 +322,7 @@
       {
         "id": "vistoria",
         "titulo": "8. Vistoria Técnica",
-        "icone": "📍",
+        "icone": "",
         "badge": "Item 6 do Edital",
         "tag": "vistoria",
         "campos": [
