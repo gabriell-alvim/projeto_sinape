@@ -390,7 +390,7 @@ input, select, textarea { font-family:inherit; }
     <div class="modal-actions">
       <button class="btn-ghost" onclick="fecharModal('modal-import')">Cancelar</button>
       <button class="btn-outline" onclick="validarImport()">Validar</button>
-      <button class="btn-primary" id="btn-confirm-import" onclick="confirmarImport()" disabled>Importar</button>
+      <button class="btn-primary" id="btn-confirm-import" onclick="confirmarImport()">Importar</button>
     </div>
   </div>
 </div>
@@ -1931,7 +1931,7 @@ function openImportModal(){
   document.getElementById('import-json').value='';
   document.getElementById('import-error').style.display='none';
   document.getElementById('import-preview').style.display='none';
-  document.getElementById('btn-confirm-import').disabled = true;
+  document.getElementById('btn-confirm-import').disabled = false;
   importPronto = null;
   abrirModal('modal-import');
 }
@@ -1940,17 +1940,19 @@ function validarImport(){
   const prev = document.getElementById('import-preview');
   errBox.style.display='none'; prev.style.display='none';
   document.getElementById('btn-confirm-import').disabled = true;
+  importPronto = null;
   let raw = document.getElementById('import-json').value.trim();
+  if(!raw){ errBox.textContent = 'Cole o JSON antes de importar.'; errBox.style.display='block'; return false; }
   // tolera colagem com cercas de código
   raw = raw.replace(/^```[a-z]*\s*/i,'').replace(/```\s*$/,'').trim();
   let obj;
   try{ obj = JSON.parse(raw); }
-  catch(e){ errBox.textContent = 'JSON inválido: '+e.message; errBox.style.display='block'; return; }
+  catch(e){ errBox.textContent = 'JSON inválido: '+e.message; errBox.style.display='block'; return false; }
   const lista = Array.isArray(obj) ? obj : [obj];
   const norm = [];
   for(let i=0;i<lista.length;i++){
     try{ norm.push(normalizarProcesso(lista[i])); }
-    catch(e){ errBox.textContent = 'Processo '+(i+1)+': '+e.message; errBox.style.display='block'; return; }
+    catch(e){ errBox.textContent = 'Processo '+(i+1)+': '+e.message; errBox.style.display='block'; return false; }
   }
   importPronto = norm;
   prev.innerHTML = norm.map(p=>{
@@ -1963,6 +1965,7 @@ function validarImport(){
   }).join('<br>');
   prev.style.display='block';
   document.getElementById('btn-confirm-import').disabled = false;
+  return true;
 }
 function normalizarProcesso(o){
   if(!o || typeof o!=='object') throw new Error('estrutura inválida.');
@@ -1993,7 +1996,9 @@ function normalizarProcesso(o){
   };
 }
 async function confirmarImport(){
-  if(!importPronto) return;
+  const btn = document.getElementById('btn-confirm-import');
+  if(!validarImport()) return;
+  btn.disabled = true;
   try{
     for(const p of importPronto){
       const existe = listaResumos.find(x=>x.id===p.id);
@@ -2011,6 +2016,7 @@ async function confirmarImport(){
     if(importPronto.length===1){ currentType = importPronto[0].type; openProcess(importPronto[0].id); }
     else if(currentType) renderProcessGrid();
   }catch(e){ toast('Erro ao importar: '+e.message); }
+  finally{ btn.disabled = false; }
 }
 function exportarProcesso(){
   if(!currentProc) return;
