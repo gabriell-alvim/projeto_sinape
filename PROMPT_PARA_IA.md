@@ -1,8 +1,8 @@
 # Prompt para IA — Gerar processo para o Painel SINAPE (V2)
 
-Use este prompt em qualquer conversa com o Claude (ou outra IA) **anexando o edital, termo de referência e demais anexos**. A IA devolve um JSON pronto para o botão **"Importar da IA (JSON)"** do painel — ou para POST direto na API.
+Use este prompt em qualquer conversa com o Claude (ou outra IA) **anexando o edital, termo de referência e demais anexos**. A IA devolve um JSON pronto para o botão **"📥 Importar da IA (JSON)"** do painel — ou para POST direto na API.
 
-> É o mesmo texto do botão **"Copiar prompt p/ IA"** do painel. Diferença do V1: método de leitura em 5 passos (índice interno, interpretação, cruzamento entre documentos, auto-revisão contra padrões de impugnação, roteamento dos achados), regra de prevalência edital > TR > anexos e refs cruzadas "A × B" para conflitos.
+> É o mesmo texto do botão **"🤖 Copiar prompt p/ IA"** do painel. Diferença do V1: método de leitura em 5 passos (índice interno, interpretação, cruzamento entre documentos, auto-revisão contra padrões de impugnação, roteamento dos achados), regra de prevalência edital > TR > anexos e refs cruzadas "A × B" para conflitos.
 
 ---
 
@@ -71,7 +71,7 @@ EXIGÊNCIAS ("exigencias") — OBRIGATÓRIO: liste TODAS as exigências formais 
 Todo item tem "ref". "obrigatorio": false apenas para exigências expressamente facultativas no edital.
 
 SEÇÕES EXTRAS ("schemaCustom.secoesExtras") — crie uma por exigência relevante que não cabe no modelo padrão (garantia de proposta, garantia contratual diferenciada, vistoria, amostras/catálogos, proposta técnica pontuada, credenciamento específico, programa de integridade, exigências ambientais):
-{ "id": "snake", "titulo": "7. Título", "icone": "", "badge": "rótulo curto", "tag": "snake",
+{ "id": "snake", "titulo": "7. Título", "icone": "🧾", "badge": "rótulo curto", "tag": "snake",
   "campos": [{"key": "prefixo_campo", "label": "...", "tipo": "text|textarea|date|number|select", "opcoes": ["..."], "span": "span-full (opcional)", "placeholder": "(opcional)"}],
   "tabela": opcional {"key": "tbl_nome", "titulo": "...", "addLabel": "+ Adicionar", "colunas": [{"label": "...", "tipo": "text"}]} }
 Os valores desses campos vão dentro de "analise" com as mesmas keys (snake_case, únicas, prefixadas pela seção).
@@ -90,10 +90,10 @@ Devolva agora apenas o JSON.
 
 ## Como usar (resumo)
 
-1. **Copiar prompt** (o texto acima, ou botão  no painel).
+1. **Copiar prompt** (o texto acima, ou botão 🤖 no painel).
 2. **Anexar documentos** na conversa com a IA: edital, TR, anexos, planilhas, minuta de contrato, carta-convite.
 3. A IA responde **só com JSON**. Se vier com cercas de código (```), o importador do painel remove sozinho.
-4. No painel: ** Importar da IA (JSON)** → colar → conferir o resumo → **Importar**. O processo aparece para toda a equipe em segundos.
+4. No painel: **📥 Importar da IA (JSON)** → colar → conferir o resumo → **Importar**. O processo aparece para toda a equipe em segundos.
 
 ### Alternativa: criar direto pela API
 
@@ -109,5 +109,5 @@ curl -X POST "https://SUA-URL.lambda-url.REGIAO.on.aws/processos" \
 - **Um processo por conversa.** Documentos de editais diferentes na mesma conversa confundem a extração e o cruzamento.
 - Anexe **tudo** (edital + TR + planilha + minuta): o cruzamento entre documentos é justamente onde o V2 rende mais — com um arquivo só, ele vira extração simples.
 - Divergências entre documentos chegam como risco ou item de checklist com ref "Edital X × Anexo Y" — são candidatas diretas a pedido de esclarecimento (art. 164 da Lei 14.133/2021).
-- Se a IA preencher algo errado, importe mesmo assim e corrija no painel — todo campo continua editável; o selo "gerado por IA" indica o que veio da IA.
+- Se a IA preencher algo errado, importe mesmo assim e corrija no painel — todo campo continua editável; o selo 🤖 indica o que veio da IA.
 - O arquivo `exemplo_processo_ia.json` deste pacote mostra uma saída completa no padrão V2 para servir de gabarito.

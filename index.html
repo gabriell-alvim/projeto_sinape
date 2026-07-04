@@ -310,13 +310,13 @@ input, select, textarea { font-family:inherit; }
     </div>
     <div class="home-grid">
       <div class="home-card" onclick="openList('publico')">
-        <div class="hc-icon"></div>
+        <div class="hc-icon">🏛️</div>
         <h3>Processos Públicos</h3>
         <p>Pregões, concorrências e dispensas — órgãos e entidades públicas</p>
         <span class="hc-count" id="count-publico">0 processos</span>
       </div>
       <div class="home-card" onclick="openList('privado')">
-        <div class="hc-icon"></div>
+        <div class="hc-icon">🏢</div>
         <h3>Processos Privados</h3>
         <p>Cartas-convite, RFQs e cotações — concessionárias e empresas</p>
         <span class="hc-count" id="count-privado">0 processos</span>
@@ -337,15 +337,15 @@ input, select, textarea { font-family:inherit; }
     <div class="list-header">
       <h2 id="list-title">Processos</h2>
       <div class="lh-actions">
-        <input type="text" class="search-box" id="search-box" placeholder="Buscar por nome, órgão, nº…" oninput="renderProcessGrid()">
-        <button class="btn-outline" onclick="openImportModal()">Importar da IA (JSON)</button>
-        <button class="btn-outline" onclick="copiarPromptIA()">Copiar prompt p/ IA</button>
+        <input type="text" class="search-box" id="search-box" placeholder="🔎 Buscar por nome, órgão, nº…" oninput="renderProcessGrid()">
+        <button class="btn-outline" onclick="openImportModal()">📥 Importar da IA (JSON)</button>
+        <button class="btn-outline" onclick="copiarPromptIA()">🤖 Copiar prompt p/ IA</button>
         <button class="btn-primary" onclick="openNewProcessModal()">+ Novo processo</button>
       </div>
     </div>
     <div class="process-grid" id="process-grid"></div>
     <div class="empty-state" id="empty-state" style="display:none;">
-      <div class="icon"></div>
+      <div class="icon">📂</div>
       <p>Nenhum processo cadastrado nesta categoria.</p>
       <p style="font-size:.76rem;margin-top:6px;">Crie manualmente ou importe um JSON gerado pela IA a partir do edital.</p>
     </div>
@@ -354,9 +354,9 @@ input, select, textarea { font-family:inherit; }
   <!-- ═══════════ VIEW: PROCESSO ═══════════ -->
   <div class="view" id="view-process">
     <div class="main-tabs">
-      <button class="main-tab active" id="tab-analise" onclick="switchProcessTab('analise')">Análise Crítica</button>
-      <button class="main-tab" id="tab-exigencias" onclick="switchProcessTab('exigencias')">Exigências</button>
-      <button class="main-tab" id="tab-checklist" onclick="switchProcessTab('checklist')">Checklist do Edital</button>
+      <button class="main-tab active" id="tab-analise" onclick="switchProcessTab('analise')">📋 Análise Crítica</button>
+      <button class="main-tab" id="tab-exigencias" onclick="switchProcessTab('exigencias')">📑 Exigências</button>
+      <button class="main-tab" id="tab-checklist" onclick="switchProcessTab('checklist')">✅ Checklist do Edital</button>
     </div>
     <div id="source-banner-area"></div>
     <div id="anexos-area"></div>
@@ -364,8 +364,8 @@ input, select, textarea { font-family:inherit; }
     <div class="panel active" id="panel-analise">
       <div class="save-row">
         <span class="save-status" id="save-status">Pronto</span>
-        <button class="btn-sm violet" onclick="exportarProcesso()">Exportar JSON</button>
-        <button class="btn-sm" onclick="sincronizarAgora()">Sincronizar</button>
+        <button class="btn-sm violet" onclick="exportarProcesso()">⬇ Exportar JSON</button>
+        <button class="btn-sm" onclick="sincronizarAgora()">🔄 Sincronizar</button>
       </div>
       <div class="filter-bar" id="filter-bar"></div>
       <div id="analise-root"></div>
@@ -398,8 +398,8 @@ input, select, textarea { font-family:inherit; }
     <p class="hint">O processo será criado com o modelo padrão SINAPE de análise e checklist. Para um processo com campos específicos do edital, use <b>Importar da IA</b>.</p>
     <input type="text" id="input-novo-nome" placeholder='Nome do processo — ex.: "Pregão 525/2026 — DETRAN/PR"' maxlength="140">
     <div class="radio-row">
-      <label><input type="radio" name="novo-tipo" value="publico" checked> Público</label>
-      <label><input type="radio" name="novo-tipo" value="privado"> Privado</label>
+      <label><input type="radio" name="novo-tipo" value="publico" checked> 🏛️ Público</label>
+      <label><input type="radio" name="novo-tipo" value="privado"> 🏢 Privado</label>
     </div>
     <div class="modal-actions">
       <button class="btn-ghost" onclick="fecharModal('modal-novo')">Cancelar</button>
@@ -411,7 +411,7 @@ input, select, textarea { font-family:inherit; }
 <!-- MODAL: IMPORTAR JSON DA IA -->
 <div class="modal-overlay" id="modal-import">
   <div class="modal-box wide">
-    <h3>Importar processo gerado por IA</h3>
+    <h3>📥 Importar processo gerado por IA</h3>
     <p class="hint">Cole abaixo o JSON gerado pelo Claude (ou outra IA) a partir do edital / termo de referência. O painel cria o processo com análise, <b>exigências do edital</b> e checklist específicos identificados nos documentos. Aceita um processo ou uma lista de processos.</p>
     <textarea class="json-area" id="import-json" placeholder='{ "nome": "Pregão Eletrônico nº ...", "type": "publico", ... }'></textarea>
     <div class="import-error" id="import-error"></div>
@@ -459,11 +459,11 @@ const OPC = {
   atendeParc: [{value:'',label:'—'},'Sim','Não','Parcialmente'],
   porte: [{value:'',label:'Sem restrição'},'ME/EPP obrigatório','Qualquer porte'],
   subcontr: ['Selecionar...','Sim — até % definido','Não','Não menciona'],
-  decisao: [{value:'',label:'Aguardando análise'},'Participar — sem ressalvas','Participar — com ressalvas','Não participar','Impugnar/questionar antes de decidir']
+  decisao: [{value:'',label:'Aguardando análise'},'✅ Participar — sem ressalvas','⚡ Participar — com ressalvas','❌ Não participar','🔄 Impugnar/questionar antes de decidir']
 };
 
 const TEMPLATE_PADRAO = [
-  { id:'geral', tag:'geral', icone:'', titulo:'1. Dados Gerais do Processo', badge:'Identificação',
+  { id:'geral', tag:'geral', icone:'📌', titulo:'1. Dados Gerais do Processo', badge:'Identificação',
     campos:[
       {key:'geral_orgao', label:'Órgão / Entidade contratante', tipo:'text', placeholder:'Ex.: DETRAN/PR, Motiva/RioSP'},
       {key:'geral_modalidade', label:'Modalidade', tipo:'select', opcoes:OPC.modalidade},
@@ -479,7 +479,7 @@ const TEMPLATE_PADRAO = [
       {key:'geral_status', label:'Status', tipo:'select', opcoes:OPC.statusProc},
       {key:'geral_obs', label:'Observações gerais', tipo:'textarea', span:'span-full', placeholder:'Notas iniciais sobre o processo, contexto, histórico com o contratante...'}
     ]},
-  { id:'quantitativos', tag:'quantitativos', icone:'', titulo:'2. Quadro de Quantitativos por Lote', badge:'Quantitativos',
+  { id:'quantitativos', tag:'quantitativos', icone:'📊', titulo:'2. Quadro de Quantitativos por Lote', badge:'Quantitativos',
     campos:[
       {key:'quant_referencia', label:'Referência de preços (sistema)', tipo:'select', opcoes:OPC.refPreco},
       {key:'quant_mesref', label:'Mês/ano da tabela de referência', tipo:'text', placeholder:'Ex.: Maio/2026'},
@@ -491,7 +491,7 @@ const TEMPLATE_PADRAO = [
         {label:'Lote', tipo:'text'},{label:'Cód./Item', tipo:'text'},{label:'Descrição do serviço', tipo:'text'},
         {label:'Un.', tipo:'text'},{label:'Quant.', tipo:'text'},{label:'PMR?', tipo:'select', opcoes:['','Sim','Não']},{label:'Observação', tipo:'text'}
       ]}},
-  { id:'custos', tag:'custos', icone:'', titulo:'3. Composição de Custos e Preços', badge:'Custos', cor:'amber',
+  { id:'custos', tag:'custos', icone:'💰', titulo:'3. Composição de Custos e Preços', badge:'Custos', cor:'amber',
     campos:[
       {key:'custo_bdi_ref', label:'BDI referencial do edital (%)', tipo:'text'},
       {key:'custo_bdi_sinape', label:'BDI SINAPE pretendido (%)', tipo:'text'},
@@ -508,7 +508,7 @@ const TEMPLATE_PADRAO = [
         {label:'Lote', tipo:'text'},{label:'Valor estimado (R$)', tipo:'text'},{label:'Preço SINAPE (R$)', tipo:'text'},
         {label:'Desconto/ágio (%)', tipo:'text'},{label:'Margem estimada (%)', tipo:'text'},{label:'Viável?', tipo:'select', opcoes:['','Sim','Não','Verificar']}
       ]}},
-  { id:'prazos', tag:'prazos', icone:'', titulo:'4. Prazos e Cronograma', badge:'Prazos', gridCols:2,
+  { id:'prazos', tag:'prazos', icone:'📅', titulo:'4. Prazos e Cronograma', badge:'Prazos', gridCols:2,
     campos:[
       {key:'prazo_publicacao', label:'Publicação / envio da carta-convite', tipo:'date'},
       {key:'prazo_esclarecimento', label:'Prazo p/ esclarecimentos (até)', tipo:'date'},
@@ -527,7 +527,7 @@ const TEMPLATE_PADRAO = [
         {label:'Marco / Etapa', tipo:'text'},{label:'Início', tipo:'text'},{label:'Término', tipo:'text'},
         {label:'% financeiro', tipo:'text'},{label:'Observação', tipo:'text'}
       ]}},
-  { id:'habilitacao', tag:'habilitacao', icone:'', titulo:'5. Exigências de Habilitação', badge:'Habilitação',
+  { id:'habilitacao', tag:'habilitacao', icone:'📂', titulo:'5. Exigências de Habilitação', badge:'Habilitação',
     campos:[
       {divisorAntes:'Habilitação Jurídica', key:'hab_jur_porte', label:'Porte exigido', tipo:'select', opcoes:OPC.porte},
       {key:'hab_jur_consorcio', label:'Permite consórcio?', tipo:'select', opcoes:OPC.simNaoMenc},
@@ -551,7 +551,7 @@ const TEMPLATE_PADRAO = [
       {key:'hab_tec_rt_nome', label:'RT disponível (nome)', tipo:'text', placeholder:'Ex.: Thiago Nishimura'},
       {key:'hab_tec_obs', label:'Observações técnicas', tipo:'textarea', span:'span-full'}
     ]},
-  { id:'riscos', tag:'riscos', icone:'', titulo:'6. Riscos e Pontos de Atenção', badge:'Riscos', cor:'red', tipoSecao:'riscos',
+  { id:'riscos', tag:'riscos', icone:'⚠️', titulo:'6. Riscos e Pontos de Atenção', badge:'Riscos', cor:'red', tipoSecao:'riscos',
     camposDecisao:[
       {key:'risco_decisao', label:'Recomendação da equipe', tipo:'select', opcoes:OPC.decisao},
       {key:'risco_resp_decisao', label:'Responsável pela decisão', tipo:'text', placeholder:'Ex.: Fabrício / Thiago'},
@@ -1101,7 +1101,7 @@ const SEEDS = SEED_PROCESSES.map(function(s){
 
 <script>
 /* ════════════════════════════════════════════════════════════════
-   PROMPT PARA IA — copiado pelo botão "Copiar prompt p/ IA"
+   PROMPT PARA IA — copiado pelo botão "🤖 Copiar prompt p/ IA"
    (versão completa em PROMPT_PARA_IA.md)
    ════════════════════════════════════════════════════════════════ */
 const PROMPT_IA =
@@ -1168,7 +1168,7 @@ const PROMPT_IA =
 'Todo item tem "ref". "obrigatorio": false apenas para exigências expressamente facultativas no edital.\n' +
 '\n' +
 'SEÇÕES EXTRAS ("schemaCustom.secoesExtras") — crie uma por exigência relevante que não cabe no modelo padrão (garantia de proposta, garantia contratual diferenciada, vistoria, amostras/catálogos, proposta técnica pontuada, credenciamento específico, programa de integridade, exigências ambientais):\n' +
-'{ "id": "snake", "titulo": "7. Título", "icone": "", "badge": "rótulo curto", "tag": "snake",\n' +
+'{ "id": "snake", "titulo": "7. Título", "icone": "🧾", "badge": "rótulo curto", "tag": "snake",\n' +
 '  "campos": [{"key": "prefixo_campo", "label": "...", "tipo": "text|textarea|date|number|select", "opcoes": ["..."], "span": "span-full (opcional)", "placeholder": "(opcional)"}],\n' +
 '  "tabela": opcional {"key": "tbl_nome", "titulo": "...", "addLabel": "+ Adicionar", "colunas": [{"label": "...", "tipo": "text"}]} }\n' +
 'Os valores desses campos vão dentro de "analise" com as mesmas keys (snake_case, únicas, prefixadas pela seção).\n' +
@@ -1333,7 +1333,7 @@ function showView(id){
 function goHome(){ currentType=null; currentProc=null; showView('view-home'); refreshHomeCounts(); }
 function openList(type){
   currentType = type; currentProc = null;
-  document.getElementById('list-title').textContent = type==='publico' ? 'Processos Públicos' : 'Processos Privados';
+  document.getElementById('list-title').textContent = type==='publico' ? '🏛️ Processos Públicos' : '🏢 Processos Privados';
   document.getElementById('search-box').value = '';
   showView('view-list');
   renderProcessGrid();
@@ -1382,7 +1382,7 @@ function renderProcessGrid(){
       '<div class="pc-nome">'+esc(p.nome)+'</div>' +
       '<div class="pc-meta">' +
         '<span class="chip st-'+esc(p.status||'pendente')+'">'+esc(stLabel)+'</span>' +
-        (p.origem==='ia' ? '<span class="chip ia">gerado por IA</span>' : '') +
+        (p.origem==='ia' ? '<span class="chip ia">🤖 gerado por IA</span>' : '') +
         (quando ? '<span>Atualizado '+quando+(p.atualizadoPor?' · '+esc(p.atualizadoPor):'')+'</span>' : '') +
       '</div>' +
       '<div class="pc-prog"><div class="fill" style="width:'+(p.progress||0)+'%"></div></div>' +
@@ -1396,12 +1396,12 @@ function renderListBanner(){
   area.innerHTML = '';
   if(Store.modo==='api' && listaResumos.length===0 && SEEDS.length){
     area.innerHTML =
-      '<div class="banner-info"><span>O servidor está vazio. Deseja enviar os '+SEEDS.length+' processos-exemplo (Motiva + EPR) para a nuvem?</span>' +
+      '<div class="banner-info"><span>☁️ O servidor está vazio. Deseja enviar os '+SEEDS.length+' processos-exemplo (Motiva + EPR) para a nuvem?</span>' +
       '<button class="btn-outline" onclick="enviarSeeds()">Enviar processos-exemplo</button></div>';
   }
   if(Store.modo==='local'){
     area.innerHTML =
-      '<div class="banner-info banner-warn"><span>Modo local (sem API configurada): os dados ficam apenas neste navegador. ' +
+      '<div class="banner-info banner-warn"><span>⚠️ Modo local (sem API configurada): os dados ficam apenas neste navegador. ' +
       'Para uso colaborativo em tempo real, implante o backend e preencha CONFIG.API_URL — ver GUIA_IMPLANTACAO_AWS.md.</span></div>';
   }
 }
@@ -1511,10 +1511,10 @@ function renderSourceBanner(){
   const a = currentProc.analise || {};
   const fontes = currentProc.fontes || a._sourceFiles;
   if(currentProc.origem==='ia' || (a._autoFilledKeys && a._autoFilledKeys.length)){
-    area.innerHTML = '<div class="source-banner"><b>Processo preenchido por IA'+(fontes?' a partir de:':'.')+'</b> '+esc(fontes||'')+
+    area.innerHTML = '<div class="source-banner">🤖 <b>Processo preenchido por IA'+(fontes?' a partir de:':'.')+'</b> '+esc(fontes||'')+
       '<br>Os campos destacados em lilás vieram dos documentos — revise e ajuste; a marcação some ao editar.</div>';
   } else if(fontes){
-    area.innerHTML = '<div class="source-banner" style="background:var(--teal-ll);border-color:var(--teal-mid);color:var(--teal);">Fontes: '+esc(fontes)+'</div>';
+    area.innerHTML = '<div class="source-banner" style="background:var(--teal-ll);border-color:var(--teal-mid);color:var(--teal);">📎 Fontes: '+esc(fontes)+'</div>';
   } else area.innerHTML = '';
 }
 function formatBytes(n){
@@ -1526,11 +1526,11 @@ function formatBytes(n){
 async function renderAnexos(){
   const area = document.getElementById('anexos-area');
   if(Store.modo !== 'api'){
-    area.innerHTML = '<div class="anexos-box"><b>Anexos</b>'+
+    area.innerHTML = '<div class="anexos-box"><b>📎 Anexos</b>'+
       '<p class="hint" style="margin:4px 0 0;">Envio de arquivos exige o backend Docker configurado (CONFIG.API_URL) — ver GUIA_DOCKER.md.</p></div>';
     return;
   }
-  area.innerHTML = '<div class="anexos-box"><b>Anexos</b>'+
+  area.innerHTML = '<div class="anexos-box"><b>📎 Anexos</b>'+
     '<input type="file" id="input-anexo" style="margin-left:10px;">'+
     '<button class="btn-sm" onclick="enviarAnexoAtual()">Enviar</button>'+
     '<div id="lista-anexos" style="margin-top:8px;">Carregando…</div></div>';
@@ -1539,7 +1539,7 @@ async function renderAnexos(){
     const lista = document.getElementById('lista-anexos');
     if(!anexos.length){ lista.innerHTML = '<span class="hint">Nenhum anexo enviado ainda.</span>'; return; }
     lista.innerHTML = anexos.map(a =>
-      '<div class="anexo-item"><a href="'+esc(Store.urlAnexo(currentProc.id, a.id))+'" target="_blank">'+esc(a.nome_original)+'</a>'+
+      '<div class="anexo-item">📄 <a href="'+esc(Store.urlAnexo(currentProc.id, a.id))+'" target="_blank">'+esc(a.nome_original)+'</a>'+
       ' <span class="hint">('+formatBytes(a.tamanho)+(a.enviado_por?' — '+esc(a.enviado_por):'')+')</span></div>'
     ).join('');
   }catch(e){
@@ -1639,7 +1639,7 @@ function secaoHTML(s, ocultos){
   }
   return '<div class="sec-card" data-tag="'+esc(s.tag||s.id)+'">' +
     '<div class="sec-head'+cor+'" onclick="toggleSec(this)">' +
-      '<span class="sec-title">'+(s.icone||'')+' <span>'+esc(s.titulo)+(s.origemIA?' <span class="chip ia" style="margin-left:6px;">do edital</span>':'')+'</span></span>' +
+      '<span class="sec-title">'+(s.icone||'')+' <span>'+esc(s.titulo)+(s.origemIA?' <span class="chip ia" style="margin-left:6px;">🤖 do edital</span>':'')+'</span></span>' +
       '<div style="display:flex;align-items:center;gap:8px;"><span class="sec-badge'+badgeCor+'">'+esc(s.badge||'')+'</span><span class="sec-chevron">▾</span></div>' +
     '</div><div class="sec-body">'+body+'</div></div>';
 }
@@ -1784,7 +1784,7 @@ function buildExigencias(){
   const root = document.getElementById('exigencias-root');
   const lista = getExigencias(currentProc);
   if(!lista.length){
-    root.innerHTML = '<div class="empty-state" style="padding:28px;"><div class="icon"></div>'+
+    root.innerHTML = '<div class="empty-state" style="padding:28px;"><div class="icon">📑</div>'+
       '<p>Nenhuma exigência cadastrada neste processo.</p>'+
       '<p style="font-size:.76rem;margin-top:6px;">Use <b>Importar da IA</b> com o prompt atualizado — o Claude extrai as exigências do edital/TR para esta aba.</p></div>';
     return;
@@ -1831,10 +1831,10 @@ function buildExigencias(){
       const desc = document.createElement('td'); desc.className='exig-desc';
       desc.textContent = ex.descricao || ex.texto || '';
       const ref = document.createElement('td'); ref.className='exig-ref';
-      ref.innerHTML = ex.ref ? '<span class="chip ref">'+esc(ex.ref)+'</span>' : '—';
+      ref.innerHTML = ex.ref ? '<span class="chip ref">📎 '+esc(ex.ref)+'</span>' : '—';
       const ob = document.createElement('td'); ob.className='exig-ob';
       ob.innerHTML = ex.obrigatorio!==false
-        ? '<span class="chip obrig" title="Exigência obrigatória">★ Obrig.</span>'
+        ? '<span class="chip obrig" title="Exigência obrigatória">★</span>'
         : '<span class="chip opt">—</span>';
       tr.appendChild(desc); tr.appendChild(ref); tr.appendChild(ob);
       EXIG_LABELS.forEach(lbl=>{
@@ -1889,7 +1889,7 @@ function buildChecklist(){
     const card = document.createElement('div'); card.className='sec-card';
     const head = document.createElement('div'); head.className='sec-head' + (sec.custom?' violet':'');
     head.onclick = ()=>card.classList.toggle('collapsed');
-    head.innerHTML = '<span class="sec-title"><span>'+esc(sec.title)+'</span>'+(sec.custom?' <span class="chip ia">do edital</span>':'')+'</span>' +
+    head.innerHTML = '<span class="sec-title"><span>'+esc(sec.title)+'</span>'+(sec.custom?' <span class="chip ia">🤖 do edital</span>':'')+'</span>' +
       '<div style="display:flex;align-items:center;gap:8px;"><span class="sec-badge'+(sec.custom?' violet':'')+'" id="chkcount-'+si+'">0/'+sec.items.length+'</span><span class="sec-chevron">▾</span></div>';
     card.appendChild(head);
     const body = document.createElement('div'); body.className='sec-body';
@@ -1901,7 +1901,7 @@ function buildChecklist(){
       item.appendChild(p);
       if(it.ref){
         const rr = document.createElement('div'); rr.className='chk-refrow';
-        rr.innerHTML = '<span class="chip ref">'+esc(it.ref)+'</span>';
+        rr.innerHTML = '<span class="chip ref">📎 '+esc(it.ref)+'</span>';
         item.appendChild(rr);
       }
       const labels = it.labels && it.labels.length ? it.labels : CHK_LABELS;
@@ -2132,7 +2132,7 @@ function validarImport(){
     const nChk = (p.schemaCustom && p.schemaCustom.checklist || []).reduce((a,g)=>a+((g.items||g.itens||[]).length),0);
     const nExig = (p.exigencias || []).length;
     const nCampos = Object.keys(p.analise).filter(k=>!k.startsWith('_') && p.analise[k]!=='' && p.analise[k]!=null).length;
-    return '<b>'+esc(p.nome)+'</b> — '+(p.type==='publico'?'público':'privado')+
+    return '✔ <b>'+esc(p.nome)+'</b> — '+(p.type==='publico'?'🏛️ público':'🏢 privado')+
       ' · '+nCampos+' campos preenchidos · '+nExig+' exigência(s) · '+nExtras+' seção(ões) específica(s) do edital · '+
       (nChk? nChk+' itens de checklist próprios' : 'checklist padrão SINAPE');
   }).join('<br>');

@@ -120,10 +120,10 @@ Com o servidor vazio, o painel mostra um aviso com o botão **"Enviar os 4 proce
 
 ## Como criar processo novo com IA (o fluxo do dia a dia)
 
-1. No painel → **"Copiar prompt p/ IA"** (copia o prompt com o contrato JSON).
+1. No painel → **"🤖 Copiar prompt p/ IA"** (copia o prompt com o contrato JSON).
 2. Numa conversa com o Claude (ou outra IA), cole o prompt e **anexe o edital/TR/anexos**.
 3. A IA devolve um JSON com os campos preenchidos e, quando o edital exigir, **seções extras próprias** (garantia, vistoria, amostras…) e **checklist customizado com referência a cada item/cláusula**.
-4. No painel → **"Importar da IA (JSON)"** → cole → o painel valida, mostra um resumo e cria o processo.
+4. No painel → **"📥 Importar da IA (JSON)"** → cole → o painel valida, mostra um resumo e cria o processo. Em segundos aparece para toda a equipe.
 
 Alternativa sem colar no painel — a IA (ou um script) pode criar direto via API:
 
