@@ -47,6 +47,11 @@ input, select, textarea { font-family:inherit; }
 .breadcrumb span.current { color:#fff; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .breadcrumb span.link { cursor:pointer; white-space:nowrap; }
 .breadcrumb span.link:hover { text-decoration:underline; }
+.topbar-logout {
+  font-size:.76rem; color:#bfe9e8; text-decoration:none; white-space:nowrap;
+  border:1px solid rgba(255,255,255,.25); border-radius:16px; padding:4px 10px;
+}
+.topbar-logout:hover { color:#fff; background:rgba(255,255,255,.12); }
 .sync-pill {
   display:flex; align-items:center; gap:6px; font-size:.72rem; font-weight:600;
   padding:4px 10px; border-radius:20px; background:rgba(255,255,255,.12); color:#e6fffb; white-space:nowrap;
@@ -77,6 +82,7 @@ input, select, textarea { font-family:inherit; }
 .home-fluxo .passo { font-size:.78rem; color:var(--slate-mid); display:flex; align-items:center; gap:6px; }
 .home-fluxo .passo b { color:var(--teal); }
 .home-fluxo .seta { color:var(--slate-l); }
+.home-actions { display:flex; justify-content:center; margin-top:18px; gap:8px; flex-wrap:wrap; }
 
 /* ── LISTA ── */
 .list-header { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:16px; flex-wrap:wrap; }
@@ -297,6 +303,7 @@ input, select, textarea { font-family:inherit; }
 <div class="topbar">
   <div class="topbar-brand" onclick="goHome()"><span class="dot"></span> SINAPE · Painel de Licitações</div>
   <div class="breadcrumb" id="breadcrumb"></div>
+  <a class="topbar-logout" href="/logout">Sair</a>
   <div class="sync-pill" id="sync-pill"><span class="sdot"></span><span id="sync-text">Iniciando…</span></div>
 </div>
 
@@ -329,6 +336,9 @@ input, select, textarea { font-family:inherit; }
       <span class="seta">→</span>
       <span class="passo"><b>3.</b> Importe aqui (ou via API) e toda a equipe vê na hora</span>
     </div>
+    <div class="home-actions">
+      <button class="btn-outline" onclick="copiarPromptIA()">🤖 Copiar prompt p/ IA</button>
+    </div>
   </div>
 
   <!-- ═══════════ VIEW: LISTA ═══════════ -->
@@ -339,7 +349,6 @@ input, select, textarea { font-family:inherit; }
       <div class="lh-actions">
         <input type="text" class="search-box" id="search-box" placeholder="🔎 Buscar por nome, órgão, nº…" oninput="renderProcessGrid()">
         <button class="btn-outline" onclick="openImportModal()">📥 Importar da IA (JSON)</button>
-        <button class="btn-outline" onclick="copiarPromptIA()">🤖 Copiar prompt p/ IA</button>
         <button class="btn-primary" onclick="openNewProcessModal()">+ Novo processo</button>
       </div>
     </div>
@@ -1198,10 +1207,18 @@ const Store = {
   },
   async _req(metodo, caminho, corpo){
     const res = await fetch(this.base + caminho, {
-      method: metodo, headers: this.headers(),
+      method: metodo, headers: this.headers(), credentials: 'same-origin',
       body: corpo !== undefined ? JSON.stringify(corpo) : undefined
     });
-    if(res.status === 401) throw new Error('Token inválido — confira CONFIG.API_TOKEN');
+    if(res.status === 401){
+      const body = await res.json().catch(()=>({}));
+      const msg = String(body.erro || '');
+      if(msg.toLowerCase().includes('autenticado')){
+        window.location.href = '/login';
+        throw new Error('Faça login para continuar');
+      }
+      throw new Error('Token inválido — confira CONFIG.API_TOKEN');
+    }
     if(res.status === 409){ const e = new Error('conflito'); e.conflito = true; e.doc = await res.json().catch(()=>null); throw e; }
     if(!res.ok) throw new Error('Servidor respondeu ' + res.status);
     if(res.status === 204) return null;
@@ -1272,9 +1289,16 @@ const Store = {
     const headers = {};
     if(CONFIG.API_TOKEN) headers['x-sinape-token'] = CONFIG.API_TOKEN;
     const res = await fetch(this.base + '/processos/' + encodeURIComponent(id) + '/anexos', {
-      method: 'POST', headers, body: form
+      method: 'POST', headers, body: form, credentials: 'same-origin'
     });
-    if(res.status === 401) throw new Error('Token inválido — confira CONFIG.API_TOKEN');
+    if(res.status === 401){
+      const body = await res.json().catch(()=>({}));
+      if(String(body.erro||'').toLowerCase().includes('autenticado')){
+        window.location.href = '/login';
+        throw new Error('Faça login para continuar');
+      }
+      throw new Error('Token inválido — confira CONFIG.API_TOKEN');
+    }
     if(!res.ok){ const e = await res.json().catch(()=>({})); throw new Error(e.erro || ('Servidor respondeu ' + res.status)); }
     return res.json();
   },

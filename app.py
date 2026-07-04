@@ -8,6 +8,9 @@ Flask serve o index.html e a API; os dados ficam no MongoDB; os anexos
 enviados pela equipe ficam em disco, dentro da pasta UPLOAD_DIR.
 
 Rotas:
+  GET     /login                             → página de login (se SITE_USER/SITE_PASSWORD configurados)
+  POST    /login                             → autentica e cria sessão
+  GET     /logout                            → encerra sessão
   GET     /                                  → index.html
   GET     /api/processos                     → lista resumida {"processos":[...]}
   POST    /api/processos                     → cria processo (corpo = documento completo)
@@ -20,7 +23,9 @@ Rotas:
   GET     /api/processos/<id>/anexos/<aid>   → baixa o arquivo
   DELETE  /api/processos/<id>/anexos/<aid>   → remove o anexo (registro + arquivo em disco)
 
-Autenticação: header x-sinape-token comparado com a variável de ambiente TOKEN.
+Autenticação:
+  - Acesso ao site: sessão Flask após login (env SITE_USER + SITE_PASSWORD + SECRET_KEY).
+  - API: header x-sinape-token comparado com a variável de ambiente TOKEN.
 Armazenamento de dados: MongoDB (env MONGO_URL), coleção "processos" com o
 documento inteiro (evita migração de esquema a cada campo novo) e coleção
 "anexos" com os metadados dos arquivos.
@@ -38,11 +43,13 @@ import os
 import re
 import time
 import uuid
+from datetime import timedelta
 from pathlib import Path
+from urllib.parse import quote
 
 from pymongo import MongoClient, ASCENDING, DESCENDING
 from pymongo.errors import DuplicateKeyError
-from flask import Flask, request, jsonify, send_from_directory, send_file
+from flask import Flask, request, jsonify, send_from_directory, send_file, session, redirect
 from werkzeug.utils import secure_filename
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -50,10 +57,18 @@ UPLOAD_DIR = Path(os.environ.get("UPLOAD_DIR", "/app/uploads"))
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
 TOKEN = os.environ.get("TOKEN", "")
+SITE_USER = os.environ.get("SITE_USER", "")
+SITE_PASSWORD = os.environ.get("SITE_PASSWORD", "")
+SECRET_KEY = os.environ.get("SECRET_KEY", "troque-em-producao")
 MONGO_URL = os.environ.get("MONGO_URL", "")
 MAX_UPLOAD_MB = int(os.environ.get("MAX_UPLOAD_MB", "25"))
 
 app = Flask(__name__, static_folder=None)
+app.secret_key = SECRET_KEY
+app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(days=7)
+app.config["SESSION_COOKIE_HTTPONLY"] = True
+app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
+app.config["SESSION_COOKIE_SECURE"] = os.environ.get("RENDER") == "true"
 app.config["MAX_CONTENT_LENGTH"] = MAX_UPLOAD_MB * 1024 * 1024
 
 CORS_HEADERS = {
@@ -122,16 +137,72 @@ def _add_cors(resp):
     return resp
 
 
+def _site_auth_enabled():
+    return bool(SITE_USER and SITE_PASSWORD)
+
+
+def _logged_in():
+    return session.get("site_auth") is True
+
+
+def _safe_next_url(val):
+    if val and val.startswith("/") and not val.startswith("//"):
+        return val
+    return "/"
+
+
 @app.before_request
 def _auth():
     if request.method == "OPTIONS":
         return ("", 204)
-    if request.path == "/" or request.path.startswith("/api/health"):
+
+    if request.path == "/api/health":
         return None
-    if not request.path.startswith("/api/"):
+
+    if request.path in ("/login", "/logout"):
         return None
-    if not TOKEN or request.headers.get("x-sinape-token") != TOKEN:
-        return jsonify({"erro": "Token ausente ou inválido"}), 401
+
+    if _site_auth_enabled() and not _logged_in():
+        if request.path.startswith("/api/"):
+            return jsonify({"erro": "Não autenticado — faça login"}), 401
+        next_path = request.path
+        if request.query_string:
+            next_path += "?" + request.query_string.decode("utf-8")
+        return redirect("/login?next=" + quote(next_path, safe="/?=&"))
+
+    if request.path.startswith("/api/"):
+        if not TOKEN or request.headers.get("x-sinape-token") != TOKEN:
+            return jsonify({"erro": "Token ausente ou inválido"}), 401
+
+    return None
+
+
+# ──────────────────────────────────────────────────────────────────
+# login do site
+# ──────────────────────────────────────────────────────────────────
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if not _site_auth_enabled():
+        return redirect("/")
+    if _logged_in():
+        return redirect(_safe_next_url(request.args.get("next")))
+    if request.method == "POST":
+        usuario = request.form.get("usuario", "")
+        senha = request.form.get("senha", "")
+        if usuario == SITE_USER and senha == SITE_PASSWORD:
+            session.permanent = True
+            session["site_auth"] = True
+            return redirect(_safe_next_url(request.form.get("next")))
+        return redirect("/login?erro=1&next=" + quote(request.form.get("next") or "/"))
+    return send_from_directory(BASE_DIR, "login.html")
+
+
+@app.route("/logout", methods=["GET", "POST"])
+def logout():
+    session.clear()
+    if _site_auth_enabled():
+        return redirect("/login")
+    return redirect("/")
 
 
 # ──────────────────────────────────────────────────────────────────

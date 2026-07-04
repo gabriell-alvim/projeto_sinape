@@ -5,7 +5,7 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY app.py index.html ./
+COPY app.py index.html login.html ./
 
 RUN mkdir -p /app/uploads
 ENV UPLOAD_DIR=/app/uploads

@@ -5,6 +5,9 @@ services:
       - "8080:8080"
     environment:
       TOKEN: ${TOKEN}
+      SITE_USER: ${SITE_USER}
+      SITE_PASSWORD: ${SITE_PASSWORD}
+      SECRET_KEY: ${SECRET_KEY:-troque-em-producao}
       MONGO_URL: mongodb://sinape:${MONGO_PASSWORD}@db:27017/?authSource=admin
       UPLOAD_DIR: /app/uploads
       MAX_UPLOAD_MB: ${MAX_UPLOAD_MB:-25}

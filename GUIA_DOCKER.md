@@ -22,6 +22,8 @@ Navegador (equipe)  ⇄  container "app" (Flask: serve index.html + API em /api)
    ```
 2. Edite `.env` e defina:
    - `TOKEN` — senha longa que a API vai exigir no header `x-sinape-token`. **Anote — vai no CONFIG do painel.**
+   - `SITE_USER` e `SITE_PASSWORD` — login de acesso ao painel (quem não souber não entra no site).
+   - `SECRET_KEY` — chave secreta para a sessão de login (string longa aleatória).
    - `MONGO_PASSWORD` — senha do usuário root do MongoDB (uso interno do container `db`, não precisa ser a mesma do `TOKEN`).
 
 ## Passo 2 — Configurar o painel
