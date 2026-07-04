@@ -1,12 +1,12 @@
 # Guia de Implantação com Docker — Painel de Processos SINAPE
 
-Este guia substitui a implantação na AWS (ver `GUIA_IMPLANTACAO_AWS.md`, mantido só como referência) por um único container Docker que serve o painel (`index.html`) e a API, mais um container Postgres para os dados. Os anexos enviados pela equipe ficam salvos em disco, em um volume Docker.
+Este guia substitui a implantação na AWS (ver `GUIA_IMPLANTACAO_AWS.md`, mantido só como referência) por um único container Docker que serve o painel (`index.html`) e a API, mais um container MongoDB para os dados. Os anexos enviados pela equipe ficam salvos em disco, em um volume Docker.
 
 **Arquitetura:**
 
 ```
 Navegador (equipe)  ⇄  container "app" (Flask: serve index.html + API em /api)
-                            ⇄  container "db" (Postgres — dados dos processos)
+                            ⇄  container "db" (MongoDB — dados dos processos)
                             ⇄  volume "uploads" (arquivos anexados aos processos)
 ```
 
@@ -22,7 +22,7 @@ Navegador (equipe)  ⇄  container "app" (Flask: serve index.html + API em /api)
    ```
 2. Edite `.env` e defina:
    - `TOKEN` — senha longa que a API vai exigir no header `x-sinape-token`. **Anote — vai no CONFIG do painel.**
-   - `POSTGRES_PASSWORD` — senha do banco Postgres (uso interno do container `db`, não precisa ser a mesma do `TOKEN`).
+   - `MONGO_PASSWORD` — senha do usuário root do MongoDB (uso interno do container `db`, não precisa ser a mesma do `TOKEN`).
 
 ## Passo 2 — Configurar o painel
 
@@ -45,7 +45,7 @@ Preencha `API_TOKEN` com o mesmo valor de `TOKEN` do `.env`.
 docker compose up -d --build
 ```
 
-Isso builda a imagem do `app` (Python 3.12 + Flask + gunicorn), sobe o Postgres, cria as tabelas automaticamente na primeira execução e publica o painel em `http://localhost:8080`.
+Isso builda a imagem do `app` (Python 3.12 + Flask + gunicorn), sobe o MongoDB, cria os índices automaticamente na primeira execução e publica o painel em `http://localhost:8080`.
 
 Verifique:
 ```bash
@@ -65,9 +65,10 @@ Tamanho máximo por arquivo: `MAX_UPLOAD_MB` no `.env` (padrão 25 MB).
 
 ## Persistência e backup
 
-- **Dados dos processos**: volume `pgdata` (Postgres). Para backup:
+- **Dados dos processos**: volume `mongodata` (MongoDB). Para backup:
   ```bash
-  docker compose exec db pg_dump -U sinape sinape > backup_$(date +%Y%m%d).sql
+  docker compose exec db mongodump -u sinape -p "$MONGO_PASSWORD" --authenticationDatabase admin --db sinape --archive=/tmp/backup.archive
+  docker compose cp db:/tmp/backup.archive backup_$(date +%Y%m%d).archive
   ```
 - **Anexos**: volume `uploads`. Para copiar para fora do Docker:
   ```bash

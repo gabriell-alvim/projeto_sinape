@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-API do Painel de Processos SINAPE — servidor Flask (Docker) + PostgreSQL
+API do Painel de Processos SINAPE — servidor Flask (Docker) + MongoDB
 =========================================================================
 
 Substitui o backend AWS (Lambda + DynamoDB + S3) por um único container:
-Flask serve o index.html e a API; os dados ficam no Postgres; os anexos
+Flask serve o index.html e a API; os dados ficam no MongoDB; os anexos
 enviados pela equipe ficam em disco, dentro da pasta UPLOAD_DIR.
 
 Rotas:
@@ -21,13 +21,16 @@ Rotas:
   DELETE  /api/processos/<id>/anexos/<aid>   → remove o anexo (registro + arquivo em disco)
 
 Autenticação: header x-sinape-token comparado com a variável de ambiente TOKEN.
-Armazenamento de dados: Postgres (env DATABASE_URL), tabela "processos" com o
-documento inteiro em uma coluna JSONB (evita migração de esquema a cada campo novo).
+Armazenamento de dados: MongoDB (env MONGO_URL), coleção "processos" com o
+documento inteiro (evita migração de esquema a cada campo novo) e coleção
+"anexos" com os metadados dos arquivos.
 Armazenamento de anexos: disco, em UPLOAD_DIR/<processo_id>/<uuid>__<nome original>.
 
 Controle de concorrência: PATCH aceita "seVersao"; se a versão gravada for
 diferente, responde 409 com o documento atual no corpo — o painel então
-mescla e reenvia (last-write-wins campo a campo, sem travar ninguém).
+mescla e reenvia (last-write-wins campo a campo, sem travar ninguém). A
+gravação usa update condicional pela versão lida, para não perder alterações
+concorrentes entre a leitura e a escrita.
 """
 
 import json
@@ -37,9 +40,9 @@ import time
 import uuid
 from pathlib import Path
 
-import psycopg2
-import psycopg2.extras
-from flask import Flask, request, jsonify, send_from_directory, send_file, g
+from pymongo import MongoClient, ASCENDING, DESCENDING
+from pymongo.errors import DuplicateKeyError
+from flask import Flask, request, jsonify, send_from_directory, send_file
 from werkzeug.utils import secure_filename
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -47,7 +50,7 @@ UPLOAD_DIR = Path(os.environ.get("UPLOAD_DIR", "/app/uploads"))
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
 TOKEN = os.environ.get("TOKEN", "")
-DATABASE_URL = os.environ.get("DATABASE_URL", "")
+MONGO_URL = os.environ.get("MONGO_URL", "")
 MAX_UPLOAD_MB = int(os.environ.get("MAX_UPLOAD_MB", "25"))
 
 app = Flask(__name__, static_folder=None)
@@ -64,45 +67,15 @@ CORS_HEADERS = {
 # ──────────────────────────────────────────────────────────────────
 # banco de dados
 # ──────────────────────────────────────────────────────────────────
-def _conn():
-    if "db" not in g:
-        g.db = psycopg2.connect(DATABASE_URL)
-    return g.db
-
-
-@app.teardown_appcontext
-def _fecha_conn(_exc):
-    db = g.pop("db", None)
-    if db is not None:
-        db.close()
+mongo_client = MongoClient(MONGO_URL)
+db = mongo_client.get_database("sinape")
+col_processos = db["processos"]
+col_anexos = db["anexos"]
 
 
 def _init_db():
-    conn = psycopg2.connect(DATABASE_URL)
-    try:
-        with conn, conn.cursor() as cur:
-            cur.execute("""
-                CREATE TABLE IF NOT EXISTS processos (
-                    id TEXT PRIMARY KEY,
-                    versao INTEGER NOT NULL DEFAULT 1,
-                    atualizado_em BIGINT NOT NULL,
-                    doc JSONB NOT NULL
-                );
-            """)
-            cur.execute("""
-                CREATE TABLE IF NOT EXISTS anexos (
-                    id TEXT PRIMARY KEY,
-                    processo_id TEXT NOT NULL REFERENCES processos(id) ON DELETE CASCADE,
-                    nome_original TEXT NOT NULL,
-                    nome_arquivo TEXT NOT NULL,
-                    tamanho BIGINT,
-                    content_type TEXT,
-                    enviado_em BIGINT NOT NULL,
-                    enviado_por TEXT
-                );
-            """)
-    finally:
-        conn.close()
+    col_processos.create_index([("atualizadoEm", DESCENDING)])
+    col_anexos.create_index([("processo_id", ASCENDING), ("enviado_em", DESCENDING)])
 
 
 # ──────────────────────────────────────────────────────────────────
@@ -121,20 +94,25 @@ def _slug(texto):
     return s[:60] or ("proc-" + uuid.uuid4().hex[:8])
 
 
-def _resumo_da_linha(row):
-    doc = row["doc"]
+def _resumo_do_doc(doc):
     return {
-        "id": row["id"],
+        "id": doc["_id"],
         "nome": doc.get("nome") or "(sem nome)",
         "type": doc.get("type") or "publico",
         "status": doc.get("status") or "em_analise",
         "progress": int(doc.get("progress") or 0),
         "origem": doc.get("origem") or "manual",
         "fontes": doc.get("fontes") or "",
-        "atualizadoEm": row["atualizado_em"],
+        "atualizadoEm": doc.get("atualizadoEm") or 0,
         "atualizadoPor": doc.get("atualizadoPor") or "",
-        "versao": row["versao"],
+        "versao": doc.get("versao") or 1,
     }
+
+
+def _sem_id_mongo(doc):
+    doc = dict(doc)
+    doc["id"] = doc.pop("_id")
+    return doc
 
 
 @app.after_request
@@ -174,10 +152,8 @@ def health():
 # ──────────────────────────────────────────────────────────────────
 @app.route("/api/processos", methods=["GET"])
 def listar():
-    conn = _conn()
-    with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
-        cur.execute("SELECT id, versao, atualizado_em, doc FROM processos ORDER BY atualizado_em DESC;")
-        processos = [_resumo_da_linha(r) for r in cur.fetchall()]
+    docs = col_processos.find().sort("atualizadoEm", DESCENDING)
+    processos = [_resumo_do_doc(d) for d in docs]
     return jsonify({"processos": processos})
 
 
@@ -186,37 +162,30 @@ def criar():
     doc = request.get_json(force=True, silent=False)
     if not isinstance(doc, dict):
         return jsonify({"erro": "Corpo deve ser um objeto JSON"}), 400
-    if not doc.get("id"):
-        doc["id"] = _slug(doc.get("nome", "")) + "-" + uuid.uuid4().hex[:6]
+    pid = doc.get("id") or (_slug(doc.get("nome", "")) + "-" + uuid.uuid4().hex[:6])
     agora = _agora_ms()
+    doc["id"] = pid
     doc.setdefault("criadoEm", agora)
     doc["atualizadoEm"] = agora
     doc["versao"] = int(doc.get("versao") or 1)
     doc.setdefault("analise", {})
     doc.setdefault("checklist", {})
 
-    conn = _conn()
+    doc["_id"] = pid
+    del doc["id"]
     try:
-        with conn, conn.cursor() as cur:
-            cur.execute(
-                "INSERT INTO processos (id, versao, atualizado_em, doc) VALUES (%s,%s,%s,%s);",
-                (doc["id"], doc["versao"], doc["atualizadoEm"], psycopg2.extras.Json(doc)),
-            )
-    except psycopg2.errors.UniqueViolation:
-        conn.rollback()
-        return jsonify({"erro": "Já existe processo com esse id", "id": doc["id"]}), 409
-    return jsonify(doc), 201
+        col_processos.insert_one(doc)
+    except DuplicateKeyError:
+        return jsonify({"erro": "Já existe processo com esse id", "id": pid}), 409
+    return jsonify(_sem_id_mongo(doc)), 201
 
 
 @app.route("/api/processos/<pid>", methods=["GET"])
 def obter(pid):
-    conn = _conn()
-    with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
-        cur.execute("SELECT doc FROM processos WHERE id=%s;", (pid,))
-        row = cur.fetchone()
-    if not row:
+    doc = col_processos.find_one({"_id": pid})
+    if not doc:
         return jsonify({"erro": "Processo não encontrado"}), 404
-    return jsonify(row["doc"])
+    return jsonify(_sem_id_mongo(doc))
 
 
 @app.route("/api/processos/<pid>", methods=["PUT"])
@@ -228,15 +197,10 @@ def substituir(pid):
     doc["atualizadoEm"] = _agora_ms()
     doc["versao"] = int(doc.get("versao") or 1)
 
-    conn = _conn()
-    with conn, conn.cursor() as cur:
-        cur.execute(
-            """INSERT INTO processos (id, versao, atualizado_em, doc) VALUES (%s,%s,%s,%s)
-               ON CONFLICT (id) DO UPDATE SET versao=EXCLUDED.versao,
-                   atualizado_em=EXCLUDED.atualizado_em, doc=EXCLUDED.doc;""",
-            (pid, doc["versao"], doc["atualizadoEm"], psycopg2.extras.Json(doc)),
-        )
-    return jsonify(doc)
+    doc["_id"] = pid
+    del doc["id"]
+    col_processos.replace_one({"_id": pid}, doc, upsert=True)
+    return jsonify(_sem_id_mongo(doc))
 
 
 @app.route("/api/processos/<pid>", methods=["PATCH"])
@@ -246,50 +210,44 @@ def patch(pid):
         return jsonify({"erro": "Corpo deve ser um objeto JSON"}), 400
     se_versao = corpo.get("seVersao")
 
-    conn = _conn()
-    with conn, conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
-        cur.execute("SELECT versao, doc FROM processos WHERE id=%s FOR UPDATE;", (pid,))
-        row = cur.fetchone()
-        if not row:
-            return jsonify({"erro": "Processo não encontrado"}), 404
-        doc = row["doc"]
-        versao_atual = row["versao"]
+    doc = col_processos.find_one({"_id": pid})
+    if not doc:
+        return jsonify({"erro": "Processo não encontrado"}), 404
+    versao_atual = doc.get("versao") or 1
 
-        if se_versao is not None and int(se_versao) != versao_atual:
-            return jsonify(doc), 409  # painel mescla e tenta de novo
+    if se_versao is not None and int(se_versao) != versao_atual:
+        return jsonify(_sem_id_mongo(doc)), 409  # painel mescla e tenta de novo
 
-        for chave, valor in (corpo.get("metaPatch") or {}).items():
-            if chave in ("id", "versao", "doc"):
-                continue
-            doc[chave] = valor
-        if corpo.get("analisePatch"):
-            doc.setdefault("analise", {}).update(corpo["analisePatch"])
-        if corpo.get("checklistPatch"):
-            doc.setdefault("checklist", {}).update(corpo["checklistPatch"])
-        if corpo.get("schemaCustom") is not None:
-            doc["schemaCustom"] = corpo["schemaCustom"]
+    for chave, valor in (corpo.get("metaPatch") or {}).items():
+        if chave in ("id", "_id", "versao", "doc"):
+            continue
+        doc[chave] = valor
+    if corpo.get("analisePatch"):
+        doc.setdefault("analise", {}).update(corpo["analisePatch"])
+    if corpo.get("checklistPatch"):
+        doc.setdefault("checklist", {}).update(corpo["checklistPatch"])
+    if corpo.get("schemaCustom") is not None:
+        doc["schemaCustom"] = corpo["schemaCustom"]
 
-        nova_versao = versao_atual + 1
-        agora = _agora_ms()
-        doc["versao"] = nova_versao
-        doc["atualizadoEm"] = agora
+    nova_versao = versao_atual + 1
+    agora = _agora_ms()
+    doc["versao"] = nova_versao
+    doc["atualizadoEm"] = agora
 
-        cur.execute(
-            "UPDATE processos SET versao=%s, atualizado_em=%s, doc=%s WHERE id=%s;",
-            (nova_versao, agora, psycopg2.extras.Json(doc), pid),
-        )
+    resultado = col_processos.replace_one({"_id": pid, "versao": versao_atual}, doc)
+    if resultado.matched_count == 0:
+        atual = col_processos.find_one({"_id": pid})
+        return jsonify(_sem_id_mongo(atual)), 409  # alterado por outra requisição nesse meio-tempo
+
     return jsonify({"versao": nova_versao, "atualizadoEm": agora})
 
 
 @app.route("/api/processos/<pid>", methods=["DELETE"])
 def excluir(pid):
-    conn = _conn()
-    with conn, conn.cursor() as cur:
-        cur.execute("SELECT nome_arquivo FROM anexos WHERE processo_id=%s;", (pid,))
-        arquivos = [r[0] for r in cur.fetchall()]
-        cur.execute("DELETE FROM processos WHERE id=%s;", (pid,))
-    for nome_arquivo in arquivos:
-        (UPLOAD_DIR / pid / nome_arquivo).unlink(missing_ok=True)
+    for anexo in col_anexos.find({"processo_id": pid}):
+        (UPLOAD_DIR / pid / anexo["nome_arquivo"]).unlink(missing_ok=True)
+    col_anexos.delete_many({"processo_id": pid})
+    col_processos.delete_one({"_id": pid})
     try:
         (UPLOAD_DIR / pid).rmdir()
     except OSError:
@@ -302,24 +260,18 @@ def excluir(pid):
 # ──────────────────────────────────────────────────────────────────
 @app.route("/api/processos/<pid>/anexos", methods=["GET"])
 def listar_anexos(pid):
-    conn = _conn()
-    with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
-        cur.execute(
-            """SELECT id, nome_original, tamanho, content_type, enviado_em, enviado_por
-               FROM anexos WHERE processo_id=%s ORDER BY enviado_em DESC;""",
-            (pid,),
-        )
-        anexos = cur.fetchall()
+    cursor = col_anexos.find(
+        {"processo_id": pid},
+        {"nome_original": 1, "tamanho": 1, "content_type": 1, "enviado_em": 1, "enviado_por": 1},
+    ).sort("enviado_em", DESCENDING)
+    anexos = [_sem_id_mongo(a) for a in cursor]
     return jsonify({"anexos": anexos})
 
 
 @app.route("/api/processos/<pid>/anexos", methods=["POST"])
 def enviar_anexo(pid):
-    conn = _conn()
-    with conn.cursor() as cur:
-        cur.execute("SELECT 1 FROM processos WHERE id=%s;", (pid,))
-        if not cur.fetchone():
-            return jsonify({"erro": "Processo não encontrado"}), 404
+    if not col_processos.find_one({"_id": pid}, {"_id": 1}):
+        return jsonify({"erro": "Processo não encontrado"}), 404
 
     arquivo = request.files.get("arquivo")
     if not arquivo or not arquivo.filename:
@@ -335,50 +287,41 @@ def enviar_anexo(pid):
 
     enviado_por = request.form.get("enviadoPor", "")
     agora = _agora_ms()
-    with conn, conn.cursor() as cur:
-        cur.execute(
-            """INSERT INTO anexos (id, processo_id, nome_original, nome_arquivo, tamanho,
-                   content_type, enviado_em, enviado_por)
-               VALUES (%s,%s,%s,%s,%s,%s,%s,%s);""",
-            (anexo_id, pid, nome_original, nome_arquivo, destino.stat().st_size,
-             arquivo.content_type, agora, enviado_por),
-        )
+    tamanho = destino.stat().st_size
+    col_anexos.insert_one({
+        "_id": anexo_id,
+        "processo_id": pid,
+        "nome_original": nome_original,
+        "nome_arquivo": nome_arquivo,
+        "tamanho": tamanho,
+        "content_type": arquivo.content_type,
+        "enviado_em": agora,
+        "enviado_por": enviado_por,
+    })
     return jsonify({
-        "id": anexo_id, "nome_original": nome_original, "tamanho": destino.stat().st_size,
+        "id": anexo_id, "nome_original": nome_original, "tamanho": tamanho,
         "content_type": arquivo.content_type, "enviado_em": agora, "enviado_por": enviado_por,
     }), 201
 
 
 @app.route("/api/processos/<pid>/anexos/<aid>", methods=["GET"])
 def baixar_anexo(pid, aid):
-    conn = _conn()
-    with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
-        cur.execute(
-            "SELECT nome_original, nome_arquivo, content_type FROM anexos WHERE id=%s AND processo_id=%s;",
-            (aid, pid),
-        )
-        row = cur.fetchone()
-    if not row:
+    anexo = col_anexos.find_one({"_id": aid, "processo_id": pid})
+    if not anexo:
         return jsonify({"erro": "Anexo não encontrado"}), 404
-    caminho = UPLOAD_DIR / pid / row["nome_arquivo"]
+    caminho = UPLOAD_DIR / pid / anexo["nome_arquivo"]
     if not caminho.is_file():
         return jsonify({"erro": "Arquivo não encontrado em disco"}), 404
-    return send_file(caminho, mimetype=row["content_type"], as_attachment=True,
-                      download_name=row["nome_original"])
+    return send_file(caminho, mimetype=anexo["content_type"], as_attachment=True,
+                      download_name=anexo["nome_original"])
 
 
 @app.route("/api/processos/<pid>/anexos/<aid>", methods=["DELETE"])
 def excluir_anexo(pid, aid):
-    conn = _conn()
-    with conn, conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
-        cur.execute(
-            "DELETE FROM anexos WHERE id=%s AND processo_id=%s RETURNING nome_arquivo;",
-            (aid, pid),
-        )
-        row = cur.fetchone()
-    if not row:
+    anexo = col_anexos.find_one_and_delete({"_id": aid, "processo_id": pid})
+    if not anexo:
         return jsonify({"erro": "Anexo não encontrado"}), 404
-    (UPLOAD_DIR / pid / row["nome_arquivo"]).unlink(missing_ok=True)
+    (UPLOAD_DIR / pid / anexo["nome_arquivo"]).unlink(missing_ok=True)
     return jsonify({"ok": True})
 
 
