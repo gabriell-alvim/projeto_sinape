@@ -13,7 +13,7 @@ Rotas:
   POST    /api/processos                     → cria processo (corpo = documento completo)
   GET     /api/processos/<id>                → documento completo
   PUT     /api/processos/<id>                → substitui documento completo
-  PATCH   /api/processos/<id>                → mescla {metaPatch, analisePatch, checklistPatch, seVersao}
+  PATCH   /api/processos/<id>                → mescla {metaPatch, analisePatch, checklistPatch, exigencias, seVersao}
   DELETE  /api/processos/<id>                → remove (e seus anexos)
   GET     /api/processos/<id>/anexos         → lista anexos do processo
   POST    /api/processos/<id>/anexos         → envia um anexo (multipart, campo "arquivo")

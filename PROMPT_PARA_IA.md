@@ -32,8 +32,9 @@ MÉTODO DE LEITURA (interno — nada disto aparece no output)
 
 5. Destino de cada achado — um lugar só, sem duplicar:
    - afeta a decisão de participar, custo, competitividade, ou fundamenta impugnação/esclarecimento → entrada em "risks" {nivel, desc}, desc curta com refs;
-   - exige ação ou verificação da equipe → item de checklist {texto, ref, obrigatorio};
-   - conflito entre fontes → ref no formato "Edital 9.5.2 × Anexo III 4.1 — quantitativos divergentes" (no risco ou no checklist, conforme o caso);
+   - exigência formal do edital/TR que o licitante deve cumprir ou apresentar (documento, índice, prazo, qualificação, declaração) → item em "exigencias" {categoria, descricao, ref, obrigatorio};
+   - ação ou verificação operacional da equipe SINAPE → item de checklist {texto, ref, obrigatorio};
+   - conflito entre fontes → ref no formato "Edital 9.5.2 × Anexo III 4.1 — quantitativos divergentes" (no risco, exigência ou checklist, conforme o caso);
    - é dado do processo → campo correspondente da estrutura abaixo.
    Níveis: Alto = pode inabilitar/desclassificar a SINAPE ou fundamenta impugnação; Médio = afeta custo/prazo/competitividade ou ambiguidade que pede esclarecimento; Baixo = atenção operacional.
 
@@ -51,6 +52,7 @@ ESTRUTURA DO JSON
   "status": "em_analise",
   "origem": "ia",
   "fontes": "arquivos analisados",
+  "exigencias": [{ "categoria": "...", "descricao": "...", "ref": "item X do Edital", "obrigatorio": true }],
   "analise": { chaves do modelo padrão + chaves das seções extras, "_autoFilledKeys": [...], "_sourceFiles": "..." },
   "schemaCustom": { "secoesExtras": [...], "camposOcultos": [...], "checklist": [...] }
 }
@@ -62,6 +64,11 @@ CHAVES DO MODELO PADRÃO ("analise")
 - Prazos: prazo_publicacao, prazo_esclarecimento, prazo_impugnacao, prazo_abertura, prazo_habilitacao, prazo_contrato, prazo_execucao, prazo_vigencia, prazo_prorroga, prazo_validade_prop, prazo_obs; tbl_prazo = [[Marco, Início, Término, % financeiro, Observação], ...]
 - Habilitação: hab_jur_porte, hab_jur_consorcio, hab_jur_lider, hab_jur_sub, hab_jur_obs, hab_fis_estadual, hab_fis_municipal, hab_fis_obs, hab_ef_lc, hab_ef_lg, hab_ef_sg, hab_ef_capital, hab_ef_lc_ok, hab_ef_cap_ok, hab_ef_obs, hab_tec_pmr, hab_tec_quant_min, hab_tec_atestado, hab_tec_rt, hab_tec_rt_nome, hab_tec_obs
 - Riscos: risks = [{"nivel": "Alto" | "Médio" | "Baixo", "desc": "..."}]; risco_decisao, risco_resp_decisao, risco_justificativa = "".
+
+EXIGÊNCIAS ("exigencias") — OBRIGATÓRIO: liste TODAS as exigências formais do edital/TR/anexos que o licitante deve cumprir ou apresentar. Varra participação, proposta, habilitação (jurídica, fiscal, econômico-financeira, técnica), garantias, documentação complementar e execução. Uma entrada por exigência distinta; não agrupe nem resuma demais. Não duplique aqui itens que já são ação interna da equipe (esses vão no checklist).
+[{ "categoria": "Participação" | "Proposta comercial" | "Habilitação jurídica" | "Habilitação fiscal e trabalhista" | "Habilitação econômico-financeira" | "Habilitação técnica" | "Garantias" | "Execução contratual" | "Documentação complementar" | "Outras",
+   "descricao": "texto objetivo do que é exigido", "ref": "item/cláusula/anexo", "obrigatorio": true|false }]
+Todo item tem "ref". "obrigatorio": false apenas para exigências expressamente facultativas no edital.
 
 SEÇÕES EXTRAS ("schemaCustom.secoesExtras") — crie uma por exigência relevante que não cabe no modelo padrão (garantia de proposta, garantia contratual diferenciada, vistoria, amostras/catálogos, proposta técnica pontuada, credenciamento específico, programa de integridade, exigências ambientais):
 { "id": "snake", "titulo": "7. Título", "icone": "🧾", "badge": "rótulo curto", "tag": "snake",

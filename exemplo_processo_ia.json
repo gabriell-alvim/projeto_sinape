@@ -5,6 +5,68 @@
   "status": "em_analise",
   "origem": "ia",
   "fontes": "Edital PE 90010-2026.pdf; TR Anexo I.pdf; Planilha Orçamentária Anexo II.xlsx",
+  "exigencias": [
+    {
+      "categoria": "Participação",
+      "descricao": "Credenciamento ativo no Compras.gov.br com certificado digital e-CNPJ válido",
+      "ref": "item 3.1 do Edital",
+      "obrigatorio": true
+    },
+    {
+      "categoria": "Participação",
+      "descricao": "Consórcio permitido com até 3 empresas, indicando líder e percentual de participação de cada consorciada",
+      "ref": "item 4.2 do Edital",
+      "obrigatorio": true
+    },
+    {
+      "categoria": "Proposta comercial",
+      "descricao": "Proposta comercial em planilha padrão do edital, com preços unitários e totais por item",
+      "ref": "Anexo IV do Edital",
+      "obrigatorio": true
+    },
+    {
+      "categoria": "Habilitação jurídica",
+      "descricao": "Registro empresarial compatível com o objeto (CNPJ com CNAE de semaforização ou correlato)",
+      "ref": "item 9.1 do Edital",
+      "obrigatorio": true
+    },
+    {
+      "categoria": "Habilitação fiscal e trabalhista",
+      "descricao": "Certidões negativas federal, estadual (DF) e municipal (DF), FGTS e débitos trabalhistas",
+      "ref": "item 9.3 do Edital",
+      "obrigatorio": true
+    },
+    {
+      "categoria": "Habilitação econômico-financeira",
+      "descricao": "Índices de liquidez corrente ≥ 1,0 e solvência geral ≥ 1,0 com balanços dos 2 últimos exercícios",
+      "ref": "item 9.4.2 do Edital",
+      "obrigatorio": true
+    },
+    {
+      "categoria": "Habilitação técnica",
+      "descricao": "Atestado de capacidade técnico-operacional com execução de semaforização em escala compatível (mín. 50% do objeto)",
+      "ref": "item 9.5.1 do Edital",
+      "obrigatorio": true
+    },
+    {
+      "categoria": "Habilitação técnica",
+      "descricao": "RT com registro no CREA e experiência mínima de 5 anos em sistemas semafóricos",
+      "ref": "item 9.5.3 do Edital",
+      "obrigatorio": true
+    },
+    {
+      "categoria": "Garantias",
+      "descricao": "Garantia de execução contratual de 5% do valor do contrato, em caução, fiança ou seguro-garantia",
+      "ref": "Cláusula 14 da Minuta",
+      "obrigatorio": true
+    },
+    {
+      "categoria": "Execução contratual",
+      "descricao": "Vistoria técnica obrigatória até 5 dias antes da abertura, com declaração de participação assinada",
+      "ref": "item 6 do Edital",
+      "obrigatorio": true
+    }
+  ],
   "analise": {
     "geral_orgao": "SODF — Secretaria de Obras e Infraestrutura do Distrito Federal",
     "geral_modalidade": "Pregão Eletrônico",

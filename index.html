@@ -101,6 +101,8 @@ input, select, textarea { font-family:inherit; }
 .chip.st-perdido       { background:var(--red-l); color:var(--red); }
 .chip.ia               { background:var(--violet-l); color:var(--violet); }
 .chip.ref              { background:var(--teal-ll); color:var(--teal); font-weight:600; }
+.chip.obrig             { background:var(--amber-l); color:var(--amber); font-weight:700; }
+.chip.opt               { background:#f1f5f9; color:var(--slate-l); font-weight:600; }
 .pc-prog { height:5px; background:#e2e8f0; border-radius:4px; overflow:hidden; }
 .pc-prog .fill { height:100%; background:linear-gradient(90deg,var(--teal-mid),var(--teal)); border-radius:4px; transition:width .3s; }
 .pc-actions { display:flex; gap:6px; margin-top:2px; }
@@ -230,6 +232,16 @@ input, select, textarea { font-family:inherit; }
 .chk-lbl input { accent-color:var(--teal); }
 .chk-lbl.checked { background:var(--green-l); border-color:#86efac; color:var(--green); }
 .chk-lbl.checked-neg { background:var(--red-l); border-color:#fca5a5; color:var(--red); }
+
+/* ── EXIGÊNCIAS ── */
+.exig-table { width:100%; border-collapse:collapse; font-size:.78rem; margin-top:4px; }
+.exig-table th { text-align:left; font-size:.68rem; font-weight:800; color:var(--slate-l); text-transform:uppercase; letter-spacing:.04em; padding:8px 10px 6px; border-bottom:1px solid var(--border); }
+.exig-table td { padding:10px; border-bottom:1px solid #eef2f7; vertical-align:top; line-height:1.5; }
+.exig-table tr:last-child td { border-bottom:none; }
+.exig-desc { color:var(--slate); }
+.exig-ref { width:22%; white-space:nowrap; }
+.exig-ob { width:10%; white-space:nowrap; text-align:right; }
+.exig-summary { font-size:.76rem; color:var(--slate-mid); margin-bottom:12px; }
 .nota-field { width:100%; margin-top:8px; border:1px dashed var(--border); border-radius:7px; padding:6px 9px; font-size:.74rem; min-height:34px; resize:vertical; background:#fcfdff; }
 .nota-field:focus { outline:none; border-color:var(--teal-mid); border-style:solid; }
 .obrig-star { color:var(--amber); font-weight:800; }
@@ -334,6 +346,7 @@ input, select, textarea { font-family:inherit; }
   <div class="view" id="view-process">
     <div class="main-tabs">
       <button class="main-tab active" id="tab-analise" onclick="switchProcessTab('analise')">📋 Análise Crítica</button>
+      <button class="main-tab" id="tab-exigencias" onclick="switchProcessTab('exigencias')">📑 Exigências</button>
       <button class="main-tab" id="tab-checklist" onclick="switchProcessTab('checklist')">✅ Checklist do Edital</button>
     </div>
     <div id="source-banner-area"></div>
@@ -347,6 +360,10 @@ input, select, textarea { font-family:inherit; }
       </div>
       <div class="filter-bar" id="filter-bar"></div>
       <div id="analise-root"></div>
+    </div>
+
+    <div class="panel" id="panel-exigencias">
+      <div id="exigencias-root"></div>
     </div>
 
     <div class="panel" id="panel-checklist">
@@ -383,7 +400,7 @@ input, select, textarea { font-family:inherit; }
 <div class="modal-overlay" id="modal-import">
   <div class="modal-box wide">
     <h3>📥 Importar processo gerado por IA</h3>
-    <p class="hint">Cole abaixo o JSON gerado pelo Claude (ou outra IA) a partir do edital / termo de referência. O painel cria o processo com os campos e o checklist específicos identificados nos documentos. Aceita um processo ou uma lista de processos.</p>
+    <p class="hint">Cole abaixo o JSON gerado pelo Claude (ou outra IA) a partir do edital / termo de referência. O painel cria o processo com análise, <b>exigências do edital</b> e checklist específicos identificados nos documentos. Aceita um processo ou uma lista de processos.</p>
     <textarea class="json-area" id="import-json" placeholder='{ "nome": "Pregão Eletrônico nº ...", "type": "publico", ... }'></textarea>
     <div class="import-error" id="import-error"></div>
     <div class="import-preview" id="import-preview"></div>
@@ -1099,8 +1116,9 @@ const PROMPT_IA =
 '\n' +
 '5. Destino de cada achado — um lugar só, sem duplicar:\n' +
 '   - afeta a decisão de participar, custo, competitividade, ou fundamenta impugnação/esclarecimento → entrada em "risks" {nivel, desc}, desc curta com refs;\n' +
-'   - exige ação ou verificação da equipe → item de checklist {texto, ref, obrigatorio};\n' +
-'   - conflito entre fontes → ref no formato "Edital 9.5.2 × Anexo III 4.1 — quantitativos divergentes" (no risco ou no checklist, conforme o caso);\n' +
+'   - exigência formal do edital/TR que o licitante deve cumprir ou apresentar (documento, índice, prazo, qualificação, declaração) → item em "exigencias" {categoria, descricao, ref, obrigatorio};\n' +
+'   - ação ou verificação operacional da equipe SINAPE → item de checklist {texto, ref, obrigatorio};\n' +
+'   - conflito entre fontes → ref no formato "Edital 9.5.2 × Anexo III 4.1 — quantitativos divergentes" (no risco, exigência ou checklist, conforme o caso);\n' +
 '   - é dado do processo → campo correspondente da estrutura abaixo.\n' +
 '   Níveis: Alto = pode inabilitar/desclassificar a SINAPE ou fundamenta impugnação; Médio = afeta custo/prazo/competitividade ou ambiguidade que pede esclarecimento; Baixo = atenção operacional.\n' +
 '\n' +
@@ -1118,6 +1136,7 @@ const PROMPT_IA =
 '  "status": "em_analise",\n' +
 '  "origem": "ia",\n' +
 '  "fontes": "arquivos analisados",\n' +
+'  "exigencias": [{ "categoria": "...", "descricao": "...", "ref": "item X do Edital", "obrigatorio": true }],\n' +
 '  "analise": { chaves do modelo padrão + chaves das seções extras, "_autoFilledKeys": [...], "_sourceFiles": "..." },\n' +
 '  "schemaCustom": { "secoesExtras": [...], "camposOcultos": [...], "checklist": [...] }\n' +
 '}\n' +
@@ -1129,6 +1148,11 @@ const PROMPT_IA =
 '- Prazos: prazo_publicacao, prazo_esclarecimento, prazo_impugnacao, prazo_abertura, prazo_habilitacao, prazo_contrato, prazo_execucao, prazo_vigencia, prazo_prorroga, prazo_validade_prop, prazo_obs; tbl_prazo = [[Marco, Início, Término, % financeiro, Observação], ...]\n' +
 '- Habilitação: hab_jur_porte, hab_jur_consorcio, hab_jur_lider, hab_jur_sub, hab_jur_obs, hab_fis_estadual, hab_fis_municipal, hab_fis_obs, hab_ef_lc, hab_ef_lg, hab_ef_sg, hab_ef_capital, hab_ef_lc_ok, hab_ef_cap_ok, hab_ef_obs, hab_tec_pmr, hab_tec_quant_min, hab_tec_atestado, hab_tec_rt, hab_tec_rt_nome, hab_tec_obs\n' +
 '- Riscos: risks = [{"nivel": "Alto" | "Médio" | "Baixo", "desc": "..."}]; risco_decisao, risco_resp_decisao, risco_justificativa = "".\n' +
+'\n' +
+'EXIGÊNCIAS ("exigencias") — OBRIGATÓRIO: liste TODAS as exigências formais do edital/TR/anexos que o licitante deve cumprir ou apresentar. Varra participação, proposta, habilitação (jurídica, fiscal, econômico-financeira, técnica), garantias, documentação complementar e execução. Uma entrada por exigência distinta; não agrupe nem resuma demais. Não duplique aqui itens que já são ação interna da equipe (esses vão no checklist).\n' +
+'[{ "categoria": "Participação" | "Proposta comercial" | "Habilitação jurídica" | "Habilitação fiscal e trabalhista" | "Habilitação econômico-financeira" | "Habilitação técnica" | "Garantias" | "Execução contratual" | "Documentação complementar" | "Outras",\n' +
+'   "descricao": "texto objetivo do que é exigido", "ref": "item/cláusula/anexo", "obrigatorio": true|false }]\n' +
+'Todo item tem "ref". "obrigatorio": false apenas para exigências expressamente facultativas no edital.\n' +
 '\n' +
 'SEÇÕES EXTRAS ("schemaCustom.secoesExtras") — crie uma por exigência relevante que não cabe no modelo padrão (garantia de proposta, garantia contratual diferenciada, vistoria, amostras/catálogos, proposta técnica pontuada, credenciamento específico, programa de integridade, exigências ambientais):\n' +
 '{ "id": "snake", "titulo": "7. Título", "icone": "🧾", "badge": "rótulo curto", "tag": "snake",\n' +
@@ -1403,7 +1427,7 @@ async function confirmNewProcess(){
 function novoProcessoVazio(nome, tipo, origem){
   return { id: uid(nome), nome, type: tipo, status:'em_analise', progress:0, origem: origem||'manual',
            fontes:'', criadoEm:Date.now(), atualizadoEm:Date.now(), atualizadoPor:CONFIG.USUARIO||'',
-           versao:1, schemaCustom:null, analise:{}, checklist:{} };
+           versao:1, schemaCustom:null, analise:{}, checklist:{}, exigencias:[] };
 }
 async function deleteProcess(id){
   const p = listaResumos.find(x=>x.id===id);
@@ -1457,13 +1481,16 @@ async function openProcess(id){
   renderAnexos();
   buildFilterBar();
   buildAnalise();
+  buildExigencias();
   buildChecklist();
   setSaveStatus('Pronto','');
 }
 function switchProcessTab(tab){
   document.getElementById('tab-analise').classList.toggle('active', tab==='analise');
+  document.getElementById('tab-exigencias').classList.toggle('active', tab==='exigencias');
   document.getElementById('tab-checklist').classList.toggle('active', tab==='checklist');
   document.getElementById('panel-analise').classList.toggle('active', tab==='analise');
+  document.getElementById('panel-exigencias').classList.toggle('active', tab==='exigencias');
   document.getElementById('panel-checklist').classList.toggle('active', tab==='checklist');
 }
 function renderSourceBanner(){
@@ -1723,6 +1750,66 @@ function addRisk(){
   rebuildRiscos();
 }
 
+/* ── exigências do edital ── */
+const ORDEM_CATEGORIAS_EXIG = [
+  'Participação', 'Proposta comercial', 'Habilitação jurídica', 'Habilitação fiscal e trabalhista',
+  'Habilitação econômico-financeira', 'Habilitação técnica', 'Garantias', 'Execução contratual',
+  'Documentação complementar', 'Outras'
+];
+function getExigencias(proc){
+  return Array.isArray(proc && proc.exigencias) ? proc.exigencias : [];
+}
+function buildExigencias(){
+  const root = document.getElementById('exigencias-root');
+  const lista = getExigencias(currentProc);
+  if(!lista.length){
+    root.innerHTML = '<div class="empty-state" style="padding:28px;"><div class="icon">📑</div>'+
+      '<p>Nenhuma exigência cadastrada neste processo.</p>'+
+      '<p style="font-size:.76rem;margin-top:6px;">Use <b>Importar da IA</b> com o prompt atualizado — o Claude extrai as exigências do edital/TR para esta aba.</p></div>';
+    return;
+  }
+  const obrig = lista.filter(x=>x.obrigatorio!==false).length;
+  const porCat = {};
+  lista.forEach((ex, i)=>{
+    const cat = (ex.categoria || 'Outras').trim() || 'Outras';
+    if(!porCat[cat]) porCat[cat] = [];
+    porCat[cat].push(Object.assign({_idx:i}, ex));
+  });
+  const cats = Object.keys(porCat).sort((a,b)=>{
+    const ia = ORDEM_CATEGORIAS_EXIG.indexOf(a), ib = ORDEM_CATEGORIAS_EXIG.indexOf(b);
+    return (ia<0?999:ia) - (ib<0?999:ib) || a.localeCompare(b);
+  });
+  root.innerHTML = '<p class="exig-summary"><b>'+lista.length+'</b> exigência(s) · <b>'+obrig+'</b> obrigatória(s) · agrupadas por categoria</p>';
+  cats.forEach(cat=>{
+    const card = document.createElement('div'); card.className='sec-card';
+    const itens = porCat[cat];
+    const head = document.createElement('div'); head.className='sec-head violet';
+    head.onclick = ()=>card.classList.toggle('collapsed');
+    head.innerHTML = '<span class="sec-title"><span>'+esc(cat)+'</span></span>'+
+      '<div style="display:flex;align-items:center;gap:8px;"><span class="sec-badge violet">'+itens.length+'</span><span class="sec-chevron">▾</span></div>';
+    card.appendChild(head);
+    const body = document.createElement('div'); body.className='sec-body';
+    const table = document.createElement('table'); table.className='exig-table';
+    table.innerHTML = '<thead><tr><th>Exigência</th><th>Referência</th><th></th></tr></thead>';
+    const tbody = document.createElement('tbody');
+    itens.forEach(ex=>{
+      const tr = document.createElement('tr');
+      const desc = document.createElement('td'); desc.className='exig-desc';
+      desc.textContent = ex.descricao || ex.texto || '';
+      const ref = document.createElement('td'); ref.className='exig-ref';
+      ref.innerHTML = ex.ref ? '<span class="chip ref">📎 '+esc(ex.ref)+'</span>' : '—';
+      const ob = document.createElement('td'); ob.className='exig-ob';
+      ob.innerHTML = ex.obrigatorio!==false
+        ? '<span class="chip obrig" title="Exigência obrigatória">★ Obrig.</span>'
+        : '<span class="chip opt">Facult.</span>';
+      tr.appendChild(desc); tr.appendChild(ref); tr.appendChild(ob);
+      tbody.appendChild(tr);
+    });
+    table.appendChild(tbody); body.appendChild(table); card.appendChild(body);
+    root.appendChild(card);
+  });
+}
+
 /* ── checklist ── */
 function buildChecklist(){
   const root = document.getElementById('checklist-root');
@@ -1883,6 +1970,7 @@ function mesclarRemoto(remoto){
   Object.keys(remoto.checklist||{}).forEach(k=>{ if(!(k in pChk)) currentProc.checklist[k]=remoto.checklist[k]; });
   currentProc.versao = remoto.versao; currentProc.nome = remoto.nome; currentProc.status = remoto.status;
   currentProc.schemaCustom = remoto.schemaCustom || currentProc.schemaCustom;
+  if(remoto.exigencias) currentProc.exigencias = remoto.exigencias;
   // reaplica na tela sem mexer no campo em foco
   const foco = document.activeElement;
   document.querySelectorAll('#analise-root [data-key]').forEach(el=>{
@@ -1893,6 +1981,7 @@ function mesclarRemoto(remoto){
   getSecoes(currentProc).forEach(s=>{ if(s.tabela && (!foco || !foco.closest('#tbody-'+s.tabela.key))) rebuildTabela(s.tabela); });
   if(!foco || !foco.closest('#risk-grid')) rebuildRiscos();
   aplicarChecklist();
+  buildExigencias();
 }
 async function sincronizarAgora(){
   if(!currentProc) return;
@@ -1958,9 +2047,10 @@ function validarImport(){
   prev.innerHTML = norm.map(p=>{
     const nExtras = (p.schemaCustom && p.schemaCustom.secoesExtras || []).length;
     const nChk = (p.schemaCustom && p.schemaCustom.checklist || []).reduce((a,g)=>a+((g.items||g.itens||[]).length),0);
+    const nExig = (p.exigencias || []).length;
     const nCampos = Object.keys(p.analise).filter(k=>!k.startsWith('_') && p.analise[k]!=='' && p.analise[k]!=null).length;
     return '✔ <b>'+esc(p.nome)+'</b> — '+(p.type==='publico'?'🏛️ público':'🏢 privado')+
-      ' · '+nCampos+' campos preenchidos · '+nExtras+' seção(ões) específica(s) do edital · '+
+      ' · '+nCampos+' campos preenchidos · '+nExig+' exigência(s) · '+nExtras+' seção(ões) específica(s) do edital · '+
       (nChk? nChk+' itens de checklist próprios' : 'checklist padrão SINAPE');
   }).join('<br>');
   prev.style.display='block';
@@ -1980,6 +2070,26 @@ function normalizarProcesso(o){
     if(schemaCustom.secoesExtras && !Array.isArray(schemaCustom.secoesExtras)) throw new Error('"schemaCustom.secoesExtras" deve ser lista.');
     if(schemaCustom.checklist && !Array.isArray(schemaCustom.checklist)) throw new Error('"schemaCustom.checklist" deve ser lista.');
   }
+  let exigencias = [];
+  if(o.exigencias !== undefined && o.exigencias !== null){
+    if(!Array.isArray(o.exigencias)) throw new Error('"exigencias" deve ser uma lista.');
+    exigencias = o.exigencias.map((ex, i)=>{
+      if(typeof ex === 'string'){
+        const descricao = ex.trim();
+        if(!descricao) throw new Error('exigencias['+i+']: texto vazio.');
+        return { categoria:'Outras', descricao, ref:'', obrigatorio:true };
+      }
+      if(!ex || typeof ex !== 'object') throw new Error('exigencias['+i+']: estrutura inválida.');
+      const descricao = (ex.descricao||ex.texto||ex.desc||'').toString().trim();
+      if(!descricao) throw new Error('exigencias['+i+']: "descricao" é obrigatória.');
+      return {
+        categoria: (ex.categoria||ex.grupo||'Outras').toString().trim() || 'Outras',
+        descricao,
+        ref: (ex.ref||ex.referencia||'').toString().trim(),
+        obrigatorio: ex.obrigatorio !== false && ex.obrigatorio !== 'false'
+      };
+    });
+  }
   if(!analise._autoFilledKeys && (o.origem==='ia' || o.origem===undefined)){
     analise._autoFilledKeys = Object.keys(analise).filter(k=>!k.startsWith('_') && analise[k]!=='' && analise[k]!=null && !Array.isArray(analise[k]));
   }
@@ -1992,7 +2102,7 @@ function normalizarProcesso(o){
     origem: o.origem || 'ia',
     fontes: o.fontes || analise._sourceFiles || '',
     criadoEm: Date.now(), atualizadoEm: Date.now(), atualizadoPor: CONFIG.USUARIO||'',
-    versao: 1, schemaCustom, analise, checklist
+    versao: 1, schemaCustom, analise, checklist, exigencias
   };
 }
 async function confirmarImport(){
