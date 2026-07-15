@@ -114,6 +114,8 @@ input, select, textarea { font-family:inherit; }
 .pc-actions { display:flex; gap:6px; margin-top:2px; }
 .pc-del { position:absolute; top:10px; right:10px; border:none; background:none; color:var(--slate-l); font-size:1rem; padding:2px 6px; border-radius:6px; }
 .pc-del:hover { background:var(--red-l); color:var(--red); }
+.pc-montar { position:absolute; top:10px; right:38px; border:none; background:none; color:var(--slate-l); font-size:1rem; padding:2px 6px; border-radius:6px; }
+.pc-montar:hover { background:var(--teal-l); color:var(--teal); }
 .empty-state { text-align:center; padding:60px 20px; color:var(--slate-l); }
 .empty-state .icon { font-size:2.4rem; margin-bottom:10px; }
 .banner-info {
@@ -136,6 +138,8 @@ input, select, textarea { font-family:inherit; }
 .btn-sm.danger:hover { background:var(--red-l); }
 .btn-sm.violet { color:var(--violet); border-color:#ddd6fe; }
 .btn-sm.violet:hover { background:var(--violet-l); }
+.btn-sm.teal { color:var(--teal); border-color:var(--teal-mid); }
+.btn-sm.teal:hover { background:var(--teal-l); }
 .btn-add-row { border:1px dashed var(--teal-mid); color:var(--teal); background:var(--teal-ll); border-radius:8px; padding:6px 12px; font-size:.75rem; font-weight:700; margin-top:8px; }
 .btn-add-row:hover { background:var(--teal-l); }
 
@@ -375,6 +379,7 @@ input, select, textarea { font-family:inherit; }
         <span class="save-status" id="save-status">Pronto</span>
         <button class="btn-sm violet" onclick="exportarProcesso()">⬇ Exportar JSON</button>
         <button class="btn-sm" onclick="sincronizarAgora()">🔄 Sincronizar</button>
+        <button class="btn-sm teal" onclick="montarDossie(currentProc && currentProc.id)">📦 Montar Dossiê</button>
       </div>
       <div class="filter-bar" id="filter-bar"></div>
       <div id="analise-root"></div>
@@ -486,6 +491,7 @@ const TEMPLATE_PADRAO = [
       {key:'geral_responsavel', label:'Responsável interno pela análise', tipo:'text', placeholder:'Ex.: Gabriel'},
       {key:'geral_abertura', label:'Data de abertura / entrega da proposta', tipo:'date'},
       {key:'geral_status', label:'Status', tipo:'select', opcoes:OPC.statusProc},
+      {key:'geral_pasta_sharepoint', label:'Pasta do dossiê no SharePoint', tipo:'text', span:'span-full', placeholder:'Link da pasta deste processo no SharePoint (usado pelo montador de dossiê para localizar os documentos)'},
       {key:'geral_obs', label:'Observações gerais', tipo:'textarea', span:'span-full', placeholder:'Notas iniciais sobre o processo, contexto, histórico com o contratante...'}
     ]},
   { id:'quantitativos', tag:'quantitativos', icone:'📊', titulo:'2. Quadro de Quantitativos por Lote', badge:'Quantitativos',
@@ -1326,6 +1332,16 @@ let currentProc = null;           // processo aberto (objeto completo)
 let currentFilter = 'all';
 let pend = null;                  // alterações pendentes de envio
 let saveTimer = null;
+
+// Endereço do servidor local do Montador de Dossiê (roda na máquina de quem
+// clica - hoje só faz sentido para quem tem o server.py rodando localmente;
+// se a equipe toda for usar o botão, isso precisa virar um endereço
+// compartilhado em vez de localhost).
+const MONTADOR_URL = 'http://localhost:5005';
+function montarDossie(id){
+  if(!id) return;
+  window.open(MONTADOR_URL + '/montar?processo_id=' + encodeURIComponent(id), '_blank');
+}
 let salvando = false;
 let pollTimer = null;
 
@@ -1403,6 +1419,7 @@ function renderProcessGrid(){
     const quando = p.atualizadoEm ? new Date(p.atualizadoEm).toLocaleDateString('pt-BR') : '';
     card.innerHTML =
       '<button class="pc-del" title="Excluir processo" onclick="event.stopPropagation();deleteProcess(\''+p.id+'\')">✕</button>' +
+      '<button class="pc-montar" title="Montar dossiê deste processo" onclick="event.stopPropagation();montarDossie(\''+p.id+'\')">📦</button>' +
       '<div class="pc-nome">'+esc(p.nome)+'</div>' +
       '<div class="pc-meta">' +
         '<span class="chip st-'+esc(p.status||'pendente')+'">'+esc(stLabel)+'</span>' +
