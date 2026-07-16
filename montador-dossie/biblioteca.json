@@ -1,0 +1,85 @@
+{
+  "_comentario": "Mapa de categoria (exigencias[].categoria do Painel Sinape) -> subpasta padrao dentro da pasta do PROCESSO no SharePoint (campo geral_pasta_sharepoint do processo). Baseado na estrutura real observada no dossie finalizado '03.06.2025 - USP RIBEIRAO PRETO - PE 10.2025'. O montador NAO varre uma biblioteca compartilhada: a equipe ja deposita a documentacao pronta dentro da pasta do processo antes de rodar o script; ele so organiza e zipa.",
+
+  "_status_confirmacao": "Categorias marcadas 'confirmado' foram vistas de verdade num dossie real. Categorias marcadas 'a_confirmar' nao apareceram no exemplo (pode ser que aquele edital nao tenha exigido, ou que fiquem em outro lugar) - nome de subpasta e um palpite consistente com a numeracao existente, a validar com a equipe.",
+
+  "categorias": [
+    {
+      "categoria_painel": "Habilitação jurídica",
+      "subpasta_relativa": "02 - Documentacao/02.01 - Habilitacao Juridica",
+      "letra_zip": "A",
+      "status": "confirmado"
+    },
+    {
+      "categoria_painel": "Habilitação fiscal e trabalhista",
+      "subpasta_relativa": "02 - Documentacao/02.02 - Habilitacao Fiscal Social e Trabalhista",
+      "letra_zip": "B",
+      "status": "confirmado"
+    },
+    {
+      "categoria_painel": "Habilitação econômico-financeira",
+      "subpasta_relativa": "02 - Documentacao/02.03 - Qualificacao Economico-Financeira",
+      "letra_zip": "C",
+      "status": "confirmado"
+    },
+    {
+      "categoria_painel": "Habilitação técnica",
+      "subpasta_relativa": "02 - Documentacao/02.04 - Qualificacao Tecnica",
+      "letra_zip": "D",
+      "status": "confirmado"
+    },
+    {
+      "categoria_painel": "Participação",
+      "subpasta_relativa": "02 - Documentacao/01 - Declaracoes",
+      "letra_zip": "E",
+      "status": "confirmado",
+      "obs": "Declaracoes exigidas de participacao (nao emprega menor, elaboracao independente, etc.) ficaram juntas nessa subpasta no exemplo real."
+    },
+    {
+      "categoria_painel": "Proposta comercial",
+      "subpasta_relativa": "01 - Edital e Orcamento",
+      "letra_zip": "F",
+      "status": "confirmado",
+      "obs": "No exemplo essa pasta ficou FORA de '02 - Documentacao' (irma dela, na raiz da pasta do processo). Contem o proprio edital + planilha de orcamento, nao so a proposta - confirmar com a equipe se e isso mesmo que deve entrar no zip final ou so o arquivo da proposta em si."
+    },
+    {
+      "categoria_painel": "Garantias",
+      "subpasta_relativa": "02 - Documentacao/02.05 - Garantias",
+      "letra_zip": "G",
+      "status": "a_confirmar",
+      "obs": "Nao apareceu no dossie de exemplo (esse edital pode nao ter exigido). Nome de subpasta e sugestao seguindo a numeracao 02.0x existente - confirmar com a equipe onde isso deve ficar quando exigido."
+    },
+    {
+      "categoria_painel": "Execução contratual",
+      "subpasta_relativa": "02 - Documentacao/02.06 - Execucao Contratual",
+      "letra_zip": null,
+      "status": "a_confirmar",
+      "obs": "Idem Garantias - nao visto no exemplo. Pode fazer mais sentido este item ficar fora do zip de habilitacao (e sobre o pos-contrato, nao sobre documentos para anexar na licitacao) - confirmar com a equipe se deve mesmo entrar no dossie."
+    },
+    {
+      "categoria_painel": "Documentação complementar",
+      "subpasta_relativa": "04 - Anexos/01 - Anexos Originais",
+      "letra_zip": null,
+      "status": "a_confirmar",
+      "obs": "Pasta de Anexos no exemplo tinha 1,2 GB (plantas, fotos tecnicas) - pode ser conteudo demais para entrar inteiro em todo zip. Confirmar se e so uma parte especifica ou a pasta toda."
+    },
+    {
+      "categoria_painel": "Outras",
+      "subpasta_relativa": null,
+      "letra_zip": null,
+      "status": "a_confirmar",
+      "obs": "Categoria coringa do enum do Painel - sem subpasta fixa previsivel. Provavelmente precisa de tratamento manual/alerta no CHECKLIST em vez de busca automatica."
+    }
+  ],
+
+  "_subpastas_fora_do_mapa_categoria": [
+    {
+      "subpasta_relativa": "03 - Esclarecimentos/01 - Esclarecimentos Originais",
+      "obs": "Existe no exemplo real mas nao corresponde a nenhuma categoria de exigencia do licitante - e conteudo APRESENTADO PELO ORGAO, nao pelo licitante. Nao deve entrar no zip de habilitacao."
+    },
+    {
+      "subpasta_relativa": "99 - Manifesto",
+      "obs": "Nao inspecionado ainda (pasta vazia ou nao explorada). A confirmar o que e e se deve entrar no zip."
+    }
+  ]
+}

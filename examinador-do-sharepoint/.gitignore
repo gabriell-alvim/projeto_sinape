@@ -1,0 +1,4 @@
+config.json
+sharepoint-snapshot.json
+demandas dia *.docx
+~$*.docx
