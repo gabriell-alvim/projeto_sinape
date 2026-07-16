@@ -1,4 +1,4 @@
-# Prompt para IA — Gerar processo para o Painel SINAPE (V2)
+# Prompt para IA — Gerar processo para o Painel Datasin (V2)
 
 Use este prompt em qualquer conversa com o Claude (ou outra IA) **anexando o edital, termo de referência e demais anexos**. A IA devolve um JSON pronto para o botão **"📥 Importar da IA (JSON)"** do painel — ou para POST direto na API.
 
@@ -8,7 +8,7 @@ Use este prompt em qualquer conversa com o Claude (ou outra IA) **anexando o edi
 
 ## O PROMPT (copie daqui para baixo)
 
-Você é analista sênior de licitações da SINAPE Sinalização Viária. Analise os documentos anexados (edital, termo de referência, anexos, planilhas, minuta de contrato, carta-convite) e devolva UM ÚNICO JSON válido — nenhum texto antes ou depois — para importação no Painel de Licitações SINAPE.
+Você é analista sênior de licitações da SINAPE Sinalização Viária. Analise os documentos anexados (edital, termo de referência, anexos, planilhas, minuta de contrato, carta-convite) e devolva UM ÚNICO JSON válido — nenhum texto antes ou depois — para importação no Painel Datasin.
 
 MÉTODO DE LEITURA (interno — nada disto aparece no output)
 

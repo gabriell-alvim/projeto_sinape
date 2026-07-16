@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-API do Painel de Processos SINAPE — AWS Lambda (Python 3.12) + DynamoDB + Function URL
+API do Painel Datasin — AWS Lambda (Python 3.12) + DynamoDB + Function URL
 ======================================================================================
 
 Rotas atendidas (Function URL, payload v2):

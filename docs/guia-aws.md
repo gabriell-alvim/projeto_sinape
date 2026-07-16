@@ -1,4 +1,4 @@
-# Guia de Implantação na AWS — Painel de Processos SINAPE
+# Guia de Implantação na AWS — Painel Datasin
 
 Este guia coloca o painel no ar em ~30 minutos usando só o console da AWS, sem instalar nada.
 

@@ -1,4 +1,4 @@
-# Painel de Licitações SINAPE
+# Datasin — Painel de Licitações
 
 Painel colaborativo para análise de processos licitatórios (públicos e privados). A equipe preenche análise crítica, exigências do edital e checklist; os dados sincronizam em tempo real via API.
 
@@ -11,6 +11,7 @@ Painel colaborativo para análise de processos licitatórios (públicos e privad
 - Aba **Exigências** extraídas do edital (com avaliação e tratativas)
 - **Checklist** operacional da equipe
 - Importação de processos via **JSON gerado por IA** (Claude, etc.)
+- Índice de seções em PDF (negrito + CAPS) para otimizar envio à IA
 - Anexos por processo (edital, TR, planilhas)
 - Sincronização entre usuários (polling + merge em conflito)
 - Login básico no site (`SITE_USER` / `SITE_PASSWORD`)
@@ -18,10 +19,11 @@ Painel colaborativo para análise de processos licitatórios (públicos e privad
 ## Estrutura do repositório
 
 ```
-projeto_sinape/
+datasin/
 ├── app.py              # API Flask + servir painel e login
 ├── index.html          # Painel (front + lógica)
 ├── login.html          # Tela de login
+├── pdf_sections.py     # Índice de seções em PDF
 ├── lambda_function.py  # Backend legado AWS (referência)
 ├── docker-compose.yml  # App + MongoDB local
 ├── Dockerfile
@@ -77,7 +79,7 @@ Sem `SITE_USER` e `SITE_PASSWORD`, o login do site fica desabilitado (útil para
 
 ## Fluxo com IA
 
-1. Na **home**, clique em **Copiar prompt p/ IA** (ou use [docs/prompt-ia.md](docs/prompt-ia.md)).
+1. Na **home**, anexe PDFs (o painel monta o índice de seções) e/ou clique em **Copiar prompt p/ IA** (ou use [docs/prompt-ia.md](docs/prompt-ia.md)).
 2. Envie o prompt + edital/TR para o Claude.
 3. Cole o JSON em **Importar da IA (JSON)**.
 4. Revise no painel — campos vindos da IA aparecem destacados.
@@ -97,6 +99,7 @@ Autenticação: sessão de login + header `x-sinape-token: TOKEN`.
 | PUT | `/api/processos/:id` | Substitui processo |
 | PATCH | `/api/processos/:id` | Mescla alterações |
 | DELETE | `/api/processos/:id` | Remove processo |
+| POST | `/api/pdf/secoes` | Índice de seções do PDF |
 | GET/POST | `/api/processos/:id/anexos` | Lista / envia anexos |
 
 ## Documentação

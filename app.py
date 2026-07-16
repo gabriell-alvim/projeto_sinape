@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-API do Painel de Processos SINAPE — servidor Flask (Docker) + MongoDB
+API do Painel Datasin — servidor Flask (Docker) + MongoDB
 =========================================================================
 
 Substitui o backend AWS (Lambda + DynamoDB + S3) por um único container:

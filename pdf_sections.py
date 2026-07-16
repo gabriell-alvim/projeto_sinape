@@ -17,7 +17,7 @@ from typing import BinaryIO, Union
 
 import pdfplumber
 
-log = logging.getLogger("sinape.pdf_sections")
+log = logging.getLogger("datasin.pdf_sections")
 
 PdfSource = Union[str, Path, bytes, BinaryIO]
 

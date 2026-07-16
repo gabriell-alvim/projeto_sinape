@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SINAPE — Painel de Licitações (Colaborativo)</title>
+<title>Datasin — Painel de Licitações (Colaborativo)</title>
 <style>
 :root {
   --teal:      #0d5c63;
@@ -327,7 +327,7 @@ input, select, textarea { font-family:inherit; }
 <body>
 
 <div class="topbar">
-  <div class="topbar-brand" onclick="goHome()"><span class="dot"></span> SINAPE · Painel de Licitações</div>
+  <div class="topbar-brand" onclick="goHome()"><span class="dot"></span> Datasin · Painel de Licitações</div>
   <div class="breadcrumb" id="breadcrumb"></div>
   <a class="topbar-logout" href="/logout">Sair</a>
   <div class="sync-pill" id="sync-pill"><span class="sdot"></span><span id="sync-text">Iniciando…</span></div>
@@ -442,7 +442,7 @@ input, select, textarea { font-family:inherit; }
 <div class="modal-overlay" id="modal-novo">
   <div class="modal-box">
     <h3>Novo processo (manual)</h3>
-    <p class="hint">O processo será criado com o modelo padrão SINAPE de análise e checklist. Para um processo com campos específicos do edital, use <b>Importar da IA</b>.</p>
+    <p class="hint">O processo será criado com o modelo padrão Datasin de análise e checklist. Para um processo com campos específicos do edital, use <b>Importar da IA</b>.</p>
     <input type="text" id="input-novo-nome" placeholder='Nome do processo — ex.: "Pregão 525/2026 — DETRAN/PR"' maxlength="140">
     <div class="radio-row">
       <label><input type="radio" name="novo-tipo" value="publico" checked> 🏛️ Público</label>
@@ -487,7 +487,7 @@ const CONFIG = {
 
 <script>
 /* ════════════════════════════════════════════════════════════════
-   MODELO PADRÃO SINAPE — seções da Análise Crítica
+   MODELO PADRÃO DATASIN — seções da Análise Crítica
    Processos criados por IA podem ACRESCENTAR seções (schemaCustom.secoesExtras),
    OCULTAR campos/seções que não se aplicam e SUBSTITUIR o checklist.
    ════════════════════════════════════════════════════════════════ */
@@ -1152,7 +1152,7 @@ const SEEDS = SEED_PROCESSES.map(function(s){
    (versão completa em docs/prompt-ia.md)
    ════════════════════════════════════════════════════════════════ */
 const PROMPT_IA =
-'Você é analista sênior de licitações da SINAPE Sinalização Viária. Analise os documentos anexados (edital, termo de referência, anexos, planilhas, minuta de contrato, carta-convite) e devolva UM ÚNICO JSON válido — nenhum texto antes ou depois — para importação no Painel de Licitações SINAPE.\n' +
+'Você é analista sênior de licitações da SINAPE Sinalização Viária. Analise os documentos anexados (edital, termo de referência, anexos, planilhas, minuta de contrato, carta-convite) e devolva UM ÚNICO JSON válido — nenhum texto antes ou depois — para importação no Painel Datasin.\n' +
 '\n' +
 'MÉTODO DE LEITURA (interno — nada disto aparece no output)\n' +
 '\n' +
@@ -2196,7 +2196,7 @@ function validarImport(){
     const nCampos = Object.keys(p.analise).filter(k=>!k.startsWith('_') && p.analise[k]!=='' && p.analise[k]!=null).length;
     return '✔ <b>'+esc(p.nome)+'</b> — '+(p.type==='publico'?'🏛️ público':'🏢 privado')+
       ' · '+nCampos+' campos preenchidos · '+nExig+' exigência(s) · '+nExtras+' seção(ões) específica(s) do edital · '+
-      (nChk? nChk+' itens de checklist próprios' : 'checklist padrão SINAPE');
+      (nChk? nChk+' itens de checklist próprios' : 'checklist padrão Datasin');
   }).join('<br>');
   prev.style.display='block';
   document.getElementById('btn-confirm-import').disabled = false;
