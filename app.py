@@ -4,7 +4,7 @@ API do Painel de Processos SINAPE — servidor Flask (Docker) + MongoDB
 =========================================================================
 
 Substitui o backend AWS (Lambda + DynamoDB + S3) por um único container:
-Flask serve o index.html e a API; os dados ficam no MongoDB; os anexos
+Flask serve o index.html, login.html e a API; os dados ficam no MongoDB; os anexos
 enviados pela equipe ficam em disco, dentro da pasta UPLOAD_DIR.
 
 Rotas:
@@ -22,6 +22,7 @@ Rotas:
   POST    /api/processos/<id>/anexos         → envia um anexo (multipart, campo "arquivo")
   GET     /api/processos/<id>/anexos/<aid>   → baixa o arquivo
   DELETE  /api/processos/<id>/anexos/<aid>   → remove o anexo (registro + arquivo em disco)
+  POST    /api/pdf/secoes                    → analisa PDF e mapeia seções (negrito + CAPS) → páginas
 
 Autenticação:
   - Acesso ao site: sessão Flask após login (env SITE_USER + SITE_PASSWORD + SECRET_KEY).
@@ -52,6 +53,8 @@ from pymongo.errors import DuplicateKeyError
 from flask import Flask, request, jsonify, send_from_directory, send_file, session, redirect
 from werkzeug.utils import secure_filename
 
+from pdf_sections import analisar_pdf_secoes, configurar_log
+
 BASE_DIR = Path(__file__).resolve().parent
 UPLOAD_DIR = Path(os.environ.get("UPLOAD_DIR", "/app/uploads"))
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
@@ -62,6 +65,10 @@ SITE_PASSWORD = os.environ.get("SITE_PASSWORD", "")
 SECRET_KEY = os.environ.get("SECRET_KEY", "troque-em-producao")
 MONGO_URL = os.environ.get("MONGO_URL", "")
 MAX_UPLOAD_MB = int(os.environ.get("MAX_UPLOAD_MB", "25"))
+PDF_DEBUG = os.environ.get("PDF_DEBUG", "").lower() in ("1", "true", "yes")
+
+if PDF_DEBUG:
+    configurar_log(debug=True)
 
 app = Flask(__name__, static_folder=None)
 app.secret_key = SECRET_KEY
@@ -216,6 +223,50 @@ def index():
 @app.route("/api/health")
 def health():
     return jsonify({"ok": True})
+
+
+# ──────────────────────────────────────────────────────────────────
+# análise de PDF (seções para otimização de tokens na IA)
+# ──────────────────────────────────────────────────────────────────
+def _eh_pdf_upload(arquivo):
+    if not arquivo or not arquivo.filename:
+        return False
+    nome = arquivo.filename.lower()
+    return nome.endswith(".pdf") or arquivo.mimetype == "application/pdf"
+
+
+@app.route("/api/pdf/secoes", methods=["POST"])
+def analisar_pdf():
+    arquivos = request.files.getlist("arquivos") or request.files.getlist("arquivo")
+    if not arquivos:
+        unico = request.files.get("arquivo")
+        arquivos = [unico] if unico else []
+
+    pdfs = [a for a in arquivos if _eh_pdf_upload(a)]
+    if not pdfs:
+        return jsonify({"erro": "Envie ao menos um PDF no campo 'arquivo' ou 'arquivos'"}), 400
+
+    resultado = []
+    for arquivo in pdfs:
+        try:
+            dados = arquivo.read()
+            if len(dados) > MAX_UPLOAD_MB * 1024 * 1024:
+                return jsonify({
+                    "erro": f'"{arquivo.filename}" excede {MAX_UPLOAD_MB} MB',
+                }), 400
+            analise = analisar_pdf_secoes(
+                dados, nome_arquivo=arquivo.filename, debug=PDF_DEBUG,
+            )
+            resultado.append(analise)
+        except Exception as exc:
+            return jsonify({
+                "erro": f'Falha ao analisar "{arquivo.filename}"',
+                "detalhe": str(exc),
+            }), 400
+
+    if len(resultado) == 1:
+        return jsonify(resultado[0])
+    return jsonify({"arquivos": resultado})
 
 
 # ──────────────────────────────────────────────────────────────────

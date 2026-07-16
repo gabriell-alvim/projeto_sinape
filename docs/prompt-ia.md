@@ -110,4 +110,4 @@ curl -X POST "https://SUA-URL.lambda-url.REGIAO.on.aws/processos" \
 - Anexe **tudo** (edital + TR + planilha + minuta): o cruzamento entre documentos é justamente onde o V2 rende mais — com um arquivo só, ele vira extração simples.
 - Divergências entre documentos chegam como risco ou item de checklist com ref "Edital X × Anexo Y" — são candidatas diretas a pedido de esclarecimento (art. 164 da Lei 14.133/2021).
 - Se a IA preencher algo errado, importe mesmo assim e corrija no painel — todo campo continua editável; o selo 🤖 indica o que veio da IA.
-- O arquivo `exemplo_processo_ia.json` deste pacote mostra uma saída completa no padrão V2 para servir de gabarito.
+- O arquivo [exemplos/processo-ia.json](exemplos/processo-ia.json) deste pacote mostra uma saída completa no padrão V2 para servir de gabarito.

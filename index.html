@@ -83,6 +83,32 @@ input, select, textarea { font-family:inherit; }
 .home-fluxo .passo b { color:var(--teal); }
 .home-fluxo .seta { color:var(--slate-l); }
 .home-actions { display:flex; justify-content:center; margin-top:18px; gap:8px; flex-wrap:wrap; }
+.home-ia-box {
+  max-width:760px; margin:22px auto 0; background:var(--white); border:1px solid var(--border);
+  border-radius:14px; padding:18px 20px;
+}
+.home-ia-box h3 { font-size:.95rem; color:var(--teal); margin-bottom:4px; }
+.home-ia-box .hint { font-size:.76rem; color:var(--slate-mid); margin-bottom:14px; line-height:1.5; }
+.pdf-drop {
+  border:2px dashed var(--border); border-radius:12px; padding:28px 16px; text-align:center;
+  background:var(--teal-ll); cursor:pointer; transition:border-color .15s, background .15s;
+}
+.pdf-drop:hover, .pdf-drop.dragover { border-color:var(--teal-mid); background:var(--teal-l); }
+.pdf-drop .pdf-drop-title { font-weight:700; color:var(--teal); font-size:.88rem; }
+.pdf-drop .pdf-drop-sub { font-size:.76rem; color:var(--slate-mid); margin-top:6px; }
+.pdf-drop input[type=file] { display:none; }
+.pdf-list { margin-top:14px; display:flex; flex-direction:column; gap:8px; }
+.pdf-item {
+  display:flex; align-items:center; gap:10px; padding:10px 12px;
+  background:#f8fafc; border:1px solid var(--border); border-radius:10px;
+}
+.pdf-item .pdf-icon { font-size:1.2rem; flex-shrink:0; }
+.pdf-item .pdf-info { flex:1; min-width:0; }
+.pdf-item .pdf-nome { font-size:.82rem; font-weight:600; color:var(--slate); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.pdf-item .pdf-meta { font-size:.72rem; color:var(--slate-l); margin-top:2px; }
+.pdf-item .pdf-secoes { font-size:.72rem; color:var(--teal); margin-top:4px; line-height:1.4; }
+.pdf-item.analisando { opacity:.65; }
+.pdf-empty { font-size:.76rem; color:var(--slate-l); text-align:center; padding:8px 0; }
 
 /* ── LISTA ── */
 .list-header { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:16px; flex-wrap:wrap; }
@@ -330,14 +356,26 @@ input, select, textarea { font-family:inherit; }
       </div>
     </div>
     <div class="home-fluxo">
-      <span class="passo"><b>1.</b> Envie o edital/TR para a IA com o prompt do painel</span>
+      <span class="passo"><b>1.</b> Anexe o edital/TR em PDF abaixo</span>
       <span class="seta">→</span>
-      <span class="passo"><b>2.</b> A IA devolve o processo em JSON, com campos e checklist próprios do edital</span>
+      <span class="passo"><b>2.</b> A IA analisa e gera o processo em JSON</span>
       <span class="seta">→</span>
-      <span class="passo"><b>3.</b> Importe aqui (ou via API) e toda a equipe vê na hora</span>
+      <span class="passo"><b>3.</b> O processo entra no painel e toda a equipe vê na hora</span>
+    </div>
+    <div class="home-ia-box">
+      <h3>📄 Documentos para análise com IA</h3>
+      <p class="hint">Anexe o edital, termo de referência e demais PDFs. Na próxima etapa o painel enviará estes arquivos direto para o Claude.</p>
+      <div class="pdf-drop" id="pdf-drop" onclick="abrirSeletorPdf()" role="button" tabindex="0">
+        <input type="file" id="input-pdf-ia" accept="application/pdf,.pdf" multiple onchange="onIaPdfInputChange(event)">
+        <div class="pdf-drop-title">Clique ou arraste PDFs aqui</div>
+        <div class="pdf-drop-sub">Edital, TR, anexos — até 25 MB por arquivo</div>
+      </div>
+      <div class="pdf-list" id="pdf-list">
+        <div class="pdf-empty" id="pdf-empty">Nenhum PDF anexado ainda.</div>
+      </div>
     </div>
     <div class="home-actions">
-      <button class="btn-outline" onclick="copiarPromptIA()">🤖 Copiar prompt p/ IA</button>
+      <button class="btn-outline" onclick="copiarPromptIA()">🤖 Copiar prompt p/ IA (manual)</button>
     </div>
   </div>
 
@@ -437,7 +475,7 @@ input, select, textarea { font-family:inherit; }
 
 <script>
 /* ════════════════════════════════════════════════════════════════
-   CONFIGURAÇÃO — ver GUIA_DOCKER.md
+   CONFIGURAÇÃO — ver docs/guia-docker.md
    ════════════════════════════════════════════════════════════════ */
 const CONFIG = {
   API_URL: '/api',    // backend no mesmo container (Render/Docker)
@@ -1111,7 +1149,7 @@ const SEEDS = SEED_PROCESSES.map(function(s){
 <script>
 /* ════════════════════════════════════════════════════════════════
    PROMPT PARA IA — copiado pelo botão "🤖 Copiar prompt p/ IA"
-   (versão completa em PROMPT_PARA_IA.md)
+   (versão completa em docs/prompt-ia.md)
    ════════════════════════════════════════════════════════════════ */
 const PROMPT_IA =
 'Você é analista sênior de licitações da SINAPE Sinalização Viária. Analise os documentos anexados (edital, termo de referência, anexos, planilhas, minuta de contrato, carta-convite) e devolva UM ÚNICO JSON válido — nenhum texto antes ou depois — para importação no Painel de Licitações SINAPE.\n' +
@@ -1426,7 +1464,7 @@ function renderListBanner(){
   if(Store.modo==='local'){
     area.innerHTML =
       '<div class="banner-info banner-warn"><span>⚠️ Modo local (sem API configurada): os dados ficam apenas neste navegador. ' +
-      'Para uso colaborativo em tempo real, implante o backend e preencha CONFIG.API_URL — ver GUIA_IMPLANTACAO_AWS.md.</span></div>';
+      'Para uso colaborativo em tempo real, implante o backend e preencha CONFIG.API_URL — ver README.md.</span></div>';
   }
 }
 async function enviarSeeds(){
@@ -1551,7 +1589,7 @@ async function renderAnexos(){
   const area = document.getElementById('anexos-area');
   if(Store.modo !== 'api'){
     area.innerHTML = '<div class="anexos-box"><b>📎 Anexos</b>'+
-      '<p class="hint" style="margin:4px 0 0;">Envio de arquivos exige o backend Docker configurado (CONFIG.API_URL) — ver GUIA_DOCKER.md.</p></div>';
+      '<p class="hint" style="margin:4px 0 0;">Envio de arquivos exige o backend configurado (CONFIG.API_URL) — ver docs/guia-docker.md.</p></div>';
     return;
   }
   area.innerHTML = '<div class="anexos-box"><b>📎 Anexos</b>'+
@@ -2262,8 +2300,164 @@ function fallbackCopy(t){
 }
 
 /* ════════════════════════════════════════════════════════════════
-   INICIALIZAÇÃO
+   PDFs PARA ANÁLISE COM IA (home)
    ════════════════════════════════════════════════════════════════ */
+const IA_PDF_MAX_MB = 25;
+let iaPdfAnexos = [];
+
+function abrirSeletorPdf(){
+  document.getElementById('input-pdf-ia').click();
+}
+
+function _ehPdf(file){
+  const nome = (file.name || '').toLowerCase();
+  return file.type === 'application/pdf' || nome.endsWith('.pdf');
+}
+
+function adicionarPdfs(fileList){
+  if(!fileList || !fileList.length) return;
+  const novos = [];
+  for(const file of fileList){
+    if(!_ehPdf(file)){
+      toast('Só PDF: "' + (file.name || 'arquivo') + '" ignorado.');
+      continue;
+    }
+    if(file.size > IA_PDF_MAX_MB * 1024 * 1024){
+      toast('"' + file.name + '" excede ' + IA_PDF_MAX_MB + ' MB.');
+      continue;
+    }
+    if(iaPdfAnexos.some(x=>x.file.name === file.name && x.file.size === file.size)){
+      continue;
+    }
+    novos.push({
+      id: uid(file.name), file,
+      secoes: null, indice: null, total_paginas: 0,
+      analisando: Store.modo === 'api', erro: ''
+    });
+  }
+  if(!novos.length) return;
+  iaPdfAnexos.push(...novos);
+  renderIaPdfAnexos();
+  novos.forEach(item => analisarPdfAnexo(item));
+}
+
+async function analisarPdfNoServidor(file){
+  const fd = new FormData();
+  fd.append('arquivo', file);
+  const h = {};
+  if(CONFIG.API_TOKEN) h['x-sinape-token'] = CONFIG.API_TOKEN;
+  const res = await fetch(Store.base + '/pdf/secoes', {
+    method: 'POST', headers: h, credentials: 'same-origin', body: fd
+  });
+  if(res.status === 401){
+    const body = await res.json().catch(()=>({}));
+    if(String(body.erro||'').toLowerCase().includes('autenticado')){
+      window.location.href = '/login';
+      throw new Error('Faça login para continuar');
+    }
+    throw new Error('Token inválido');
+  }
+  const body = await res.json().catch(()=>({}));
+  if(!res.ok) throw new Error(body.erro || ('Servidor respondeu ' + res.status));
+  return body;
+}
+
+async function analisarPdfAnexo(item){
+  if(Store.modo !== 'api'){
+    item.analisando = false;
+    return;
+  }
+  try{
+    const r = await analisarPdfNoServidor(item.file);
+    item.secoes = r.secoes || [];
+    item.indice = r.indice || {};
+    item.total_paginas = r.total_paginas || 0;
+    item.erro = '';
+    const n = item.secoes.length;
+    toast((n ? n + ' seção(ões) detectada(s)' : 'Nenhuma seção em negrito/CAPS') + ' em "' + item.file.name + '"');
+  }catch(e){
+    item.erro = e.message || 'Falha na análise';
+    toast('Erro ao analisar "' + item.file.name + '": ' + item.erro);
+  }finally{
+    item.analisando = false;
+    renderIaPdfAnexos();
+  }
+}
+
+function _resumoSecoesPdf(item){
+  if(item.analisando) return 'Identificando seções…';
+  if(item.erro) return 'Erro: ' + item.erro;
+  if(Store.modo !== 'api') return 'Mapa de seções disponível com API ativa';
+  const n = (item.secoes || []).length;
+  if(!n) return 'Nenhuma seção em negrito + CAPS detectada';
+  const pag = item.total_paginas || '?';
+  return n + ' seção(ões) · ' + pag + ' página(s) — pronto para envio otimizado à IA';
+}
+
+function removerPdfAnexo(id){
+  iaPdfAnexos = iaPdfAnexos.filter(x=>x.id !== id);
+  renderIaPdfAnexos();
+}
+
+function renderIaPdfAnexos(){
+  const lista = document.getElementById('pdf-list');
+  const vazio = document.getElementById('pdf-empty');
+  if(!iaPdfAnexos.length){
+    lista.innerHTML = '';
+    const el = document.createElement('div');
+    el.className = 'pdf-empty';
+    el.id = 'pdf-empty';
+    el.textContent = 'Nenhum PDF anexado ainda.';
+    lista.appendChild(el);
+    return;
+  }
+  lista.innerHTML = iaPdfAnexos.map(item=>{
+    const f = item.file;
+    const mb = (f.size / 1024 / 1024).toFixed(2);
+    const cls = item.analisando ? ' pdf-item analisando' : ' pdf-item';
+    return '<div class="'+cls.trim()+'">'+
+      '<span class="pdf-icon">📄</span>'+
+      '<div class="pdf-info">'+
+        '<div class="pdf-nome">'+esc(f.name)+'</div>'+
+        '<div class="pdf-meta">'+mb+' MB</div>'+
+        '<div class="pdf-secoes">'+esc(_resumoSecoesPdf(item))+'</div>'+
+      '</div>'+
+      '<button type="button" class="btn-sm danger" onclick="removerPdfAnexo(\''+esc(item.id)+'\')">Remover</button>'+
+    '</div>';
+  }).join('');
+}
+
+function onIaPdfInputChange(ev){
+  adicionarPdfs(ev.target.files);
+  ev.target.value = '';
+}
+
+function setupIaPdfDropzone(){
+  const drop = document.getElementById('pdf-drop');
+  if(!drop) return;
+  ['dragenter','dragover'].forEach(evt=>{
+    drop.addEventListener(evt, e=>{
+      e.preventDefault(); e.stopPropagation();
+      drop.classList.add('dragover');
+    });
+  });
+  ['dragleave','drop'].forEach(evt=>{
+    drop.addEventListener(evt, e=>{
+      e.preventDefault(); e.stopPropagation();
+      drop.classList.remove('dragover');
+    });
+  });
+  drop.addEventListener('drop', e=>{
+    adicionarPdfs(e.dataTransfer && e.dataTransfer.files);
+  });
+  drop.addEventListener('keydown', e=>{
+    if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); abrirSeletorPdf(); }
+  });
+}
+
+/* ════════════════════════════════════════════════════════════════
+   INICIALIZAÇÃO
+   ════════════════════════════════════════════════════════════════ */ */
 async function init(){
   if(Store.modo==='local'){
     setSync('', 'Modo local (sem API)');
@@ -2283,6 +2477,8 @@ async function init(){
   }
   iniciarPolling();
   updateBreadcrumb();
+  setupIaPdfDropzone();
+  renderIaPdfAnexos();
 }
 init();
 </script>

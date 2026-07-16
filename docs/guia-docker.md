@@ -1,6 +1,8 @@
 # Guia de Implantação com Docker — Painel de Processos SINAPE
 
-Este guia substitui a implantação na AWS (ver `GUIA_IMPLANTACAO_AWS.md`, mantido só como referência) por um único container Docker que serve o painel (`index.html`) e a API, mais um container MongoDB para os dados. Os anexos enviados pela equipe ficam salvos em disco, em um volume Docker.
+Este guia substitui a implantação na AWS (ver [guia-aws.md](guia-aws.md), mantido só como referência) por um único container Docker que serve o painel (`index.html`) e a API, mais um container MongoDB para os dados. Os anexos enviados pela equipe ficam salvos em disco, em um volume Docker.
+
+Para deploy na nuvem sem servidor próprio, veja também [guia-render.md](guia-render.md).
 
 **Arquitetura:**
 
