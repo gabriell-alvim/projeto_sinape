@@ -4,10 +4,13 @@ Agente/tarefa agendada que roda todo dia útil às 08:15 (e pode ser rodada manu
 
 ## Integração com o Painel Sinape e o Montador de Dossiê (modo sugestão)
 
-Quando um processo entra na subpasta "05 - Finalizado" do SharePoint, o relatório
-diário passa a ter uma seção "Dossiês Prontos para Montar" sinalizando isso — é
-o sinal de que a documentação de habilitação normalmente já está completa e o
-Montador de Dossiê pode ser rodado para aquele processo.
+Quando um processo entra na subpasta "02 - Em Participação" do SharePoint, o
+relatório diário passa a ter uma seção "Dossiês Prontos para Montar" sinalizando
+isso — é o momento em que a equipe decide participar do certame e a
+documentação de habilitação precisa estar pronta, então o Montador de Dossiê
+pode ser rodado para aquele processo. (Não é o status "05 - Finalizado" — esse
+representa o encerramento do processo/contrato, tarde demais para a montagem
+da habilitação.)
 
 Se `config.json` estiver preenchido (veja `config.exemplo.json`), o agente
 cruza automaticamente esses itens com a lista de processos do Painel Sinape
