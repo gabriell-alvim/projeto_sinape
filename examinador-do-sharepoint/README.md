@@ -17,9 +17,12 @@ cruza automaticamente esses itens com a lista de processos do Painel Sinape
 (por órgão/número do edital) e já cita o `id` correto no relatório — bastando
 abrir aquele processo no Painel e clicar em "📦 Montar Dossiê". Se não
 encontrar com confiança (ou o Painel ainda não estiver configurado), o
-relatório avisa que a checagem precisa ser manual. Em nenhum dos dois casos o
-agente chama o Montador sozinho — a decisão de montar continua sendo sempre
-do usuário.
+relatório avisa que a checagem precisa ser manual.
+
+O clique em "📦 Montar Dossiê" continua sendo a única ação manual para
+disparar a montagem — mas a partir dele, tudo o resto (buscar a pasta certa,
+baixar cada documento, organizar nas pastas certas e compactar) já é 100%
+automático, feito pelo Montador de Dossiê sem mais nenhuma intervenção.
 
 ## Conteúdo deste repositório
 
