@@ -22,13 +22,26 @@ do edital, registrada no Painel. Ele so organiza o que ja esta pronto no
 SharePoint.
 
 Configuracao necessaria (config.json ou variaveis de ambiente):
-    TENANT_ID, CLIENT_ID, CLIENT_SECRET   - app registrado no Azure AD (Graph API)
-    PAINEL_BASE_URL, PAINEL_TOKEN         - API do Painel Sinape
+    PAINEL_BASE_URL, PAINEL_TOKEN         - API do Painel Sinape (sempre)
+
+    Modo Graph API (MODO_LOCAL=false, padrao):
+        TENANT_ID, CLIENT_ID, CLIENT_SECRET   - app registrado no Azure AD
+
+    Modo local (MODO_LOCAL=true) - usa uma pasta do SharePoint ja
+    sincronizada no disco via OneDrive ("Adicionar atalho ao OneDrive" na
+    biblioteca de documentos) em vez do Graph API. Util enquanto o cadastro
+    do app no Azure AD nao estiver liberado (ex: bloqueio de permissao para
+    gerar o Client Secret):
+        ONEDRIVE_RAIZ_SHAREPOINT - caminho local ate a raiz da biblioteca
+            "Documentos" (a mesma pasta que, no Graph API, e a raiz do
+            drive) - ex: "C:\\Users\\usuario\\OneDrive - SINAPE LTDA\\Setor
+            Comercial - Documentos"
 """
 
 import os
 import sys
 import json
+import shutil
 import argparse
 import logging
 from pathlib import Path
@@ -56,10 +69,18 @@ def carregar_config(caminho_config: Optional[str]) -> dict:
         with open(caminho_config, "r", encoding="utf-8") as f:
             cfg = json.load(f)
 
-    chaves = ["TENANT_ID", "CLIENT_ID", "CLIENT_SECRET", "PAINEL_BASE_URL", "PAINEL_TOKEN"]
-    for chave in chaves:
+    todas_chaves = ["TENANT_ID", "CLIENT_ID", "CLIENT_SECRET", "PAINEL_BASE_URL", "PAINEL_TOKEN",
+                    "ONEDRIVE_RAIZ_SHAREPOINT", "MODO_LOCAL"]
+    for chave in todas_chaves:
         if os.environ.get(chave):
             cfg[chave] = os.environ[chave]
+
+    modo_local = str(cfg.get("MODO_LOCAL", "")).lower() in ("1", "true", "sim")
+    cfg["MODO_LOCAL"] = modo_local
+
+    chaves_sempre = ["PAINEL_BASE_URL", "PAINEL_TOKEN"]
+    chaves_modo = ["ONEDRIVE_RAIZ_SHAREPOINT"] if modo_local else ["TENANT_ID", "CLIENT_ID", "CLIENT_SECRET"]
+    chaves = chaves_sempre + chaves_modo
 
     faltando = [k for k in chaves if not cfg.get(k)]
     if faltando:
@@ -204,6 +225,52 @@ def baixar_arquivo(gc: GraphClient, drive_id: str, item_id: str, destino: Path) 
 
 
 # ---------------------------------------------------------------------------
+# Modo local (pasta do SharePoint sincronizada via OneDrive)
+# ---------------------------------------------------------------------------
+
+def caminho_longo(p: Path) -> Path:
+    """Prefixa o caminho com \\\\?\\ (extended-length path do Windows) para
+    contornar o limite de 260 caracteres do MAX_PATH - as pastas do
+    SharePoint sincronizadas via OneDrive facilmente ultrapassam esse limite
+    quando ha varios niveis de subpasta com nomes longos."""
+    s = str(p)
+    if os.name == "nt" and not s.startswith("\\\\?\\"):
+        s = "\\\\?\\" + os.path.abspath(s)
+    return Path(s)
+
+
+def listar_recursivo_local(raiz: Path, caminho_pasta: str) -> list:
+    """Equivalente local a listar_recursivo: varre uma pasta ja sincronizada
+    no disco pelo cliente OneDrive em vez de chamar o Graph API. O acesso a
+    cada arquivo (rglob + stat) e suficiente para o OneDrive baixar o
+    conteudo real sob demanda (Files On-Demand), mesmo que ainda apareca
+    como "so na nuvem" no Explorer."""
+    base = caminho_longo(raiz / caminho_pasta)
+    if not base.is_dir():
+        raise FileNotFoundError(f"pasta nao encontrada localmente: {raiz / caminho_pasta}")
+    resultado = []
+    for item in base.rglob("*"):
+        if item.is_file():
+            resultado.append({
+                "name": item.name,
+                "size": item.stat().st_size,
+                "_caminho_local": item,
+            })
+    return resultado
+
+
+def copiar_arquivo_local(caminho_origem: Path, destino: Path) -> None:
+    destino = caminho_longo(destino)
+    destino.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        shutil.copyfile(caminho_longo(caminho_origem), destino)
+    except OSError:
+        destino.unlink(missing_ok=True)
+        raise
+    log.info(f"Copiado: {destino.name} ({destino.stat().st_size/1024:.0f} KB)")
+
+
+# ---------------------------------------------------------------------------
 # Orquestracao principal
 # ---------------------------------------------------------------------------
 
@@ -213,10 +280,21 @@ def montar_dossie_por_processo(cfg: dict, biblioteca: dict, processo_id: str, sa
     pasta_url = (processo.get("analise") or {}).get("geral_pasta_sharepoint")
     hostname, site_path, caminho_base = parse_pasta_sharepoint(pasta_url)
 
-    token = obter_token(cfg)
-    gc = GraphClient(token)
-    site_id = obter_site_id(gc, hostname, site_path)
-    drive_id = obter_drive_id(gc, site_id)
+    modo_local = cfg.get("MODO_LOCAL", False)
+    gc = drive_id = raiz_local = None
+    if modo_local:
+        raiz_local = Path(cfg["ONEDRIVE_RAIZ_SHAREPOINT"])
+        if not caminho_longo(raiz_local).is_dir():
+            raise SystemExit(
+                f"ONEDRIVE_RAIZ_SHAREPOINT nao existe ou nao e uma pasta: {raiz_local}. "
+                f"Confira se a biblioteca foi sincronizada (\"Adicionar atalho ao OneDrive\" no SharePoint)."
+            )
+        log.info(f"Modo local ativo - lendo arquivos de: {raiz_local}")
+    else:
+        token = obter_token(cfg)
+        gc = GraphClient(token)
+        site_id = obter_site_id(gc, hostname, site_path)
+        drive_id = obter_drive_id(gc, site_id)
 
     mapa_categoria = {c["categoria_painel"]: c for c in biblioteca["categorias"]}
     limite_bytes = int(cfg.get("TAMANHO_MAX_MB", LIMITE_MB_PADRAO)) * 1024 * 1024
@@ -244,8 +322,11 @@ def montar_dossie_por_processo(cfg: dict, biblioteca: dict, processo_id: str, sa
         caminho_sp = f"{caminho_base}/{entry['subpasta_relativa']}"
 
         try:
-            arquivos = listar_recursivo(gc, drive_id, caminho_sp)
-        except requests.HTTPError as e:
+            if modo_local:
+                arquivos = listar_recursivo_local(raiz_local, caminho_sp)
+            else:
+                arquivos = listar_recursivo(gc, drive_id, caminho_sp)
+        except (requests.HTTPError, FileNotFoundError) as e:
             checklist.append(f"[ERRO] {categoria}: nao foi possivel acessar '{caminho_sp}' ({e})")
             continue
 
@@ -256,14 +337,31 @@ def montar_dossie_por_processo(cfg: dict, biblioteca: dict, processo_id: str, sa
         pequenos = [a for a in arquivos if a.get("size", 0) <= limite_bytes]
         grandes = [a for a in arquivos if a.get("size", 0) > limite_bytes]
 
+        falhas = []
+        copiados = 0
         for arq in pequenos:
             destino = pasta_local / arq["name"]
-            baixar_arquivo(gc, drive_id, arq["id"], destino)
+            try:
+                if modo_local:
+                    copiar_arquivo_local(arq["_caminho_local"], destino)
+                else:
+                    baixar_arquivo(gc, drive_id, arq["id"], destino)
+                copiados += 1
+            except OSError as e:
+                falhas.append(arq["name"])
+                log.warning(f"Nao consegui baixar '{arq['name']}' agora ({e}) - "
+                            f"provavel arquivo ainda nao sincronizado no OneDrive.")
 
-        checklist.append(f"[OK] {categoria}: {len(pequenos)} arquivo(s) baixado(s) de '{caminho_sp}'")
+        origem = str(raiz_local / caminho_sp) if modo_local else caminho_sp
+        checklist.append(f"[OK] {categoria}: {copiados} arquivo(s) baixado(s) de '{origem}'")
+        for nome in falhas:
+            checklist.append(
+                f"  [FALHOU AGORA - TENTAR DE NOVO DEPOIS] {nome} "
+                f"(provavel arquivo ainda nao sincronizado localmente pelo OneDrive)"
+            )
         for arq in grandes:
             tamanho_mb = arq.get("size", 0) / (1024 * 1024)
-            link = arq.get("webUrl", "")
+            link = str(arq.get("_caminho_local", "")) if modo_local else arq.get("webUrl", "")
             checklist.append(
                 f"  [GRANDE DEMAIS - NAO BAIXADO] {arq['name']} ({tamanho_mb:.0f} MB) - anexar manualmente: {link}"
             )
