@@ -51,9 +51,10 @@ no Painel Sinape) e clique em "Montar dossiê e baixar .zip".
 ## 4. Antes de enviar
 
 Leia o `CHECKLIST.txt` dentro da pasta gerada — ele lista o que foi
-encontrado, o que está faltando, e quais arquivos ficaram grandes demais
-para entrar automaticamente (ficam listados com link direto do SharePoint
-para você decidir se anexa manualmente).
+encontrado, o que está faltando e o que falhou ao baixar (nesse caso,
+geralmente é um arquivo que o OneDrive ainda não sincronizou localmente —
+tente rodar de novo depois). Não há limite de tamanho: todo arquivo
+encontrado é baixado automaticamente, incluindo os grandes.
 
 ## Pendências conhecidas (ver `biblioteca.json`)
 

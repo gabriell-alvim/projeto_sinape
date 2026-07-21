@@ -10,6 +10,5 @@
   "ONEDRIVE_RAIZ_SHAREPOINT": "C:\\Users\\SEU-USUARIO\\OneDrive - SINAPE LTDA\\Setor Comercial - Documentos",
 
   "PAINEL_BASE_URL": "https://SUA-URL-DO-PAINEL-SINAPE",
-  "PAINEL_TOKEN": "o-mesmo-token-x-sinape-token-usado-no-painel",
-  "TAMANHO_MAX_MB": 20
+  "PAINEL_TOKEN": "o-mesmo-token-x-sinape-token-usado-no-painel"
 }

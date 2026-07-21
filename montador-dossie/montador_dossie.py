@@ -11,9 +11,9 @@ Fluxo (v2 - pos-leitura do edital):
      biblioteca.json para saber a subpasta padrao (dentro da pasta do
      processo) onde a equipe ja deposita a documentacao pronta.
   3. Baixa os arquivos binarios reais dessa subpasta via Microsoft Graph
-     API (app-only / client credentials). Arquivos acima do limite de
-     tamanho NAO sao baixados automaticamente - ficam listados no
-     checklist com o link, para decisao manual.
+     API (app-only / client credentials) ou da pasta local sincronizada
+     via OneDrive, sem limite de tamanho - o download e feito em streaming
+     para nao estourar memoria com arquivos grandes.
   4. Organiza tudo em pastas letradas (A, B, C...) e gera um CHECKLIST.txt.
   5. Compacta em .zip.
 
@@ -56,7 +56,6 @@ log = logging.getLogger("montador_dossie")
 
 GRAPH_BASE = "https://graph.microsoft.com/v1.0"
 GRAPH_SCOPE = ["https://graph.microsoft.com/.default"]
-LIMITE_MB_PADRAO = 20
 
 
 # ---------------------------------------------------------------------------
@@ -88,7 +87,6 @@ def carregar_config(caminho_config: Optional[str]) -> dict:
             f"Configuracao incompleta. Faltando: {', '.join(faltando)}. "
             f"Preencha config.json (veja config.exemplo.json) ou defina as variaveis de ambiente."
         )
-    cfg.setdefault("TAMANHO_MAX_MB", LIMITE_MB_PADRAO)
     return cfg
 
 
@@ -177,6 +175,14 @@ class GraphClient:
         resp.raise_for_status()
         return resp.content
 
+    def get_stream(self, url: str, destino: Path) -> None:
+        with self.session.get(url, stream=True) as resp:
+            resp.raise_for_status()
+            destino.parent.mkdir(parents=True, exist_ok=True)
+            with open(destino, "wb") as f:
+                for chunk in resp.iter_content(chunk_size=1024 * 1024):
+                    f.write(chunk)
+
 
 def obter_site_id(gc: GraphClient, hostname: str, site_path: str) -> str:
     dados = gc.get(f"{GRAPH_BASE}/sites/{hostname}:{site_path}")
@@ -218,10 +224,12 @@ def listar_recursivo(gc: GraphClient, drive_id: str, caminho_pasta: str) -> list
 
 
 def baixar_arquivo(gc: GraphClient, drive_id: str, item_id: str, destino: Path) -> None:
-    conteudo = gc.get_binario(f"{GRAPH_BASE}/drives/{drive_id}/items/{item_id}/content")
-    destino.parent.mkdir(parents=True, exist_ok=True)
-    destino.write_bytes(conteudo)
-    log.info(f"Baixado: {destino.name} ({len(conteudo)/1024:.0f} KB)")
+    try:
+        gc.get_stream(f"{GRAPH_BASE}/drives/{drive_id}/items/{item_id}/content", destino)
+    except requests.RequestException:
+        destino.unlink(missing_ok=True)
+        raise
+    log.info(f"Baixado: {destino.name} ({destino.stat().st_size/1024:.0f} KB)")
 
 
 # ---------------------------------------------------------------------------
@@ -297,7 +305,6 @@ def montar_dossie_por_processo(cfg: dict, biblioteca: dict, processo_id: str, sa
         drive_id = obter_drive_id(gc, site_id)
 
     mapa_categoria = {c["categoria_painel"]: c for c in biblioteca["categorias"]}
-    limite_bytes = int(cfg.get("TAMANHO_MAX_MB", LIMITE_MB_PADRAO)) * 1024 * 1024
 
     saida_dir.mkdir(parents=True, exist_ok=True)
     checklist = [
@@ -334,12 +341,9 @@ def montar_dossie_por_processo(cfg: dict, biblioteca: dict, processo_id: str, sa
             checklist.append(f"[FALTANDO] {categoria}: nenhum arquivo encontrado em '{caminho_sp}'")
             continue
 
-        pequenos = [a for a in arquivos if a.get("size", 0) <= limite_bytes]
-        grandes = [a for a in arquivos if a.get("size", 0) > limite_bytes]
-
         falhas = []
         copiados = 0
-        for arq in pequenos:
+        for arq in arquivos:
             destino = pasta_local / arq["name"]
             try:
                 if modo_local:
@@ -347,7 +351,7 @@ def montar_dossie_por_processo(cfg: dict, biblioteca: dict, processo_id: str, sa
                 else:
                     baixar_arquivo(gc, drive_id, arq["id"], destino)
                 copiados += 1
-            except OSError as e:
+            except (OSError, requests.RequestException) as e:
                 falhas.append(arq["name"])
                 log.warning(f"Nao consegui baixar '{arq['name']}' agora ({e}) - "
                             f"provavel arquivo ainda nao sincronizado no OneDrive.")
@@ -358,12 +362,6 @@ def montar_dossie_por_processo(cfg: dict, biblioteca: dict, processo_id: str, sa
             checklist.append(
                 f"  [FALHOU AGORA - TENTAR DE NOVO DEPOIS] {nome} "
                 f"(provavel arquivo ainda nao sincronizado localmente pelo OneDrive)"
-            )
-        for arq in grandes:
-            tamanho_mb = arq.get("size", 0) / (1024 * 1024)
-            link = str(arq.get("_caminho_local", "")) if modo_local else arq.get("webUrl", "")
-            checklist.append(
-                f"  [GRANDE DEMAIS - NAO BAIXADO] {arq['name']} ({tamanho_mb:.0f} MB) - anexar manualmente: {link}"
             )
 
     checklist_path = saida_dir / "CHECKLIST.txt"
