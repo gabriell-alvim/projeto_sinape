@@ -313,6 +313,20 @@ input, select, textarea { font-family:inherit; }
   .field.span2 { grid-column:auto; }
   .breadcrumb { display:none; }
 }
+
+/* ── MODO ACESSIBILIDADE (navegação numérica opt-in p/ NVDA) ── */
+.a11y-num {
+  position:absolute; top:6px; left:6px; z-index:5;
+  background:var(--teal); color:#fff; font-weight:800; font-size:.72rem;
+  width:20px; height:20px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 1px 4px rgba(0,0,0,.3); pointer-events:none;
+}
+.a11y-selecionado { outline:3px solid var(--teal-mid) !important; outline-offset:2px; }
+.sr-only {
+  position:absolute; width:1px; height:1px; overflow:hidden;
+  clip:rect(0,0,0,0); white-space:nowrap; border:0; padding:0; margin:-1px;
+}
 </style>
 </head>
 <body>
@@ -485,6 +499,7 @@ input, select, textarea { font-family:inherit; }
 </div>
 
 <div id="toast"></div>
+<div id="a11y-anuncio" class="sr-only" aria-live="assertive" role="status"></div>
 
 <script>
 /* ════════════════════════════════════════════════════════════════
@@ -1408,7 +1423,7 @@ function showView(id){
   document.getElementById(id).classList.add('active');
   updateBreadcrumb();
 }
-function goHome(){ currentType=null; currentProc=null; showView('view-home'); refreshHomeCounts(); }
+function goHome(){ currentType=null; currentProc=null; showView('view-home'); refreshHomeCounts(); a11yAtualizarItens(); }
 function openList(type){
   currentType = type; currentProc = null;
   document.getElementById('list-title').textContent = type==='publico' ? '🏛️ Processos Públicos' : '🏢 Processos Privados';
@@ -1472,6 +1487,7 @@ function renderProcessGrid(){
     grid.appendChild(card);
   });
   renderListBanner();
+  a11yAtualizarItens();
 }
 function renderListBanner(){
   const area = document.getElementById('list-banner-area');
@@ -1579,6 +1595,7 @@ async function openProcess(id){
   buildExigencias();
   buildChecklist();
   setSaveStatus('Pronto','');
+  a11yAtualizarItens();
 }
 function switchProcessTab(tab){
   document.getElementById('tab-analise').classList.toggle('active', tab==='analise');
@@ -1587,6 +1604,7 @@ function switchProcessTab(tab){
   document.getElementById('panel-analise').classList.toggle('active', tab==='analise');
   document.getElementById('panel-exigencias').classList.toggle('active', tab==='exigencias');
   document.getElementById('panel-checklist').classList.toggle('active', tab==='checklist');
+  a11yAtualizarItens();
 }
 function renderSourceBanner(){
   const area = document.getElementById('source-banner-area');
@@ -2429,6 +2447,125 @@ async function executarAnaliseAgora(){
 }
 
 /* ════════════════════════════════════════════════════════════════
+   MODO ACESSIBILIDADE — navegação numérica opt-in p/ NVDA (Insert+Alt+L)
+   Não altera a experiência de quem não ativa. Numera de 1 a 9 as opções
+   da tela (abas, botões de ação, cards de menu/lista); páginas de 9 em 9
+   quando há mais itens; suspende automaticamente dentro de campos editáveis.
+   ════════════════════════════════════════════════════════════════ */
+const A11Y = { ativo: localStorage.getItem('sinape:a11y')==='1', foco:null, pagina:0, todosItens:[], itensAtuais:[], avisoCampoDado:false };
+let a11yInsertPressionado = false;
+
+function a11yAnunciar(msg){
+  const el = document.getElementById('a11y-anuncio');
+  el.textContent = '';
+  setTimeout(()=>{ el.textContent = msg; }, 30);
+}
+function a11yEstaEmCampoEditavel(el){
+  if(!el) return false;
+  const tag = el.tagName;
+  return tag==='INPUT' || tag==='TEXTAREA' || tag==='SELECT' || el.isContentEditable;
+}
+function a11yToggle(){
+  A11Y.ativo = !A11Y.ativo;
+  localStorage.setItem('sinape:a11y', A11Y.ativo ? '1' : '0');
+  A11Y.foco = null; A11Y.pagina = 0;
+  a11yAnunciar(A11Y.ativo ? 'Modo acessibilidade ativado. Navegação numérica disponível.' : 'Modo acessibilidade desativado.');
+  a11yAtualizarItens();
+}
+/* recalcula os itens navegáveis da tela atual — chamado após toda troca de tela/re-render */
+function a11yAtualizarItens(){
+  document.querySelectorAll('.a11y-num').forEach(n=>n.remove());
+  A11Y.todosItens = [];
+  if(!A11Y.ativo){ A11Y.itensAtuais = []; return; }
+
+  if(document.getElementById('view-home').classList.contains('active')){
+    A11Y.todosItens = [
+      {el: document.querySelector('.home-card[onclick*="publico"]'), label:'Processos Públicos'},
+      {el: document.querySelector('.home-card[onclick*="privado"]'), label:'Processos Privados'},
+      {el: document.getElementById('btn-atualizacoes-dia'), label:'Atualizações do dia'},
+      {el: document.querySelector('.home-actions .btn-outline'), label:'Copiar prompt para IA'}
+    ].filter(i=>i.el);
+  } else if(document.getElementById('view-list').classList.contains('active')){
+    A11Y.todosItens = Array.from(document.querySelectorAll('#process-grid .proc-card'))
+      .map(c=>({el:c, label:(c.querySelector('.pc-nome')?.textContent)||'Processo'}));
+  } else if(document.getElementById('view-process').classList.contains('active')){
+    A11Y.todosItens = [
+      {el: document.getElementById('tab-analise'), label:'Aba Análise Crítica'},
+      {el: document.getElementById('tab-exigencias'), label:'Aba Exigências'},
+      {el: document.getElementById('tab-checklist'), label:'Aba Checklist do Edital'},
+      {el: document.getElementById('btn-montar-dossie'), label:'Montar dossiê de habilitação'}
+    ].filter(i=>i.el);
+  }
+  A11Y.pagina = Math.min(A11Y.pagina, Math.max(0, Math.ceil(A11Y.todosItens.length/9)-1));
+  a11yRenderizarPagina();
+}
+function a11yRenderizarPagina(){
+  document.querySelectorAll('.a11y-num').forEach(n=>n.remove());
+  if(!A11Y.ativo){ A11Y.itensAtuais = []; return; }
+  const inicio = A11Y.pagina*9;
+  A11Y.itensAtuais = A11Y.todosItens.slice(inicio, inicio+9);
+  A11Y.itensAtuais.forEach((item,i)=>{
+    item.el.tabIndex = -1;
+    if(getComputedStyle(item.el).position==='static') item.el.style.position = 'relative';
+    const badge = document.createElement('span');
+    badge.className = 'a11y-num';
+    badge.textContent = String(i+1);
+    badge.setAttribute('aria-hidden','true');
+    item.el.appendChild(badge);
+  });
+  const totalPaginas = Math.max(1, Math.ceil(A11Y.todosItens.length/9));
+  if(totalPaginas>1) a11yAnunciar('Página '+(A11Y.pagina+1)+' de '+totalPaginas+'. Opções de 1 a '+A11Y.itensAtuais.length+'.');
+}
+function a11yProximaPagina(){
+  const totalPaginas = Math.max(1, Math.ceil(A11Y.todosItens.length/9));
+  if(A11Y.pagina < totalPaginas-1){ A11Y.pagina++; A11Y.foco=null; a11yRenderizarPagina(); }
+}
+function a11yPaginaAnterior(){
+  if(A11Y.pagina>0){ A11Y.pagina--; A11Y.foco=null; a11yRenderizarPagina(); }
+}
+function a11ySelecionar(n){
+  const total = A11Y.itensAtuais.length;
+  if(n<1 || n>total){ a11yAnunciar('As opções disponíveis vão até '+total+'.'); return; }
+  if(A11Y.foco===n){ a11yAtivarItem(n); return; }
+  A11Y.foco = n;
+  document.querySelectorAll('.a11y-selecionado').forEach(el=>el.classList.remove('a11y-selecionado'));
+  const item = A11Y.itensAtuais[n-1];
+  item.el.classList.add('a11y-selecionado');
+  item.el.focus();
+  item.el.scrollIntoView({block:'center', behavior:'smooth'});
+  a11yAnunciar('Opção '+n+' de '+total+': '+item.label+'. Pressione Enter ou '+n+' novamente para abrir.');
+}
+function a11yAtivarItem(n){
+  const item = A11Y.itensAtuais[n-1];
+  A11Y.foco = null;
+  if(item) item.el.click();
+}
+document.addEventListener('keydown', function(e){
+  if(e.key==='Insert') a11yInsertPressionado = true;
+  if(a11yInsertPressionado && e.altKey && (e.key==='l' || e.key==='L')){
+    e.preventDefault(); a11yToggle(); return;
+  }
+  if(!A11Y.ativo) return;
+  if(a11yEstaEmCampoEditavel(document.activeElement)) return;
+  if(e.key>='1' && e.key<='9' && !e.altKey && !e.ctrlKey && !e.metaKey){
+    e.preventDefault(); a11ySelecionar(parseInt(e.key,10)); return;
+  }
+  if(e.key==='Enter' && A11Y.foco){ e.preventDefault(); a11yAtivarItem(A11Y.foco); return; }
+  if(e.code==='NumpadDecimal'){ e.preventDefault(); a11yProximaPagina(); return; }
+  if(e.code==='Numpad0'){ e.preventDefault(); a11yPaginaAnterior(); return; }
+});
+document.addEventListener('keyup', function(e){ if(e.key==='Insert') a11yInsertPressionado = false; });
+document.addEventListener('focusin', function(e){
+  if(!A11Y.ativo) return;
+  if(a11yEstaEmCampoEditavel(e.target)){
+    A11Y.foco = null;
+    if(!A11Y.avisoCampoDado){ A11Y.avisoCampoDado = true; a11yAnunciar('Campo editável. Navegação numérica temporariamente suspensa.'); }
+  } else {
+    A11Y.avisoCampoDado = false;
+  }
+});
+
+/* ════════════════════════════════════════════════════════════════
    INICIALIZAÇÃO
    ════════════════════════════════════════════════════════════════ */
 async function init(){
@@ -2450,6 +2587,7 @@ async function init(){
   }
   iniciarPolling();
   updateBreadcrumb();
+  a11yAtualizarItens();
   if(!CONFIG.USUARIO) abrirModal('modal-usuario');
 }
 init();
