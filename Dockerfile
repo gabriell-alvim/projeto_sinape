@@ -5,7 +5,8 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY app.py index.html login.html ./
+COPY app.py index.html login.html prompt_ia.txt ./
+COPY montador-dossie/ ./montador-dossie/
 
 RUN mkdir -p /app/uploads
 ENV UPLOAD_DIR=/app/uploads

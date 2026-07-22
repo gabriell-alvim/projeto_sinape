@@ -11,6 +11,12 @@ services:
       MONGO_URL: mongodb://sinape:${MONGO_PASSWORD}@db:27017/?authSource=admin
       UPLOAD_DIR: /app/uploads
       MAX_UPLOAD_MB: ${MAX_UPLOAD_MB:-25}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      MONTADOR_MODO_LOCAL: ${MONTADOR_MODO_LOCAL:-}
+      MONTADOR_TENANT_ID: ${MONTADOR_TENANT_ID:-}
+      MONTADOR_CLIENT_ID: ${MONTADOR_CLIENT_ID:-}
+      MONTADOR_CLIENT_SECRET: ${MONTADOR_CLIENT_SECRET:-}
+      MONTADOR_ONEDRIVE_RAIZ: ${MONTADOR_ONEDRIVE_RAIZ:-}
     volumes:
       - uploads:/app/uploads
     depends_on:
