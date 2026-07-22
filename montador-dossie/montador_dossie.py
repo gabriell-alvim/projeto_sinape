@@ -39,11 +39,14 @@ Configuracao necessaria (config.json ou variaveis de ambiente):
 """
 
 import os
+import re
 import sys
 import json
 import shutil
 import argparse
 import logging
+import unicodedata
+from datetime import date
 from pathlib import Path
 from typing import Optional
 from urllib.parse import urlparse, unquote
@@ -279,11 +282,252 @@ def copiar_arquivo_local(caminho_origem: Path, destino: Path) -> None:
 
 
 # ---------------------------------------------------------------------------
+# Biblioteca v2 - fontes centrais + regras de vigencia
+# (ver PROPOSTA - Biblioteca v2 (repositorio real).md)
+# ---------------------------------------------------------------------------
+
+PASTAS_ARQUIVO_MORTO = {
+    "obsoleto", "obsoletos", "anterior", "anteriores", "antiga", "antigas",
+    "antigos", "descartar", "old", "baixados",
+}
+
+_RE_INTERVALO = re.compile(r"(\d{1,2})\.(\d{1,2})(?:\.(\d{2,4}))?\s*[-–]\s*(\d{1,2})\.(\d{1,2})(?:\.(\d{2,4}))?")
+_RE_UNICA = re.compile(r"(\d{1,2})\.(\d{1,2})\.(\d{2,4})")
+
+
+def _sem_acento(s: str) -> str:
+    s = unicodedata.normalize("NFD", s)
+    return "".join(c for c in s if unicodedata.category(c) != "Mn").lower().strip()
+
+
+def _mkdate(d, mo, y):
+    try:
+        d, mo = int(d), int(mo)
+        if y is None:
+            yr = date.today().year
+        else:
+            y = int(y)
+            yr = 2000 + y if y < 100 else y
+        return date(yr, mo, d)
+    except (ValueError, TypeError):
+        return None
+
+
+def _validade(nome: str):
+    """Data de VALIDADE confiavel para alerta de vencimento: apenas a 2a data
+    do intervalo DD.MM - DD.MM (emissao-validade). Datas unicas no nome
+    costumam ser data de EMISSAO/consulta (ex.: Sicaf, certidoes de aprendiz),
+    entao NAO viram alerta de vencimento. Retorna date ou None."""
+    m = _RE_INTERVALO.search(nome)
+    if m:
+        return _mkdate(m.group(4), m.group(5), m.group(6))
+    return None
+
+
+def _data_ordenacao(nome: str):
+    """Data para escolher a versao mais recente (frescor): 2a data do intervalo
+    ou a data unica. Usada so para ordenar/desempatar, nao para alerta."""
+    m = _RE_INTERVALO.search(nome)
+    if m:
+        return _mkdate(m.group(4), m.group(5), m.group(6))
+    m = _RE_UNICA.search(nome)
+    if m:
+        return _mkdate(m.group(1), m.group(2), m.group(3))
+    return None
+
+
+def _tipo_key(nome: str) -> str:
+    """Chave do 'tipo' do documento = nome sem as datas e sem extensao,
+    para agrupar versoes do mesmo documento (ex.: varias 'Reg Estadual GO')."""
+    base = re.sub(r"\.[A-Za-z0-9]+$", "", nome)
+    base = _RE_INTERVALO.sub("", base)
+    base = _RE_UNICA.sub("", base)
+    base = re.sub(r"[-–]", " ", base)
+    base = re.sub(r"\s+", " ", base)
+    return _sem_acento(base)
+
+
+def _selecionar_vigencia(arquivos: list, vigencia: str):
+    """Aplica a regra de vigencia. arquivos: dicts com 'name' e '_rel_parts'
+    (subpastas entre a raiz da fonte e o arquivo). Retorna (escolhidos, avisos)
+    onde avisos = lista de (nome, validade) de documentos possivelmente vencidos."""
+    vivos = [a for a in arquivos
+             if not any(_sem_acento(p) in PASTAS_ARQUIVO_MORTO for p in a.get("_rel_parts", []))]
+
+    if vigencia == "atual_mais_recente":
+        grupos = {}
+        for a in vivos:
+            grupos.setdefault(_tipo_key(a["name"]), []).append(a)
+        escolhidos = []
+        for its in grupos.values():
+            its.sort(key=lambda a: (_data_ordenacao(a["name"]) or date.min), reverse=True)
+            escolhidos.append(its[0])
+    else:  # "todos" (ou desconhecido -> nao filtra)
+        escolhidos = vivos
+
+    hoje = date.today()
+    avisos = [(a["name"], _validade(a["name"])) for a in escolhidos
+              if _validade(a["name"]) and _validade(a["name"]) < hoje]
+    return escolhidos, avisos
+
+
+def _listar_fonte(modo_local, gc, drive_id, raiz_local, caminho):
+    """Lista recursivamente os arquivos de uma pasta (Graph API ou local),
+    anexando '_rel_parts' (subpastas entre a raiz da fonte e o arquivo)."""
+    if modo_local:
+        base = caminho_longo(raiz_local / caminho)
+        registros = []
+        if not base.is_dir():
+            raise FileNotFoundError(caminho)
+        for item in base.rglob("*"):
+            if item.is_file():
+                rel_parts = list(item.relative_to(base).parts[:-1])
+                registros.append({
+                    "name": item.name, "size": item.stat().st_size,
+                    "_caminho_local": item, "_rel_parts": rel_parts,
+                })
+        return registros
+    else:
+        itens = listar_recursivo(gc, drive_id, caminho)
+        for it in itens:
+            pasta = it.get("_caminho_pasta", "")
+            rel = pasta[len(caminho):].strip("/") if pasta.startswith(caminho) else ""
+            it["_rel_parts"] = [p for p in rel.split("/") if p]
+        return itens
+
+
+def _listar_subpastas(modo_local, gc, drive_id, raiz_local, caminho):
+    """Nomes das subpastas diretas de um caminho (para achar o ano do balanco)."""
+    if modo_local:
+        base = caminho_longo(raiz_local / caminho)
+        if not base.is_dir():
+            return []
+        return [d.name for d in base.iterdir() if d.is_dir()]
+    try:
+        itens = listar_itens_pasta(gc, drive_id, caminho)
+    except requests.HTTPError:
+        return []
+    return [it["name"] for it in itens if "folder" in it]
+
+
+def _baixar_registro(modo_local, gc, drive_id, arq, destino):
+    if modo_local:
+        copiar_arquivo_local(arq["_caminho_local"], destino)
+    else:
+        baixar_arquivo(gc, drive_id, arq["id"], destino)
+
+
+def _destino_unico(pasta: Path, nome: str) -> Path:
+    """Evita sobrescrever quando duas fontes trazem arquivos de mesmo nome."""
+    destino = pasta / nome
+    if not destino.exists():
+        return destino
+    tronco = destino.stem
+    ext = destino.suffix
+    i = 2
+    while (pasta / f"{tronco} ({i}){ext}").exists():
+        i += 1
+    return pasta / f"{tronco} ({i}){ext}"
+
+
+def _montar_v2(biblioteca, processo, caminho_base, saida_dir, checklist,
+               modo_local, gc, drive_id, raiz_local):
+    """Monta o dossie usando o schema v2 (fontes centrais + vigencia)."""
+    raiz_central = biblioteca.get("_raiz_central", "2 - LICITACAO/05.03 - Documentos Atualizados")
+    analise = processo.get("analise") or {}
+    uf = (analise.get("geral_uf") or "SP").strip().upper()
+    empresa = (analise.get("geral_empresa") or "Sinape").strip()
+
+    # ano do balanco = subpasta numerica mais recente da contabilidade
+    contabil = f"{raiz_central}/04 - Qualificação Econômica/SP/Contábil"
+    anos = [int(n) for n in _listar_subpastas(modo_local, gc, drive_id, raiz_local, contabil) if n.isdigit()]
+    ano_balanco = str(max(anos)) if anos else str(date.today().year)
+
+    ctx = {"uf": uf, "empresa": empresa, "ano_balanco": ano_balanco}
+
+    def resolver(fonte):
+        def sub(s):
+            for k, v in ctx.items():
+                s = s.replace("{" + k + "}", v)
+            return s
+        origem = fonte.get("origem")
+        if origem == "central":
+            return f"{raiz_central}/{sub(fonte['caminho'])}"
+        if origem == "comercial":
+            return sub(fonte["caminho"])
+        if origem == "processo":
+            return f"{caminho_base}/{sub(fonte.get('caminho_relativo_processo', ''))}"
+        return sub(fonte.get("caminho", ""))
+
+    checklist.append(f"Contexto: UF={uf} | Empresa={empresa} | Ano do balanco={ano_balanco}")
+    checklist.append("")
+
+    for categoria in biblioteca["categorias"]:
+        nome_cat = categoria["categoria_painel"]
+        letra = categoria.get("letra_zip") or "X"
+        pasta_local = saida_dir / f"{letra} - {nome_cat}"
+        checklist.append(f"### {letra} - {nome_cat}")
+
+        falhas, avisos = [], []
+        for fonte in categoria.get("fontes", []):
+            desc = fonte.get("descricao", "(sem descricao)")
+            for k, v in ctx.items():
+                desc = desc.replace("{" + k + "}", v)
+            vig = fonte.get("vigencia", "todos")
+            caminho = resolver(fonte)
+
+            if vig == "manual":
+                try:
+                    disp = _listar_fonte(modo_local, gc, drive_id, raiz_local, caminho)
+                    vivos, _ = _selecionar_vigencia(disp, "todos")
+                    checklist.append(
+                        f"  [SELECAO MANUAL] {desc}: {len(vivos)} arquivo(s) disponivel(is) "
+                        f"em '{caminho}' - escolher os compativeis com o objeto do edital.")
+                except (requests.HTTPError, FileNotFoundError):
+                    checklist.append(f"  [SELECAO MANUAL] {desc}: pasta '{caminho}' nao encontrada.")
+                continue
+
+            try:
+                arquivos = _listar_fonte(modo_local, gc, drive_id, raiz_local, caminho)
+            except (requests.HTTPError, FileNotFoundError) as e:
+                checklist.append(f"  [ERRO] {desc}: nao acessei '{caminho}' ({type(e).__name__}).")
+                continue
+
+            escolhidos, av = _selecionar_vigencia(arquivos, vig)
+            avisos.extend(av)
+            if not escolhidos:
+                checklist.append(f"  [FALTANDO] {desc}: nenhum arquivo em '{caminho}'.")
+                continue
+
+            copiados = 0
+            for arq in escolhidos:
+                destino = _destino_unico(pasta_local, arq["name"])
+                try:
+                    _baixar_registro(modo_local, gc, drive_id, arq, destino)
+                    copiados += 1
+                except (OSError, requests.RequestException):
+                    falhas.append(arq["name"])
+            checklist.append(f"  [OK] {desc}: {copiados} arquivo(s) de '{caminho}'.")
+
+        for nome, val in avisos:
+            v = val.strftime("%d/%m/%Y") if val else "?"
+            checklist.append(f"     [VENCIDO? CONFERIR] {nome} (validade {v})")
+        for nome in falhas:
+            checklist.append(f"     [FALHOU AGORA - TENTAR DE NOVO] {nome}")
+        checklist.append("")
+
+
+# ---------------------------------------------------------------------------
 # Orquestracao principal
 # ---------------------------------------------------------------------------
 
-def montar_dossie_por_processo(cfg: dict, biblioteca: dict, processo_id: str, saida_dir: Path) -> Path:
-    processo = buscar_processo(cfg, processo_id)
+def montar_dossie_por_processo(cfg: dict, biblioteca: dict, processo_id: str, saida_dir: Path,
+                                processo_preload: Optional[dict] = None) -> Path:
+    """Se processo_preload for informado (ex.: o Painel ja tem o documento em
+    mao, vindo do Mongo), usa ele diretamente em vez de buscar no Painel via
+    HTTP - evita uma chamada auto-referente quando o Montador roda integrado
+    ao proprio backend do Painel."""
+    processo = processo_preload if processo_preload is not None else buscar_processo(cfg, processo_id)
     nome_processo = processo.get("nome") or processo_id
     pasta_url = (processo.get("analise") or {}).get("geral_pasta_sharepoint")
     hostname, site_path, caminho_base = parse_pasta_sharepoint(pasta_url)
@@ -304,8 +548,6 @@ def montar_dossie_por_processo(cfg: dict, biblioteca: dict, processo_id: str, sa
         site_id = obter_site_id(gc, hostname, site_path)
         drive_id = obter_drive_id(gc, site_id)
 
-    mapa_categoria = {c["categoria_painel"]: c for c in biblioteca["categorias"]}
-
     saida_dir.mkdir(parents=True, exist_ok=True)
     checklist = [
         f"CHECKLIST DE MONTAGEM - {nome_processo}",
@@ -313,6 +555,19 @@ def montar_dossie_por_processo(cfg: dict, biblioteca: dict, processo_id: str, sa
         "=" * 70,
         "",
     ]
+
+    usa_v2 = any("fontes" in c for c in biblioteca.get("categorias", []))
+    if usa_v2:
+        _montar_v2(biblioteca, processo, caminho_base, saida_dir, checklist,
+                   modo_local, gc, drive_id, raiz_local)
+        checklist_path = saida_dir / "CHECKLIST.txt"
+        checklist_path.write_text("\n".join(checklist), encoding="utf-8")
+        log.info(f"Checklist gerado em {checklist_path}")
+        zip_destino = saida_dir.parent / f"{saida_dir.name}.zip"
+        compactar_dossie(saida_dir, zip_destino)
+        return zip_destino
+
+    mapa_categoria = {c["categoria_painel"]: c for c in biblioteca["categorias"]}
 
     categorias = categorias_exigidas(processo)
     if not categorias:

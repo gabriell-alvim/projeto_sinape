@@ -203,6 +203,18 @@ input, select, textarea { font-family:inherit; }
 .auto-filled { background:var(--violet-l) !important; border-color:#c4b5fd !important; }
 .field .hint-ia { font-size:.64rem; color:var(--violet); }
 
+/* ── BARRA DE AÇÕES DO PROCESSO (abaixo das abas) ── */
+.process-actions { display:flex; align-items:center; gap:12px; flex-wrap:wrap; padding:12px 0 2px; }
+.btn-dossie {
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--teal); color:#fff; border:none; border-radius:9px;
+  padding:10px 18px; font-size:.86rem; font-weight:800; cursor:pointer;
+  box-shadow:0 2px 8px rgba(13,92,99,.18); transition:background .15s;
+}
+.btn-dossie:hover { background:var(--teal-mid); }
+.btn-dossie:disabled { opacity:.6; cursor:default; box-shadow:none; }
+.dossie-hint { font-size:.72rem; color:var(--slate-mid); }
+
 /* ── TABELAS EDITÁVEIS ── */
 .tbl-wrap { overflow-x:auto; margin-top:8px; border:1px solid var(--border); border-radius:8px; }
 .edit-table { width:100%; border-collapse:collapse; font-size:.76rem; min-width:640px; }
@@ -366,6 +378,10 @@ input, select, textarea { font-family:inherit; }
       <button class="main-tab active" id="tab-analise" onclick="switchProcessTab('analise')">📋 Análise Crítica</button>
       <button class="main-tab" id="tab-exigencias" onclick="switchProcessTab('exigencias')">📑 Exigências</button>
       <button class="main-tab" id="tab-checklist" onclick="switchProcessTab('checklist')">✅ Checklist do Edital</button>
+    </div>
+    <div class="process-actions">
+      <button class="btn-dossie" id="btn-montar-dossie" onclick="montarDossie()">📦 Montar dossiê de habilitação</button>
+      <span class="dossie-hint" id="dossie-hint">Baixa e organiza a documentação de habilitação do processo em um arquivo .zip.</span>
     </div>
     <div id="source-banner-area"></div>
     <div id="anexos-area"></div>
@@ -1608,25 +1624,34 @@ function setFilter(f){
 function toggleSec(head){ head.closest('.sec-card').classList.toggle('collapsed'); }
 
 /* ── campos ── */
+let _fldSeq = 0;
 function fieldHTML(c, ocultos){
   if(ocultos && ocultos.includes(c.key)) return '';
-  let inner = '';
+  const fid = 'fld-' + (++_fldSeq);
   const ph = esc(c.placeholder||'');
+  const phAttr = ph ? ' placeholder="'+ph+'"' : '';
+  // Acessibilidade: o campo precisa de um NOME proprio (label associado ou
+  // aria-label) para o leitor de tela nao usar o placeholder (o "Ex.:...")
+  // como nome do campo.
+  const nomeAcess = c.label || c.divisorAntes || '';
+  const ariaAttr = (!c.label && nomeAcess) ? ' aria-label="'+esc(nomeAcess)+'"' : '';
+  let inner = '';
   if(c.tipo==='select'){
-    inner = '<select data-key="'+esc(c.key)+'">' + (c.opcoes||[]).map(o=>{
+    inner = '<select id="'+fid+'" data-key="'+esc(c.key)+'"'+ariaAttr+'>' + (c.opcoes||[]).map(o=>{
       const v = (o && o.value!==undefined) ? o.value : o;
       const l = (o && o.label!==undefined) ? o.label : o;
       return '<option value="'+esc(v)+'">'+esc(l||'Selecionar...')+'</option>';
     }).join('') + '</select>';
   } else if(c.tipo==='textarea'){
-    inner = '<textarea data-key="'+esc(c.key)+'" placeholder="'+ph+'"></textarea>';
+    inner = '<textarea id="'+fid+'" data-key="'+esc(c.key)+'"'+phAttr+ariaAttr+'></textarea>';
   } else {
     const t = (c.tipo==='date'||c.tipo==='number') ? c.tipo : 'text';
-    inner = '<input type="'+t+'" data-key="'+esc(c.key)+'" placeholder="'+ph+'">';
+    inner = '<input id="'+fid+'" type="'+t+'" data-key="'+esc(c.key)+'"'+phAttr+ariaAttr+'>';
   }
   const span = c.span ? ' '+c.span : '';
   const div = c.divisorAntes ? '<div class="sec-divider" style="grid-column:1/-1;">'+esc(c.divisorAntes)+'</div>' : '';
-  return div + '<div class="field'+span+'"><label>'+esc(c.label||'')+'</label>'+inner+'</div>';
+  const labelHTML = c.label ? '<label for="'+fid+'">'+esc(c.label)+'</label>' : '';
+  return div + '<div class="field'+span+'">'+labelHTML+inner+'</div>';
 }
 function secaoHTML(s, ocultos){
   const cor = s.cor ? ' '+s.cor : '';
@@ -1679,6 +1704,7 @@ function buildAnalise(){
     const fn = ()=>{
       currentProc.analise[el.dataset.key] = el.value;
       el.classList.remove('auto-filled');
+      atualizarPlaceholder(el);
       marcarPend('analise', el.dataset.key, el.value);
     };
     el.addEventListener('input', fn);
@@ -1705,6 +1731,17 @@ function setCampoValor(el, v){
     el.type = 'text';
   }
   if(el.value !== String(v)) el.value = v;
+  atualizarPlaceholder(el);
+}
+/* Acessibilidade: quando o campo tem conteudo, remove o placeholder (o "Ex.:...")
+   para o leitor de tela ler SO o que esta escrito; quando fica vazio, restaura
+   o exemplo como dica. */
+function atualizarPlaceholder(el){
+  if(!el || el.tagName==='SELECT') return;
+  if(el.dataset.phOrig===undefined) el.dataset.phOrig = el.getAttribute('placeholder')||'';
+  const orig = el.dataset.phOrig;
+  if(el.value && String(el.value).trim()!==''){ el.removeAttribute('placeholder'); }
+  else if(orig){ el.setAttribute('placeholder', orig); }
 }
 
 /* ── tabelas editáveis ── */
@@ -1772,7 +1809,8 @@ function rebuildRiscos(){
     sel.value = r.nivel||'Médio'; sel.className='n-'+sel.value;
     sel.onchange = ()=>{ r.nivel=sel.value; sel.className='n-'+sel.value; marcarPend('analise','risks',risks); };
     const ta = document.createElement('textarea'); ta.value=r.desc||''; ta.placeholder='Descrição do risco…';
-    ta.oninput = ()=>{ r.desc=ta.value; marcarPend('analise','risks',risks); };
+    ta.setAttribute('aria-label','Descrição do risco'); atualizarPlaceholder(ta);
+    ta.oninput = ()=>{ r.desc=ta.value; atualizarPlaceholder(ta); marcarPend('analise','risks',risks); };
     const del = document.createElement('button'); del.className='row-del'; del.textContent='✕'; del.title='Remover risco';
     del.onclick = ()=>{ risks.splice(i,1); marcarPend('analise','risks',risks); rebuildRiscos(); };
     item.appendChild(sel); item.appendChild(ta); item.appendChild(del);
@@ -1878,8 +1916,9 @@ function buildExigencias(){
       });
       const tdTrat = document.createElement('td');
       const ta = document.createElement('textarea'); ta.className='exig-tratativa'; ta.placeholder='Tratativa…'; ta.dataset.exig=idx;
-      ta.value = item.tratativa || '';
-      ta.oninput = ()=>{ item.tratativa = ta.value; marcarPendExigencias(); };
+      ta.setAttribute('aria-label','Tratativa da exigência');
+      ta.value = item.tratativa || ''; atualizarPlaceholder(ta);
+      ta.oninput = ()=>{ item.tratativa = ta.value; atualizarPlaceholder(ta); marcarPendExigencias(); };
       tdTrat.appendChild(ta); tr.appendChild(tdTrat);
       tbody.appendChild(tr);
     });
@@ -1946,9 +1985,11 @@ function buildChecklist(){
       });
       item.appendChild(ctrl);
       const ta = document.createElement('textarea'); ta.className='nota-field'; ta.placeholder='Tratativa / observação…'; ta.dataset.notaK=k;
+      ta.setAttribute('aria-label','Tratativa / observação do item do checklist');
       ta.oninput = ()=>{
         if(!currentProc.checklist[k]) currentProc.checklist[k]={checks:{},note:''};
         currentProc.checklist[k].note = ta.value;
+        atualizarPlaceholder(ta);
         marcarPend('checklist', k, currentProc.checklist[k]);
       };
       item.appendChild(ta);
@@ -1972,7 +2013,7 @@ function aplicarChecklist(){
         lab.classList.toggle('checked-neg', on && CHK_NEG.includes(lab.dataset.lbl));
       });
       const ta = document.querySelector('.nota-field[data-nota-k="'+k+'"]');
-      if(ta && st && document.activeElement!==ta) ta.value = st.note||'';
+      if(ta && st && document.activeElement!==ta){ ta.value = st.note||''; atualizarPlaceholder(ta); }
     });
   });
   updateChkProgress();
@@ -2245,6 +2286,39 @@ function exportarProcesso(){
   a.download = (currentProc.id||'processo')+'.json';
   a.click();
   URL.revokeObjectURL(a.href);
+}
+async function montarDossie(){
+  if(!currentProc){ toast('Abra um processo primeiro.'); return; }
+  if(Store.modo!=='api'){ toast('Montar dossiê exige o Painel conectado à API (modo local não tem SharePoint).'); return; }
+  const btn = document.getElementById('btn-montar-dossie');
+  const hint = document.getElementById('dossie-hint');
+  const hintOrig = hint ? hint.textContent : '';
+  btn.disabled = true;
+  if(hint) hint.textContent = 'Montando o dossiê — buscando e organizando a documentação (pode levar 1–2 min)…';
+  try{
+    const resp = await fetch(Store.base + '/processos/' + encodeURIComponent(currentProc.id) + '/dossie', {
+      headers: Store.headers()
+    });
+    if(!resp.ok){
+      const corpo = await resp.json().catch(()=>({}));
+      throw new Error(corpo.erro || ('Servidor respondeu ' + resp.status));
+    }
+    const blob = await resp.blob();
+    const cd = resp.headers.get('Content-Disposition') || '';
+    const m = cd.match(/filename="?([^"]+)"?/);
+    const nomeArquivo = m ? m[1] : (currentProc.id + '.zip');
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = nomeArquivo;
+    a.click();
+    URL.revokeObjectURL(a.href);
+    toast('Dossiê montado! Confira o CHECKLIST.txt dentro do .zip antes de enviar.');
+  }catch(e){
+    toast('Não foi possível montar o dossiê: ' + e.message);
+  }finally{
+    btn.disabled = false;
+    if(hint) hint.textContent = hintOrig;
+  }
 }
 function copiarPromptIA(){
   const fim = Store.modo==='api'
