@@ -640,6 +640,53 @@ def compactar_dossie(saida_dir: Path, zip_destino: Path) -> None:
 
 
 # ---------------------------------------------------------------------------
+# Varredura da biblioteca (Atualizacoes do dia / Examinador do SharePoint)
+# ---------------------------------------------------------------------------
+
+SITE_HOSTNAME = "tisinape.sharepoint.com"
+SITE_PATH = "/sites/sinape.comercial"
+
+
+def escanear_biblioteca(cfg: dict, ano: Optional[int] = None) -> dict:
+    """Varre a biblioteca do SharePoint via Graph API e devolve um retrato
+    (snapshot) do estado atual: propostas privadas cadastradas no ano e
+    licitacoes agrupadas por pasta de status. Usado para comparar com a
+    varredura anterior e gerar o relatorio de 'Atualizacoes do dia'."""
+    ano = ano or date.today().year
+    token = obter_token(cfg)
+    gc = GraphClient(token)
+    site_id = obter_site_id(gc, SITE_HOSTNAME, SITE_PATH)
+    drive_id = obter_drive_id(gc, site_id)
+
+    propostas = []
+    try:
+        itens = listar_itens_pasta(gc, drive_id, f"1 - COMERCIAL/02.02 - Propostas/PROPOSTAS ANO {ano}")
+        propostas = sorted(it["name"] for it in itens if "folder" in it)
+    except requests.HTTPError:
+        pass
+
+    licitacoes = {}
+    base_lic = f"2 - LICITACAO/05.02 - Editais para Licitação/{ano}"
+    try:
+        status_dirs = [it["name"] for it in listar_itens_pasta(gc, drive_id, base_lic) if "folder" in it]
+    except requests.HTTPError:
+        status_dirs = []
+    for status in status_dirs:
+        try:
+            itens = listar_itens_pasta(gc, drive_id, f"{base_lic}/{status}")
+            licitacoes[status] = sorted(it["name"] for it in itens if "folder" in it)
+        except requests.HTTPError:
+            licitacoes[status] = []
+
+    return {
+        "generated_at": date.today().isoformat(),
+        "ano": ano,
+        "propostas_privadas": propostas,
+        "licitacoes": licitacoes,
+    }
+
+
+# ---------------------------------------------------------------------------
 # CLI
 # ---------------------------------------------------------------------------
 

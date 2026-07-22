@@ -23,8 +23,9 @@ Rotas:
   GET     /api/processos/<id>/anexos/<aid>   → baixa o arquivo
   DELETE  /api/processos/<id>/anexos/<aid>   → remove o anexo (registro + arquivo em disco)
   GET     /api/processos/<id>/dossie         → monta o dossiê de habilitação (Montador) e devolve o .zip
-  GET     /api/relatorios/mais-recente       → devolve a atualização do dia mais recente publicada
-  POST    /api/relatorios                    → publica uma nova atualização do dia (uso por processo automatizado)
+  GET     /api/relatorios/mais-recente        → devolve a atualização do dia mais recente publicada
+  POST    /api/relatorios                     → publica uma nova atualização do dia (uso por processo automatizado)
+  POST    /api/relatorios/executar-varredura  → varre o SharePoint agora, compara com a varredura anterior e publica o relatório do dia
 
 Montador de Dossiê (integrado):
   Usa o módulo em montador-dossie/ (mesmo repo) para buscar a documentação de
@@ -74,7 +75,7 @@ UPLOAD_DIR = Path(os.environ.get("UPLOAD_DIR", "/app/uploads"))
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
 sys.path.insert(0, str(BASE_DIR / "montador-dossie"))
-from montador_dossie import montar_dossie_por_processo  # noqa: E402
+from montador_dossie import montar_dossie_por_processo, escanear_biblioteca  # noqa: E402
 
 MONTADOR_MODO_LOCAL = os.environ.get("MONTADOR_MODO_LOCAL", "").lower() in ("1", "true", "sim")
 MONTADOR_TENANT_ID = os.environ.get("MONTADOR_TENANT_ID", "")
@@ -121,12 +122,14 @@ db = mongo_client.get_database("sinape")
 col_processos = db["processos"]
 col_anexos = db["anexos"]
 col_relatorios = db["relatorios"]
+col_snapshots = db["sharepoint_snapshots"]
 
 
 def _init_db():
     col_processos.create_index([("atualizadoEm", DESCENDING)])
     col_anexos.create_index([("processo_id", ASCENDING), ("enviado_em", DESCENDING)])
     col_relatorios.create_index([("criadoEm", DESCENDING)])
+    col_snapshots.create_index([("criadoEm", DESCENDING)])
 
 
 # ──────────────────────────────────────────────────────────────────
@@ -440,6 +443,136 @@ def criar_relatorio():
     }
     col_relatorios.insert_one(doc)
     return jsonify(_sem_id_mongo(doc)), 201
+
+
+def _fmt_data_ms(ms):
+    from datetime import datetime
+    return datetime.fromtimestamp(ms / 1000).strftime("%d/%m/%Y")
+
+
+def _gerar_relatorio_diario(atual: dict, anterior: dict | None, data_anterior: str | None) -> tuple[str, str]:
+    """Compara a varredura atual com a anterior e monta o texto do relatório
+    do dia, no mesmo espírito do que a varredura manual da equipe já produz:
+    propostas novas, editais novos e movimentações de status."""
+    ano = atual.get("ano")
+    props_atual = atual.get("propostas_privadas", [])
+    lic_atual = atual.get("licitacoes", {})
+
+    partes = []
+
+    partes.append("PROPOSTAS PRIVADAS NOVAS")
+    if anterior is None:
+        partes.append(
+            f"Primeira varredura registrada — {len(props_atual)} proposta(s) encontrada(s) na pasta "
+            f"PROPOSTAS ANO {ano}, servindo de base para as próximas comparações."
+        )
+    else:
+        props_anterior = set(anterior.get("propostas_privadas", []))
+        novas = [p for p in props_atual if p not in props_anterior]
+        if novas:
+            partes.append(f"{len(novas)} nova(s) proposta(s) cadastrada(s) desde a verificação anterior ({data_anterior}):")
+            for p in novas:
+                partes.append(f"  • {p}")
+        else:
+            extremos = f", da {props_atual[0]} até a {props_atual[-1]}" if props_atual else ""
+            partes.append(
+                f"Não houve novas propostas privadas cadastradas na pasta PROPOSTAS ANO {ano} desde a "
+                f"verificação anterior ({data_anterior}). A pasta segue com as mesmas {len(props_atual)} "
+                f"proposta(s) já registrada(s){extremos}."
+            )
+    partes.append("")
+
+    mapa_atual = {nome: status for status, lst in lic_atual.items() for nome in lst}
+    mapa_anterior = {}
+    if anterior:
+        for status, lst in anterior.get("licitacoes", {}).items():
+            for nome in lst:
+                mapa_anterior[nome] = status
+
+    partes.append("LICITAÇÕES/EDITAIS NOVOS")
+    if anterior is None:
+        partes.append(
+            f"Primeira varredura registrada — {len(mapa_atual)} processo(s) de licitação encontrados, "
+            f"distribuídos em {len(lic_atual)} categoria(s) de status."
+        )
+    else:
+        novos = [n for n in mapa_atual if n not in mapa_anterior]
+        if novos:
+            partes.append(f"{len(novos)} novo(s) edital(is) adicionado(s) desde a verificação anterior ({data_anterior}):")
+            for n in novos:
+                partes.append(f"  • {n} (em \"{mapa_atual[n]}\")")
+        else:
+            partes.append(
+                "Não houve novos editais adicionados às pastas de status de licitação desde a última "
+                "verificação. Todas as subpastas de status mantiveram os mesmos processos já conhecidos."
+            )
+    partes.append("")
+
+    partes.append("STATUS DE PROCESSOS EM ANDAMENTO")
+    if anterior is not None:
+        movidos = [(n, mapa_anterior[n], mapa_atual[n]) for n in mapa_atual
+                   if n in mapa_anterior and mapa_anterior[n] != mapa_atual[n]]
+        if movidos:
+            for nome, de, para in movidos:
+                partes.append(f"O processo \"{nome}\", que constava em \"{de}\", foi movido para \"{para}\".")
+        else:
+            partes.append("Nenhuma movimentação de status identificada nesta verificação.")
+        partes.append("")
+
+    partes.append("Situação atual, por categoria:")
+    for status in sorted(lic_atual.keys()):
+        itens = lic_atual[status]
+        if itens:
+            partes.append(f"  \"{status}\" ({len(itens)}): " + "; ".join(itens))
+        else:
+            partes.append(f"  \"{status}\": nenhum processo.")
+
+    conteudo = "\n".join(partes)
+    titulo = "Varredura do SharePoint"
+    return titulo, conteudo
+
+
+@app.route("/api/relatorios/executar-varredura", methods=["POST"])
+def executar_varredura_sharepoint():
+    """Varre o SharePoint agora (propostas privadas + licitações por status),
+    compara com a varredura anterior salva e publica o relatório do dia -
+    o equivalente automatizado à varredura manual que a equipe já fazia."""
+    if not (MONTADOR_TENANT_ID and MONTADOR_CLIENT_ID and MONTADOR_CLIENT_SECRET):
+        return jsonify({
+            "erro": "SharePoint não configurado neste servidor. Defina MONTADOR_TENANT_ID, "
+                    "MONTADOR_CLIENT_ID e MONTADOR_CLIENT_SECRET."
+        }), 503
+
+    corpo = request.get_json(silent=True) or {}
+    cfg = {
+        "MODO_LOCAL": False,
+        "TENANT_ID": MONTADOR_TENANT_ID,
+        "CLIENT_ID": MONTADOR_CLIENT_ID,
+        "CLIENT_SECRET": MONTADOR_CLIENT_SECRET,
+    }
+    try:
+        atual = escanear_biblioteca(cfg)
+    except Exception as e:
+        return jsonify({"erro": f"Falha ao varrer o SharePoint: {e}"}), 502
+
+    anterior_doc = col_snapshots.find_one(sort=[("criadoEm", DESCENDING)])
+    anterior = anterior_doc["dados"] if anterior_doc else None
+    data_anterior = _fmt_data_ms(anterior_doc["criadoEm"]) if anterior_doc else None
+
+    titulo, conteudo = _gerar_relatorio_diario(atual, anterior, data_anterior)
+
+    col_snapshots.insert_one({"_id": uuid.uuid4().hex, "dados": atual, "criadoEm": _agora_ms()})
+
+    rid = uuid.uuid4().hex
+    doc_rel = {
+        "_id": rid,
+        "titulo": titulo,
+        "conteudo": conteudo,
+        "autor": corpo.get("autor") or "",
+        "criadoEm": _agora_ms(),
+    }
+    col_relatorios.insert_one(doc_rel)
+    return jsonify(_sem_id_mongo(doc_rel)), 201
 
 
 @app.route("/api/processos/analisar-ia", methods=["POST"])
