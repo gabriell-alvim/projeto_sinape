@@ -479,6 +479,7 @@ input, select, textarea { font-family:inherit; }
     </div>
     <div class="modal-actions">
       <button class="btn-ghost" onclick="fecharModal('modal-relatorio')">Fechar</button>
+      <button class="btn-primary" id="btn-executar-analise" onclick="executarAnaliseAgora()">▶ Executar análise agora</button>
     </div>
   </div>
 </div>
@@ -2398,6 +2399,75 @@ async function abrirRelatorioDoDia(){
       '<div class="relatorio-corpo">'+esc(rel.conteudo||'')+'</div>';
   }catch(e){
     area.innerHTML = '<p class="relatorio-vazio">Não foi possível carregar as atualizações: '+esc(e.message)+'</p>';
+  }
+}
+
+async function executarAnaliseAgora(){
+  if(Store.modo!=='api'){ toast('Disponível apenas com o Painel conectado ao backend.'); return; }
+  const btn = document.getElementById('btn-executar-analise');
+  const area = document.getElementById('relatorio-conteudo');
+  btn.disabled = true;
+  const textoOriginal = btn.textContent;
+  btn.textContent = 'Executando…';
+  try{
+    // busca a lista mais atual de processos (nao confia so no que ja estava em memoria)
+    const lista = await Store.listar();
+    const total = lista.length;
+    const publicos = lista.filter(p=>p.type==='publico').length;
+    const privados = lista.filter(p=>p.type==='privado').length;
+
+    const porStatus = {};
+    lista.forEach(p=>{
+      const k = STATUS_LABELS[p.status] || p.status || 'Sem status';
+      porStatus[k] = (porStatus[k]||0) + 1;
+    });
+
+    const ultimas24h = Date.now() - 24*60*60*1000;
+    const atualizadosHoje = lista
+      .filter(p=>(p.atualizadoEm||0) >= ultimas24h)
+      .sort((a,b)=>(b.atualizadoEm||0)-(a.atualizadoEm||0));
+
+    const baixoChecklist = lista
+      .filter(p=>(p.progress||0) < 50 && p.status!=='nao_participar' && p.status!=='perdido')
+      .sort((a,b)=>(a.progress||0)-(b.progress||0));
+
+    const linhas = [];
+    linhas.push(`Portfólio: ${total} processo(s) — ${publicos} público(s), ${privados} privado(s).`);
+    linhas.push('');
+    linhas.push('Por status:');
+    Object.keys(porStatus).sort().forEach(k => linhas.push(`  • ${k}: ${porStatus[k]}`));
+    linhas.push('');
+    if(atualizadosHoje.length){
+      linhas.push(`Atualizados nas últimas 24h (${atualizadosHoje.length}):`);
+      atualizadosHoje.forEach(p => linhas.push(`  • ${p.nome}${p.atualizadoPor?' — por '+p.atualizadoPor:''}`));
+    } else {
+      linhas.push('Nenhum processo atualizado nas últimas 24h.');
+    }
+    linhas.push('');
+    if(baixoChecklist.length){
+      linhas.push(`Checklist abaixo de 50% — atenção (${baixoChecklist.length}):`);
+      baixoChecklist.forEach(p => linhas.push(`  • ${p.nome} (${p.progress||0}%)`));
+    } else {
+      linhas.push('Nenhum processo ativo com checklist abaixo de 50%.');
+    }
+
+    const resp = await fetch(Store.base + '/relatorios', {
+      method: 'POST', headers: Store.headers(),
+      body: JSON.stringify({
+        titulo: 'Análise do portfólio',
+        conteudo: linhas.join('\n'),
+        autor: CONFIG.USUARIO || 'Análise manual'
+      })
+    });
+    if(!resp.ok){ const c = await resp.json().catch(()=>({})); throw new Error(c.erro || ('Servidor respondeu '+resp.status)); }
+
+    toast('Análise executada e publicada!');
+    await abrirRelatorioDoDia(); // recarrega o modal ja mostrando o resultado novo
+  }catch(e){
+    area.innerHTML = '<p class="relatorio-vazio">Falha ao executar a análise: '+esc(e.message)+'</p>';
+  }finally{
+    btn.disabled = false;
+    btn.textContent = textoOriginal;
   }
 }
 
