@@ -75,7 +75,10 @@ UPLOAD_DIR = Path(os.environ.get("UPLOAD_DIR", "/app/uploads"))
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
 sys.path.insert(0, str(BASE_DIR / "montador-dossie"))
-from montador_dossie import montar_dossie_por_processo, escanear_biblioteca  # noqa: E402
+from montador_dossie import (  # noqa: E402
+    montar_dossie_por_processo, escanear_biblioteca, localizar_pasta_processo,
+    SITE_HOSTNAME, SITE_PATH,
+)
 
 MONTADOR_MODO_LOCAL = os.environ.get("MONTADOR_MODO_LOCAL", "").lower() in ("1", "true", "sim")
 MONTADOR_TENANT_ID = os.environ.get("MONTADOR_TENANT_ID", "")
@@ -390,6 +393,32 @@ def montar_dossie(pid):
         "CLIENT_SECRET": MONTADOR_CLIENT_SECRET,
         "ONEDRIVE_RAIZ_SHAREPOINT": MONTADOR_ONEDRIVE_RAIZ,
     }
+
+    analise = processo.setdefault("analise", {})
+    if not analise.get("geral_pasta_sharepoint") and not MONTADOR_MODO_LOCAL:
+        try:
+            achado = localizar_pasta_processo(
+                cfg,
+                orgao=analise.get("geral_orgao", ""),
+                numero=analise.get("geral_numero", ""),
+                objeto=analise.get("geral_objeto", ""),
+                nome=processo.get("nome", ""),
+            )
+        except Exception as e:
+            return jsonify({"erro": f"Falha ao localizar a pasta do processo no SharePoint: {e}"}), 502
+
+        if not achado["encontrado"]:
+            proximos = [c["nome"] for c in achado["candidatos"][:5]]
+            return jsonify({
+                "erro": "Não consegui identificar sozinho a pasta deste processo no SharePoint. "
+                        "Confira se 'Órgão' e 'Nº do Edital/Processo' estão preenchidos e batem com o "
+                        "nome da pasta real, ou preencha manualmente o campo da pasta.",
+                "candidatos_proximos": proximos,
+            }), 404
+
+        url_pasta = f"https://{SITE_HOSTNAME}{SITE_PATH}/Documentos/{achado['caminho']}"
+        analise["geral_pasta_sharepoint"] = url_pasta
+        col_processos.update_one({"_id": pid}, {"$set": {"analise.geral_pasta_sharepoint": url_pasta}})
 
     pasta_temp = Path(tempfile.mkdtemp(prefix="dossie-"))
     try:

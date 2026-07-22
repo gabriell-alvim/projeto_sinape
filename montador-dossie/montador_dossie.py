@@ -42,10 +42,12 @@ import os
 import re
 import sys
 import json
+import time
 import shutil
 import argparse
 import logging
 import unicodedata
+from concurrent.futures import ThreadPoolExecutor
 from datetime import date
 from pathlib import Path
 from typing import Optional
@@ -684,6 +686,128 @@ def escanear_biblioteca(cfg: dict, ano: Optional[int] = None) -> dict:
         "propostas_privadas": propostas,
         "licitacoes": licitacoes,
     }
+
+
+# ---------------------------------------------------------------------------
+# Localizacao automatica da pasta do processo (por orgao/numero/nome)
+# ---------------------------------------------------------------------------
+
+def _norm_texto(s: str) -> str:
+    s = unicodedata.normalize("NFD", s or "")
+    s = "".join(c for c in s if unicodedata.category(c) != "Mn")
+    return s.lower()
+
+
+def _grupos_digitos(s: str) -> set:
+    return set(re.findall(r"\d+", s or ""))
+
+
+def _palavras_relevantes(s: str, minlen: int = 4) -> set:
+    s = _norm_texto(s)
+    parar = {"para", "sinalizacao", "servico", "servicos", "fornecimento", "implantacao",
+             "manutencao", "processo", "editais", "licitacao"}
+    return {p for p in re.findall(r"[a-z]{%d,}" % minlen, s) if p not in parar}
+
+
+_CACHE_PASTAS_PROCESSOS = {"ts": 0.0, "dados": None}
+_CACHE_PASTAS_TTL_SEGUNDOS = 600  # 10 minutos - a arvore de pastas nao muda a cada clique
+
+
+def listar_todas_pastas_processos(cfg: dict, forcar_atualizar: bool = False) -> list:
+    """Lista {caminho, nome, status} de TODOS os processos de licitacao no
+    SharePoint, varrendo todos os anos (inclusive a arvore antiga
+    'OLD-Ate <ano>') e todas as subpastas de status - em paralelo, com cache
+    em memoria de 10 min (a varredura completa sequencial levava minutos;
+    cada clique em 'Montar dossie' nao pode esperar isso toda vez). Usado
+    para localizar automaticamente a pasta de um processo do Painel."""
+    agora = time.time()
+    if not forcar_atualizar and _CACHE_PASTAS_PROCESSOS["dados"] is not None \
+            and (agora - _CACHE_PASTAS_PROCESSOS["ts"]) < _CACHE_PASTAS_TTL_SEGUNDOS:
+        return _CACHE_PASTAS_PROCESSOS["dados"]
+
+    token = obter_token(cfg)
+    gc = GraphClient(token)
+    site_id = obter_site_id(gc, SITE_HOSTNAME, SITE_PATH)
+    drive_id = obter_drive_id(gc, site_id)
+
+    base = "2 - LICITACAO/05.02 - Editais para Licitação"
+    try:
+        grupos = [it["name"] for it in listar_itens_pasta(gc, drive_id, base) if "folder" in it]
+    except requests.HTTPError:
+        grupos = []
+
+    bases_ano = []
+    old_groups = [g for g in grupos if _norm_texto(g).startswith("old")]
+    bases_ano.extend(f"{base}/{g}" for g in grupos if g.strip().isdigit())
+
+    def _listar(caminho):
+        try:
+            return caminho, [it["name"] for it in listar_itens_pasta(gc, drive_id, caminho) if "folder" in it]
+        except requests.HTTPError:
+            return caminho, []
+
+    if old_groups:
+        with ThreadPoolExecutor(max_workers=8) as ex:
+            for caminho_grupo, sub_anos in ex.map(_listar, [f"{base}/{g}" for g in old_groups]):
+                bases_ano.extend(f"{caminho_grupo}/{a}" for a in sub_anos)
+
+    caminhos_status = []
+    with ThreadPoolExecutor(max_workers=8) as ex:
+        for caminho_ano, status_dirs in ex.map(_listar, bases_ano):
+            caminhos_status.extend(f"{caminho_ano}/{s}" for s in status_dirs)
+
+    resultado = []
+    with ThreadPoolExecutor(max_workers=8) as ex:
+        for caminho_status, nomes_processo in ex.map(_listar, caminhos_status):
+            status_nome = caminho_status.split("/")[-1]
+            for nome_pasta in nomes_processo:
+                resultado.append({"caminho": f"{caminho_status}/{nome_pasta}", "nome": nome_pasta, "status": status_nome})
+
+    _CACHE_PASTAS_PROCESSOS["dados"] = resultado
+    _CACHE_PASTAS_PROCESSOS["ts"] = agora
+    return resultado
+
+
+def localizar_pasta_processo(cfg: dict, orgao: str = "", numero: str = "", objeto: str = "",
+                             nome: str = "") -> dict:
+    """Tenta achar, sozinho, a pasta do processo no SharePoint a partir dos
+    dados ja existentes no Painel (orgao/numero do edital/nome do processo) -
+    sem precisar que ninguem cole o link manualmente. Pontua cada pasta real
+    pela combinacao de numeros (numero do edital, ano) e palavras (orgao,
+    objeto, nome) que aparecem no nome da pasta; exige pelo menos um numero
+    batendo para considerar encontrado, evitando falso-positivo por palavra
+    generica. Retorna {'encontrado': bool, 'caminho': str|None, 'candidatos': [...]}."""
+    todas = listar_todas_pastas_processos(cfg)
+
+    grupos_alvo = _grupos_digitos(numero) | _grupos_digitos(nome)
+    palavras_alvo = _palavras_relevantes(orgao) | _palavras_relevantes(nome) | _palavras_relevantes(objeto)
+
+    pontuados = []
+    for item in todas:
+        grupos_pasta = _grupos_digitos(item["nome"])
+        palavras_pasta = _palavras_relevantes(item["nome"])
+        score_num = len(grupos_alvo & grupos_pasta)
+        score_palavra = len(palavras_alvo & palavras_pasta)
+        score = score_num * 10 + score_palavra
+        if score_num > 0:
+            pontuados.append((score, item))
+
+    if not pontuados:
+        candidatos_proximos = sorted(
+            ((len(palavras_alvo & _palavras_relevantes(it["nome"])), it) for it in todas),
+            key=lambda x: -x[0],
+        )[:5]
+        return {"encontrado": False, "caminho": None,
+                "candidatos": [it for score, it in candidatos_proximos if score > 0]}
+
+    pontuados.sort(key=lambda x: -x[0])
+    melhor = pontuados[0][0]
+    empatados = [it for score, it in pontuados if score == melhor]
+    candidatos = [it for _, it in pontuados[:5]]
+
+    if len(empatados) == 1:
+        return {"encontrado": True, "caminho": empatados[0]["caminho"], "candidatos": candidatos}
+    return {"encontrado": False, "caminho": None, "candidatos": candidatos}
 
 
 # ---------------------------------------------------------------------------
