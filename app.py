@@ -23,6 +23,8 @@ Rotas:
   GET     /api/processos/<id>/anexos/<aid>   → baixa o arquivo
   DELETE  /api/processos/<id>/anexos/<aid>   → remove o anexo (registro + arquivo em disco)
   GET     /api/processos/<id>/dossie         → monta o dossiê de habilitação (Montador) e devolve o .zip
+  GET     /api/relatorios/mais-recente       → devolve a atualização do dia mais recente publicada
+  POST    /api/relatorios                    → publica uma nova atualização do dia (uso por processo automatizado)
 
 Montador de Dossiê (integrado):
   Usa o módulo em montador-dossie/ (mesmo repo) para buscar a documentação de
@@ -118,11 +120,13 @@ mongo_client = MongoClient(MONGO_URL)
 db = mongo_client.get_database("sinape")
 col_processos = db["processos"]
 col_anexos = db["anexos"]
+col_relatorios = db["relatorios"]
 
 
 def _init_db():
     col_processos.create_index([("atualizadoEm", DESCENDING)])
     col_anexos.create_index([("processo_id", ASCENDING), ("enviado_em", DESCENDING)])
+    col_relatorios.create_index([("criadoEm", DESCENDING)])
 
 
 # ──────────────────────────────────────────────────────────────────
@@ -405,6 +409,37 @@ def montar_dossie(pid):
         mimetype="application/zip",
         headers={"Content-Disposition": f'attachment; filename="{nome_zip}"'},
     )
+
+
+# ──────────────────────────────────────────────────────────────────
+# relatórios ("Atualizações do dia")
+# ──────────────────────────────────────────────────────────────────
+@app.route("/api/relatorios/mais-recente", methods=["GET"])
+def relatorio_mais_recente():
+    doc = col_relatorios.find_one(sort=[("criadoEm", DESCENDING)])
+    if not doc:
+        return jsonify({"erro": "Nenhum relatório publicado ainda"}), 404
+    return jsonify(_sem_id_mongo(doc))
+
+
+@app.route("/api/relatorios", methods=["POST"])
+def criar_relatorio():
+    """Publica uma nova atualização do dia. Pensado para ser chamado por um
+    processo automatizado (ex.: Examinador do SharePoint) - o Painel sempre
+    mostra a mais recente pelo campo criadoEm."""
+    corpo = request.get_json(force=True, silent=False)
+    if not isinstance(corpo, dict) or not corpo.get("conteudo"):
+        return jsonify({"erro": "Informe ao menos o campo 'conteudo'"}), 400
+    rid = uuid.uuid4().hex
+    doc = {
+        "_id": rid,
+        "titulo": corpo.get("titulo") or "Atualizações do dia",
+        "conteudo": corpo["conteudo"],
+        "autor": corpo.get("autor") or "",
+        "criadoEm": _agora_ms(),
+    }
+    col_relatorios.insert_one(doc)
+    return jsonify(_sem_id_mongo(doc)), 201
 
 
 @app.route("/api/processos/analisar-ia", methods=["POST"])

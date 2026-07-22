@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SINAPE — Painel de Licitações (Colaborativo)</title>
+<title>DATA SIN — Painel de Licitações (Colaborativo)</title>
 <style>
 :root {
   --teal:      #0d5c63;
@@ -83,6 +83,10 @@ input, select, textarea { font-family:inherit; }
 .home-fluxo .passo b { color:var(--teal); }
 .home-fluxo .seta { color:var(--slate-l); }
 .home-actions { display:flex; justify-content:center; margin-top:18px; gap:8px; flex-wrap:wrap; }
+.home-relatorio-row { display:flex; justify-content:center; margin-top:16px; }
+.relatorio-meta { font-size:.76rem; color:var(--slate-mid); margin-bottom:12px; padding-bottom:10px; border-bottom:1px solid var(--border); }
+.relatorio-corpo { font-size:.86rem; color:var(--slate); line-height:1.6; white-space:pre-wrap; }
+.relatorio-vazio { font-size:.86rem; color:var(--slate-mid); text-align:center; padding:24px 10px; }
 
 /* ── LISTA ── */
 .list-header { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:16px; flex-wrap:wrap; }
@@ -111,6 +115,7 @@ input, select, textarea { font-family:inherit; }
 .chip.opt               { background:#f1f5f9; color:var(--slate-l); font-weight:600; }
 .pc-prog { height:5px; background:#e2e8f0; border-radius:4px; overflow:hidden; }
 .pc-prog .fill { height:100%; background:linear-gradient(90deg,var(--teal-mid),var(--teal)); border-radius:4px; transition:width .3s; }
+.proc-card .pc-resumo { font-size:.72rem; color:var(--slate-mid); line-height:1.4; }
 .pc-actions { display:flex; gap:6px; margin-top:2px; }
 .pc-del { position:absolute; top:10px; right:10px; border:none; background:none; color:var(--slate-l); font-size:1rem; padding:2px 6px; border-radius:6px; }
 .pc-del:hover { background:var(--red-l); color:var(--red); }
@@ -313,7 +318,7 @@ input, select, textarea { font-family:inherit; }
 <body>
 
 <div class="topbar">
-  <div class="topbar-brand" onclick="goHome()"><span class="dot"></span> SINAPE · Painel de Licitações</div>
+  <div class="topbar-brand" onclick="goHome()"><span class="dot"></span> DATA SIN · Painel de Licitações</div>
   <div class="breadcrumb" id="breadcrumb"></div>
   <a class="topbar-logout" href="/logout">Sair</a>
   <div class="sync-pill" id="sync-pill"><span class="sdot"></span><span id="sync-text">Iniciando…</span></div>
@@ -340,6 +345,9 @@ input, select, textarea { font-family:inherit; }
         <p>Cartas-convite, RFQs e cotações — concessionárias e empresas</p>
         <span class="hc-count" id="count-privado">0 processos</span>
       </div>
+    </div>
+    <div class="home-relatorio-row">
+      <button class="btn-outline" id="btn-atualizacoes-dia" onclick="abrirRelatorioDoDia()">📋 Atualizações do dia</button>
     </div>
     <div class="home-fluxo">
       <span class="passo"><b>1.</b> Envie o edital/TR para a IA com o prompt do painel</span>
@@ -449,6 +457,32 @@ input, select, textarea { font-family:inherit; }
   </div>
 </div>
 
+<!-- MODAL: NOME DO USUÁRIO (uma vez por navegador) -->
+<div class="modal-overlay" id="modal-usuario">
+  <div class="modal-box">
+    <h3>👋 Como você se chama?</h3>
+    <p class="hint">Seu nome aparece nas atualizações dos processos que você editar (ex.: "Atualizado por Fabrício"). Fica salvo só neste navegador.</p>
+    <input type="text" id="input-usuario-nome" placeholder="Ex.: Fabrício" maxlength="60">
+    <div class="modal-actions">
+      <button class="btn-ghost" onclick="pularUsuario()">Agora não</button>
+      <button class="btn-primary" onclick="salvarUsuario()">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: ATUALIZAÇÕES DO DIA -->
+<div class="modal-overlay" id="modal-relatorio">
+  <div class="modal-box wide" role="dialog" aria-label="Atualizações do dia">
+    <h3>📋 Atualizações do dia</h3>
+    <div id="relatorio-conteudo">
+      <p class="relatorio-vazio">Carregando…</p>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-ghost" onclick="fecharModal('modal-relatorio')">Fechar</button>
+    </div>
+  </div>
+</div>
+
 <div id="toast"></div>
 
 <script>
@@ -461,6 +495,7 @@ const CONFIG = {
   POLL_SEGUNDOS: 20,
   USUARIO: ''
 };
+CONFIG.USUARIO = localStorage.getItem('sinape:usuario') || '';
 </script>
 
 <script>
@@ -1416,17 +1451,21 @@ function renderProcessGrid(){
     card.className = 'proc-card';
     card.onclick = ()=>openProcess(p.id);
     const stLabel = STATUS_LABELS[p.status] || (p.status||'—');
-    const quando = p.atualizadoEm ? new Date(p.atualizadoEm).toLocaleDateString('pt-BR') : '';
+    const dt = p.atualizadoEm ? new Date(p.atualizadoEm) : null;
+    const dataStr = dt ? dt.toLocaleDateString('pt-BR') : '';
+    const horaStr = dt ? dt.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}) : '';
+    const porStr = p.atualizadoPor ? ', por: '+p.atualizadoPor : '';
+    const resumoAtualizacao = dataStr
+      ? 'Atualizado em '+dataStr+' às '+horaStr+'h · '+(p.progress||0)+'% do checklist tratado'+porStr+'.'
+      : (p.progress||0)+'% do checklist tratado.';
     card.innerHTML =
-      '<button class="pc-del" title="Excluir processo" onclick="event.stopPropagation();deleteProcess(\''+p.id+'\')">✕</button>' +
+      '<button class="pc-del" type="button" aria-label="Excluir processo '+esc(p.nome)+'" title="Excluir processo" onclick="event.stopPropagation();deleteProcess(\''+p.id+'\')">✕</button>' +
       '<div class="pc-nome">'+esc(p.nome)+'</div>' +
       '<div class="pc-meta">' +
         '<span class="chip st-'+esc(p.status||'pendente')+'">'+esc(stLabel)+'</span>' +
-        (p.origem==='ia' ? '<span class="chip ia">🤖 gerado por IA</span>' : '') +
-        (quando ? '<span>Atualizado '+quando+(p.atualizadoPor?' · '+esc(p.atualizadoPor):'')+'</span>' : '') +
       '</div>' +
       '<div class="pc-prog"><div class="fill" style="width:'+(p.progress||0)+'%"></div></div>' +
-      '<div class="pc-meta"><span>'+(p.progress||0)+'% do checklist tratado</span></div>';
+      '<div class="pc-resumo">'+esc(resumoAtualizacao)+'</div>';
     grid.appendChild(card);
   });
   renderListBanner();
@@ -2335,6 +2374,33 @@ function fallbackCopy(t){
   ta.select(); try{ document.execCommand('copy'); }catch(e){} document.body.removeChild(ta);
 }
 
+/* ── Atualizações do dia (relatório mais recente) ── */
+async function abrirRelatorioDoDia(){
+  abrirModal('modal-relatorio');
+  const area = document.getElementById('relatorio-conteudo');
+  area.innerHTML = '<p class="relatorio-vazio">Carregando…</p>';
+  if(Store.modo!=='api'){
+    area.innerHTML = '<p class="relatorio-vazio">Disponível apenas com o Painel conectado ao backend (modo local não tem esse recurso).</p>';
+    return;
+  }
+  try{
+    const res = await fetch(Store.base + '/relatorios/mais-recente', { headers: Store.headers() });
+    if(res.status===404){
+      area.innerHTML = '<p class="relatorio-vazio">Nenhuma atualização publicada ainda. As atualizações diárias começam a partir de hoje.</p>';
+      return;
+    }
+    if(!res.ok) throw new Error('Servidor respondeu ' + res.status);
+    const rel = await res.json();
+    const quando = rel.criadoEm ? new Date(rel.criadoEm).toLocaleString('pt-BR') : '';
+    area.innerHTML =
+      '<div class="relatorio-meta">'+esc(rel.titulo||'Atualização')+(quando?' — '+esc(quando):'')+
+      (rel.autor?' · por '+esc(rel.autor):'')+'</div>' +
+      '<div class="relatorio-corpo">'+esc(rel.conteudo||'')+'</div>';
+  }catch(e){
+    area.innerHTML = '<p class="relatorio-vazio">Não foi possível carregar as atualizações: '+esc(e.message)+'</p>';
+  }
+}
+
 /* ════════════════════════════════════════════════════════════════
    INICIALIZAÇÃO
    ════════════════════════════════════════════════════════════════ */
@@ -2357,8 +2423,18 @@ async function init(){
   }
   iniciarPolling();
   updateBreadcrumb();
+  if(!CONFIG.USUARIO) abrirModal('modal-usuario');
 }
 init();
+function salvarUsuario(){
+  const nome = document.getElementById('input-usuario-nome').value.trim();
+  if(!nome){ toast('Digite seu nome, ou clique em "Agora não".'); return; }
+  localStorage.setItem('sinape:usuario', nome);
+  CONFIG.USUARIO = nome;
+  fecharModal('modal-usuario');
+  toast('Prazer, '+nome+'!');
+}
+function pularUsuario(){ fecharModal('modal-usuario'); }
 </script>
 </body>
 </html>
