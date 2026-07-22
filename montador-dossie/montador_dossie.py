@@ -774,15 +774,19 @@ def localizar_pasta_processo(cfg: dict, orgao: str = "", numero: str = "", objet
     dados ja existentes no Painel (orgao/numero do edital/nome do processo) -
     sem precisar que ninguem cole o link manualmente. Pontua cada pasta real
     pela combinacao de numeros (numero do edital, ano) e palavras (orgao,
-    objeto, nome) que aparecem no nome da pasta; exige pelo menos um numero
-    batendo para considerar encontrado, evitando falso-positivo por palavra
-    generica. Retorna {'encontrado': bool, 'caminho': str|None, 'candidatos': [...]}."""
+    objeto, nome) que aparecem no nome da pasta. Aceita como encontrado: (a)
+    qualquer candidato com pelo menos um numero batendo, sem empate no topo;
+    ou (b), quando nao ha nenhum numero batendo (ex.: campo 'numero' vazio),
+    um candidato unico e isolado por palavras (score_palavra alto e bem acima
+    do segundo colocado) - fallback seguro para nao depender so de digitos.
+    Retorna {'encontrado': bool, 'caminho': str|None, 'candidatos': [...]}."""
     todas = listar_todas_pastas_processos(cfg)
 
     grupos_alvo = _grupos_digitos(numero) | _grupos_digitos(nome)
     palavras_alvo = _palavras_relevantes(orgao) | _palavras_relevantes(nome) | _palavras_relevantes(objeto)
 
-    pontuados = []
+    pontuados_num = []
+    pontuados_palavra = []
     for item in todas:
         grupos_pasta = _grupos_digitos(item["nome"])
         palavras_pasta = _palavras_relevantes(item["nome"])
@@ -790,24 +794,34 @@ def localizar_pasta_processo(cfg: dict, orgao: str = "", numero: str = "", objet
         score_palavra = len(palavras_alvo & palavras_pasta)
         score = score_num * 10 + score_palavra
         if score_num > 0:
-            pontuados.append((score, item))
+            pontuados_num.append((score, item))
+        if score_palavra > 0:
+            pontuados_palavra.append((score_palavra, item))
 
-    if not pontuados:
-        candidatos_proximos = sorted(
-            ((len(palavras_alvo & _palavras_relevantes(it["nome"])), it) for it in todas),
-            key=lambda x: -x[0],
-        )[:5]
-        return {"encontrado": False, "caminho": None,
-                "candidatos": [it for score, it in candidatos_proximos if score > 0]}
+    if pontuados_num:
+        pontuados_num.sort(key=lambda x: -x[0])
+        melhor = pontuados_num[0][0]
+        empatados = [it for score, it in pontuados_num if score == melhor]
+        candidatos = [it for _, it in pontuados_num[:5]]
+        if len(empatados) == 1:
+            return {"encontrado": True, "caminho": empatados[0]["caminho"], "candidatos": candidatos}
+        return {"encontrado": False, "caminho": None, "candidatos": candidatos}
 
-    pontuados.sort(key=lambda x: -x[0])
-    melhor = pontuados[0][0]
-    empatados = [it for score, it in pontuados if score == melhor]
-    candidatos = [it for _, it in pontuados[:5]]
+    # sem nenhum numero batendo (ex.: "numero" vazio) - tenta so por palavras,
+    # mas so aceita se houver um candidato claramente isolado, para nao
+    # arriscar falso-positivo por termo generico.
+    if pontuados_palavra:
+        pontuados_palavra.sort(key=lambda x: -x[0])
+        melhor_palavra = pontuados_palavra[0][0]
+        segundo_palavra = pontuados_palavra[1][0] if len(pontuados_palavra) > 1 else 0
+        empatados_palavra = [it for score, it in pontuados_palavra if score == melhor_palavra]
+        candidatos = [it for _, it in pontuados_palavra[:5]]
+        isolado_na_biblioteca = len(pontuados_palavra) == 1  # unica pasta de toda a biblioteca que bate alguma palavra
+        if len(empatados_palavra) == 1 and melhor_palavra > segundo_palavra and (melhor_palavra >= 2 or isolado_na_biblioteca):
+            return {"encontrado": True, "caminho": empatados_palavra[0]["caminho"], "candidatos": candidatos}
+        return {"encontrado": False, "caminho": None, "candidatos": candidatos}
 
-    if len(empatados) == 1:
-        return {"encontrado": True, "caminho": empatados[0]["caminho"], "candidatos": candidatos}
-    return {"encontrado": False, "caminho": None, "candidatos": candidatos}
+    return {"encontrado": False, "caminho": None, "candidatos": []}
 
 
 # ---------------------------------------------------------------------------
