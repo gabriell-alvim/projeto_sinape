@@ -1,0 +1,146 @@
+{
+  "_versao": "2-proposta",
+  "_comentario": "RASCUNHO para revisao com a equipe. Reaponta o Montador para o repositorio central real da SINAPE ('2 - LICITACAO/05.03 - Documentos Atualizados' + '1 - COMERCIAL/02.07 - Atestados'), em vez da estrutura '02 - Documentacao' que so existia na pasta de teste USP RP. Variaveis: {uf} = UF do processo (analise.geral_uf do Painel); {empresa} = empresa licitante (padrao 'Sinape'). Ver PROPOSTA - Biblioteca v2 (repositorio real).md.",
+
+  "_raiz_central": "2 - LICITACAO/05.03 - Documentos Atualizados",
+  "_pastas_arquivo_morto": ["obsoleto", "obsoletos", "anterior", "anteriores", "antiga", "antigas", "antigos", "descartar", "old", "baixados"],
+  "_regras_vigencia": {
+    "todos": "copia todos os arquivos da pasta (pasta ja curada, ex.: .../Vigente)",
+    "atual_mais_recente": "exclui pastas de arquivo morto; se houver varios do mesmo tipo, escolhe o de validade mais recente pela data no nome (2a data do intervalo DD.MM - DD.MM, ou data unica DD.MM.AAAA); marca [VENCIDO? CONFERIR] se a validade ja passou",
+    "manual": "nao baixa automaticamente; lista no CHECKLIST para selecao humana"
+  },
+
+  "categorias": [
+    {
+      "categoria_painel": "Habilitação jurídica",
+      "letra_zip": "A",
+      "fontes": [
+        { "descricao": "Contrato social vigente ({empresa})",
+          "origem": "central",
+          "caminho": "01 - Habilitação Jurídica/01 - Contrato Social/{empresa}/Vigente",
+          "vigencia": "todos" },
+        { "descricao": "Certidão Simplificada JUCESP ({empresa})",
+          "origem": "central",
+          "caminho": "01 - Habilitação Jurídica/02 - Certidão Simplificada/{empresa}",
+          "vigencia": "atual_mais_recente" },
+        { "descricao": "Documentos dos sócios/administradores",
+          "origem": "central",
+          "caminho": "01 - Habilitação Jurídica/03 - Documento dos Sócios ou Administradores",
+          "vigencia": "todos" },
+        { "descricao": "Alvará",
+          "origem": "central",
+          "caminho": "01 - Habilitação Jurídica/04 - Alvarás",
+          "vigencia": "atual_mais_recente" }
+      ]
+    },
+    {
+      "categoria_painel": "Habilitação fiscal e trabalhista",
+      "letra_zip": "B",
+      "fontes": [
+        { "descricao": "Regularidade Federal (CNPJ, FGTS, CND Tributos Federais) — nacional",
+          "origem": "central",
+          "caminho": "02 - Regularidade Fiscal/SP/Federal",
+          "vigencia": "atual_mais_recente",
+          "obs": "Federal e nacional; SP fixado como fonte canonica (a confirmar)" },
+        { "descricao": "Regularidade Estadual da UF do processo",
+          "origem": "central",
+          "caminho": "02 - Regularidade Fiscal/{uf}/Estadual",
+          "vigencia": "atual_mais_recente" },
+        { "descricao": "Regularidade Municipal da UF do processo",
+          "origem": "central",
+          "caminho": "02 - Regularidade Fiscal/{uf}/Municipal",
+          "vigencia": "atual_mais_recente",
+          "obs": "Municipal varia por cidade; conferir se o edital exige cidade especifica" },
+        { "descricao": "Regularidade Trabalhista (CNDT, MTE, TRT)",
+          "origem": "central",
+          "caminho": "03 - Regularidade Trabalhista",
+          "vigencia": "atual_mais_recente" }
+      ]
+    },
+    {
+      "categoria_painel": "Habilitação econômico-financeira",
+      "letra_zip": "C",
+      "fontes": [
+        { "descricao": "Balanço/ECD do último exercício",
+          "origem": "central",
+          "caminho": "04 - Qualificação Econômica/SP/Contábil/{ano_balanco}",
+          "vigencia": "todos",
+          "obs": "{ano_balanco} = ano mais recente disponivel (hoje: 2026)" },
+        { "descricao": "Índices financeiros",
+          "origem": "central",
+          "caminho": "04 - Qualificação Econômica/SP/Contábil/{ano_balanco}/Índices",
+          "vigencia": "todos" },
+        { "descricao": "Certidões de falência/concordata e cartórios (UF sede)",
+          "origem": "central",
+          "caminho": "04 - Qualificação Econômica/RJ",
+          "vigencia": "atual_mais_recente",
+          "obs": "Confirmar UF sede para falencia/cartorios" },
+        { "descricao": "Declarações financeiras (idoneidade, contabilidade regular)",
+          "origem": "central",
+          "caminho": "04 - Qualificação Econômica/Declarações Financeiras - Modelo",
+          "vigencia": "todos" },
+        { "descricao": "CRC do contador (vigente)",
+          "origem": "central",
+          "caminho": "04 - Qualificação Econômica/Documentos do Contador",
+          "vigencia": "atual_mais_recente" }
+      ]
+    },
+    {
+      "categoria_painel": "Habilitação técnica",
+      "letra_zip": "D",
+      "fontes": [
+        { "descricao": "Registro/CREA da empresa e RTs (mais recente de cada)",
+          "origem": "central",
+          "caminho": "05 - Qualificação Técnica/05 - Certidões/CREA/Vigentes",
+          "vigencia": "atual_mais_recente",
+          "obs": "Ha subpastas por UF (CREA SP, CREA RJ...). atual_mais_recente deduplica versoes antigas; idealmente filtrar pela {uf} do processo + CREA SP (sede)" },
+        { "descricao": "Credenciais dos responsáveis técnicos (CREA/contratos)",
+          "origem": "central",
+          "caminho": "05 - Qualificação Técnica/01 - Engenheiros",
+          "vigencia": "todos",
+          "obs": "Grande; idealmente so o(s) RT indicado(s) no processo" },
+        { "descricao": "Atestados de capacidade técnica compatíveis com o objeto",
+          "origem": "comercial",
+          "caminho": "1 - COMERCIAL/02.07 - Atestados/01 - Minuta",
+          "vigencia": "manual",
+          "obs": "Selecao depende do objeto do edital — curadoria humana ou sugestao da IA do Painel" }
+      ]
+    },
+    {
+      "categoria_painel": "Participação",
+      "letra_zip": "E",
+      "fontes": [
+        { "descricao": "Declarações específicas do processo (não emprega menor, elaboração independente, etc.)",
+          "origem": "processo",
+          "caminho_relativo_processo": "DECLARAÇÕES",
+          "vigencia": "todos",
+          "obs": "Nome da subpasta de declaracoes varia por processo; confirmar convencao" }
+      ]
+    },
+    {
+      "categoria_painel": "Proposta comercial",
+      "letra_zip": "F",
+      "fontes": [
+        { "descricao": "Proposta/orçamento do processo",
+          "origem": "processo",
+          "caminho_relativo_processo": "Orçamento - Enviar Órgão",
+          "vigencia": "todos",
+          "obs": "Nome varia por processo; confirmar convencao" }
+      ]
+    },
+    {
+      "categoria_painel": "Certificações cadastrais (SICAF)",
+      "letra_zip": "G",
+      "fontes": [
+        { "descricao": "SICAF mais recente",
+          "origem": "central",
+          "caminho": "06 - Certificações Cadastrais/Federal",
+          "vigencia": "atual_mais_recente" },
+        { "descricao": "SICAF - arquivos complementares (CRC, relatórios de ocorrência)",
+          "origem": "central",
+          "caminho": "06 - Certificações Cadastrais/Federal/01. SICAF - Arquivos Complementares",
+          "vigencia": "todos" }
+      ]
+    }
+  ]
+}

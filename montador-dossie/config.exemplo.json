@@ -1,0 +1,14 @@
+{
+  "_comentario": "Escolha UM dos dois modos abaixo. MODO_LOCAL=true usa a pasta do SharePoint ja sincronizada via OneDrive (nao precisa de Azure AD); MODO_LOCAL=false (padrao) usa o Graph API com o app do Azure AD.",
+
+  "MODO_LOCAL": false,
+
+  "TENANT_ID": "coloque-aqui-o-tenant-id-do-azure-ad",
+  "CLIENT_ID": "coloque-aqui-o-client-id-do-app-registrado",
+  "CLIENT_SECRET": "coloque-aqui-o-client-secret-NUNCA-versione-isso-no-git",
+
+  "ONEDRIVE_RAIZ_SHAREPOINT": "C:\\Users\\SEU-USUARIO\\OneDrive - SINAPE LTDA\\Setor Comercial - Documentos",
+
+  "PAINEL_BASE_URL": "https://SUA-URL-DO-PAINEL-SINAPE",
+  "PAINEL_TOKEN": "o-mesmo-token-x-sinape-token-usado-no-painel"
+}

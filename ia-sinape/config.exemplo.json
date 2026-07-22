@@ -1,0 +1,8 @@
+{
+  "ANTHROPIC_API_KEY": "crie-em-platform.claude.com-e-cole-aqui-NUNCA-versione-no-git",
+  "CLAUDE_MODEL": "claude-opus-4-8",
+  "CLAUDE_EFFORT": "high",
+  "PAINEL_BASE_URL": "http://localhost:8080",
+  "PAINEL_TOKEN": "o-mesmo-x-sinape-token-do-painel",
+  "IA_SERVICE_TOKEN": "opcional-token-para-proteger-este-servico"
+}

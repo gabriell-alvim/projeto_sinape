@@ -22,6 +22,18 @@ Rotas:
   POST    /api/processos/<id>/anexos         → envia um anexo (multipart, campo "arquivo")
   GET     /api/processos/<id>/anexos/<aid>   → baixa o arquivo
   DELETE  /api/processos/<id>/anexos/<aid>   → remove o anexo (registro + arquivo em disco)
+  GET     /api/processos/<id>/dossie         → monta o dossiê de habilitação (Montador) e devolve o .zip
+  GET     /api/relatorios/mais-recente       → devolve a atualização do dia mais recente publicada
+  POST    /api/relatorios                    → publica uma nova atualização do dia (uso por processo automatizado)
+
+Montador de Dossiê (integrado):
+  Usa o módulo em montador-dossie/ (mesmo repo) para buscar a documentação de
+  habilitação atualizada da SINAPE no SharePoint via Microsoft Graph API e
+  organizar num .zip. Configuração via variáveis de ambiente:
+    MONTADOR_TENANT_ID, MONTADOR_CLIENT_ID, MONTADOR_CLIENT_SECRET  → app do Azure AD
+    MONTADOR_MODO_LOCAL + MONTADOR_ONEDRIVE_RAIZ                    → alternativa via OneDrive sincronizado
+  Sem essas variáveis, o endpoint responde 503 (funcionalidade desabilitada,
+  resto do Painel funciona normalmente).
 
 Autenticação:
   - Acesso ao site: sessão Flask após login (env SITE_USER + SITE_PASSWORD + SECRET_KEY).
@@ -38,23 +50,39 @@ gravação usa update condicional pela versão lida, para não perder alteraçõ
 concorrentes entre a leitura e a escrita.
 """
 
+import base64
 import json
 import os
 import re
+import shutil
+import sys
+import tempfile
 import time
 import uuid
 from datetime import timedelta
 from pathlib import Path
 from urllib.parse import quote
 
+import anthropic
 from pymongo import MongoClient, ASCENDING, DESCENDING
 from pymongo.errors import DuplicateKeyError
-from flask import Flask, request, jsonify, send_from_directory, send_file, session, redirect
+from flask import Flask, request, jsonify, send_from_directory, send_file, session, redirect, Response
 from werkzeug.utils import secure_filename
 
 BASE_DIR = Path(__file__).resolve().parent
 UPLOAD_DIR = Path(os.environ.get("UPLOAD_DIR", "/app/uploads"))
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
+
+sys.path.insert(0, str(BASE_DIR / "montador-dossie"))
+from montador_dossie import montar_dossie_por_processo  # noqa: E402
+
+MONTADOR_MODO_LOCAL = os.environ.get("MONTADOR_MODO_LOCAL", "").lower() in ("1", "true", "sim")
+MONTADOR_TENANT_ID = os.environ.get("MONTADOR_TENANT_ID", "")
+MONTADOR_CLIENT_ID = os.environ.get("MONTADOR_CLIENT_ID", "")
+MONTADOR_CLIENT_SECRET = os.environ.get("MONTADOR_CLIENT_SECRET", "")
+MONTADOR_ONEDRIVE_RAIZ = os.environ.get("MONTADOR_ONEDRIVE_RAIZ", "")
+with open(BASE_DIR / "montador-dossie" / "biblioteca_v2_proposta.json", "r", encoding="utf-8") as _f:
+    MONTADOR_BIBLIOTECA = json.load(_f)
 
 TOKEN = os.environ.get("TOKEN", "")
 SITE_USER = os.environ.get("SITE_USER", "")
@@ -62,6 +90,12 @@ SITE_PASSWORD = os.environ.get("SITE_PASSWORD", "")
 SECRET_KEY = os.environ.get("SECRET_KEY", "troque-em-producao")
 MONGO_URL = os.environ.get("MONGO_URL", "")
 MAX_UPLOAD_MB = int(os.environ.get("MAX_UPLOAD_MB", "25"))
+
+ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY", "")
+ANTHROPIC_MODEL = os.environ.get("ANTHROPIC_MODEL", "claude-opus-4-8")
+MAX_PDF_TOTAL_MB = int(os.environ.get("MAX_PDF_TOTAL_MB", "24"))  # margem p/ limite de 32MB em base64
+PROMPT_IA = (BASE_DIR / "prompt_ia.txt").read_text(encoding="utf-8")
+anthropic_client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY) if ANTHROPIC_API_KEY else None
 
 app = Flask(__name__, static_folder=None)
 app.secret_key = SECRET_KEY
@@ -86,11 +120,13 @@ mongo_client = MongoClient(MONGO_URL)
 db = mongo_client.get_database("sinape")
 col_processos = db["processos"]
 col_anexos = db["anexos"]
+col_relatorios = db["relatorios"]
 
 
 def _init_db():
     col_processos.create_index([("atualizadoEm", DESCENDING)])
     col_anexos.create_index([("processo_id", ASCENDING), ("enviado_em", DESCENDING)])
+    col_relatorios.create_index([("criadoEm", DESCENDING)])
 
 
 # ──────────────────────────────────────────────────────────────────
@@ -324,6 +360,139 @@ def excluir(pid):
     except OSError:
         pass
     return jsonify({"ok": True})
+
+
+@app.route("/api/processos/<pid>/dossie", methods=["GET"])
+def montar_dossie(pid):
+    """Monta o dossie de habilitacao do processo (Montador de Dossie,
+    integrado ao Painel) e devolve o .zip pronto. Usa a documentacao
+    atualizada da SINAPE no SharePoint - nao precisa que a equipe tenha
+    copiado nada para dentro da pasta do processo (ver biblioteca v2)."""
+    doc = col_processos.find_one({"_id": pid})
+    if not doc:
+        return jsonify({"erro": "Processo não encontrado"}), 404
+    processo = _sem_id_mongo(doc)
+
+    if not (MONTADOR_MODO_LOCAL or (MONTADOR_TENANT_ID and MONTADOR_CLIENT_ID and MONTADOR_CLIENT_SECRET)):
+        return jsonify({
+            "erro": "Montador não configurado neste servidor. Defina MONTADOR_TENANT_ID, "
+                    "MONTADOR_CLIENT_ID e MONTADOR_CLIENT_SECRET (ou MONTADOR_MODO_LOCAL=true "
+                    "+ MONTADOR_ONEDRIVE_RAIZ)."
+        }), 503
+
+    cfg = {
+        "MODO_LOCAL": MONTADOR_MODO_LOCAL,
+        "TENANT_ID": MONTADOR_TENANT_ID,
+        "CLIENT_ID": MONTADOR_CLIENT_ID,
+        "CLIENT_SECRET": MONTADOR_CLIENT_SECRET,
+        "ONEDRIVE_RAIZ_SHAREPOINT": MONTADOR_ONEDRIVE_RAIZ,
+    }
+
+    pasta_temp = Path(tempfile.mkdtemp(prefix="dossie-"))
+    try:
+        zip_destino = montar_dossie_por_processo(
+            cfg, MONTADOR_BIBLIOTECA, pid, pasta_temp / pid, processo_preload=processo)
+        # le o zip para memoria e limpa a pasta temp AGORA - no Windows, o
+        # arquivo fica travado enquanto send_file esta streaming a resposta,
+        # entao apagar depois (ex.: via after_this_request) falha silenciosamente
+        conteudo_zip = zip_destino.read_bytes()
+        nome_zip = zip_destino.name
+    except SystemExit as e:
+        return jsonify({"erro": str(e)}), 400
+    except Exception as e:
+        return jsonify({"erro": f"Falha ao montar o dossiê: {e}"}), 502
+    finally:
+        shutil.rmtree(pasta_temp, ignore_errors=True)
+
+    return Response(
+        conteudo_zip,
+        mimetype="application/zip",
+        headers={"Content-Disposition": f'attachment; filename="{nome_zip}"'},
+    )
+
+
+# ──────────────────────────────────────────────────────────────────
+# relatórios ("Atualizações do dia")
+# ──────────────────────────────────────────────────────────────────
+@app.route("/api/relatorios/mais-recente", methods=["GET"])
+def relatorio_mais_recente():
+    doc = col_relatorios.find_one(sort=[("criadoEm", DESCENDING)])
+    if not doc:
+        return jsonify({"erro": "Nenhum relatório publicado ainda"}), 404
+    return jsonify(_sem_id_mongo(doc))
+
+
+@app.route("/api/relatorios", methods=["POST"])
+def criar_relatorio():
+    """Publica uma nova atualização do dia. Pensado para ser chamado por um
+    processo automatizado (ex.: Examinador do SharePoint) - o Painel sempre
+    mostra a mais recente pelo campo criadoEm."""
+    corpo = request.get_json(force=True, silent=False)
+    if not isinstance(corpo, dict) or not corpo.get("conteudo"):
+        return jsonify({"erro": "Informe ao menos o campo 'conteudo'"}), 400
+    rid = uuid.uuid4().hex
+    doc = {
+        "_id": rid,
+        "titulo": corpo.get("titulo") or "Atualizações do dia",
+        "conteudo": corpo["conteudo"],
+        "autor": corpo.get("autor") or "",
+        "criadoEm": _agora_ms(),
+    }
+    col_relatorios.insert_one(doc)
+    return jsonify(_sem_id_mongo(doc)), 201
+
+
+@app.route("/api/processos/analisar-ia", methods=["POST"])
+def analisar_ia():
+    if not anthropic_client:
+        return jsonify({"erro": "ANTHROPIC_API_KEY não configurada no servidor"}), 503
+
+    arquivos = request.files.getlist("arquivos")
+    if not arquivos:
+        return jsonify({"erro": "Envie ao menos um arquivo no campo 'arquivos'"}), 400
+
+    total_bytes = 0
+    content = []
+    nomes = []
+    for arquivo in arquivos:
+        if arquivo.mimetype != "application/pdf":
+            return jsonify({"erro": f"Arquivo '{arquivo.filename}' não é PDF"}), 400
+        dados = arquivo.read()
+        total_bytes += len(dados)
+        if total_bytes > MAX_PDF_TOTAL_MB * 1024 * 1024:
+            return jsonify({"erro": f"Total dos PDFs excede {MAX_PDF_TOTAL_MB} MB"}), 400
+        nomes.append(arquivo.filename)
+        content.append({
+            "type": "document",
+            "source": {
+                "type": "base64",
+                "media_type": "application/pdf",
+                "data": base64.standard_b64encode(dados).decode("ascii"),
+            },
+        })
+    content.append({"type": "text", "text": PROMPT_IA})
+
+    try:
+        with anthropic_client.messages.stream(
+            model=ANTHROPIC_MODEL,
+            max_tokens=32000,
+            messages=[{"role": "user", "content": content}],
+        ) as stream:
+            resposta = stream.get_final_message()
+    except anthropic.APIStatusError as e:
+        return jsonify({"erro": f"Erro na API da IA: {e.message}"}), 502
+
+    texto = "".join(b.text for b in resposta.content if b.type == "text").strip()
+    texto = re.sub(r"^```(?:json)?\s*|\s*```$", "", texto.strip())
+
+    try:
+        doc = json.loads(texto)
+    except json.JSONDecodeError:
+        return jsonify({"erro": "A IA não devolveu um JSON válido", "bruto": texto[:2000]}), 502
+
+    doc.setdefault("fontes", "; ".join(nomes))
+    doc.setdefault("analise", {}).setdefault("_sourceFiles", "; ".join(nomes))
+    return jsonify(doc)
 
 
 # ──────────────────────────────────────────────────────────────────
