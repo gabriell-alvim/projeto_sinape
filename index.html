@@ -2447,13 +2447,15 @@ async function executarAnaliseAgora(){
 }
 
 /* ════════════════════════════════════════════════════════════════
-   MODO ACESSIBILIDADE — navegação numérica opt-in p/ NVDA (Insert+Alt+L)
+   MODO ACESSIBILIDADE — navegação numérica opt-in p/ NVDA (Ctrl+Alt+A)
    Não altera a experiência de quem não ativa. Numera de 1 a 9 as opções
    da tela (abas, botões de ação, cards de menu/lista); páginas de 9 em 9
    quando há mais itens; suspende automaticamente dentro de campos editáveis.
+   Evita a tecla Insert de propósito: é a tecla modificadora padrão do
+   NVDA (ou nem existe em muitos teclados de notebook), então o navegador
+   nunca chega a receber esse evento de tecla.
    ════════════════════════════════════════════════════════════════ */
 const A11Y = { ativo: localStorage.getItem('sinape:a11y')==='1', foco:null, pagina:0, todosItens:[], itensAtuais:[], avisoCampoDado:false };
-let a11yInsertPressionado = false;
 
 function a11yAnunciar(msg){
   const el = document.getElementById('a11y-anuncio');
@@ -2541,8 +2543,7 @@ function a11yAtivarItem(n){
   if(item) item.el.click();
 }
 document.addEventListener('keydown', function(e){
-  if(e.key==='Insert') a11yInsertPressionado = true;
-  if(a11yInsertPressionado && e.altKey && (e.key==='l' || e.key==='L')){
+  if(e.ctrlKey && e.altKey && (e.key==='a' || e.key==='A')){
     e.preventDefault(); a11yToggle(); return;
   }
   if(!A11Y.ativo) return;
@@ -2554,7 +2555,6 @@ document.addEventListener('keydown', function(e){
   if(e.code==='NumpadDecimal'){ e.preventDefault(); a11yProximaPagina(); return; }
   if(e.code==='Numpad0'){ e.preventDefault(); a11yPaginaAnterior(); return; }
 });
-document.addEventListener('keyup', function(e){ if(e.key==='Insert') a11yInsertPressionado = false; });
 document.addEventListener('focusin', function(e){
   if(!A11Y.ativo) return;
   if(a11yEstaEmCampoEditavel(e.target)){
