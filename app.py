@@ -23,9 +23,11 @@ Rotas:
   GET     /api/processos/<id>/anexos/<aid>   → baixa o arquivo
   DELETE  /api/processos/<id>/anexos/<aid>   → remove o anexo (registro + arquivo em disco)
   GET     /api/processos/<id>/dossie         → monta o dossiê de habilitação (Montador) e devolve o .zip
-  GET     /api/relatorios/mais-recente        → devolve a atualização do dia mais recente publicada
+  GET     /api/relatorios/mais-recente        → devolve a atualização do dia mais recente publicada (inclui "novos": [{tipo,nome,status,caminho_pasta}])
   POST    /api/relatorios                     → publica uma nova atualização do dia (uso por processo automatizado)
   POST    /api/relatorios/executar-varredura  → varre o SharePoint agora, compara com a varredura anterior e publica o relatório do dia
+  POST    /api/processos/analisar-ia          → recebe PDFs (multipart, campo "arquivos") e devolve o JSON de análise via IA
+  POST    /api/processos/analisar-novo        → a partir de {caminho_pasta, tipo, model?, effort?} de um item novo da varredura, baixa os PDFs, roda a IA e já cria o processo
 
 Montador de Dossiê (integrado):
   Usa o módulo em montador-dossie/ (mesmo repo) para buscar a documentação de
@@ -77,7 +79,7 @@ UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 sys.path.insert(0, str(BASE_DIR / "montador-dossie"))
 from montador_dossie import (  # noqa: E402
     montar_dossie_por_processo, escanear_biblioteca, localizar_pasta_processo,
-    SITE_HOSTNAME, SITE_PATH,
+    baixar_pdfs_da_pasta, SITE_HOSTNAME, SITE_PATH,
 )
 
 MONTADOR_MODO_LOCAL = os.environ.get("MONTADOR_MODO_LOCAL", "").lower() in ("1", "true", "sim")
@@ -275,21 +277,10 @@ def criar():
     doc = request.get_json(force=True, silent=False)
     if not isinstance(doc, dict):
         return jsonify({"erro": "Corpo deve ser um objeto JSON"}), 400
-    pid = doc.get("id") or (_slug(doc.get("nome", "")) + "-" + uuid.uuid4().hex[:6])
-    agora = _agora_ms()
-    doc["id"] = pid
-    doc.setdefault("criadoEm", agora)
-    doc["atualizadoEm"] = agora
-    doc["versao"] = int(doc.get("versao") or 1)
-    doc.setdefault("analise", {})
-    doc.setdefault("checklist", {})
-
-    doc["_id"] = pid
-    del doc["id"]
     try:
-        col_processos.insert_one(doc)
+        doc = _preparar_e_inserir_processo(doc)
     except DuplicateKeyError:
-        return jsonify({"erro": "Já existe processo com esse id", "id": pid}), 409
+        return jsonify({"erro": "Já existe processo com esse id", "id": doc.get("_id")}), 409
     return jsonify(_sem_id_mongo(doc)), 201
 
 
@@ -479,13 +470,17 @@ def _fmt_data_ms(ms):
     return datetime.fromtimestamp(ms / 1000).strftime("%d/%m/%Y")
 
 
-def _gerar_relatorio_diario(atual: dict, anterior: dict | None, data_anterior: str | None) -> tuple[str, str]:
+def _gerar_relatorio_diario(atual: dict, anterior: dict | None, data_anterior: str | None) -> tuple[str, str, list]:
     """Compara a varredura atual com a anterior e monta o texto do relatório
     do dia, no mesmo espírito do que a varredura manual da equipe já produz:
-    propostas novas, editais novos e movimentações de status."""
+    propostas novas, editais novos e movimentações de status. Também devolve
+    uma lista estruturada dos itens novos (com o caminho da pasta no
+    SharePoint já resolvido), usada pelo botão "Rodar análise e preencher
+    informações" — não precisa localizar a pasta de novo, já veio da varredura."""
     ano = atual.get("ano")
     props_atual = atual.get("propostas_privadas", [])
     lic_atual = atual.get("licitacoes", {})
+    novos_estruturados = []
 
     partes = []
 
@@ -502,6 +497,12 @@ def _gerar_relatorio_diario(atual: dict, anterior: dict | None, data_anterior: s
             partes.append(f"{len(novas)} nova(s) proposta(s) cadastrada(s) desde a verificação anterior ({data_anterior}):")
             for p in novas:
                 partes.append(f"  • {p}")
+                novos_estruturados.append({
+                    "tipo": "privado",
+                    "nome": p,
+                    "status": None,
+                    "caminho_pasta": f"1 - COMERCIAL/02.02 - Propostas/PROPOSTAS ANO {ano}/{p}",
+                })
         else:
             extremos = f", da {props_atual[0]} até a {props_atual[-1]}" if props_atual else ""
             partes.append(
@@ -530,6 +531,13 @@ def _gerar_relatorio_diario(atual: dict, anterior: dict | None, data_anterior: s
             partes.append(f"{len(novos)} novo(s) edital(is) adicionado(s) desde a verificação anterior ({data_anterior}):")
             for n in novos:
                 partes.append(f"  • {n} (em \"{mapa_atual[n]}\")")
+                status_n = mapa_atual[n]
+                novos_estruturados.append({
+                    "tipo": "publico",
+                    "nome": n,
+                    "status": status_n,
+                    "caminho_pasta": f"2 - LICITACAO/05.02 - Editais para Licitação/{ano}/{status_n}/{n}",
+                })
         else:
             partes.append(
                 "Não houve novos editais adicionados às pastas de status de licitação desde a última "
@@ -558,7 +566,7 @@ def _gerar_relatorio_diario(atual: dict, anterior: dict | None, data_anterior: s
 
     conteudo = "\n".join(partes)
     titulo = "Varredura do SharePoint"
-    return titulo, conteudo
+    return titulo, conteudo, novos_estruturados
 
 
 @app.route("/api/relatorios/executar-varredura", methods=["POST"])
@@ -588,7 +596,7 @@ def executar_varredura_sharepoint():
     anterior = anterior_doc["dados"] if anterior_doc else None
     data_anterior = _fmt_data_ms(anterior_doc["criadoEm"]) if anterior_doc else None
 
-    titulo, conteudo = _gerar_relatorio_diario(atual, anterior, data_anterior)
+    titulo, conteudo, novos = _gerar_relatorio_diario(atual, anterior, data_anterior)
 
     col_snapshots.insert_one({"_id": uuid.uuid4().hex, "dados": atual, "criadoEm": _agora_ms()})
 
@@ -597,6 +605,7 @@ def executar_varredura_sharepoint():
         "_id": rid,
         "titulo": titulo,
         "conteudo": conteudo,
+        "novos": novos,
         "autor": corpo.get("autor") or "",
         "criadoEm": _agora_ms(),
     }
@@ -604,26 +613,26 @@ def executar_varredura_sharepoint():
     return jsonify(_sem_id_mongo(doc_rel)), 201
 
 
-@app.route("/api/processos/analisar-ia", methods=["POST"])
-def analisar_ia():
+MODELOS_IA_PERMITIDOS = {"claude-opus-4-8", "claude-sonnet-5"}
+ESFORCOS_IA_PERMITIDOS = {"low", "medium", "high", "xhigh", "max"}
+
+
+def _rodar_analise_ia(pdfs: list, model: str | None = None, effort: str | None = None) -> dict:
+    """Manda uma lista de PDFs (nome, bytes) pro Claude com o prompt padrão do
+    Painel e devolve o JSON de análise já pronto pra importar como processo.
+    Reaproveitado tanto pelo upload manual (analisar_ia) quanto pela análise
+    automática de processos novos detectados na varredura do SharePoint."""
     if not anthropic_client:
-        return jsonify({"erro": "ANTHROPIC_API_KEY não configurada no servidor"}), 503
+        raise RuntimeError("ANTHROPIC_API_KEY não configurada no servidor")
 
-    arquivos = request.files.getlist("arquivos")
-    if not arquivos:
-        return jsonify({"erro": "Envie ao menos um arquivo no campo 'arquivos'"}), 400
+    total_bytes = sum(len(dados) for _, dados in pdfs)
+    if total_bytes > MAX_PDF_TOTAL_MB * 1024 * 1024:
+        raise ValueError(f"Total dos PDFs excede {MAX_PDF_TOTAL_MB} MB")
 
-    total_bytes = 0
-    content = []
     nomes = []
-    for arquivo in arquivos:
-        if arquivo.mimetype != "application/pdf":
-            return jsonify({"erro": f"Arquivo '{arquivo.filename}' não é PDF"}), 400
-        dados = arquivo.read()
-        total_bytes += len(dados)
-        if total_bytes > MAX_PDF_TOTAL_MB * 1024 * 1024:
-            return jsonify({"erro": f"Total dos PDFs excede {MAX_PDF_TOTAL_MB} MB"}), 400
-        nomes.append(arquivo.filename)
+    content = []
+    for nome, dados in pdfs:
+        nomes.append(nome)
         content.append({
             "type": "document",
             "source": {
@@ -634,27 +643,130 @@ def analisar_ia():
         })
     content.append({"type": "text", "text": PROMPT_IA})
 
-    try:
-        with anthropic_client.messages.stream(
-            model=ANTHROPIC_MODEL,
-            max_tokens=32000,
-            messages=[{"role": "user", "content": content}],
-        ) as stream:
-            resposta = stream.get_final_message()
-    except anthropic.APIStatusError as e:
-        return jsonify({"erro": f"Erro na API da IA: {e.message}"}), 502
+    kwargs = {}
+    if effort in ESFORCOS_IA_PERMITIDOS:
+        kwargs["output_config"] = {"effort": effort}
+
+    with anthropic_client.messages.stream(
+        model=model if model in MODELOS_IA_PERMITIDOS else ANTHROPIC_MODEL,
+        max_tokens=32000,
+        messages=[{"role": "user", "content": content}],
+        **kwargs,
+    ) as stream:
+        resposta = stream.get_final_message()
 
     texto = "".join(b.text for b in resposta.content if b.type == "text").strip()
     texto = re.sub(r"^```(?:json)?\s*|\s*```$", "", texto.strip())
-
-    try:
-        doc = json.loads(texto)
-    except json.JSONDecodeError:
-        return jsonify({"erro": "A IA não devolveu um JSON válido", "bruto": texto[:2000]}), 502
+    doc = json.loads(texto)  # deixa json.JSONDecodeError propagar pro chamador
 
     doc.setdefault("fontes", "; ".join(nomes))
     doc.setdefault("analise", {}).setdefault("_sourceFiles", "; ".join(nomes))
+    return doc
+
+
+def _preparar_e_inserir_processo(doc: dict) -> dict:
+    """Mesma preparação (id, timestamps, versão, defaults) que POST
+    /api/processos faz — reaproveitada pela criação manual e pela criação
+    automática a partir da análise de um processo novo do SharePoint."""
+    pid = doc.get("id") or (_slug(doc.get("nome", "")) + "-" + uuid.uuid4().hex[:6])
+    agora = _agora_ms()
+    doc["id"] = pid
+    doc.setdefault("criadoEm", agora)
+    doc["atualizadoEm"] = agora
+    doc["versao"] = int(doc.get("versao") or 1)
+    doc.setdefault("analise", {})
+    doc.setdefault("checklist", {})
+
+    doc["_id"] = pid
+    del doc["id"]
+    col_processos.insert_one(doc)
+    return doc
+
+
+@app.route("/api/processos/analisar-ia", methods=["POST"])
+def analisar_ia():
+    arquivos = request.files.getlist("arquivos")
+    if not arquivos:
+        return jsonify({"erro": "Envie ao menos um arquivo no campo 'arquivos'"}), 400
+
+    pdfs = []
+    total_bytes = 0
+    for arquivo in arquivos:
+        if arquivo.mimetype != "application/pdf":
+            return jsonify({"erro": f"Arquivo '{arquivo.filename}' não é PDF"}), 400
+        dados = arquivo.read()
+        total_bytes += len(dados)
+        if total_bytes > MAX_PDF_TOTAL_MB * 1024 * 1024:
+            return jsonify({"erro": f"Total dos PDFs excede {MAX_PDF_TOTAL_MB} MB"}), 400
+        pdfs.append((arquivo.filename, dados))
+
+    try:
+        doc = _rodar_analise_ia(pdfs)
+    except RuntimeError as e:
+        return jsonify({"erro": str(e)}), 503
+    except ValueError as e:
+        return jsonify({"erro": str(e)}), 400
+    except json.JSONDecodeError:
+        return jsonify({"erro": "A IA não devolveu um JSON válido"}), 502
+    except anthropic.APIStatusError as e:
+        return jsonify({"erro": f"Erro na API da IA: {e.message}"}), 502
+
     return jsonify(doc)
+
+
+@app.route("/api/processos/analisar-novo", methods=["POST"])
+def analisar_processo_novo():
+    """A partir de um item novo já identificado na varredura do SharePoint
+    (pasta conhecida, sem precisar de localização fuzzy), baixa os PDFs,
+    roda a análise por IA e já cria o processo no Painel — o botão "Rodar
+    análise e preencher informações" dentro do relatório do dia."""
+    if not (MONTADOR_TENANT_ID and MONTADOR_CLIENT_ID and MONTADOR_CLIENT_SECRET):
+        return jsonify({
+            "erro": "SharePoint não configurado neste servidor. Defina MONTADOR_TENANT_ID, "
+                    "MONTADOR_CLIENT_ID e MONTADOR_CLIENT_SECRET."
+        }), 503
+
+    corpo = request.get_json(silent=True) or {}
+    caminho_pasta = corpo.get("caminho_pasta")
+    tipo = corpo.get("tipo")
+    if not caminho_pasta or tipo not in ("publico", "privado"):
+        return jsonify({"erro": "Informe 'caminho_pasta' e 'tipo' ('publico' ou 'privado')."}), 400
+
+    cfg = {
+        "MODO_LOCAL": False,
+        "TENANT_ID": MONTADOR_TENANT_ID,
+        "CLIENT_ID": MONTADOR_CLIENT_ID,
+        "CLIENT_SECRET": MONTADOR_CLIENT_SECRET,
+    }
+    try:
+        pdfs_pasta = baixar_pdfs_da_pasta(cfg, caminho_pasta)
+    except Exception as e:
+        return jsonify({"erro": f"Falha ao baixar documentos do SharePoint: {e}"}), 502
+    if not pdfs_pasta:
+        return jsonify({"erro": "Nenhum PDF encontrado nessa pasta do SharePoint."}), 404
+
+    pdfs = [(p["nome"], p["bytes"]) for p in pdfs_pasta]
+    try:
+        doc = _rodar_analise_ia(pdfs, model=corpo.get("model"), effort=corpo.get("effort"))
+    except RuntimeError as e:
+        return jsonify({"erro": str(e)}), 503
+    except ValueError as e:
+        return jsonify({"erro": str(e)}), 400
+    except json.JSONDecodeError:
+        return jsonify({"erro": "A IA não devolveu um JSON válido a partir desses documentos."}), 502
+    except anthropic.APIStatusError as e:
+        return jsonify({"erro": f"Erro na API da IA: {e.message}"}), 502
+
+    doc["type"] = tipo
+    doc.setdefault("origem", "ia")
+    url_pasta = f"https://{SITE_HOSTNAME}{SITE_PATH}/Documentos/{caminho_pasta}"
+    doc.setdefault("analise", {})["geral_pasta_sharepoint"] = url_pasta
+
+    try:
+        doc = _preparar_e_inserir_processo(doc)
+    except DuplicateKeyError:
+        return jsonify({"erro": "Já existe processo com esse id", "id": doc.get("id") or doc.get("_id")}), 409
+    return jsonify(_sem_id_mongo(doc)), 201
 
 
 # ──────────────────────────────────────────────────────────────────

@@ -87,6 +87,11 @@ input, select, textarea { font-family:inherit; }
 .relatorio-meta { font-size:.76rem; color:var(--slate-mid); margin-bottom:12px; padding-bottom:10px; border-bottom:1px solid var(--border); }
 .relatorio-corpo { font-size:.86rem; color:var(--slate); line-height:1.6; white-space:pre-wrap; }
 .relatorio-vazio { font-size:.86rem; color:var(--slate-mid); text-align:center; padding:24px 10px; }
+.novos-processos { margin-top:6px; }
+.novo-item { background:var(--violet-l); border:1px solid #ddd6fe; border-radius:10px; padding:10px 12px; margin-bottom:8px; }
+.novo-item-nome { font-weight:700; font-size:.84rem; color:var(--slate); margin-bottom:8px; }
+.novo-item-acoes { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+.novo-select { border:1px solid var(--border); border-radius:7px; padding:5px 8px; font-size:.76rem; background:var(--white); color:var(--slate); }
 
 /* ── LISTA ── */
 .list-header { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:16px; flex-wrap:wrap; }
@@ -2426,10 +2431,13 @@ function fallbackCopy(t){
 }
 
 /* ── Atualizações do dia (relatório mais recente) ── */
+let ULTIMO_RELATORIO_NOVOS = [];
+
 async function abrirRelatorioDoDia(){
   abrirModal('modal-relatorio');
   const area = document.getElementById('relatorio-conteudo');
   area.innerHTML = '<p class="relatorio-vazio">Carregando…</p>';
+  ULTIMO_RELATORIO_NOVOS = [];
   if(Store.modo!=='api'){
     area.innerHTML = '<p class="relatorio-vazio">Disponível apenas com o Painel conectado ao backend (modo local não tem esse recurso).</p>';
     return;
@@ -2443,12 +2451,69 @@ async function abrirRelatorioDoDia(){
     if(!res.ok) throw new Error('Servidor respondeu ' + res.status);
     const rel = await res.json();
     const quando = rel.criadoEm ? new Date(rel.criadoEm).toLocaleString('pt-BR') : '';
+    ULTIMO_RELATORIO_NOVOS = rel.novos || [];
     area.innerHTML =
       '<div class="relatorio-meta">'+esc(rel.titulo||'Atualização')+(quando?' — '+esc(quando):'')+
       (rel.autor?' · por '+esc(rel.autor):'')+'</div>' +
-      '<div class="relatorio-corpo">'+esc(rel.conteudo||'')+'</div>';
+      '<div class="relatorio-corpo">'+esc(rel.conteudo||'')+'</div>' +
+      renderizarNovosProcessos(ULTIMO_RELATORIO_NOVOS);
+    a11yAtualizarItens();
   }catch(e){
     area.innerHTML = '<p class="relatorio-vazio">Não foi possível carregar as atualizações: '+esc(e.message)+'</p>';
+  }
+}
+
+function renderizarNovosProcessos(novos){
+  if(!novos || !novos.length) return '';
+  return '<div class="novos-processos">' +
+    '<div class="sec-divider" style="margin-top:16px;">📦 Processos novos identificados — rodar análise sozinha</div>' +
+    novos.map((n,i)=>{
+      const icone = n.tipo==='publico' ? '🏛️' : '🏢';
+      const statusHTML = n.status ? ' <span class="chip st-em_analise">'+esc(n.status)+'</span>' : '';
+      return '<div class="novo-item">' +
+        '<div class="novo-item-nome">'+icone+' '+esc(n.nome)+statusHTML+'</div>' +
+        '<div class="novo-item-acoes">' +
+          '<select class="novo-select" id="novo-'+i+'-modelo" aria-label="Modelo de IA para '+esc(n.nome)+'">' +
+            '<option value="claude-sonnet-5">Sonnet 5 (mais barato)</option>' +
+            '<option value="claude-opus-4-8" selected>Opus 4.8 (mais cuidadoso)</option>' +
+          '</select>' +
+          '<select class="novo-select" id="novo-'+i+'-esforco" aria-label="Nível de esforço para '+esc(n.nome)+'">' +
+            '<option value="low">Esforço baixo</option>' +
+            '<option value="medium">Esforço médio</option>' +
+            '<option value="high" selected>Esforço alto</option>' +
+            '<option value="xhigh">Esforço muito alto</option>' +
+            '<option value="max">Esforço máximo</option>' +
+          '</select>' +
+          '<button class="btn-sm violet" onclick="rodarAnaliseNova('+i+', this)">▶ Rodar análise e preencher informações</button>' +
+        '</div>' +
+      '</div>';
+    }).join('') +
+  '</div>';
+}
+
+async function rodarAnaliseNova(i, btn){
+  const item = ULTIMO_RELATORIO_NOVOS[i];
+  if(!item) return;
+  const modelo = document.getElementById('novo-'+i+'-modelo').value;
+  const esforco = document.getElementById('novo-'+i+'-esforco').value;
+  const textoOriginal = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = 'Analisando… (pode levar alguns minutos)';
+  try{
+    const resp = await fetch(Store.base + '/processos/analisar-novo', {
+      method: 'POST', headers: Store.headers(),
+      body: JSON.stringify({ caminho_pasta: item.caminho_pasta, tipo: item.tipo, model: modelo, effort: esforco })
+    });
+    const corpo = await resp.json().catch(()=>({}));
+    if(!resp.ok) throw new Error(corpo.erro || ('Servidor respondeu '+resp.status));
+    toast('Processo criado a partir da análise automática!');
+    fecharModal('modal-relatorio');
+    await recarregarLista();
+    openProcess(corpo.id);
+  }catch(e){
+    toast('Erro ao analisar '+item.nome+': '+e.message);
+    btn.disabled = false;
+    btn.textContent = textoOriginal;
   }
 }
 

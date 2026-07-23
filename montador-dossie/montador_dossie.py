@@ -44,6 +44,7 @@ import sys
 import json
 import time
 import shutil
+import tempfile
 import argparse
 import logging
 import unicodedata
@@ -235,6 +236,37 @@ def baixar_arquivo(gc: GraphClient, drive_id: str, item_id: str, destino: Path) 
         destino.unlink(missing_ok=True)
         raise
     log.info(f"Baixado: {destino.name} ({destino.stat().st_size/1024:.0f} KB)")
+
+
+def baixar_pdfs_da_pasta(cfg: dict, caminho_pasta: str, limite_mb: int = 24) -> list:
+    """Baixa (em memoria) todos os PDFs de uma pasta do SharePoint, varrendo
+    subpastas (ex.: 'Anexos'), ate um limite total de tamanho. Usado para
+    alimentar a analise automatica por IA de um processo recem-chegado -
+    diferente do montar_dossie_por_processo, aqui a pasta ja e conhecida
+    (veio da propria varredura), sem precisar de localizacao fuzzy.
+    Retorna [{'nome': str, 'bytes': bytes}, ...]."""
+    token = obter_token(cfg)
+    gc = GraphClient(token)
+    site_id = obter_site_id(gc, SITE_HOSTNAME, SITE_PATH)
+    drive_id = obter_drive_id(gc, site_id)
+
+    itens = listar_recursivo(gc, drive_id, caminho_pasta)
+    pdfs = [it for it in itens if it["name"].lower().endswith(".pdf")]
+
+    limite_bytes = limite_mb * 1024 * 1024
+    total = 0
+    resultado = []
+    with tempfile.TemporaryDirectory() as tmp:
+        for it in pdfs:
+            destino = Path(tmp) / it["name"]
+            baixar_arquivo(gc, drive_id, it["id"], destino)
+            dados = destino.read_bytes()
+            if total + len(dados) > limite_bytes:
+                log.info(f"Ignorando {it['name']}: excederia o limite de {limite_mb} MB para a analise")
+                continue
+            total += len(dados)
+            resultado.append({"nome": it["name"], "bytes": dados})
+    return resultado
 
 
 # ---------------------------------------------------------------------------
