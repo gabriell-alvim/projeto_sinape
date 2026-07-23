@@ -1408,6 +1408,7 @@ function toast(msg){
   const t = document.getElementById('toast');
   t.textContent = msg; t.classList.add('show');
   clearTimeout(t._tm); t._tm = setTimeout(()=>t.classList.remove('show'), 3200);
+  if(typeof A11Y!=='undefined' && A11Y.ativo) a11yAnunciar(msg);
 }
 function setSync(estado, texto){
   const pill = document.getElementById('sync-pill');
@@ -2449,9 +2450,11 @@ async function executarAnaliseAgora(){
 /* ════════════════════════════════════════════════════════════════
    MODO ACESSIBILIDADE — navegação numérica opt-in p/ NVDA
    Não altera a experiência de quem não ativa. Numera de 1 a 9 as opções
-   da tela (abas, botões de ação, cards de menu/lista, seções da Análise
-   Crítica); páginas de 9 em 9 quando há mais itens; suspende
-   automaticamente dentro de campos editáveis.
+   da tela (abas, botões de ação, cards de menu/lista, seções de qualquer
+   uma das 3 abas do processo — Análise Crítica, Exigências e Checklist);
+   páginas de 9 em 9 quando há mais itens; suspende automaticamente
+   dentro de campos editáveis; avisos de erro/sucesso (toast) também são
+   falados automaticamente enquanto o modo está ligado.
    Evita a tecla Insert de propósito: é a tecla modificadora padrão do
    NVDA (ou nem existe em muitos teclados de notebook), então o navegador
    nunca chega a receber esse evento de tecla.
@@ -2459,11 +2462,13 @@ async function executarAnaliseAgora(){
    Atalhos:
      Ctrl+Alt+A   liga/desliga o modo
      1–9          seleciona (1º toque) / ativa (2º toque) a opção
-     Enter        ativa a opção selecionada
+     Enter        ativa a opção selecionada; dentro de uma seção já aberta,
+                  pula pro primeiro campo editável dela
      Backspace    volta um nível (conteúdo→abas→lista→início)
      , e 0 (num.) próxima página / página anterior, quando há mais de 9 itens
      Ctrl+Alt+I   anuncia identificação do processo aberto (nome/órgão/status/%)
      Ctrl+Alt+R   repete o último anúncio
+     Ctrl+Alt+H   fala a lista de atalhos (esta ajuda)
    ════════════════════════════════════════════════════════════════ */
 const A11Y = { ativo: localStorage.getItem('sinape:a11y')==='1', foco:null, pagina:0, nivel:'tela', todosItens:[], itensAtuais:[], avisoCampoDado:false, ultimoAnuncio:'' };
 
@@ -2479,6 +2484,18 @@ function a11yAnunciarIdentificacao(){
   const orgao = a.geral_orgao || 'órgão não informado';
   const statusLabel = STATUS_LABELS[currentProc.status] || currentProc.status || 'sem status';
   a11yAnunciar(currentProc.nome+' — '+orgao+' — Status: '+statusLabel+' — '+(currentProc.progress||0)+'% do checklist.');
+}
+function a11yAjuda(){
+  a11yAnunciar(
+    'Atalhos do modo acessibilidade: ' +
+    'Control mais Alt mais A liga ou desliga o modo. ' +
+    'Números de 1 a 9 selecionam uma opção; aperte o mesmo número de novo, ou Enter, para abrir. ' +
+    'Backspace volta um nível. ' +
+    'Vírgula do teclado numérico avança de página, e o zero volta, quando há mais de 9 opções. ' +
+    'Control mais Alt mais I fala qual processo está aberto agora. ' +
+    'Control mais Alt mais R repete o último aviso. ' +
+    'Control mais Alt mais H repete esta ajuda.'
+  );
 }
 /* sobe um nível de navegação: conteúdo da aba → abas → lista → início */
 function a11yVoltar(){
@@ -2531,27 +2548,54 @@ function a11yAtualizarItens(manterNivel){
     A11Y.todosItens = Array.from(document.querySelectorAll('#process-grid .proc-card'))
       .map(c=>({el:c, label:(c.querySelector('.pc-nome')?.textContent)||'Processo'}));
   } else if(document.getElementById('view-process').classList.contains('active')){
-    if(A11Y.nivel==='conteudo' && document.getElementById('panel-analise').classList.contains('active')){
-      A11Y.todosItens = Array.from(document.querySelectorAll('#analise-root .sec-card')).map(card=>{
+    const painelAtivo = document.querySelector('.panel.active');
+    const rootPorPainel = { 'panel-analise':'analise-root', 'panel-exigencias':'exigencias-root', 'panel-checklist':'checklist-root' };
+    const rootId = painelAtivo && rootPorPainel[painelAtivo.id];
+    if(A11Y.nivel==='conteudo' && rootId){
+      const usaFiltro = painelAtivo.id === 'panel-analise';
+      const listaSecoes = Array.from(document.querySelectorAll('#'+rootId+' .sec-card')).map(card=>{
         const head = card.querySelector('.sec-head');
         const tituloEl = card.querySelector('.sec-title');
         const titulo = tituloEl ? tituloEl.textContent.trim() : 'Seção';
-        return { el: head, label: titulo, ativar: ()=>{
-          setFilter('all');
-          card.classList.remove('collapsed');
-          card.scrollIntoView({block:'start', behavior:'smooth'});
-          head.focus();
-          a11yAnunciar('Seção: '+titulo+'.');
-        }};
+        return { el: head, label: titulo, card };
       }).filter(i=>i.el);
+      /* ativação nº1 entra na seção (expande + rola); ativação nº2, já dentro
+         dela, pula direto pro primeiro campo editável. Usa uma flag própria
+         (não o foco do DOM) porque a própria "prévia" do número já foca o
+         cabeçalho da seção antes de qualquer ativação. */
+      listaSecoes.forEach(item=>{
+        item._entrou = false;
+        item.ativar = ()=>{
+          if(!item._entrou){
+            item._entrou = true;
+            if(usaFiltro) setFilter('all');
+            item.card.classList.remove('collapsed');
+            item.card.scrollIntoView({block:'start', behavior:'smooth'});
+            item.el.focus();
+            const n = A11Y.itensAtuais.indexOf(item)+1;
+            A11Y.foco = n>0 ? n : null;
+            a11yAnunciar('Seção: '+item.label+'. Pressione Enter novamente para ir ao primeiro campo.');
+          } else {
+            // prefere um campo de texto/seleção (mais informativo) a uma checkbox solta
+            const alvo = item.card.querySelector('textarea, select, input:not([type=checkbox]):not([type=radio])')
+                      || item.card.querySelector('input[type=checkbox], input[type=radio]');
+            if(!alvo){ a11yAnunciar('Esta seção não tem campos editáveis.'); return; }
+            alvo.focus();
+            let nome = alvo.getAttribute('aria-label') || '';
+            if(!nome && alvo.id){ const lab = document.querySelector('label[for="'+alvo.id+'"]'); if(lab) nome = lab.textContent.trim(); }
+            if(!nome){ const labEnvolvente = alvo.closest('label'); if(labEnvolvente) nome = labEnvolvente.textContent.trim(); }
+            a11yAnunciar('Primeiro campo: '+(nome||'sem nome')+'.');
+          }
+        };
+      });
+      A11Y.todosItens = listaSecoes;
     } else {
       A11Y.nivel = 'tela';
+      const entrarConteudo = tab=>()=>{ switchProcessTab(tab); A11Y.nivel='conteudo'; a11yAtualizarItens(true); };
       A11Y.todosItens = [
-        {el: document.getElementById('tab-analise'), label:'Aba Análise Crítica', ativar: ()=>{
-          switchProcessTab('analise'); A11Y.nivel = 'conteudo'; a11yAtualizarItens(true);
-        }},
-        {el: document.getElementById('tab-exigencias'), label:'Aba Exigências'},
-        {el: document.getElementById('tab-checklist'), label:'Aba Checklist do Edital'},
+        {el: document.getElementById('tab-analise'), label:'Aba Análise Crítica', ativar: entrarConteudo('analise')},
+        {el: document.getElementById('tab-exigencias'), label:'Aba Exigências', ativar: entrarConteudo('exigencias')},
+        {el: document.getElementById('tab-checklist'), label:'Aba Checklist do Edital', ativar: entrarConteudo('checklist')},
         {el: document.getElementById('btn-montar-dossie'), label:'Montar dossiê de habilitação'}
       ].filter(i=>i.el);
     }
@@ -2612,6 +2656,9 @@ document.addEventListener('keydown', function(e){
   }
   if(e.ctrlKey && e.altKey && (e.key==='r' || e.key==='R')){
     e.preventDefault(); if(A11Y.ultimoAnuncio) a11yAnunciar(A11Y.ultimoAnuncio); return;
+  }
+  if(e.ctrlKey && e.altKey && (e.key==='h' || e.key==='H')){
+    e.preventDefault(); a11yAjuda(); return;
   }
   if(a11yEstaEmCampoEditavel(document.activeElement)) return;
   if(e.key>='1' && e.key<='9' && !e.altKey && !e.ctrlKey && !e.metaKey){
