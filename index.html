@@ -471,6 +471,28 @@ input, select, textarea { font-family:inherit; }
   </div>
 </div>
 
+<!-- MODAL: AJUDA DO MODO ACESSIBILIDADE (Ctrl+Alt+H) -->
+<div class="modal-overlay" id="modal-a11y-ajuda">
+  <div class="modal-box" role="dialog" aria-label="Atalhos do Modo Acessibilidade">
+    <h3>⌨️ Atalhos do Modo Acessibilidade</h3>
+    <div class="hint" style="line-height:1.9;">
+      <b>Ctrl+Alt+A</b> — liga/desliga o modo<br>
+      <b>1–9</b> — 1º toque seleciona, 2º toque (ou Enter) ativa<br>
+      <b>Enter</b> — ativa a opção selecionada / avança pro próximo nível<br>
+      <b>Backspace</b> — volta um nível (ou fecha esta janela)<br>
+      <b>, do numérico</b> — próxima página (mais de 9 opções)<br>
+      <b>0 do numérico</b> — página anterior<br>
+      <b>Ctrl+Alt+I</b> — identificação do processo aberto<br>
+      <b>Ctrl+Alt+O</b> — onde você está agora<br>
+      <b>Ctrl+Alt+R</b> — repete o último aviso falado<br>
+      <b>Ctrl+Alt+H</b> — abre/fecha esta lista
+    </div>
+    <div class="modal-actions">
+      <button class="btn-ghost" onclick="fecharModal('modal-a11y-ajuda')">Fechar</button>
+    </div>
+  </div>
+</div>
+
 <!-- MODAL: NOME DO USUÁRIO (uma vez por navegador) -->
 <div class="modal-overlay" id="modal-usuario">
   <div class="modal-box">
@@ -1522,8 +1544,8 @@ async function recarregarLista(){
 
 /* ── novo processo manual ── */
 function openNewProcessModal(){ document.getElementById('input-novo-nome').value=''; abrirModal('modal-novo'); }
-function abrirModal(id){ document.getElementById(id).classList.add('open'); }
-function fecharModal(id){ document.getElementById(id).classList.remove('open'); }
+function abrirModal(id){ document.getElementById(id).classList.add('open'); a11yAtualizarItens(); }
+function fecharModal(id){ document.getElementById(id).classList.remove('open'); a11yAtualizarItens(); }
 async function confirmNewProcess(){
   const nome = document.getElementById('input-novo-nome').value.trim();
   if(!nome){ toast('Informe o nome do processo.'); return; }
@@ -1682,7 +1704,14 @@ function setFilter(f){
     card.classList.toggle('hidden', f!=='all' && card.dataset.tag!==f);
   });
 }
-function toggleSec(head){ head.closest('.sec-card').classList.toggle('collapsed'); }
+function toggleSec(head){
+  const card = head.closest('.sec-card');
+  card.classList.toggle('collapsed');
+  if(typeof A11Y!=='undefined' && A11Y.ativo){
+    const titulo = (head.querySelector('.sec-title')?.textContent||'Seção').trim();
+    a11yAnunciar((card.classList.contains('collapsed')?'Seção recolhida: ':'Seção expandida: ')+titulo+'.');
+  }
+}
 
 /* ── campos ── */
 let _fldSeq = 0;
@@ -2450,11 +2479,15 @@ async function executarAnaliseAgora(){
 /* ════════════════════════════════════════════════════════════════
    MODO ACESSIBILIDADE — navegação numérica opt-in p/ NVDA
    Não altera a experiência de quem não ativa. Numera de 1 a 9 as opções
-   da tela (abas, botões de ação, cards de menu/lista, seções de qualquer
-   uma das 3 abas do processo — Análise Crítica, Exigências e Checklist);
-   páginas de 9 em 9 quando há mais itens; suspende automaticamente
-   dentro de campos editáveis; avisos de erro/sucesso (toast) também são
-   falados automaticamente enquanto o modo está ligado.
+   da tela (abas, botões de ação, cards de menu/lista, botões de qualquer
+   modal aberto, seções de qualquer uma das 3 abas do processo — Análise
+   Crítica, Exigências e Checklist — e, dentro de Exigências/Checklist,
+   os itens de cada seção); páginas de 9 em 9 quando há mais itens;
+   suspende automaticamente dentro de campos editáveis; avisos de
+   erro/sucesso (toast) e expandir/recolher seção também são falados
+   automaticamente enquanto o modo está ligado. Lembra, por processo e
+   por aba, a última seção visitada (localStorage) e volta direto pra
+   ela ao reabrir.
    Evita a tecla Insert de propósito: é a tecla modificadora padrão do
    NVDA (ou nem existe em muitos teclados de notebook), então o navegador
    nunca chega a receber esse evento de tecla.
@@ -2463,12 +2496,15 @@ async function executarAnaliseAgora(){
      Ctrl+Alt+A   liga/desliga o modo
      1–9          seleciona (1º toque) / ativa (2º toque) a opção
      Enter        ativa a opção selecionada; dentro de uma seção já aberta,
-                  pula pro primeiro campo editável dela
-     Backspace    volta um nível (conteúdo→abas→lista→início)
+                  entra nos itens dela (ou pula pro primeiro campo, se não
+                  houver itens numeráveis)
+     Backspace    volta um nível (itens→seções→abas→lista→início) ou
+                  fecha a janela/modal aberta
      , e 0 (num.) próxima página / página anterior, quando há mais de 9 itens
      Ctrl+Alt+I   anuncia identificação do processo aberto (nome/órgão/status/%)
+     Ctrl+Alt+O   anuncia em que tela/nível você está agora
      Ctrl+Alt+R   repete o último anúncio
-     Ctrl+Alt+H   fala a lista de atalhos (esta ajuda)
+     Ctrl+Alt+H   abre/fecha a lista de atalhos na tela (texto, não só fala)
    ════════════════════════════════════════════════════════════════ */
 const A11Y = { ativo: localStorage.getItem('sinape:a11y')==='1', foco:null, pagina:0, nivel:'tela', todosItens:[], itensAtuais:[], avisoCampoDado:false, ultimoAnuncio:'' };
 
@@ -2486,20 +2522,94 @@ function a11yAnunciarIdentificacao(){
   a11yAnunciar(currentProc.nome+' — '+orgao+' — Status: '+statusLabel+' — '+(currentProc.progress||0)+'% do checklist.');
 }
 function a11yAjuda(){
-  a11yAnunciar(
-    'Atalhos do modo acessibilidade: ' +
-    'Control mais Alt mais A liga ou desliga o modo. ' +
-    'Números de 1 a 9 selecionam uma opção; aperte o mesmo número de novo, ou Enter, para abrir. ' +
-    'Backspace volta um nível. ' +
-    'Vírgula do teclado numérico avança de página, e o zero volta, quando há mais de 9 opções. ' +
-    'Control mais Alt mais I fala qual processo está aberto agora. ' +
-    'Control mais Alt mais R repete o último aviso. ' +
-    'Control mais Alt mais H repete esta ajuda.'
-  );
+  const modal = document.getElementById('modal-a11y-ajuda');
+  if(modal.classList.contains('open')){ fecharModal('modal-a11y-ajuda'); }
+  else { abrirModal('modal-a11y-ajuda'); a11yAnunciar('Lista de atalhos aberta na tela.'); }
 }
-/* sobe um nível de navegação: conteúdo da aba → abas → lista → início */
-function a11yVoltar(){
+function a11yOndeEstou(){
+  if(document.querySelector('.modal-overlay.open')){
+    const titulo = document.querySelector('.modal-overlay.open h3');
+    a11yAnunciar('Você está numa janela: '+(titulo?titulo.textContent.trim():'sem título')+'.');
+    return;
+  }
+  if(document.getElementById('view-home').classList.contains('active')){ a11yAnunciar('Você está na tela inicial.'); return; }
+  if(document.getElementById('view-list').classList.contains('active')){
+    a11yAnunciar('Você está na lista de '+(currentType==='publico'?'Processos Públicos':'Processos Privados')+'.');
+    return;
+  }
   if(document.getElementById('view-process').classList.contains('active')){
+    const abaAtual = (document.querySelector('.main-tab.active')||{}).textContent||'';
+    let msg = 'Processo: '+(currentProc?currentProc.nome:'sem nome')+'. Aba: '+abaAtual.trim()+'.';
+    if(A11Y.nivel==='conteudo') msg += ' Navegando pelas seções.';
+    if(A11Y.nivel==='itens') msg += ' Navegando pelos itens de uma seção.';
+    a11yAnunciar(msg);
+    return;
+  }
+  a11yAnunciar('Não foi possível identificar a tela atual.');
+}
+/* lembra, por processo+aba, a última seção visitada (persiste entre sessões) */
+function a11ySalvarUltimaSecao(tab, titulo){
+  if(!currentProc) return;
+  const mapa = JSON.parse(localStorage.getItem('sinape:a11y:ultimaSecao')||'{}');
+  mapa[currentProc.id+'|'+tab] = titulo;
+  localStorage.setItem('sinape:a11y:ultimaSecao', JSON.stringify(mapa));
+}
+function a11yLerUltimaSecao(tab){
+  if(!currentProc) return null;
+  const mapa = JSON.parse(localStorage.getItem('sinape:a11y:ultimaSecao')||'{}');
+  return mapa[currentProc.id+'|'+tab] || null;
+}
+/* entra num 3º nível listando os itens de dentro de uma seção (linhas do
+   checklist ou da tabela de exigências); retorna false se a seção não tiver
+   itens desse tipo, e quem chamou deve então cair no comportamento antigo
+   (focar direto o 1º campo). */
+function a11yEntrarItens(secaoItem){
+  const cardEl = secaoItem.card;
+  let subItens = [];
+  if(cardEl.querySelectorAll('.chk-item').length){
+    subItens = Array.from(cardEl.querySelectorAll('.chk-item')).map((el,idx)=>({
+      el, label: ((el.querySelector('.chk-text')||{}).textContent||('Item '+(idx+1))).trim().slice(0,90)
+    }));
+  } else if(cardEl.querySelectorAll('tbody tr').length){
+    subItens = Array.from(cardEl.querySelectorAll('tbody tr')).map((el,idx)=>({
+      el, label: ((el.querySelector('.exig-desc')||{}).textContent||('Item '+(idx+1))).trim().slice(0,90)
+    }));
+  }
+  if(!subItens.length) return false;
+  subItens.forEach(it=>{
+    it.ativar = ()=>{
+      const alvo = it.el.querySelector('textarea, select, input:not([type=checkbox]):not([type=radio])')
+                || it.el.querySelector('input[type=checkbox], input[type=radio]');
+      it.el.scrollIntoView({block:'center', behavior:'smooth'});
+      if(alvo){ alvo.focus(); a11yAnunciar('Campo do item: '+it.label+'.'); }
+      else { it.el.focus(); a11yAnunciar('Item: '+it.label+'.'); }
+    };
+  });
+  A11Y.nivel = 'itens';
+  A11Y.foco = null;
+  A11Y.todosItens = subItens;
+  A11Y.pagina = 0;
+  a11yRenderizarPagina();
+  a11yAnunciar(subItens.length+' item(ns) nesta seção. Use os números para navegar, ou Backspace para voltar às seções.');
+  return true;
+}
+/* sobe um nível: itens→seções→abas→lista→início; ou fecha um modal aberto */
+function a11yVoltar(){
+  const modalAberto = document.querySelector('.modal-overlay.open');
+  if(modalAberto){
+    modalAberto.classList.remove('open');
+    a11yAnunciar('Janela fechada.');
+    a11yAtualizarItens();
+    return;
+  }
+  if(document.getElementById('view-process').classList.contains('active')){
+    if(A11Y.nivel==='itens'){
+      a11yAnunciar('Voltar para: seções.');
+      A11Y.nivel = 'conteudo';
+      A11Y._pularRestauro = true; // já estávamos numa seção; não repete o "continuando de onde parou"
+      a11yAtualizarItens(true);
+      return;
+    }
     if(A11Y.nivel==='conteudo'){
       a11yAnunciar('Voltar para: abas do processo.');
       a11yAtualizarItens();
@@ -2534,8 +2644,26 @@ function a11yToggle(){
 function a11yAtualizarItens(manterNivel){
   document.querySelectorAll('.a11y-num').forEach(n=>n.remove());
   A11Y.todosItens = [];
+  let _restaurarSecao = null; // preenchido pelo ramo de conteúdo; executado só depois de paginar
+  const modalAberto = document.querySelector('.modal-overlay.open');
+  if(modalAberto){
+    A11Y.nivel = 'modal';
+    if(!A11Y.ativo){ A11Y.itensAtuais = []; return; }
+    A11Y.todosItens = Array.from(modalAberto.querySelectorAll('.modal-actions button'))
+      .map(b=>({el:b, label:b.textContent.trim()}));
+    A11Y.pagina = Math.min(A11Y.pagina, Math.max(0, Math.ceil(A11Y.todosItens.length/9)-1));
+    a11yRenderizarPagina();
+    return;
+  }
   if(!manterNivel) A11Y.nivel = 'tela';
   if(!A11Y.ativo){ A11Y.itensAtuais = []; return; }
+
+  if(A11Y.nivel==='itens'){
+    /* nível de itens é montado sob demanda por a11yEntrarItens() a partir de
+       uma seção específica; se chegarmos aqui sem esse contexto (ex.: F5 na
+       página), volta pro nível de conteúdo com segurança. */
+    A11Y.nivel = 'conteudo';
+  }
 
   if(document.getElementById('view-home').classList.contains('active')){
     A11Y.todosItens = [
@@ -2553,6 +2681,7 @@ function a11yAtualizarItens(manterNivel){
     const rootId = painelAtivo && rootPorPainel[painelAtivo.id];
     if(A11Y.nivel==='conteudo' && rootId){
       const usaFiltro = painelAtivo.id === 'panel-analise';
+      const abaAtualId = Object.keys(rootPorPainel).find(k=>rootPorPainel[k]===rootId).replace('panel-','');
       const listaSecoes = Array.from(document.querySelectorAll('#'+rootId+' .sec-card')).map(card=>{
         const head = card.querySelector('.sec-head');
         const tituloEl = card.querySelector('.sec-title');
@@ -2560,9 +2689,10 @@ function a11yAtualizarItens(manterNivel){
         return { el: head, label: titulo, card };
       }).filter(i=>i.el);
       /* ativação nº1 entra na seção (expande + rola); ativação nº2, já dentro
-         dela, pula direto pro primeiro campo editável. Usa uma flag própria
-         (não o foco do DOM) porque a própria "prévia" do número já foca o
-         cabeçalho da seção antes de qualquer ativação. */
+         dela, numera os itens de dentro (checklist/exigências) ou, se não
+         houver itens desse tipo (Análise Crítica), pula direto pro primeiro
+         campo editável. Usa uma flag própria (não o foco do DOM) porque a
+         própria "prévia" do número já foca o cabeçalho antes de ativar. */
       listaSecoes.forEach(item=>{
         item._entrou = false;
         item.ativar = ()=>{
@@ -2574,9 +2704,10 @@ function a11yAtualizarItens(manterNivel){
             item.el.focus();
             const n = A11Y.itensAtuais.indexOf(item)+1;
             A11Y.foco = n>0 ? n : null;
-            a11yAnunciar('Seção: '+item.label+'. Pressione Enter novamente para ir ao primeiro campo.');
-          } else {
-            // prefere um campo de texto/seleção (mais informativo) a uma checkbox solta
+            a11ySalvarUltimaSecao(abaAtualId, item.label);
+            a11yAnunciar('Seção: '+item.label+'. Pressione Enter novamente para ver os itens.');
+          } else if(!a11yEntrarItens(item)){
+            // sem itens numeráveis (Análise Crítica): pula pro primeiro campo
             const alvo = item.card.querySelector('textarea, select, input:not([type=checkbox]):not([type=radio])')
                       || item.card.querySelector('input[type=checkbox], input[type=radio]');
             if(!alvo){ a11yAnunciar('Esta seção não tem campos editáveis.'); return; }
@@ -2589,6 +2720,16 @@ function a11yAtualizarItens(manterNivel){
         };
       });
       A11Y.todosItens = listaSecoes;
+      // reabre direto na última seção visitada deste processo+aba, se houver
+      // (executado só no final, depois que A11Y.itensAtuais já estiver correto)
+      if(!A11Y._pularRestauro){
+        const lembrada = a11yLerUltimaSecao(abaAtualId);
+        if(lembrada){
+          const alvo = listaSecoes.find(s=>s.label===lembrada);
+          if(alvo) _restaurarSecao = alvo;
+        }
+      }
+      A11Y._pularRestauro = false;
     } else {
       A11Y.nivel = 'tela';
       const entrarConteudo = tab=>()=>{ switchProcessTab(tab); A11Y.nivel='conteudo'; a11yAtualizarItens(true); };
@@ -2602,6 +2743,10 @@ function a11yAtualizarItens(manterNivel){
   }
   A11Y.pagina = Math.min(A11Y.pagina, Math.max(0, Math.ceil(A11Y.todosItens.length/9)-1));
   a11yRenderizarPagina();
+  if(_restaurarSecao){
+    _restaurarSecao.ativar();
+    a11yAnunciar('Continuando de onde você parou: '+_restaurarSecao.label+'. Pressione Enter novamente para ver os itens.');
+  }
 }
 function a11yRenderizarPagina(){
   document.querySelectorAll('.a11y-num').forEach(n=>n.remove());
@@ -2659,6 +2804,9 @@ document.addEventListener('keydown', function(e){
   }
   if(e.ctrlKey && e.altKey && (e.key==='h' || e.key==='H')){
     e.preventDefault(); a11yAjuda(); return;
+  }
+  if(e.ctrlKey && e.altKey && (e.key==='o' || e.key==='O')){
+    e.preventDefault(); a11yOndeEstou(); return;
   }
   if(a11yEstaEmCampoEditavel(document.activeElement)) return;
   if(e.key>='1' && e.key<='9' && !e.altKey && !e.ctrlKey && !e.metaKey){
