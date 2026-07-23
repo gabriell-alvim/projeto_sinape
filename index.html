@@ -2447,20 +2447,57 @@ async function executarAnaliseAgora(){
 }
 
 /* ════════════════════════════════════════════════════════════════
-   MODO ACESSIBILIDADE — navegação numérica opt-in p/ NVDA (Ctrl+Alt+A)
+   MODO ACESSIBILIDADE — navegação numérica opt-in p/ NVDA
    Não altera a experiência de quem não ativa. Numera de 1 a 9 as opções
-   da tela (abas, botões de ação, cards de menu/lista); páginas de 9 em 9
-   quando há mais itens; suspende automaticamente dentro de campos editáveis.
+   da tela (abas, botões de ação, cards de menu/lista, seções da Análise
+   Crítica); páginas de 9 em 9 quando há mais itens; suspende
+   automaticamente dentro de campos editáveis.
    Evita a tecla Insert de propósito: é a tecla modificadora padrão do
    NVDA (ou nem existe em muitos teclados de notebook), então o navegador
    nunca chega a receber esse evento de tecla.
+
+   Atalhos:
+     Ctrl+Alt+A   liga/desliga o modo
+     1–9          seleciona (1º toque) / ativa (2º toque) a opção
+     Enter        ativa a opção selecionada
+     Backspace    volta um nível (conteúdo→abas→lista→início)
+     , e 0 (num.) próxima página / página anterior, quando há mais de 9 itens
+     Ctrl+Alt+I   anuncia identificação do processo aberto (nome/órgão/status/%)
+     Ctrl+Alt+R   repete o último anúncio
    ════════════════════════════════════════════════════════════════ */
-const A11Y = { ativo: localStorage.getItem('sinape:a11y')==='1', foco:null, pagina:0, todosItens:[], itensAtuais:[], avisoCampoDado:false };
+const A11Y = { ativo: localStorage.getItem('sinape:a11y')==='1', foco:null, pagina:0, nivel:'tela', todosItens:[], itensAtuais:[], avisoCampoDado:false, ultimoAnuncio:'' };
 
 function a11yAnunciar(msg){
+  A11Y.ultimoAnuncio = msg;
   const el = document.getElementById('a11y-anuncio');
   el.textContent = '';
   setTimeout(()=>{ el.textContent = msg; }, 30);
+}
+function a11yAnunciarIdentificacao(){
+  if(!currentProc){ a11yAnunciar('Nenhum processo aberto no momento.'); return; }
+  const a = currentProc.analise || {};
+  const orgao = a.geral_orgao || 'órgão não informado';
+  const statusLabel = STATUS_LABELS[currentProc.status] || currentProc.status || 'sem status';
+  a11yAnunciar(currentProc.nome+' — '+orgao+' — Status: '+statusLabel+' — '+(currentProc.progress||0)+'% do checklist.');
+}
+/* sobe um nível de navegação: conteúdo da aba → abas → lista → início */
+function a11yVoltar(){
+  if(document.getElementById('view-process').classList.contains('active')){
+    if(A11Y.nivel==='conteudo'){
+      a11yAnunciar('Voltar para: abas do processo.');
+      a11yAtualizarItens();
+      return;
+    }
+    a11yAnunciar('Voltar para: '+(currentType==='publico'?'Processos Públicos':'Processos Privados')+'.');
+    openList(currentType);
+    return;
+  }
+  if(document.getElementById('view-list').classList.contains('active')){
+    a11yAnunciar('Voltar para: Início.');
+    goHome();
+    return;
+  }
+  a11yAnunciar('Você já está na tela inicial.');
 }
 function a11yEstaEmCampoEditavel(el){
   if(!el) return false;
@@ -2474,10 +2511,13 @@ function a11yToggle(){
   a11yAnunciar(A11Y.ativo ? 'Modo acessibilidade ativado. Navegação numérica disponível.' : 'Modo acessibilidade desativado.');
   a11yAtualizarItens();
 }
-/* recalcula os itens navegáveis da tela atual — chamado após toda troca de tela/re-render */
-function a11yAtualizarItens(){
+/* recalcula os itens navegáveis da tela atual — chamado após toda troca de tela/re-render.
+   manterNivel=true preserva A11Y.nivel (usado ao entrar no conteúdo de uma aba); caso
+   contrário volta sempre para o nível de tela (abas/cards). */
+function a11yAtualizarItens(manterNivel){
   document.querySelectorAll('.a11y-num').forEach(n=>n.remove());
   A11Y.todosItens = [];
+  if(!manterNivel) A11Y.nivel = 'tela';
   if(!A11Y.ativo){ A11Y.itensAtuais = []; return; }
 
   if(document.getElementById('view-home').classList.contains('active')){
@@ -2491,12 +2531,30 @@ function a11yAtualizarItens(){
     A11Y.todosItens = Array.from(document.querySelectorAll('#process-grid .proc-card'))
       .map(c=>({el:c, label:(c.querySelector('.pc-nome')?.textContent)||'Processo'}));
   } else if(document.getElementById('view-process').classList.contains('active')){
-    A11Y.todosItens = [
-      {el: document.getElementById('tab-analise'), label:'Aba Análise Crítica'},
-      {el: document.getElementById('tab-exigencias'), label:'Aba Exigências'},
-      {el: document.getElementById('tab-checklist'), label:'Aba Checklist do Edital'},
-      {el: document.getElementById('btn-montar-dossie'), label:'Montar dossiê de habilitação'}
-    ].filter(i=>i.el);
+    if(A11Y.nivel==='conteudo' && document.getElementById('panel-analise').classList.contains('active')){
+      A11Y.todosItens = Array.from(document.querySelectorAll('#analise-root .sec-card')).map(card=>{
+        const head = card.querySelector('.sec-head');
+        const tituloEl = card.querySelector('.sec-title');
+        const titulo = tituloEl ? tituloEl.textContent.trim() : 'Seção';
+        return { el: head, label: titulo, ativar: ()=>{
+          setFilter('all');
+          card.classList.remove('collapsed');
+          card.scrollIntoView({block:'start', behavior:'smooth'});
+          head.focus();
+          a11yAnunciar('Seção: '+titulo+'.');
+        }};
+      }).filter(i=>i.el);
+    } else {
+      A11Y.nivel = 'tela';
+      A11Y.todosItens = [
+        {el: document.getElementById('tab-analise'), label:'Aba Análise Crítica', ativar: ()=>{
+          switchProcessTab('analise'); A11Y.nivel = 'conteudo'; a11yAtualizarItens(true);
+        }},
+        {el: document.getElementById('tab-exigencias'), label:'Aba Exigências'},
+        {el: document.getElementById('tab-checklist'), label:'Aba Checklist do Edital'},
+        {el: document.getElementById('btn-montar-dossie'), label:'Montar dossiê de habilitação'}
+      ].filter(i=>i.el);
+    }
   }
   A11Y.pagina = Math.min(A11Y.pagina, Math.max(0, Math.ceil(A11Y.todosItens.length/9)-1));
   a11yRenderizarPagina();
@@ -2540,18 +2598,27 @@ function a11ySelecionar(n){
 function a11yAtivarItem(n){
   const item = A11Y.itensAtuais[n-1];
   A11Y.foco = null;
-  if(item) item.el.click();
+  if(!item) return;
+  if(typeof item.ativar==='function') item.ativar();
+  else item.el.click();
 }
 document.addEventListener('keydown', function(e){
   if(e.ctrlKey && e.altKey && (e.key==='a' || e.key==='A')){
     e.preventDefault(); a11yToggle(); return;
   }
   if(!A11Y.ativo) return;
+  if(e.ctrlKey && e.altKey && (e.key==='i' || e.key==='I')){
+    e.preventDefault(); a11yAnunciarIdentificacao(); return;
+  }
+  if(e.ctrlKey && e.altKey && (e.key==='r' || e.key==='R')){
+    e.preventDefault(); if(A11Y.ultimoAnuncio) a11yAnunciar(A11Y.ultimoAnuncio); return;
+  }
   if(a11yEstaEmCampoEditavel(document.activeElement)) return;
   if(e.key>='1' && e.key<='9' && !e.altKey && !e.ctrlKey && !e.metaKey){
     e.preventDefault(); a11ySelecionar(parseInt(e.key,10)); return;
   }
   if(e.key==='Enter' && A11Y.foco){ e.preventDefault(); a11yAtivarItem(A11Y.foco); return; }
+  if(e.key==='Backspace'){ e.preventDefault(); a11yVoltar(); return; }
   if(e.code==='NumpadDecimal'){ e.preventDefault(); a11yProximaPagina(); return; }
   if(e.code==='Numpad0'){ e.preventDefault(); a11yPaginaAnterior(); return; }
 });
