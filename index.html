@@ -87,6 +87,16 @@ input, select, textarea { font-family:inherit; }
 .relatorio-meta { font-size:.76rem; color:var(--slate-mid); margin-bottom:12px; padding-bottom:10px; border-bottom:1px solid var(--border); }
 .relatorio-corpo { font-size:.86rem; color:var(--slate); line-height:1.6; white-space:pre-wrap; }
 .relatorio-vazio { font-size:.86rem; color:var(--slate-mid); text-align:center; padding:24px 10px; }
+.gastos-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:16px; }
+.gastos-card { background:var(--teal-ll); border:1px solid var(--teal-mid); border-radius:12px; padding:14px 12px; text-align:center; }
+.gastos-card .gc-num { font-size:1.7rem; font-weight:800; color:var(--teal-dark, #0d5c63); line-height:1.1; }
+.gastos-card .gc-lbl { font-size:.72rem; color:var(--slate-mid); margin-top:4px; }
+.gastos-tabela { width:100%; border-collapse:collapse; font-size:.78rem; }
+.gastos-tabela th { text-align:left; background:#f8fafc; padding:7px 8px; border-bottom:1px solid var(--border); font-size:.68rem; color:var(--slate-mid); text-transform:uppercase; letter-spacing:.03em; }
+.gastos-tabela td { padding:7px 8px; border-bottom:1px solid #eef2f7; color:var(--slate); }
+.gastos-tabela td.num { text-align:right; white-space:nowrap; font-variant-numeric:tabular-nums; }
+.gastos-tabela tr:last-child td { border-bottom:none; }
+.gastos-modelo { font-size:.68rem; font-weight:700; background:var(--violet-l); color:var(--violet); padding:2px 8px; border-radius:10px; white-space:nowrap; }
 .novos-processos { margin-top:6px; }
 .novo-item { background:var(--violet-l); border:1px solid #ddd6fe; border-radius:10px; padding:10px 12px; margin-bottom:8px; }
 .novo-item-nome { font-weight:700; font-size:.84rem; color:var(--slate); margin-bottom:8px; }
@@ -367,8 +377,9 @@ input, select, textarea { font-family:inherit; }
         <span class="hc-count" id="count-privado">0 processos</span>
       </div>
     </div>
-    <div class="home-relatorio-row">
+    <div class="home-relatorio-row" style="flex-direction:column; gap:8px;">
       <button class="btn-outline" id="btn-atualizacoes-dia" onclick="abrirRelatorioDoDia()">📋 Atualizações do dia</button>
+      <button class="btn-outline" id="btn-painel-gastos" onclick="abrirPainelGastos()">💵 Painel de gastos</button>
     </div>
     <div class="home-fluxo">
       <span class="passo"><b>1.</b> Envie o edital/TR para a IA com o prompt do painel</span>
@@ -523,6 +534,19 @@ input, select, textarea { font-family:inherit; }
     <div class="modal-actions">
       <button class="btn-ghost" onclick="fecharModal('modal-relatorio')">Fechar</button>
       <button class="btn-primary" id="btn-executar-analise" onclick="executarAnaliseAgora()">▶ Executar análise agora</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: PAINEL DE GASTOS -->
+<div class="modal-overlay" id="modal-gastos">
+  <div class="modal-box wide" role="dialog" aria-label="Painel de gastos de IA">
+    <h3>💵 Painel de gastos de IA</h3>
+    <div id="gastos-conteudo">
+      <p class="relatorio-vazio">Carregando…</p>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-ghost" onclick="fecharModal('modal-gastos')">Fechar</button>
     </div>
   </div>
 </div>
@@ -2488,6 +2512,57 @@ function fallbackCopy(t){
 /* ── Atualizações do dia (relatório mais recente) ── */
 let ULTIMO_RELATORIO_NOVOS = [];
 
+function fmtTokens(n){
+  n = n || 0;
+  if(n >= 1000000) return (n/1000000).toFixed(2)+'M';
+  if(n >= 1000) return (n/1000).toFixed(1)+'k';
+  return String(n);
+}
+
+async function abrirPainelGastos(){
+  abrirModal('modal-gastos');
+  const area = document.getElementById('gastos-conteudo');
+  area.innerHTML = '<p class="relatorio-vazio">Carregando…</p>';
+  if(Store.modo!=='api'){
+    area.innerHTML = '<p class="relatorio-vazio">Disponível apenas com o Painel conectado ao backend.</p>';
+    return;
+  }
+  try{
+    const res = await fetch(Store.base + '/gastos', { headers: Store.headers() });
+    if(!res.ok) throw new Error('Servidor respondeu ' + res.status);
+    const g = await res.json();
+    let html =
+      '<div class="gastos-cards">' +
+        '<div class="gastos-card"><div class="gc-num">'+fmtTokens(g.total_tokens)+'</div><div class="gc-lbl">tokens no total<br>('+fmtTokens(g.total_tokens_entrada)+' entrada · '+fmtTokens(g.total_tokens_saida)+' saída)</div></div>' +
+        '<div class="gastos-card"><div class="gc-num">$'+(g.total_usd||0).toFixed(2)+'</div><div class="gc-lbl">gasto total<br>(~R$ '+(g.total_brl_aprox||0).toFixed(2)+')</div></div>' +
+        '<div class="gastos-card"><div class="gc-num">'+(g.total_analises||0)+'</div><div class="gc-lbl">análises rodadas</div></div>' +
+      '</div>';
+    if(!g.itens || !g.itens.length){
+      html += '<p class="relatorio-vazio">Nenhuma análise por IA registrada ainda. Os gastos aparecem aqui conforme você roda análises.</p>';
+    } else {
+      html += '<table class="gastos-tabela"><thead><tr>' +
+        '<th>Processo</th><th>Modelo</th><th style="text-align:right;">Tokens (ent./saída)</th><th style="text-align:right;">Custo</th><th style="text-align:right;">Quando</th>' +
+        '</tr></thead><tbody>' +
+        g.itens.map(it=>{
+          const quando = it.criadoEm ? new Date(it.criadoEm).toLocaleString('pt-BR') : '';
+          return '<tr>' +
+            '<td>'+esc(it.processo_nome)+(it.origem?'<br><span class="hint" style="font-size:.68rem;">'+esc(it.origem)+'</span>':'')+'</td>' +
+            '<td><span class="gastos-modelo">'+esc(it.model)+'</span></td>' +
+            '<td class="num">'+fmtTokens(it.tokens_entrada)+' / '+fmtTokens(it.tokens_saida)+'</td>' +
+            '<td class="num">$'+(it.custo_usd||0).toFixed(4)+'</td>' +
+            '<td class="num">'+esc(quando)+'</td>' +
+          '</tr>';
+        }).join('') +
+        '</tbody></table>';
+    }
+    html += '<p style="font-size:.72rem;color:var(--slate-l);margin-top:12px;font-style:italic;">Cotação de referência para o valor em reais: US$ 1 ≈ R$ '+(g.cotacao_usd_brl||0).toFixed(2)+'. Custo calculado pelos tokens reais que a API devolve — não é estimativa.</p>';
+    area.innerHTML = html;
+    a11yAtualizarItens();
+  }catch(e){
+    area.innerHTML = '<p class="relatorio-vazio">Não foi possível carregar os gastos: '+esc(e.message)+'</p>';
+  }
+}
+
 async function abrirRelatorioDoDia(){
   abrirModal('modal-relatorio');
   const area = document.getElementById('relatorio-conteudo');
@@ -2790,6 +2865,7 @@ function a11yAtualizarItens(manterNivel){
       {el: document.querySelector('.home-card[onclick*="publico"]'), label:'Processos Públicos'},
       {el: document.querySelector('.home-card[onclick*="privado"]'), label:'Processos Privados'},
       {el: document.getElementById('btn-atualizacoes-dia'), label:'Atualizações do dia'},
+      {el: document.getElementById('btn-painel-gastos'), label:'Painel de gastos'},
       {el: document.querySelector('.home-actions .btn-outline'), label:'Copiar prompt para IA'}
     ].filter(i=>i.el);
   } else if(document.getElementById('view-list').classList.contains('active')){

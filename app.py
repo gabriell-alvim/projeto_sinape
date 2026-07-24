@@ -28,6 +28,7 @@ Rotas:
   POST    /api/relatorios/executar-varredura  → varre o SharePoint agora, compara com a varredura anterior e publica o relatório do dia
   POST    /api/processos/analisar-ia          → recebe PDFs (multipart, campo "arquivos") e devolve o JSON de análise via IA
   POST    /api/processos/analisar-novo        → a partir de {caminho_pasta, tipo, model?, effort?} de um item novo da varredura, baixa os PDFs, roda a IA e já cria o processo
+  GET     /api/gastos                         → contador de gastos de IA (total de tokens e custo em US$/R$) + detalhamento por processo
 
 Montador de Dossiê (integrado):
   Usa o módulo em montador-dossie/ (mesmo repo) para buscar a documentação de
@@ -128,6 +129,7 @@ col_processos = db["processos"]
 col_anexos = db["anexos"]
 col_relatorios = db["relatorios"]
 col_snapshots = db["sharepoint_snapshots"]
+col_gastos = db["gastos_ia"]
 
 
 def _init_db():
@@ -135,6 +137,7 @@ def _init_db():
     col_anexos.create_index([("processo_id", ASCENDING), ("enviado_em", DESCENDING)])
     col_relatorios.create_index([("criadoEm", DESCENDING)])
     col_snapshots.create_index([("criadoEm", DESCENDING)])
+    col_gastos.create_index([("criadoEm", DESCENDING)])
 
 
 # ──────────────────────────────────────────────────────────────────
@@ -616,12 +619,49 @@ def executar_varredura_sharepoint():
 MODELOS_IA_PERMITIDOS = {"claude-opus-4-8", "claude-sonnet-5"}
 ESFORCOS_IA_PERMITIDOS = {"low", "medium", "high", "xhigh", "max"}
 
+# preço por 1 milhão de tokens (entrada / saída), em dólares — referência oficial.
+# Já deixo GPT aqui pra quando/se integrarmos a OpenAI (ainda não está ligada).
+PRECOS_MODELOS = {
+    "claude-opus-4-8": {"entrada": 5.0,  "saida": 25.0},
+    "claude-sonnet-5": {"entrada": 2.0,  "saida": 10.0},   # preço promocional até 31/08/2026; depois 3/15
+    "gpt-5.6-sol":     {"entrada": 5.0,  "saida": 30.0},
+    "gpt-5.6-terra":   {"entrada": 2.5,  "saida": 15.0},
+    "gpt-5.6-luna":    {"entrada": 1.0,  "saida": 6.0},
+}
+USD_PARA_BRL = 5.40  # referência aproximada, só para exibição
 
-def _rodar_analise_ia(pdfs: list, model: str | None = None, effort: str | None = None) -> dict:
+
+def _custo_usd(model: str, tokens_entrada: int, tokens_saida: int) -> float:
+    p = PRECOS_MODELOS.get(model, {"entrada": 0.0, "saida": 0.0})
+    return (tokens_entrada * p["entrada"] + tokens_saida * p["saida"]) / 1_000_000
+
+
+def _registrar_gasto(model: str, uso: dict, processo_id=None, processo_nome: str = "", origem: str = ""):
+    """Registra uma chamada de IA no contador de gastos: tokens e custo em
+    dólar. Usado toda vez que uma análise por IA roda, pra alimentar o Painel
+    de Gastos (total geral + por processo)."""
+    ent = int(uso.get("entrada", 0))
+    sai = int(uso.get("saida", 0))
+    custo = _custo_usd(model, ent, sai)
+    col_gastos.insert_one({
+        "_id": uuid.uuid4().hex,
+        "processo_id": processo_id,
+        "processo_nome": processo_nome,
+        "model": model,
+        "origem": origem,
+        "tokens_entrada": ent,
+        "tokens_saida": sai,
+        "custo_usd": round(custo, 6),
+        "criadoEm": _agora_ms(),
+    })
+
+
+def _rodar_analise_ia(pdfs: list, model: str | None = None, effort: str | None = None):
     """Manda uma lista de PDFs (nome, bytes) pro Claude com o prompt padrão do
-    Painel e devolve o JSON de análise já pronto pra importar como processo.
-    Reaproveitado tanto pelo upload manual (analisar_ia) quanto pela análise
-    automática de processos novos detectados na varredura do SharePoint."""
+    Painel e devolve (doc, meta) — o JSON de análise pronto pra virar processo
+    e os metadados de uso (modelo + tokens de entrada/saída) pro contador de
+    gastos. Reaproveitado tanto pelo upload manual (analisar_ia) quanto pela
+    análise automática de processos novos detectados na varredura."""
     if not anthropic_client:
         raise RuntimeError("ANTHROPIC_API_KEY não configurada no servidor")
 
@@ -647,13 +687,23 @@ def _rodar_analise_ia(pdfs: list, model: str | None = None, effort: str | None =
     if effort in ESFORCOS_IA_PERMITIDOS:
         kwargs["output_config"] = {"effort": effort}
 
+    modelo_usado = model if model in MODELOS_IA_PERMITIDOS else ANTHROPIC_MODEL
     with anthropic_client.messages.stream(
-        model=model if model in MODELOS_IA_PERMITIDOS else ANTHROPIC_MODEL,
+        model=modelo_usado,
         max_tokens=32000,
         messages=[{"role": "user", "content": content}],
         **kwargs,
     ) as stream:
         resposta = stream.get_final_message()
+
+    u = resposta.usage
+    uso = {
+        "model": modelo_usado,
+        "entrada": (getattr(u, "input_tokens", 0) or 0)
+                   + (getattr(u, "cache_creation_input_tokens", 0) or 0)
+                   + (getattr(u, "cache_read_input_tokens", 0) or 0),
+        "saida": getattr(u, "output_tokens", 0) or 0,
+    }
 
     texto = "".join(b.text for b in resposta.content if b.type == "text").strip()
     texto = re.sub(r"^```(?:json)?\s*|\s*```$", "", texto.strip())
@@ -661,7 +711,7 @@ def _rodar_analise_ia(pdfs: list, model: str | None = None, effort: str | None =
 
     doc.setdefault("fontes", "; ".join(nomes))
     doc.setdefault("analise", {}).setdefault("_sourceFiles", "; ".join(nomes))
-    return doc
+    return doc, uso
 
 
 def _preparar_e_inserir_processo(doc: dict) -> dict:
@@ -701,7 +751,7 @@ def analisar_ia():
         pdfs.append((arquivo.filename, dados))
 
     try:
-        doc = _rodar_analise_ia(pdfs)
+        doc, uso = _rodar_analise_ia(pdfs)
     except RuntimeError as e:
         return jsonify({"erro": str(e)}), 503
     except ValueError as e:
@@ -711,6 +761,7 @@ def analisar_ia():
     except anthropic.APIStatusError as e:
         return jsonify({"erro": f"Erro na API da IA: {e.message}"}), 502
 
+    _registrar_gasto(uso["model"], uso, processo_nome=doc.get("nome", ""), origem="upload manual")
     return jsonify(doc)
 
 
@@ -747,7 +798,7 @@ def analisar_processo_novo():
 
     pdfs = [(p["nome"], p["bytes"]) for p in pdfs_pasta]
     try:
-        doc = _rodar_analise_ia(pdfs, model=corpo.get("model"), effort=corpo.get("effort"))
+        doc, uso = _rodar_analise_ia(pdfs, model=corpo.get("model"), effort=corpo.get("effort"))
     except RuntimeError as e:
         return jsonify({"erro": str(e)}), 503
     except ValueError as e:
@@ -766,7 +817,39 @@ def analisar_processo_novo():
         doc = _preparar_e_inserir_processo(doc)
     except DuplicateKeyError:
         return jsonify({"erro": "Já existe processo com esse id", "id": doc.get("id") or doc.get("_id")}), 409
+    _registrar_gasto(uso["model"], uso, processo_id=doc.get("_id"),
+                     processo_nome=doc.get("nome", ""), origem="varredura automática")
     return jsonify(_sem_id_mongo(doc)), 201
+
+
+@app.route("/api/gastos", methods=["GET"])
+def painel_gastos():
+    """Contador de gastos de IA: total geral (tokens + custo) e o detalhamento
+    por processo/análise, do mais recente para o mais antigo. Alimenta o
+    Painel de Gastos do front-end."""
+    registros = list(col_gastos.find(sort=[("criadoEm", DESCENDING)]))
+    total_ent = sum(r.get("tokens_entrada", 0) for r in registros)
+    total_sai = sum(r.get("tokens_saida", 0) for r in registros)
+    total_usd = round(sum(r.get("custo_usd", 0.0) for r in registros), 4)
+    itens = [{
+        "processo_nome": r.get("processo_nome") or "(sem nome)",
+        "model": r.get("model", ""),
+        "origem": r.get("origem", ""),
+        "tokens_entrada": r.get("tokens_entrada", 0),
+        "tokens_saida": r.get("tokens_saida", 0),
+        "custo_usd": round(r.get("custo_usd", 0.0), 4),
+        "criadoEm": r.get("criadoEm"),
+    } for r in registros]
+    return jsonify({
+        "total_analises": len(registros),
+        "total_tokens_entrada": total_ent,
+        "total_tokens_saida": total_sai,
+        "total_tokens": total_ent + total_sai,
+        "total_usd": total_usd,
+        "total_brl_aprox": round(total_usd * USD_PARA_BRL, 2),
+        "cotacao_usd_brl": USD_PARA_BRL,
+        "itens": itens,
+    })
 
 
 # ──────────────────────────────────────────────────────────────────
