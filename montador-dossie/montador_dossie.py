@@ -514,13 +514,27 @@ def _destino_unico(pasta: Path, nome: str) -> Path:
     return pasta / f"{tronco} ({i}){ext}"
 
 
+CATEGORIAS_V2_SEMPRE_INCLUIR = {"Certificações cadastrais (SICAF)"}
+
+
 def _montar_v2(biblioteca, processo, caminho_base, saida_dir, checklist,
                modo_local, gc, drive_id, raiz_local):
-    """Monta o dossie usando o schema v2 (fontes centrais + vigencia)."""
+    """Monta o dossie usando o schema v2 (fontes centrais + vigencia). So
+    baixa a categoria se ela aparecer nas exigencias.categoria daquele
+    processo especifico (mesmo filtro que a v1 ja fazia via
+    categorias_exigidas) - excecao para as categorias em
+    CATEGORIAS_V2_SEMPRE_INCLUIR (ex.: SICAF), que nao tem uma categoria de
+    exigencia correspondente no que a IA gera e por isso sempre entram."""
     raiz_central = biblioteca.get("_raiz_central", "2 - LICITACAO/05.03 - Documentos Atualizados")
     analise = processo.get("analise") or {}
     uf = (analise.get("geral_uf") or "SP").strip().upper()
     empresa = (analise.get("geral_empresa") or "Sinape").strip()
+
+    categorias_exig = set(categorias_exigidas(processo))
+    if not categorias_exig:
+        checklist.append("Nenhuma exigencia com categoria encontrada neste processo no Painel - "
+                          "baixando so as categorias sempre incluidas (ex.: SICAF).")
+        checklist.append("")
 
     # ano do balanco = subpasta numerica mais recente da contabilidade
     contabil = f"{raiz_central}/04 - Qualificação Econômica/SP/Contábil"
@@ -548,6 +562,11 @@ def _montar_v2(biblioteca, processo, caminho_base, saida_dir, checklist,
 
     for categoria in biblioteca["categorias"]:
         nome_cat = categoria["categoria_painel"]
+        if nome_cat not in categorias_exig and nome_cat not in CATEGORIAS_V2_SEMPRE_INCLUIR:
+            checklist.append(f"### {nome_cat} - IGNORADA (processo nao exige esta categoria)")
+            checklist.append("")
+            continue
+
         letra = categoria.get("letra_zip") or "X"
         pasta_local = saida_dir / f"{letra} - {nome_cat}"
         checklist.append(f"### {letra} - {nome_cat}")
