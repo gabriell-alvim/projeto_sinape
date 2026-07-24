@@ -68,6 +68,7 @@ from pathlib import Path
 from urllib.parse import quote
 
 import anthropic
+import requests
 from pymongo import MongoClient, ASCENDING, DESCENDING
 from pymongo.errors import DuplicateKeyError
 from flask import Flask, request, jsonify, send_from_directory, send_file, session, redirect, Response
@@ -791,6 +792,14 @@ def analisar_processo_novo():
     }
     try:
         pdfs_pasta = baixar_pdfs_da_pasta(cfg, caminho_pasta)
+    except requests.HTTPError as e:
+        if e.response is not None and e.response.status_code == 404:
+            return jsonify({
+                "erro": "Essa pasta não foi encontrada no SharePoint agora. Ela pode ter sido "
+                        "renomeada, movida ou removida desde a última varredura. Clique em "
+                        "\"Executar análise agora\" para atualizar a lista e tente de novo."
+            }), 404
+        return jsonify({"erro": f"Falha ao baixar documentos do SharePoint (erro {e.response.status_code if e.response is not None else '?'})."}), 502
     except Exception as e:
         return jsonify({"erro": f"Falha ao baixar documentos do SharePoint: {e}"}), 502
     if not pdfs_pasta:
