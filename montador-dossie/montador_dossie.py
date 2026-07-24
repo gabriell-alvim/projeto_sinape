@@ -510,7 +510,13 @@ def _montar_v2(biblioteca, processo, caminho_base, saida_dir, checklist,
     processo especifico (mesmo filtro que a v1 ja fazia via
     categorias_exigidas) - excecao para as categorias em
     CATEGORIAS_V2_SEMPRE_INCLUIR (ex.: SICAF), que nao tem uma categoria de
-    exigencia correspondente no que a IA gera e por isso sempre entram."""
+    exigencia correspondente no que a IA gera e por isso sempre entram.
+    Categorias exigidas pelo processo que nao existem em biblioteca.json
+    (ex.: Garantias, Execucao contratual, Documentacao complementar, Outras -
+    tipicamente especificas do edital, sem fonte central reaproveitavel) nao
+    tem como ser baixadas automaticamente; entram no checklist com a
+    descricao real de cada exigencia (vinda da analise da IA), para a equipe
+    resolver manualmente em vez de so um aviso generico."""
     raiz_central = biblioteca.get("_raiz_central", "2 - LICITACAO/05.03 - Documentos Atualizados")
     analise = processo.get("analise") or {}
     uf = (analise.get("geral_uf") or "SP").strip().upper()
@@ -604,6 +610,21 @@ def _montar_v2(biblioteca, processo, caminho_base, saida_dir, checklist,
         for nome in falhas:
             checklist.append(f"     [FALHOU AGORA - TENTAR DE NOVO] {nome}")
         checklist.append("")
+
+    nomes_biblioteca = {c["categoria_painel"] for c in biblioteca["categorias"]}
+    categorias_sem_mapeamento = sorted(categorias_exig - nomes_biblioteca)
+    if categorias_sem_mapeamento:
+        checklist.append("### Categorias exigidas sem fonte mapeada em biblioteca.json - conferir manualmente")
+        checklist.append("")
+        for nome_cat in categorias_sem_mapeamento:
+            checklist.append(f"  [VERIFICAR MANUALMENTE] {nome_cat}: sem pasta padrao mapeada em biblioteca.json")
+            for exig in processo.get("exigencias", []):
+                if exig.get("categoria") != nome_cat:
+                    continue
+                ref = (exig.get("ref") or "").strip()
+                ref_txt = f" ({ref})" if ref else ""
+                checklist.append(f"     - {exig.get('descricao', '(sem descricao)')}{ref_txt}")
+            checklist.append("")
 
 
 # ---------------------------------------------------------------------------
