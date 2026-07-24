@@ -44,6 +44,7 @@ import sys
 import json
 import time
 import shutil
+import zipfile
 import tempfile
 import argparse
 import logging
@@ -238,34 +239,83 @@ def baixar_arquivo(gc: GraphClient, drive_id: str, item_id: str, destino: Path) 
     log.info(f"Baixado: {destino.name} ({destino.stat().st_size/1024:.0f} KB)")
 
 
+_PADRAO_PASTA_ANALISE_IA = re.compile(r"^data\s+sin", re.IGNORECASE)
+
+
+def _pastas_dedicadas_analise_ia(gc: GraphClient, drive_id: str, caminho_pasta: str) -> list:
+    """Procura, entre as subpastas diretas de caminho_pasta, qualquer uma cujo
+    nome comece com 'DATA SIN' (case-insensitive, tolera espaço(s) extra entre
+    as palavras; pode ter qualquer coisa depois, ex.: 'DATA SIN - Araruama').
+    A equipe cria essa pasta e joga nela só o que interessa pra IA ler
+    (edital, TR, anexos, zip do portal), deixando de fora certidões de
+    habilitação e versões antigas. Se não achar nenhuma, quem chamou cai no
+    comportamento antigo (varre a pasta toda)."""
+    itens = listar_itens_pasta(gc, drive_id, caminho_pasta)
+    return [f"{caminho_pasta}/{it['name']}" for it in itens
+            if "folder" in it and _PADRAO_PASTA_ANALISE_IA.match(it["name"].strip())]
+
+
 def baixar_pdfs_da_pasta(cfg: dict, caminho_pasta: str, limite_mb: int = 24) -> list:
-    """Baixa (em memoria) todos os PDFs de uma pasta do SharePoint, varrendo
-    subpastas (ex.: 'Anexos'), ate um limite total de tamanho. Usado para
-    alimentar a analise automatica por IA de um processo recem-chegado -
-    diferente do montar_dossie_por_processo, aqui a pasta ja e conhecida
-    (veio da propria varredura), sem precisar de localizacao fuzzy.
-    Retorna [{'nome': str, 'bytes': bytes}, ...]."""
+    """Baixa (em memoria) os PDFs relevantes pra analise automatica por IA de
+    um processo recem-chegado. Se existir uma subpasta cujo nome comece com
+    'DATA SIN' (ver _pastas_dedicadas_analise_ia), varre SÓ ela - assim a
+    equipe controla exatamente o que entra na analise, sem misturar
+    certidoes de habilitacao ou versoes antigas guardadas em outras
+    subpastas. Sem essa pasta dedicada, varre a pasta do processo inteira
+    (comportamento antigo). Arquivos .zip encontrados são abertos em memória
+    e os PDFs de dentro deles entram na conta normalmente (ex.: o pacote de
+    editais baixado direto do portal). Retorna [{'nome': str, 'bytes': bytes}, ...]."""
     token = obter_token(cfg)
     gc = GraphClient(token)
     site_id = obter_site_id(gc, SITE_HOSTNAME, SITE_PATH)
     drive_id = obter_drive_id(gc, site_id)
 
-    itens = listar_recursivo(gc, drive_id, caminho_pasta)
-    pdfs = [it for it in itens if it["name"].lower().endswith(".pdf")]
+    pastas_dedicadas = _pastas_dedicadas_analise_ia(gc, drive_id, caminho_pasta)
+    caminhos_para_varrer = pastas_dedicadas or [caminho_pasta]
+    if pastas_dedicadas:
+        log.info(f"Usando pasta(s) dedicada(s) 'DATA SIN...' para a análise: {pastas_dedicadas}")
+
+    itens = []
+    for caminho in caminhos_para_varrer:
+        itens.extend(listar_recursivo(gc, drive_id, caminho))
 
     limite_bytes = limite_mb * 1024 * 1024
     total = 0
     resultado = []
+    nomes_ja_incluidos = set()  # evita mandar o mesmo PDF 2x pra IA (ex.: solto na pasta E dentro de um zip)
+
+    def _incluir(nome, dados):
+        nonlocal total
+        chave = nome.strip().lower()
+        if chave in nomes_ja_incluidos:
+            log.info(f"Ignorando {nome}: mesmo nome já incluído (evita duplicata solto/dentro de zip)")
+            return
+        if total + len(dados) > limite_bytes:
+            log.info(f"Ignorando {nome}: excederia o limite de {limite_mb} MB para a analise")
+            return
+        nomes_ja_incluidos.add(chave)
+        total += len(dados)
+        resultado.append({"nome": nome, "bytes": dados})
+
     with tempfile.TemporaryDirectory() as tmp:
-        for it in pdfs:
-            destino = Path(tmp) / it["name"]
-            baixar_arquivo(gc, drive_id, it["id"], destino)
-            dados = destino.read_bytes()
-            if total + len(dados) > limite_bytes:
-                log.info(f"Ignorando {it['name']}: excederia o limite de {limite_mb} MB para a analise")
-                continue
-            total += len(dados)
-            resultado.append({"nome": it["name"], "bytes": dados})
+        for it in itens:
+            nome_lower = it["name"].lower()
+            if nome_lower.endswith(".pdf"):
+                destino = Path(tmp) / it["name"]
+                baixar_arquivo(gc, drive_id, it["id"], destino)
+                _incluir(it["name"], destino.read_bytes())
+            elif nome_lower.endswith(".zip"):
+                destino = Path(tmp) / it["name"]
+                baixar_arquivo(gc, drive_id, it["id"], destino)
+                try:
+                    with zipfile.ZipFile(destino) as zf:
+                        for info in zf.infolist():
+                            if info.is_dir() or not info.filename.lower().endswith(".pdf"):
+                                continue
+                            nome_pdf = Path(info.filename).name  # descarta o caminho interno do zip
+                            _incluir(nome_pdf, zf.read(info))
+                except zipfile.BadZipFile:
+                    log.warning(f"Arquivo {it['name']} não é um .zip válido - ignorado")
     return resultado
 
 
