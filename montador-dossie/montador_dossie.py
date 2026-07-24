@@ -239,45 +239,31 @@ def baixar_arquivo(gc: GraphClient, drive_id: str, item_id: str, destino: Path) 
     log.info(f"Baixado: {destino.name} ({destino.stat().st_size/1024:.0f} KB)")
 
 
-_PADRAO_PASTA_ANALISE_IA = re.compile(r"^data\s+sin", re.IGNORECASE)
-
-
-def _pastas_dedicadas_analise_ia(gc: GraphClient, drive_id: str, caminho_pasta: str) -> list:
-    """Procura, entre as subpastas diretas de caminho_pasta, qualquer uma cujo
-    nome comece com 'DATA SIN' (case-insensitive, tolera espaço(s) extra entre
-    as palavras; pode ter qualquer coisa depois, ex.: 'DATA SIN - Araruama').
-    A equipe cria essa pasta e joga nela só o que interessa pra IA ler
-    (edital, TR, anexos, zip do portal), deixando de fora certidões de
-    habilitação e versões antigas. Se não achar nenhuma, quem chamou cai no
-    comportamento antigo (varre a pasta toda)."""
-    itens = listar_itens_pasta(gc, drive_id, caminho_pasta)
-    return [f"{caminho_pasta}/{it['name']}" for it in itens
-            if "folder" in it and _PADRAO_PASTA_ANALISE_IA.match(it["name"].strip())]
+_PADRAO_MARCA_ARQUIVO_ANALISE_IA = re.compile(r"data\s+sin", re.IGNORECASE)
 
 
 def baixar_pdfs_da_pasta(cfg: dict, caminho_pasta: str, limite_mb: int = 24) -> list:
     """Baixa (em memoria) os PDFs relevantes pra analise automatica por IA de
-    um processo recem-chegado. Se existir uma subpasta cujo nome comece com
-    'DATA SIN' (ver _pastas_dedicadas_analise_ia), varre SÓ ela - assim a
-    equipe controla exatamente o que entra na analise, sem misturar
-    certidoes de habilitacao ou versoes antigas guardadas em outras
-    subpastas. Sem essa pasta dedicada, varre a pasta do processo inteira
-    (comportamento antigo). Arquivos .zip encontrados são abertos em memória
-    e os PDFs de dentro deles entram na conta normalmente (ex.: o pacote de
-    editais baixado direto do portal). Retorna [{'nome': str, 'bytes': bytes}, ...]."""
+    um processo recem-chegado. Varre a pasta do processo inteira (recursivo)
+    e, se algum arquivo tiver 'DATA SIN' no NOME (em qualquer posicao, ex.:
+    'Certidao de falencia DATA SIN.pdf', 'DATA SIN - Edital.pdf'), usa SÓ os
+    arquivos marcados - assim a equipe controla exatamente o que entra na
+    analise, sem misturar certidoes de habilitacao ou versoes antigas, sem
+    precisar organizar nada em subpasta. Sem nenhum arquivo marcado, cai no
+    comportamento antigo (usa tudo que achou). Um .zip só é aberto (e os PDFs
+    de dentro dele extraidos) se ELE MESMO tiver a marca no nome - cobre o
+    caso do pacote de editais baixado direto do portal, renomeado com a
+    marca. Retorna [{'nome': str, 'bytes': bytes}, ...]."""
     token = obter_token(cfg)
     gc = GraphClient(token)
     site_id = obter_site_id(gc, SITE_HOSTNAME, SITE_PATH)
     drive_id = obter_drive_id(gc, site_id)
 
-    pastas_dedicadas = _pastas_dedicadas_analise_ia(gc, drive_id, caminho_pasta)
-    caminhos_para_varrer = pastas_dedicadas or [caminho_pasta]
-    if pastas_dedicadas:
-        log.info(f"Usando pasta(s) dedicada(s) 'DATA SIN...' para a análise: {pastas_dedicadas}")
-
-    itens = []
-    for caminho in caminhos_para_varrer:
-        itens.extend(listar_recursivo(gc, drive_id, caminho))
+    todos_itens = listar_recursivo(gc, drive_id, caminho_pasta)
+    marcados = [it for it in todos_itens if _PADRAO_MARCA_ARQUIVO_ANALISE_IA.search(it["name"])]
+    itens = marcados if marcados else todos_itens
+    if marcados:
+        log.info(f"Usando só os {len(marcados)} arquivo(s) marcados com 'DATA SIN' no nome para a análise.")
 
     limite_bytes = limite_mb * 1024 * 1024
     total = 0
