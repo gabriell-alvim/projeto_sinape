@@ -776,7 +776,7 @@ def analisar_processo_novo():
 def listar_anexos(pid):
     cursor = col_anexos.find(
         {"processo_id": pid},
-        {"nome_original": 1, "tamanho": 1, "content_type": 1, "enviado_em": 1, "enviado_por": 1},
+        {"nome_original": 1, "tamanho": 1, "content_type": 1, "enviado_em": 1, "enviado_por": 1, "secao": 1},
     ).sort("enviado_em", DESCENDING)
     anexos = [_sem_id_mongo(a) for a in cursor]
     return jsonify({"anexos": anexos})
@@ -800,8 +800,16 @@ def enviar_anexo(pid):
     arquivo.save(destino)
 
     enviado_por = request.form.get("enviadoPor", "")
+    # "secao" marca o anexo como a planilha real de uma seção específica da
+    # Análise Crítica (ex.: "quantitativos", "custos") — só uma por seção;
+    # anexos comuns (sem seção) continuam só na aba de Anexos.
+    secao = request.form.get("secao") or None
     agora = _agora_ms()
     tamanho = destino.stat().st_size
+    if secao:
+        antigo = col_anexos.find_one_and_delete({"processo_id": pid, "secao": secao})
+        if antigo:
+            (UPLOAD_DIR / pid / antigo["nome_arquivo"]).unlink(missing_ok=True)
     col_anexos.insert_one({
         "_id": anexo_id,
         "processo_id": pid,
@@ -811,10 +819,12 @@ def enviar_anexo(pid):
         "content_type": arquivo.content_type,
         "enviado_em": agora,
         "enviado_por": enviado_por,
+        "secao": secao,
     })
     return jsonify({
         "id": anexo_id, "nome_original": nome_original, "tamanho": tamanho,
         "content_type": arquivo.content_type, "enviado_em": agora, "enviado_por": enviado_por,
+        "secao": secao,
     }), 201
 
 

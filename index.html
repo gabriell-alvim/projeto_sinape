@@ -172,6 +172,8 @@ input, select, textarea { font-family:inherit; }
   padding:10px 14px; font-size:.78rem; margin-bottom:12px; line-height:1.6;
 }
 .anexo-item { padding:3px 0; }
+.planilha-anexo-box { display:flex; align-items:center; gap:10px; flex-wrap:wrap; background:var(--teal-ll); border:1px dashed var(--teal-mid); border-radius:8px; padding:10px 12px; margin:8px 0 4px; font-size:.8rem; }
+.planilha-anexo-box.pendente { background:#f8fafc; border-color:var(--border); }
 .filter-bar { display:flex; gap:6px; flex-wrap:wrap; align-items:center; margin-bottom:14px; }
 .filter-bar-label { font-size:.74rem; color:var(--slate-l); font-weight:700; margin-right:2px; }
 .fbtn { border:1px solid var(--border); background:var(--white); color:var(--slate-mid); border-radius:16px; padding:5px 12px; font-size:.72rem; font-weight:600; }
@@ -591,7 +593,7 @@ const TEMPLATE_PADRAO = [
       {key:'quant_desone', label:'Fator de desoneração', tipo:'select', opcoes:OPC.desone},
       {key:'quant_pmr', label:'Parcela de maior relevância técnica', tipo:'text'}
     ],
-    tabela:{ key:'tbl_quant', titulo:'Itens do quadro de quantidades', nota:'Registre os itens principais conforme Planilha/Anexo de quantidades do processo.', addLabel:'+ Adicionar item',
+    tabela:{ key:'tbl_quant', secaoAnexo:'quantitativos', titulo:'Itens do quadro de quantidades',
       colunas:[
         {label:'Lote', tipo:'text'},{label:'Cód./Item', tipo:'text'},{label:'Descrição do serviço', tipo:'text'},
         {label:'Un.', tipo:'text'},{label:'Quant.', tipo:'text'},{label:'PMR?', tipo:'select', opcoes:['','Sim','Não']},{label:'Observação', tipo:'text'}
@@ -608,7 +610,7 @@ const TEMPLATE_PADRAO = [
       {key:'custo_reajuste', label:'Forma de reajuste', tipo:'text'},
       {divisorAntes:'Observações sobre custos', key:'custo_obs', label:'', tipo:'textarea', span:'span-full', placeholder:'Ex.: ICMS, frete, insumos críticos, taxas de portal...'}
     ],
-    tabela:{ key:'tbl_custo', titulo:'Composição estimada por lote', addLabel:'+ Adicionar lote', antesDosCamposFinais:true,
+    tabela:{ key:'tbl_custo', secaoAnexo:'custos', titulo:'Composição estimada por lote', antesDosCamposFinais:true,
       colunas:[
         {label:'Lote', tipo:'text'},{label:'Valor estimado (R$)', tipo:'text'},{label:'Preço SINAPE (R$)', tipo:'text'},
         {label:'Desconto/ágio (%)', tipo:'text'},{label:'Margem estimada (%)', tipo:'text'},{label:'Viável?', tipo:'select', opcoes:['','Sim','Não','Verificar']}
@@ -1246,6 +1248,7 @@ const PROMPT_IA =
 '3. Só o que está nos documentos; nada inventado. Sem informação = "". Referências sempre curtas (número de item/cláusula/anexo) — nunca transcreva trechos dos documentos.\n' +
 '4. "_autoFilledKeys" = todas as chaves de "analise" preenchidas a partir dos documentos. "fontes" e "_sourceFiles" = nomes dos arquivos analisados.\n' +
 '5. Ficam VAZIOS por serem da equipe: risco_decisao, risco_resp_decisao, risco_justificativa, hab_ef_lc_ok, hab_ef_cap_ok, custo_bdi_sinape e as colunas Preço SINAPE / Desconto / Margem / Viável? de tbl_custo.\n' +
+'6. tbl_quant e tbl_custo ficam sempre [] (vazios) — a equipe anexa a planilha real de quantitativos/custos direto no Painel em vez de a IA transcrever os valores em tabela.\n' +
 '\n' +
 'ESTRUTURA DO JSON\n' +
 '{\n' +
@@ -1261,8 +1264,8 @@ const PROMPT_IA =
 '\n' +
 'CHAVES DO MODELO PADRÃO ("analise")\n' +
 '- Gerais: geral_orgao, geral_modalidade, geral_numero, geral_portal, geral_uf, geral_municipios, geral_objeto, geral_lotes, geral_valor, geral_responsavel, geral_abertura, geral_status, geral_obs\n' +
-'- Quantitativos: quant_referencia, quant_mesref, quant_desone, quant_pmr; tbl_quant = [[Lote, Cód/Item, Descrição, Un, Quant, PMR? ("Sim"/"Não"/""), Observação], ...]\n' +
-'- Custos: custo_bdi_ref, custo_bdi_sinape, custo_es_regime, custo_es_pct, custo_preco_max, custo_inexeq, custo_criterio, custo_reajuste, custo_obs; tbl_custo = [[Lote, Valor estimado, Preço SINAPE, Desconto %, Margem %, Viável? ("","Sim","Não","Verificar")], ...]\n' +
+'- Quantitativos: quant_referencia, quant_mesref, quant_desone, quant_pmr; tbl_quant = [] (sempre vazio — ver regra 6)\n' +
+'- Custos: custo_bdi_ref, custo_bdi_sinape, custo_es_regime, custo_es_pct, custo_preco_max, custo_inexeq, custo_criterio, custo_reajuste, custo_obs; tbl_custo = [] (sempre vazio — ver regra 6)\n' +
 '- Prazos: prazo_publicacao, prazo_esclarecimento, prazo_impugnacao, prazo_abertura, prazo_habilitacao, prazo_contrato, prazo_execucao, prazo_vigencia, prazo_prorroga, prazo_validade_prop, prazo_obs; tbl_prazo = [[Marco, Início, Término, % financeiro, Observação], ...]\n' +
 '- Habilitação: hab_jur_porte, hab_jur_consorcio, hab_jur_lider, hab_jur_sub, hab_jur_obs, hab_fis_estadual, hab_fis_municipal, hab_fis_obs, hab_ef_lc, hab_ef_lg, hab_ef_sg, hab_ef_capital, hab_ef_lc_ok, hab_ef_cap_ok, hab_ef_obs, hab_tec_pmr, hab_tec_quant_min, hab_tec_atestado, hab_tec_rt, hab_tec_rt_nome, hab_tec_obs\n' +
 '- Riscos: risks = [{"nivel": "Alto" | "Médio" | "Baixo", "desc": "..."}]; risco_decisao, risco_resp_decisao, risco_justificativa = "".\n' +
@@ -1377,11 +1380,12 @@ const Store = {
     const r = await this._req('GET','/processos/' + encodeURIComponent(id) + '/anexos');
     return r.anexos || [];
   },
-  async enviarAnexo(id, file){
+  async enviarAnexo(id, file, secao){
     if(this.modo !== 'api') throw new Error('Anexos exigem o backend configurado (CONFIG.API_URL)');
     const form = new FormData();
     form.append('arquivo', file);
     form.append('enviadoPor', CONFIG.USUARIO || '');
+    if(secao) form.append('secao', secao);
     const headers = {};
     if(CONFIG.API_TOKEN) headers['x-sinape-token'] = CONFIG.API_TOKEN;
     const res = await fetch(this.base + '/processos/' + encodeURIComponent(id) + '/anexos', {
@@ -1651,7 +1655,10 @@ function formatBytes(n){
   if(n < 1024*1024) return (n/1024).toFixed(1) + ' KB';
   return (n/1024/1024).toFixed(1) + ' MB';
 }
+let ANEXOS_ATUAIS = [];
+
 async function renderAnexos(){
+  ANEXOS_ATUAIS = []; // evita mostrar, mesmo que por instantes, a planilha do processo anterior
   const area = document.getElementById('anexos-area');
   if(Store.modo !== 'api'){
     area.innerHTML = '<div class="anexos-box"><b>📎 Anexos</b>'+
@@ -1663,16 +1670,59 @@ async function renderAnexos(){
     '<button class="btn-sm" onclick="enviarAnexoAtual()">Enviar</button>'+
     '<div id="lista-anexos" style="margin-top:8px;">Carregando…</div></div>';
   try{
-    const anexos = await Store.listarAnexos(currentProc.id);
+    ANEXOS_ATUAIS = await Store.listarAnexos(currentProc.id);
     const lista = document.getElementById('lista-anexos');
-    if(!anexos.length){ lista.innerHTML = '<span class="hint">Nenhum anexo enviado ainda.</span>'; return; }
-    lista.innerHTML = anexos.map(a =>
+    const gerais = ANEXOS_ATUAIS.filter(a=>!a.secao);
+    if(!gerais.length){ lista.innerHTML = '<span class="hint">Nenhum anexo enviado ainda.</span>'; }
+    else lista.innerHTML = gerais.map(a =>
       '<div class="anexo-item">📄 <a href="'+esc(Store.urlAnexo(currentProc.id, a.id))+'" target="_blank">'+esc(a.nome_original)+'</a>'+
       ' <span class="hint">('+formatBytes(a.tamanho)+(a.enviado_por?' — '+esc(a.enviado_por):'')+')</span></div>'
     ).join('');
   }catch(e){
+    ANEXOS_ATUAIS = [];
     document.getElementById('lista-anexos').innerHTML = '<span class="hint">Erro ao listar anexos: '+esc(e.message)+'</span>';
   }
+  // atualiza os widgets de planilha (Quantitativos/Custos) com os dados recem-carregados
+  document.querySelectorAll('[id^="planilha-anexo-"]').forEach(el=>{
+    const secaoAnexo = el.id.replace('planilha-anexo-','');
+    el.innerHTML = widgetPlanilhaHTML(secaoAnexo);
+  });
+}
+
+function widgetPlanilhaHTML(secaoAnexo){
+  const anexo = ANEXOS_ATUAIS.find(a=>a.secao===secaoAnexo);
+  if(anexo){
+    return '<div class="planilha-anexo-box">' +
+      '<span>📊 <a href="'+esc(Store.urlAnexo(currentProc.id, anexo.id))+'" target="_blank">'+esc(anexo.nome_original)+'</a></span>' +
+      '<span class="hint">('+formatBytes(anexo.tamanho)+(anexo.enviado_por?' — '+esc(anexo.enviado_por):'')+')</span>' +
+      '<button class="btn-sm danger" onclick="removerPlanilhaAnexo(\''+secaoAnexo+'\',\''+anexo.id+'\')">Remover</button>' +
+    '</div>';
+  }
+  return '<div class="planilha-anexo-box pendente">' +
+    '<span class="hint">(pendente de anexo)</span>' +
+    '<input type="file" id="input-planilha-'+secaoAnexo+'" class="sr-only" onchange="enviarPlanilhaAnexo(\''+secaoAnexo+'\', this)">' +
+    '<button class="btn-sm violet" type="button" onclick="document.getElementById(\'input-planilha-'+secaoAnexo+'\').click()">📎 Anexar planilha</button>' +
+  '</div>';
+}
+
+async function enviarPlanilhaAnexo(secaoAnexo, inputEl){
+  const file = inputEl.files && inputEl.files[0];
+  if(!file) return;
+  try{
+    toast('Enviando planilha…');
+    await Store.enviarAnexo(currentProc.id, file, secaoAnexo);
+    toast('Planilha anexada.');
+    await renderAnexos();
+  }catch(e){ toast('Erro ao anexar planilha: '+e.message); }
+}
+
+async function removerPlanilhaAnexo(secaoAnexo, anexoId){
+  if(!confirm('Remover a planilha anexada desta seção?')) return;
+  try{
+    await Store.excluirAnexo(currentProc.id, anexoId);
+    toast('Planilha removida.');
+    await renderAnexos();
+  }catch(e){ toast('Erro ao remover planilha: '+e.message); }
 }
 async function enviarAnexoAtual(){
   const input = document.getElementById('input-anexo');
@@ -1762,7 +1812,12 @@ function secaoHTML(s, ocultos){
     const grid = 'field-grid' + (s.gridCols===2?' cols-2':'');
     const camposHTML = (s.campos||[]).map(c=>fieldHTML(c,ocultos)).join('');
     let tabelaHTML = '';
-    if(s.tabela){
+    if(s.tabela && s.tabela.secaoAnexo){
+      // planilha real anexada pela equipe, em vez de tabela preenchida pela IA/à mão
+      tabelaHTML =
+        (s.tabela.titulo?'<div class="sec-divider">'+esc(s.tabela.titulo)+'</div>':'') +
+        '<div id="planilha-anexo-'+esc(s.tabela.secaoAnexo)+'">'+widgetPlanilhaHTML(s.tabela.secaoAnexo)+'</div>';
+    } else if(s.tabela){
       tabelaHTML =
         (s.tabela.titulo?'<div class="sec-divider">'+esc(s.tabela.titulo)+'</div>':'') +
         (s.tabela.nota?'<p style="font-size:.78rem;color:var(--slate-l);margin:6px 0;">'+esc(s.tabela.nota)+'</p>':'') +

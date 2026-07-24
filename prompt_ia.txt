@@ -33,6 +33,7 @@ REGRAS DE SAÍDA
 3. Só o que está nos documentos; nada inventado. Sem informação = "". Referências sempre curtas (número de item/cláusula/anexo) — nunca transcreva trechos dos documentos.
 4. "_autoFilledKeys" = todas as chaves de "analise" preenchidas a partir dos documentos. "fontes" e "_sourceFiles" = nomes dos arquivos analisados.
 5. Ficam VAZIOS por serem da equipe: risco_decisao, risco_resp_decisao, risco_justificativa, hab_ef_lc_ok, hab_ef_cap_ok, custo_bdi_sinape e as colunas Preço SINAPE / Desconto / Margem / Viável? de tbl_custo.
+6. tbl_quant e tbl_custo ficam sempre [] (vazios) — a equipe anexa a planilha real de quantitativos/custos direto no Painel em vez de a IA transcrever os valores em tabela.
 
 ESTRUTURA DO JSON
 {
@@ -47,8 +48,8 @@ ESTRUTURA DO JSON
 
 CHAVES DO MODELO PADRÃO ("analise")
 - Gerais: geral_orgao, geral_modalidade, geral_numero, geral_portal, geral_uf, geral_municipios, geral_objeto, geral_lotes, geral_valor, geral_responsavel, geral_abertura, geral_status, geral_obs
-- Quantitativos: quant_referencia, quant_mesref, quant_desone, quant_pmr; tbl_quant = [[Lote, Cód/Item, Descrição, Un, Quant, PMR? ("Sim"/"Não"/""), Observação], ...]
-- Custos: custo_bdi_ref, custo_bdi_sinape, custo_es_regime, custo_es_pct, custo_preco_max, custo_inexeq, custo_criterio, custo_reajuste, custo_obs; tbl_custo = [[Lote, Valor estimado, Preço SINAPE, Desconto %, Margem %, Viável? ("","Sim","Não","Verificar")], ...]
+- Quantitativos: quant_referencia, quant_mesref, quant_desone, quant_pmr; tbl_quant = [] (sempre vazio — ver regra 6)
+- Custos: custo_bdi_ref, custo_bdi_sinape, custo_es_regime, custo_es_pct, custo_preco_max, custo_inexeq, custo_criterio, custo_reajuste, custo_obs; tbl_custo = [] (sempre vazio — ver regra 6)
 - Prazos: prazo_publicacao, prazo_esclarecimento, prazo_impugnacao, prazo_abertura, prazo_habilitacao, prazo_contrato, prazo_execucao, prazo_vigencia, prazo_prorroga, prazo_validade_prop, prazo_obs; tbl_prazo = [[Marco, Início, Término, % financeiro, Observação], ...]
 - Habilitação: hab_jur_porte, hab_jur_consorcio, hab_jur_lider, hab_jur_sub, hab_jur_obs, hab_fis_estadual, hab_fis_municipal, hab_fis_obs, hab_ef_lc, hab_ef_lg, hab_ef_sg, hab_ef_capital, hab_ef_lc_ok, hab_ef_cap_ok, hab_ef_obs, hab_tec_pmr, hab_tec_quant_min, hab_tec_atestado, hab_tec_rt, hab_tec_rt_nome, hab_tec_obs
 - Riscos: risks = [{"nivel": "Alto" | "Médio" | "Baixo", "desc": "..."}]; risco_decisao, risco_resp_decisao, risco_justificativa = "".
