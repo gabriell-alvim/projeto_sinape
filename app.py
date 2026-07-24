@@ -691,7 +691,16 @@ def _rodar_analise_ia(pdfs: list, model: str | None = None, effort: str | None =
     modelo_usado = model if model in MODELOS_IA_PERMITIDOS else ANTHROPIC_MODEL
     with anthropic_client.messages.stream(
         model=modelo_usado,
-        max_tokens=32000,
+        # 64k porque o "esforço" alto/máximo gasta parte do orçamento pensando:
+        # max_tokens limita raciocínio + resposta juntos, e com 32k o JSON da
+        # análise chegava a ser cortado no meio nos esforços mais altos.
+        max_tokens=64000,
+        # Sem isto o Opus 4.8 roda SEM raciocinar (no Sonnet 5 o padrão já é
+        # raciocinar) - ou seja, o modelo vendido como "mais cuidadoso" saía
+        # menos cuidadoso que o barato, e o seletor de esforço quase não
+        # surtia efeito nele. Com o raciocínio desligado o Opus também tende a
+        # escrever explicações junto do JSON, o que quebrava a leitura.
+        thinking={"type": "adaptive"},
         messages=[{"role": "user", "content": content}],
         **kwargs,
     ) as stream:
@@ -708,7 +717,16 @@ def _rodar_analise_ia(pdfs: list, model: str | None = None, effort: str | None =
 
     texto = "".join(b.text for b in resposta.content if b.type == "text").strip()
     texto = re.sub(r"^```(?:json)?\s*|\s*```$", "", texto.strip())
-    doc = json.loads(texto)  # deixa json.JSONDecodeError propagar pro chamador
+    try:
+        doc = json.loads(texto)
+    except json.JSONDecodeError:
+        # de vez em quando a IA escreve uma frase antes ou depois do JSON;
+        # antes de desistir, recorta o objeto do meio do texto. Se nem assim
+        # der, o erro sobe pro chamador (que responde "JSON inválido").
+        inicio, fim = texto.find("{"), texto.rfind("}")
+        if inicio == -1 or fim <= inicio:
+            raise
+        doc = json.loads(texto[inicio:fim + 1])
 
     doc.setdefault("fontes", "; ".join(nomes))
     doc.setdefault("analise", {}).setdefault("_sourceFiles", "; ".join(nomes))
