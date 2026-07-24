@@ -1240,7 +1240,10 @@ const PROMPT_IA =
 '\n' +
 'MÉTODO DE LEITURA (interno — nada disto aparece no output)\n' +
 '\n' +
+'0. Classificação prévia: antes de qualquer outra leitura, determine se o processo é PÚBLICO (edital regido por lei de licitações) ou PRIVADO (RFQ/carta-convite de empresa/concessionária privada). Essa classificação define quais padrões do passo 4 se aplicam e com que fundamentação — registre-a logo no início e não a reavalie depois.\n' +
+'\n' +
 '1. Índice: antes de preencher, mapeie cada arquivo (papel: edital, TR, planilha orçamentária, minuta de contrato, anexo N) e onde cada tema é tratado: objeto, valores, quantitativos, habilitação, prazos, garantias, condições especiais. Tema tratado em mais de um documento entra na lista de cruzamento do passo 3.\n' +
+'   a. Se uma página contiver informação relevante (prazos, valores, quantitativos, assinaturas, tabelas) mas não gerar texto extraível — por ser gráfico, imagem, tabela escaneada ou diagrama —, renderize essa página como imagem e leia visualmente antes de declarar o campo como ausente. Nunca preencha "" só porque a extração de texto automática falhou numa página específica; esgote a leitura visual primeiro.\n' +
 '\n' +
 '2. Interpretação: preencha pelo sentido, não pela forma. Distinga conceitos parecidos que geram exigências diferentes: capital social mínimo ≠ patrimônio líquido mínimo; garantia de proposta ≠ garantia contratual; prazo de execução ≠ vigência; índice contábil exigido ≠ sugerido; consórcio vedado ≠ consórcio não previsto; atestado de capacidade técnico-operacional (empresa) ≠ técnico-profissional (RT). Termo ambíguo ou definido de duas formas no mesmo documento: preencha com a leitura mais provável e registre a ambiguidade (passo 5).\n' +
 '\n' +
@@ -1249,14 +1252,15 @@ const PROMPT_IA =
 '   b. Compare valores, quantitativos e prazos que aparecem em mais de um documento. Se divergirem: preencha o campo com a fonte que prevalece (ordem: edital > TR > demais anexos, salvo hierarquia expressa no próprio edital) e registre a divergência (passo 5) citando as duas fontes.\n' +
 '   c. Compare as exigências de habilitação do corpo do edital com as da minuta de contrato e anexos; divergência = achado.\n' +
 '\n' +
-'4. Auto-revisão: antes de fechar o JSON, teste o processo contra estes padrões de impugnação/esclarecimento; cada ocorrência vira risco com nível e refs:\n' +
+'4. Auto-revisão: antes de fechar o JSON, teste o processo contra estes padrões de impugnação/esclarecimento; cada ocorrência vira risco com nível e refs. Se o processo for PRIVADO (classificado no passo 0), aplique os padrões pelo mérito prático (impacto em custo/prazo/competitividade), citando apenas o documento do contratante — nunca artigos da Lei 14.133, que valem só para processos PÚBLICOS:\n' +
 '   - consórcio vedado com objeto amplo/multidisciplinar que pressupõe capacidades combinadas;\n' +
-'   - exigências técnicas cumulativas ou quantitativo mínimo de atestado acima do usual (≈50% do licitado) — arts. 67 e 69 da Lei 14.133/2021;\n' +
-'   - prazos internamente inconsistentes (impugnação após a abertura, execução incompatível com o cronograma, validade de proposta menor que o rito);\n' +
+'   - exigências técnicas cumulativas ou quantitativo mínimo de atestado acima do usual (≈50% do licitado) — em processo público, arts. 67 e 69 da Lei 14.133/2021;\n' +
+'   - prazos internamente inconsistentes (impugnação após a abertura, execução incompatível com o cronograma, validade de proposta menor que o rito, ou qualquer data de um evento anterior à data de um evento que deveria precedê-lo — ex.: resposta a dúvidas datada antes do prazo de envio de dúvidas);\n' +
 '   - índices econômico-financeiros empilhados (liquidez + capital/PL mínimo + garantias adicionais simultâneos);\n' +
 '   - contradição entre valor numérico e por extenso;\n' +
 '   - vedações que conflitam com o próprio objeto (ex.: subcontratação vedada, mas parcela exige especialidade distinta);\n' +
-'   - reajuste sem data-base clara ou critério de pagamento/medição ambíguo.\n' +
+'   - reajuste sem data-base clara ou critério de pagamento/medição ambíguo;\n' +
+'   - texto parcialmente ilegível, cortado ou obscurecido por elemento gráfico (redação, caixa preta, sobreposição, marca d\'água) no PDF original, especialmente em campos de data, valor ou quantitativo — sempre registrar como risco citando a página; nunca inferir ou completar o valor oculto.\n' +
 '\n' +
 '5. Destino de cada achado — um lugar só, sem duplicar:\n' +
 '   - afeta a decisão de participar, custo, competitividade, ou fundamenta impugnação/esclarecimento → entrada em "risks" {nivel, desc}, desc curta com refs;\n' +
