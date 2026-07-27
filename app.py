@@ -30,6 +30,7 @@ Rotas:
   POST    /api/processos/analisar-novo        → a partir de {caminho_pasta, tipo, model?, effort?} de um item novo da varredura, baixa os PDFs, roda a IA e já cria o processo
   GET     /api/gastos                         → contador de gastos de IA (total de tokens e custo em US$/R$) + detalhamento por processo
   GET     /api/correcoes                      → pares (resposta da IA / correção da equipe) — matéria-prima pra treinar um modelo especialista no futuro
+  GET     /api/prazos                         → todos os prazos de todos os processos ativos, numa lista só, ordenados do mais urgente pro mais distante
   POST    /api/sinki/conversar                → uma rodada de conversa com o Sinki (multipart: mensagem + arquivos + conversa_id)
   GET     /api/sinki/conversas                → lista as conversas com o Sinki (mais recentes primeiro)
   GET     /api/sinki/conversas/<cid>          → histórico completo de uma conversa
@@ -70,7 +71,7 @@ import sys
 import tempfile
 import time
 import uuid
-from datetime import timedelta
+from datetime import date, timedelta
 from pathlib import Path
 from urllib.parse import quote
 
@@ -913,6 +914,104 @@ def analisar_processo_novo():
     _registrar_gasto(uso["model"], uso, processo_id=doc.get("_id"),
                      processo_nome=doc.get("nome", ""), origem="varredura automática")
     return jsonify(_sem_id_mongo(doc)), 201
+
+
+# ──────────────────────────────────────────────────────────────────
+# Painel de prazos — junta os prazos de todos os processos numa lista só
+# ──────────────────────────────────────────────────────────────────
+# Só os campos que a IA/a equipe preenchem como DATA de verdade (AAAA-MM-DD);
+# prazo_execucao/prazo_vigencia/prazo_contrato ficam de fora de propósito -
+# são duração em texto ("12 meses", "30 dias após assinatura"), não uma data
+# marcável no calendário.
+CAMPOS_PRAZO_DATA = [
+    ("prazo_publicacao", "Publicação / envio da carta-convite"),
+    ("prazo_esclarecimento", "Prazo para esclarecimentos"),
+    ("prazo_impugnacao", "Prazo para impugnação"),
+    ("prazo_abertura", "Abertura / entrega da proposta"),
+    ("prazo_habilitacao", "Prazo para envio de habilitação"),
+]
+# processo com esse status já foi decidido - prazo dele não interessa mais
+# no painel do dia a dia (evita virar ruído). "Vencido" aqui é o sentido de
+# licitação: a SINAPE VENCEU o certame - não confundir com prazo vencido.
+STATUS_PRAZO_ENCERRADO = {"Vencido", "Perdido", "Decidido não participar"}
+PRAZO_JANELA_PASSADO_DIAS = 60   # atrasado além disso não aparece mais (ruído velho)
+PRAZO_JANELA_FUTURO_DIAS = 180   # prazo longe demais também não ajuda o dia a dia
+
+
+def _parse_data_prazo(valor):
+    """Aceita AAAA-MM-DD (o formato que a IA usa) e, com tolerância,
+    DD/MM/AAAA (caso alguém digite manualmente na Análise Crítica)."""
+    valor = (valor or "").strip()
+    if not valor:
+        return None
+    try:
+        return date.fromisoformat(valor)
+    except ValueError:
+        pass
+    m = re.match(r"^(\d{1,2})/(\d{1,2})/(\d{4})$", valor)
+    if m:
+        d, mo, y = (int(x) for x in m.groups())
+        try:
+            return date(y, mo, d)
+        except ValueError:
+            return None
+    return None
+
+
+def _prazos_do_processo(doc):
+    """Devolve a lista de prazos com data reconhecível deste processo, cada
+    um já com quantos dias faltam (negativo = atrasado)."""
+    analise = doc.get("analise") or {}
+    if analise.get("geral_status") in STATUS_PRAZO_ENCERRADO:
+        return []
+    hoje = date.today()
+    nome = doc.get("nome") or "(sem nome)"
+    achados = []
+
+    for campo, rotulo in CAMPOS_PRAZO_DATA:
+        data_prazo = _parse_data_prazo(analise.get(campo))
+        if campo == "prazo_abertura" and data_prazo is None:
+            data_prazo = _parse_data_prazo(analise.get("geral_abertura"))  # sinônimo antigo
+        if data_prazo:
+            achados.append((rotulo, data_prazo))
+
+    for linha in analise.get("tbl_prazo") or []:
+        if not isinstance(linha, list) or len(linha) < 3:
+            continue
+        marco, data_prazo = (linha[0] or "").strip(), _parse_data_prazo(linha[2])
+        if data_prazo and marco:
+            achados.append((f"Cronograma: {marco}", data_prazo))
+
+    resultado = []
+    for rotulo, data_prazo in achados:
+        dias = (data_prazo - hoje).days
+        if -PRAZO_JANELA_PASSADO_DIAS <= dias <= PRAZO_JANELA_FUTURO_DIAS:
+            resultado.append({
+                "processo_id": doc["_id"], "processo_nome": nome,
+                "tipo": doc.get("type"), "campo": rotulo,
+                "data": data_prazo.isoformat(), "dias": dias,
+                "categoria": ("atrasado" if dias < 0 else "hoje" if dias == 0
+                              else "semana" if dias <= 7 else "mes" if dias <= 30 else "depois"),
+            })
+    return resultado
+
+
+@app.route("/api/prazos", methods=["GET"])
+def painel_prazos():
+    """Junta os prazos de TODOS os processos ativos numa lista só, ordenada
+    do mais urgente pro mais distante - hoje cada prazo só aparece dentro do
+    processo dele, um de cada vez; aqui dá pra ver o que vence essa semana em
+    qualquer processo, sem abrir um por um."""
+    prazos = []
+    for doc in col_processos.find():
+        prazos.extend(_prazos_do_processo(doc))
+    prazos.sort(key=lambda p: p["dias"])
+    return jsonify({
+        "total": len(prazos),
+        "atrasados": sum(1 for p in prazos if p["categoria"] == "atrasado"),
+        "esta_semana": sum(1 for p in prazos if p["categoria"] in ("hoje", "semana")),
+        "prazos": prazos,
+    })
 
 
 @app.route("/api/correcoes", methods=["GET"])

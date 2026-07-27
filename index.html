@@ -93,6 +93,25 @@ input, select, textarea { font-family:inherit; }
 .gastos-tabela td.num { text-align:right; white-space:nowrap; font-variant-numeric:tabular-nums; }
 .gastos-tabela tr:last-child td { border-bottom:none; }
 .gastos-modelo { font-size:.68rem; font-weight:700; background:var(--violet-l); color:var(--violet); padding:2px 8px; border-radius:10px; white-space:nowrap; }
+
+/* ── Painel de prazos ── */
+.prazos-grupo { margin-bottom:16px; }
+.prazos-grupo-titulo { font-size:.74rem; font-weight:800; text-transform:uppercase; letter-spacing:.03em; color:var(--slate-mid); margin-bottom:6px; }
+.prazo-item {
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  width:100%; text-align:left; border:none; border-left:4px solid var(--border);
+  background:#fafbfd; border-radius:8px; padding:9px 12px; margin-bottom:6px; cursor:pointer; font-size:.82rem;
+}
+.prazo-item:hover { background:var(--teal-ll); }
+.prazo-item.atrasado { border-left-color:var(--red, #dc2626); }
+.prazo-item.hoje { border-left-color:#d97706; }
+.prazo-item.semana { border-left-color:var(--teal-mid); }
+.prazo-item.mes, .prazo-item.depois { border-left-color:var(--slate-l); }
+.prazo-item-nome { font-weight:700; color:var(--slate); }
+.prazo-item-campo { font-size:.74rem; color:var(--slate-mid); }
+.prazo-item-quando { font-size:.74rem; font-weight:700; white-space:nowrap; flex-shrink:0; }
+.prazo-item.atrasado .prazo-item-quando { color:var(--red, #dc2626); }
+.prazo-item.hoje .prazo-item-quando { color:#d97706; }
 .novos-processos { margin-top:6px; }
 .novo-item { background:var(--violet-l); border:1px solid #ddd6fe; border-radius:10px; padding:10px 12px; margin-bottom:8px; }
 .novo-item-nome { font-weight:700; font-size:.84rem; color:var(--slate); margin-bottom:8px; }
@@ -450,6 +469,7 @@ input, select, textarea { font-family:inherit; }
     </div>
     <div class="home-relatorio-row" style="flex-direction:column; gap:8px;">
       <button class="btn-outline" id="btn-atualizacoes-dia" onclick="abrirRelatorioDoDia()">📋 Atualizações do dia</button>
+      <button class="btn-outline" id="btn-painel-prazos" onclick="abrirPainelPrazos()">⏰ Painel de prazos</button>
       <button class="btn-outline" id="btn-painel-gastos" onclick="abrirPainelGastos()">💵 Painel de gastos</button>
     </div>
     <div class="home-actions" style="flex-direction:column; align-items:center;">
@@ -644,6 +664,20 @@ input, select, textarea { font-family:inherit; }
 </div>
 
 <!-- MODAL: PAINEL DE GASTOS -->
+<!-- MODAL: PAINEL DE PRAZOS -->
+<div class="modal-overlay" id="modal-prazos">
+  <div class="modal-box wide" role="dialog" aria-label="Painel de prazos">
+    <h3>⏰ Painel de prazos</h3>
+    <p class="hint">Junta os prazos de todos os processos ativos — o que vence hoje, essa semana ou já passou. Clique num processo pra abrir ele direto.</p>
+    <div id="prazos-conteudo">
+      <p class="relatorio-vazio">Carregando…</p>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-ghost" onclick="fecharModal('modal-prazos')">Fechar</button>
+    </div>
+  </div>
+</div>
+
 <div class="modal-overlay" id="modal-gastos">
   <div class="modal-box wide" role="dialog" aria-label="Painel de gastos de IA">
     <h3>💵 Painel de gastos de IA</h3>
@@ -2558,6 +2592,63 @@ function fmtTokens(n){
   return String(n);
 }
 
+const PRAZO_GRUPO_INFO = {
+  atrasado: '🔴 Atrasado',
+  hoje:     '🟠 Vence hoje',
+  semana:   '🟡 Esta semana',
+  mes:      '🔵 Este mês',
+  depois:   '⚪ Mais adiante',
+};
+
+function prazoQuandoTexto(p){
+  if(p.categoria === 'hoje') return 'hoje';
+  if(p.dias < 0) return 'há '+Math.abs(p.dias)+' dia'+(Math.abs(p.dias)===1?'':'s');
+  return 'em '+p.dias+' dia'+(p.dias===1?'':'s');
+}
+
+async function abrirPainelPrazos(){
+  abrirModal('modal-prazos');
+  const area = document.getElementById('prazos-conteudo');
+  area.innerHTML = '<p class="relatorio-vazio">Carregando…</p>';
+  if(Store.modo!=='api'){
+    area.innerHTML = '<p class="relatorio-vazio">Disponível apenas com o Painel conectado ao backend.</p>';
+    return;
+  }
+  try{
+    const res = await fetch(Store.base + '/prazos', { headers: Store.headers() });
+    if(!res.ok) throw new Error('Servidor respondeu ' + res.status);
+    const g = await res.json();
+    let html =
+      '<div class="gastos-cards">' +
+        '<div class="gastos-card"><div class="gc-num">'+(g.total||0)+'</div><div class="gc-lbl">prazo(s) no total</div></div>' +
+        '<div class="gastos-card"><div class="gc-num">'+(g.atrasados||0)+'</div><div class="gc-lbl">atrasado(s)</div></div>' +
+        '<div class="gastos-card"><div class="gc-num">'+(g.esta_semana||0)+'</div><div class="gc-lbl">vencendo esta semana</div></div>' +
+      '</div>';
+    if(!g.prazos || !g.prazos.length){
+      html += '<p class="relatorio-vazio">Nenhum prazo próximo encontrado. Prazos aparecem aqui quando preenchidos na Análise Crítica de cada processo.</p>';
+    } else {
+      const ordem = ['atrasado','hoje','semana','mes','depois'];
+      for(const cat of ordem){
+        const itens = g.prazos.filter(p=>p.categoria===cat);
+        if(!itens.length) continue;
+        html += '<div class="prazos-grupo"><div class="prazos-grupo-titulo">'+PRAZO_GRUPO_INFO[cat]+' ('+itens.length+')</div>';
+        html += itens.map(p=>
+          '<button class="prazo-item '+cat+'" onclick="fecharModal(\'modal-prazos\'); openProcess(\''+p.processo_id+'\')">' +
+            '<span><span class="prazo-item-nome">'+esc(p.processo_nome)+'</span><br>' +
+            '<span class="prazo-item-campo">'+esc(p.campo)+'</span></span>' +
+            '<span class="prazo-item-quando">'+prazoQuandoTexto(p)+'</span>' +
+          '</button>'
+        ).join('');
+        html += '</div>';
+      }
+    }
+    area.innerHTML = html;
+    a11yAtualizarItens();
+  }catch(e){
+    area.innerHTML = '<p class="relatorio-vazio">Não foi possível carregar os prazos: '+esc(e.message)+'</p>';
+  }
+}
+
 async function abrirPainelGastos(){
   abrirModal('modal-gastos');
   const area = document.getElementById('gastos-conteudo');
@@ -3185,6 +3276,7 @@ function a11yAtualizarItens(manterNivel){
       {el: document.querySelector('.home-card[onclick*="publico"]'), label:'Processos Públicos'},
       {el: document.querySelector('.home-card[onclick*="privado"]'), label:'Processos Privados'},
       {el: document.getElementById('btn-atualizacoes-dia'), label:'Atualizações do dia'},
+      {el: document.getElementById('btn-painel-prazos'), label:'Painel de prazos'},
       {el: document.getElementById('btn-painel-gastos'), label:'Painel de gastos'},
       {el: document.querySelector('.home-actions .btn-outline'), label:'Copiar prompt para IA'},
       {el: document.getElementById('btn-falar-sinki'), label:'Falar com Sinki'}
