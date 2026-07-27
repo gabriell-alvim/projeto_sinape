@@ -122,6 +122,58 @@ input, select, textarea { font-family:inherit; }
 .ai-picker-opt b { display:block; font-weight:600; }
 .ai-picker-opt small { color:var(--slate-mid); font-weight:400; }
 
+/* ── SINKI (tela própria da IA) ── */
+.sinki-layout { display:flex; gap:16px; height:calc(100vh - 150px); min-height:420px; }
+.sinki-lateral {
+  width:230px; flex-shrink:0; display:flex; flex-direction:column; gap:10px;
+  background:var(--white); border:1px solid var(--border); border-radius:12px; padding:12px;
+}
+.sinki-nova { width:100%; }
+.sinki-lista { flex:1; overflow-y:auto; display:flex; flex-direction:column; gap:4px; }
+.sinki-conversa-item {
+  text-align:left; border:none; background:none; cursor:pointer; border-radius:8px;
+  padding:8px 10px; font-size:.78rem; color:var(--slate-mid); line-height:1.35;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.sinki-conversa-item:hover { background:var(--teal-ll); }
+.sinki-conversa-item.ativa { background:var(--teal-l); color:var(--teal); font-weight:600; }
+.sinki-lista-vazia { font-size:.75rem; color:var(--slate-l); padding:10px 4px; line-height:1.5; }
+.sinki-principal {
+  flex:1; min-width:0; display:flex; flex-direction:column;
+  background:var(--white); border:1px solid var(--border); border-radius:12px; padding:14px;
+}
+.sinki-composer { border-top:1px solid var(--border); padding-top:10px; margin-top:10px; }
+.sinki-rodape { display:flex; gap:8px; align-items:center; margin-top:8px; flex-wrap:wrap; }
+.sinki-acoes {
+  display:block; margin-top:8px; padding:7px 10px; background:var(--teal-ll);
+  border-left:3px solid var(--teal-mid); border-radius:6px; font-size:.75rem; color:var(--teal);
+}
+.sinki-acoes b { display:block; margin-bottom:2px; }
+.sinki-msgs {
+  flex:1; min-height:180px; overflow-y:auto; padding:4px 2px;
+  display:flex; flex-direction:column; gap:12px;
+}
+.sinki-vazio { font-size:.85rem; color:var(--slate-mid); text-align:center; padding:28px 12px; line-height:1.7; }
+.sinki-vazio b { color:var(--teal); }
+.sinki-msg { max-width:88%; font-size:.86rem; line-height:1.6; white-space:pre-wrap; word-wrap:break-word; }
+.sinki-msg.eu { align-self:flex-end; background:var(--teal-l); color:var(--slate); border-radius:12px 12px 2px 12px; padding:9px 13px; }
+.sinki-msg.sinki { align-self:flex-start; background:var(--white); border:1px solid var(--border); border-radius:12px 12px 12px 2px; padding:11px 14px; max-width:100%; }
+.sinki-msg .quem { display:block; font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.03em; margin-bottom:5px; opacity:.75; }
+.sinki-msg.sinki .quem { color:var(--violet); }
+.sinki-msg .arqs { display:block; font-size:.72rem; margin-top:6px; opacity:.8; }
+.sinki-pensando { align-self:flex-start; font-size:.82rem; color:var(--slate-mid); font-style:italic; padding:4px 2px; }
+.sinki-anexos { display:flex; flex-wrap:wrap; gap:6px; margin:8px 0 0; }
+.sinki-anexo-chip { display:inline-flex; align-items:center; gap:6px; background:var(--violet-l); border:1px solid #ddd6fe; border-radius:14px; padding:3px 10px; font-size:.74rem; color:var(--slate); }
+.sinki-anexo-chip button { border:none; background:none; cursor:pointer; color:var(--slate-mid); font-size:.9rem; line-height:1; padding:0; }
+.sinki-barra { display:flex; gap:8px; align-items:flex-end; margin-top:10px; }
+.sinki-barra textarea {
+  flex:1; border:1px solid var(--border); border-radius:10px; padding:9px 11px;
+  font-size:.86rem; font-family:inherit; resize:vertical; min-height:44px; color:var(--slate);
+}
+.sinki-barra textarea:focus { outline:2px solid var(--teal-mid); outline-offset:1px; }
+.sinki-barra-botoes { display:flex; flex-direction:column; gap:6px; }
+.sinki-config { display:flex; gap:8px; align-items:center; margin-top:8px; flex-wrap:wrap; }
+
 /* ── LISTA ── */
 .list-header { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:16px; flex-wrap:wrap; }
 .list-header h2 { color:var(--teal); font-size:1.15rem; }
@@ -400,8 +452,9 @@ input, select, textarea { font-family:inherit; }
       <button class="btn-outline" id="btn-atualizacoes-dia" onclick="abrirRelatorioDoDia()">📋 Atualizações do dia</button>
       <button class="btn-outline" id="btn-painel-gastos" onclick="abrirPainelGastos()">💵 Painel de gastos</button>
     </div>
-    <div class="home-actions">
+    <div class="home-actions" style="flex-direction:column; align-items:center;">
       <button class="btn-outline" onclick="copiarPromptIA()">🤖 Copiar prompt p/ IA</button>
+      <button class="btn-outline" id="btn-falar-sinki" onclick="abrirSinki()">💬 Falar com Sinki</button>
     </div>
   </div>
 
@@ -463,6 +516,43 @@ input, select, textarea { font-family:inherit; }
       <div class="prog-label" id="prog-label"></div>
       <div style="height:14px;"></div>
       <div id="checklist-root"></div>
+    </div>
+  </div>
+
+  <!-- TELA: SINKI — a IA do DATA SIN -->
+  <div class="view" id="view-sinki">
+    <div class="sinki-layout">
+      <aside class="sinki-lateral" aria-label="Conversas com o Sinki">
+        <button class="btn-sm violet sinki-nova" onclick="sinkiNovaConversa()">＋ Nova conversa</button>
+        <div class="sinki-lista" id="sinki-lista-conversas"></div>
+      </aside>
+
+      <section class="sinki-principal">
+        <div class="sinki-msgs" id="sinki-mensagens" role="log" aria-live="polite"
+             aria-label="Conversa com o Sinki"></div>
+
+        <div class="sinki-composer">
+          <div class="sinki-anexos" id="sinki-anexos-pendentes"></div>
+          <div class="sinki-barra">
+            <textarea id="sinki-input" rows="2" placeholder="Pergunte ao Sinki…"
+                      aria-label="Sua mensagem para o Sinki"
+                      onkeydown="sinkiTecla(event)"></textarea>
+            <div class="sinki-barra-botoes">
+              <input type="file" id="sinki-arquivo" multiple hidden
+                     accept=".pdf,.png,.jpg,.jpeg,.gif,.webp,.txt,.md,.csv,.json,.xml,.log"
+                     onchange="sinkiArquivosEscolhidos(this)">
+              <button class="btn-sm" id="btn-sinki-anexar" aria-label="Anexar arquivo"
+                      onclick="document.getElementById('sinki-arquivo').click()">📎 Anexar</button>
+              <button class="btn-sm violet" id="btn-sinki-enviar" onclick="sinkiEnviar()">Enviar</button>
+            </div>
+          </div>
+          <div class="sinki-rodape">
+            <div id="sinki-picker-modelo"></div>
+            <div id="sinki-picker-esforco"></div>
+            <span class="hint" style="margin:0;">Enter envia · Shift+Enter quebra linha</span>
+          </div>
+        </div>
+      </section>
     </div>
   </div>
 
@@ -1247,89 +1337,6 @@ const SEEDS = SEED_PROCESSES.map(function(s){
    PROMPT PARA IA — copiado pelo botão "🤖 Copiar prompt p/ IA"
    (versão completa em PROMPT_PARA_IA.md)
    ════════════════════════════════════════════════════════════════ */
-const PROMPT_IA =
-'Você é analista sênior de licitações da SINAPE Sinalização Viária. Analise os documentos anexados (edital, termo de referência, anexos, planilhas, minuta de contrato, carta-convite) e devolva UM ÚNICO JSON válido — nenhum texto antes ou depois — para importação no Painel de Licitações SINAPE.\n' +
-'\n' +
-'MÉTODO DE LEITURA (interno — nada disto aparece no output)\n' +
-'\n' +
-'0. Classificação prévia: antes de qualquer outra leitura, determine se o processo é PÚBLICO (edital regido por lei de licitações) ou PRIVADO (RFQ/carta-convite de empresa/concessionária privada). Essa classificação define quais padrões do passo 4 se aplicam e com que fundamentação — registre-a logo no início e não a reavalie depois.\n' +
-'\n' +
-'1. Índice: antes de preencher, mapeie cada arquivo (papel: edital, TR, planilha orçamentária, minuta de contrato, anexo N) e onde cada tema é tratado: objeto, valores, quantitativos, habilitação, prazos, garantias, condições especiais. Tema tratado em mais de um documento entra na lista de cruzamento do passo 3.\n' +
-'   a. Se uma página contiver informação relevante (prazos, valores, quantitativos, assinaturas, tabelas) mas não gerar texto extraível — por ser gráfico, imagem, tabela escaneada ou diagrama —, renderize essa página como imagem e leia visualmente antes de declarar o campo como ausente. Nunca preencha "" só porque a extração de texto automática falhou numa página específica; esgote a leitura visual primeiro.\n' +
-'\n' +
-'2. Interpretação: preencha pelo sentido, não pela forma. Distinga conceitos parecidos que geram exigências diferentes: capital social mínimo ≠ patrimônio líquido mínimo; garantia de proposta ≠ garantia contratual; prazo de execução ≠ vigência; índice contábil exigido ≠ sugerido; consórcio vedado ≠ consórcio não previsto; atestado de capacidade técnico-operacional (empresa) ≠ técnico-profissional (RT). Termo ambíguo ou definido de duas formas no mesmo documento: preencha com a leitura mais provável e registre a ambiguidade (passo 5).\n' +
-'\n' +
-'3. Cruzamento (obrigatório para os temas listados no passo 1):\n' +
-'   a. Confira toda referência cruzada usada em exigência ("conforme item X", "vide Anexo Y"). Destino inexistente ou incompatível com o que a remissão promete = achado (passo 5), nunca silêncio.\n' +
-'   b. Compare valores, quantitativos e prazos que aparecem em mais de um documento. Se divergirem: preencha o campo com a fonte que prevalece (ordem: edital > TR > demais anexos, salvo hierarquia expressa no próprio edital) e registre a divergência (passo 5) citando as duas fontes.\n' +
-'   c. Compare as exigências de habilitação do corpo do edital com as da minuta de contrato e anexos; divergência = achado.\n' +
-'\n' +
-'4. Auto-revisão: antes de fechar o JSON, teste o processo contra estes padrões de impugnação/esclarecimento; cada ocorrência vira risco com nível e refs. Se o processo for PRIVADO (classificado no passo 0), aplique os padrões pelo mérito prático (impacto em custo/prazo/competitividade), citando apenas o documento do contratante — nunca artigos da Lei 14.133, que valem só para processos PÚBLICOS:\n' +
-'   - consórcio vedado com objeto amplo/multidisciplinar que pressupõe capacidades combinadas;\n' +
-'   - exigências técnicas cumulativas ou quantitativo mínimo de atestado acima do usual (≈50% do licitado) — em processo público, arts. 67 e 69 da Lei 14.133/2021;\n' +
-'   - prazos internamente inconsistentes (impugnação após a abertura, execução incompatível com o cronograma, validade de proposta menor que o rito, ou qualquer data de um evento anterior à data de um evento que deveria precedê-lo — ex.: resposta a dúvidas datada antes do prazo de envio de dúvidas);\n' +
-'   - índices econômico-financeiros empilhados (liquidez + capital/PL mínimo + garantias adicionais simultâneos);\n' +
-'   - contradição entre valor numérico e por extenso;\n' +
-'   - vedações que conflitam com o próprio objeto (ex.: subcontratação vedada, mas parcela exige especialidade distinta);\n' +
-'   - reajuste sem data-base clara ou critério de pagamento/medição ambíguo;\n' +
-'   - texto parcialmente ilegível, cortado ou obscurecido por elemento gráfico (redação, caixa preta, sobreposição, marca d\'água) no PDF original, especialmente em campos de data, valor ou quantitativo — sempre registrar como risco citando a página; nunca inferir ou completar o valor oculto.\n' +
-'\n' +
-'5. Destino de cada achado — um lugar só, sem duplicar:\n' +
-'   - afeta a decisão de participar, custo, competitividade, ou fundamenta impugnação/esclarecimento → entrada em "risks" {nivel, desc}, desc curta com refs;\n' +
-'   - exigência formal do edital/TR que o licitante deve cumprir ou apresentar (documento, índice, prazo, qualificação, declaração) → item em "exigencias" {categoria, descricao, ref, obrigatorio};\n' +
-'   - ação ou verificação operacional da equipe SINAPE → item de checklist {texto, ref, obrigatorio};\n' +
-'   - conflito entre fontes → ref no formato "Edital 9.5.2 × Anexo III 4.1 — quantitativos divergentes" (no risco, exigência ou checklist, conforme o caso);\n' +
-'   - é dado do processo → campo correspondente da estrutura abaixo.\n' +
-'   Níveis: Alto = pode inabilitar/desclassificar a SINAPE ou fundamenta impugnação; Médio = afeta custo/prazo/competitividade ou ambiguidade que pede esclarecimento; Baixo = atenção operacional.\n' +
-'\n' +
-'REGRAS DE SAÍDA\n' +
-'1. Somente o JSON. Sem markdown, sem crases, sem comentários.\n' +
-'2. Português. Datas exatas em AAAA-MM-DD; demais prazos em texto ("30 dias após assinatura"). Células de tabelas como texto, na formatação do documento ("1.850", "R$ 155.000.000,00").\n' +
-'3. Só o que está nos documentos; nada inventado. Sem informação = "". Referências sempre curtas (número de item/cláusula/anexo) — nunca transcreva trechos dos documentos.\n' +
-'4. "_autoFilledKeys" = todas as chaves de "analise" preenchidas a partir dos documentos. "fontes" e "_sourceFiles" = nomes dos arquivos analisados.\n' +
-'5. Ficam VAZIOS por serem da equipe: risco_decisao, risco_resp_decisao, risco_justificativa, hab_ef_lc_ok, hab_ef_cap_ok, custo_bdi_sinape e as colunas Preço SINAPE / Desconto / Margem / Viável? de tbl_custo.\n' +
-'6. tbl_quant e tbl_custo ficam sempre [] (vazios) — a equipe anexa a planilha real de quantitativos/custos direto no Painel em vez de a IA transcrever os valores em tabela.\n' +
-'\n' +
-'ESTRUTURA DO JSON\n' +
-'{\n' +
-'  "nome": "título curto (ex.: Pregão Eletrônico 90010/2026 — SODF)",\n' +
-'  "type": "publico" ou "privado",\n' +
-'  "status": "em_analise",\n' +
-'  "origem": "ia",\n' +
-'  "fontes": "arquivos analisados",\n' +
-'  "exigencias": [{ "categoria": "...", "descricao": "...", "ref": "item X do Edital", "obrigatorio": true }],\n' +
-'  "analise": { chaves do modelo padrão + chaves das seções extras, "_autoFilledKeys": [...], "_sourceFiles": "..." },\n' +
-'  "schemaCustom": { "secoesExtras": [...], "camposOcultos": [...], "checklist": [...] }\n' +
-'}\n' +
-'\n' +
-'CHAVES DO MODELO PADRÃO ("analise")\n' +
-'- Gerais: geral_orgao, geral_modalidade, geral_numero, geral_portal, geral_uf, geral_municipios, geral_objeto, geral_lotes, geral_valor, geral_responsavel, geral_abertura, geral_status, geral_obs\n' +
-'- Quantitativos: quant_referencia, quant_mesref, quant_desone, quant_pmr; tbl_quant = [] (sempre vazio — ver regra 6)\n' +
-'- Custos: custo_bdi_ref, custo_bdi_sinape, custo_es_regime, custo_es_pct, custo_preco_max, custo_inexeq, custo_criterio, custo_reajuste, custo_obs; tbl_custo = [] (sempre vazio — ver regra 6)\n' +
-'- Prazos: prazo_publicacao, prazo_esclarecimento, prazo_impugnacao, prazo_abertura, prazo_habilitacao, prazo_contrato, prazo_execucao, prazo_vigencia, prazo_prorroga, prazo_validade_prop, prazo_obs; tbl_prazo = [[Marco, Início, Término, % financeiro, Observação], ...]\n' +
-'- Habilitação: hab_jur_porte, hab_jur_consorcio, hab_jur_lider, hab_jur_sub, hab_jur_obs, hab_fis_estadual, hab_fis_municipal, hab_fis_obs, hab_ef_lc, hab_ef_lg, hab_ef_sg, hab_ef_capital, hab_ef_lc_ok, hab_ef_cap_ok, hab_ef_obs, hab_tec_pmr, hab_tec_quant_min, hab_tec_atestado, hab_tec_rt, hab_tec_rt_nome, hab_tec_obs\n' +
-'- Riscos: risks = [{"nivel": "Alto" | "Médio" | "Baixo", "desc": "..."}]; risco_decisao, risco_resp_decisao, risco_justificativa = "".\n' +
-'\n' +
-'EXIGÊNCIAS ("exigencias") — OBRIGATÓRIO: liste TODAS as exigências formais do edital/TR/anexos que o licitante deve cumprir ou apresentar. Varra participação, proposta, habilitação (jurídica, fiscal, econômico-financeira, técnica), garantias, documentação complementar e execução. Uma entrada por exigência distinta; não agrupe nem resuma demais. Não duplique aqui itens que já são ação interna da equipe (esses vão no checklist).\n' +
-'[{ "categoria": "Participação" | "Proposta comercial" | "Habilitação jurídica" | "Habilitação fiscal e trabalhista" | "Habilitação econômico-financeira" | "Habilitação técnica" | "Garantias" | "Execução contratual" | "Documentação complementar" | "Outras",\n' +
-'   "descricao": "texto objetivo do que é exigido", "ref": "item/cláusula/anexo", "obrigatorio": true|false }]\n' +
-'Todo item tem "ref". "obrigatorio": false apenas para exigências expressamente facultativas no edital.\n' +
-'\n' +
-'SEÇÕES EXTRAS ("schemaCustom.secoesExtras") — crie uma por exigência relevante que não cabe no modelo padrão (garantia de proposta, garantia contratual diferenciada, vistoria, amostras/catálogos, proposta técnica pontuada, credenciamento específico, programa de integridade, exigências ambientais):\n' +
-'{ "id": "snake", "titulo": "7. Título", "icone": "🧾", "badge": "rótulo curto", "tag": "snake",\n' +
-'  "campos": [{"key": "prefixo_campo", "label": "...", "tipo": "text|textarea|date|number|select", "opcoes": ["..."], "span": "span-full (opcional)", "placeholder": "(opcional)"}],\n' +
-'  "tabela": opcional {"key": "tbl_nome", "titulo": "...", "addLabel": "+ Adicionar", "colunas": [{"label": "...", "tipo": "text"}]} }\n' +
-'Os valores desses campos vão dentro de "analise" com as mesmas keys (snake_case, únicas, prefixadas pela seção).\n' +
-'\n' +
-'CAMPOS OCULTOS ("schemaCustom.camposOcultos") — chaves do modelo padrão comprovadamente inaplicáveis a este processo. Na dúvida, não oculte.\n' +
-'\n' +
-'CHECKLIST ("schemaCustom.checklist") — checklist operacional específico deste processo, varrendo edital/TR/anexos: condições de participação, credenciamento no portal, proposta, garantias, habilitação jurídica/fiscal/econômico-financeira/técnica, cada declaração exigida como item próprio, vistoria, amostras, prazos pós-lance, assinatura:\n' +
-'[{ "title": "1. Grupo", "items": [{"texto": "ação verificável e objetiva", "ref": "item 9.1.2 do Edital", "obrigatorio": true}] }]\n' +
-'Todo item tem "ref". "obrigatorio": true quando a falta inabilita ou desclassifica. Cláusulas conflitantes entre si: uma única entrada com ref cruzada ("Edital 9.5.2 × Anexo III 4.1") pedindo esclarecimento antes da sessão.\n' +
-'\n' +
-'LEGISLAÇÃO — público: Lei 14.133/2021 (art. 164 esclarecimento/impugnação; arts. 67 e 69 limites de exigência; LC 123/2006 ME/EPP). Privado: exclusivamente o documento do contratante e suas condições gerais.\n' +
-'\n' +
-'Devolva agora apenas o JSON.';
 </script>
 
 <script>
@@ -1506,6 +1513,10 @@ function openList(type){
 function updateBreadcrumb(){
   const bc = document.getElementById('breadcrumb');
   let html = '<span class="link" onclick="goHome()">Início</span>';
+  if(document.getElementById('view-sinki').classList.contains('active')){
+    bc.innerHTML = html + '<span class="sep">/</span><span class="current">Sinki</span>';
+    return;
+  }
   if(currentType){
     const label = currentType==='publico' ? 'Processos Públicos' : 'Processos Privados';
     if(currentProc){
@@ -2510,15 +2521,24 @@ async function montarDossie(){
     if(hint) hint.textContent = hintOrig;
   }
 }
-function copiarPromptIA(){
-  const fim = Store.modo==='api'
-    ? '\n\nOBS: alem de colar o JSON no painel, o processo pode ser criado direto via API: POST '+Store.base+'/processos com header x-sinape-token.'
-    : '';
-  const texto = PROMPT_IA + fim;
-  const done = ()=>toast('Prompt copiado! Cole na conversa com a IA junto com o edital/TR.');
-  if(navigator.clipboard && navigator.clipboard.writeText){
-    navigator.clipboard.writeText(texto).then(done).catch(()=>{ fallbackCopy(texto); done(); });
-  } else { fallbackCopy(texto); done(); }
+/* Busca o prompt no servidor em vez de guardar uma cópia aqui: o texto do
+   Sinki mora num arquivo só (prompt_sinki.txt) e é o mesmo que o Painel usa
+   nas análises. Antes existia uma cópia embutida nesta página, que já saiu de
+   sincronia com o arquivo uma vez. */
+async function copiarPromptIA(){
+  if(Store.modo!=='api'){ toast('Copiar o prompt exige o Painel conectado ao backend.'); return; }
+  try{
+    const res = await fetch(Store.base + '/sinki/prompt', { headers: Store.headers() });
+    if(!res.ok) throw new Error('Servidor respondeu ' + res.status);
+    const { prompt } = await res.json();
+    const texto = prompt +
+      '\n\nOBS: alem de colar o JSON no painel, o processo pode ser criado direto via API: POST ' +
+      Store.base + '/processos com header x-sinape-token.';
+    const done = ()=>toast('Prompt copiado! Cole na conversa com a IA junto com o edital/TR.');
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(texto).then(done).catch(()=>{ fallbackCopy(texto); done(); });
+    } else { fallbackCopy(texto); done(); }
+  }catch(e){ toast('Não consegui copiar o prompt: '+e.message); }
 }
 function fallbackCopy(t){
   const ta = document.createElement('textarea'); ta.value=t; document.body.appendChild(ta);
@@ -2753,6 +2773,165 @@ async function executarAnaliseAgora(){
 }
 
 /* ════════════════════════════════════════════════════════════════
+   SINKI — a IA do DATA SIN
+   Conversa em tela própria, com anexos e acesso real ao Painel: o Sinki
+   consulta e altera os processos por conta própria (ver ferramentas em
+   app.py). Toda alteração que ele faz volta descrita e aparece na tela,
+   pra equipe conferir o que foi mexido.
+   ════════════════════════════════════════════════════════════════ */
+const SINKI = { conversaId: null, mensagens: [], anexos: [], ocupado: false };
+
+function abrirSinki(){
+  if(Store.modo!=='api'){ toast('O Sinki precisa do Painel conectado ao backend.'); return; }
+  showView('view-sinki');
+  document.getElementById('sinki-picker-modelo').innerHTML =
+    renderAiPicker('sinki-modelo', 'modelo', 'claude-opus-5', 'Modelo do Sinki');
+  document.getElementById('sinki-picker-esforco').innerHTML =
+    renderAiPicker('sinki-esforco', 'esforco', 'medium', 'Nível de esforço do Sinki');
+  sinkiRenderizar();
+  sinkiListarConversas();
+  document.getElementById('sinki-input').focus();
+  a11yAtualizarItens();
+}
+
+function sinkiNovaConversa(){
+  SINKI.conversaId = null;
+  SINKI.mensagens = [];
+  SINKI.anexos = [];
+  sinkiRenderizar();
+  sinkiRenderizarAnexos();
+  document.querySelectorAll('.sinki-conversa-item.ativa').forEach(b=>b.classList.remove('ativa'));
+  document.getElementById('sinki-input').focus();
+}
+
+async function sinkiListarConversas(){
+  const lista = document.getElementById('sinki-lista-conversas');
+  try{
+    const res = await fetch(Store.base + '/sinki/conversas', { headers: Store.headers() });
+    if(!res.ok) throw new Error('Servidor respondeu ' + res.status);
+    const { conversas } = await res.json();
+    if(!conversas.length){
+      lista.innerHTML = '<p class="sinki-lista-vazia">Nenhuma conversa ainda. Comece perguntando algo.</p>';
+      return;
+    }
+    lista.innerHTML = conversas.map(c=>
+      '<button class="sinki-conversa-item'+(c.id===SINKI.conversaId?' ativa':'')+'" ' +
+      'onclick="sinkiCarregarConversa(\''+c.id+'\')" title="'+esc(c.titulo)+'">' +
+        esc(c.titulo || 'Sem título') +
+      '</button>'
+    ).join('');
+  }catch(e){
+    lista.innerHTML = '<p class="sinki-lista-vazia">Não consegui carregar as conversas.</p>';
+  }
+}
+
+async function sinkiCarregarConversa(id){
+  try{
+    const res = await fetch(Store.base + '/sinki/conversas/' + id, { headers: Store.headers() });
+    if(!res.ok) throw new Error('Servidor respondeu ' + res.status);
+    const c = await res.json();
+    SINKI.conversaId = c.id;
+    SINKI.mensagens = (c.mensagens || []).map(m=>({
+      papel: m.papel, texto: m.texto, arquivos: (m.arquivos||[]).map(a=>a.nome), acoes: m.acoes || []
+    }));
+    SINKI.anexos = [];
+    sinkiRenderizar();
+    sinkiRenderizarAnexos();
+    sinkiListarConversas();
+  }catch(e){ toast('Não consegui abrir a conversa: '+e.message); }
+}
+
+function sinkiRenderizar(pensando){
+  const area = document.getElementById('sinki-mensagens');
+  if(!SINKI.mensagens.length && !pensando){
+    area.innerHTML =
+      '<div class="sinki-vazio">Oi! Eu sou o <b>Sinki</b>, a IA do DATA SIN.<br>' +
+      'Pergunte sobre qualquer processo do Painel, anexe um edital para eu ler, ou peça para eu ' +
+      'preencher campos e marcar itens do checklist.</div>';
+    return;
+  }
+  area.innerHTML = SINKI.mensagens.map(m=>{
+    const eu = m.papel === 'user';
+    const arqs = (m.arquivos && m.arquivos.length)
+      ? '<span class="arqs">📎 '+m.arquivos.map(esc).join(', ')+'</span>' : '';
+    const acoes = (m.acoes && m.acoes.length)
+      ? '<span class="sinki-acoes"><b>O que o Sinki fez no Painel:</b>' +
+        m.acoes.map(a=>'• '+esc(a)).join('<br>') + '</span>'
+      : '';
+    return '<div class="sinki-msg '+(eu?'eu':'sinki')+'">' +
+      '<span class="quem">'+(eu?'Você':'Sinki')+'</span>' +
+      esc(m.texto) + arqs + acoes +
+    '</div>';
+  }).join('') + (pensando ? '<div class="sinki-pensando">Sinki está pensando…</div>' : '');
+  area.scrollTop = area.scrollHeight;
+}
+
+function sinkiRenderizarAnexos(){
+  const area = document.getElementById('sinki-anexos-pendentes');
+  area.innerHTML = SINKI.anexos.map((f,i)=>
+    '<span class="sinki-anexo-chip">📎 '+esc(f.name)+
+    '<button onclick="sinkiRemoverAnexo('+i+')" aria-label="Remover '+esc(f.name)+'">×</button></span>'
+  ).join('');
+}
+
+function sinkiArquivosEscolhidos(input){
+  SINKI.anexos = SINKI.anexos.concat(Array.from(input.files));
+  input.value = '';
+  sinkiRenderizarAnexos();
+}
+
+function sinkiRemoverAnexo(i){
+  SINKI.anexos.splice(i, 1);
+  sinkiRenderizarAnexos();
+}
+
+function sinkiTecla(e){
+  if(e.key === 'Enter' && !e.shiftKey){ e.preventDefault(); sinkiEnviar(); }
+}
+
+async function sinkiEnviar(){
+  if(SINKI.ocupado) return;
+  const input = document.getElementById('sinki-input');
+  const texto = input.value.trim();
+  if(!texto && !SINKI.anexos.length){ toast('Escreva uma mensagem ou anexe um arquivo.'); return; }
+
+  const nomesAnexos = SINKI.anexos.map(f=>f.name);
+  SINKI.mensagens.push({ papel:'user', texto: texto, arquivos: nomesAnexos });
+  input.value = '';
+  sinkiRenderizar(true);
+
+  const dados = new FormData();
+  dados.append('mensagem', texto);
+  if(SINKI.conversaId) dados.append('conversa_id', SINKI.conversaId);
+  dados.append('model', document.getElementById('sinki-modelo').dataset.valor);
+  dados.append('effort', document.getElementById('sinki-esforco').dataset.valor);
+  SINKI.anexos.forEach(f=>dados.append('arquivos', f));
+  SINKI.anexos = [];
+  sinkiRenderizarAnexos();
+
+  const btn = document.getElementById('btn-sinki-enviar');
+  SINKI.ocupado = true; btn.disabled = true; btn.textContent = 'Pensando…';
+  try{
+    const headers = Store.headers();
+    delete headers['Content-Type'];   // o navegador precisa montar o boundary do multipart
+    const res = await fetch(Store.base + '/sinki/conversar', { method:'POST', headers, body: dados });
+    const corpo = await res.json().catch(()=>({}));
+    if(!res.ok) throw new Error(corpo.erro || ('Servidor respondeu '+res.status));
+    SINKI.conversaId = corpo.conversa_id;
+    SINKI.mensagens.push({ papel:'assistant', texto: corpo.resposta, acoes: corpo.acoes || [] });
+    sinkiRenderizar();
+    sinkiListarConversas();
+    if(corpo.acoes && corpo.acoes.length) recarregarLista();  // o Painel mudou; atualiza a lista
+  }catch(e){
+    SINKI.mensagens.push({ papel:'assistant', texto:'Não consegui responder agora: '+e.message });
+    sinkiRenderizar();
+  }finally{
+    SINKI.ocupado = false; btn.disabled = false; btn.textContent = 'Enviar';
+    document.getElementById('sinki-input').focus();
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
    MODO ACESSIBILIDADE — navegação numérica opt-in p/ NVDA
    Não altera a experiência de quem não ativa. Numera de 1 a 9 as opções
    da tela (abas, botões de ação, cards de menu/lista, botões de qualquer
@@ -2947,7 +3126,15 @@ function a11yAtualizarItens(manterNivel){
       {el: document.querySelector('.home-card[onclick*="privado"]'), label:'Processos Privados'},
       {el: document.getElementById('btn-atualizacoes-dia'), label:'Atualizações do dia'},
       {el: document.getElementById('btn-painel-gastos'), label:'Painel de gastos'},
-      {el: document.querySelector('.home-actions .btn-outline'), label:'Copiar prompt para IA'}
+      {el: document.querySelector('.home-actions .btn-outline'), label:'Copiar prompt para IA'},
+      {el: document.getElementById('btn-falar-sinki'), label:'Falar com Sinki'}
+    ].filter(i=>i.el);
+  } else if(document.getElementById('view-sinki').classList.contains('active')){
+    A11Y.todosItens = [
+      {el: document.getElementById('sinki-input'), label:'Escrever mensagem para o Sinki'},
+      {el: document.getElementById('btn-sinki-enviar'), label:'Enviar mensagem'},
+      {el: document.getElementById('btn-sinki-anexar'), label:'Anexar arquivo'},
+      {el: document.querySelector('.sinki-nova'), label:'Nova conversa'}
     ].filter(i=>i.el);
   } else if(document.getElementById('view-list').classList.contains('active')){
     A11Y.todosItens = Array.from(document.querySelectorAll('#process-grid .proc-card'))

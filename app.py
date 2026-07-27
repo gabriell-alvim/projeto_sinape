@@ -29,6 +29,11 @@ Rotas:
   POST    /api/processos/analisar-ia          → recebe PDFs (multipart, campo "arquivos") e devolve o JSON de análise via IA
   POST    /api/processos/analisar-novo        → a partir de {caminho_pasta, tipo, model?, effort?} de um item novo da varredura, baixa os PDFs, roda a IA e já cria o processo
   GET     /api/gastos                         → contador de gastos de IA (total de tokens e custo em US$/R$) + detalhamento por processo
+  POST    /api/sinki/conversar                → uma rodada de conversa com o Sinki (multipart: mensagem + arquivos + conversa_id)
+  GET     /api/sinki/conversas                → lista as conversas com o Sinki (mais recentes primeiro)
+  GET     /api/sinki/conversas/<cid>          → histórico completo de uma conversa
+  DELETE  /api/sinki/conversas/<cid>          → apaga a conversa e seus anexos
+  GET     /api/sinki/prompt                   → prompt do Sinki em texto (fonte única, usada pelo botão de copiar)
 
 Montador de Dossiê (integrado):
   Usa o módulo em montador-dossie/ (mesmo repo) para buscar a documentação de
@@ -102,7 +107,16 @@ MAX_UPLOAD_MB = int(os.environ.get("MAX_UPLOAD_MB", "25"))
 ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY", "")
 ANTHROPIC_MODEL = os.environ.get("ANTHROPIC_MODEL", "claude-opus-5")
 MAX_PDF_TOTAL_MB = int(os.environ.get("MAX_PDF_TOTAL_MB", "24"))  # margem p/ limite de 32MB em base64
-PROMPT_IA = (BASE_DIR / "prompt_ia.txt").read_text(encoding="utf-8")
+# Prompt único do Sinki (a IA do DATA SIN): vale tanto pra conversa quanto pra
+# análise estruturada de edital — antes eram dois textos que saíam de sincronia.
+PROMPT_SINKI = (BASE_DIR / "prompt_sinki.txt").read_text(encoding="utf-8")
+# Pedido que liga o "modo análise" descrito no prompt do Sinki. Vai como última
+# coisa do turno do usuário (posição de maior peso), logo após os documentos.
+PEDIDO_ANALISE = (
+    "Produza agora a análise estruturada deste processo para importar no Painel, "
+    "seguindo exatamente o contrato da seção \"ANÁLISE ESTRUTURADA DE EDITAL\". "
+    "Responda apenas com o JSON, sem nenhum texto antes ou depois."
+)
 anthropic_client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY) if ANTHROPIC_API_KEY else None
 
 app = Flask(__name__, static_folder=None)
@@ -131,6 +145,7 @@ col_anexos = db["anexos"]
 col_relatorios = db["relatorios"]
 col_snapshots = db["sharepoint_snapshots"]
 col_gastos = db["gastos_ia"]
+col_sinki = db["sinki_conversas"]
 
 
 def _init_db():
@@ -139,6 +154,7 @@ def _init_db():
     col_relatorios.create_index([("criadoEm", DESCENDING)])
     col_snapshots.create_index([("criadoEm", DESCENDING)])
     col_gastos.create_index([("criadoEm", DESCENDING)])
+    col_sinki.create_index([("atualizadoEm", DESCENDING)])
 
 
 # ──────────────────────────────────────────────────────────────────
@@ -683,7 +699,7 @@ def _rodar_analise_ia(pdfs: list, model: str | None = None, effort: str | None =
                 "data": base64.standard_b64encode(dados).decode("ascii"),
             },
         })
-    content.append({"type": "text", "text": PROMPT_IA})
+    content.append({"type": "text", "text": PEDIDO_ANALISE})
 
     kwargs = {}
     if effort in ESFORCOS_IA_PERMITIDOS:
@@ -692,6 +708,9 @@ def _rodar_analise_ia(pdfs: list, model: str | None = None, effort: str | None =
     modelo_usado = model if model in MODELOS_IA_PERMITIDOS else ANTHROPIC_MODEL
     with anthropic_client.messages.stream(
         model=modelo_usado,
+        # quem é o Sinki e o contrato da análise ficam no system prompt: é o
+        # mesmo texto usado na conversa, e o cache de prompt cobra barato por ele
+        system=[{"type": "text", "text": PROMPT_SINKI, "cache_control": {"type": "ephemeral"}}],
         # 64k porque o "esforço" alto/máximo gasta parte do orçamento pensando:
         # max_tokens limita raciocínio + resposta juntos, e com 32k o JSON da
         # análise chegava a ser cortado no meio nos esforços mais altos.
@@ -848,6 +867,465 @@ def analisar_processo_novo():
     _registrar_gasto(uso["model"], uso, processo_id=doc.get("_id"),
                      processo_nome=doc.get("nome", ""), origem="varredura automática")
     return jsonify(_sem_id_mongo(doc)), 201
+
+
+# ──────────────────────────────────────────────────────────────────
+# Sinki — conversa com a IA do Painel
+# ──────────────────────────────────────────────────────────────────
+SINKI_DIR = UPLOAD_DIR / "sinki"
+SINKI_MAX_RODADAS = 12  # teto de idas e vindas com as ferramentas numa única resposta
+TIPOS_IMAGEM = {"image/jpeg", "image/png", "image/gif", "image/webp"}
+EXTENSOES_TEXTO = {".txt", ".md", ".csv", ".json", ".xml", ".log", ".yaml", ".yml"}
+
+
+def _bloco_de_arquivo(nome: str, dados: bytes, content_type: str):
+    """Converte um anexo no bloco de conteúdo que a API entende. PDF e imagem
+    vão nativos; arquivo de texto entra transcrito. Formato não suportado
+    (ex.: .xlsx, .docx) devolve None e o chamador avisa a equipe."""
+    nome_lower = (nome or "").lower()
+    if nome_lower.endswith(".pdf") or content_type == "application/pdf":
+        return {"type": "document", "source": {
+            "type": "base64", "media_type": "application/pdf",
+            "data": base64.standard_b64encode(dados).decode("ascii")}}
+    if content_type in TIPOS_IMAGEM:
+        return {"type": "image", "source": {
+            "type": "base64", "media_type": content_type,
+            "data": base64.standard_b64encode(dados).decode("ascii")}}
+    if any(nome_lower.endswith(e) for e in EXTENSOES_TEXTO):
+        texto = dados.decode("utf-8", errors="replace")
+        return {"type": "text", "text": f"--- conteúdo de {nome} ---\n{texto}"}
+    return None
+
+
+# ── ferramentas do Sinki: é o que dá "mãos" a ele dentro do Painel ──
+# De propósito NÃO existe ferramenta que apague processo, anexo ou conversa:
+# tudo aqui é leitura, preenchimento ou criação, então nenhum pedido mal
+# interpretado consegue destruir trabalho da equipe.
+SINKI_FERRAMENTAS = [
+    {
+        "name": "listar_processos",
+        "description": "Lista os processos cadastrados no Painel, com nome, tipo, status e progresso. "
+                       "Use para responder o que existe, o que está em cada etapa, ou para achar o id "
+                       "de um processo antes de abrir ou alterar.",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "tipo": {"type": "string", "enum": ["publico", "privado"],
+                         "description": "Filtra por licitação pública ou contratação privada."},
+                "busca": {"type": "string", "description": "Trecho do nome do processo."},
+            },
+        },
+    },
+    {
+        "name": "ver_processo",
+        "description": "Abre um processo inteiro: análise crítica preenchida, exigências do edital, "
+                       "checklist e o que já foi marcado. Use antes de responder qualquer pergunta "
+                       "específica sobre um processo.",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "processo": {"type": "string", "description": "Id do processo ou parte do nome."},
+            },
+            "required": ["processo"],
+        },
+    },
+    {
+        "name": "ver_gastos",
+        "description": "Quanto já foi gasto com IA: total de tokens, custo em dólar e real, e o "
+                       "detalhamento por análise.",
+        "input_schema": {"type": "object", "properties": {}},
+    },
+    {
+        "name": "ver_atualizacoes_do_dia",
+        "description": "Último relatório de varredura do SharePoint: propostas e editais novos, "
+                       "movimentações de status e os processos novos ainda não analisados.",
+        "input_schema": {"type": "object", "properties": {}},
+    },
+    {
+        "name": "atualizar_processo",
+        "description": "Preenche ou corrige campos de um processo já cadastrado. Use as chaves do "
+                       "modelo padrão (ex.: geral_orgao, prazo_abertura, hab_tec_rt_nome). Só mexa "
+                       "no que o usuário pediu.",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "processo": {"type": "string", "description": "Id do processo ou parte do nome."},
+                "campos": {"type": "object",
+                           "description": "Pares chave/valor da análise crítica a gravar."},
+                "status": {"type": "string",
+                           "description": "Opcional: novo status do processo (ex.: em_analise)."},
+            },
+            "required": ["processo", "campos"],
+        },
+    },
+    {
+        "name": "marcar_checklist",
+        "description": "Marca ou desmarca itens do checklist de um processo. Identifique os itens "
+                       "pelo texto; confira antes com ver_processo.",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "processo": {"type": "string", "description": "Id do processo ou parte do nome."},
+                "itens": {"type": "array", "items": {"type": "string"},
+                          "description": "Trechos do texto dos itens a marcar."},
+                "marcar": {"type": "boolean",
+                           "description": "true marca como feito, false desmarca. Padrão true."},
+            },
+            "required": ["processo", "itens"],
+        },
+    },
+    {
+        "name": "criar_processo",
+        "description": "Cria um processo novo no Painel a partir da análise estruturada que você "
+                       "mesmo produziu (mesmo formato da seção ANÁLISE ESTRUTURADA DE EDITAL). "
+                       "Use quando anexarem um edital e pedirem para cadastrar.",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "documento": {"type": "object",
+                              "description": "O JSON completo do processo, no contrato da análise."},
+            },
+            "required": ["documento"],
+        },
+    },
+    {
+        "name": "executar_varredura_sharepoint",
+        "description": "Varre o SharePoint agora, compara com a varredura anterior e publica o "
+                       "relatório do dia. Demora cerca de meio minuto. Use quando pedirem para "
+                       "conferir se entrou processo novo.",
+        "input_schema": {"type": "object", "properties": {}},
+    },
+]
+
+
+def _sinki_achar_processo(referencia: str):
+    """Aceita id exato ou pedaço do nome — a equipe fala pelo nome, não pelo id."""
+    doc = col_processos.find_one({"_id": referencia})
+    if doc:
+        return doc
+    ref = _norm(referencia)
+    candidatos = [d for d in col_processos.find() if ref in _norm(d.get("nome", ""))]
+    return candidatos[0] if len(candidatos) == 1 else (candidatos or None)
+
+
+def _norm(texto):
+    s = (texto or "").lower()
+    for de, para in (("àáâãä", "a"), ("èéêë", "e"), ("ìíîï", "i"),
+                     ("òóôõö", "o"), ("ùúûü", "u"), ("ç", "c")):
+        for c in de:
+            s = s.replace(c, para)
+    return s
+
+
+def _sinki_rodar_ferramenta(nome: str, entrada: dict):
+    """Executa uma ferramenta e devolve (resultado_pro_modelo, acao_pro_usuario).
+    'acao' só é preenchida quando algo mudou de fato no Painel, pra que a tela
+    possa mostrar à equipe exatamente o que o Sinki fez."""
+    if nome == "listar_processos":
+        consulta = {}
+        if entrada.get("tipo"):
+            consulta["type"] = entrada["tipo"]
+        docs = list(col_processos.find(consulta).sort("atualizadoEm", DESCENDING))
+        if entrada.get("busca"):
+            b = _norm(entrada["busca"])
+            docs = [d for d in docs if b in _norm(d.get("nome", ""))]
+        return {"total": len(docs), "processos": [{
+            "id": d["_id"], "nome": d.get("nome"), "tipo": d.get("type"),
+            "status": d.get("status"), "progresso": d.get("progress", 0),
+        } for d in docs[:60]]}, None
+
+    if nome == "ver_processo":
+        doc = _sinki_achar_processo(entrada.get("processo", ""))
+        if not doc:
+            return {"erro": "Nenhum processo com esse id ou nome."}, None
+        if isinstance(doc, list):
+            return {"erro": "Mais de um processo bate com esse nome — seja mais específico.",
+                    "candidatos": [{"id": d["_id"], "nome": d.get("nome")} for d in doc[:10]]}, None
+        analise = {k: v for k, v in (doc.get("analise") or {}).items() if v not in ("", None, [])}
+        checklist_marcado = doc.get("checklist") or {}
+        return {
+            "id": doc["_id"], "nome": doc.get("nome"), "tipo": doc.get("type"),
+            "status": doc.get("status"), "progresso": doc.get("progress", 0),
+            "analise": analise,
+            "exigencias": doc.get("exigencias") or [],
+            "checklist_do_edital": (doc.get("schemaCustom") or {}).get("checklist") or [],
+            "itens_ja_marcados": checklist_marcado,
+        }, None
+
+    if nome == "ver_gastos":
+        registros = list(col_gastos.find(sort=[("criadoEm", DESCENDING)]))
+        ent = sum(r.get("tokens_entrada", 0) for r in registros)
+        sai = sum(r.get("tokens_saida", 0) for r in registros)
+        usd = round(sum(r.get("custo_usd", 0.0) for r in registros), 4)
+        return {"total_analises": len(registros), "tokens_entrada": ent, "tokens_saida": sai,
+                "custo_usd": usd, "custo_brl_aprox": round(usd * USD_PARA_BRL, 2),
+                "itens": [{"processo": r.get("processo_nome"), "modelo": r.get("model"),
+                           "origem": r.get("origem"), "custo_usd": r.get("custo_usd")}
+                          for r in registros[:40]]}, None
+
+    if nome == "ver_atualizacoes_do_dia":
+        doc = col_relatorios.find_one(sort=[("criadoEm", DESCENDING)])
+        if not doc:
+            return {"erro": "Nenhuma varredura publicada ainda."}, None
+        return {"titulo": doc.get("titulo"), "conteudo": doc.get("conteudo"),
+                "processos_novos": doc.get("novos") or []}, None
+
+    if nome == "atualizar_processo":
+        doc = _sinki_achar_processo(entrada.get("processo", ""))
+        if not doc or isinstance(doc, list):
+            return {"erro": "Processo não encontrado ou ambíguo — confira com listar_processos."}, None
+        campos = entrada.get("campos") or {}
+        if not campos and not entrada.get("status"):
+            return {"erro": "Nada para atualizar."}, None
+        mudanca = {"atualizadoEm": _agora_ms(), "versao": (doc.get("versao") or 1) + 1,
+                   "atualizadoPor": "Sinki"}
+        for k, v in campos.items():
+            mudanca["analise." + k] = v
+        if entrada.get("status"):
+            mudanca["status"] = entrada["status"]
+        col_processos.update_one({"_id": doc["_id"]}, {"$set": mudanca})
+        quais = ", ".join(list(campos)[:6]) + ("…" if len(campos) > 6 else "")
+        return ({"ok": True, "campos_gravados": list(campos)},
+                f"Preencheu {len(campos)} campo(s) em “{doc.get('nome')}”: {quais}")
+
+    if nome == "marcar_checklist":
+        doc = _sinki_achar_processo(entrada.get("processo", ""))
+        if not doc or isinstance(doc, list):
+            return {"erro": "Processo não encontrado ou ambíguo."}, None
+        marcar = entrada.get("marcar", True)
+        grupos = (doc.get("schemaCustom") or {}).get("checklist") or []
+        checklist = dict(doc.get("checklist") or {})
+        casados = []
+        for gi, grupo in enumerate(grupos):
+            for ii, item in enumerate(grupo.get("items", [])):
+                texto = _norm(item.get("texto", ""))
+                for procurado in entrada.get("itens", []):
+                    if _norm(procurado) in texto:
+                        chave = f"{gi}-{ii}"
+                        checklist[chave] = {"feito": marcar}
+                        casados.append(item.get("texto", ""))
+                        break
+        if not casados:
+            return {"erro": "Nenhum item do checklist bate com esses textos."}, None
+        col_processos.update_one({"_id": doc["_id"]}, {"$set": {
+            "checklist": checklist, "atualizadoEm": _agora_ms(),
+            "versao": (doc.get("versao") or 1) + 1, "atualizadoPor": "Sinki"}})
+        verbo = "Marcou" if marcar else "Desmarcou"
+        return ({"ok": True, "itens": casados},
+                f"{verbo} {len(casados)} item(ns) do checklist de “{doc.get('nome')}”")
+
+    if nome == "criar_processo":
+        documento = entrada.get("documento") or {}
+        if not isinstance(documento, dict) or not documento.get("nome"):
+            return {"erro": "O documento precisa ser um objeto com pelo menos 'nome'."}, None
+        documento.setdefault("origem", "sinki")
+        try:
+            criado = _preparar_e_inserir_processo(dict(documento))
+        except DuplicateKeyError:
+            return {"erro": "Já existe processo com esse id."}, None
+        return ({"ok": True, "id": criado["_id"], "nome": criado.get("nome")},
+                f"Cadastrou o processo “{criado.get('nome')}” no Painel")
+
+    if nome == "executar_varredura_sharepoint":
+        if not (MONTADOR_TENANT_ID and MONTADOR_CLIENT_ID and MONTADOR_CLIENT_SECRET):
+            return {"erro": "SharePoint não configurado neste servidor."}, None
+        try:
+            atual = escanear_biblioteca({"MODO_LOCAL": False, "TENANT_ID": MONTADOR_TENANT_ID,
+                                         "CLIENT_ID": MONTADOR_CLIENT_ID,
+                                         "CLIENT_SECRET": MONTADOR_CLIENT_SECRET})
+        except Exception as e:
+            return {"erro": f"Falha ao varrer o SharePoint: {e}"}, None
+        anterior_doc = col_snapshots.find_one(sort=[("criadoEm", DESCENDING)])
+        anterior = anterior_doc["dados"] if anterior_doc else None
+        data_anterior = _fmt_data_ms(anterior_doc["criadoEm"]) if anterior_doc else None
+        titulo, conteudo, novos = _gerar_relatorio_diario(atual, anterior, data_anterior)
+        col_snapshots.insert_one({"_id": uuid.uuid4().hex, "dados": atual, "criadoEm": _agora_ms()})
+        col_relatorios.insert_one({"_id": uuid.uuid4().hex, "titulo": titulo, "conteudo": conteudo,
+                                   "novos": novos, "autor": "Sinki", "criadoEm": _agora_ms()})
+        return ({"ok": True, "relatorio": conteudo, "processos_novos": novos},
+                f"Varreu o SharePoint e publicou o relatório ({len(novos)} processo(s) novo(s))")
+
+    return {"erro": f"Ferramenta desconhecida: {nome}"}, None
+
+
+def _mensagens_da_conversa(conversa: dict) -> list:
+    """Remonta o histórico no formato da API, relendo do disco os arquivos que
+    foram anexados em cada turno (a API não guarda estado entre chamadas)."""
+    pasta = SINKI_DIR / conversa["_id"]
+    mensagens = []
+    for m in conversa.get("mensagens", []):
+        if m.get("papel") == "assistant":
+            mensagens.append({"role": "assistant", "content": m.get("texto") or ""})
+            continue
+        content = []
+        for a in m.get("arquivos", []):
+            caminho = pasta / a["arquivo"]
+            if not caminho.is_file():
+                continue
+            bloco = _bloco_de_arquivo(a["nome"], caminho.read_bytes(), a.get("content_type", ""))
+            if bloco:
+                content.append(bloco)
+        content.append({"type": "text", "text": m.get("texto") or "(sem texto)"})
+        mensagens.append({"role": "user", "content": content})
+    return mensagens
+
+
+@app.route("/api/sinki/prompt", methods=["GET"])
+def sinki_prompt():
+    """Prompt do Sinki em texto puro — usado pelo botão 'copiar prompt' do
+    Painel, pra existir uma única fonte de verdade (antes o texto vivia
+    duplicado no index.html e saía de sincronia com o arquivo)."""
+    return jsonify({"prompt": PROMPT_SINKI})
+
+
+@app.route("/api/sinki/conversas", methods=["GET"])
+def sinki_listar_conversas():
+    docs = col_sinki.find({}, {"titulo": 1, "criadoEm": 1, "atualizadoEm": 1}).sort("atualizadoEm", DESCENDING)
+    return jsonify({"conversas": [_sem_id_mongo(d) for d in docs]})
+
+
+@app.route("/api/sinki/conversas/<cid>", methods=["GET"])
+def sinki_obter_conversa(cid):
+    doc = col_sinki.find_one({"_id": cid})
+    if not doc:
+        return jsonify({"erro": "Conversa não encontrada"}), 404
+    return jsonify(_sem_id_mongo(doc))
+
+
+@app.route("/api/sinki/conversas/<cid>", methods=["DELETE"])
+def sinki_excluir_conversa(cid):
+    col_sinki.delete_one({"_id": cid})
+    shutil.rmtree(SINKI_DIR / cid, ignore_errors=True)
+    return jsonify({"ok": True})
+
+
+@app.route("/api/sinki/conversar", methods=["POST"])
+def sinki_conversar():
+    """Uma rodada de conversa com o Sinki. Recebe (multipart) a mensagem nova e
+    os arquivos anexados agora; o histórico fica guardado no servidor, então o
+    Painel só precisa mandar o id da conversa. Devolve a resposta pronta — sem
+    streaming de propósito: o texto sendo remontado aos pedaços atrapalha quem
+    usa leitor de tela, que prefere ouvir a resposta inteira de uma vez."""
+    if not anthropic_client:
+        return jsonify({"erro": "ANTHROPIC_API_KEY não configurada no servidor"}), 503
+
+    mensagem = (request.form.get("mensagem") or "").strip()
+    arquivos = request.files.getlist("arquivos")
+    if not mensagem and not arquivos:
+        return jsonify({"erro": "Escreva uma mensagem ou anexe um arquivo."}), 400
+
+    cid = request.form.get("conversa_id") or ""
+    conversa = col_sinki.find_one({"_id": cid}) if cid else None
+    if not conversa:
+        cid = uuid.uuid4().hex
+        conversa = {"_id": cid, "titulo": "", "mensagens": [],
+                    "criadoEm": _agora_ms(), "atualizadoEm": _agora_ms()}
+
+    # salva os anexos desta rodada; eles são relidos a cada turno seguinte
+    anexados, nao_suportados = [], []
+    if arquivos:
+        pasta = SINKI_DIR / cid
+        pasta.mkdir(parents=True, exist_ok=True)
+        for arquivo in arquivos:
+            if not arquivo.filename:
+                continue
+            dados = arquivo.read()
+            if _bloco_de_arquivo(arquivo.filename, dados, arquivo.content_type or "") is None:
+                nao_suportados.append(arquivo.filename)
+                continue
+            nome_disco = uuid.uuid4().hex + "__" + secure_filename(arquivo.filename)
+            (pasta / nome_disco).write_bytes(dados)
+            anexados.append({"nome": arquivo.filename, "arquivo": nome_disco,
+                             "content_type": arquivo.content_type or "", "tamanho": len(dados)})
+
+    if nao_suportados and not anexados and not mensagem:
+        return jsonify({"erro": "Nenhum dos arquivos pode ser lido pela IA: "
+                                + ", ".join(nao_suportados)
+                                + ". Envie PDF, imagem ou texto."}), 400
+
+    conversa.setdefault("mensagens", []).append({
+        "papel": "user", "texto": mensagem, "arquivos": anexados, "em": _agora_ms()})
+
+    total_anexos = sum(a.get("tamanho", 0)
+                       for m in conversa["mensagens"] for a in m.get("arquivos", []))
+    if total_anexos > MAX_PDF_TOTAL_MB * 1024 * 1024:
+        return jsonify({"erro": f"Os anexos desta conversa somam mais de {MAX_PDF_TOTAL_MB} MB. "
+                                f"Comece uma conversa nova para continuar."}), 400
+
+    modelo = request.form.get("model")
+    modelo_usado = modelo if modelo in MODELOS_IA_PERMITIDOS else ANTHROPIC_MODEL
+    esforco = request.form.get("effort")
+    kwargs = {"output_config": {"effort": esforco if esforco in ESFORCOS_IA_PERMITIDOS else "medium"}}
+
+    # laço de ferramentas: o Sinki pode consultar e mexer no Painel várias vezes
+    # antes de responder. O teto de rodadas evita que um pedido mal formulado
+    # vire um vaivém sem fim segurando a requisição.
+    mensagens = _mensagens_da_conversa(conversa)
+    acoes, entrada_total, saida_total = [], 0, 0
+    resposta = None
+    try:
+        for _ in range(SINKI_MAX_RODADAS):
+            with anthropic_client.messages.stream(
+                model=modelo_usado,
+                max_tokens=32000,
+                system=[{"type": "text", "text": PROMPT_SINKI, "cache_control": {"type": "ephemeral"}}],
+                thinking={"type": "adaptive"},
+                tools=SINKI_FERRAMENTAS,
+                messages=mensagens,
+                **kwargs,
+            ) as stream:
+                resposta = stream.get_final_message()
+
+            u = resposta.usage
+            entrada_total += ((getattr(u, "input_tokens", 0) or 0)
+                              + (getattr(u, "cache_creation_input_tokens", 0) or 0)
+                              + (getattr(u, "cache_read_input_tokens", 0) or 0))
+            saida_total += getattr(u, "output_tokens", 0) or 0
+
+            if resposta.stop_reason != "tool_use":
+                break
+
+            # o turno do assistente volta inteiro (inclui raciocínio e as chamadas)
+            mensagens.append({"role": "assistant", "content": resposta.content})
+            resultados = []
+            for bloco in resposta.content:
+                if bloco.type != "tool_use":
+                    continue
+                try:
+                    saida, acao = _sinki_rodar_ferramenta(bloco.name, bloco.input or {})
+                    erro = False
+                except Exception as e:
+                    saida, acao, erro = {"erro": str(e)}, None, True
+                if acao:
+                    acoes.append(acao)
+                resultados.append({"type": "tool_result", "tool_use_id": bloco.id,
+                                   "content": json.dumps(saida, ensure_ascii=False, default=str),
+                                   "is_error": erro})
+            mensagens.append({"role": "user", "content": resultados})
+    except anthropic.APIStatusError as e:
+        return jsonify({"erro": f"Erro na API da IA: {e.message}"}), 502
+
+    texto = "".join(b.text for b in (resposta.content if resposta else []) if b.type == "text").strip()
+    if not texto:
+        texto = "(o Sinki não devolveu texto desta vez — tente reformular a pergunta)"
+    if nao_suportados:
+        texto += ("\n\nObservação: não consegui ler " + ", ".join(nao_suportados)
+                  + ". Envie em PDF, imagem ou texto.")
+
+    conversa["mensagens"].append({"papel": "assistant", "texto": texto,
+                                  "acoes": acoes, "em": _agora_ms()})
+    if not conversa.get("titulo"):
+        base = mensagem or (anexados[0]["nome"] if anexados else "Conversa")
+        conversa["titulo"] = base[:60] + ("…" if len(base) > 60 else "")
+    conversa["atualizadoEm"] = _agora_ms()
+    col_sinki.replace_one({"_id": cid}, conversa, upsert=True)
+
+    uso = {"model": modelo_usado, "entrada": entrada_total, "saida": saida_total}
+    _registrar_gasto(modelo_usado, uso, processo_nome="Sinki: " + conversa["titulo"],
+                     origem="conversa com o Sinki")
+
+    return jsonify({"conversa_id": cid, "titulo": conversa["titulo"], "resposta": texto,
+                    "acoes": acoes, "anexados": [a["nome"] for a in anexados]})
 
 
 @app.route("/api/gastos", methods=["GET"])
