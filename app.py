@@ -29,6 +29,7 @@ Rotas:
   POST    /api/processos/analisar-ia          → recebe PDFs (multipart, campo "arquivos") e devolve o JSON de análise via IA
   POST    /api/processos/analisar-novo        → a partir de {caminho_pasta, tipo, model?, effort?} de um item novo da varredura, baixa os PDFs, roda a IA e já cria o processo
   GET     /api/gastos                         → contador de gastos de IA (total de tokens e custo em US$/R$) + detalhamento por processo
+  GET     /api/correcoes                      → pares (resposta da IA / correção da equipe) — matéria-prima pra treinar um modelo especialista no futuro
   POST    /api/sinki/conversar                → uma rodada de conversa com o Sinki (multipart: mensagem + arquivos + conversa_id)
   GET     /api/sinki/conversas                → lista as conversas com o Sinki (mais recentes primeiro)
   GET     /api/sinki/conversas/<cid>          → histórico completo de uma conversa
@@ -60,6 +61,7 @@ concorrentes entre a leitura e a escrita.
 """
 
 import base64
+import copy
 import json
 import os
 import re
@@ -146,6 +148,7 @@ col_relatorios = db["relatorios"]
 col_snapshots = db["sharepoint_snapshots"]
 col_gastos = db["gastos_ia"]
 col_sinki = db["sinki_conversas"]
+col_correcoes = db["correcoes_ia"]
 
 
 def _init_db():
@@ -155,6 +158,8 @@ def _init_db():
     col_snapshots.create_index([("criadoEm", DESCENDING)])
     col_gastos.create_index([("criadoEm", DESCENDING)])
     col_sinki.create_index([("atualizadoEm", DESCENDING)])
+    col_correcoes.create_index([("processo_id", ASCENDING)])
+    col_correcoes.create_index([("atualizadoEm", DESCENDING)])
 
 
 # ──────────────────────────────────────────────────────────────────
@@ -327,6 +332,34 @@ def substituir(pid):
     return jsonify(_sem_id_mongo(doc))
 
 
+def _capturar_correcoes(doc_antes: dict, campos_tocados: dict):
+    """Registra o par (resposta original da IA / valor que a equipe deixou) pra
+    cada campo da análise que a equipe editou nesta requisição — vira material
+    de treino no futuro. Só se aplica a processo que nasceu de IA (tem
+    '_analiseOriginalIA' guardado); processo manual não tem o que comparar.
+    Se a equipe editar e depois voltar pro valor original, some o registro —
+    não é mais uma correção."""
+    baseline = doc_antes.get("_analiseOriginalIA")
+    if baseline is None or not campos_tocados:
+        return
+    processo_id = doc_antes["_id"]
+    processo_nome = doc_antes.get("nome") or ""
+    modelo_ia = doc_antes.get("_iaModel") or ""
+    fontes = doc_antes.get("analise", {}).get("_sourceFiles") or doc_antes.get("fontes") or ""
+    for campo, valor_novo in campos_tocados.items():
+        chave_registro = f"{processo_id}::{campo}"
+        valor_ia = baseline.get(campo, "")
+        if valor_novo == valor_ia:
+            col_correcoes.delete_one({"_id": chave_registro})
+            continue
+        col_correcoes.replace_one({"_id": chave_registro}, {
+            "_id": chave_registro, "processo_id": processo_id, "processo_nome": processo_nome,
+            "campo": campo, "modelo_ia": modelo_ia, "fontes": fontes,
+            "valor_ia": valor_ia, "valor_atual": valor_novo,
+            "criadoEm": _agora_ms(), "atualizadoEm": _agora_ms(),
+        }, upsert=True)
+
+
 @app.route("/api/processos/<pid>", methods=["PATCH"])
 def patch(pid):
     corpo = request.get_json(force=True, silent=False)
@@ -348,6 +381,7 @@ def patch(pid):
         doc[chave] = valor
     if corpo.get("analisePatch"):
         doc.setdefault("analise", {}).update(corpo["analisePatch"])
+        _capturar_correcoes(doc, corpo["analisePatch"])
     if corpo.get("checklistPatch"):
         doc.setdefault("checklist", {}).update(corpo["checklistPatch"])
     if corpo.get("schemaCustom") is not None:
@@ -750,6 +784,7 @@ def _rodar_analise_ia(pdfs: list, model: str | None = None, effort: str | None =
 
     doc.setdefault("fontes", "; ".join(nomes))
     doc.setdefault("analise", {}).setdefault("_sourceFiles", "; ".join(nomes))
+    doc["_iaModel"] = modelo_usado
     return doc, uso
 
 
@@ -765,6 +800,14 @@ def _preparar_e_inserir_processo(doc: dict) -> dict:
     doc["versao"] = int(doc.get("versao") or 1)
     doc.setdefault("analise", {})
     doc.setdefault("checklist", {})
+
+    # guarda o que a IA respondeu originalmente, pra depois comparar com o que
+    # a equipe deixou de fato — é o par (resposta da IA / correção humana) que
+    # vira material de treino no futuro. Só faz sentido pra processo que
+    # nasceu de IA; um processo criado manualmente não tem "resposta da IA"
+    # pra comparar.
+    if doc.get("origem") in ("ia", "sinki") and "_analiseOriginalIA" not in doc:
+        doc["_analiseOriginalIA"] = copy.deepcopy(doc.get("analise") or {})
 
     doc["_id"] = pid
     del doc["id"]
@@ -857,6 +900,9 @@ def analisar_processo_novo():
 
     doc["type"] = tipo
     doc.setdefault("origem", "ia")
+    # o baseline pra comparar correções depois é só o que a IA respondeu de
+    # fato — captura antes de colar o link da pasta (isso não veio da IA)
+    doc["_analiseOriginalIA"] = copy.deepcopy(doc.get("analise") or {})
     url_pasta = f"https://{SITE_HOSTNAME}{SITE_PATH}/Documentos/{caminho_pasta}"
     doc.setdefault("analise", {})["geral_pasta_sharepoint"] = url_pasta
 
@@ -867,6 +913,17 @@ def analisar_processo_novo():
     _registrar_gasto(uso["model"], uso, processo_id=doc.get("_id"),
                      processo_nome=doc.get("nome", ""), origem="varredura automática")
     return jsonify(_sem_id_mongo(doc)), 201
+
+
+@app.route("/api/correcoes", methods=["GET"])
+def listar_correcoes():
+    """Cada correção é um par (o que a IA respondeu / o que a equipe deixou
+    de fato) num campo de um processo — a matéria-prima pra treinar um modelo
+    especialista no futuro. Se junta sozinha: toda vez que alguém edita um
+    campo de um processo criado por IA/Sinki, o par entra aqui. Editar de
+    volta pro valor original apaga o registro correspondente."""
+    registros = list(col_correcoes.find().sort("atualizadoEm", DESCENDING))
+    return jsonify({"total": len(registros), "correcoes": [_sem_id_mongo(r) for r in registros]})
 
 
 # ──────────────────────────────────────────────────────────────────
@@ -1017,7 +1074,7 @@ def _norm(texto):
     return s
 
 
-def _sinki_rodar_ferramenta(nome: str, entrada: dict):
+def _sinki_rodar_ferramenta(nome: str, entrada: dict, modelo_usado: str = ""):
     """Executa uma ferramenta e devolve (resultado_pro_modelo, acao_pro_usuario).
     'acao' só é preenchida quando algo mudou de fato no Painel, pra que a tela
     possa mostrar à equipe exatamente o que o Sinki fez."""
@@ -1119,6 +1176,8 @@ def _sinki_rodar_ferramenta(nome: str, entrada: dict):
         if not isinstance(documento, dict) or not documento.get("nome"):
             return {"erro": "O documento precisa ser um objeto com pelo menos 'nome'."}, None
         documento.setdefault("origem", "sinki")
+        if modelo_usado:
+            documento["_iaModel"] = modelo_usado
         try:
             criado = _preparar_e_inserir_processo(dict(documento))
         except DuplicateKeyError:
@@ -1292,7 +1351,7 @@ def sinki_conversar():
                 if bloco.type != "tool_use":
                     continue
                 try:
-                    saida, acao = _sinki_rodar_ferramenta(bloco.name, bloco.input or {})
+                    saida, acao = _sinki_rodar_ferramenta(bloco.name, bloco.input or {}, modelo_usado)
                     erro = False
                 except Exception as e:
                     saida, acao, erro = {"erro": str(e)}, None, True
