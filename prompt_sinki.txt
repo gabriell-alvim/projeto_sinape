@@ -92,7 +92,7 @@ ESTRUTURA DO JSON
 }
 
 CHAVES DO MODELO PADRÃO ("analise")
-- Gerais: geral_orgao, geral_modalidade, geral_numero, geral_portal, geral_uf, geral_municipios, geral_objeto, geral_lotes, geral_valor, geral_responsavel, geral_abertura, geral_status, geral_obs
+- Gerais: geral_orgao, geral_modalidade, geral_numero, geral_portal (a URL do portal/site onde a licitação ocorre — comece com http:// ou https://; se o edital só citar o nome da plataforma sem link, preencha com o nome mesmo, mas prefira sempre o link quando estiver disponível), geral_uf, geral_municipios, geral_objeto, geral_lotes, geral_valor, geral_responsavel, geral_abertura, geral_status, geral_obs
 - Quantitativos: quant_referencia, quant_mesref, quant_desone, quant_pmr; tbl_quant = [] (sempre vazio — ver regra 6)
 - Custos: custo_bdi_ref, custo_bdi_sinape, custo_es_regime, custo_es_pct, custo_preco_max, custo_inexeq, custo_criterio, custo_reajuste, custo_obs; tbl_custo = [] (sempre vazio — ver regra 6)
 - Prazos: prazo_publicacao, prazo_esclarecimento, prazo_impugnacao, prazo_abertura, prazo_habilitacao, prazo_contrato, prazo_execucao, prazo_vigencia, prazo_prorroga, prazo_validade_prop, prazo_obs; tbl_prazo = [[Marco, Início, Término, % financeiro, Observação], ...]

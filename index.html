@@ -330,6 +330,13 @@ input, select, textarea { font-family:inherit; }
 .field input:focus, .field select:focus, .field textarea:focus { outline:none; border-color:var(--teal-mid); box-shadow:0 0 0 2px rgba(26,138,138,.15); }
 .auto-filled { background:var(--violet-l) !important; border-color:#c4b5fd !important; }
 .field .hint-ia { font-size:.64rem; color:var(--violet); }
+.campo-link-row { display:flex; gap:6px; align-items:center; }
+.campo-link-row input { flex:1; min-width:0; }
+.campo-link-abrir {
+  flex-shrink:0; font-size:.74rem; font-weight:700; color:var(--teal); background:var(--teal-l);
+  border-radius:7px; padding:7px 10px; white-space:nowrap; text-decoration:none;
+}
+.campo-link-abrir:hover { background:var(--teal-mid); color:#fff; }
 
 /* ── BARRA DE AÇÕES DO PROCESSO (abaixo das abas) ── */
 .process-actions { display:flex; align-items:center; gap:12px; flex-wrap:wrap; padding:12px 0 2px; }
@@ -759,7 +766,6 @@ CONFIG.USUARIO = localStorage.getItem('sinape:usuario') || '';
    ════════════════════════════════════════════════════════════════ */
 const OPC = {
   modalidade: ['Selecionar...','Pregão Eletrônico','Concorrência Eletrônica','Dispensa de Licitação','Inexigibilidade','Carta-convite (privado)','RFQ / Cotação privada'],
-  portal: ['Selecionar...','Compras.gov.br','BLL','Licitações-e (BB)','Portal próprio estadual','Coupa','SAP Ariba','Nimbi','Outro'],
   statusProc: ['Selecionar...','Em análise','Decidido participar','Decidido não participar','Impugnado','Em disputa','Vencido','Perdido'],
   refPreco: ['Selecionar...','SINAPI','SICRO','DNIT','ORSE','Composição própria do órgão/contratante'],
   desone: ['Selecionar...','Desonerado','Não desonerado','Ambas as versões','Não aplicável'],
@@ -781,7 +787,7 @@ const TEMPLATE_PADRAO = [
       {key:'geral_orgao', label:'Órgão / Entidade contratante', tipo:'text', placeholder:'Ex.: DETRAN/PR, Motiva/RioSP'},
       {key:'geral_modalidade', label:'Modalidade', tipo:'select', opcoes:OPC.modalidade},
       {key:'geral_numero', label:'Nº do Edital / Processo', tipo:'text', placeholder:'Ex.: 90010/2026'},
-      {key:'geral_portal', label:'Portal / Plataforma', tipo:'select', opcoes:OPC.portal},
+      {key:'geral_portal', label:'Portal / Plataforma', tipo:'link', placeholder:'Cole aqui o link do portal onde a licitação ocorre'},
       {key:'geral_uf', label:'UF de execução', tipo:'text', placeholder:'Ex.: RJ/SP'},
       {key:'geral_municipios', label:'Município(s) de execução', tipo:'text'},
       {key:'geral_objeto', label:'Objeto (resumo)', tipo:'text'},
@@ -2038,6 +2044,14 @@ function fieldHTML(c, ocultos){
     }).join('') + '</select>';
   } else if(c.tipo==='textarea'){
     inner = '<textarea id="'+fid+'" data-key="'+esc(c.key)+'"'+phAttr+ariaAttr+'></textarea>';
+  } else if(c.tipo==='link'){
+    // campo de URL: continua editável como texto, mas mostra um "Abrir" ao
+    // lado que vira link de verdade assim que o valor parece uma URL — ver
+    // atualizarLinkAbrir(), chamada tanto ao digitar quanto ao carregar valor.
+    inner = '<div class="campo-link-row">' +
+      '<input id="'+fid+'" type="text" data-key="'+esc(c.key)+'"'+phAttr+ariaAttr+'>' +
+      '<a id="'+fid+'-abrir" class="campo-link-abrir" href="#" target="_blank" rel="noopener noreferrer" style="display:none;">🔗 Abrir</a>' +
+    '</div>';
   } else {
     const t = (c.tipo==='date'||c.tipo==='number') ? c.tipo : 'text';
     inner = '<input id="'+fid+'" type="'+t+'" data-key="'+esc(c.key)+'"'+phAttr+ariaAttr+'>';
@@ -2104,6 +2118,7 @@ function buildAnalise(){
       currentProc.analise[el.dataset.key] = el.value;
       el.classList.remove('auto-filled');
       atualizarPlaceholder(el);
+      atualizarLinkAbrir(el);
       marcarPend('analise', el.dataset.key, el.value);
     };
     el.addEventListener('input', fn);
@@ -2131,6 +2146,21 @@ function setCampoValor(el, v){
   }
   if(el.value !== String(v)) el.value = v;
   atualizarPlaceholder(el);
+  atualizarLinkAbrir(el);
+}
+/* campo tipo 'link' (ex.: portal da licitação): mostra o botão "Abrir" só
+   quando o valor já parece uma URL de verdade — evita um link quebrado
+   enquanto a equipe ainda está digitando ou colando o endereço. */
+function atualizarLinkAbrir(el){
+  const abrir = document.getElementById(el.id + '-abrir');
+  if(!abrir) return;
+  const v = (el.value || '').trim();
+  if(/^https?:\/\/\S+/i.test(v)){
+    abrir.href = v;
+    abrir.style.display = '';
+  } else {
+    abrir.style.display = 'none';
+  }
 }
 /* Acessibilidade: quando o campo tem conteudo, remove o placeholder (o "Ex.:...")
    para o leitor de tela ler SO o que esta escrito; quando fica vazio, restaura
