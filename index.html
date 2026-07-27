@@ -78,10 +78,6 @@ input, select, textarea { font-family:inherit; }
 .home-card h3 { margin-top:10px; color:var(--teal); }
 .home-card p { font-size:.8rem; color:var(--slate-mid); margin-top:6px; }
 .home-card .hc-count { display:inline-block; margin-top:12px; background:var(--teal-l); color:var(--teal); font-weight:700; padding:3px 12px; border-radius:14px; font-size:.78rem; }
-.home-fluxo { max-width:760px; margin:26px auto 0; background:var(--white); border:1px dashed var(--border); border-radius:12px; padding:14px 18px; display:flex; gap:14px; align-items:center; flex-wrap:wrap; justify-content:center; }
-.home-fluxo .passo { font-size:.78rem; color:var(--slate-mid); display:flex; align-items:center; gap:6px; }
-.home-fluxo .passo b { color:var(--teal); }
-.home-fluxo .seta { color:var(--slate-l); }
 .home-actions { display:flex; justify-content:center; margin-top:18px; gap:8px; flex-wrap:wrap; }
 .home-relatorio-row { display:flex; justify-content:center; margin-top:16px; }
 .relatorio-meta { font-size:.76rem; color:var(--slate-mid); margin-bottom:12px; padding-bottom:10px; border-bottom:1px solid var(--border); }
@@ -101,7 +97,30 @@ input, select, textarea { font-family:inherit; }
 .novo-item { background:var(--violet-l); border:1px solid #ddd6fe; border-radius:10px; padding:10px 12px; margin-bottom:8px; }
 .novo-item-nome { font-weight:700; font-size:.84rem; color:var(--slate); margin-bottom:8px; }
 .novo-item-acoes { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
-.novo-select { border:1px solid var(--border); border-radius:7px; padding:5px 8px; font-size:.76rem; background:var(--white); color:var(--slate); }
+/* seletor de modelo/esforço estilo "picker" (botão + menu), como o seletor de modelo do Claude */
+.ai-picker { position:relative; display:inline-block; }
+.ai-picker-btn {
+  display:flex; align-items:center; gap:6px; border:1px solid var(--border); border-radius:8px;
+  padding:6px 10px; font-size:.76rem; background:var(--white); color:var(--slate); cursor:pointer;
+  font-weight:600; line-height:1.2;
+}
+.ai-picker-btn:hover { border-color:var(--teal-mid); }
+.ai-picker-btn .ap-sub { font-weight:400; color:var(--slate-mid); }
+.ai-picker-btn .ap-chev { font-size:.6rem; color:var(--slate-l); margin-left:1px; transition:transform .15s; }
+.ai-picker.open .ap-chev { transform:rotate(180deg); }
+.ai-picker-menu {
+  position:fixed; z-index:60; min-width:210px; background:var(--white); border:1px solid var(--border);
+  border-radius:10px; box-shadow:0 10px 28px rgba(30,41,59,.18); padding:5px; display:none;
+}
+.ai-picker.open .ai-picker-menu { display:block; }
+.ai-picker-opt {
+  display:flex; align-items:flex-start; gap:8px; width:100%; text-align:left; border:none; background:none;
+  padding:7px 9px; border-radius:7px; cursor:pointer; font-size:.78rem; color:var(--slate);
+}
+.ai-picker-opt:hover { background:var(--teal-ll); }
+.ai-picker-opt .ap-check { width:14px; flex-shrink:0; color:var(--teal); font-weight:700; }
+.ai-picker-opt b { display:block; font-weight:600; }
+.ai-picker-opt small { color:var(--slate-mid); font-weight:400; }
 
 /* ── LISTA ── */
 .list-header { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:16px; flex-wrap:wrap; }
@@ -380,13 +399,6 @@ input, select, textarea { font-family:inherit; }
     <div class="home-relatorio-row" style="flex-direction:column; gap:8px;">
       <button class="btn-outline" id="btn-atualizacoes-dia" onclick="abrirRelatorioDoDia()">📋 Atualizações do dia</button>
       <button class="btn-outline" id="btn-painel-gastos" onclick="abrirPainelGastos()">💵 Painel de gastos</button>
-    </div>
-    <div class="home-fluxo">
-      <span class="passo"><b>1.</b> Envie o edital/TR para a IA com o prompt do painel</span>
-      <span class="seta">→</span>
-      <span class="passo"><b>2.</b> A IA devolve o processo em JSON, com campos e checklist próprios do edital</span>
-      <span class="seta">→</span>
-      <span class="passo"><b>3.</b> Importe aqui (ou via API) e toda a equipe vê na hora</span>
     </div>
     <div class="home-actions">
       <button class="btn-outline" onclick="copiarPromptIA()">🤖 Copiar prompt p/ IA</button>
@@ -2607,17 +2619,8 @@ function renderizarNovosProcessos(novos){
       return '<div class="novo-item">' +
         '<div class="novo-item-nome">'+icone+' '+esc(n.nome)+statusHTML+'</div>' +
         '<div class="novo-item-acoes">' +
-          '<select class="novo-select" id="novo-'+i+'-modelo" aria-label="Modelo de IA para '+esc(n.nome)+'">' +
-            '<option value="claude-sonnet-5">Sonnet 5 (mais barato)</option>' +
-            '<option value="claude-opus-5" selected>Opus 5 (mais cuidadoso)</option>' +
-          '</select>' +
-          '<select class="novo-select" id="novo-'+i+'-esforco" aria-label="Nível de esforço para '+esc(n.nome)+'">' +
-            '<option value="low">Esforço baixo</option>' +
-            '<option value="medium">Esforço médio</option>' +
-            '<option value="high" selected>Esforço alto</option>' +
-            '<option value="xhigh">Esforço muito alto</option>' +
-            '<option value="max">Esforço máximo</option>' +
-          '</select>' +
+          renderAiPicker('novo-'+i+'-modelo', 'modelo', 'claude-opus-5', 'Modelo de IA para '+n.nome) +
+          renderAiPicker('novo-'+i+'-esforco', 'esforco', 'high', 'Nível de esforço para '+n.nome) +
           '<button class="btn-sm violet" onclick="rodarAnaliseNova('+i+', this)">▶ Rodar análise e preencher informações</button>' +
         '</div>' +
       '</div>';
@@ -2625,11 +2628,85 @@ function renderizarNovosProcessos(novos){
   '</div>';
 }
 
+/* ── seletor "picker" de modelo/esforço (botão + menu, como o seletor de
+   modelo do Claude) — substitui o <select> nativo, confuso e inconsistente
+   entre navegadores/SO ── */
+const OPCOES_AI = {
+  modelo: [
+    {v:'claude-sonnet-5', label:'Sonnet 5', sub:'mais barato'},
+    {v:'claude-opus-5',   label:'Opus 5',   sub:'mais cuidadoso'},
+  ],
+  esforco: [
+    {v:'low',    label:'Esforço baixo'},
+    {v:'medium', label:'Esforço médio'},
+    {v:'high',   label:'Esforço alto'},
+    {v:'xhigh',  label:'Esforço muito alto'},
+    {v:'max',    label:'Esforço máximo'},
+  ],
+};
+
+function aiPickerRotulo(o){
+  return '<span>'+esc(o.label)+(o.sub?' <span class="ap-sub">('+esc(o.sub)+')</span>':'')+'</span>';
+}
+
+function renderAiPicker(id, tipo, valorInicial, ariaLabel){
+  const opcoes = OPCOES_AI[tipo];
+  const atual = opcoes.find(o=>o.v===valorInicial) || opcoes[0];
+  return '<div class="ai-picker" id="'+id+'" data-tipo="'+tipo+'" data-valor="'+atual.v+'">' +
+    '<button type="button" class="ai-picker-btn" onclick="toggleAiPicker(this)" aria-label="'+esc(ariaLabel)+'">' +
+      aiPickerRotulo(atual) +
+      '<span class="ap-chev">▾</span>' +
+    '</button>' +
+    '<div class="ai-picker-menu">' +
+      opcoes.map(o=>
+        '<button type="button" class="ai-picker-opt" data-valor="'+o.v+'" onclick="escolherAiOpcao(\''+id+'\',\''+o.v+'\')">' +
+          '<span class="ap-check">'+(o.v===atual.v?'✓':'')+'</span>' +
+          '<span><b>'+esc(o.label)+'</b>'+(o.sub?'<small>'+esc(o.sub)+'</small>':'')+'</span>' +
+        '</button>'
+      ).join('') +
+    '</div>' +
+  '</div>';
+}
+
+function fecharTodosAiPickers(){
+  document.querySelectorAll('.ai-picker.open').forEach(p=>p.classList.remove('open'));
+}
+
+function toggleAiPicker(btn){
+  const picker = btn.closest('.ai-picker');
+  const menu = picker.querySelector('.ai-picker-menu');
+  const jaAberto = picker.classList.contains('open');
+  fecharTodosAiPickers();
+  if(jaAberto) return;
+  const r = btn.getBoundingClientRect();
+  menu.style.top = (r.bottom + 4) + 'px';
+  menu.style.left = r.left + 'px';
+  picker.classList.add('open');
+}
+
+function escolherAiOpcao(pickerId, valor){
+  const picker = document.getElementById(pickerId);
+  const opcoes = OPCOES_AI[picker.dataset.tipo];
+  const o = opcoes.find(x=>x.v===valor);
+  if(!o) return;
+  picker.dataset.valor = valor;
+  picker.classList.remove('open');
+  picker.querySelector('.ai-picker-btn').innerHTML = aiPickerRotulo(o) + '<span class="ap-chev">▾</span>';
+  picker.querySelectorAll('.ai-picker-opt').forEach(opt=>{
+    opt.querySelector('.ap-check').textContent = (opt.dataset.valor===valor) ? '✓' : '';
+  });
+}
+
+document.addEventListener('click', function(e){
+  if(!e.target.closest('.ai-picker')) fecharTodosAiPickers();
+});
+document.addEventListener('scroll', function(){ fecharTodosAiPickers(); }, true);
+
 async function rodarAnaliseNova(i, btn){
   const item = ULTIMO_RELATORIO_NOVOS[i];
   if(!item) return;
-  const modelo = document.getElementById('novo-'+i+'-modelo').value;
-  const esforco = document.getElementById('novo-'+i+'-esforco').value;
+  const modelo = document.getElementById('novo-'+i+'-modelo').dataset.valor;
+  const esforco = document.getElementById('novo-'+i+'-esforco').dataset.valor;
   const textoOriginal = btn.textContent;
   btn.disabled = true;
   btn.textContent = 'Analisando… (pode levar alguns minutos)';
