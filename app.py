@@ -36,6 +36,9 @@ Rotas:
   GET     /api/sinki/conversas/<cid>          → histórico completo de uma conversa
   DELETE  /api/sinki/conversas/<cid>          → apaga a conversa e seus anexos
   GET     /api/sinki/prompt                   → prompt do Sinki em texto (fonte única, usada pelo botão de copiar)
+  GET     /api/processos/<id>/concorrentes         → lista as verificações de documentação de concorrente já feitas neste processo
+  POST    /api/processos/<id>/concorrentes         → confere a documentação de uma empresa concorrente (multipart: empresa, arquivos) contra as exigências já extraídas do edital
+  DELETE  /api/processos/<id>/concorrentes/<cid>   → apaga uma verificação de concorrente e seus arquivos
 
 Montador de Dossiê (integrado):
   Usa o módulo em montador-dossie/ (mesmo repo) para buscar a documentação de
@@ -119,6 +122,13 @@ PEDIDO_ANALISE = (
     "Produza agora a análise estruturada deste processo para importar no Painel, "
     "seguindo exatamente o contrato da seção \"ANÁLISE ESTRUTURADA DE EDITAL\". "
     "Responda apenas com o JSON, sem nenhum texto antes ou depois."
+)
+PEDIDO_VERIFICAR_CONCORRENTE = (
+    "Os documentos anexados a seguir pertencem a uma empresa CONCORRENTE da SINAPE "
+    "neste certame — não são documentos da SINAPE. Confira-os contra o gabarito de "
+    "exigências do edital (abaixo, em JSON), seguindo exatamente o contrato da seção "
+    "\"VERIFICAÇÃO DE DOCUMENTAÇÃO DE CONCORRENTE\". Responda apenas com o JSON, sem "
+    "nenhum texto antes ou depois.\n\nGABARITO DE EXIGÊNCIAS DO EDITAL:\n{gabarito}"
 )
 anthropic_client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY) if ANTHROPIC_API_KEY else None
 
@@ -1484,6 +1494,147 @@ def sinki_conversar():
 
     return jsonify({"conversa_id": cid, "titulo": conversa["titulo"], "resposta": texto,
                     "acoes": acoes, "anexados": [a["nome"] for a in anexados]})
+
+
+# ──────────────────────────────────────────────────────────────────
+# Verificação de documentação de empresa CONCORRENTE (por processo)
+# ──────────────────────────────────────────────────────────────────
+# Guardado numa pasta própria e num campo próprio do processo (doc["concorrentes"],
+# nunca dentro de "analise"/"exigencias") de propósito: são documentos de uma
+# OUTRA empresa, não podem se misturar com os dados/documentos da SINAPE.
+CONCORRENTES_DIR = UPLOAD_DIR / "concorrentes"
+
+
+@app.route("/api/processos/<pid>/concorrentes", methods=["GET"])
+def listar_concorrentes(pid):
+    doc = col_processos.find_one({"_id": pid}, {"concorrentes": 1})
+    if not doc:
+        return jsonify({"erro": "Processo não encontrado"}), 404
+    return jsonify({"concorrentes": doc.get("concorrentes") or []})
+
+
+@app.route("/api/processos/<pid>/concorrentes", methods=["POST"])
+def verificar_concorrente(pid):
+    """Confere a documentação de uma empresa concorrente contra as exigências
+    JÁ extraídas deste processo (o 'gabarito' vindo da análise do edital) -
+    não relê o edital do zero pra cada concorrente, só compara contra o que
+    já está cadastrado. Resultado fica em doc['concorrentes'], separado de
+    'analise'/'exigencias' (que são da SINAPE)."""
+    if not anthropic_client:
+        return jsonify({"erro": "ANTHROPIC_API_KEY não configurada no servidor"}), 503
+
+    doc = col_processos.find_one({"_id": pid})
+    if not doc:
+        return jsonify({"erro": "Processo não encontrado"}), 404
+
+    exigencias = doc.get("exigencias") or []
+    if not exigencias:
+        return jsonify({"erro": "Este processo ainda não tem exigências extraídas do edital "
+                                "(aba Exigências vazia) — não há gabarito pra comparar o "
+                                "concorrente. Rode a análise do edital primeiro."}), 400
+
+    empresa_informada = (request.form.get("empresa") or "").strip()
+    arquivos = request.files.getlist("arquivos")
+    if not arquivos:
+        return jsonify({"erro": "Envie ao menos um arquivo da documentação do concorrente."}), 400
+
+    pdfs, nao_suportados = [], []
+    total_bytes = 0
+    for arquivo in arquivos:
+        if not arquivo.filename:
+            continue
+        dados = arquivo.read()
+        total_bytes += len(dados)
+        if total_bytes > MAX_PDF_TOTAL_MB * 1024 * 1024:
+            return jsonify({"erro": f"Total dos arquivos excede {MAX_PDF_TOTAL_MB} MB"}), 400
+        if _bloco_de_arquivo(arquivo.filename, dados, arquivo.content_type or "") is None:
+            nao_suportados.append(arquivo.filename)
+            continue
+        pdfs.append((arquivo.filename, dados, arquivo.content_type or ""))
+
+    if not pdfs:
+        return jsonify({"erro": "Nenhum dos arquivos pode ser lido pela IA: "
+                                + ", ".join(nao_suportados) + ". Envie PDF, imagem ou texto."}), 400
+
+    gabarito = [{"ref": e.get("ref", ""), "categoria": e.get("categoria", ""),
+                 "descricao": e.get("descricao", ""), "obrigatorio": e.get("obrigatorio", True)}
+                for e in exigencias]
+
+    content = [_bloco_de_arquivo(nome, dados, ct) for nome, dados, ct in pdfs]
+    content.append({"type": "text", "text": PEDIDO_VERIFICAR_CONCORRENTE.format(
+        gabarito=json.dumps(gabarito, ensure_ascii=False, indent=2))})
+
+    modelo = request.form.get("model")
+    modelo_usado = modelo if modelo in MODELOS_IA_PERMITIDOS else ANTHROPIC_MODEL
+    esforco = request.form.get("effort")
+    kwargs = {"output_config": {"effort": esforco if esforco in ESFORCOS_IA_PERMITIDOS else "medium"}}
+
+    try:
+        with anthropic_client.messages.stream(
+            model=modelo_usado,
+            max_tokens=32000,
+            system=[{"type": "text", "text": PROMPT_SINKI, "cache_control": {"type": "ephemeral"}}],
+            thinking={"type": "adaptive"},
+            messages=[{"role": "user", "content": content}],
+            **kwargs,
+        ) as stream:
+            resposta = stream.get_final_message()
+    except anthropic.APIStatusError as e:
+        return jsonify({"erro": f"Erro na API da IA: {e.message}"}), 502
+
+    texto = "".join(b.text for b in resposta.content if b.type == "text").strip()
+    texto = re.sub(r"^```(?:json)?\s*|\s*```$", "", texto.strip())
+    try:
+        resultado = json.loads(texto)
+    except json.JSONDecodeError:
+        inicio, fim = texto.find("{"), texto.rfind("}")
+        if inicio == -1 or fim <= inicio:
+            return jsonify({"erro": "A IA não devolveu um JSON válido para esta verificação."}), 502
+        try:
+            resultado = json.loads(texto[inicio:fim + 1])
+        except json.JSONDecodeError:
+            return jsonify({"erro": "A IA não devolveu um JSON válido para esta verificação."}), 502
+
+    cid = uuid.uuid4().hex
+    pasta = CONCORRENTES_DIR / pid / cid
+    pasta.mkdir(parents=True, exist_ok=True)
+    arquivos_salvos = []
+    for nome, dados, ct in pdfs:
+        nome_disco = uuid.uuid4().hex + "__" + secure_filename(nome)
+        (pasta / nome_disco).write_bytes(dados)
+        arquivos_salvos.append({"nome": nome, "arquivo": nome_disco})
+
+    registro = {
+        "_id": cid,
+        "empresa": empresa_informada or resultado.get("empresa_concorrente") or "(empresa não identificada)",
+        "resumo": resultado.get("resumo", ""),
+        "itens": resultado.get("itens", []),
+        "arquivos": arquivos_salvos,
+        "modelo": modelo_usado,
+        "criadoEm": _agora_ms(),
+    }
+    col_processos.update_one({"_id": pid}, {"$push": {"concorrentes": registro}})
+
+    u = resposta.usage
+    uso = {"model": modelo_usado,
+           "entrada": (getattr(u, "input_tokens", 0) or 0)
+                      + (getattr(u, "cache_creation_input_tokens", 0) or 0)
+                      + (getattr(u, "cache_read_input_tokens", 0) or 0),
+           "saida": getattr(u, "output_tokens", 0) or 0}
+    _registrar_gasto(modelo_usado, uso, processo_id=pid, processo_nome=doc.get("nome", ""),
+                     origem="verificação de concorrente")
+
+    return jsonify(registro), 201
+
+
+@app.route("/api/processos/<pid>/concorrentes/<cid>", methods=["DELETE"])
+def excluir_concorrente(pid, cid):
+    doc = col_processos.find_one({"_id": pid}, {"concorrentes": 1})
+    if not doc:
+        return jsonify({"erro": "Processo não encontrado"}), 404
+    col_processos.update_one({"_id": pid}, {"$pull": {"concorrentes": {"_id": cid}}})
+    shutil.rmtree(CONCORRENTES_DIR / pid / cid, ignore_errors=True)
+    return jsonify({"ok": True})
 
 
 @app.route("/api/gastos", methods=["GET"])

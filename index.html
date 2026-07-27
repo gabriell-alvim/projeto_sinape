@@ -94,6 +94,29 @@ input, select, textarea { font-family:inherit; }
 .gastos-tabela tr:last-child td { border-bottom:none; }
 .gastos-modelo { font-size:.68rem; font-weight:700; background:var(--violet-l); color:var(--violet); padding:2px 8px; border-radius:10px; white-space:nowrap; }
 
+/* ── Concorrentes (documentação de terceiros — precisa ficar visualmente
+   inconfundível com os dados da própria SINAPE) ── */
+.concorrente-aviso {
+  background:var(--amber-l); border:1px solid var(--amber); color:var(--amber);
+  border-radius:8px; padding:10px 12px; font-size:.8rem; line-height:1.5; margin-bottom:14px;
+}
+.concorrente-card { background:var(--white); border:1px solid var(--border); border-radius:12px; padding:14px; margin-bottom:14px; }
+.concorrente-card-head { display:flex; justify-content:space-between; align-items:flex-start; gap:10px; margin-bottom:8px; }
+.concorrente-card-nome { font-weight:800; color:var(--slate); font-size:.92rem; }
+.concorrente-card-quando { font-size:.72rem; color:var(--slate-l); }
+.concorrente-resumo { font-size:.82rem; color:var(--slate-mid); margin-bottom:10px; }
+.concorrente-item { border:1px solid var(--border); border-radius:8px; padding:9px 11px; margin-bottom:8px; font-size:.8rem; }
+.concorrente-item.nao { border-left:4px solid var(--red); background:var(--red-l); }
+.concorrente-item.sim { border-left:4px solid #16a34a; }
+.concorrente-item.nao_verificavel { border-left:4px solid var(--amber); }
+.concorrente-item-topo { display:flex; justify-content:space-between; gap:10px; font-weight:700; margin-bottom:4px; }
+.concorrente-item-status { white-space:nowrap; }
+.concorrente-item.nao .concorrente-item-status { color:var(--red); }
+.concorrente-item.sim .concorrente-item-status { color:#16a34a; }
+.concorrente-item.nao_verificavel .concorrente-item-status { color:var(--amber); }
+.concorrente-fundamento { margin-top:6px; padding:8px 10px; background:#fff; border:1px dashed var(--red); border-radius:6px; font-size:.78rem; color:var(--slate); }
+.concorrente-fundamento b { color:var(--red); }
+
 /* ── Painel de prazos ── */
 .prazos-grupo { margin-bottom:16px; }
 .prazos-grupo-titulo { font-size:.74rem; font-weight:800; text-transform:uppercase; letter-spacing:.03em; color:var(--slate-mid); margin-bottom:6px; }
@@ -503,6 +526,7 @@ input, select, textarea { font-family:inherit; }
       <button class="main-tab active" id="tab-analise" onclick="switchProcessTab('analise')">📋 Análise Crítica</button>
       <button class="main-tab" id="tab-exigencias" onclick="switchProcessTab('exigencias')">📑 Exigências</button>
       <button class="main-tab" id="tab-checklist" onclick="switchProcessTab('checklist')">✅ Checklist do Edital</button>
+      <button class="main-tab" id="tab-concorrentes" onclick="switchProcessTab('concorrentes')">🔎 Concorrentes</button>
     </div>
     <div class="process-actions">
       <button class="btn-dossie" id="btn-montar-dossie" onclick="montarDossie()">📦 Montar dossiê de habilitação</button>
@@ -536,6 +560,17 @@ input, select, textarea { font-family:inherit; }
       <div class="prog-label" id="prog-label"></div>
       <div style="height:14px;"></div>
       <div id="checklist-root"></div>
+    </div>
+
+    <div class="panel" id="panel-concorrentes">
+      <div class="concorrente-aviso" role="note">
+        ⚠️ <b>Documentação de empresa CONCORRENTE — não é da SINAPE.</b>
+        Fica separada dos seus dados: não entra na Análise Crítica nem nas Exigências deste processo.
+      </div>
+      <div class="save-row">
+        <button class="btn-sm violet" onclick="abrirModalConcorrente()">＋ Analisar documentação de concorrente</button>
+      </div>
+      <div id="concorrentes-root"></div>
     </div>
   </div>
 
@@ -582,6 +617,23 @@ input, select, textarea { font-family:inherit; }
 </div><!-- /content -->
 
 <!-- MODAL: NOVO PROCESSO MANUAL -->
+<!-- MODAL: ANALISAR DOCUMENTAÇÃO DE CONCORRENTE -->
+<div class="modal-overlay" id="modal-concorrente">
+  <div class="modal-box" role="dialog" aria-label="Analisar documentação de concorrente">
+    <h3>🔎 Analisar documentação de concorrente</h3>
+    <p class="hint concorrente-aviso" role="note">⚠️ Anexe aqui a documentação de habilitação da <b>empresa concorrente</b>
+      (obtida na sessão), não a da SINAPE. O Sinki compara contra as exigências já cadastradas neste processo.</p>
+    <input type="text" id="input-concorrente-empresa" placeholder="Nome da empresa concorrente (opcional — o Sinki tenta identificar sozinho)" maxlength="140">
+    <input type="file" id="input-concorrente-arquivos" multiple
+           accept=".pdf,.png,.jpg,.jpeg,.gif,.webp,.txt,.md,.csv,.json,.xml,.log" style="margin-top:10px;">
+    <div id="concorrente-picker-modelo" style="margin-top:10px;"></div>
+    <div class="modal-actions">
+      <button class="btn-ghost" onclick="fecharModal('modal-concorrente')">Cancelar</button>
+      <button class="btn-primary" id="btn-concorrente-enviar" onclick="enviarConcorrente()">Analisar</button>
+    </div>
+  </div>
+</div>
+
 <div class="modal-overlay" id="modal-novo">
   <div class="modal-box">
     <h3>Novo processo (manual)</h3>
@@ -1721,9 +1773,12 @@ function switchProcessTab(tab){
   document.getElementById('tab-analise').classList.toggle('active', tab==='analise');
   document.getElementById('tab-exigencias').classList.toggle('active', tab==='exigencias');
   document.getElementById('tab-checklist').classList.toggle('active', tab==='checklist');
+  document.getElementById('tab-concorrentes').classList.toggle('active', tab==='concorrentes');
   document.getElementById('panel-analise').classList.toggle('active', tab==='analise');
   document.getElementById('panel-exigencias').classList.toggle('active', tab==='exigencias');
   document.getElementById('panel-checklist').classList.toggle('active', tab==='checklist');
+  document.getElementById('panel-concorrentes').classList.toggle('active', tab==='concorrentes');
+  if(tab==='concorrentes') carregarConcorrentes();
   a11yAtualizarItens();
 }
 function renderSourceBanner(){
@@ -1791,6 +1846,102 @@ function widgetPlanilhaHTML(secaoAnexo){
     '<input type="file" id="input-planilha-'+secaoAnexo+'" class="sr-only" onchange="enviarPlanilhaAnexo(\''+secaoAnexo+'\', this)">' +
     '<button class="btn-sm violet" type="button" onclick="document.getElementById(\'input-planilha-'+secaoAnexo+'\').click()">📎 Anexar planilha</button>' +
   '</div>';
+}
+
+/* ── Concorrentes: verificação de documentação de empresa concorrente ──
+   Fica na aba própria "Concorrentes" do processo, separada de propósito da
+   Análise Crítica e das Exigências (que são da SINAPE) ── */
+const CONCORRENTE_STATUS_TEXTO = {
+  sim: '✅ Atende', nao: '❌ Não atende', nao_verificavel: '❓ Não dá pra verificar',
+};
+
+function abrirModalConcorrente(){
+  document.getElementById('input-concorrente-empresa').value = '';
+  document.getElementById('input-concorrente-arquivos').value = '';
+  document.getElementById('concorrente-picker-modelo').innerHTML =
+    renderAiPicker('concorrente-modelo', 'modelo', 'claude-opus-5', 'Modelo para a verificação');
+  abrirModal('modal-concorrente');
+}
+
+async function enviarConcorrente(){
+  const empresa = document.getElementById('input-concorrente-empresa').value.trim();
+  const arquivos = document.getElementById('input-concorrente-arquivos').files;
+  if(!arquivos.length){ toast('Anexe ao menos um arquivo da documentação do concorrente.'); return; }
+
+  const dados = new FormData();
+  dados.append('empresa', empresa);
+  dados.append('model', document.getElementById('concorrente-modelo').dataset.valor);
+  Array.from(arquivos).forEach(f=>dados.append('arquivos', f));
+
+  const btn = document.getElementById('btn-concorrente-enviar');
+  const textoOriginal = btn.textContent;
+  btn.disabled = true; btn.textContent = 'Analisando… (pode levar alguns minutos)';
+  try{
+    const headers = Store.headers();
+    delete headers['Content-Type'];
+    const res = await fetch(Store.base + '/processos/' + currentProc.id + '/concorrentes', {
+      method: 'POST', headers, body: dados });
+    const corpo = await res.json().catch(()=>({}));
+    if(!res.ok) throw new Error(corpo.erro || ('Servidor respondeu '+res.status));
+    toast('Verificação concluída: '+esc(corpo.empresa));
+    fecharModal('modal-concorrente');
+    await carregarConcorrentes();
+  }catch(e){
+    toast('Erro ao analisar concorrente: '+e.message);
+  }finally{
+    btn.disabled = false; btn.textContent = textoOriginal;
+  }
+}
+
+async function carregarConcorrentes(){
+  const root = document.getElementById('concorrentes-root');
+  root.innerHTML = '<p class="relatorio-vazio">Carregando…</p>';
+  try{
+    const res = await fetch(Store.base + '/processos/' + currentProc.id + '/concorrentes', { headers: Store.headers() });
+    if(!res.ok) throw new Error('Servidor respondeu ' + res.status);
+    const { concorrentes } = await res.json();
+    renderConcorrentes(concorrentes || []);
+  }catch(e){
+    root.innerHTML = '<p class="relatorio-vazio">Não foi possível carregar: '+esc(e.message)+'</p>';
+  }
+}
+
+function renderConcorrentes(lista){
+  const root = document.getElementById('concorrentes-root');
+  if(!lista.length){
+    root.innerHTML = '<p class="relatorio-vazio">Nenhuma verificação de concorrente ainda neste processo.</p>';
+    return;
+  }
+  root.innerHTML = lista.slice().reverse().map(c=>{
+    const quando = c.criadoEm ? new Date(c.criadoEm).toLocaleString('pt-BR') : '';
+    const naoAtende = (c.itens||[]).filter(i=>i.atende==='nao').length;
+    return '<div class="concorrente-card">' +
+      '<div class="concorrente-card-head">' +
+        '<div><div class="concorrente-card-nome">🏢 '+esc(c.empresa)+'</div>' +
+        '<div class="concorrente-card-quando">'+esc(quando)+(naoAtende?' · '+naoAtende+' exigência(s) não atendida(s)':'')+'</div></div>' +
+        '<button class="btn-sm danger" onclick="excluirConcorrente(\''+c._id+'\')">Excluir</button>' +
+      '</div>' +
+      '<div class="concorrente-resumo">'+esc(c.resumo||'')+'</div>' +
+      (c.itens||[]).map(i=>
+        '<div class="concorrente-item '+esc(i.atende)+'">' +
+          '<div class="concorrente-item-topo"><span>'+esc(i.descricao_exigencia||i.categoria||'')+'</span>' +
+          '<span class="concorrente-item-status">'+(CONCORRENTE_STATUS_TEXTO[i.atende]||i.atende)+'</span></div>' +
+          '<div>'+esc(i.observacao||'')+(i.ref?' <span class="hint">('+esc(i.ref)+')</span>':'')+'</div>' +
+          (i.fundamento_recurso ? '<div class="concorrente-fundamento"><b>Fundamento para recurso:</b> '+esc(i.fundamento_recurso)+'</div>' : '') +
+        '</div>'
+      ).join('') +
+    '</div>';
+  }).join('');
+}
+
+async function excluirConcorrente(cid){
+  try{
+    const res = await fetch(Store.base + '/processos/' + currentProc.id + '/concorrentes/' + cid,
+      { method: 'DELETE', headers: Store.headers() });
+    if(!res.ok) throw new Error('Servidor respondeu ' + res.status);
+    toast('Verificação removida.');
+    await carregarConcorrentes();
+  }catch(e){ toast('Erro ao remover: '+e.message); }
 }
 
 async function enviarPlanilhaAnexo(secaoAnexo, inputEl){
@@ -3297,7 +3448,22 @@ function a11yAtualizarItens(manterNivel){
     const painelAtivo = document.querySelector('.panel.active');
     const rootPorPainel = { 'panel-analise':'analise-root', 'panel-exigencias':'exigencias-root', 'panel-checklist':'checklist-root' };
     const rootId = painelAtivo && rootPorPainel[painelAtivo.id];
-    if(A11Y.nivel==='conteudo' && rootId){
+    if(A11Y.nivel==='conteudo' && painelAtivo && painelAtivo.id==='panel-concorrentes'){
+      // painel de Concorrentes não usa o formato de seções recolhíveis das
+      // outras abas (Análise/Exigências/Checklist) — é uma lista simples de
+      // verificações já feitas, então a navegação numérica aqui é uma lista
+      // achatada: o botão de analisar + um item por concorrente já verificado.
+      const botaoAnalisar = document.querySelector('#panel-concorrentes .btn-sm.violet');
+      const cards = Array.from(document.querySelectorAll('#concorrentes-root .concorrente-card'));
+      A11Y.todosItens = [
+        ...(botaoAnalisar ? [{el: botaoAnalisar, label:'Analisar documentação de concorrente'}] : []),
+        ...cards.map(card=>({
+          el: card.querySelector('.btn-sm.danger'),
+          label: 'Concorrente: ' + (card.querySelector('.concorrente-card-nome')?.textContent.replace('🏢','').trim() || '')
+                 + ' — botão Excluir',
+        })),
+      ].filter(i=>i.el);
+    } else if(A11Y.nivel==='conteudo' && rootId){
       const usaFiltro = painelAtivo.id === 'panel-analise';
       const abaAtualId = Object.keys(rootPorPainel).find(k=>rootPorPainel[k]===rootId).replace('panel-','');
       const listaSecoes = Array.from(document.querySelectorAll('#'+rootId+' .sec-card')).map(card=>{
@@ -3355,6 +3521,7 @@ function a11yAtualizarItens(manterNivel){
         {el: document.getElementById('tab-analise'), label:'Aba Análise Crítica', ativar: entrarConteudo('analise')},
         {el: document.getElementById('tab-exigencias'), label:'Aba Exigências', ativar: entrarConteudo('exigencias')},
         {el: document.getElementById('tab-checklist'), label:'Aba Checklist do Edital', ativar: entrarConteudo('checklist')},
+        {el: document.getElementById('tab-concorrentes'), label:'Aba Concorrentes', ativar: entrarConteudo('concorrentes')},
         {el: document.getElementById('btn-montar-dossie'), label:'Montar dossiê de habilitação'}
       ].filter(i=>i.el);
     }
