@@ -100,7 +100,7 @@ MONGO_URL = os.environ.get("MONGO_URL", "")
 MAX_UPLOAD_MB = int(os.environ.get("MAX_UPLOAD_MB", "25"))
 
 ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY", "")
-ANTHROPIC_MODEL = os.environ.get("ANTHROPIC_MODEL", "claude-opus-4-8")
+ANTHROPIC_MODEL = os.environ.get("ANTHROPIC_MODEL", "claude-opus-5")
 MAX_PDF_TOTAL_MB = int(os.environ.get("MAX_PDF_TOTAL_MB", "24"))  # margem p/ limite de 32MB em base64
 PROMPT_IA = (BASE_DIR / "prompt_ia.txt").read_text(encoding="utf-8")
 anthropic_client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY) if ANTHROPIC_API_KEY else None
@@ -617,13 +617,14 @@ def executar_varredura_sharepoint():
     return jsonify(_sem_id_mongo(doc_rel)), 201
 
 
-MODELOS_IA_PERMITIDOS = {"claude-opus-4-8", "claude-sonnet-5"}
+MODELOS_IA_PERMITIDOS = {"claude-opus-5", "claude-sonnet-5"}
 ESFORCOS_IA_PERMITIDOS = {"low", "medium", "high", "xhigh", "max"}
 
 # preço por 1 milhão de tokens (entrada / saída), em dólares — referência oficial.
 # Já deixo GPT aqui pra quando/se integrarmos a OpenAI (ainda não está ligada).
 PRECOS_MODELOS = {
-    "claude-opus-4-8": {"entrada": 5.0,  "saida": 25.0},
+    "claude-opus-5":   {"entrada": 5.0,  "saida": 25.0},
+    "claude-opus-4-8": {"entrada": 5.0,  "saida": 25.0},   # mantido só p/ registros antigos de gastos
     "claude-sonnet-5": {"entrada": 2.0,  "saida": 10.0},   # preço promocional até 31/08/2026; depois 3/15
     "gpt-5.6-sol":     {"entrada": 5.0,  "saida": 30.0},
     "gpt-5.6-terra":   {"entrada": 2.5,  "saida": 15.0},
