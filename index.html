@@ -532,6 +532,14 @@ input, select, textarea { font-family:inherit; }
              aria-label="Conversa com o Sinki"></div>
 
         <div class="sinki-composer">
+          <!-- pickers ANTES do campo de mensagem: a ordem de tabulação segue a
+               ordem de leitura da tela, e faz mais sentido escolher modelo e
+               esforço antes de escrever do que depois de já ter mandado. -->
+          <div class="sinki-rodape">
+            <div id="sinki-picker-modelo"></div>
+            <div id="sinki-picker-esforco"></div>
+            <span class="hint" style="margin:0;">Enter envia · Shift+Enter quebra linha</span>
+          </div>
           <div class="sinki-anexos" id="sinki-anexos-pendentes"></div>
           <div class="sinki-barra">
             <textarea id="sinki-input" rows="2" placeholder="Pergunte ao Sinki…"
@@ -545,11 +553,6 @@ input, select, textarea { font-family:inherit; }
                       onclick="document.getElementById('sinki-arquivo').click()">📎 Anexar</button>
               <button class="btn-sm violet" id="btn-sinki-enviar" onclick="sinkiEnviar()">Enviar</button>
             </div>
-          </div>
-          <div class="sinki-rodape">
-            <div id="sinki-picker-modelo"></div>
-            <div id="sinki-picker-esforco"></div>
-            <span class="hint" style="margin:0;">Enter envia · Shift+Enter quebra linha</span>
           </div>
         </div>
       </section>
@@ -2669,18 +2672,30 @@ function aiPickerRotulo(o){
   return '<span>'+esc(o.label)+(o.sub?' <span class="ap-sub">('+esc(o.sub)+')</span>':'')+'</span>';
 }
 
-function renderAiPicker(id, tipo, valorInicial, ariaLabel){
+// "proposito" é o que o item faz (ex.: "Modelo de IA") — vira o nome que o
+// leitor de tela anuncia, junto com a opção ATUAL. Antes o botão tinha um
+// aria-label fixo definido só na criação (ex.: "Modelo de IA para Sinki")
+// que nunca era atualizado ao trocar de opção — o NVDA sempre lia o rótulo
+// genérico, nunca "Opus 5" nem "Esforço alto". Agora o aria-label é
+// recalculado a cada troca, incluindo a opção escolhida.
+function aiPickerNomeAcessivel(proposito, o){
+  return proposito + ': ' + o.label + (o.sub ? ' (' + o.sub + ')' : '') + '. Ativar para trocar.';
+}
+
+function renderAiPicker(id, tipo, valorInicial, proposito){
   const opcoes = OPCOES_AI[tipo];
   const atual = opcoes.find(o=>o.v===valorInicial) || opcoes[0];
-  return '<div class="ai-picker" id="'+id+'" data-tipo="'+tipo+'" data-valor="'+atual.v+'">' +
-    '<button type="button" class="ai-picker-btn" onclick="toggleAiPicker(this)" aria-label="'+esc(ariaLabel)+'">' +
+  return '<div class="ai-picker" id="'+id+'" data-tipo="'+tipo+'" data-proposito="'+esc(proposito)+'" data-valor="'+atual.v+'">' +
+    '<button type="button" class="ai-picker-btn" onclick="toggleAiPicker(this)" ' +
+      'aria-haspopup="listbox" aria-expanded="false" aria-label="'+esc(aiPickerNomeAcessivel(proposito, atual))+'">' +
       aiPickerRotulo(atual) +
-      '<span class="ap-chev">▾</span>' +
+      '<span class="ap-chev" aria-hidden="true">▾</span>' +
     '</button>' +
-    '<div class="ai-picker-menu">' +
+    '<div class="ai-picker-menu" role="listbox" aria-label="'+esc(proposito)+'">' +
       opcoes.map(o=>
-        '<button type="button" class="ai-picker-opt" data-valor="'+o.v+'" onclick="escolherAiOpcao(\''+id+'\',\''+o.v+'\')">' +
-          '<span class="ap-check">'+(o.v===atual.v?'✓':'')+'</span>' +
+        '<button type="button" class="ai-picker-opt" role="option" aria-selected="'+(o.v===atual.v?'true':'false')+'" ' +
+          'data-valor="'+o.v+'" onclick="escolherAiOpcao(\''+id+'\',\''+o.v+'\')" onkeydown="aiPickerOpcaoTecla(event,this)">' +
+          '<span class="ap-check" aria-hidden="true">'+(o.v===atual.v?'✓':'')+'</span>' +
           '<span><b>'+esc(o.label)+'</b>'+(o.sub?'<small>'+esc(o.sub)+'</small>':'')+'</span>' +
         '</button>'
       ).join('') +
@@ -2688,8 +2703,13 @@ function renderAiPicker(id, tipo, valorInicial, ariaLabel){
   '</div>';
 }
 
-function fecharTodosAiPickers(){
-  document.querySelectorAll('.ai-picker.open').forEach(p=>p.classList.remove('open'));
+function fecharTodosAiPickers(refoco){
+  document.querySelectorAll('.ai-picker.open').forEach(p=>{
+    p.classList.remove('open');
+    const btn = p.querySelector('.ai-picker-btn');
+    btn.setAttribute('aria-expanded', 'false');
+    if(refoco) btn.focus();
+  });
 }
 
 function toggleAiPicker(btn){
@@ -2702,6 +2722,19 @@ function toggleAiPicker(btn){
   menu.style.top = (r.bottom + 4) + 'px';
   menu.style.left = r.left + 'px';
   picker.classList.add('open');
+  btn.setAttribute('aria-expanded', 'true');
+  const selecionada = menu.querySelector('.ai-picker-opt[aria-selected="true"]') || menu.querySelector('.ai-picker-opt');
+  if(selecionada) selecionada.focus();
+}
+
+function aiPickerOpcaoTecla(e, opt){
+  const menu = opt.closest('.ai-picker-menu');
+  const itens = Array.from(menu.querySelectorAll('.ai-picker-opt'));
+  const i = itens.indexOf(opt);
+  if(e.key === 'ArrowDown'){ e.preventDefault(); (itens[i+1] || itens[0]).focus(); }
+  else if(e.key === 'ArrowUp'){ e.preventDefault(); (itens[i-1] || itens[itens.length-1]).focus(); }
+  else if(e.key === 'Escape'){ e.preventDefault(); fecharTodosAiPickers(true); }
+  else if(e.key === 'Tab'){ fecharTodosAiPickers(); }  // sai do menu normalmente, só fecha
 }
 
 function escolherAiOpcao(pickerId, valor){
@@ -2711,10 +2744,16 @@ function escolherAiOpcao(pickerId, valor){
   if(!o) return;
   picker.dataset.valor = valor;
   picker.classList.remove('open');
-  picker.querySelector('.ai-picker-btn').innerHTML = aiPickerRotulo(o) + '<span class="ap-chev">▾</span>';
+  const btn = picker.querySelector('.ai-picker-btn');
+  btn.innerHTML = aiPickerRotulo(o) + '<span class="ap-chev" aria-hidden="true">▾</span>';
+  btn.setAttribute('aria-expanded', 'false');
+  btn.setAttribute('aria-label', aiPickerNomeAcessivel(picker.dataset.proposito, o));
   picker.querySelectorAll('.ai-picker-opt').forEach(opt=>{
-    opt.querySelector('.ap-check').textContent = (opt.dataset.valor===valor) ? '✓' : '';
+    const selecionada = opt.dataset.valor === valor;
+    opt.querySelector('.ap-check').textContent = selecionada ? '✓' : '';
+    opt.setAttribute('aria-selected', selecionada ? 'true' : 'false');
   });
+  btn.focus();
 }
 
 document.addEventListener('click', function(e){
@@ -2806,22 +2845,36 @@ function sinkiNovaConversa(){
 
 async function sinkiListarConversas(){
   const lista = document.getElementById('sinki-lista-conversas');
+  // a lista é reconstruída do zero sempre que uma conversa é enviada/criada.
+  // Se o foco do teclado estava em cima de um item dela nesse instante, trocar
+  // o innerHTML apaga o elemento focado e o navegador joga o foco pro <body>
+  // — daí o próximo Tab recomeça do primeiro link focável da PÁGINA INTEIRA,
+  // que é o "Sair" lá no topo. É exatamente o "pula pro Sair do nada" que
+  // acontecia. Aqui a gente guarda onde o foco estava e devolve pro mesmo
+  // lugar (ou pro item equivalente) depois de reconstruir.
+  const focoEstavaAqui = lista.contains(document.activeElement);
+  const idFocado = focoEstavaAqui ? document.activeElement.dataset.id : null;
   try{
     const res = await fetch(Store.base + '/sinki/conversas', { headers: Store.headers() });
     if(!res.ok) throw new Error('Servidor respondeu ' + res.status);
     const { conversas } = await res.json();
     if(!conversas.length){
       lista.innerHTML = '<p class="sinki-lista-vazia">Nenhuma conversa ainda. Comece perguntando algo.</p>';
-      return;
+    } else {
+      lista.innerHTML = conversas.map(c=>
+        '<button class="sinki-conversa-item'+(c.id===SINKI.conversaId?' ativa':'')+'" data-id="'+c.id+'" ' +
+        'onclick="sinkiCarregarConversa(\''+c.id+'\')" title="'+esc(c.titulo)+'">' +
+          esc(c.titulo || 'Sem título') +
+        '</button>'
+      ).join('');
     }
-    lista.innerHTML = conversas.map(c=>
-      '<button class="sinki-conversa-item'+(c.id===SINKI.conversaId?' ativa':'')+'" ' +
-      'onclick="sinkiCarregarConversa(\''+c.id+'\')" title="'+esc(c.titulo)+'">' +
-        esc(c.titulo || 'Sem título') +
-      '</button>'
-    ).join('');
   }catch(e){
     lista.innerHTML = '<p class="sinki-lista-vazia">Não consegui carregar as conversas.</p>';
+  }
+  if(focoEstavaAqui){
+    const alvo = (idFocado && lista.querySelector('[data-id="'+idFocado+'"]'))
+                 || document.querySelector('.sinki-nova');
+    if(alvo) alvo.focus();
   }
 }
 
@@ -2868,10 +2921,17 @@ function sinkiRenderizar(pensando){
 
 function sinkiRenderizarAnexos(){
   const area = document.getElementById('sinki-anexos-pendentes');
+  // mesmo caso da lista de conversas: clicar em "Remover" foca o próprio
+  // botão e, no mesmo clique, ele é apagado ao reconstruir a lista — o foco
+  // cairia pro <body> e o próximo Tab pularia pro topo da página. Devolve o
+  // foco pro campo de mensagem, que é o próximo lugar natural depois de tirar
+  // um anexo.
+  const focoEstavaAqui = area.contains(document.activeElement);
   area.innerHTML = SINKI.anexos.map((f,i)=>
     '<span class="sinki-anexo-chip">📎 '+esc(f.name)+
     '<button onclick="sinkiRemoverAnexo('+i+')" aria-label="Remover '+esc(f.name)+'">×</button></span>'
   ).join('');
+  if(focoEstavaAqui) document.getElementById('sinki-input').focus();
 }
 
 function sinkiArquivosEscolhidos(input){
@@ -3131,9 +3191,11 @@ function a11yAtualizarItens(manterNivel){
     ].filter(i=>i.el);
   } else if(document.getElementById('view-sinki').classList.contains('active')){
     A11Y.todosItens = [
+      {el: document.querySelector('#sinki-picker-modelo .ai-picker-btn'), label:'Modelo do Sinki'},
+      {el: document.querySelector('#sinki-picker-esforco .ai-picker-btn'), label:'Esforço do Sinki'},
+      {el: document.getElementById('btn-sinki-anexar'), label:'Anexar arquivo'},
       {el: document.getElementById('sinki-input'), label:'Escrever mensagem para o Sinki'},
       {el: document.getElementById('btn-sinki-enviar'), label:'Enviar mensagem'},
-      {el: document.getElementById('btn-sinki-anexar'), label:'Anexar arquivo'},
       {el: document.querySelector('.sinki-nova'), label:'Nova conversa'}
     ].filter(i=>i.el);
   } else if(document.getElementById('view-list').classList.contains('active')){
