@@ -1096,6 +1096,24 @@ SINKI_FERRAMENTAS = [
         },
     },
     {
+        "name": "ver_concorrentes",
+        "description": "Consulta as verificações já feitas de documentação de empresas concorrentes "
+                       "— o que cada uma atende ou não atende num edital, e por quê. Use pra responder "
+                       "se uma empresa concorrente cumpre as exigências (ex.: 'a empresa X atende as "
+                       "exigências técnicas daquele edital?'). Omita 'processo' pra buscar em todos os "
+                       "processos — útil pra saber se essa empresa já apareceu antes, em outro certame.",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "processo": {"type": "string", "description": "Id do processo ou parte do nome. "
+                                                               "Omita pra buscar em todos os processos."},
+                "empresa": {"type": "string", "description": "Nome (ou parte do nome) da empresa "
+                                                              "concorrente. Omita pra ver todas as "
+                                                              "verificações daquele processo."},
+            },
+        },
+    },
+    {
         "name": "ver_gastos",
         "description": "Quanto já foi gasto com IA: total de tokens, custo em dólar e real, e o "
                        "detalhamento por análise.",
@@ -1209,6 +1227,7 @@ def _sinki_rodar_ferramenta(nome: str, entrada: dict, modelo_usado: str = ""):
                     "candidatos": [{"id": d["_id"], "nome": d.get("nome")} for d in doc[:10]]}, None
         analise = {k: v for k, v in (doc.get("analise") or {}).items() if v not in ("", None, [])}
         checklist_marcado = doc.get("checklist") or {}
+        concorrentes = doc.get("concorrentes") or []
         return {
             "id": doc["_id"], "nome": doc.get("nome"), "tipo": doc.get("type"),
             "status": doc.get("status"), "progresso": doc.get("progress", 0),
@@ -1216,7 +1235,40 @@ def _sinki_rodar_ferramenta(nome: str, entrada: dict, modelo_usado: str = ""):
             "exigencias": doc.get("exigencias") or [],
             "checklist_do_edital": (doc.get("schemaCustom") or {}).get("checklist") or [],
             "itens_ja_marcados": checklist_marcado,
+            "concorrentes_verificados": [c.get("empresa") for c in concorrentes] if concorrentes else [],
         }, None
+
+    if nome == "ver_concorrentes":
+        processo_ref = entrada.get("processo")
+        empresa_ref = _norm(entrada.get("empresa") or "")
+        if processo_ref:
+            doc = _sinki_achar_processo(processo_ref)
+            if not doc:
+                return {"erro": "Nenhum processo com esse id ou nome."}, None
+            if isinstance(doc, list):
+                return {"erro": "Mais de um processo bate com esse nome — seja mais específico.",
+                        "candidatos": [{"id": d["_id"], "nome": d.get("nome")} for d in doc[:10]]}, None
+            docs = [doc]
+        else:
+            docs = list(col_processos.find())
+
+        verificacoes = []
+        for d in docs:
+            for c in d.get("concorrentes") or []:
+                if empresa_ref and empresa_ref not in _norm(c.get("empresa", "")):
+                    continue
+                verificacoes.append({
+                    "processo_id": d["_id"], "processo_nome": d.get("nome"),
+                    "empresa": c.get("empresa"), "resumo": c.get("resumo"),
+                    "itens": [{"ref": i.get("ref"), "categoria": i.get("categoria"),
+                               "descricao_exigencia": i.get("descricao_exigencia"),
+                               "atende": i.get("atende"), "observacao": i.get("observacao"),
+                               "fundamento_recurso": i.get("fundamento_recurso")}
+                              for i in c.get("itens") or []],
+                })
+        if not verificacoes:
+            return {"erro": "Nenhuma verificação de concorrente encontrada com esses filtros."}, None
+        return {"total": len(verificacoes), "verificacoes": verificacoes}, None
 
     if nome == "ver_gastos":
         registros = list(col_gastos.find(sort=[("criadoEm", DESCENDING)]))

@@ -104,18 +104,11 @@ input, select, textarea { font-family:inherit; }
 .concorrente-card-head { display:flex; justify-content:space-between; align-items:flex-start; gap:10px; margin-bottom:8px; }
 .concorrente-card-nome { font-weight:800; color:var(--slate); font-size:.92rem; }
 .concorrente-card-quando { font-size:.72rem; color:var(--slate-l); }
-.concorrente-resumo { font-size:.82rem; color:var(--slate-mid); margin-bottom:10px; }
-.concorrente-item { border:1px solid var(--border); border-radius:8px; padding:9px 11px; margin-bottom:8px; font-size:.8rem; }
-.concorrente-item.nao { border-left:4px solid var(--red); background:var(--red-l); }
-.concorrente-item.sim { border-left:4px solid #16a34a; }
-.concorrente-item.nao_verificavel { border-left:4px solid var(--amber); }
-.concorrente-item-topo { display:flex; justify-content:space-between; gap:10px; font-weight:700; margin-bottom:4px; }
-.concorrente-item-status { white-space:nowrap; }
-.concorrente-item.nao .concorrente-item-status { color:var(--red); }
-.concorrente-item.sim .concorrente-item-status { color:#16a34a; }
-.concorrente-item.nao_verificavel .concorrente-item-status { color:var(--amber); }
-.concorrente-fundamento { margin-top:6px; padding:8px 10px; background:#fff; border:1px dashed var(--red); border-radius:6px; font-size:.78rem; color:var(--slate); }
-.concorrente-fundamento b { color:var(--red); }
+.concorrente-titulo { font-size:.8rem; font-weight:700; color:var(--red); margin-bottom:6px; }
+.concorrente-titulo.ok { color:#16a34a; }
+.concorrente-linha { font-size:.82rem; color:var(--slate); line-height:1.5; margin-bottom:7px; border-left:3px solid var(--red); padding-left:8px; }
+.concorrente-fundamento { margin-top:3px; font-size:.76rem; color:var(--slate-mid); font-style:italic; }
+.concorrente-resumo-extra { font-size:.76rem; color:var(--slate-mid); margin-top:6px; }
 
 /* ── Painel de prazos ── */
 .prazos-grupo { margin-bottom:16px; }
@@ -1851,10 +1844,6 @@ function widgetPlanilhaHTML(secaoAnexo){
 /* ── Concorrentes: verificação de documentação de empresa concorrente ──
    Fica na aba própria "Concorrentes" do processo, separada de propósito da
    Análise Crítica e das Exigências (que são da SINAPE) ── */
-const CONCORRENTE_STATUS_TEXTO = {
-  sim: '✅ Atende', nao: '❌ Não atende', nao_verificavel: '❓ Não dá pra verificar',
-};
-
 function abrirModalConcorrente(){
   document.getElementById('input-concorrente-empresa').value = '';
   document.getElementById('input-concorrente-arquivos').value = '';
@@ -1912,24 +1901,45 @@ function renderConcorrentes(lista){
     root.innerHTML = '<p class="relatorio-vazio">Nenhuma verificação de concorrente ainda neste processo.</p>';
     return;
   }
+  // versão enxuta: só o que NÃO atende (com o motivo) fica em destaque — o
+  // resto (atende / não dá pra verificar) vira uma linha de resumo. O texto
+  // completo continua todo salvo e consultável pelo Sinki (ver_concorrentes),
+  // isso aqui é só a versão resumida pra tela.
   root.innerHTML = lista.slice().reverse().map(c=>{
     const quando = c.criadoEm ? new Date(c.criadoEm).toLocaleString('pt-BR') : '';
-    const naoAtende = (c.itens||[]).filter(i=>i.atende==='nao').length;
+    const itens = c.itens || [];
+    const naoAtende = itens.filter(i=>i.atende==='nao');
+    const naoVerificavel = itens.filter(i=>i.atende==='nao_verificavel');
+    const atende = itens.filter(i=>i.atende==='sim');
+
+    let corpo = '';
+    if(naoAtende.length){
+      corpo += '<div class="concorrente-titulo">Não atende '+naoAtende.length+' de '+itens.length+' exigência(s):</div>';
+      corpo += naoAtende.map(i=>
+        '<div class="concorrente-linha">' +
+          '<b>'+esc(i.descricao_exigencia||i.categoria||'')+'</b>'+(i.ref?' <span class="hint">('+esc(i.ref)+')</span>':'')+
+          ': '+esc(i.observacao||'') +
+          (i.fundamento_recurso ? '<div class="concorrente-fundamento">Fundamento para recurso: '+esc(i.fundamento_recurso)+'</div>' : '') +
+        '</div>'
+      ).join('');
+    } else {
+      corpo += '<div class="concorrente-titulo ok">✅ Atende todas as exigências conferidas.</div>';
+    }
+    if(naoVerificavel.length){
+      corpo += '<div class="concorrente-resumo-extra">❓ Não deu pra confirmar: ' +
+        naoVerificavel.map(i=>esc(i.descricao_exigencia||i.categoria||'')).join('; ') + '.</div>';
+    }
+    if(atende.length && naoAtende.length){
+      corpo += '<div class="concorrente-resumo-extra">Atende '+atende.length+' exigência(s) sem problema.</div>';
+    }
+
     return '<div class="concorrente-card">' +
       '<div class="concorrente-card-head">' +
         '<div><div class="concorrente-card-nome">🏢 '+esc(c.empresa)+'</div>' +
-        '<div class="concorrente-card-quando">'+esc(quando)+(naoAtende?' · '+naoAtende+' exigência(s) não atendida(s)':'')+'</div></div>' +
+        '<div class="concorrente-card-quando">'+esc(quando)+'</div></div>' +
         '<button class="btn-sm danger" onclick="excluirConcorrente(\''+c._id+'\')">Excluir</button>' +
       '</div>' +
-      '<div class="concorrente-resumo">'+esc(c.resumo||'')+'</div>' +
-      (c.itens||[]).map(i=>
-        '<div class="concorrente-item '+esc(i.atende)+'">' +
-          '<div class="concorrente-item-topo"><span>'+esc(i.descricao_exigencia||i.categoria||'')+'</span>' +
-          '<span class="concorrente-item-status">'+(CONCORRENTE_STATUS_TEXTO[i.atende]||i.atende)+'</span></div>' +
-          '<div>'+esc(i.observacao||'')+(i.ref?' <span class="hint">('+esc(i.ref)+')</span>':'')+'</div>' +
-          (i.fundamento_recurso ? '<div class="concorrente-fundamento"><b>Fundamento para recurso:</b> '+esc(i.fundamento_recurso)+'</div>' : '') +
-        '</div>'
-      ).join('') +
+      corpo +
     '</div>';
   }).join('');
 }
