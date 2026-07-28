@@ -3307,7 +3307,7 @@ async function sinkiEnviar(){
      Ctrl+Alt+R   repete o último anúncio
      Ctrl+Alt+H   abre/fecha a lista de atalhos na tela (texto, não só fala)
    ════════════════════════════════════════════════════════════════ */
-const A11Y = { ativo: localStorage.getItem('sinape:a11y')==='1', foco:null, pagina:0, nivel:'tela', todosItens:[], itensAtuais:[], avisoCampoDado:false, ultimoAnuncio:'' };
+const A11Y = { ativo: localStorage.getItem('sinape:a11y')==='1', foco:null, pagina:0, nivel:'tela', todosItens:[], itensAtuais:[], avisoCampoDado:false, ultimoAnuncio:'', _semTab:[] };
 
 function a11yAnunciar(msg){
   A11Y.ultimoAnuncio = msg;
@@ -3444,6 +3444,7 @@ function a11yToggle(){
    contrário volta sempre para o nível de tela (abas/cards). */
 function a11yAtualizarItens(manterNivel){
   document.querySelectorAll('.a11y-num').forEach(n=>n.remove());
+  a11yRestaurarTab();
   A11Y.todosItens = [];
   let _restaurarSecao = null; // preenchido pelo ramo de conteúdo; executado só depois de paginar
   const modalAberto = document.querySelector('.modal-overlay.open');
@@ -3577,13 +3578,22 @@ function a11yAtualizarItens(manterNivel){
     a11yAnunciar('Continuando de onde você parou: '+_restaurarSecao.label+'. Pressione Enter novamente para ver os itens.');
   }
 }
+function a11yRestaurarTab(){
+  // devolve ao Tab nativo os itens numerados em telas/páginas anteriores —
+  // sem isso, um botão numerado uma vez ficava fora da ordem de Tab pra
+  // sempre (mesmo desligando o modo), até a página ser recarregada.
+  A11Y._semTab.forEach(el=>el.removeAttribute('tabindex'));
+  A11Y._semTab = [];
+}
 function a11yRenderizarPagina(){
   document.querySelectorAll('.a11y-num').forEach(n=>n.remove());
+  a11yRestaurarTab();
   if(!A11Y.ativo){ A11Y.itensAtuais = []; return; }
   const inicio = A11Y.pagina*9;
   A11Y.itensAtuais = A11Y.todosItens.slice(inicio, inicio+9);
   A11Y.itensAtuais.forEach((item,i)=>{
     item.el.tabIndex = -1;
+    A11Y._semTab.push(item.el);
     if(getComputedStyle(item.el).position==='static') item.el.style.position = 'relative';
     const badge = document.createElement('span');
     badge.className = 'a11y-num';
