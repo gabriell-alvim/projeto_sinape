@@ -3379,11 +3379,23 @@ function a11yEntrarItens(secaoItem){
   if(!subItens.length) return false;
   subItens.forEach(it=>{
     it.ativar = ()=>{
-      const alvo = it.el.querySelector('textarea, select, input:not([type=checkbox]):not([type=radio])')
-                || it.el.querySelector('input[type=checkbox], input[type=radio]');
+      // as caixinhas de avaliação (Atende/Não atende/Confere/Não confere) são
+      // a ação principal do item — vêm antes, no DOM, do campo de tratativa.
+      // Indo direto pro campo de texto (como era antes), o usuário do modo
+      // numérico nunca ficava sabendo que essas opções existiam ali.
+      const checks = Array.from(it.el.querySelectorAll('input[type=checkbox], input[type=radio]'));
+      const campoTexto = it.el.querySelector('textarea, select, input:not([type=checkbox]):not([type=radio])');
       it.el.scrollIntoView({block:'center', behavior:'smooth'});
-      if(alvo){ alvo.focus(); a11yAnunciar('Campo do item: '+it.label+'.'); }
-      else { it.el.focus(); a11yAnunciar('Item: '+it.label+'.'); }
+      if(checks.length){
+        checks[0].focus();
+        a11yAnunciar('Item: '+it.label+'. '+checks.length+' opção(ões) de avaliação — use Tab para percorrer'+(campoTexto?' e chegar ao campo de tratativa':'')+'.');
+      } else if(campoTexto){
+        campoTexto.focus();
+        a11yAnunciar('Campo do item: '+it.label+'.');
+      } else {
+        it.el.focus();
+        a11yAnunciar('Item: '+it.label+'.');
+      }
     };
   });
   A11Y.nivel = 'itens';
