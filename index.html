@@ -3522,7 +3522,10 @@ function a11yAtualizarItens(manterNivel){
         // Tab normal isso não se nota (ninguém lê o número em voz alta); no
         // modo numérico, ouvir dois números diferentes na mesma frase confunde
         // — por isso o número do título não entra na navegação numérica.
-        const titulo = (tituloEl ? tituloEl.textContent.trim() : 'Seção').replace(/^\s*\d+[.)]\s*/, '');
+        // o texto de .sec-title começa com o ícone da seção antes do número
+        // (ex.: "⚠️ 6. Riscos..."), por isso o número pode vir depois de um
+        // token inicial que não é dígito — não só logo no começo da string.
+        const titulo = (tituloEl ? tituloEl.textContent.trim() : 'Seção').replace(/^(\S*\s+)?\d+[.)]\s*/, '');
         return { el: head, label: titulo, card };
       }).filter(i=>i.el);
       /* ativação nº1 entra na seção (expande + rola); ativação nº2, já dentro
