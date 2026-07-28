@@ -1768,7 +1768,7 @@ async function openProcess(id){
   setSaveStatus('Pronto','');
   a11yAtualizarItens();
 }
-function switchProcessTab(tab){
+function switchProcessTab(tab, pularA11y){
   document.getElementById('tab-analise').classList.toggle('active', tab==='analise');
   document.getElementById('tab-exigencias').classList.toggle('active', tab==='exigencias');
   document.getElementById('tab-checklist').classList.toggle('active', tab==='checklist');
@@ -1778,7 +1778,12 @@ function switchProcessTab(tab){
   document.getElementById('panel-checklist').classList.toggle('active', tab==='checklist');
   document.getElementById('panel-concorrentes').classList.toggle('active', tab==='concorrentes');
   if(tab==='concorrentes') carregarConcorrentes();
-  a11yAtualizarItens();
+  // quem entra direto no conteúdo da aba pelo modo numérico (entrarConteudo,
+  // abaixo) já chama a11yAtualizarItens(true) por conta própria logo depois;
+  // se essa chamada daqui rodasse também, ela recalcularia a lista no nível
+  // "tela" (as abas) por uma fração de segundo e chegava a anunciar isso em
+  // voz, sendo sobrescrita quase no mesmo instante — daí passar pularA11y.
+  if(!pularA11y) a11yAtualizarItens();
 }
 function renderSourceBanner(){
   const area = document.getElementById('source-banner-area');
@@ -3547,7 +3552,12 @@ function a11yAtualizarItens(manterNivel){
          própria "prévia" do número já foca o cabeçalho antes de ativar. */
       listaSecoes.forEach(item=>{
         item._entrou = false;
-        item.ativar = ()=>{
+        // silencioso=true só quando esta ativação vem do "continuando de onde
+        // você parou" (logo abaixo) — aí quem anuncia é aquele aviso, que já
+        // diz o nome da seção; sem isso, o usuário ouvia a mesma frase duas
+        // vezes seguidas ("Seção: X..." e, no mesmo instante, "Continuando de
+        // onde você parou: X...").
+        item.ativar = (silencioso)=>{
           if(!item._entrou){
             item._entrou = true;
             if(usaFiltro) setFilter('all');
@@ -3557,7 +3567,7 @@ function a11yAtualizarItens(manterNivel){
             const n = A11Y.itensAtuais.indexOf(item)+1;
             A11Y.foco = n>0 ? n : null;
             a11ySalvarUltimaSecao(abaAtualId, item.label);
-            a11yAnunciar('Seção: '+item.label+'. Pressione Enter novamente para ver os itens.');
+            if(!silencioso) a11yAnunciar('Seção: '+item.label+'. Pressione Enter novamente para ver os itens.');
           } else if(!a11yEntrarItens(item)){
             // sem itens numeráveis (Análise Crítica): pula pro primeiro campo
             const alvo = item.card.querySelector('textarea, select, input:not([type=checkbox]):not([type=radio])')
@@ -3584,7 +3594,7 @@ function a11yAtualizarItens(manterNivel){
       A11Y._pularRestauro = false;
     } else {
       A11Y.nivel = 'tela';
-      const entrarConteudo = tab=>()=>{ switchProcessTab(tab); A11Y.nivel='conteudo'; a11yAtualizarItens(true); };
+      const entrarConteudo = tab=>()=>{ switchProcessTab(tab, true); A11Y.nivel='conteudo'; a11yAtualizarItens(true); };
       A11Y.todosItens = [
         {el: document.getElementById('tab-analise'), label:'Aba Análise Crítica', ativar: entrarConteudo('analise')},
         {el: document.getElementById('tab-exigencias'), label:'Aba Exigências', ativar: entrarConteudo('exigencias')},
@@ -3597,7 +3607,7 @@ function a11yAtualizarItens(manterNivel){
   A11Y.pagina = Math.min(A11Y.pagina, Math.max(0, Math.ceil(A11Y.todosItens.length/9)-1));
   a11yRenderizarPagina();
   if(_restaurarSecao){
-    _restaurarSecao.ativar();
+    _restaurarSecao.ativar(true);
     a11yAnunciar('Continuando de onde você parou: '+_restaurarSecao.label+'. Pressione Enter novamente para ver os itens.');
   }
 }
