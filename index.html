@@ -3514,7 +3514,15 @@ function a11yAtualizarItens(manterNivel){
       const listaSecoes = Array.from(document.querySelectorAll('#'+rootId+' .sec-card')).map(card=>{
         const head = card.querySelector('.sec-head');
         const tituloEl = card.querySelector('.sec-title');
-        const titulo = tituloEl ? tituloEl.textContent.trim() : 'Seção';
+        // a seção de Riscos sempre aparece por último (é a de conclusão), mas o
+        // título dela ("6. Riscos...") vem fixo do modelo padrão — quando há
+        // seções extras da IA, elas ocupam as posições que ficariam entre a
+        // exigências e riscos, e todo número escrito no título passa a não
+        // bater mais com a posição real (ex.: opção 9 tem título "6."). No
+        // Tab normal isso não se nota (ninguém lê o número em voz alta); no
+        // modo numérico, ouvir dois números diferentes na mesma frase confunde
+        // — por isso o número do título não entra na navegação numérica.
+        const titulo = (tituloEl ? tituloEl.textContent.trim() : 'Seção').replace(/^\s*\d+[.)]\s*/, '');
         return { el: head, label: titulo, card };
       }).filter(i=>i.el);
       /* ativação nº1 entra na seção (expande + rola); ativação nº2, já dentro
@@ -3602,7 +3610,13 @@ function a11yRenderizarPagina(){
     item.el.appendChild(badge);
   });
   const totalPaginas = Math.max(1, Math.ceil(A11Y.todosItens.length/9));
+  // antes só avisava quando havia mais de uma página — com 9 opções ou menos
+  // (o caso mais comum, ex.: as abas do processo ou as seções de uma aba) o
+  // usuário não ouvia nada ao entrar numa tela nova, só silêncio. Agora
+  // sempre anuncia quantas opções existem.
+  if(!A11Y.itensAtuais.length){ return; }
   if(totalPaginas>1) a11yAnunciar('Página '+(A11Y.pagina+1)+' de '+totalPaginas+'. Opções de 1 a '+A11Y.itensAtuais.length+'.');
+  else a11yAnunciar(A11Y.itensAtuais.length+' opção(ões) disponível(is).');
 }
 function a11yProximaPagina(){
   const totalPaginas = Math.max(1, Math.ceil(A11Y.todosItens.length/9));
