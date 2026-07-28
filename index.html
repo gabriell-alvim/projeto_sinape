@@ -3253,6 +3253,10 @@ async function sinkiEnviar(){
 
   const btn = document.getElementById('btn-sinki-enviar');
   SINKI.ocupado = true; btn.disabled = true; btn.textContent = 'Pensando…';
+  // desabilitar um botão que está com foco joga o foco pro <body> — daí o
+  // próximo Tab recomeça do primeiro link focável da página inteira (o
+  // "Sair" lá no topo). Devolve o foco pro campo de texto pra evitar isso.
+  if(document.activeElement === document.body) document.getElementById('sinki-input').focus();
   try{
     const headers = Store.headers();
     delete headers['Content-Type'];   // o navegador precisa montar o boundary do multipart
