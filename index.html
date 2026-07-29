@@ -94,6 +94,10 @@ input, select, textarea { font-family:inherit; }
 .gastos-tabela tr:last-child td { border-bottom:none; }
 .gastos-modelo { font-size:.68rem; font-weight:700; background:var(--violet-l); color:var(--violet); padding:2px 8px; border-radius:10px; white-space:nowrap; }
 .gastos-subtitulo { font-size:.8rem; font-weight:700; color:var(--slate); margin:4px 0 8px; }
+.comp-grupo { margin-bottom:14px; }
+.comp-titulo { font-size:.72rem; font-weight:700; color:var(--slate-mid); text-transform:uppercase; letter-spacing:.03em; margin-bottom:4px; }
+.gastos-tabela tr.comp-vencedor td { background:var(--teal-ll); }
+.comp-tag { font-size:.62rem; font-weight:700; background:var(--teal-l); color:var(--teal); padding:1px 6px; border-radius:8px; white-space:nowrap; }
 
 /* ── Concorrentes (documentação de terceiros — precisa ficar visualmente
    inconfundível com os dados da própria SINAPE) ── */
@@ -2872,22 +2876,47 @@ async function abrirPainelGastos(){
       // foi mais usada.
       const comp = g.comparativo_modelo_esforco || [];
       if(comp.length > 1){
-        html += '<h4 class="gastos-subtitulo">Custo médio por chamada, por modelo e esforço</h4>' +
-          '<table class="gastos-tabela"><thead><tr>' +
-            '<th>Modelo</th><th>Esforço</th><th style="text-align:right;">Chamadas</th>' +
-            '<th style="text-align:right;">Saída média</th><th style="text-align:right;">Custo médio</th>' +
-            '<th style="text-align:right;">Total</th>' +
-          '</tr></thead><tbody>' +
-          comp.map(c=>'<tr>' +
-            '<td><span class="gastos-modelo">'+esc(c.model)+'</span></td>' +
-            '<td>'+esc(c.esforco)+'</td>' +
-            '<td class="num">'+c.chamadas+'</td>' +
-            '<td class="num">'+fmtTokens(c.tokens_saida_media)+'</td>' +
-            '<td class="num">$'+(c.custo_usd_medio||0).toFixed(4)+'</td>' +
-            '<td class="num">$'+(c.custo_usd_total||0).toFixed(4)+'</td>' +
-          '</tr>').join('') +
-          '</tbody></table>' +
-          '<p class="hint" style="font-size:.72rem;margin:6px 0 16px;">Compare pela coluna de custo médio, não pelo total: uma combinação usada 2 vezes e outra usada 50 não se comparam pelo total gasto.</p>';
+        // Uma tabela por tipo de trabalho — comparar entre tipos diferentes
+        // não diz nada, porque ler edital custa muito mais que conversar.
+        const porOrigem = {};
+        comp.forEach(c=>{ (porOrigem[c.origem] = porOrigem[c.origem] || []).push(c); });
+        html += '<h4 class="gastos-subtitulo">O que sai mais em conta para cada tipo de trabalho</h4>';
+        Object.keys(porOrigem).sort().forEach(origem=>{
+          const linhas = porOrigem[origem];
+          if(linhas.length < 2) return;   // com uma combinação só não há o que comparar
+          const barato = Math.min(...linhas.map(l=>l.custo_usd_medio||0));
+          html += '<div class="comp-grupo"><div class="comp-titulo">'+esc(origem)+'</div>' +
+            '<table class="gastos-tabela"><thead><tr>' +
+              '<th>Modelo</th><th>Esforço</th><th style="text-align:right;">Chamadas</th>' +
+              '<th style="text-align:right;">Tokens (ent./saída)</th>' +
+              '<th style="text-align:right;">Custo médio</th>' +
+              '<th style="text-align:right;">Correções</th>' +
+            '</tr></thead><tbody>' +
+            linhas.map(c=>{
+              const eMaisBarato = (c.custo_usd_medio||0) === barato;
+              const q = c.qualidade;
+              const corr = q
+                ? q.taxa_correcao_pct.toFixed(1)+'%<br><span class="hint" style="font-size:.66rem;">'
+                  + q.campos_corrigidos+' de '+q.campos_preenchidos+' campos · '
+                  + q.processos_avaliados+' processo(s)</span>'
+                : '<span class="hint">sem dado</span>';
+              return '<tr'+(eMaisBarato?' class="comp-vencedor"':'')+'>' +
+                '<td><span class="gastos-modelo">'+esc(c.model)+'</span></td>' +
+                '<td>'+esc(c.esforco)+(eMaisBarato?' <span class="comp-tag">mais barato</span>':'')+'</td>' +
+                '<td class="num">'+c.chamadas+'</td>' +
+                '<td class="num">'+fmtTokens(c.tokens_entrada_media)+' / '+fmtTokens(c.tokens_saida_media)+'</td>' +
+                '<td class="num">$'+(c.custo_usd_medio||0).toFixed(4)+'</td>' +
+                '<td class="num">'+corr+'</td>' +
+              '</tr>';
+            }).join('') +
+            '</tbody></table></div>';
+        });
+        html += '<p class="hint" style="font-size:.72rem;margin:6px 0 16px;">' +
+          'Leia as duas últimas colunas juntas: <b>mais barato com taxa de correção parecida</b> quer dizer que ' +
+          'aquela combinação faz o mesmo trabalho gastando menos — aí não compensa usar a mais cara. ' +
+          'Se a mais barata precisa de bem mais correção, a economia vira retrabalho da equipe. ' +
+          'A taxa conta os campos que vocês editaram depois da análise; campo que ninguém conferiu ' +
+          'conta como certo, então ela vale como comparação entre modelos, não como nota absoluta.</p>';
       }
       html += '<h4 class="gastos-subtitulo">Todas as chamadas</h4>' +
         '<table class="gastos-tabela"><thead><tr>' +

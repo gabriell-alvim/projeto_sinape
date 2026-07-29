@@ -366,6 +366,7 @@ def _capturar_correcoes(doc_antes: dict, campos_tocados: dict):
     processo_id = doc_antes["_id"]
     processo_nome = doc_antes.get("nome") or ""
     modelo_ia = doc_antes.get("_iaModel") or ""
+    esforco_ia = doc_antes.get("_iaEsforco") or ""
     fontes = doc_antes.get("analise", {}).get("_sourceFiles") or doc_antes.get("fontes") or ""
     for campo, valor_novo in campos_tocados.items():
         chave_registro = f"{processo_id}::{campo}"
@@ -375,7 +376,7 @@ def _capturar_correcoes(doc_antes: dict, campos_tocados: dict):
             continue
         col_correcoes.replace_one({"_id": chave_registro}, {
             "_id": chave_registro, "processo_id": processo_id, "processo_nome": processo_nome,
-            "campo": campo, "modelo_ia": modelo_ia, "fontes": fontes,
+            "campo": campo, "modelo_ia": modelo_ia, "esforco_ia": esforco_ia, "fontes": fontes,
             "valor_ia": valor_ia, "valor_atual": valor_novo,
             "criadoEm": _agora_ms(), "atualizadoEm": _agora_ms(),
         }, upsert=True)
@@ -826,6 +827,7 @@ def _rodar_analise_ia(pdfs: list, model: str | None = None, effort: str | None =
     doc.setdefault("fontes", "; ".join(nomes))
     doc.setdefault("analise", {}).setdefault("_sourceFiles", "; ".join(nomes))
     doc["_iaModel"] = modelo_usado
+    doc["_iaEsforco"] = esforco_usado
     return doc, uso
 
 
@@ -1900,24 +1902,71 @@ def painel_gastos():
     # esforço?" e "Opus no médio sai mais barato que Sonnet no máximo?".
     # A média por chamada importa mais que o total, porque uma combinação usada
     # 2 vezes e outra usada 50 não se comparam pelo total gasto.
+    # Agrupa por TIPO DE TRABALHO antes de modelo+esforço. Sem isso a conta
+    # engana: ler um edital de 200 páginas custa dez vezes uma pergunta ao
+    # Sinki, então um modelo usado só em edital pareceria caríssimo ao lado de
+    # outro usado só em conversa — sem que nenhum dos dois seja pior.
     combos = {}
     for r in registros:
-        chave = (r.get("model", ""), r.get("esforco", ""))
+        chave = (r.get("origem", "") or "(sem origem)", r.get("model", ""), r.get("esforco", ""))
         c = combos.setdefault(chave, {"chamadas": 0, "entrada": 0, "saida": 0, "usd": 0.0})
         c["chamadas"] += 1
         c["entrada"] += r.get("tokens_entrada", 0)
         c["saida"] += r.get("tokens_saida", 0)
         c["usd"] += r.get("custo_usd", 0.0)
+
+    # ── qualidade: quanto a equipe teve que corrigir do que a IA preencheu ──
+    # Não dá pra julgar a qualidade sozinho, mas dá pra usar algo melhor que
+    # opinião: o trabalho da própria equipe. Todo processo nascido de IA guarda
+    # o que ela respondeu (_analiseOriginalIA), e cada campo que a equipe mudou
+    # depois vira um registro de correção. A proporção entre os dois é o sinal
+    # mais honesto que temos de "esse modelo/esforço acertou mais".
+    correcoes_por_processo = {}
+    for corr in col_correcoes.find({}, {"processo_id": 1}):
+        pid_c = corr.get("processo_id")
+        correcoes_por_processo[pid_c] = correcoes_por_processo.get(pid_c, 0) + 1
+
+    qualidade = {}
+    for d in col_processos.find({"_iaModel": {"$exists": True}},
+                                {"_iaModel": 1, "_iaEsforco": 1, "_analiseOriginalIA": 1}):
+        base = d.get("_analiseOriginalIA") or {}
+        preenchidos = base.get("_autoFilledKeys")
+        if not isinstance(preenchidos, list) or not preenchidos:
+            # sem a lista que a IA declara, conta os campos que ela deixou com valor
+            preenchidos = [k for k, v in base.items()
+                           if not k.startswith("_") and v not in ("", None, [], {})]
+        if not preenchidos:
+            continue
+        chave = (d.get("_iaModel", ""), d.get("_iaEsforco", ""))
+        q = qualidade.setdefault(chave, {"processos": 0, "campos": 0, "corrigidos": 0})
+        q["processos"] += 1
+        q["campos"] += len(preenchidos)
+        q["corrigidos"] += correcoes_por_processo.get(d["_id"], 0)
+
+    def _qualidade_de(modelo, esf):
+        q = qualidade.get((modelo, esf))
+        if not q or not q["campos"]:
+            return None
+        return {
+            "processos_avaliados": q["processos"],
+            "campos_preenchidos": q["campos"],
+            "campos_corrigidos": q["corrigidos"],
+            "taxa_correcao_pct": round(q["corrigidos"] / q["campos"] * 100, 1),
+        }
+
     comparativo = sorted(
         ({
+            "origem": origem,
             "model": modelo,
             "esforco": esf or "(não registrado)",
             "chamadas": c["chamadas"],
+            "tokens_entrada_media": round(c["entrada"] / c["chamadas"]),
             "tokens_saida_media": round(c["saida"] / c["chamadas"]),
             "custo_usd_medio": round(c["usd"] / c["chamadas"], 4),
             "custo_usd_total": round(c["usd"], 4),
-        } for (modelo, esf), c in combos.items()),
-        key=lambda x: -x["custo_usd_total"],
+            "qualidade": _qualidade_de(modelo, esf),
+        } for (origem, modelo, esf), c in combos.items()),
+        key=lambda x: (x["origem"], x["custo_usd_medio"]),
     )
 
     return jsonify({
