@@ -66,16 +66,23 @@ PALAVRAS = {
     "5.5.1": ["contrato social", "estatuto", "objeto social", "habilitação jurídica",
               "registro comercial", "CNPJ"],
     "5.5":   ["habilitação", "inabilitação", "documentos de habilitação", "diligência"],
-    "5.1.1": ["impugnação", "esclarecimento", "republicação do edital",
-              "reabertura de prazo", "prazo para impugnar"],
-    "5.6":   ["recurso", "intenção de recurso", "contrarrazões", "reconsideração",
-              "efeito suspensivo", "preclusão"],
+    # o vocabulário aqui é o que a EQUIPE digita, não o do manual: quem
+    # pergunta escreve "recorrer" e "impugnar", não "recurso" e "impugnação".
+    "5.1.1": ["impugnação", "impugnar", "esclarecimento", "esclarecer",
+              "republicação do edital", "republicar", "reabertura de prazo",
+              "prazo para impugnar", "questionar o edital"],
+    "5.6":   ["recurso", "recorrer", "recorrente", "intenção de recurso",
+              "contrarrazões", "reconsideração", "efeito suspensivo",
+              "preclusão", "contestar habilitação", "prazo para recorrer"],
     "5.2.1": ["garantia de proposta", "pré-habilitação", "1%", "caução",
               "seguro-garantia", "fiança bancária"],
     "5.11.2": ["garantia contratual", "seguro-garantia", "5%", "10%",
                "retenção", "performance bond"],
-    "5.4.1": ["inexequibilidade", "preço inexequível", "desclassificação",
-              "aceitabilidade", "preço máximo", "sobrepreço", "diligência"],
+    "5.4.1": ["inexequibilidade", "inexequível", "desclassificação",
+              "desclassificar", "aceitabilidade", "preço máximo", "sobrepreço",
+              "diligência", "proposta desclassificada"],
+    "5.8":   ["sanção", "penalidade", "multa", "impedimento de licitar",
+              "declaração de inidoneidade", "advertência", "punição", "punido"],
     "5.4.1.2": ["amostra", "prova de conceito", "POC", "exame de conformidade",
                 "demonstração"],
     "5.4.2": ["desempate", "critério de desempate", "sorteio"],
@@ -87,8 +94,6 @@ PALAVRAS = {
     "4.5.2.1": ["impedimento", "vedação de participar", "conflito de interesses",
                 "inidoneidade", "sanção"],
     "4.5.2.5": ["margem de preferência", "produto nacional"],
-    "5.8":   ["sanção", "penalidade", "multa", "impedimento de licitar",
-              "declaração de inidoneidade", "advertência"],
     "5.9.4": ["registro de preços", "SRP", "ata de registro de preços", "carona",
               "adesão", "órgão participante", "intenção de registro de preços"],
     "6.1.1": ["subcontratação", "subcontratada", "cessão"],
@@ -103,6 +108,15 @@ PALAVRAS = {
     "5.7":   ["adjudicação", "homologação", "encerramento"],
     "5.11.6": ["convocação para contratar", "recusa em assinar", "prazo para assinar"],
 }
+
+# Chave repetida num dict literal não dá erro em Python — a última cala a
+# primeira, e a lista de palavras que alguém achou que tinha cadastrado
+# simplesmente some da busca. Já aconteceu com "5.8" ao editar este arquivo.
+_repetidas = [k for k in PALAVRAS if list(PALAVRAS).count(k) > 1]
+assert not _repetidas, f"chaves repetidas em PALAVRAS: {_repetidas}"
+_orfas = [k for k in PALAVRAS if k not in NUCLEO and k not in COMPLEMENTAR]
+assert not _orfas, (f"seções com palavras-chave mas fora do escopo (a busca por "
+                    f"tema nunca as devolveria): {_orfas}")
 
 
 def escopo_de(numero):
@@ -166,6 +180,44 @@ def extrair_referencias(texto):
     return sorted(acs, key=lambda a: (int(a.split("/")[1]), int(a.split("/")[0]))), sorted(sums)
 
 
+# palavras que aparecem em toda seção e não distinguem nada
+PARADAS = {
+    "para", "como", "pela", "pelo", "pelos", "pelas", "esse", "essa", "esses",
+    "essas", "este", "esta", "estes", "estas", "isso", "aquilo", "aquele",
+    "aquela", "seja", "sejam", "ser", "sao", "esta", "estao", "tem", "temos",
+    "deve", "devem", "devera", "deverao", "pode", "podem", "podera", "poderao",
+    "que", "com", "sem", "por", "dos", "das", "nos", "nas", "aos", "ate",
+    "quando", "onde", "qual", "quais", "cada", "todo", "toda", "todos", "todas",
+    "mais", "menos", "muito", "pouco", "outro", "outra", "outros", "outras",
+    "caso", "casos", "forma", "formas", "modo", "meio", "vez", "vezes",
+    "lei", "art", "artigo", "inciso", "alinea", "paragrafo", "acordao",
+    "acordaos", "tcu", "plenario", "camara", "sumula", "enunciado", "tribunal",
+    "administracao", "administrativo", "administrativa", "publico", "publica",
+    "publicas", "publicos", "licitacao", "licitacoes", "contrato", "contratos",
+    "contratacao", "contratacoes", "processo", "processos", "orgao", "entidade",
+    "normativos", "dispositivos", "quadro", "referencias", "jurisprudencia",
+    "entendimento", "sentido", "termos", "nos", "sobre", "entre", "ainda",
+    "apenas", "tambem", "assim", "ser", "haver", "havera", "fins",
+}
+
+
+def extrair_termos(texto, limite=30):
+    """Termos distintivos da seção, usados como rede de segurança na busca:
+    a lista de palavras-chave escrita à mão cobre só as seções mais usadas, e
+    sem isto as demais só seriam achadas se a frase casasse com o título."""
+    palavras = re.findall(r"[a-zà-ú]{5,}", texto.lower())
+    freq = {}
+    for p in palavras:
+        p = (p.replace("á", "a").replace("â", "a").replace("ã", "a").replace("à", "a")
+              .replace("é", "e").replace("ê", "e").replace("í", "i").replace("ó", "o")
+              .replace("ô", "o").replace("õ", "o").replace("ú", "u").replace("ç", "c"))
+        if p in PARADAS:
+            continue
+        freq[p] = freq.get(p, 0) + 1
+    ordenadas = sorted(freq.items(), key=lambda kv: -kv[1])
+    return [p for p, n in ordenadas[:limite] if n >= 3]
+
+
 def numero_de(titulo, slug):
     m = re.match(r"^\s*(\d+(?:\.\d+)*)\.?\s", titulo)
     if m:
@@ -224,8 +276,24 @@ def main():
             "acordaos": acordaos,
             "sumulas": sumulas,
             "palavras_chave": PALAVRAS.get(numero, []),
+            "termos": extrair_termos(corpo) if escopo != "fora" else [],
             "url": f"https://licitacoesecontratos.tcu.gov.br/{p['slug']}/",
         })
+
+    # Termo que aparece em quase toda seção não distingue nada e só embaralha o
+    # ranking — "preços" e "serviços" apareciam em metade do manual e faziam a
+    # busca por preço inexequível cair em Registro de Preços. Corta os comuns.
+    uteis = [e for e in entradas if e["escopo"] != "fora"]
+    frequencia = {}
+    for e in uteis:
+        for t in set(e["termos"]):
+            frequencia[t] = frequencia.get(t, 0) + 1
+    teto = max(3, int(len(uteis) * 0.25))
+    comuns = {t for t, n in frequencia.items() if n > teto}
+    for e in uteis:
+        e["termos"] = [t for t in e["termos"] if t not in comuns]
+    print(f"termos genéricos descartados (aparecem em mais de {teto} das "
+          f"{len(uteis)} seções úteis): {len(comuns)}")
 
     entradas.sort(key=lambda e: [int(x) for x in e["numero"].split(".")])
 

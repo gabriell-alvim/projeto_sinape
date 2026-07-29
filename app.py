@@ -1292,7 +1292,10 @@ def _tcu_buscar(busca):
         achados = [s for s in secoes if alvo in (s.get("acordaos") or [])]
         return sorted(achados, key=lambda s: s["escopo"] != "nucleo")
 
-    # busca por tema: pontua palavras-chave e título, ignorando o que está fora do escopo
+    # Busca por tema. A pontuação é por PALAVRA, não por substring da frase
+    # inteira: quem pergunta escreve "nosso preço foi considerado inexequível",
+    # e a palavra-chave cadastrada é "preço inexequível" — casar a frase toda
+    # falha justamente nos casos reais, porque as palavras não vêm coladas.
     alvo = _norm(termo)
     palavras = [p for p in re.split(r"\W+", alvo) if len(p) > 3]
     pontuados = []
@@ -1300,18 +1303,25 @@ def _tcu_buscar(busca):
         if s["escopo"] == "fora":
             continue
         pontos = 0
-        for chave in s.get("palavras_chave") or []:
-            ch = _norm(chave)
-            if ch in alvo or alvo in ch:
-                pontos += 10
-            elif palavras and all(p in ch for p in palavras):
-                pontos += 6
+        chaves = [_norm(c) for c in s.get("palavras_chave") or []]
+        palavras_das_chaves = set()
+        for ch in chaves:
+            palavras_das_chaves.update(w for w in re.split(r"\W+", ch) if len(w) > 3)
+            if ch and (ch in alvo or alvo in ch):
+                pontos += 10          # a expressão inteira bateu
+        pontos += sum(5 for p in palavras if p in palavras_das_chaves)
+
         titulo = _norm(s["titulo"])
         if alvo in titulo:
             pontos += 8
-        pontos += sum(2 for p in palavras if p in titulo)
-        pontos += sum(1 for p in palavras
-                      if any(p in _norm(c) for c in s.get("palavras_chave") or []))
+        pontos += sum(3 for p in palavras if p in titulo)
+
+        # rede de segurança: só ~1/3 das seções tem palavra-chave escrita à mão;
+        # as demais dependeriam de a frase casar com o título. Os termos
+        # extraídos do próprio texto (já sem os genéricos) cobrem esse buraco,
+        # mas pesam menos que uma palavra-chave curada.
+        termos = set(s.get("termos") or [])
+        pontos += sum(2 for p in palavras if p in termos)
         if s["escopo"] == "nucleo":
             pontos = int(pontos * 1.3)
         if pontos:
