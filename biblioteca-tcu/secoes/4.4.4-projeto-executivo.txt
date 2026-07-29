@@ -1,0 +1,63 @@
+4.4.4. Projeto Executivo
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/4-4-4-projeto-executivo/
+======================================================================
+
+A Lei 14.133/2021 conceitua projeto executivo como:
+
+Art. 6º […]
+
+XXVI […] o conjunto dos elementos necessários e suficientes à execução completa da obra, com o detalhamento das soluções previstas no projeto básico, a identificação de serviços, de materiais e de equipamentos a serem incorporados à obra, bem como suas especificações técnicas, de acordo com as normas técnicas pertinentes.
+
+A NBR 13.531/1995, por sua vez, define projeto executivo como uma etapa destinada à concepção e à representação final das informações técnicas da edificação e de seus elementos, instalações e componentes, completas e definitivas, necessárias e suficientes à licitação (contratação) e à execução dos serviços de obra correspondentes.
+
+Diante dessas definições e considerando que o projeto básico também deve conter todos os elementos necessários e suficientes à caracterização da obra, elaboração de seu orçamento e sua licitação, pode surgir a dúvida de quais seriam os elementos que diferenciam o projeto básico do executivo.
+
+O projeto executivo é o projeto básico complementado por informações que não acarretem impacto no orçamento ou no prazo de execução dos serviços ou que tenham impacto mínimo[1].
+
+Em termos gerais, é possível afirmar que o projeto básico trata do que fazer e o projeto executivo trata, em sua essência, de como fazer. Como o projeto executivo é elaborado após e a partir do projeto básico, na prática ele é também uma oportunidade para detalhar e aperfeiçoar definições do projeto básico. Projetos de paginação de revestimentos, paginação de fôrmas estruturais, escoramento de estruturas, escoramento de escavações, de interferências, de juntas de dilatação, de juntas de concretagem, de drenagem, de irrigação e de impermeabilização, são exemplos de projetos executivos. Eles são necessários à execução da obra, mas não são necessários à elaboração do orçamento.
+
+Para exemplificar a relação entre projeto básico e projeto executivo, podemos citar as fôrmas para concretagem de uma estrutura de concreto. No projeto estrutural de uma edificação em concreto, as plantas de fôrmas são peças constantes do projeto básico. Nelas serão discriminadas as dimensões de todos os elementos estruturais da obra. A partir dessas plantas, o orçamentista pode calcular os quantitativos de fôrma para incluir o serviço na planilha orçamentária, considerando as dimensões de cada viga, pilar, laje, bem como o tipo de forma a ser utilizada para a confecção desses elementos.
+
+Existe, entretanto, a possibilidade de detalhar esse projeto. É possível elaborar o “projeto executivo de fôrmas”, no qual será definido, com mais detalhes, o procedimento executivo de cada peça estrutural, indicando a dimensão das chapas de madeirite e a posição dos cortes nessas chapas, de modo a otimizar o seu aproveitamento, o posicionamento das peças para escoramento das lajes e o travamento das vigas e pilares etc.
+
+São detalhes importantes à execução da obra, que melhoram a eficiência no uso dos recursos e reduzem o risco de erros construtivos, mas que não têm impacto no custo da obra, já que não se modificam as quantidades ou as dimensões dos elementos estruturais; nem a quantidade de aço ou as especificações do concreto.
+
+Por fim, destaca-se que é proibida a realização de obras e serviços de engenharia sem projeto executivo[2], com exceção de quando for demonstrada, no estudo técnico preliminar, a inexistência de prejuízo para a aferição dos padrões de desempenho e qualidade almejados, hipótese na qual a especificação do objeto poderá ser realizada apenas em termo de referência ou em projeto básico, no caso de serviços comuns de engenharia ou de obras[3].
+
+Quadro 172 – Referências normativas para o projeto executivo
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 6º […] XXVI – projeto executivo: conjunto de elementos necessários e suficientes à execução completa da obra, com o detalhamento das soluções previstas no projeto básico, a identificação de serviços, de materiais e de equipamentos a serem incorporados à obra , bem como suas especificações técnicas, de acordo com as normas técnicas pertinentes; […] Art. 14. Não poderão disputar licitação ou participar da execução de contrato, direta ou indiretamente : I – autor do anteprojeto, do projeto básico ou do projeto executivo , pessoa física ou jurídica, quando a licitação versar sobre obra, serviços ou fornecimento de bens a ele relacionados; […] Art. 19 § 3º Nas licitações de obras e serviços de engenharia e arquitetura, sempre que adequada ao objeto da licitação, será preferencialmente adotada a Modelagem da Informação da Construção ( Building Information Modelling – BIM) ou tecnologias e processos integrados similares ou mais avançados que venham a substituí-la. […] Art. 46. § 1º É vedada a realização de obras e serviços de engenharia sem projeto executivo, ressalvada a hipótese prevista no § 3º do art. 18 desta Lei . (Grifo nosso)
+Decreto 10.306/2020 | Art. 3º II – Building Information Modelling – BIM ou Modelagem da Informação da Construção – conjunto de tecnologias e processos integrados que permite a criação, a utilização e a atualização de modelos digitais de uma construção, de modo colaborativo, que sirva a todos os participantes do empreendimento, em qualquer etapa do ciclo de vida da construção;
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 173 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Súmula – TCU 261 | Em licitações de obras e serviços de engenharia, é necessária a elaboração de projeto básico adequado e atualizado, assim considerado aquele aprovado com todos os elementos descritos no art. 6º, inciso IX, da Lei 8.666, de 21 de junho de 1993, constituindo prática ilegal a revisão de projeto básico ou a elaboração de projeto executivo que transfigurem o objeto originalmente contratado em outro de natureza e propósito diversos .
+Acórdão 136/2025-TCU-Plenário | A omissão do art. 23, § 2º, da Lei 14.133/2021 quanto à possibilidade da realização de cotação local no caso de obras e serviços de engenharia não deve obstar, por si só, a prática de pesquisa local de valores de insumos para definição do preço estimado da contratação, desde que sua adoção seja devidamente justificada e a vantagem em relação ao sistema referencial de custos demonstrada pelo orçamentista, nos termos do art. 8º do Decreto 7.983/2013, cuja aplicação no âmbito da referida lei está autorizada pela IN Seges-ME 91/2022.
+Acórdão 619/2024-TCU-Plenário | [Enunciado] Para serviços sem correspondência direta no Sistema de Custos Referenciais de Obras (Sicro) ou no Sistema Nacional de Pesquisa de Custos e Índices da Construção Civil (Sinapi), é possível a conjugação de composições desses sistemas para análise de economicidade de contrato de obra pública, desde que devidamente adaptados às peculiaridades de cada caso concreto. [Enunciado] O uso de outros sistemas de referência de custos em detrimento do Sistema de Custos Referenciais de Obras (Sicro) e do Sistema Nacional de Pesquisa de Custos e Índices da Construção Civil (Sinapi) , desconsiderando-se a possibilidade de ajustes a fim de efetuar adequações às peculiaridades das obras e serviços licitados, mediante as necessárias justificativas, afronta os arts. 3º e 4º do Decreto 7.983/2013.
+Acórdão 1576/2022-TCU-Plenário | [Enunciado] Em licitações de obras e serviços de engenharia, é necessária a elaboração de projeto básico adequado e atualizado, assim considerado aquele aprovado com os elementos descritos no art. 6º, inciso IX, da Lei 8.666/1993, constituindo prática ilegal a sua revisão ou a elaboração de projeto executivo que transfigurem o objeto originalmente contratado, a exemplo da adoção de solução de engenharia diferente daquela submetida à licitação.
+Acórdão 1241/2022-TCU-Plenário | [Enunciado] Para fins do exercício do poder sancionatório do TCU, pode ser tipificada como erro grosseiro (art. 28 do Decreto-lei 4.657/1942 – Lindb) a aprovação, pelo fiscal do contrato de obra pública, de planilha anexa ao termo aditivo do contrato contendo quantitativos de serviços incompatíveis com os quantitativos constantes da planilha orçamentária do projeto executivo, acarretando a desfiguração do projeto básico. O fato de a Administração contratar terceiro para auxiliá-la na fiscalização do empreendimento (art. 67 da Lei 8.666/1993) não afasta a responsabilidade daquele agente público por tal irregularidade, porquanto a função do terceiro contratado é de assistência, não de substituição.
+Acórdão 1984/2021-TCU- Plenário | [Enunciado] Deficiências do projeto executivo não constituem fato ou condição excepcional capaz de justificar a realização de aditivos contratuais que ultrapassem os limites instituídos pelo art. 65, §§ 1º e 2º, da Lei 8.666/1993.
+Acórdão 2053/2015-TCU-Plenário | [Voto] 13. Com relação à execução de serviços em desacordo com o projeto executivo, a equipe de auditoria confrontou as previsão dos principais elementos construtivos do empreendimento no projeto executivo com o as built , identificando diversas modificações não justificadas, conforme apresentado na tabela do relatório que fundamenta esta deliberação. 14. Considero que algumas modificações são possíveis, até mesmo esperadas, entre o objeto executado e o seu projeto, sem que exista necessidade de haver justificativas técnicas ou celebração de aditivos contratuais. Seria o caso de modificações pontuais de locação dos elementos construtivos ou de encaminhamento das redes e instalações diversas. Porém, tais mudanças não podem trazer reflexo nos quantitativos, nas especificações técnicas ou no dimensionamento dos serviços contratados, o que exigiria necessariamente a prévia celebração de aditamento contratual, nos termos do art. 65, inciso I, alínea “a”, da Lei 8.666/1993.
+Acórdão 3107/2013-TCU-Plenário | [Enunciado] É ilegal a subcontratação, pela empresa executora da obra ou do serviço, de autor do projeto básico para elaboração do projeto executivo.
+Acórdão 1874/2007-TCU-Plenário | [Sumário] 5. Admite-se que sejam entregues à responsabilidade das empresas contratadas, como encargo, e desde que expressamente previsto no edital, apenas a elaboração do projeto executivo da obra, cujo principal escopo é o de continuação e detalhamento do projeto básico, não se admitindo, por isso, que o projeto executivo traga alterações significativas nos quantitativos dos serviços mais relevantes, em termos financeiros, estimados pelo projeto básico e nas principais soluções técnicas nele adotadas.
+Pesquisa de Jurisprudência | Execute a seguinte consulta na Jurisprudência Selecionada . Pesquise pelo seguinte termo: projeto executivo . Os resultados podem ser filtrados pela área “licitação” ou “contrato administrativo”.
+
+Fonte: Elaboração própria a partir de consulta a jurisprudência do TCU.
+
+Quadro 174 – Riscos relacionados
+
+Riscos
+Alterações significativas dos quantitativos de serviços constantes da planilha orçamentária do projeto executivo, levando à transfiguração do projeto básico ou à extrapolação dos limites legais de alteração contratual, com consequente elevação do preço final da obra, redução da vantajosidade inicial da avença e, portanto, desequilíbrio econômico-financeiro em desfavor da Administração.
+
+Fonte: Elaboração própria.
+
+[1] Acórdão 1.874/2007 – TCU – Plenário.
+
+[2] Lei 14.133/2021, art. 46, § 1º.
+
+[3] Lei 14.133/2021, art. 18, § 3º.

@@ -1,0 +1,35 @@
+5.10.2.6. Contratações realizadas por ICT ou agência de fomento (inciso IV, alínea “d”)
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/5-10-2-6-contratacoes-realizadas-por-ict-ou-agencia-de-fomento-inciso-iv-alinea-d/
+======================================================================
+
+Trata-se de hipótese de dispensa de licitação para contratações cujo objeto seja a transferência de tecnologia ou licenciamento de direito de uso ou de exploração de criação protegida.
+
+As organizações que podem celebrar essas contratações por dispensa são as instituições científicas, tecnológicas e de inovação (ICTs) públicas e as agências de fomento, para criações por elas desenvolvidas, isoladamente ou por meio de parceria.
+
+A Lei 10.973/2004, que dispõe sobre incentivos à inovação e à pesquisa científica e tecnológica, conceitua ICT e agência de fomento[1]. O Decreto 9.283/2018, que regulamenta essa Lei, aborda os procedimentos para a celebração do contrato, editados ainda na vigência da Lei 8.666/1993. Ver Quadro 329.
+
+A Lei 14.133/2021 exige que seja demonstrada a vantagem para a Administração.
+
+Quadro 329 – Referências normativas para a dispensa para contratações por ICT ou agência de fomento
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 75. É dispensável a licitação: […] IV – para contratação que tenha por objeto: […] d) transferência de tecnologia ou licenciamento de direito de uso ou de exploração de criação protegida, nas contratações realizadas por instituição científica, tecnológica e de inovação (ICT) pública ou por agência de fomento, desde que demonstrada vantagem para a Administração; […] Art. 189. Aplica-se esta Lei às hipóteses previstas na legislação que façam referência expressa à Lei nº 8.666, de 21 de junho de 1993, à Lei nº 10.520, de 17 de julho de 2002, e aos arts. 1º a 47-A da Lei nº 12.462, de 4 de agosto de 2011.
+Lei 10.973/2004 | Art. 2º Para os efeitos desta Lei, considera-se: I – agência de fomento: órgão ou instituição de natureza pública ou privada que tenha entre os seus objetivos o financiamento de ações que visem a estimular e promover o desenvolvimento da ciência, da tecnologia e da inovação; II – criação: invenção, modelo de utilidade, desenho industrial, programa de computador, topografia de circuito integrado, nova cultivar ou cultivar essencialmente derivada e qualquer outro desenvolvimento tecnológico que acarrete ou possa acarretar o surgimento de novo produto, processo ou aperfeiçoamento incremental, obtida por um ou mais criadores; […] IV – inovação: introdução de novidade ou aperfeiçoamento no ambiente produtivo e social que resulte em novos produtos, serviços ou processos ou que compreenda a agregação de novas funcionalidades ou características a produto, serviço ou processo já existente que possa resultar em melhorias e em efetivo ganho de qualidade ou desempenho; (Redação pela Lei nº 13.243, de 2016) […] Art. 25. O art. 24 da Lei nº 8.666, de 21 de junho de 1993, passa a vigorar acrescido do seguinte inciso: “ Art. 24. …………………………………………………………. XXV – na contratação realizada por Instituição Científica e Tecnológica – ICT ou por agência de fomento para a transferência de tecnologia e para o licenciamento de direito de uso ou de exploração de criação protegida.
+Decreto 10.947/2022 | Art. 6º Até a primeira quinzena de maio de cada exercício, os órgãos e as entidades elaborarão os seus planos de contratações anual, os quais conterão todas as contratações que pretendem realizar no exercício subsequente, incluídas: I – as contratações diretas, nas hipóteses previstas nos art. 74 e art. 75 da Lei nº 14. 133, de 2021;
+Decreto 9.203/2018 | Da transferência de tecnologia Art. 11. A ICT pública poderá celebrar contrato de transferência de tecnologia e de licenciamento para outorga de direito de uso ou de exploração de criação por ela desenvolvida isoladamente ou por meio de parceria. […] Art. 12. A realização de licitação em contratação realizada por ICT ou por agência de fomento para a transferência de tecnologia e para o licenciamento de direito de uso ou de exploração de criação protegida é dispensável. […]
+IN – Seges/ME 81/2022 | Art. 6º O TR, a partir dos Estudos Técnicos Preliminares – ETP, se elaborados, definirá o objeto para atendimento da necessidade, a ser enviado para o setor de contratações no prazo definido no calendário de contratação de que trata o inciso III do art. 11 do Decreto nº 10.947, de 25 de janeiro de 2022. § 1 º Os processos de contratação direta de que trata o art. 72 da Lei nº 14.133, de 1º de abril de 2021, serão instruídos com o TR, observado em especial os arts. 8º e 10.
+IN – Seges/ME 67/2021 | Art. 4º Os órgãos e entidades adotarão a dispensa de licitação, na forma eletrônica, nas seguintes hipóteses: […] III – contratação de obras, bens e serviços, incluídos os serviços de engenharia, nos termos do disposto no inciso III e seguintes do caput do art. 75 da Lei nº 14.133, de 2021, quando cabível; e
+IN – Seges/ME 65/2021 | Art. 5º A pesquisa de preços para fins de determinação do preço estimado em processo licitatório para a aquisição de bens e contratação de serviços em geral será realizada mediante a utilização dos seguintes parâmetros, empregados de forma combinada ou não: […] Art. 7º Nas contratações diretas por inexigibilidade ou por dispensa de licitação, aplica-se o disposto no art. 5º. […]
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 330 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 725/2018-TCU-Plenário | [Enunciado] A dispensa de licitação de que trata o art. 24, inciso XXV, da Lei 8.666/1993 é aplicável nas hipóteses nas quais o ente público atua tanto como fornecedor quanto receptor da tecnologia, abrangendo, assim, todos os casos de transferência de tecnologia, sejam eles onerosos ou gratuitos. [Enunciado] A dispensa de licitação de que trata o art. 24, inciso XXV, da Lei 8.666/1993 deve ser precedida de publicação de edital com o objetivo de dispor sobre critérios para qualificação e escolha do contratado, quando as instituições científicas e tecnológicas (ICT) transferem tecnologia ao setor privado, nos termos do art. 7º, § 1º, do Decreto 5.563/2005. Não há essa obrigatoriedade, contudo, quando é empresa do setor privado quem transfere tecnologia para as ICT.
+Pesquisa de Jurisprudência | Execute consulta na Jurisprudência Selecionada do TCU . Selecione a “área – Licitação”, tema “dispensa de licitação” . Os resultados podem ser filtrados pelo subtema “instituição de pesquisa” .
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+[1] Lei 10.973/2004, art. 2º, incisos I e V (redação dada pela Lei 13.243/2016).

@@ -1,0 +1,32 @@
+4.5.4. Condições Contratuais
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/4-5-4-condicoes-contratuais/
+======================================================================
+
+As condições da futura contratação devem ser detalhadas na minuta do contrato ou no instrumento equivalente, o qual pode fazer menção a informações constantes do termo de referência ou do projeto básico. Tais regras foram abordadas no item 5.11 (e respectivos subitens), ao qual se remete o leitor.
+
+É importante mencionar que a minuta de contrato, parte integrante do edital de licitação, deve ser divulgada no Portal Nacional de Compras Públicas e em sítio eletrônico oficial, sem necessidade de registro ou de identificação para acesso[1].
+
+Quadro 203 – Referências normativas para as condições contratuais
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 25. O edital deverá conter o objeto da licitação e as regras relativas à […] fiscalização e à gestão do contrato, à entrega do objeto e às condições de pagamento. […] § 1º Sempre que o objeto permitir, a Administração adotará minutas padronizadas de edital e de contrato com cláusulas uniformes. […] § 3º Todos os elementos do edital, incluídos minuta de contrato, termos de referência, anteprojeto, projetos e outros anexos, deverão ser divulgados em sítio eletrônico oficial na mesma data de divulgação do edital, sem necessidade de registro ou de identificação para acesso. […] Art. 54. A publicidade do edital de licitação será realizada mediante divulgação e manutenção do inteiro teor do ato convocatório e de seus anexos no Portal Nacional de Contratações Públicas (PNCP).
+
+Fonte: Elaboração própria a partir das normas consultadas.
+
+Quadro 204 – Jurisprudência do TCU
+
+Jurisprudência
+Vide jurisprudência do item 5.11 e respectivos subitens.
+
+Fonte: Elaboração própria.
+
+Quadro 205 – Riscos relacionados
+
+Riscos
+Ausência de previsão no edital ou na minuta de contrato de cláusula que possibilite a prorrogação/renovação do contrato, quando é intenção da Administração prorrogá-lo, levando à impossibilidade de prorrogar o contrato, ao afastamento de potenciais licitantes que teriam participado do certame se soubessem da possibilidade de prorrogação, e à precificação das propostas com valores mais elevados por não considerarem a possível duração mais prolongada do contrato, com consequentes redução da competitividade, contratação por preços mais elevados, e desperdício de esforços para realizar nova licitação quando encerrada a vigência contratual.
+Demais riscos expostos no item 5.11 e respectivos subitens.
+
+Fonte: Elaboração própria.
+
+[1] Lei 14.133/2021, art. 54, caput, e art. 25, § 3º.

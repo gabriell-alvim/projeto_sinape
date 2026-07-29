@@ -1,0 +1,136 @@
+3.4.4. Técnica e preço
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/3-4-4-tecnica-e-preco-2/
+======================================================================
+
+O critério de julgamento de técnica e preço deve ser utilizado quando a avaliação e a ponderação da qualidade técnica das propostas que superarem os requisitos mínimos estabelecidos no edital forem relevantes aos fins pretendidos pela Administração[1].
+
+Por esse critério de julgamento, a apuração da proposta mais vantajosa se dá pela conjugação de fatores relacionados a aspectos de técnica e ao preço a ser pago[2].
+
+Deverão ser avaliadas e ponderadas primeiramente as propostas técnicas e, em seguida, as propostas de preço apresentadas pelos licitantes, sendo permitido o estabelecimento da “proporção máxima de 70% de valoração para a proposta técnica”[3].
+
+Cabe destacar que o desempenho pretérito na execução de contratos com a Administração Pública deverá ser considerado na pontuação técnica, observado o disposto nos §§ 3º e 4º do art. 88 desta Lei e em regulamento[4], sendo irregular a utilização desse critério sem a sua prévia regulamentação, por se tratar de norma de eficácia limitada[5].
+
+Quando adotado o critério de julgamento por técnica e preço, a modalidade de licitação deverá ser a concorrência ou o diálogo competitivo (fase competitiva), quando pertinente. O modo de disputa será o fechado[6].
+
+A Lei 14.133/2021 elenca os tipos de objeto que podem ser contratados com adoção do julgamento por técnica e preço, a saber[7]:
+
+Art. 36. […] § 1º […]:
+
+I – serviços técnicos especializados de natureza predominantemente intelectual, caso em que o critério de julgamento de técnica e preço deverá ser preferencialmente empregado;
+
+II – serviços majoritariamente dependentes de tecnologia sofisticada e de domínio restrito, conforme atestado por autoridades técnicas de reconhecida qualificação;
+
+III – bens e serviços especiais de tecnologia da informação e de comunicação;
+
+IV – obras e serviços especiais de engenharia;
+
+V – objetos que admitam soluções específicas e alternativas e variações de execução, com repercussões significativas e concretamente mensuráveis sobre sua qualidade, produtividade, rendimento e durabilidade, quando essas soluções e variações puderem ser adotadas à livre escolha dos licitantes, conforme critérios objetivamente definidos no edital de licitação.
+
+Os serviços técnicos especializados de natureza predominantemente intelectual são os realizados em trabalhos relativos a[8]:
+
+a) estudos técnicos, planejamentos, projetos básicos e projetos executivos;
+
+b) pareceres, perícias e avaliações em geral;
+
+c) assessorias e consultorias técnicas e auditorias financeiras e tributárias;
+
+d) fiscalização, supervisão e gerenciamento de obras e serviços;
+
+e) patrocínio ou defesa de causas judiciais e administrativas;
+
+f) treinamento e aperfeiçoamento de pessoal;
+
+g) restauração de obras de arte e de bens de valor histórico;
+
+h) controles de qualidade e tecnológico, análises, testes e ensaios de campo e laboratoriais, instrumentação e monitoramento de parâmetros específicos de obras e do meio ambiente e demais serviços de engenharia que se enquadrem na definição deste inciso;
+
+Os serviços mencionados nas alíneas “a”, “d” e “h” supra cujo valor estimado da contratação seja superior a R$ 376.353,48 [9] devem ser contratados pelo critério de julgamento de melhor técnica, ou de técnica e preço, na proporção de 70% de valoração da proposta técnica, ressalvados os casos de inexigibilidade de licitação[10].
+
+Para a contratação de serviços técnicos especializados de natureza predominantemente intelectual, a Lei 14.133/2021 estabelece o uso do concurso, em alguns casos, ou da concorrência[11]. No caso do concurso, o critério de julgamento obrigatoriamente será de melhor técnica ou conteúdo artístico. Já a concorrência pode ocorrer segundo o critério de julgamento por técnica e preço, ou pelos critérios de julgamento pelo menor preço ou maior desconto, nos casos em que a avaliação e a ponderação da qualidade técnica das propostas que superarem os requisitos mínimos estabelecidos no edital não forem relevantes aos fins pretendidos pela Administração[12] (exceto na hipótese mencionada no parágrafo anterior, prevista no art. 37, § 2º, da Lei 14.133/2021).
+
+Nessa linha, a IN – Seges/MGI 2/2023 dispõe que:
+
+Art. 12 […] Parágrafo único. Quando o estudo técnico preliminar demonstrar que os serviços que envolverem o desenvolvimento de soluções específicas de natureza intelectual, científica e técnica puderem ser descritos como comuns, nos termos do inciso XIII do art. 6º da Lei nº 14.133, de 2021, o objeto será licitado pelo critério de julgamento por menor preço ou maior desconto.
+
+Para o julgamento por técnica e preço, a Lei 14.133/2021 estabelece os seguintes fatores de avaliação das propostas (art. 37):
+
+I – verificação da capacitação e da experiência do licitante, comprovadas por meio da apresentação de atestados de obras, produtos ou serviços previamente realizados;
+
+II – atribuição de notas a quesitos de natureza qualitativa por banca designada para esse fim, de acordo com orientações e limites definidos em edital, considerados a demonstração de conhecimento do objeto, a metodologia e o programa de trabalho, a qualificação das equipes técnicas e a relação dos produtos que serão entregues;
+
+III – atribuição de notas por desempenho do licitante em contratações anteriores aferida nos documentos comprobatórios de que trata o § 3º do art. 88 desta Lei e em registro cadastral unificado disponível no Portal Nacional de Contratações Públicas (PNCP). (Grifo nosso)
+
+A atribuição de notas aos quesitos de natureza qualitativa, de que trata o inciso II do art. 37 da Lei 14.133/2021 deverá será realizada por banca com, no mínimo, três membros, composta por servidores efetivos ou empregados públicos; ou por profissionais contratados por conhecimento técnico, experiência ou renome na avaliação dos quesitos especificados em edital, desde que supervisionados por agente público[13].
+
+A jurisprudência do TCU é firme no sentido de que os fatores de ponderação entre as notas das propostas de técnica e de preço devem ser fundamentados no processo licitatório, a fim de evidenciar sua razoabilidade e demonstrar que não representam privilégio ou proporcionam aumento indevido de preço em decorrência de diferenças técnicas não substanciais[14].
+
+Nesse sentido, os princípios da motivação, da razoabilidade e da proporcionalidade devem ser especialmente valorados quando da escolha do critério de julgamento por técnica e preço, da definição da proporção entres os quesitos e da escolha dos critérios de avaliação da técnica envolvida, os quais devem ser dotados do máximo de objetividade possível.
+
+Quadro 62 – Referências normativas para o critério técnica e preço
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 33. O julgamento das propostas será realizado de acordo com os seguintes critérios: […] IV – técnica e preço; […] Art. 36. O julgamento por técnica e preço considerará a maior pontuação obtida a partir da ponderação, segundo fatores objetivos previstos no edital, das notas atribuídas aos aspectos de técnica e de preço da proposta. § 1º O critério de julgamento de que trata o caput deste artigo será escolhido quando estudo técnico preliminar demonstrar que a avaliação e a ponderação da qualidade técnica das propostas que superarem os requisitos mínimos estabelecidos no edital forem relevantes aos fins pretendidos pela Administração nas licitações para contratação de: I – serviços técnicos especializados de natureza predominantemente intelectual, caso em que o critério de julgamento de técnica e preço deverá ser preferencialmente empregado; II – serviços majoritariamente dependentes de tecnologia sofisticada e de domínio restrito, conforme atestado por autoridades técnicas de reconhecida qualificação; III – bens e serviços especiais de tecnologia da informação e de comunicação; IV – obras e serviços especiais de engenharia; V – objetos que admitam soluções específicas e alternativas e variações de execução, com repercussões significativas e concretamente mensuráveis sobre sua qualidade, produtividade, rendimento e durabilidade, quando essas soluções e variações puderem ser adotadas à livre escolha dos licitantes, conforme critérios objetivamente definidos no edital de licitação. § 2º No julgamento por técnica e preço, deverão ser avaliadas e ponderadas as propostas técnicas e, em seguida, as propostas de preço apresentadas pelos licitantes, na proporção máxima de 70% (setenta por cento) de valoração para a proposta técnica. § 3º O desempenho pretérito na execução de contratos com a Administração Pública deverá ser considerado na pontuação técnica, observado o disposto nos §§ 3º e 4º do art. 88 desta Lei e em regulamento. Art. 37. O julgamento por melhor técnica ou por técnica e preço deverá ser realizado por: I – verificação da capacitação e da experiência do licitante, comprovadas por meio da apresentação de atestados de obras, produtos ou serviços previamente realizados; II – atribuição de notas a quesitos de natureza qualitativa por banca designada para esse fim, de acordo com orientações e limites definidos em edital, considerados a demonstração de conhecimento do objeto, a metodologia e o programa de trabalho, a qualificação das equipes técnicas e a relação dos produtos que serão entregues; III – atribuição de notas por desempenho do licitante em contratações anteriores aferida nos documentos comprobatórios de que trata o § 3º do art. 88 desta Lei e em registro cadastral unificado disponível no Portal Nacional de Contratações Públicas (PNCP). § 1º A banca referida no inciso II do caput deste artigo terá no mínimo 3 (três) membros e poderá ser composta de: I – servidores efetivos ou empregados públicos pertencentes aos quadros permanentes da Administração Pública; II – profissionais contratados por conhecimento técnico, experiência ou renome na avaliação dos quesitos especificados em edital, desde que seus trabalhos sejam supervisionados por profissionais designados conforme o disposto no art. 7º desta Lei . § 2º Ressalvados os casos de inexigibilidade de licitação, na licitação para contratação dos serviços técnicos especializados de natureza predominantemente intelectual previstos nas alíneas “a”, “d” e “h” do inciso XVIII do caput do art. 6º desta Lei cujo valor estimado da contratação seja superior a R$ 300.000,00 (trezentos mil reais), o julgamento será por: (Promulgação partes vetadas) ( Vide Decreto nº 10.922, de 2021) (Vigência) I – melhor técnica; ou II – técnica e preço, na proporção de 70% (setenta por cento) de valoração da proposta técnica.” Art. 38. No julgamento por melhor técnica ou por técnica e preço, a obtenção de pontuação devido à capacitação técnico-profissional exigirá que a execução do respectivo contrato tenha participação direta e pessoal do profissional correspondente. […] Art. 55. Os prazos mínimos para apresentação de propostas e lances, contados a partir da data de divulgação do edital de licitação, são de: […] IV – para licitação em que se adote o critério de julgamento de técnica e preço ou de melhor técnica ou conteúdo artístico, 35 (trinta e cinco) dias úteis.
+IN – Seges/ME 2/2023 | Art. 1º Esta Instrução Normativa dispõe sobre a licitação pelo critério de julgamento por técnica e preço, na forma eletrônica, no âmbito da Administração Pública federal direta, autárquica e fundacional. […]
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 63 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 7695/2024- TCU-Segunda Câmara | [Enunciado] É irregular a utilização, em licitações, do critério do art. 36, § 3º, da Lei 14.133/2021 (desempenho pretérito na execução de contratos com a Administração Pública para fins de pontuação técnica) sem a sua prévia regulamentação, por se tratar de norma de eficácia limitada.
+Acórdão 1257/2023-TCU-Plenário | [Enunciado] A comissão julgadora de licitação do tipo “técnica e preço” deve fundamentar adequadamente as avaliações das propostas técnicas, deixando-as consignadas em relatório circunstanciado nos autos do processo, não se limitando a meramente expressar as notas ou os conceitos. Para reduzir o grau de subjetividade nas pontuações atribuídas a essas propostas, os critérios de julgamento devem estar suficientemente detalhados no edital do certame, sob pena de violação ao princípio do julgamento objetivo.
+Acórdão 2108/2020-TCU-Plenário | [Enunciado] Em licitação do tipo técnica e preço, a Administração deve se abster de utilizar, para atribuição da nota de preço, qualquer critério que tenha como resultado prático a fixação de preço mínimo, a exemplo da limitação da nota de preço a um valor máximo, em desacordo […] com o princípio da economicidade.
+Acórdão 364/2020-TCU-Plenário | [Enunciado] A exigência sem a devida motivação, para fins de pontuação das propostas técnicas, de prova de vínculo trabalhista de profissionais com a licitante contraria o art. 37, inciso XXI, da Constituição Federal […], por restringir indevidamente o caráter competitivo do certame.
+Acórdão 3750/2019 – TCU – Primeira Câmara | [Enunciado] A licitação do tipo técnica e preço (art. 46, caput , da Lei 8.666/1993) deve ser adotada apenas quando os serviços de natureza predominantemente intelectual compreenderem a maior parte do objeto que se pretende contratar.
+Acórdão 508/2018-TCU-Plenário | [Enunciado] Em licitações do tipo técnica e preço com preponderância da proposta técnica, os fatores de ponderação entre técnica e preço deverão ser expressamente fundamentados, a fim de evidenciar sua razoabilidade e demonstrar que não representam privilégio ou proporcionam aumento indevido de preço em decorrência de diferenças técnicas não substanciais.
+Acórdão 5233/2017-TCU-Primeira Câmara | [Enunciado] É irregular, nas licitações de técnica e preço, atribuir pontuação para empresa licitante simplesmente por possuir, em seu quadro permanente, por determinado tempo, certos tipos de profissionais, o que pode vir a inibir o caráter competitivo do certame e privilegiar empresas de grande porte, além de não garantir que os mesmos profissionais sejam alocados na execução do objeto.
+Acórdão 607/2017-TCU-Plenário | [Enunciado] Na modelagem das licitações do tipo técnica e preço devem ser analisados, conjuntamente, a ponderação atribuída a esses quesitos e os critérios e as gradações de pontuação técnica, além de serem realizadas simulações e avaliações de possibilidades de resultados, considerando as características do mercado, de modo a minimizar o risco de contratações antieconômicas, restrição injustificada à competitividade e favorecimento indevido.
+Acórdão 1348/2017 – TCU – Plenário | 9.6. com base no art. 7º da Resolução-TCU 265/2014, dar ciência à [ omissis ] das seguintes irregularidades, verificadas nas concorrências para a contratação de serviços de engenharia de [ omissis ]: […] 9.6.3. desbalanceamento entre os pesos e limitação ao desconto no uso do tipo de licitação “técnica e preço”, tornando nulo o efeito do fator preço, em desconformidade com os arts. 3º, caput e § 1º, inciso I, 44, caput e § 1º, 45, 46, § 1º, incisos I e II c/c § 2º, todos da Lei 8.666/1993; […] 9.6.5. adoção de critérios subjetivos na pontuação técnica de “conhecimento do objeto”, “metodologia executiva”, “plano de trabalho” e “esquema organizacional”, mantidos no edital mesmo após o alerta da Procuradoria Jurídica. […]
+Acórdão 627/2017 – TCU – Plenário | c) dar ciência, ao [ omissis ], acerca das seguintes irregularidades identificadas no instrumento convocatório e no processamento da [ omissis ], a fim de que sejam adotadas providências com vistas a inibir a nova ocorrência de falhas da espécie: c.1) estabelecimento de pesos diferenciados (70% para nota técnica e 30% para nota de preço) no âmbito de certame do tipo “técnica e preço”, uma vez que, conforme jurisprudência deste Tribunal ( vide , e.g., Acórdãos 1488/2009 e 3183/2011, ambos do Plenário), os serviços de comunicação social “constituem prestação de serviços especializada, sem, no entanto, estarem dotados de complexidade que justifique, pela simples natureza do objeto, o estabelecimento de pesos diferentes”.
+Acórdão 532/2016-TCU-Plenário | [Enunciado] Nas licitações do tipo técnica e preço, ainda que não submetidas ao RDC, é possível adotar como referência o disposto no art. 20, § 2º, da Lei 12.462/2011, que permite a atribuição de fatores de ponderação distintos para valorar as respectivas propostas, com percentual de ponderação mais relevante limitado a 70%, devendo-se demonstrar no processo licitatório, se for o caso, a pertinência da primazia da técnica em relação ao preço, considerando-se a natureza dos serviços a serem executados.
+Acórdão 1134/2015-TCU-Plenário | 1.7.1. Dar ciência à [ omissis ], acerca da seguinte irregularidade, constatada no âmbito do edital da concorrência 1/2014: 1.7.1.1. a atribuição de diferença excessiva entre a pontuação máxima e a pontuação mínima, prevista no subitem 6.3.III do edital, bem como a atribuição de pontuação progressiva a um número crescente de atestados comprobatórios de experiência de idêntico teor, constatada no subitem 6.3.IV do edital, contrariam o disposto no art. 19, § 2º, inciso I, c/c art. 28, parágrafo único, inciso III, da IN-MPOG 2/2008;
+Acórdão 479/2015-TCU-Plenário | [Enunciado] Em licitações do tipo técnica e preço, os critérios de pontuação e valoração dos quesitos da proposta técnica devem ser compatíveis com o objeto licitado, de modo a atribuir pontuação que valore o aspecto técnico em nível necessário e, sobretudo, suficiente, porém, sem restringir injustificadamente o caráter competitivo do certame ou reduzir o estímulo à oferta de propostas mais econômicas […]. Os fatores de ponderação entre as notas das propostas de técnica e de preço devem ser expressamente fundamentados no processo licitatório, a fim de evidenciar sua razoabilidade e demonstrar que não representam privilégio ou proporcionam aumento indevido de preço em decorrência de diferenças técnicas não substanciais.
+Acórdão 769/2013-TCU-Plenário | [Enunciado] A falta de estipulação de critérios para a gradação das notas de propostas técnicas, em licitações do tipo técnica e preço […], viola os princípios da igualdade e do julgamento objetivo das propostas.
+Acórdão 700/2012-TCU-Plenário | [Enunciado] Os integrantes de comitê instituído para a avaliação de propostas de concorrentes em licitação devem fundamentar cada um dos pontos atribuídos aos participantes habilitados para que seja possível avaliar a observância ao princípio constitucional da isonomia e se, de fato, foi selecionada a proposta mais vantajosa para a Administração.
+Acórdão 6164/2011 – TCU – Primeira Câmara | 9.3. dar ciência ao [ omissis ] quanto às seguintes falhas observadas nos editais dos Termos de Convocação [ omissis ] a fim de evitar sua reincidência em futuros certames licitatórios destinados a dar aplicação a recursos da Lei 9.615/1998 (alterada pela Lei 10.264/2001): […] 9.3.1.2. pontuação por tempo de constituição de pessoa jurídica, visto que privilegia licitantes mais antigas, sem que implique vantagem para execução do contrato, conforme entendimento predominante neste Tribunal (Acórdãos 481/2004, 2028/2005 e 264/2006, todos do Plenário); 9.3.1.3. critérios de pontuação que não guardem proporção com a experiência a ser comprovada, a exemplo do item 5.2.2.4 do Termo de Convocação 022/2008, segundo o qual a atuação em seis causas conferiria o dobro da pontuação nesse item que a atuação em cinco causas;
+Acórdão 503/2008 – TCU – Plenário | [Voto] 17.3. a atribuição de pontuação, na forma dos itens 18.1.1.2.1, 18.1.1.3.1 e 18.1.1.4.1 do edital, aos requisitos obrigatórios definidos nos itens 17.1.2.5 e 17.1.2.6 (suportar os sistemas operacionais Sun Solaris e AIX) fere a própria finalidade do instituto da pontuação, que se destina a classificação das propostas em decorrência de vantagens adicionais de seus produtos, ou seja, de vantagens que ultrapassam o mínimo exigido.
+Acórdão 1910/2007 – TCU – Plenário | [Enunciado] Na apresentação de certificação de qualidade como critério de pontuação em licitações envolvendo tecnologia da informação, a Administração deve evitar o direcionamento a um certificado específico, estabelecendo a aceitabilidade de todas as certidões idôneas disponíveis no mercado, emitidas por entidade certificadora independente, não mencionado produtos específicos, senão a título exemplificativo
+Pesquisa de Jurisprudência | Realize “pesquisa por árvore de classificação” na Jurisprudência Selecionada do TCU . Selecione área “Licitação”, tema “licitação técnica e preço”. Nas Publicações , selecione “Informativo de Licitações e Contratos”, pesquise por técnica e preço
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+Quadro 64 – Modelos
+
+Assunto | Modelo disponibilizados por OGS ou por órgãos de controle | OGS
+Diretrizes | Vídeo explicativo | AGU, MGI
+
+Fonte: Elaboração própria.
+
+[1] Lei 14.133/2021, art. 36, § 1º, incisos I a V.
+
+[2] Lei 14.133/2021, art. 36, caput.
+
+[3] Lei 14.133/2021, art. 36, § 2º.
+
+[4] Lei 14.133/2021, art. 36, § 3º. 
+
+[5] Acórdão 7695/2024 – TCU – Segunda Câmara
+
+[6] Lei 14.133/2021, art. 6º, inciso XXXVIII, alínea “c”, e art. 56, § 2º; e IN Seges/MGI 2/2023, art. 4º, incisos I e II.
+
+[7] Lei 14.133/2021, art. 36, § 1º, incisos I a V.
+
+[8] Lei 14.133/2021, art. 6º, inciso XVIII.
+
+[9] Lei 14.133/2021, art. 37, § 2º. Os valores são atualizados anualmente pelo Poder Executivo federal (Lei 14.133/2021, art. 182), vide Decreto 12.343/2024, Anexo.
+
+[10] Contratação de serviços técnicos especializados de natureza predominantemente intelectual quando realizados por profissionais de notória especialização (Lei 14.133/2021, art. 74, inciso III).
+
+[11] Lei 14.133/2021, art. 6º, incisos XXXVIII e XXXIX, art. 29, parágrafo único, e art. 30, parágrafo único.
+
+[12] Lei 14.133/2021, art. 36, § 1º, inciso I.
+
+[13] Lei 14.133/2021, art. 37, inciso II, § 1º, incisos I e II, c/c art. 7º, incisos I a III, e § 1º.
+
+[14] A exemplo dos enunciados de jurisprudência dos Acórdãos 508/2008; 2909/2012; 3217/2014; e 479/2015; todos do Plenário do TCU.

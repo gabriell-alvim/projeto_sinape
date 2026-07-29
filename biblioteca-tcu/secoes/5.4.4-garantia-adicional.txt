@@ -1,0 +1,97 @@
+5.4.4. Garantia adicional
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/5-4-4-garantia-adicional-2/
+======================================================================
+
+É possível observar, no texto da Lei 14.133/2021, a previsão de garantias para cinco finalidades distintas, a saber:
+
+- garantia de proposta, limitada a 1% do valor estimado da contratação, cuja finalidade precípua é assegurar a assinatura do contrato pelo licitante vencedor ou evitar a não apresentação dos documentos necessários para a contratação[1];
+
+- garantia adicional do licitante vencedor cuja proposta for inferior a 85% do valor orçado pela Administração[2], com a finalidade de desencorajar a oferta de propostas inexequíveis em certames destinados à contratação de obras e serviços de engenharia, bem como de proporcionar maior segurança ao Poder Público quanto ao adimplemento do objeto;
+
+- garantia de execução contratual, prevista no art. 98, com finalidade de assegurar o adimplemento contratual e a efetiva entrega do objeto na forma especificada, podendo ser exigida em até 5% do valor inicial do contrato, autorizada a majoração desse percentual para até 10%, desde que justificada mediante análise da complexidade técnica e dos riscos envolvidos;
+
+- garantia adicional como condição para o pagamento antecipado[3], para mitigar o risco de crédito dos fornecedores nas situações em que a aquisição do objeto demanda algum tipo de antecipação de pagamento pela Administração; e
+
+- garantia complementar, cabível nos contratos que impliquem a entrega de bens pela Administração, dos quais o contratado ficará depositário[4].
+
+Ainda, nas contratações de obras e serviços de engenharia de grande vulto, poderá ser exigida a prestação de garantia, na modalidade seguro-garantia, com cláusula de retomada, em percentual equivalente a até 30% do valor inicial do contrato[5].
+
+Feita essa breve distinção sobre todas as espécies de garantia previstas no texto legal, é pertinente apresentar alguns esclarecimentos complementares sobre a exigência de garantia adicional nas contratações de obras e serviços de engenharia em que o licitante vencedor ofereça proposta inferior a 85% do valor orçado pela Administração. Tal garantia poderá ser exigida sem prejuízo das demais modalidades de garantia previstas em lei[6], somando-se a estas e tendo as mesmas condições e prazo de vigência.
+
+O cálculo pode ser exemplificado em uma situação hipotética apresentada a seguir, em que o valor orçado pela Administração seja de R$ 100,00 e, portanto, 85% desse valor orçado seja R$ 85,00.
+
+Quadro 253 – Exemplo de cálculo da garantia adicional
+
+Valor da melhor proposta | Valor da garantia contratual (5% do valor do contrato) (A) | Valor da garantia adicional (B) | Garantia total (A+B)
+R$90,00 | R$4,50 | 0 | R$4,50
+R$89,00 | R$4,45 | 0 | R$4,45
+R$88,00 | R$4,40 | 0 | R$4,40
+R$87,00 | R$4,35 | 0 | R$4,35
+R$86,00 | R$4,30 | 0 | R$4,30
+R$85,00 | R$4,25 | 0 | R$4,25
+R$84,00 | R$4,20 | R$1,00 | R$5,20
+R$83,00 | R$4,15 | R$2,00 | R$6,15
+R$82,00 | R$4,10 | R$3,00 | R$7,10
+R$81,00 | R$4,05 | R$4,00 | R$8,05
+R$80,00 | R$4,00 | R$5,00 | R$9,00
+R$79,00 | R$3,95 | R$6,00 | R$9,95
+R$78,00 | R$3,90 | R$7,00 | R$10,90
+R$77,00 | R$3,85 | R$8,00 | R$11,85
+R$76,00 | R$3,80 | R$9,00 | R$12,80
+R$75,00 | R$3,75 | R$10,00 | R$13,75
+R$74,00 | R$3,70 | R$11,00 | R$14,70
+R$73,00 | R$3,65 | R$12,00 | R$15,65
+R$72,00 | R$3,60 | R$13,00 | R$16,60
+R$71,00 | R$3,55 | R$14,00 | R$17,55
+R$70,00 | R$3,50 | R$15,00 | R$18,50
+
+Fonte: Elaboração própria.
+
+No exemplo apresentado acima, as propostas inferiores a R$ 75,00 estariam abaixo do patamar estipulado em lei para exequibilidade de obras e serviços de engenharia. Consoante exposto anteriormente, a Lei 14.133/2021[7] delimitou a inexequibilidade a valores inferiores a 75% do valor orçado pela Administração. No entanto, considerando o disposto na Súmula – TCU 262 e em diversos julgados do TCU[8], ainda sob a égide da Lei 8.666/1993, e outros já sob a Lei 14.133/2021[9], esse limite também pode ser considerado para fins de presunção relativa de inexequibilidade de preços, devendo a Administração dar ao licitante a oportunidade de demonstrar a exequibilidade da sua proposta. Esse também é o entendimento expresso na IN – Seges/MGI 2/2023, art. 28, parágrafo único.
+
+Não se vê, portanto, obstáculo para aplicar a súmula citada à Lei 14.133/2021, inclusive porque o art. 59, inciso IV c/c § 2º, da referida Lei prevê expressamente a possibilidade de a exequibilidade ser demonstrada pelo licitante, quando solicitado pela Administração.
+
+Quadro 254 – Referências normativas para a garantia adicional
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 59 […] § 5º. Nas contratações de obras e serviços de engenharia, será exigida garantia adicional do licitante vencedor cuja proposta for inferior a 85% (oitenta e cinco por cento) do valor orçado pela Administração, equivalente à diferença entre este último e o valor da proposta, sem prejuízo das demais garantias exigíveis de acordo com esta Lei.
+Enunciado do IBDA nº 19/2024 | Nas contratações de obras e serviços de engenharia, ocorrida a situação do art. 59, § 5º, da Lei n. 14.133/2021, a garantia adicional será exigida do licitante vencedor ainda que o instrumento convocatório não tenha exigido a garantia contratual dos arts. 96, caput, e 98, caput, da mesma lei.
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 255 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 803/2024-TCU-Plenário | [Voto] 13. Com efeito, considero correta a interpretação da unidade técnica de que a regra de inexequibilidade presente no art. 59, § 4º, da Lei 14.133/2021 não representa uma presunção absoluta, devendo ter sua interpretação compatibilizada com o disposto no inciso IV do caput e no § 2º do mesmo artigo, o qual prevê a possibilidade de realização de diligências para sanear dúvidas sobre eventual inexequibilidade da proposta. […] 15. A interpretação da matéria pelo TCU, no âmbito da Lei 8.666/1993, sempre entendeu que se tratava de uma presunção relativa de inexequibilidade, consoante a Súmula 262, devendo a Administração dar à licitante a oportunidade de demonstrar a exequibilidade da sua proposta. Não vejo nenhum dispositivo adicional da Lei 14.133/2021 que enseje a modificação do entendimento consolidado pela referida súmula. 16. Embora eu reconheça o precedente de relatoria do Ministro Antonio Anastasia, no sentido de que “não há que se cogitar da realização de diligências para aferir a inexequibilidade, pois o lance abaixo daquele percentual de 75% já é identificado pela própria Lei como inexequível, devendo a proposta ser desclassificada” (Acórdão 2198/2023-TCU-Plenário), a jurisprudência recente parece estar convergindo para a aplicação da Súmula 262 no âmbito da Lei 14.133/2021. […] 31. No entanto, uma regra inflexível de desclassificar qualquer proposta com mais de 25% de desconto em relação ao valor estimado não permite captar todas essas nuances, exigindo que se realize as necessárias diligências para se aferir de fato se a proposta é exequível. [Enunciado] O critério definido no art. 59, § 4º, da Lei 14.133/2021 conduz a uma presunção relativa de inexequibilidade de preços, sendo possível que a Administração conceda à licitante a oportunidade de demonstrar a exequibilidade da sua proposta, nos termos do art. 59, § 2º, da referida lei.
+Acórdão 2088/2024 – TCU – Segunda Câmara | 9.3. determinar, nos termos do art. 45 da Lei 8.443/1992, ao [ omissis ] que, no prazo de 15 (quinze) dias, adote providências no sentido de retornar, na Concorrência 2/2023, à fase de análise de proposta de preços, tendo em vista que o critério estabelecido no art. 59, inciso III e § 4º, da Lei 14.133/2021 deve conduzir a uma presunção relativa de inexequibilidade, devendo ser dada oportunidade aos licitantes de demonstrarem a exequibilidade de suas propostas, em atenção à Sumula TCU 262 e ao princípio da seleção da proposta mais vantajosa para a Administração Pública;
+Acórdão 465/2024-TCU-Plenário | 9.3. dar ciência à [ omissis ] de que o critério definido no art. 59, § 4º, da Lei 14.133/2021 conduz a uma presunção relativa de inexequibilidade de preços, devendo a Administração dar à licitante a oportunidade de demonstrar a exequibilidade de sua proposta, nos termos do art. 59, § 2º, da mesma lei;
+Acórdão 169/2021-TCU-Plenário | 9.2. nos termos do art. 1º, inciso XVII, da Lei 8.443/1992, responder ao consulente que, à luz das interpretações lógica e sistemática realizadas sobre o texto do § 2º do art. 48 da Lei de Licitações, Lei 8.666/1993, o cálculo da garantia adicional disciplinada nesse parágrafo que mais se amolda à finalidade da licitação de atender ao interesse público na busca da proposta mais vantajosa é a seguinte: Garantia Adicional = (80% do menor dos valores das alíneas “a” e “b” do § 1º do art. 48) – (valor da correspondente proposta);
+Pesquisa de Jurisprudência | Execute consulta na Jurisprudência Selecionada do TCU . No campo de busca, faça busca pelo seguinte termo garantia adicional . Os resultados das buscas podem ser filtrados por “área – Licitação” ou “contrato administrativo”.
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+Quadro 256 – Riscos relacionados
+
+Riscos
+Edital de licitação não prevê a exigência de garantia adicional, levando à aceitação de proposta de licitante com preços abaixo de 85% do orçamento estimado pela Administração sem a devida garantia para resguardo do erário, com consequente potencialização do risco de inadimplemento da obrigação pelo contratado ou de redução da qualidade do objeto a nível inferior ao contratado.
+
+Fonte: Elaboração própria.
+
+[1] Lei 14.133/2021, art. 58.
+
+[2] Lei 14.133/2021, art. 59, § 5º.
+
+[3] Lei 14.133/2021, art. 145, § 2º
+
+[4] Lei 14.133/2021, art. 101.
+
+[5] Lei 14.133/2021, art. 99.
+
+[6] Lei 14.133/2021, art. 59, § 5º.
+
+[7] Lei 14.133/2021, art. 59, § 4º.
+
+[8] Como nos Acórdãos 697/2006, Voto, parágrafos 8-13; 614/2008, voto do Ministro-Relator, parágrafos 127-134; 1.100/2008, declaração de voto, parágrafo 2; 1.248/2009, item 9.2.2.1; 1.678/2013, Voto, parágrafo 22-30; e 2.340/2016, item 9.1.10, alínea “e”; todos do Plenário do TCU; 612/2004, item 9.4; e 559/2009, item 9.2; ambos da Primeira Câmara; e 1.720/2010-TCU-Segunda Câmara, item 9.6.2.
+
+[9] Acórdão 2088/2024 – TCU – Segunda Câmara, item 9.3; Acórdão 465/2024-TCU-Plenário, item 9.3.

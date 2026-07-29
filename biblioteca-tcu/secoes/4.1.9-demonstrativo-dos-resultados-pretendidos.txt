@@ -1,0 +1,58 @@
+4.1.9. Demonstrativo dos resultados pretendidos
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/4-1-9-demonstrativo-dos-resultados-pretendidos/
+======================================================================
+
+Uma solução deve ser planejada e contratada para o atendimento de uma necessidade pública[1]. Nesse sentido, o ETP deve conter o demonstrativo dos resultados pretendidos em termos de economicidade e de melhor aproveitamento dos recursos humanos, materiais e financeiros disponíveis[2].
+
+Trata-se de esclarecer quais serão os benefícios diretos esperados com a contratação, que justifiquem o dispêndio envolvido. Normalmente são definidos pela área requisitante e são fundamentais para determinar a solução mais adequada ao atendimento dessa necessidade.
+
+Sobre o assunto, cabe citar o Guia de Boas Práticas em Contratação de Soluções de Tecnologia da Informação do TCU, que define os resultados pretendidos como[3]:
+
+[…] os benefícios diretos que o órgão almeja com a contratação da solução, em termos de economicidade, eficácia, eficiência, de melhor aproveitamento dos recursos humanos, materiais e financeiros disponíveis, inclusive com respeito a impactos ambientais positivos (e.g. diminuição do consumo de papel ou de energia elétrica), bem como, se for caso, de melhoria da qualidade de produtos ou serviços, de forma a atender à necessidade da contratação. […]
+
+Por exemplo, na contratação de um novo sistema de informação para automatizar um processo de trabalho do órgão, pode-se definir como um dos resultados pretendidos a diminuição do tempo médio de execução de um determinado serviço oferecido pelo órgão (e.g. emissão de um determinado tipo de certidão). Nesse caso, o resultado refere-se à eficiência, pois o serviço a ser oferecido por intermédio da solução deverá ser mais rápido do que o serviço oferecido manualmente.
+
+Outro benefício possível é a diminuição de custos com a nova solução de TI. Essa diminuição de custo pode ocorrer mediante a contratação de solução de TI mais barata do que a anteriormente utilizada, isto é, diminuição de custo da TI do órgão. Também pode ocorrer mediante a diminuição de custo de processo de trabalho do órgão não atendido originalmente pela área de TI (e.g. contratar infraestrutura de voz sobre IP que propicia barateamento dos custos com telefonia), de modo que o custo da TI pode aumentar, mas esse aumento é menor do que o corte de custo dele decorrente em outra área do órgão.
+
+Assim, os resultados pretendidos indicam os parâmetros que serão utilizados pela Administração para avaliar se a contratação atingiu seus objetivos, ou seja, se atendeu adequadamente à necessidade que a originou. Essa avaliação constará do relatório final da contratação, com “informações sobre a consecução dos objetivos que tenham justificado a contratação e eventuais condutas a serem adotadas para o aprimoramento das atividades da Administração”[4].
+
+Como explica a Nota Técnica – AudTI/TCU 8/2023[5], que dispõe sobre elaboração de orçamento estimado em contratações de TI:
+
+62. […] ou seja, o relatório final da contratação deve permitir que os resultados obtidos com ela possam ser confrontados com os objetivos que a tenham justificado. Esses objetivos deverão embutir ou expressar a necessidade que desencadeou a contratação e a perspectiva de seu atendimento, que leva à autorização do prosseguimento do processo licitatório, funciona como uma promessa a ser cumprida.
+
+Quadro 112 – Referências normativas para o demonstrativo dos resultados pretendidos
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 18. […] § 1º O estudo técnico preliminar a que se refere o inciso I do caput deste artigo deverá evidenciar o problema a ser resolvido e a sua melhor solução, de modo a permitir a avaliação da viabilidade técnica e econômica da contratação, e conterá os seguintes elementos: […] IX – demonstrativo dos resultados pretendidos em termos de economicidade e de melhor aproveitamento dos recursos humanos, materiais e financeiros disponíveis;
+IN – SGD/ME 94/2022 | Art. 15. A justificativa para contratação deverá conter, pelo menos: […] IV – os resultados e benefícios a serem alcançados com a contratação; e
+IN – Seges 58/2022 | Art. 9º Com base no Plano de Contratações Anual, deverão ser registrados no Sistema ETP Digital os seguintes elementos: […] X – demonstrativo dos resultados pretendidos, em termos de economicidade e de melhor aproveitamento dos recursos humanos, materiais e financeiros disponíveis;
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 113 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Súmula – TCU 269 | Nas contratações para a prestação de serviços de tecnologia da informação, a remuneração deve estar vinculada a resultados ou ao atendimento de níveis de serviço, admitindo-se o pagamento por hora trabalhada ou por posto de serviço somente quando as características do objeto não o permitirem, hipótese em que a excepcionalidade deve estar prévia e adequadamente justificada nos respectivos processos administrativos.
+Acórdão 5157/2015 – TCU – Primeira Câmara | É irregular a contratação de serviços por postos de trabalho, com medição e pagamento por hora trabalhada ou por posto de serviço, sempre que a prestação do serviço puder ser avaliada por determinada unidade quantitativa ou por nível de serviço alcançado (aferição por resultados).
+Pesquisa de Jurisprudência | Na Pesquisa na base de acórdãos , busque por: “resultados pretendidos” adj3 “contratação”
+
+Fonte: Elaboração própria.
+
+Quadro 114 – Riscos relacionados
+
+Riscos
+Declaração de resultados subjetivos ou não realistas, levando à frustração do requisitante e de outros interessados, com consequente não atendimento da necessidade que gerou a contratação.
+Declaração de resultados subjetivos ou não realistas, levando à falta de parâmetros para realizar análise adequada de custo-benefício da contratação, com consequente contratação que não representa a melhor alocação de recursos na organização.
+
+Fonte: Adaptado de Tribunal de Contas da União, 2014, item “Resultados pretendidos”.
+
+[1] Lei 14.133/2021, art. 18, inciso I e § 1º, inciso I.
+
+[2] Lei 14.133/2021, art. 18, § 1º, inciso IX.
+
+[3] Tribunal de Contas da União, 2012, p. 106-107.
+
+[4] Lei 14.133/2021, art. 174, § 3º, inciso VI, alínea “d”.
+
+[5] Tribunal de Contas da União, 2023, p. 39.

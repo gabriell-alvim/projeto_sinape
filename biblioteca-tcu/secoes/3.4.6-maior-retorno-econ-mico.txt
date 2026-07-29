@@ -1,0 +1,94 @@
+3.4.6. Maior retorno econômico
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/3-4-6-maior-retorno-economico/
+======================================================================
+
+O critério de julgamento por maior retorno econômico já existia na Lei do Regime Diferenciado de Contratações (RDC)[1] e na Lei da Estatais[2].
+
+Pode ser adotado nas modalidades concorrência e diálogo competitivo (fase competitiva)[3].
+
+Quanto aos modos de disputa, a IN – Seges/ME 96/2022, no âmbito da Administração Pública federal direta, autárquica e fundacional do Poder Executivo, possibilitou adotar os modos fechado e aberto. No modo aberto, os lances incidirão sobre a proposta de preço[4].
+
+Assim como nos regramentos anteriores, a Lei 14.133/2021 estabeleceu que o maior retorno econômico deve ser utilizado exclusivamente para a celebração de contrato de eficiência, o qual tem por objeto:
+
+[…] a prestação de serviços, que pode incluir a realização de obras e o fornecimento de bens, com o objetivo de proporcionar economia ao contratante, na forma de redução de despesas correntes, remunerado o contratado com base em percentual da economia gerada.[5]
+
+Ou seja, o contrato de eficiência é um ajuste pelo qual a Administração contrata um terceiro com o intuito de reduzir determinada despesa corrente do órgão ou entidade, como, por exemplo, consumo de energia elétrica ou de água.
+
+Cabe ressaltar que o objeto da contratação deve ser a prestação de serviços, a qual pode incluir, de forma acessória, obras e fornecimento de bens. A solução contratada deve incrementar a eficiência das soluções existentes, modificando-as ou substituindo-as.
+
+A Administração obtém os benefícios dessa espécie contratual com o aumento da eficiência e a consequente redução dos gastos correntes. Por seu turno, o particular é remunerado a partir da apropriação de percentual que “incidirá de forma proporcional à economia efetivamente obtida na execução do contrato” [6]. Assim, quanto maior a economia efetivamente obtida, maiores os benefícios para ambas as partes.
+
+O pagamento é, portanto, ajustado em base percentual sobre o valor economizado e a despesa do contrato será paga com a economia gerada. Exatamente por isso que a Lei prevê que a despesa gerada por esse tipo de contrato correrá à conta dos mesmos créditos orçamentários (na forma de regulamento), não demandando crédito orçamentário específico[7].
+
+A Lei 14.133/2021 prevê o prazo de até dez anos para contratos de eficiência em que não haja realização de investimentos pelo contratado; e de até 35 anos nos contratos com investimento, “assim considerados aqueles que impliquem a elaboração de benfeitorias permanentes, realizadas exclusivamente a expensas do contratado, que serão revertidas ao patrimônio da Administração Pública ao término do contrato”[8].
+
+Espera-se, assim, razoabilidade na fixação do prazo contratual, especialmente nas situações em que forem previstos investimentos por parte do contratado, de forma que a vigência planejada considere a amortização desses investimentos.
+
+Quanto ao procedimento, a Lei prevê a apresentação de uma proposta de trabalho e de uma proposta de preço.
+
+A proposta de trabalho deverá contemplar[9]:
+
+- as obras, os serviços ou os bens, com os respectivos prazos de realização ou fornecimento;
+
+- a economia que se estima gerar, expressa em unidade de medida associada à obra, ao bem ou ao serviço e em unidade monetária;
+
+Por sua vez, a proposta de preço “corresponderá a percentual sobre a economia que se estima gerar durante determinado período, expressa em unidade monetária”[10].
+
+O retorno econômico para a Administração será então calculado pelo montante da economia estimada (na proposta de trabalho) deduzida a remuneração do contratado (constante da proposta de preço)[11]. 
+
+Como exemplo, cite-se a hipótese em que a proposta de trabalho estime a redução do gasto corrente do órgão na média de R$ 60 mil mensais; e a proposta de preço indique o percentual de remuneração de 30%. O retorno econômico estimado será de R$ 42 mil (R$ 60 mil de economia menos R$ 18 mil de remuneração).
+
+A Lei 14.133/2021 prevê que, nos casos em que não for gerada a economia prevista no contrato, “a diferença entre a economia contratada e a efetivamente obtida será descontada da remuneração do contratado” [12]. Voltando ao exemplo acima, se a economia efetiva for de R$ 50 mil, o contratado será remunerado em R$ 15 mil (30% de R$ 50 mil) e descontado em R$ 10 mil (diferença entre a economia contratada de R$ 60 mil e a efetivamente obtida de R$ 50 mil).
+
+A Lei 14.133/2021 prevê ainda que, “se a diferença entre a economia contratada e a efetivamente obtida for superior ao limite máximo estabelecido no contrato, o contratado sujeitar-se-á, ainda, a outras sanções cabíveis”[13].
+
+Quadro 67 – Referências normativas para o critério de maior retorno econômico
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 33. O julgamento das propostas será realizado de acordo com os seguintes critérios: […] VI – maior retorno econômico. […] Art. 39. O julgamento por maior retorno econômico, utilizado exclusivamente para a celebração de contrato de eficiência, considerará a maior economia para a Administração, e a remuneração deverá ser fixada em percentual que incidirá de forma proporcional à economia efetivamente obtida na execução do contrato. § 1º Nas licitações que adotarem o critério de julgamento de que trata o caput deste artigo, os licitantes apresentarão: I – proposta de trabalho, que deverá contemplar: a) as obras, os serviços ou os bens, com os respectivos prazos de realização ou fornecimento; b) a economia que se estima gerar, expressa em unidade de medida associada à obra, ao bem ou ao serviço e em unidade monetária; II – proposta de preço, que corresponderá a percentual sobre a economia que se estima gerar durante determinado período, expressa em unidade monetária. § 2º O edital de licitação deverá prever parâmetros objetivos de mensuração da economia gerada com a execução do contrato, que servirá de base de cálculo para a remuneração devida ao contratado. § 3º Para efeito de julgamento da proposta, o retorno econômico será o resultado da economia que se estima gerar com a execução da proposta de trabalho, deduzida a proposta de preço. § 4º Nos casos em que não for gerada a economia prevista no contrato de eficiência: I – a diferença entre a economia contratada e a efetivamente obtida será descontada da remuneração do contratado; II – se a diferença entre a economia contratada e a efetivamente obtida for superior ao limite máximo estabelecido no contrato, o contratado sujeitar-se-á, ainda, a outras sanções cabíveis. […] Art. 55. Os prazos mínimos para apresentação de propostas e lances, contados a partir da data de divulgação do edital de licitação, são de: […] II – no caso de serviços e obras: […] d) 35 (trinta e cinco) dias úteis, quando o regime de execução for o de contratação semi-integrada ou nas hipóteses não abrangidas pelas alíneas “a”, “b” e “c” deste inciso; […] Art. 110. Na contratação que gere receita e no contrato de eficiência que gere economia para a Administração, os prazos serão de: I – até 10 (dez) anos, nos contratos sem investimento; II – até 35 (trinta e cinco) anos, nos contratos com investimento, assim considerados aqueles que impliquem a elaboração de benfeitorias permanentes, realizadas exclusivamente a expensas do contratado, que serão revertidas ao patrimônio da Administração Pública ao término do contrato. […] Art. 144. Na contratação de obras, fornecimentos e serviços, inclusive de engenharia, poderá ser estabelecida remuneração variável vinculada ao desempenho do contratado, com base em metas, padrões de qualidade, critérios de sustentabilidade ambiental e prazos de entrega definidos no edital de licitação e no contrato. § 1º O pagamento poderá ser ajustado em base percentual sobre o valor economizado em determinada despesa, quando o objeto do contrato visar à implantação de processo de racionalização, hipótese em que as despesas correrão à conta dos mesmos créditos orçamentários, na forma de regulamentação específica.
+IN – Seges/ME 96/2022 | Art. 1º Esta Instrução Normativa dispõe sobre a licitação pelo critério de julgamento por maior retorno econômico , na forma eletrônica , no âmbito da Administração Pública federal direta, autárquica e fundacional. […]
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 68 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Pesquisa de Jurisprudência | Execute consulta na Pesquisa Integrada do TCU . Pesquise pela expressão: “critério” ADJ5 “maior retorno econômico”. [14]
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+Quadro 69 – Modelos
+
+Assunto | Modelo disponibilizados por OGS ou por órgãos de controle | OGS
+Diretrizes | Vídeo explicativo | AGU, MGI
+
+Fonte: Elaboração própria.
+
+[1] Lei 12.462/2011, art.18, inciso V, e art. 23.
+
+[2] Lei 13.303/2016, art. 54, inciso VII, e § 6º.
+
+[3] Lei 14.133/2021, art. 6º, inciso XXXVIII, alínea “d”; art. 32, § 1º, inciso VIII, IN – Seges/ME 96/2022, art. 4º, incisos I e II.
+
+[4] IN – Seges/ME 96/2022, art. 26, incisos I e II.
+
+[5] Lei 14.133/2021, art. 6º, inciso LIII.
+
+[6] Lei 14.133/2021, art. 39, caput.
+
+[7] Lei 14.133/2021, art. 144, § 1º.
+
+[8] Lei 14.133/2021, art. 110.
+
+[9] Lei 14.133/2021 art. 39, § 1º, inciso I, alíneas “a” e “b”.
+
+[10] Lei 14.133/2021 art. 39, § 1º, inciso II.
+
+[11] Lei 14.133/2021 art. 39, § 3º.
+
+[12] Lei 14.133/2021 art. 39, § 4º, inciso I.
+
+[13] Lei 14.133/2021 art. 39, § 4º, inciso II.
+
+[14] Pesquisa sugerida, mas não serão encontrados resultados para a busca, até que haja jurisprudência do TCU relacionada ao art. 39 da Lei 14.133/2021.

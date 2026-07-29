@@ -1,0 +1,102 @@
+5.9.3. Procedimento de Manifestação de Interesse
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/5-9-3-procedimento-de-manifestacao-de-interesse-2/
+======================================================================
+
+O Procedimento de Manifestação de Interesse (PMI) é instrumento auxiliar previsto na Lei 14.133/2021 que tem por intuito solicitar à iniciativa privada, mediante edital de chamamento público, a propositura e a realização de estudos, investigações, levantamentos e projetos de soluções inovadoras que contribuam com questões de relevância pública[1].
+
+Configura-se, portanto, como um meio de interação entre a Administração Pública e a iniciativa privada, com o objetivo de procurar as melhores soluções para o atendimento de uma determinada necessidade pública, sem que haja conhecimento prévio do melhor meio de atendimento dessa necessidade.
+
+A Lei prevê que “a realização, pela iniciativa privada, desses estudos, investigações, levantamentos e projetos em decorrência do procedimento de manifestação de interesse”:
+
+Art. 81 […] § 2º […]
+
+I – não atribuirá ao realizador direito de preferência no processo licitatório;
+
+II – não obrigará o poder público a realizar licitação;
+
+III – não implicará, por si só, direito a ressarcimento de valores envolvidos em sua elaboração;
+
+IV – será remunerada somente pelo vencedor da licitação, vedada, em qualquer hipótese, a cobrança de valores do poder público.
+
+Ou seja, o PMI não resulta em dispêndios por parte da Administração e não envolve, por si, o compromisso de realização posterior do certame licitatório e a remuneração do particular. Essa remuneração somente ocorrerá caso se opte pela realização da licitação, e caberá ao vencedor da licitação a ressarcimento dos dispêndios do autor do projeto escolhido[2].
+
+Outra particularidade do PMI é que não há vedação legal para que o autor do projeto escolhido participe da futura licitação, se houver.
+
+Cabe lembrar que a modalidade de licitação diálogo competitivo também visa a essa aproximação com o mercado fornecedor, sem que haja definição prévia da melhor solução, a qual será desenvolvida durante a realização do certame por meio dos referidos diálogos. Contudo, há diferenças significativas entre o PMI e o diálogo competitivo, entre as quais se destacam:
+
+- no diálogo competitivo, a Administração já decide pela realização de uma licitação. Isso implica não apenas o compromisso de realizar a licitação, mas também a obrigação de indicar os créditos orçamentários correspondentes. Por outro lado, o PMI é um procedimento prévio à licitação. A partir do PMI, se os projetos apresentados forem viáveis e adequados, a Administração pode optar por realizar uma licitação posteriormente;
+
+- no diálogo competitivo, apenas os licitantes que foram pré-selecionados durante a fase de diálogo participam da etapa competitiva. Em contrapartida, a licitação que se segue a um PMI é aberta a quaisquer interessados, incluindo consórcios. Uma vez que os resultados do PMI são disponibilizados para todos os interessados, qualquer empresa que tenha a capacidade de executar o objeto da licitação tem a oportunidade de participar da competição.
+
+Portanto, dependendo das circunstâncias específicas de cada caso, o PMI pode se mostrar uma solução mais flexível e mais adequada para a Administração.
+
+A aceitação das soluções apresentadas pelos participantes do PMI deve ser fundamentada pela Administração, de forma a demonstrar que[3]:
+
+- o produto ou serviço entregue é adequado e suficiente à compreensão do objeto;
+
+- as premissas adotadas são compatíveis com as reais necessidades do órgão; e
+
+- a metodologia proposta é a que propicia maior economia e vantagem entre as demais possíveis.
+
+A Lei prevê, ainda, que o PMI poderá ser restrito a startups, assim considerados[4]:
+
+os microempreendedores individuais, as microempresas e as empresas de pequeno porte, de natureza emergente e com grande potencial, que se dediquem à pesquisa, ao desenvolvimento e à implementação de novos produtos ou serviços baseados em soluções tecnológicas inovadoras que possam causar alto impacto, exigida, na seleção definitiva da inovação, validação prévia fundamentada em métricas objetivas, de modo a demonstrar o atendimento das necessidades da Administração.
+
+Oportunamente, será editado decreto do Poder Executivo para regulamentar o PMI[5]. Cabe mencionar, no entanto, que o Decreto 8.428/2015, o qual dispôs sobre o PMI para parcerias público-privadas, definiu as etapas para o procedimento e parâmetros para avaliar e selecionar a solução: 
+
+Art. 10. […]
+
+I – a observância de diretrizes e premissas definidas pelo órgão ou pela entidade a que se refere o art. 2º;
+
+II – a consistência e a coerência das informações que subsidiaram sua realização;
+
+III – a adoção das melhores técnicas de elaboração, segundo normas e procedimentos científicos pertinentes, e a utilização de equipamentos e processos recomendados pela melhor tecnologia aplicada ao setor;
+
+IV – a compatibilidade com a legislação aplicável ao setor e com as normas técnicas emitidas pelos órgãos e pelas entidades competentes;
+
+V – a demonstração comparativa de custo e benefício da proposta do empreendimento em relação a opções funcionalmente equivalentes, na hipótese prevista no § 2º do art. 4º; e
+
+VI – o impacto socioeconômico da proposta para o empreendimento, se aplicável.
+
+Parágrafo único. Na hipótese de autorização exclusiva ou a número limitado de interessados, a seleção deverá considerar um ou mais dos seguintes critérios: (Incluído pelo Decreto nº 10.104, de 2019)
+
+I – experiência profissional comprovada; (Incluído pelo Decreto nº 10.104, de 2019)
+
+II – plano de trabalho; e (Incluído pelo Decreto nº 10.104, de 2019)
+
+III – avaliações preliminares sobre o empreendimento.
+
+Quadro 290 – Referências normativas para o procedimento de manifestação de interesse
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 78. São procedimentos auxiliares das licitações e das contratações regidas por esta Lei: […] III – procedimento de manifestação de interesse; […] Art. 81. A Administração poderá solicitar à iniciativa privada, mediante procedimento aberto de manifestação de interesse a ser iniciado com a publicação de edital de chamamento público, a propositura e a realização de estudos, investigações, levantamentos e projetos de soluções inovadoras que contribuam com questões de relevância pública, na forma de regulamento. § 1º Os estudos, as investigações, os levantamentos e os projetos vinculados à contratação e de utilidade para a licitação, realizados pela Administração ou com a sua autorização, estarão à disposição dos interessados, e o vencedor da licitação deverá ressarcir os dispêndios correspondentes, conforme especificado no edital. § 2º A realização, pela iniciativa privada, de estudos, investigações, levantamentos e projetos em decorrência do procedimento de manifestação de interesse previsto no caput deste artigo: I – não atribuirá ao realizador direito de preferência no processo licitatório; II – não obrigará o poder público a realizar licitação; III – não implicará, por si só, direito a ressarcimento de valores envolvidos em sua elaboração; IV – será remunerada somente pelo vencedor da licitação, vedada, em qualquer hipótese, a cobrança de valores do poder público. § 3º Para aceitação dos produtos e serviços de que trata o caput deste artigo, a Administração deverá elaborar parecer fundamentado com a demonstração de que o produto ou serviço entregue é adequado e suficiente à compreensão do objeto, de que as premissas adotadas são compatíveis com as reais necessidades do órgão e de que a metodologia proposta é a que propicia maior economia e vantagem entre as demais possíveis. § 4º O procedimento previsto no caput deste artigo poderá ser restrito a startups, assim considerados os microempreendedores individuais, as microempresas e as empresas de pequeno porte, de natureza emergente e com grande potencial, que se dediquem à pesquisa, ao desenvolvimento e à implementação de novos produtos ou serviços baseados em soluções tecnológicas inovadoras que possam causar alto impacto, exigida, na seleção definitiva da inovação, validação prévia fundamentada em métricas objetivas, de modo a demonstrar o atendimento das necessidades da Administração.
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 291 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 2613/2022-TCU-Plenário | [Enunciado] Não é cabível a aplicação da sanção de declaração de inidoneidade a empresa que pratica irregularidade no âmbito de procedimento de manifestação de interesse (PMI), regulamentado pelo Decreto 8.428/2015. Esse procedimento, apesar de possuir semelhanças com a fase interna de uma licitação, não se confunde com o certame que poderá vir a sucedê-lo, razão pela qual não é possível valer-se de interpretação extensiva para aplicação da sanção prevista no art. 46 da Lei 8.443/1992.
+Acórdão 1873/2016-TCU-Plenário | [Enunciado] Nos editais de Procedimento de Manifestação de Interesse (PMI), a mera reprodução literal do art. 10, incisos I a V, do Decreto 8.428/2015, por si só, não atende aos requisitos de clareza e objetividade inerentes aos critérios de avaliação e seleção de projetos, levantamentos, investigações ou estudos. [Enunciado] Nos editais de Procedimento de Manifestação de Interesse (PMI), regulados pelo Decreto 8.428/2015, devem ser divulgados o valor calculado para o ressarcimento pelos projetos elaborados e a respectiva memória de cálculo, fundamentada em dados objetivos vinculados aos custos de elaboração dos estudos, incluindo margem de lucro compatível com a natureza do serviço e com os riscos envolvidos, e baseados em preços de mercado para serviços de porte e complexidade similares.
+Pesquisa de Jurisprudência | Execute consulta na Jurisprudência Selecionada do TCU . No campo de busca, faça buscas pelos seguintes termos: procedimento de manifestação de interesse . Os resultados das buscas podem ser filtrados por “área – Licitação” ou “contrato administrativo”. Execute consulta nas Publicações do TCU . Selecione o tipo de publicação “Informativo de Licitações e Contratos”. Pesquise separadamente pelo termo: procedimento de manifestação de interesse .
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+Quadro 292 – Riscos relacionados
+
+Riscos
+Declaração imprecisa, no edital de chamamento público, do escopo, das diretrizes e das premissas para orientar a elaboração dos projetos a serem apresentados no PMI, levando a interpretações equivocadas, pelos participantes, sobre a necessidade que a Administração precisa atender, com o consequente recebimento de propostas de soluções inadequadas ao atendimento da necessidade que originou o PMI.
+Realização de PMI sem que haja legítimo interesse de licitar eventual solução aprovada ou, realizado o PMI, decidir por não licitar sem fundamentar a decisão, levando à perda de credibilidade do procedimento perante o mercado e desestímulo para participação em novos PMIs, com consequente falta de interessados e frustração de PMIs futuros.
+
+Fonte: Elaboração própria.
+
+[1] Lei 14.133/2021, art. 81, caput.
+
+[2] Lei 14.133/2021, art. 81, § 1º.
+
+[3] Lei 14.133/2021, art. 81, § 3º.
+
+[4] Lei 14.133/2021, art. 81, § 4º.
+
+[5] Lei 14.133/2021, art. 78, § 1º, c/c art. 81, caput.

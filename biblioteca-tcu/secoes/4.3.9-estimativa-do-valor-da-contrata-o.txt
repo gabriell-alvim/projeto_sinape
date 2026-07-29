@@ -1,0 +1,54 @@
+4.3.9. Estimativa do valor da contratação
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/4-3-9-estimativa-do-valor-da-contratacao-2/
+======================================================================
+
+Em regra, o orçamento estimado torna-se mais detalhado e preciso à medida que se avança pelas etapas do planejamento das contratações.
+
+No Plano de Contratações Anual (PCA), a estimativa de custos proporciona uma visão geral dos gastos necessários para atender a uma determinada necessidade da Administração. Essa estimativa inicial é importante para definir quais demandas serão priorizadas durante o ano fiscal e fundamentar a proposta orçamentária da organização. Para isso, pode-se utilizar um procedimento simplificado que auxilia na definição dos quantitativos e preços dos itens a serem contratados[1].
+
+Prosseguindo para o ETP, a estimativa de valor é mais detalhada do que aquela feita no PCA. Nessa etapa, a análise abrange os custos associados a cada solução potencial que pode atender à necessidade da Administração. O principal objetivo do orçamento no ETP é avaliar se é economicamente viável contratar a solução escolhida.
+
+Já no termo de referência, a estimativa de valor será mais precisa que aquelas elaboradas no PCA e no ETP. Nesta etapa, a estimativa reflete as possíveis mudanças nos requisitos técnicos, nas quantidades e nas especificidades do mercado que oferece o objeto a ser contratado. Além disso, a orçamentação no TR/PB leva em consideração as condições de execução do objeto e a gestão do contrato, garantindo que todos os aspectos críticos sejam contemplados para uma execução eficaz e conforme o esperado.
+
+É essencial destacar que uma estimativa de valor adequada é fundamental para o sucesso da contratação, pois diminui o risco de execução inadequada das diversas atividades envolvidas no processo, tais como[2]:
+
+195. […]
+
+1) verificação da viabilidade da licitação no âmbito do ETP, o que pode levar a contratação inviável, com o consequente desperdício de tempo, esforço e recursos financeiros da organização pública[…];
+
+2) adequação orçamentária, o que pode levar à alocação excessiva de recursos financeiros (se o preço vencedor for muito menor que o estimado), que, se combinar com a ausência de tempo hábil para utilizar os recursos excedentes em outras contratações (p. ex., se a licitação se encerrar no fim do ano), pode resultar na não utilização desses recursos […];
+
+3) estabelecimento de critérios de habilitação referentes ao valor do capital mínimo exigido ou do patrimônio líquido, ou ainda da garantia de execução, os quais podem limitar a competição;
+
+4) análise da aceitabilidade de preços, o que pode levar à aceitação de preços inexequíveis ou com sobrepreço, este último podendo ter como consequência o superfaturamento, inclusive nas contratações diretas.
+
+Entretanto, normalmente há grande assimetria de informações entre o órgão ou entidade que promove a contratação e as empresas fornecedoras, de modo que as empresas detêm mais informações sobre esse tipo de transação do que as organizações públicas.
+
+Desse modo, a Administração deve buscar conhecimentos e técnicas que levem à diminuição dessa assimetria ao longo das diversas atividades envolvidas na elaboração do orçamento estimado, sintetizadas na figura a seguir:
+
+Figura 8 – Atividades básicas para elaboração de orçamento estimado
+
+Fonte: Elaborado com base em TCU, 2023, p. 100.
+
+As duas atividades iniciais envolvem o levantamento de mercado, essencial para selecionar a solução adequada ao atendimento da necessidade, bem como a definição das quantidades requeridas. Ambas as tarefas são executadas na etapa de elaboração do ETP e, posteriormente, as informações obtidas são revisadas e aperfeiçoadas durante a elaboração do TR.
+
+As atividades 3, 4 e 5 abordam as etapas necessárias para obtenção dos preços e cálculo do valor estimado da contratação com base nos quantitativos definidos. Durante a elaboração do TR, essas atividades devem cumprir os critérios estabelecidos no art. 23 da Lei 14.133/2021. Mais detalhes sobre cada uma dessas atividades podem ser encontrados nas seções subsequentes.
+
+Observa-se ainda, na Figura 8, que todas as atividades do processo de orçamentação devem ser documentadas. A Lei 14.133/2021 estabelece que as estimativas de valor calculadas para composição do TR devem ser acompanhadas dos preços unitários referenciais, das memórias de cálculo e dos documentos que lhes dão suporte, com os parâmetros utilizados para a obtenção dos preços e para os respectivos cálculos, que devem constar de documento separado e classificado[3].
+
+Cabe mencionar que, no âmbito da Administração Pública federal direta, autárquica e fundacional do Poder Executivo, a IN – Seges/ME 65/2021 regulamenta o § 1º do art. 23 da Lei 14.133/2021 para cálculo do valor estimado de contratações de bens e serviços em geral, inclusive os de tecnologia da informação.
+
+Para elaboração de orçamentos para contratações de serviços com regime de dedicação exclusiva de mão de obra, a IN – Seges/ME 65/2021 estabelece que a IN – Seges/ME 5/2017 (ou outra que venha a substitui-la) seja aplicada.
+
+No que tange a obras e serviços de engenharia, a IN – Seges/ME 91/2022 autoriza o uso do Decreto 7.983/2013[4]. Para mais detalhes sobre orçamento estimado de obras e serviços de engenharia remete-se o leitor ao item 4.4.3.6 deste manual.
+
+Quanto ao tema “orçamento sigiloso”, recomenda-se a leitura do item 4.5.6.
+
+[1] Decreto 10.947/2022, art. 8º, incisos III e IV.
+
+[2] Tribunal de Contas da União, 2023, p. 100.
+
+[3] Lei 14.133/2021, art. 6º, inciso XXIII, alínea “i”.
+
+[4] IN – Seges/ME 65/2021, art. 9º; IN – Seges/ME 91/2022, art. 1º; IN – SGD/ME 94/2022, art. 20.

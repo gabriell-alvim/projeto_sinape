@@ -1,0 +1,109 @@
+4.1.12. Descrição de possíveis impactos ambientais
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/4-1-12-descricao-de-possiveis-impactos-ambientais/
+======================================================================
+
+O desenvolvimento nacional sustentável é um dos princípios a observar na aplicação da Lei 14.133/2021[1] e um dos objetivos do processo licitatório[2]. Apresenta três dimensões principais: econômica, social e ambiental[3].
+
+A questão ambiental assume especial importância na elaboração do ETP, pois é nele que devem ser descritos os possíveis impactos ambientais do objeto a ser contratado, bem como as medidas que poderão ser tomadas para minimizá-los.
+
+A análise dos possíveis impactos ambientais deve considerar todo o ciclo de vida do objeto a ser contratado[4], pois uma solução inicialmente mais onerosa poderá mostrar-se mais vantajosa ao longo do tempo. Além disso, é importante considerar a logística reversa para a reciclagem e descarte adequado de bens e resíduos[5].
+
+Para obras e demais empreendimentos potencialmente poluidores do meio ambiente, as Resoluções – CONAMA 1/1986 e 237/1997 devem ser consultadas, pois dispõem, respectivamente, sobre critérios básicos e diretrizes gerais para a avaliação de impacto ambiental, trazendo, inclusive, o rol de empreendimentos cujo licenciamento ambiental é obrigatório, e procedimentos para o licenciamento ambiental.
+
+Cabe mencionar que o art. 25, § 5º, da Lei 14.133/2021 possibilita atribuir ao contratado a responsabilidade por obter o licenciamento ambiental ou por realizar desapropriação autorizada pelo poder público. Caberá, portanto, à equipe de planejamento avaliar e decidir se é mais conveniente delegar essas responsabilidades ao contratado ou não. A exigência deverá constar expressamente no edital de licitação, a fim de que os potenciais licitantes considerem essa responsabilidade na elaboração de suas propostas.
+
+Sempre que a responsabilidade pelo licenciamento ambiental for da Administração, a manifestação prévia ou licença prévia, quando cabíveis, deverão ser obtidas antes da divulgação do edital[6].
+
+Quanto às medidas para minimizar o impacto ambiental, a primeira delas é definir critérios de sustentabilidade para o objeto a ser contratado, tais como baixo consumo de energia e de outros recursos naturais. O Decreto 7.746/2012, que foi publicado no contexto da Lei 8.666/1993, fornece uma lista de critérios de sustentabilidade que podem ser requeridos[7]:
+
+ I – baixo impacto sobre recursos naturais como flora, fauna, ar, solo e água; (Redação dada pelo Decreto nº 9.178, de 2017) […]
+
+III – maior eficiência na utilização de recursos naturais como água e energia; […]
+
+VI – uso de inovações que reduzam a pressão sobre recursos naturais; (Redação dada pelo Decreto nº 9.178, de 2017)
+
+VII – origem ambientalmente regular dos recursos naturais utilizados nos bens, serviços e obras.
+
+VII – origem sustentável dos recursos naturais utilizados nos bens, nos serviços e nas obras; e (Redação dada pelo Decreto nº 9.178, de 2017)
+
+VIII – utilização de produtos florestais madeireiros e não madeireiros originários de manejo florestal sustentável ou de reflorestamento. (Incluído pelo Decreto nº 9.178, de 2017)
+
+Os critérios de sustentabilidade deverão ser incluídos nos requisitos da contratação (vide item 4.1.3). É importante que a equipe de planejamento pesquise se existem normativos que estabeleçam regras específicas de sustentabilidade para o objeto a ser contratado, evitando critérios genéricos.
+
+Sobre o assunto, a 6ª edição do Guia Nacional de Contratações Sustentáveis[8], publicado pela AGU, relaciona bens, serviços e obras com os respectivos padrões de sustentabilidade previstos por normativos específicos. 
+
+No Portal de Compras do Governo Federal[9], também há um conjunto de orientações dedicadas ao tema de logística pública sustentável, no qual podem ser encontrados materiais de apoio, como cartilhas, guias e cadernos de estudo; normas federais relacionadas ao tema; e exemplos de boas práticas.
+
+Durante a elaboração do ETP, a equipe de planejamento pode avaliar a possibilidade de utilização de mão de obra, materiais, tecnologias e matérias-primas existentes no local da execução, conservação e operação do bem, serviço ou obra, desde que não sejam causados prejuízos à competitividade do processo licitatório e à eficiência do respectivo contrato[10].
+
+Cabe ressaltar que os critérios de sustentabilidade devem ser motivados, necessários, não contemplando exigências impertinentes ou irrelevantes que restrinjam indevidamente o caráter competitivo do certame[11] ou que representem um dispêndio desarrazoado à Administração Pública.
+
+Assim, a análise dos possíveis impactos ambientais pode influenciar a escolha da solução contratada. A opção escolhida deve equilibrar as três dimensões da sustentabilidade – social, econômica e ambiental. Isso significa que os impactos ambientais devem ser comparados aos impactos sociais e aos custos das possíveis alternativas para se chegar a uma solução com maior equilíbrio entre essas três dimensões.
+
+Quadro 121 – Referências normativas para a descrição de possíveis impactos ambientais
+
+Normativos | Dispositivos
+Constituição Federal de 1988 | Art. 225. Todos têm direito ao meio ambiente ecologicamente equilibrado, bem de uso comum do povo e essencial à sadia qualidade de vida, impondo-se ao Poder Público e à coletividade o dever de defendê-lo e preservá-lo para as presentes e futuras gerações. § 1º Para assegurar a efetividade desse direito, incumbe ao Poder Público: […] IV – exigir, na forma da Lei, para instalação de obra ou atividade potencialmente causadora de significativa degradação do meio ambiente, estudo prévio de impacto ambiental, a que se dará publicidade;
+Lei 14.133/2021 | Art. 18. […] § 1º O estudo técnico preliminar a que se refere o inciso I do caput deste artigo deverá evidenciar o problema a ser resolvido e a sua melhor solução, de modo a permitir a avaliação da viabilidade técnica e econômica da contratação, e conterá os seguintes elementos: […] XII – descrição de possíveis impactos ambientais e respectivas medidas mitigadoras, incluídos requisitos de baixo consumo de energia e de outros recursos, bem como logística reversa para desfazimento e reciclagem de bens e refugos, quando aplicável;
+LC 140/2011 | Art. 2º Para os fins desta Lei Complementar, consideram-se: I – licenciamento ambiental: o procedimento administrativo destinado a licenciar atividades ou empreendimentos utilizadores de recursos ambientais, efetiva ou potencialmente poluidores ou capazes, sob qualquer forma, de causar degradação ambiental;
+Lei 6.938/1981 | Art. 10. A construção, instalação, ampliação e funcionamento de estabelecimentos e atividades utilizadores de recursos ambientais, efetiva ou potencialmente poluidores ou capazes, sob qualquer forma, de causar degradação ambiental dependerão de prévio licenciamento ambiental. (Redação dada pela Lei Complementar nº 140, de 2011) […]
+Decreto 7.746/2012 | Art. 2º Na aquisição de bens e na contratação de serviços e obras, a Administração Pública federal direta, autárquica e fundacional e as empresas estatais dependentes adotarão critérios e práticas sustentáveis nos instrumentos convocatórios, observado o disposto neste Decreto. (Redação dada pelo Decreto nº 9.178, de 2017) Vigência Parágrafo único. A adequação da especificação do objeto da contratação e das obrigações do contratado aos critérios e às práticas de sustentabilidade será justificada nos autos, resguardado o caráter competitivo do certame.) (Redação dada pelo Decreto nº 9.178, de 2017) Vigência Art. 4º Para os fins do disposto no art. 2º , são considerados critérios e práticas sustentáveis, entre outras: (Redação dada pelo Decreto nº 9.178, de 2017) I – baixo impacto sobre recursos naturais como flora, fauna, ar, solo e água; (Redação dada pelo Decreto nº 9.178, de 2017) II – preferência para materiais, tecnologias e matérias-primas de origem local; III – maior eficiência na utilização de recursos naturais como água e energia; IV – maior geração de empregos, preferencialmente com mão de obra local; V – maior vida útil e menor custo de manutenção do bem e da obra; […] VI – uso de inovações que reduzam a pressão sobre recursos naturais; (Redação dada pelo Decreto nº 9.178, de 2017) […] VII – origem sustentável dos recursos naturais utilizados nos bens, nos serviços e nas obras; e (Redação dada pelo Decreto nº 9.178, de 2017) VIII – utilização de produtos florestais madeireiros e não madeireiros originários de manejo florestal sustentável ou de reflorestamento. (Incluído pelo Decreto nº 9.178, de 2017) Art. 5º A Administração Pública federal direta, autárquica e fundacional e as empresas estatais dependentes poderão exigir no instrumento convocatório para a aquisição de bens que estes sejam constituídos por material renovável, reciclado, atóxico ou biodegradável, entre outros critérios de sustentabilidade. (Redação dada pelo Decreto nº 9.178, de 2017)
+Decreto 99.274/1990 | Art. 19. O Poder Público, no exercício de sua competência de controle, expedirá as seguintes licenças: I – Licença Prévia (LP), na fase preliminar do planejamento de atividade, contendo requisitos básicos a serem atendidos nas fases de localização, instalação e operação, observados os planos municipais, estaduais ou federais de uso do solo; II – Licença de Instalação (LI), autorizando o início da implantação, de acordo com as especificações constantes do Projeto Executivo aprovado; e III – Licença de Operação (LO), autorizando, após as verificações necessárias, o início da atividade licenciada e o funcionamento de seus equipamentos de controle de poluição, de acordo com o previsto nas Licenças Prévia e de Instalação.
+Resolução – CONAMA 1/1986 | Artigo 1º – Para efeito desta Resolução, considera-se impacto ambiental qualquer alteração das propriedades físicas, químicas e biológicas do meio ambiente, causada por qualquer forma de matéria ou energia resultante das atividades humanas que, direta ou indiretamente, afetam: I – a saúde, a segurança e o bem-estar da população; II – as atividades sociais e econômicas; III – a biota; IV – as condições estéticas e sanitárias do meio ambiente; V – a qualidade dos recursos ambientais. Artigo 2º – Dependerá de elaboração de estudo de impacto ambiental e respectivo relatório de impacto ambiental – RIMA, a serem submetidos à aprovação do órgão estadual competente, e do IBAMA e em caráter supletivo, o licenciamento de atividades modificadoras do meio ambiente, tais como: […]
+IN – Seges 58/2022 | Art. 9º Com base no Plano de Contratações Anual, deverão ser registrados no Sistema ETP Digital os seguintes elementos: […] II – descrição dos requisitos da contratação necessários e suficientes à escolha da solução, prevendo critérios e práticas de sustentabilidade, observadas as leis ou regulamentações específicas, bem como padrões mínimos de qualidade e desempenho; […] X – demonstrativo dos resultados pretendidos, em termos de economicidade e de melhor aproveitamento dos recursos humanos, materiais e financeiros disponíveis; […] XII – descrição de possíveis impactos ambientais e respectivas medidas mitigadoras, incluídos requisitos de baixo consumo de energia e de outros recursos, bem como logística reversa para desfazimento e reciclagem de bens e refugos, quando aplicável;
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 122 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 1912/2023-TCU-Plenário | [Enunciado] É possível, no regime de contratação integrada da Lei 12.462/2011 (RDC), a transferência do licenciamento ambiental ao contratado, não apenas pela superveniência da Lei 14.133/2021 (nova Lei de Licitações e Contratos), a qual admite a atribuição do licenciamento ambiental ao particular (art. 25, § 5º, inciso I) , mas também para compatibilizar o emprego da contratação integrada com o referido licenciamento.
+Acórdão 2129/2021-TCU-Plenário | [Voto] 36. Assim, revela-se plenamente possível que o Poder Público, ante os comandos constitucionais mencionados, estabeleça critérios de sustentabilidade nas contratações que realizar, com os objetivos de reduzir o impacto ambiental gerado pela máquina pública e induzir mudanças no setor produtivo. 37. Contudo, a interpretação da Lei não pode ocorrer de forma isolada apenas com base no princípio do desenvolvimento nacional sustentável, pois os princípios licitatórios estão inter-relacionados, sendo possível, em linhas gerais, afirmar que as contratações devem ocorrer: a) em um ambiente em que sejam fornecidas iguais condições para todos quantos quiserem participar (princípio da igualdade); b) consoante os procedimentos previstos no instrumento convocatório (princípio da vinculação ao instrumento convocatório); c) de forma a serem evitados quaisquer favorecimentos ou preferências pessoais por parte dos administradores públicos (princípios da impessoalidade e do julgamento objetivo) ; d) buscando-se a proposta mais vantajosa para a entidade e que melhor atenda ao interesse público (princípios da moralidade, da probidade administrativa, da eficiência e da economicidade). […] 39. A escolha feita pela Administração Pública não pode ser arbitrária, ao contrário, deve ser motivada. Em suma, a licitação exige, necessariamente, algum tipo de restrição, pois, no momento em que se definem as características do produto desejado, afasta-se a possibilidade de participação das empresas que não detêm os bens com as características estipuladas. O que não se admite, e assim prevê tanto o art. 37, inciso XXI, da Constituição Federal como o art. 3º, § 1º, inciso I, da Lei 8.666/1993, é o estabelecimento de condições que restrinjam o caráter competitivo das licitações em razão de circunstância impertinente ou irrelevante para o específico objeto do contrato.
+Acórdão 6306/2021-TCU-Segunda Câmara | É irregular a exigência de comprovação de licença ambiental como requisito de habilitação, pois tal exigência só deve ser formulada ao vencedor da licitação. Como requisito para participação no certame, pode ser exigida declaração de disponibilidade da licença ou declaração de que o licitante reúne condições de apresentá-la quando solicitado pela Administração.
+Acórdão1375/2015-TCU-Plenário | [Enunciado] É legítimo que as contratações da Administração Pública se adequem a novos parâmetros de sustentabilidade ambiental, ainda que com possíveis reflexos na economicidade da contratação. Deve constar expressamente dos processos de licitação motivação fundamentada que justifique a definição das exigências de caráter ambiental, as quais devem incidir sobre o objeto a ser contratado e não como critério de habilitação da empresa licitante.
+Acórdão 6047/2015-TCU-Segunda Câmara | A exigência de regularidade ambiental como critério de qualificação técnica é legal, desde que não represente discriminação injustificada entre os licitantes, uma vez que objetiva garantir o cumprimento da obrigação contratual e é essencial para que o objeto da licitação seja executado sem o comprometimento do meio ambiente
+Pesquisa de Jurisprudência | Execute consulta na Jurisprudência Selecionada do TCU . No campo de busca, faça buscas pelos seguintes termos individualmente: “impacto ambiental” . Os resultados das buscas podem ser filtrados por “área – Licitação” ou “contrato administrativo”. Execute pesquisa na base de acórdãos , pelo seguinte termo: “critérios de sustentabilidade” . Execute pesquisa na base de acórdãos , pelos seguintes termos: “licitações sustentáveis” OR “contratações sustentáveis”
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+Quadro 123 – Riscos relacionados
+
+Riscos
+Exigências de critérios de sustentabilidade irrelevantes ou impertinentes ao objeto, levando a restrições indevidas à competitividade, com consequente contratação com custos mais elevados.
+Ausência de critérios de logística reversa, levando a elevadas despesas de descarte de materiais em fim de vida útil, com consequentes gastos elevados sem o devido planejamento.
+Realização de contratações sem inclusão de requisitos de sustentabilidade previstos em leis e regulamentos específicos, levando a contratações mais agressivas ao meio ambiente, com consequentes prejuízos ambientais que poderiam ser mitigados com o devido planejamento.
+Exigências de critérios de sustentabilidade genéricos, sem possibilidade de comprovação objetiva do atendimento a tais exigências, levando a contratações menos vantajosas, com consequentes perda de oportunidade de obtenção de benefícios econômicos e sociais, minimização de impactos ao meio ambiente e diminuição de custos indiretos relacionados ao ciclo de vida do objeto adquirido.
+Entendimento de que a vantajosidade da contratação se resume ao menor preço, levando o gestor a desconsiderar os custos indiretos relacionados ao ciclo de vida do objeto adquirido, com consequentes contratações de soluções mais onerosas ao longo do tempo e, portanto, menos vantajosas para a Administração.
+
+Fonte: Elaboração própria.
+
+Quadro 124 – Modelos
+
+Assunto | Modelo disponibilizados por OGS ou por órgãos de controle | OGS
+Contratações sustentáveis | Guia Nacional de Contratações Sustentáveis – 6ª ed. (Advocacia-Geral da União, 2023b) | AGU
+Portal “Compras Públicas Sustentáveis” (Tribunal de Contas da União, 2023b) | TCU
+
+Fonte: Elaboração própria.
+
+[1] Lei 14.133/2021, art. 5º.
+
+[2] Lei 14.133/2021, art. 11, inciso IV.
+
+[3] ABNT, 2017, p. 6.
+
+[4] Lei 14.133/2021, art. 11, inciso I, art. 34, § 1º.
+
+[5] Lei 14.133/2021, art. 18, § 1º, inciso XII.
+
+[6] Lei 14.133/2021, art. 115, § 4º.
+
+[7] Decreto 7.746/2012, art. 4º (redação dada pelo Decreto 9.178/2017).
+
+[8] Advocacia-Geral da União, 2023b.
+
+[9] Ministério da Economia, 2021d.
+
+[10] Lei 14.133/2021, art. 25, § 2º.
+
+[11] Decreto 7.746/2012, art. 2º, parágrafo único (redação dada pelo Decreto 9.178/2017).

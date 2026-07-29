@@ -1,0 +1,226 @@
+3.3. Agentes públicos
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/3-3-agentes-publicos/
+======================================================================
+
+Antes de discutir este assunto, é importante apresentar os seguintes conceitos:
+
+- agente público[1]: indivíduo que, em virtude de eleição, nomeação, designação, contratação ou qualquer outra forma de investidura ou vínculo, exerce mandato, cargo, emprego ou função em pessoa jurídica integrante da Administração Pública;
+
+- autoridade competente[2]: agente público dotado de poder de decisão. Entre outros atos decisórios, é responsável por designar os agentes públicos para o desempenho das funções essenciais relativas às contratações na organização;
+
+- agente de contratação[3]: pessoa designada pela autoridade competente, entre servidores efetivos ou empregados públicos dos quadros permanentes da Administração Pública, para tomar decisões, acompanhar o trâmite da licitação, dar impulso ao procedimento licitatório e executar quaisquer outras atividades necessárias ao bom andamento do certame até a homologação.
+
+- em processos de bens e serviços não comuns, o agente pode ser substituído pela comissão de contratação;
+
+- ele será auxiliado por equipe de apoio e responderá individualmente pelos atos que praticar, salvo quando induzido a erro pela atuação da equipe;
+
+- a atuação do agente de contratação na fase preparatória deve se ater ao acompanhamento e às eventuais diligências para o fluxo regular da instrução processual. Assim, ele estará desobrigado da elaboração de estudos preliminares, projetos e anteprojetos, termos de referência, pesquisas de preço e, preferencialmente, minutas de editais. No entanto, ele pode acompanhar o andamento do processo e demandar informações que se fizerem necessárias até a homologação do certame[4];
+
+- todas as licitações serão conduzidas por agente de contratação ou comissão de contratação, com exceção do leilão, que pode ser conduzido por leiloeiro oficial[5]; e
+
+- para a Administração Pública federal direta, autárquica e fundacional[6], o Decreto 11.246/2022 detalhou as atribuições do agente de contratação;
+
+- pregoeiro[7]: agente de contratação responsável pela condução de licitações na modalidade pregão (conceito semelhante ao disposto na Lei 10.520/2002[8]);
+
+- leiloeiro[9]: agente responsável pela condução de licitações na modalidade leilão. Quando não for leiloeiro oficial selecionado pela Administração (mediante credenciamento ou pregão), será servidor designado pela autoridade competente;
+
+- comissão de contratação[10]: conjunto de agentes públicos indicados pela Administração, em caráter permanente ou especial, com a função de receber, examinar e julgar documentos relativos às licitações e aos procedimentos auxiliares. Deve ser formada por, no mínimo, três membros, preferencialmente dos quadros permanentes da Administração, em conformidade com os requisitos do art. 9º da Lei 14.133/2021. No âmbito da APF, o presidente da comissão deverá ser servidor efetivo ou empregado público;
+
+- conduz os processos licitatórios de bens ou serviços especiais, substituindo o agente de contratação. Nos certames cujo objeto não seja rotineiramente contratado pela Administração, poderá ser contratado, por prazo determinado, serviço de empresa ou de profissional especializado para assessorar os agentes públicos responsáveis pela condução da licitação;
+
+- os membros respondem solidariamente por todos os atos praticados pela comissão, ressalvado o membro que expressar posição individual divergente fundamentada e registrada em ata lavrada na reunião em que houver sido tomada a decisão;
+
+- é responsável por conduzir diálogos competitivos, hipótese em que a comissão deverá ser composta por servidores efetivos ou empregados públicos pertencentes aos quadros permanentes da Administração;
+
+- a Lei 14.133/2021 não estabeleceu limite de tempo para permanência como membro de comissão, tampouco vedou a recondução;
+
+- equipe de apoio[11]: auxilia o agente de contratação ou a comissão de contratação, podendo ser composta por terceiros contratados;
+
+- gestor do contrato[12]: agente público ou comissão designada por autoridade competente, preferencialmente da área requisitante da solução (ou ainda setor da organização), para coordenar as atividades de fiscalização da execução contratual e os atos preparatórios à instrução processual e ao encaminhamento da documentação pertinente ao setor de contratos para a formalização dos procedimentos relativos à prorrogação, à alteração, ao reequilíbrio, ao pagamento, à eventual aplicação de sanções e à extinção dos contratos. É responsável por[13]:
+
+- coordenar as atividades relacionadas à fiscalização contratual;
+
+- acompanhar os registros realizados pelos fiscais do contrato das ocorrências relacionadas à execução do contrato e as medidas adotadas, e informar à autoridade superior àquelas que ultrapassarem a sua competência;
+
+- acompanhar a manutenção das condições de habilitação do contratado, para fins de empenho de despesa e de pagamento, e anotar os problemas que obstem o fluxo normal da liquidação e do pagamento da despesa no relatório de riscos eventuais;
+
+- coordenar a rotina de acompanhamento e de fiscalização do contrato, cujo histórico de gerenciamento deverá conter todos os registros formais da execução, a exemplo da ordem de serviço, do registro de ocorrências, das alterações e das prorrogações contratuais, e elaborar relatório com vistas à verificação da necessidade de adequações do contrato para fins de atendimento da finalidade da Administração;
+
+- elaborar o relatório final com informações sobre a consecução dos objetivos que tenham justificado a contratação e eventuais condutas a serem adotadas para o aprimoramento das atividades da Administração (de que trata a Lei nº 14.133/2021, art. 174, § 3º, inciso VI, alínea “d”);
+
+- coordenar a atualização contínua do relatório de riscos durante a gestão do contrato, com apoio dos fiscais de contrato;
+
+- emitir documento comprobatório da avaliação realizada pelos fiscais quanto ao cumprimento de obrigações assumidas pelo contratado, com menção ao seu desempenho na execução contratual, baseado em indicadores objetivamente definidos e aferidos, e a eventuais penalidades aplicadas, a constarem do cadastro de atesto de cumprimento de obrigações conforme disposto em regulamento;
+
+- realizar o recebimento definitivo do objeto do contrato, mediante termo detalhado que comprove o atendimento das exigências contratuais; e
+
+- tomar providências para a formalização de processo administrativo de responsabilização para fins de aplicação de sanções, a ser conduzido pela comissão de que trata o art. 158 da Lei nº 14.133/2021, ou pelo agente ou pelo setor competente para tal, conforme o caso.
+
+- fiscal do contrato[14]: agente público, preferencialmente servidor efetivo ou empregado público do quadro permanente da Administração, designado conforme requisitos estabelecidos no art. 7º da Lei 14.133/2021. Auxilia o gestor do contrato, avaliando a execução do objeto quanto aos aspectos técnicos e administrativos. É responsável pelo recebimento provisório do objeto. Poderá ser assistido e subsidiado por terceiros contratados pela Administração. O Decreto 11.246/2022, nos arts. 22 a 25, detalhou as atribuições dos fiscais de contrato.
+
+Quadro 51 – Agentes públicos
+
+Agente | Requisitos | Atribuições
+Autoridade competente | Agente público | Designar os agentes públicos que executarão as atividades relativas a contratações na organização, dentre outros atos decisórios.
+Agente público | Titular de mandato, cargo, emprego ou função na Administração Pública. | As relativas ao mandato, cargo, emprego ou função que exerce na Administração.
+Agente de contratação | Servidor efetivo ou empregado público do quadro permanente. | Acompanhar o trâmite da licitação, dar impulso ao procedimento licitatório e executar quaisquer outras atividades necessárias ao bom andamento do certame até a homologação. Nas licitações de bens e serviços especiais, poderá ser substituído por comissão de contratação. Será auxiliado, na fase externa, por equipe de apoio.
+Pregoeiro | Servidor efetivo ou empregado público do quadro permanente. | Conduzir as licitações na modalidade pregão.
+Leiloeiro | Servidor ou leiloeiro oficial | Conduzir as licitações na modalidade leilão.
+Comissão de contratação | Órgão coletivo, composto por, no mínimo, três agentes públicos, preferencialmente servidores efetivos ou empregados públicos do quadro permanente. O presidente da comissão deve ser servidor ou empregado público. Para a modalidade de diálogo competitivo, deve ser composta por servidores efetivos ou empregados públicos. | Pode substituir o agente de contratação na condução de licitações de bens e serviços não comuns (a critério da autoridade competente), e deve conduzir as licitações na modalidade diálogo competitivo (por obrigação legal). Nas contratações de bens e serviços especiais cujo objeto não seja rotineiramente contratado pela administração, poderá ser assessorada por serviço de empresa ou de profissional especializado contratado pela Administração.
+Equipe de apoio | Preferencialmente, servidor efetivo ou empregado público do quadro permanente. Pode ser integrada por terceiros. | Auxilia o agente de contratação na condução do certame.
+Gestor do contrato | Preferencialmente, servidor efetivo ou empregado público do quadro permanente. Pode ser comissão designada pela autoridade competente ou, excepcionalmente e motivadamente, setor da organização. | Compõe a equipe de fiscalização do contrato. Responsável por coordenar e comandar o processo de gestão e fiscalização da execução contratual. Realiza o recebimento definitivo.
+Fiscal do contrato | Preferencialmente, servidor efetivo ou empregado público do quadro permanente. | Compõe a equipe de fiscalização do contrato. Responsável por avaliar a execução do objeto quanto aos aspectos técnicos e administrativos. Realiza o recebimento provisório. Poderá ser assistido e subsidiado por terceiros contratados pela Administração.
+
+Fonte: Elaboração própria.
+
+A atuação do agente de contratação e da equipe de apoio, o funcionamento da comissão de contratação e a atuação de fiscais e gestores de contratos de que trata a Lei 14.133/2021 foram disciplinados, para as organizações da Administração Pública federal direta, autárquica e fundacional[15], por meio do Decreto 11.246/2022. Tal regulamento estabeleceu a possibilidade de que esses agentes públicos contem com o auxílio dos órgãos de assessoramento jurídico e de controle interno para o desempenho das suas funções[16].
+
+O regramento exposto nos arts. 7º a 10 da Lei 14.133/2021 apresenta três principais diretrizes para designar agentes públicos para o desempenho das funções essenciais à execução dessa Lei, a saber:
+
+- gestão por competências;
+
+- segregação de funções; e
+
+- prevenção ao conflito de interesses.
+
+Quanto à gestão por competências, é responsabilidade da autoridade máxima da organização (ou de quem as normas internas indicarem) promovê-la. A mencionada Lei limita a discricionariedade do gestor na escolha dos ocupantes das funções essenciais à execução das contratações públicas, condicionando-a à observância das práticas de gestão por competências. O inciso II do art. 7º estabelece requisito mínimo para os perfis profissionais desses agentes:
+
+Art. 7º […] II – tenham atribuições relacionadas a licitações e contratos ou possuam formação compatível ou qualificação atestada por certificação profissional emitida por escola de governo criada e mantida pelo poder público.
+
+Para os fiscais e gestores de contrato, a Lei 14.133/2021 prevê que as necessidades de capacitação desses agentes sejam consideradas no estudo técnico preliminar, como providência prévia à celebração do contrato[17].
+
+Adicionalmente, a capacitação dos agentes públicos é uma das medidas previstas pela Lei para reduzir o risco de impropriedades no metaprocesso de contratação[18].
+
+Sobre o assunto, o Decreto 11.246/2022 estabeleceu que:
+
+Art. 11 […] § 1º Na hipótese de deficiência ou de limitações técnicas que possam impedir o cumprimento diligente das atribuições, o agente público deverá comunicar o fato ao seu superior hierárquico.
+
+§ 2º Na hipótese prevista no § 1º, a autoridade competente poderá providenciar a qualificação prévia do servidor para o desempenho das suas atribuições, conforme a natureza e a complexidade do objeto, ou designar outro servidor com a qualificação requerida, observado o disposto no § 3º do art. 8º. […]
+
+Art. 8º […]
+
+§ 1º Para o exercício da função, o gestor e os fiscais de contratos deverão ser formalmente cientificados da indicação e das respectivas atribuições antes da formalização do ato de designação.
+
+§ 2º Na designação de que trata o caput, serão considerados:
+
+I – a compatibilidade com as atribuições do cargo;
+
+II – a complexidade da fiscalização;
+
+III – o quantitativo de contratos por agente público; e
+
+IV – a capacidade para o desempenho das atividades.
+
+§ 3º A eventual necessidade de desenvolvimento de competências de agentes públicos para fins de fiscalização e de gestão contratual deverá ser demonstrada no estudo técnico preliminar e deverá ser sanada, conforme o caso, previamente à celebração do contrato, conforme o disposto no inciso X do § 1º do art. 18 da Lei nº 14.133, de 2021. (Grifo nosso)
+
+Na mesma linha, extraem-se recomendações da jurisprudência do TCU não somente para a adequada capacitação dos fiscais de contrato, mas também para que seja avaliado se eles têm tempo hábil para executar a fiscalização, considerando a quantidade de contratos sob sua responsabilidade e a complexidade das demais atividades que exercem na organização[19].
+
+No que tange à segregação de funções, além de ser elencada como princípio para a aplicação da Lei 14.133/2021, a sua observação é obrigatória para a designação dos agentes públicos. Cabe ao dirigente máximo vedar a atuação de um mesmo agente em funções cuja acumulação propiciaria o excesso de poder e facilitaria a ocultação de desvios[20].
+
+A prevenção de conflito de interesses é abordada nos art. 7º e 9º da Lei 14.133/2021. O art. 7º, inciso III, proíbe a designação de agentes públicos para desempenhar funções essenciais à execução da Lei se eles forem cônjuges, companheiros ou parentes até o terceiro grau de licitantes ou contratados habituais da Administração, ou se tiverem vínculos técnicos, comerciais, econômicos, financeiros, trabalhistas ou civis com eles.
+
+Cabe mencionar que o Decreto 11.246/2022 define “contratados habituais” como as pessoas físicas e jurídicas cujo histórico recorrente de contratação com o órgão ou com a entidade evidencie significativa probabilidade de novas contratações. O regulamento esclarece que a proibição mencionada anteriormente se aplica ao agente público que atue em processo de contratação cujo objeto seja do mesmo ramo de atividade do licitante ou do contratado habitual com o qual haja o relacionamento[21].
+
+O art. 9º, § 1º, por sua vez, proíbe que agentes públicos da organização licitante ou contratante[22] participem diretamente ou indiretamente da disputa (como licitante ou consultor de licitante, por exemplo) ou da execução do contrato (como contratado ou subcontratado).
+
+As exigências para a promoção da gestão por competências, a garantia da segregação de funções e a prevenção de conflito de interesses também se aplicam às assessorias jurídicas e aos órgãos de controle interno[23]. Essas são boas práticas de governança estabelecidas na Lei 14.133/2021, e a não observância dessas práticas pode resultar na responsabilização dos líderes das organizações públicas. No item 2.3.1 deste manual, são tecidas considerações acerca dessas práticas para estabelecer o modelo de gestão das contratações.
+
+Outro requisito estabelecido pela Lei 14.133/2021 para designar agentes públicos para o desempenho de funções essenciais nas contratações é que eles sejam, preferencialmente, servidores efetivos ou empregados públicos dos quadros permanentes da Administração Pública[24]. A Lei torna exceção (a ser, portanto, motivada) a designação de servidores temporários ou ocupantes de cargos em comissão que não sejam servidores de carreira.
+
+O art. 9º elenca um conjunto de vedações ao agente público designado para atuar na área de licitações e contratos, a exemplo de comprometer a competitividade das licitações, estabelecer preferências ou distinções em razão da naturalidade, da sede ou do domicílio dos licitantes, e opor resistência injustificada ao andamento dos processos.
+
+Por fim, o art. 10 prevê representação judicial e extrajudicial, pela advocacia pública, ou seja, às custas da Administração, de agentes públicos que, tendo participado de procedimentos relacionados às licitações e contratos, precisarem se defender administrativa ou judicialmente, em razão de ato praticado com estrita observância de orientação constante em parecer jurídico[25].
+
+Esse suporte da Administração é aplicável inclusive na hipótese de o agente não mais ocupar o cargo, emprego ou função em que foi praticado o ato questionado.
+
+Em situação excepcional, quando houver, nos autos do processo administrativo ou judicial, provas de prática de atos ilícitos dolosos, os meios de defesa não serão patrocinados pela Administração[26].
+
+Quadro 52 – Referências normativas para agentes públicos
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 7º Caberá à autoridade máxima do órgão ou da entidade, ou a quem as normas de organização administrativa indicarem, promover gestão por competências e designar agentes públicos para o desempenho das funções essenciais à execução desta Lei que preencham os seguintes requisitos: I – sejam, preferencialmente, servidor efetivo ou empregado público dos quadros permanentes da Administração Pública; II – tenham atribuições relacionadas a licitações e contratos ou possuam formação compatível ou qualificação atestada por certificação profissional emitida por escola de governo criada e mantida pelo poder público; e III – não sejam cônjuge ou companheiro de licitantes ou contratados habituais da Administração nem tenham com eles vínculo de parentesco, colateral ou por afinidade, até o terceiro grau, ou de natureza técnica, comercial, econômica, financeira, trabalhista e civil. § 1º A autoridade referida no caput deste artigo deverá observar o princípio da segregação de funções, vedada a designação do mesmo agente público para atuação simultânea em funções mais suscetíveis a riscos, de modo a reduzir a possibilidade de ocultação de erros e de ocorrência de fraudes na respectiva contratação. § 2º O disposto no caput e no § 1º deste artigo, inclusive os requisitos estabelecidos, também se aplica aos órgãos de assessoramento jurídico e de controle interno da Administração. Art. 8º A licitação será conduzida por agente de contratação, pessoa designada pela autoridade competente, entre servidores efetivos ou empregados públicos dos quadros permanentes da Administração Pública, para tomar decisões, acompanhar o trâmite da licitação, dar impulso ao procedimento licitatório e executar quaisquer outras atividades necessárias ao bom andamento do certame até a homologação. § 1º O agente de contratação será auxiliado por equipe de apoio e responderá individualmente pelos atos que praticar, salvo quando induzido a erro pela atuação da equipe. § 2º Em licitação que envolva bens ou serviços especiais, desde que observados os requisitos estabelecidos no art. 7º desta Lei, o agente de contratação poderá ser substituído por comissão de contratação formada por, no mínimo, 3 (três) membros, que responderão solidariamente por todos os atos praticados pela comissão, ressalvado o membro que expressar posição individual divergente fundamentada e registrada em ata lavrada na reunião em que houver sido tomada a decisão. § 3º As regras relativas à atuação do agente de contratação e da equipe de apoio, ao funcionamento da comissão de contratação e à atuação de fiscais e gestores de contratos de que trata esta Lei serão estabelecidas em regulamento, e deverá ser prevista a possibilidade de eles contarem com o apoio dos órgãos de assessoramento jurídico e de controle interno para o desempenho das funções essenciais à execução do disposto nesta Lei. § 4º Em licitação que envolva bens ou serviços especiais cujo objeto não seja rotineiramente contratado pela Administração, poderá ser contratado, por prazo determinado, serviço de empresa ou de profissional especializado para assessorar os agentes públicos responsáveis pela condução da licitação. § 5º Em licitação na modalidade pregão, o agente responsável pela condução do certame será designado pregoeiro. Art. 9º É vedado ao agente público designado para atuar na área de licitações e contratos, ressalvados os casos previstos em lei: I – admitir, prever, incluir ou tolerar, nos atos que praticar, situações que: a) comprometam, restrinjam ou frustrem o caráter competitivo do processo licitatório, inclusive nos casos de participação de sociedades cooperativas; b) estabeleçam preferências ou distinções em razão da naturalidade, da sede ou do domicílio dos licitantes; c) sejam impertinentes ou irrelevantes para o objeto específico do contrato; II – estabelecer tratamento diferenciado de natureza comercial, legal, trabalhista, previdenciária ou qualquer outra entre empresas brasileiras e estrangeiras, inclusive no que se refere a moeda, modalidade e local de pagamento, mesmo quando envolvido financiamento de agência internacional; III – opor resistência injustificada ao andamento dos processos e, indevidamente, retardar ou deixar de praticar ato de ofício, ou praticá-lo contra disposição expressa em lei. § 1º Não poderá participar, direta ou indiretamente, da licitação ou da execução do contrato agente público de órgão ou entidade licitante ou contratante, devendo ser observadas as situações que possam configurar conflito de interesses no exercício ou após o exercício do cargo ou emprego, nos termos da legislação que disciplina a matéria. § 2º As vedações de que trata este artigo estendem-se a terceiro que auxilie a condução da contratação na qualidade de integrante de equipe de apoio, profissional especializado ou funcionário ou representante de empresa que preste assessoria técnica. Art. 10. Se as autoridades competentes e os servidores públicos que tiverem participado dos procedimentos relacionados às licitações e aos contratos de que trata esta Lei precisarem defender-se nas esferas administrativa, controladora ou judicial em razão de ato praticado com estrita observância de orientação constante em parecer jurídico elaborado na forma do § 1º do art. 53 desta Lei, a advocacia pública promoverá, a critério do agente público, sua representação judicial ou extrajudicial. § 1º Não se aplica o disposto no caput deste artigo quando: […] II – provas da prática de atos ilícitos dolosos constarem nos autos do processo administrativo ou judicial. § 2º Aplica-se o disposto no caput deste artigo inclusive na hipótese de o agente público não mais ocupar o cargo, emprego ou função em que foi praticado o ato questionado.
+Lei 14.204/2021 | Art. 9º São critérios gerais para a ocupação de cargos em comissão e de funções de confiança na Administração Pública federal direta, autárquica e fundacional : […] II – perfil profissional ou formação acadêmica compatível com o cargo ou com a função para a qual tenha sido indicado; e […](Grifo nosso)
+Lei 12.813/2013 | Art. 1º As situações que configuram conflito de interesses envolvendo ocupantes de cargo ou emprego no âmbito do Poder Executivo federal , os requisitos e restrições a ocupantes de cargo ou emprego que tenham acesso a informações privilegiadas , os impedimentos posteriores ao exercício do cargo ou emprego e as competências para fiscalização, avaliação e prevenção de conflito de interesses regulam-se pelo disposto nesta Lei. […] Art. 2º Parágrafo único. Além dos agentes públicos mencionados nos incisos I a IV, sujeitam-se ao disposto nesta Lei os ocupantes de cargos ou empregos cujo exercício proporcione acesso a informação privilegiada capaz de trazer vantagem econômica ou financeira para o agente público ou para terceiro , conforme definido em regulamento. (Grifo nosso)
+Lei 9784/1999 | Art. 18. É impedido de atuar em processo administrativo o servidor ou autoridade que: I – tenha interesse direto ou indireto na matéria ; (Grifo nosso)
+Decreto 11.246/2022 | Regulamenta o disposto no § 3º do art. 8º da Lei nº 14.133, de 1º de abril de 2021, para dispor sobre as regras para a atuação do agente de contratação e da equipe de apoio, o funcionamento da comissão de contratação e a atuação dos gestores e fiscais de contratos, no âmbito da Administração Pública federal direta, autárquica e fundacional.
+Decreto 9.507/2018 | Art. 10. A gestão e a fiscalização da execução dos contratos compreendem o conjunto de ações que objetivam: I – aferir o cumprimento dos resultados estabelecidos pelo contratado; II – verificar a regularidade das obrigações previdenciárias, fiscais e trabalhistas; e III – prestar apoio à instrução processual e ao encaminhamento da documentação pertinente para a formalização dos procedimentos relativos a repactuação, reajuste, alteração, reequilíbrio, prorrogação, pagamento, aplicação de sanções, extinção dos contratos, entre outras, com vistas a assegurar o cumprimento das cláusulas do contrato a solução de problemas relacionados ao objeto. Art. 11. A gestão e a fiscalização de que trata o art. 10 competem ao gestor da execução dos contratos, auxiliado pela fiscalização técnica, administrativa, setorial e pelo público usuário e, se necessário, poderá ter o auxílio de terceiro ou de empresa especializada, desde que justificada a necessidade de assistência especializada.
+Portaria – Seges/ME 8.678/2021 | Art. 6º São instrumentos de governança nas contratações públicas, dentre outros: […] V – Gestão por competências; […] Art. 18. Compete ao órgão ou entidade, quanto à estrutura da área de contratações públicas: […] IV – zelar pela devida segregação de funções , vedada a designação do mesmo agente público para atuação simultânea nas funções mais suscetíveis a riscos; […] (Grifo nosso)
+Resolução – CNJ 347/2020 | DA GESTÃO POR COMPETÊNCIA Art. 27. Observadas as disposições constantes da Política Nacional de Formação e Aperfeiçoamento dos Servidores do Poder Judiciário, instituída por meio das Resoluções CNJ nº 192/2014, e nº 240/2016, os órgãos do Poder Judiciário deverão: […] I – definir as funções-chave ligadas à governança e à gestão de contratações , incluindo os principais agentes do processo de contratações, de acordo com os processos de trabalho estabelecidos e a estrutura de cada órgão; II – estabelecer modelo de competências para os ocupantes das funções-chave previstas no inciso I; e III – realizar a escolha dos ocupantes de funções-chave fundamentados nos perfis de competências definidos no modelo de que trata o inciso II, observando os princípios da transparência, da motivação, da eficiência e do interesse público. (Grifo nosso)
+Ato da Diretoria -Geral do Senado Federal 14/2022 | Estabelece, no âmbito do Senado Federal, disposições regulamentares acerca das atribuições e procedimentos de licitações e contratos administrativos. […] Dos Responsáveis pela Condução da Licitação Art. 29. A fase externa do processo de licitação pública será conduzida por agente de contratação, ou, nos casos previstos no §2º do art. 8º ou no inciso XI do art. 32 da Lei nº 14.133, de 2021, por Comissão de Contratação. […] Art. 30. Ao Agente de Contratação compete conduzir a fase externa dos processos licitatórios na modalidade concorrência e pregão, observado o rito procedimental previsto no art. 17 da Lei nº 14.133, de 2021, e, em especial: […]
+Ato da Mesa da Câmara dos Deputados 206/2021 | DO AGENTE DE CONTRATAÇÃO Art. 3° O agente de contratação será designado entre os servidores efetivos da Câmara dos Deputados para: I – tomar decisões acerca do procedimento licitatório; II – acompanhar o trâmite da licitação, zelando pelo seu fluxo satisfatório, desde a fase preparatória; III – dar impulso ao procedimento licitatório, em ambas as suas fases e em observância ao princípio da celeridade; IV – executar quaisquer outras atividades necessárias ao bom andamento do certame até a homologação. […] DOS GESTORES E DOS FISCAIS DE CONTRATOS Art. 6° Os gestores e fiscais de contratos e os respectivos substitutos serão representantes da Câmara dos Deputados designados para acompanhar e fiscalizar a execução de contrato ou instrumentos congêneres. Art. 7° Os fiscais de contratos poderão ser assistidos e subsidiados por servidores lotados em unidades distintas, nos termos de Portaria do Diretor-Geral, ou por terceiros contratados pela Administração, observado neste caso o disposto no art. 19. […] REQUISITOS PARA DESIGNAÇÃO Art. 10. O servidor designado para o cumprimento das atribuições dispostas neste Título deverá preencher os seguintes requisitos: I – ser servidor efetivo da Câmara dos Deputados; II – ter atribuições relacionadas a licitações e contratos ou possuir formação ou qualificação compatível, nos termos de Portaria do Diretor-Geral; III – não ser cônjuge ou companheiro de licitantes ou contratados habituais da Câmara dos Deputados nem ter com eles vínculo de parentesco, colateral ou por afinidade, até o terceiro grau, ou de natureza técnica, comercial, econômica, financeira, trabalhista e civil. Parágrafo único. A definição de contratado habitual, para os fins do disposto neste artigo, observará os requisitos definidos em Portaria do Diretor-Geral. DA VEDAÇÃO Art. 11. Fica vedada a designação do mesmo servidor para atuação simultânea em funções mais suscetíveis a riscos, em observância ao princípio da segregação de funções, de modo a reduzir a possibilidade de ocultação de erros e de ocorrência de fraudes na respectiva contratação. Art. 12. Os impedimentos dispostos no art. 9° da Lei n. 14.133/2021 aplicam-se a terceiro que auxilie a condução da contratação na qualidade de integrante de equipe de apoio, profissional especializado ou funcionário ou representante de empresa que preste assessoria técnica.
+Enunciado CJF 15/2022 | Diante da ocorrência de condutas infracionais tipificadas no art. 155 da Lei n. 14.133/2021, ao agente de contratação compete apenas a comunicação do fato à autoridade superior para fins de avaliação quanto à pertinência de instauração do processo administrativo sancionatório, sendo atentatória aos postulados da segregação de funções e da imparcialidade a atribuição de competências ao agente de contratação para promover a instrução e a deliberação quanto à aplicação e dosimetria de penalidade
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 53 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 18587/2021-TCU-Primeira Câmara | [Enunciado] Os documentos apresentados para lastrear a liquidação da despesa devem possuir o devido atesto da execução dos serviços por pessoa diversa da que autorizou o pagamento, em atenção ao princípio da segregação de funções.
+Acórdão 7428/2019-TCU-Plenário | [Enunciado] A contratação pela Administração de empresas pertencentes a parentes ou cônjuge de gestor público envolvido no processo de licitação caracteriza, diante do manifesto conflito de interesses, violação aos princípios constitucionais da moralidade e da impessoalidade.
+Acórdão 1375/2015-TCU-Plenário | [Enunciado] É vedado o exercício, por uma mesma pessoa, das atribuições de pregoeiro e de fiscal do contrato celebrado, por atentar contra o princípio da segregação das funções.
+Acórdão 2296/2014-TCU-Plenário | [Enunciado] As boas práticas administrativas impõem que as atividades de fiscalização e de supervisão do contrato devem ser realizadas por agentes administrativos distintos (princípio da segregação das funções), o que favorece o controle e a segurança do procedimento de liquidação de despesa.
+Acórdão 663/2012 -TCU-Plenário | [Voto] […] 6. Além disso, deve-se atentar para o fato de que, na linha do entendimento esposado no Voto da decisão 133/1997-Plenário, não há que se perquirir se o servidor possuía ou não informações privilegiadas, pois o impedimento do art. 9º se caracteriza pelo simples fato de ser o participante da licitação servidor do órgão ou da entidade contratante. 7. Colaciono, ainda, o entendimento inserto no Acórdão 294/2007-TCU-Plenário, no sentido de que “A omissão em declaração prestada perante a Administração Pública de determinada circunstância impeditiva de licitar, no caso a presença de servidor do órgão ou entidade licitante no quadro societário da empresa declarante, é motivo suficiente a configurar fraude à licitação, ensejando a declaração de inidoneidade da empresa para licitar.” No caso em tela, foi identificada, nos autos da tomada de preços [omissis] da [omissis] , declaração emitida pela recorrente de inexistência de fatos supervenientes impeditivos de sua participação no certame.
+Decisão 133/1997 – TCU – Plenário | [Voto] 5. O deslinde da questão “sub examine” não passa pela avaliação de saber se os servidores do INPE detinham ou não informações privilegiadas, conforme a linha de raciocínio adotada pela Assessoria Jurídica do Órgão. O vício a macular o processo consiste essencialmente na participação dos servidores como contratados do único licitante, posto que a Lei 8.666/93, ao vedar a participação na licitação de “servidor ou dirigente de órgão ou entidade contratante”, não fez distinção quanto ao nível de conhecimento técnico do servidor ou dirigente acerca do objeto licitado. Ou seja, basta que o interessado seja servidor ou dirigente do órgão ou entidade contratante para que esteja impedido de participar, direta ou indiretamente, de licitação por ele realizada. É certo, entretanto, que, caso fosse admitida no certame a participação de servidores, este fato por si só já constituiria infringência ao princípio da moralidade, insculpido no art. 37, “ caput ”, da Constituição Federal. Agravaria a irregularidade, nesta hipótese, semelhante ao caso concreto examinado, se, admitidos no certame, os servidores detivessem informações privilegiadas que os colocassem em posição favorecida quanto aos demais licitantes.
+Pesquisa de Jurisprudência | Realize “pesquisa por árvore de classificação” na Jurisprudência Selecionada do TCU . Selecione área “Licitação”. No campo de busca, realize pesquisas individuais pelos seguintes termos (não utilize aspas): segregação ; conflito de interesses. Realize “pesquisa por árvore de classificação” na Jurisprudência Selecionada do TCU . Selecione área “Contrato Administrativo”. No campo de busca, realize pesquisas individuais pelos seguintes termos (não utilize aspas): segregação ; conflito de interesses .
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+Quadro 54 – Modelos
+
+Assunto | Modelo disponibilizados por OGS ou por órgãos de controle | OGS
+Diretrizes | Vídeo explicativo | AGU, MGI
+
+Fonte: Elaboração própria.
+
+[1] Lei 14.133/2021, art. 6º, inciso V.
+
+[2] Lei 14.133/2021, art. 6º, incisos VI e LX, art. 7º caput e inciso I, art. 8º, e art. 31; IN – SGD/ME 94/2022, art. 2º, incisos IV e V, art. 29 § 1º; IN – Seges/MP 5/2017, art. 21, inciso III, art. 22 e art. 42.
+
+[3] Lei 14.133/2021, art. 6º, inciso LX, art. 8º, caput e § 1º, Decreto 11.246/2022, art. 14.
+
+[4] Lei 14.133/2021, art. 7º, § 1º; e Decreto 11.246/2022, art. 14, §§ 2º e 3º.
+
+[5] Lei 14.133/2021, art. 8º, caput, art. 31 e art. 61, § 2º.
+
+[6] O Decreto em questão é aplicável às organizações da Administração Pública federal direta, autárquica e fundacional do Poder Executivo federal. Esse Decreto está fundamentado no poder regulamentar do Presidente da República, conforme disposto no artigo 84, inciso IV, da CF/1988. No entanto, a recepção desse regulamento por parte das organizações dos poderes Legislativo e Judiciário pode variar, dependendo de fatores como compatibilidade com suas competências e existência de normas específicas que regulamentam a matéria abordada pelo Decreto. Um exemplo disso é o normativo interno do Senado Federal, que estabelece que os regulamentos do Poder Executivo só serão aplicados nas contratações do Senado quando houver uma previsão expressa nesse sentido em ato normativo próprio, decisão de autoridade competente ou disposição editalícia (ADG 14/2022, art. 1º, § 1º). Por isso, é fundamental que os termos de referência e editais de licitação esclareçam qual é a fundamentação jurídica da contratação, garantindo assim que todos os envolvidos tenham conhecimento das regras do processo.
+
+[7] Lei 14.133/2021, art. 8º, § 5º.
+
+[8] Lei 10.520/2002, art. 3º, inciso IV.
+
+[9] Lei 14.133/2021, art. 31, caput e § 1º.
+
+[10] Lei 14.133/2021, art. 6º, inciso L, art. 7º, inciso I, art. 8º, caput e §§ 1º, 2º e 4º, art. 32, § 1º, inciso XI; Decreto 11.246/2022, arts. 5º a 7º; art. 10, § 3º.
+
+[11] Lei 14.133/2021, art. 9º, § 2º; Decreto 11.246/2022, art. 4º, parágrafo único.
+
+[12] Lei 14.133/2021, art. 7º, inciso I, art. 140, inciso I, alínea “b”, inciso II, alínea “b”; Decreto 11.246/2022, art. 19, inciso I e § 1º; Decreto 9507/2018, arts. 10 e 11; IN – SGD/ME 94/2022, art. 2º, inciso V, alínea “a”, art. 29, § 3º, art. 31, inciso I, art. 32, art. 33, art. 38, § 3º, IN – Seges/MP 5/2017, art. 40, inciso I e § 2º; art. 50, inciso II; Resolução – CNJ 182/2013, art. 2º, inciso XVI.
+
+[13] Decreto 11.246/2022, art. 21.
+
+[14] Lei 14.133/2021, art. 7º, inciso I, art. 117, caput e §§ 1º a 3º; Decreto 11.246/2022, arts. 9º, e 22 a 25; IN – SGD/ME 94/2022, art. 2º, inciso V, alíneas “b”, “c”, “d”, art. 29, art. 33, incisos II, III e IV; IN – Seges/MP 5/2017, art. 41, § 2º, art. 50, inciso I, Anexos VIII-A e VIII-B; Resolução – CNJ 182/2013, art. 2º, inciso XII; Resolução – CNMP 102/2013, art. 2º, incisos XI, XII e XIII.
+
+[15] Os órgãos e as entidades da Administração Pública estadual, distrital e municipal que utilizem recursos da União oriundos de transferências voluntárias poderão observar as disposições do Decreto (Decreto 11.246/2022, art. 2º).
+
+[16] Lei 14.133/202, art. 8º, § 3º; Decreto 11.246/2022, arts. 15, 16, parágrafo único, 18 e 27.
+
+[17] Lei 14.133/2021, art. 18, § 1º, inciso X.
+
+[18] Lei 14.133/2021, art. 169, § 3º, inciso I.
+
+[19] A exemplo dos Acórdãos 2831/2011, item 9.1.3; 2065/2013, item 9.6; 2348/2016, item 9.1.11; 2350/2016, item 9.1.15 alínea “e”; 2351/2016, item 9.1.10 alínea “e”, todos do Plenário do TCU.
+
+[20] Lei 14.133/2021, art. 7º, § 1º.
+
+[21] Decreto 11.246/2022, art. 10, §§ 1º e 2º.
+
+[22] Em hipóteses de registro de preços, por exemplo, a organização contratante pode não ser a licitante.
+
+[23] Lei 14.133/2021, art. 7º, § 2º.
+
+[24] Lei 14.133/2021, art. 7º, inciso I.
+
+[25] Lei 14.133/2021, art. 10, caput.
+
+[26] Lei 14.133/2021, art. 10, § 1º, inciso II, e § 2º.

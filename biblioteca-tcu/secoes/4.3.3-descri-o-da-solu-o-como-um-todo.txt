@@ -1,0 +1,37 @@
+4.3.3. Descrição da solução como um todo
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/4-3-3-descricao-da-solucao-como-um-todo/
+======================================================================
+
+Como visto no tópico correspondente do estudo técnico preliminar, uma solução é o conjunto de todos os elementos (bens, serviços e outros) necessários para, de forma integrada, gerar os resultados que atendam à necessidade que originou a contratação.
+
+Alguns elementos de uma solução podem ser objeto de parcelamento em contratações diversas. Ou seja, um único ETP pode resultar em mais de um item de uma licitação ou mais de uma licitação, ou mais de um processo de contratação direta.
+
+Assim, o termo de referência pode se referir a uma única parte da solução escolhida. Apesar disso, é importante apresentar a solução como um todo para o pleno entendimento acerca do objeto e da finalidade da contratação pelas partes interessadas (fornecedores, sociedade, órgãos de controle).
+
+Para isso, deve ser realizada a transcrição ou a síntese do item “descrição da solução como um todo” do ETP, com as devidas atualizações.
+
+Quadro 142 – Referências normativas para a descrição da solução como um todo
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 6º Para os fins desta Lei, consideram-se: […] XXIII – termo de referência: documento necessário para a contratação de bens e serviços, que deve conter os seguintes parâmetros e elementos descritivos: […] c) descrição da solução como um todo, considerado todo o ciclo de vida do objeto; […]
+IN – SGD/ME 94/2022 | Art. 12. O Termo de referência ou Projeto básico será elaborado pela Equipe de Planejamento da Contratação a partir do Estudo Técnico Preliminar da Contratação, incluindo, no mínimo, as seguintes informações: […] III – descrição da solução de TIC, conforme art. 14; […] Art. 14. A descrição da solução de TIC como um todo deverá conter, de forma detalhada, motivada e justificada, o quantitativo de bens e serviços necessários para a sua composição, considerado todo o ciclo de vida do objeto.
+IN – Seges/ME 81/2022 | Art. 9º Deverão ser registrados no Sistema TR Digital os seguintes parâmetros e elementos descritivos: […] III – descrição da solução como um todo, considerado todo o ciclo de vida do objeto, com preferência a arranjos inovadores em sede de economia circular;
+IN – Seges/MP 5/2017 | Art. 30. O Termo de referência ou Projeto básico deve conter, no mínimo, o seguinte conteúdo: […] III – descrição da solução como um todo; […] ANEXO V DIRETRIZES PARA ELABORAÇÃO DO PROJETO BÁSICO (PB) OU TERMO DE REFERÊNCIA (TR) 2. São diretrizes específicas a cada elemento do Termo de referência ou Projeto básico: […] 2.3. Descrição da solução como um todo: a) Descrição da solução como um todo extraída dos Estudos Preliminares, com eventuais atualizações decorrentes de amadurecimento com relação à descrição da solução.
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 143 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 932/2017-TCU-Plenário | 9.1. conhecer da presente representação; 9.2. em atenção aos princípios constitucionais do contraditório e da ampla defesa, promover a audiência dos responsáveis conforme a seguir, para que, no prazo de quinze dias, a contar da ciência, apresentem razões de justificativa pelas ocorrências indicadas: […] 9.2.1.1 falta de planejamento embasado em estudos técnicos preliminares que assegurassem a viabilidade da contratação e que dessem suporte à especificação da solução contratada, em afronta ao art. 6º, inciso IX, da Lei 8.666/1993 e ao art. 8º, inciso II, do Decreto 3.555/2000; [Relatório] 18. Mesmo com relação à opção feita, não consta no termo de referência a descrição da solução como um todo, tampouco detalhamento, ainda que preliminar, das suas funcionalidades (“emissão de certidões” e “jurimetria”), com a descrição de seus insumos (entradas), saídas e forma básica de funcionamento. Trata-se, na verdade, de um termo de referência focado em aspectos puramente tecnológicos da infraestrutura de operacionalização da Central e desprovido de subsídios técnicos que permitam a compreensão de como o [ omissis ] estabeleceu os requisitos ali consignados e de que forma eles trariam benefícios à […] e atenderiam às necessidades de negócio estabelecidas pelo Conselho. […] 21. A ausência de uma solução bem definida, selecionada a partir de estudos que contribuíssem também para garantir a sua viabilidade técnica e diminuir os riscos do projeto, denota falta de planejamento, vem ao encontro da tese de que a contratação foi feita às pressas e tem estreita conexão com o insucesso na implantação do sistema.
+Pesquisa de Jurisprudência | Na Pesquisa integrada , pesquise por: “solução como um todo” E “termo de referência” .
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+Quadro 144 – Riscos relacionados
+
+Riscos
+Ausência da descrição da solução como um todo no TR, levando à falta de compreensão dos licitantes acerca do contexto em que se insere a solução objeto da licitação, com consequente oferecimento de proposta que não atende à necessidade que originou a contratação.
+
+Fonte: Tribunal de Contas da União, 2014, item “Descrição da solução como um todo”.

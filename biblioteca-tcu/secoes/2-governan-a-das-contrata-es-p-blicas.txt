@@ -1,0 +1,140 @@
+2. Governança das contratações públicas
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/2-governanca-das-contratacoes-publicas-2/
+======================================================================
+
+O Tribunal de Contas da União adotou um conceito abrangente para governança pública organizacional, que envolve os mecanismos de liderança, estratégia e controle utilizados para avaliar, direcionar e monitorar a atuação da gestão nas organizações públicas. O objetivo da governança é garantir a condução adequada das políticas públicas e a prestação de serviços de interesse da sociedade[1].
+
+Esse conceito foi assimilado pelo Decreto 9.203/2017[2] e tem como foco as organizações públicas. Ele busca superar um problema comum também presente na governança corporativa, que é o conflito conhecido como “principal-agente” ou “conflito de agência”.
+
+Esse conflito ocorre quando o agente, que é o administrador que recebe autoridade e recursos do principal (proprietário), adquire mais informações e controle sobre o que está sendo administrado. Essa vantagem pode levar o agente a agir em benefício próprio, em detrimento dos interesses do principal.
+
+Para lidar com esse conflito, as práticas de governança são implementadas visando aumentar a probabilidade de que os administradores atuem de forma efetiva para alcançar os objetivos estabelecidos pelo principal.
+
+No caso das organizações públicas, os usuários dos serviços, cidadãos e sociedade desempenham o papel de principal[3]. Os agentes públicos atuam como administradores, gerenciando os recursos que são de propriedade do principal.
+
+O conceito de governança organizacional apresenta três atividades básicas a serem desempenhadas pelos seus responsáveis[4]:
+
+- avaliar, com fundamento em evidências, o ambiente, os cenários, as alternativas, o desempenho e os resultados atuais e os almejados […]
+
+- direcionar, priorizar e orientar a preparação, a articulação e a coordenação de políticas e de planos, alinhando as funções organizacionais às necessidades das partes interessadas (usuários dos serviços, cidadãos e sociedade em geral) e assegurando o alcance dos objetivos estabelecidos. O direcionamento dá os critérios para o monitoramento. […]
+
+- monitorar os resultados, o desempenho e o cumprimento de políticas e planos, confrontando-os com as metas estabelecidas e as expectativas das partes interessadas. (Grifo nosso)
+
+A Figura 1 a seguir apresenta as práticas de governança organizacional promovidas pelo TCU, no Referencial Básico de Governança Organizacional (RBGO), classificadas nos mecanismos de Liderança, Estratégia e Controle.
+
+Figura 1 – Mecanismos e práticas de governança pública organizacional
+
+Fonte: Tribunal de Contas da União, 2020b, p. 52.
+
+As práticas de governança pública, quando aplicadas em conjunto, têm um papel crucial no direcionamento das funções de gestão e no monitoramento do desempenho organizacional. O objetivo dessas práticas é garantir que as funções de gestão estejam alinhadas com os objetivos da organização e que, de forma coordenada, contribuam para a entrega dos resultados esperados pela sociedade[5].
+
+Ao adotar um recorte da governança organizacional com foco no direcionamento da função de contratações, pode-se definir a “governança das contratações públicas” como[6]:
+
+O conjunto de mecanismos de liderança, estratégia e controle postos em prática para avaliar, direcionar e monitorar a atuação da gestão das contratações públicas, com objetivo de que as contratações agreguem valor ao negócio da organização, com riscos aceitáveis.
+
+A Lei 14.133/2021 atribui à alta administração dos órgãos e entidades da Administração Pública a responsabilidade pela governança das contratações. Essa Lei estabelece a implementação de processos e estruturas necessários para avaliar, direcionar e monitorar os processos licitatórios e os respectivos contratos. Isso inclui aspectos relacionados a riscos e controles internos, com ênfase nos de caráter preventivo[7].
+
+Conforme previsto na Lei, os processos e estruturas de governança devem ser implementados com vistas ao alcance dos seguintes objetivos[8]:
+
+- assegurar a seleção da proposta apta a gerar o resultado de contratação mais vantajoso para a Administração Pública, inclusive no que se refere ao ciclo de vida do objeto;
+
+- assegurar tratamento isonômico entre os licitantes, bem como a justa competição;
+
+- evitar contratações com sobrepreço ou com preços manifestamente inexequíveis e superfaturamento na execução dos contratos;
+
+- incentivar a inovação e o desenvolvimento nacional sustentável;
+
+- assegurar o alinhamento das contratações ao planejamento estratégico e às leis orçamentárias;
+
+- promover um ambiente íntegro e confiável; e
+
+- promover eficiência, efetividade e eficácia nas contratações.
+
+Assim, a instância interna de governança (conselho ou alta administração), com base na avaliação dos ambientes interno e externo, bem como nos resultados atuais e almejados, deve direcionar a função de contratações para o alcance desses objetivos, monitorando o desempenho dessa função organizacional.
+
+Em contrapartida, a função de contratações deve utilizar as diretrizes estabelecidas pela governança como base para o planejamento de suas ações. Ela deve executar o que foi planejado e controlar os resultados. Se forem detectados problemas ou sinais de possíveis problemas, a função de contratações deve informar à instância interna de governança para que medidas sejam tomadas para resolvê-los ou preveni-los.
+
+O Quadro 1 a seguir apresenta um conjunto de práticas para promover a governança das contratações[9]. Essas práticas são organizadas com base no modelo de governança pública organizacional[10] apresentado pelo Referencial Básico de Governança Pública (RBGO). Além disso, elas estão alinhadas a estudos de organizações de referência no tema[11], e fundamentadas na Lei 14.133/2021, em normativos aplicáveis aos órgãos e entidades da Administração Pública federal e na jurisprudência do TCU.
+
+As práticas destacam a necessidade de que a instância interna de governança seja formalmente responsável pela orientação e aprovação das estratégias e políticas internas relacionadas às contratações, bem como pela transparência e accountability[12] dos recursos empregados no exercício dessa função organizacional.
+
+A primeira e segunda colunas apresentam mecanismos e práticas do modelo de governança organizacional publicado pelo TCU (apresentados anteriormente na Figura 1). A terceira e quarta colunas propõem as práticas de governança das contratações com os respectivos detalhamentos.
+
+Para melhor compreensão do texto, é necessário esclarecer o significado dos seguintes verbetes utilizados ao longo deste manual:
+
+- “área de contratações” diz respeito à(s) unidade(s) responsável(eis) pelo planejamento, pela coordenação e pelo acompanhamento das ações destinadas às contratações, no âmbito da organização[13];
+
+- “função de contratações” trata do conjunto de processos de trabalho definidos e coordenados pela área de contratações, mas que não são limitados a ela, pois permeiam outras unidades organizacionais, como áreas requisitantes, áreas técnicas, assessoria jurídica, setores de material e de patrimônio, de contabilidade, de pagamento, e outros setores envolvidos no metaprocesso de contratação; e
+
+- “metaprocesso de contratação” é o agrupamento dos processos de trabalho de planejamento de cada uma das contratações, seleção de fornecedor e gestão de contrato[14].
+
+Quadro 1 – Práticas de governança das contratações públicas[15]
+
+Mecanismo | Prática de governança pública organizacional | Práticas de governança das contratações | Detalhamento
+Liderança | Promover a integridade | Promover a integridade nas contratações | Orientar, aprovar e apoiar programa de integridade aplicável às contratações públicasOrientar, aprovar e apoiar medidas de identificação e gerenciamento de conflito de interesses na função de contratações
+Estratégia | Gerir riscos | Gerir riscos das contratações | Estabelecer diretrizes para a gestão de riscos da função de contrataçõesEstabelecer diretrizes para a gestão de riscos em cada contratação
+Promover a gestão estratégica | Promover a gestão estratégica das contratações | Estabelecer o modelo de gestão das contratações, que abrange:aprovar a estrutura da área de contratações e os processos de trabalho que caracterizam a função de contratações;estabelecer diretrizes para a gestão de pessoas na função de contratações; eestabelecer outras diretrizes necessárias para orientar a função de contratações [16]
+Orientar, aprovar e apoiar os instrumentos de planejamento da função de contratações, incluindo:objetivos, indicadores e metas para a função de contratações;plano de logística sustentável (PLS); eplano de contratações anual (PCA).
+Monitorar o desempenho das funções de gestão | Monitorar o desempenho da função de contratações | Aprovar as rotinas de monitoramento do desempenho da função de contratações Receber e avaliar os relatórios de controle da área de contratações e efetuar intervenções, quando necessário
+Controle | Promover a transparência | Promover a transparência e a accountability das contratações | Estabelecer modelo de transparência das contrataçõesResponsabilizar-se pela administração dos recursos empregados nas contratações
+Promover a accountability
+Assegurar a efetividade da auditoria interna | Assegurar que a auditoria interna adicione valor à função de contratações | Informar a auditoria interna acerca dos objetivos, riscos, processos relevantes e prioridades da função de contrataçõesContribuir para que os serviços de auditoria interna contemplem a avaliação da governança das contratações, e do processo de gestão de riscos (incluindo os controles internos) da função de contratações, e a apuração de irregularidades nas contrataçõesTomar conhecimento das recomendações da auditoria interna e garantir a adoção das ações corretivas necessárias
+
+Fonte: Elaboração própria.
+
+A seguir, serão apresentadas explicações mais detalhadas sobre cada uma das práticas de governança das contratações públicas. No entanto, é importante mencionar que a governança é um tema complexo e em constante evolução. Ao longo do tempo, novas práticas e abordagens têm sido desenvolvidas e aperfeiçoadas para lidar com os desafios e demandas da Administração Pública.
+
+Portanto, as práticas ora sugeridas não esgotam todo o conjunto possível de práticas de governança das contratações, mas somente aquelas consideradas, atualmente, aplicáveis às organizações regidas pela Lei 14.133/2021.
+
+Além disso, a implementação das práticas de governança deve ser feita de acordo com a realidade da organização, buscando um formato e nível de complexidade adequados para alcançar os seus objetivos e lidar com os riscos aos quais está exposta. Deve-se evitar a implementação de controles que tenham custos maiores do que os benefícios esperados, como mencionado no artigo 14 do Decreto-lei 200/1967.
+
+É importante lembrar que a governança das contratações não é um fim em si mesma. Seu objetivo não é criar estruturas e controles desnecessários ou meramente burocráticos[17]. Pelo contrário, seu propósito é garantir que sejam adotadas as medidas necessárias para direcionar o esforço da gestão ao alcance dos resultados de interesse da sociedade. Isso inclui remover controles cujos custos sejam superiores aos possíveis benefícios. Como explicado no Referencial Básico de Governança Pública[18]:
+
+O propósito da governança não é, nem poderia ser, a criação de mais controles e de mais burocracia. Ao contrário, a governança provê formas de descobrir oportunidades de remover controles desnecessários, que se tornam empecilhos à entrega de resultados, pois seu objetivo é a melhoria do desempenho da organização para a geração de valor (adaptado de OCDE (2017)). Por isso, a mera adoção burocrática de práticas, sem foco nos resultados, não conduz à boa governança e nem condiz com ela. Todas as práticas de governança servem para criar contextos favoráveis à entrega dos resultados esperados pelos cidadãos, com sustentabilidade.
+
+[1] Tribunal de Contas da União, 2020b, p. 36.
+
+[2] Decreto 9.203/2017, art. 2º, inciso I.
+
+[3] CF/1988, art. 1º, parágrafo único: “Todo o poder emana do povo, que o exerce por meio de representantes eleitos ou diretamente, nos termos desta Constituição”.
+
+[4] Tribunal de Contas da União, 2020b, p. 17 – 18
+
+[5] Tribunal de Contas da União, 2020b, p. 15, 18 e 148.
+
+[6] Adaptado do Acórdão 2622/2015-TCU-Plenario, relatório do Ministro-Relator, parágrafo 2, excerto do relatório da unidade técnica, parágrafo 22. Esse conceito foi adotado em normativos infralegais dos poderes Judiciário e Executivo da União, como: a Resolução – CNJ 347/2020, que dispõe sobre a Política de Governança das Contratações Públicas no Poder Judiciário, e a Portaria – Seges/ME 8.678/2021, que dispõe sobre a governança das contratações públicas no âmbito da Administração Pública Federal, autárquica e fundacional.
+
+[7] Lei 14.133/2021, art. 11, parágrafo único, e art. 169, caput e § 1º.
+
+[8] Lei 14.133/2021, art. 11, caput e parágrafo único.
+
+[9] Não há a pretensão de esgotar todo o conjunto existente de práticas de governança das contratações públicas.
+
+[10] As razões para utilizar como referência o modelo de governança pública organizacional proposto pelo TCU foram: o enfoque em organizações públicas federais; o robusto referencial teórico; e o amplo histórico de validação, que inclui não apenas as validações realizadas durante a elaboração do próprio documento, mas também edições anteriores e fiscalizações de governança executadas pelo TCU desde o ano de 2007.
+
+[11] Principalmente da ABNT; OCDE; Naspo, o NIGP e o CIPS (associações profissionais sem fins lucrativos que prestam serviços de pesquisa, formação, capacitação e certificação nos temas de governança e gestão das contratações); além do COSO e do IIA, nos temas de gestão de riscos e de controles internos.
+
+[12] Vide item 2.5.
+
+[13] Decreto 10.947/2022, art. 2º, inciso VI; Resolução – CNJ 347/2020, Anexo, inciso VIII.
+
+[14] Tribunal de Contas da União, 2020a; Portaria – Seges/ME 8.678/2021, art. 2º, inciso IV.
+
+[15] Não foram abordadas no modelo as práticas de nível organizacional consideradas não adequadas à particularização para direcionamento da função de contratações, a saber:
+
+a) “estabelecer o modelo de governança”, pois é de âmbito organizacional, e não funcional. O enfoque funcional está contemplado na prática “promover a gestão estratégica das contratações”, que aborda a definição do modelo de gestão de contratações;
+
+b) “promover a capacidade da liderança”, pois a prática “promover a gestão estratégica das contratações” já aborda a gestão de pessoas na função de contratações, aplicável não somente aos colaboradores e gestores, mas também ao diretor de contratações ou função similar;
+
+c) “estabelecer a estratégia”, pois trata-se de prática de âmbito organizacional, e não funcional. O enfoque funcional é visto na prática “promover a gestão estratégica das contratações”, a qual contempla a elaboração do plano diretor dessa função e dos demais instrumentos de planejamento da gestão das contratações;
+
+d) “monitorar os resultados organizacionais”, por ser prática de âmbito organizacional, e não funcional. O enfoque funcional é dado na prática “monitorar o desempenho da gestão de contratações”; e
+
+e) “monitorar a satisfação dos usuários”, por ser prática de âmbito organizacional, e não funcional. O enfoque funcional é dado na prática “monitorar o desempenho da gestão de contratações”.
+
+[16] Exemplos no item 2.3.1.3 deste manual.
+
+[17] Uma das ações possíveis para mitigar riscos é a adoção de controles internos, que devem ser implantados de forma parcimoniosa, de modo a evitar o surgimento de disfunções burocráticas, coloquialmente chamado de “burocratização”, como consta de diversos normativos, tais como: Decreto-Lei 200/1967 (Organização da Administração Federal), art. 14; Lei 13.460/2017 (Código de Defesa do Usuário do Serviço Público), art. 5º, incisos IV, XI e XIII; Lei 9.784/1999 (Lei do Processo Administrativo), art. 2º, parágrafo único, incisos VI e IX; Lei 14.129/2021 (Governo Digital), diversos dispositivos, com destaque para o art. 3º, incisos I a IV, VII a XVI, XXII, XXV e XXVI); Decreto 9.094/2017 (Simplificação do atendimento prestado aos usuários dos serviços públicos), art. 1º, incisos IV a VIII; Decreto 8.936/2016 (Plataforma de Cidadania Digital), art. 1º; Decreto 9.191/2017 (item 17 do Anexo do decreto); e Decreto 9.203/2017 (Política de Governança da APF), art. 4º, inciso II.
+
+[18] Tribunal de Contas da União, 2020b, p. 15.

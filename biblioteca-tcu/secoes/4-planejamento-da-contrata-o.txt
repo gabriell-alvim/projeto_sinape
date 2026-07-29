@@ -1,0 +1,52 @@
+4. Planejamento da contratação
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/4-planejamento-da-contratacao/
+======================================================================
+
+O planejamento de cada contratação consiste em uma série de atividades realizadas internamente pelo órgão ou entidade, que permitem identificar a necessidade da Administração, indicar a solução mais adequada para atendê-la, verificar a viabilidade da contratação, e definir como essa solução será contratada (caso seja viável), executada e fiscalizada.
+
+O nível de detalhamento das informações produzidas em cada artefato do planejamento deve ser proporcional ao nível de risco associado ao objeto contratado[1].
+
+Na primeira etapa, a equipe de planejamento da contratação será constituída para realizar o estudo técnico preliminar (ETP) e a análise de riscos. Se não for constituída a equipe de planejamento, o ETP deverá ser elaborado por representantes da área requisitante[2] e da área técnica[3].
+
+O ETP é o documento que identifica o problema a ser resolvido (caracterizando o interesse público) e sua melhor solução, e que permite a avaliação da viabilidade técnica e econômica da contratação, servindo de base para a elaboração do termo de referência, do projeto básico ou do anteprojeto, caso se conclua pela viabilidade da contratação[4].
+
+A análise de riscos é o procedimento que engloba as atividades de identificação, análise e avaliação dos riscos da contratação e da execução contratual[5]. Juntamente com o ETP, permite concluir sobre a viabilidade da contratação. Os resultados da análise são utilizados ainda para definir o modelo de gestão contratual[6], por ocasião da elaboração do termo de referência e do contrato, e a matriz de alocação de riscos, quando necessária[7].
+
+Se a contratação for viável técnica e economicamente, a equipe de planejamento irá elaborar termo de referência (ou nortear o desenvolvimento ou contratação do projeto básico, ou anteprojeto[8]), para subsequente elaboração do edital ou do instrumento de contratação direta[9].
+
+Conforme disposto no art. 53 da Lei 14.133/2021, o processo seguirá para apreciação do órgão de assessoramento jurídico, que “realizará controle prévio de legalidade mediante análise jurídica da contratação”.
+
+A equipe de planejamento deverá avaliar a necessidade de realização de audiência pública (presencial ou virtual) ou consulta pública, a ser convocada com antecedência mínima de oito dias úteis, para participação de quaisquer interessados (não somente licitantes). Nesses casos, devem ser disponibilizadas previamente as informações pertinentes, inclusive o estudo técnico preliminar e elementos do edital de licitação[10]. 
+
+Encerrada a instrução sob os aspectos técnico e jurídico, a autoridade competente, caso necessário, efetuará as alterações necessárias no edital, e determinará a sua divulgação ou do aviso de contratação direta[11], encerrando-se o planejamento, e dando início ao processo de seleção do fornecedor. 
+
+Vale lembrar que, como comentado no item 3, a Lei 14.133/2021 deu maior ênfase à realização de contratações compartilhadas e à padronização de compras, serviços e obras, o que tem o potencial de reduzir o custo do processo de contratação[12]. O objetivo é simplificar e agilizar os processos, obtendo economia de escala e de esforços administrativos.
+
+Assim, a Lei determinou a instituição de centrais de compras e de instrumentos que permitam a centralização dos procedimentos de aquisição e contratação, a criação de catálogo eletrônico de padronização e a elaboração de modelos de minutas de editais, de termos de referência, de contratos padronizados e de outros documentos.
+
+A não utilização do catálogo eletrônico de padronização ou dos modelos de minutas deverá ser justificada por escrito e anexada ao respectivo processo licitatório.
+
+[1] IN – Seges/MP 5/2017, art. 19, parágrafo único.
+
+[2] Requisitante: agente ou unidade responsável por identificar a necessidade de contratação de bens, serviços e obras e requerê-la (Decreto 10.947/2022, art. 2º, inciso II). Área técnica: agente ou unidade com conhecimento técnico-operacional sobre o objeto demandado (Decreto 10.947/2022, art. 2º, inciso III).
+
+[3]IN – Seges/ME 58/2022, art. 8º.
+
+[4] Lei 14.133/2021, art. 6º, inciso XX, e art. 18, inciso X e § 1º.
+
+[5] Lei 14.133/2021, art. 18, inciso X.
+
+[6] Descreve como a execução do objeto será acompanhada e fiscalizada pelo órgão ou entidade (Lei 14.133/2021, art. 6º, inciso XXIII, alínea “f”, e art. 92, inciso XVIII).
+
+[7] Lei 14.133/2021, art. 103.
+
+[8] Anteprojeto é elaborado nos casos de contratação integrada (Lei 14.133/2021, art. 46, § 2º).
+
+[9] O art. 72 da Lei 14.133/2021 dispõe sobre os elementos que deverão compor os processos de contratação direta.
+
+[10] Lei 14.133/2021, art. 21.
+
+[11] Lei 14.133/2021, art. 53, § 3º, c/c art. 72, parágrafo único.
+
+[12] Lei 14.133/2021, arts. 19 e 181.

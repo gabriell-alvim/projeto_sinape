@@ -1,0 +1,45 @@
+4.1.2. Demonstração da previsão da contratação no PCA
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/4-1-2-demonstracao-da-previsao-da-contratacao-no-pca/
+======================================================================
+
+O estudo técnico preliminar deve indicar se a contratação em análise está prevista no plano de contratações anual da organização (PCA), demonstrando assim o seu alinhamento ao planejamento da Administração[1].
+
+Conforme explicado no item 2.3.2.3 deste manual, o PCA fundamenta a proposta orçamentária da organização e deve ser elaborado de forma alinhada aos planos de ações ou diretores das áreas administrativas e finalísticas, os quais suportam o plano estratégico institucional (PEI). Assim, a previsão da contratação no PCA pressupõe o alinhamento do futuro contrato com as prioridades e objetivos organizacionais e a existência dos recursos orçamentários necessários ao pagamento das despesas decorrentes.
+
+No âmbito da Administração Pública federal direta, autárquica e fundacional[2], o Decreto 10.947/2022 prevê que todas as contratações que a organização pretenda realizar no exercício subsequente deverão ser incluídas no PCA, incluídas as contratações diretas previstas nos arts. 74 e 75 da Lei 14.133/2021 e as “contratações que envolvam recursos provenientes de empréstimo ou de doação, oriundos de agência oficial de cooperação estrangeira ou de organismo financeiro de que o País seja parte”[3]. Ademais, novas demandas ensejarão a revisão do PCA[4].
+
+Quadro 90 – Referências normativas para a previsão da contratação no PCA
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 18. A fase preparatória do processo licitatório é caracterizada pelo planejamento e deve compatibilizar-se com o plano de contratações anual de que trata o inciso VII do caput do art. 12 desta Lei , sempre que elaborado, e com as leis orçamentárias, bem como abordar todas as considerações técnicas, mercadológicas e de gestão que podem interferir na contratação, compreendidos […] § 1º O estudo técnico preliminar a que se refere o inciso I do caput deste artigo deverá evidenciar o problema a ser resolvido e a sua melhor solução, de modo a permitir a avaliação da viabilidade técnica e econômica da contratação, e conterá os seguintes elementos: […] II – demonstração da previsão da contratação no plano de contratações anual, sempre que elaborado, de modo a indicar o seu alinhamento com o planejamento da Administração;
+Decreto 10.947/2022 | Art. 17. O setor de contratações verificará se as demandas encaminhadas constam do plano de contratações anual anteriormente à sua execução. Parágrafo único. As demandas que não constarem do plano de contratações anual ensejarão a sua revisão, caso justificadas, observado o disposto no art. 16. Art. 18. As demandas constantes do plano de contratações anual serão formalizadas em processo de contratação e encaminhadas à área de contratações com a antecedência necessária ao cumprimento da data pretendida de que trata o inciso V do caput do art. 8º, acompanhadas de instrução processual, observado o disposto no § 1º do art. 11.
+IN – SGD/ME 94/2022 | Art. 2º Para fins desta Instrução Normativa, considera-se: […] XXVIII – Plano de Contratações Anual – PCA: documento que consolida as demandas que o órgão ou a entidade planeja contratar no exercício subsequente ao de sua elaboração, conforme disposto no Decreto nº 10.947, de 25 de janeiro de 2022; […] Art. 7º As contratações de soluções de TIC deverão constar no Plano de Contratações Anual, nos termos do Decreto nº 10.947, de 2022. […] Art. 10. A fase de Planejamento da Contratação terá início com a instituição da Equipe de Planejamento da Contratação pela autoridade competente da Área Administrativa e ocorrerá após: I – envio pela área requisitante para a área de TIC do: Documento de Formalização da Demanda, utilizado para registrar a necessidade no PCA; registro do alinhamento da necessidade ao PDTIC vigente e Indicação do integrante Requisitante; II – avaliação pela área de TIC do alinhamento da contratação ao PDTIC e ao PCA e indicação do integrante Técnico;
+IN – Seges/ME 73/2022 | Art. 1º Esta Instrução Normativa dispõe sobre a licitação pelo critério de julgamento por menor preço ou maior desconto, na forma eletrônica, para a contratação de bens, serviços e obras, no âmbito da Administração Pública federal direta, autárquica e fundacional. […] Art. 11. A fase preparatória do processo licitatório deve compatibilizar-se com o Plano de Contratações Anual e com as leis orçamentárias, bem como abordar todas as considerações técnicas, mercadológicas e de gestão que podem interferir na contratação, compreendidos os documentos e procedimentos necessários de que dispõe o art. 18 da Lei nº 14.133, de 2021, observada a modalidade de licitação adotada, nos termos do art. 4º.
+IN – Seges/ME 58/2022 | Art. 9º Com base no Plano de Contratações Anual, deverão ser registrados no Sistema ETP Digital os seguintes elementos: […] IX – demonstrativo da previsão da contratação no Plano de Contratações Anual, de modo a indicar o seu alinhamento com o instrumentos de planejamento do órgão ou entidade;
+Enunciado – CJF 41/2023 | De acordo com o art. 18, § 1º, inciso II, o ETP deve demonstrar que a contratação está prevista no Plano de Contratações Anual (PCA), indicando seu alinhamento ao planejamento da Administração. Caso não esteja, retorna-se o ETP para área requisitante para que esta justifique sua necessidade, motivando a ausência de planejamento prévio. Após a devida justificativa e a aprovação pela autoridade competente, inclui-se a demanda e publica-se a alteração do PCA, para que assim volte à fase de avaliação da viabilidade técnica e econômica da contratação.
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 91 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Pesquisa de Jurisprudência | Execute consulta na Jurisprudência selecionada do TCU . Pesquise pela árvore de classificação: área “licitação”, tema “planejamento”. Execute a seguinte consulta na Pesquisa Integrada do TCU : “plano anual de aquisições” OU “plano de contratações” OU “plano anual de contratações” OU “Planejamento anual de contratações”
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+Quadro 92 – Riscos relacionados
+
+Riscos
+Não inclusão da solução no PCA, levando à realização de contratação desalinhada ao planejamento organizacional (desvinculada com o PEI, a LOA, o PLS e as diretrizes dos OGS), com consequente investimento em iniciativas e projetos não prioritários para a organização.
+Não inclusão da solução no PCA, levando à ausência de análise acerca do relacionamento entre a contratação que se deseja realizar e as demais contratações planejadas e em andamento, com consequente impossibilidade de identificar e considerar efeitos de alterações em quantidades e requisitos de uma contratação que afetem outras contratações.
+
+Fonte: Adaptado de Tribunal de Contas da União, 2014, itens “Alinhamento aos planos do órgão” e “Descrição da solução como um todo”; e adaptado de Tribunal de Contas da União, 2012, p. 69.
+
+[1] Lei 14.133/2021, art. 18, § 1º, inciso II.
+
+[2] O Decreto em questão é aplicável às organizações da Administração Pública federal direta, autárquica e fundacional do Poder Executivo federal. Esse Decreto está fundamentado no poder regulamentar do Presidente da República, conforme disposto no artigo 84, inciso IV, da CF/1988. No entanto, a recepção desse regulamento por parte das organizações dos poderes Legislativo e Judiciário pode variar, dependendo de fatores como compatibilidade com suas competências e existência de normas específicas que regulamentam a matéria abordada pelo Decreto. Um exemplo disso é o normativo interno do Senado Federal, que estabelece que os regulamentos do Poder Executivo só serão aplicados nas contratações do Senado quando houver uma previsão expressa nesse sentido em ato normativo próprio, decisão de autoridade competente ou disposição editalícia (ADG 14/2022, art. 1º, § 1º). Por isso, é fundamental que os termos de referência e editais de licitação esclareçam qual é a fundamentação jurídica da contratação, garantindo assim que todos os envolvidos tenham conhecimento das regras do processo.
+
+[3] Decreto 10.947/2022, art. 6º, caput e incisos I e II.
+
+[4] Decreto 10.947/2022, art. 17, parágrafo único.

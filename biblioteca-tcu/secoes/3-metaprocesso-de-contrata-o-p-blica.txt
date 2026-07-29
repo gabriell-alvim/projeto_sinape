@@ -1,0 +1,102 @@
+3. Metaprocesso de contratação pública
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/3-metaprocesso-de-contratacao-publica/
+======================================================================
+
+Adota-se, neste manual, o conceito de metaprocesso de contratação pública (Figura 3) como o “agrupamento dos processos de trabalho de planejamento de cada uma das contratações, seleção de fornecedores e gestão de contratos”[1].
+
+Figura 3 – Metaprocesso de Contratação Pública
+
+Fonte: Adaptado de Tribunal de Contas da União, 2014 (item “Aquisições Públicas” / “Metaprocesso de aquisição”); e de SGD, 2021, item “MCTI”.
+
+O planejamento da contratação aproxima-se do conceito de “fase preparatória do processo licitatório”, trazido pela Lei 14.133/2021[2] (Figura 4). Ambos recebem como insumo a necessidade da Administração, cujas possíveis soluções são avaliadas e comparadas por meio do estudo técnico preliminar, e a solução escolhida é especificada no termo de referência. O planejamento pode gerar como saída não apenas um edital de licitação, mas uma decisão de contratar por meio de dispensa ou inexigibilidade, que desencadeará um processo de trabalho de contratação específico de seleção do fornecedor inerente à contratação direta.
+
+O planejamento pode ainda levar à declaração de inviabilidade da contratação, encerrando o metaprocesso, ou até mesmo indicar mais de uma licitação subsequentes para atendimento integral da necessidade pública.
+
+O processo de seleção do fornecedor inicia-se com a divulgação do edital ou do aviso de contratação direta do objeto; e abrange, nos casos de licitação, as fases de apresentação e de julgamento de propostas, de habilitação, recursal e de homologação, previstas na Lei 14.133/2021 (Figura 4).
+
+Já o processo de gestão do contrato “recebe como insumo o contrato e gera como saída uma solução, que produz resultados, os quais atendem à necessidade que desencadeou a contratação”[3], até que haja o encerramento ou a extinção contratual.
+
+O processo de gestão de riscos, realizado ao longo de todas as etapas do metaprocesso de contratação, consiste nas atividades de identificação, análise, avaliação, tratamento e comunicação dos riscos relacionados ao processo licitatório, à execução contratual e aos resultados pretendidos com a contratação. 
+
+Figura 4 – Fases do Processo Licitatório – Lei 14.133/2021
+
+Fonte: Elaboração própria a partir da Lei 14.133/2021, art. 17.
+
+O conceito de metaprocesso de contratação insere-se no planejamento das contratações da organização como um todo, o qual envolve etapas adicionais e anteriores ao metaprocesso, como a elaboração do plano de contratações anual (PCA) e dos ajustes que lhe sejam necessários após a aprovação do orçamento da organização pública pelo Congresso Nacional.
+
+Ou seja, o metaprocesso de contratação trata de cada contratação individualmente, mas há uma etapa anterior que levanta as contratações da organização e identifica as relações de dependência entre elas (p.ex.: se houver a mudança de quantidade de microcomputadores a contratar, pode ser necessário alterar a quantidade a contratar de licenças de software que serão instaladas nesses equipamentos).
+
+Assim, cada contratação deve estar prevista no PCA[4], elaborado a partir de documentos de formalização de demandas (DFD), em que a área requisitante evidencia e detalha a necessidade de contratação[5] (Figura 5).
+
+Figura 5 – Planejamento da Contratação
+
+Fonte: Elaboração própria.
+
+Por sua vez, o PCA deve ser elaborado de forma vinculada aos objetivos específicos para contratações e ao plano de logística Sustentável (PLS), e subsidiar a elaboração da proposta orçamentária[6]. Deve ser, posteriormente, ajustado para adequar-se aos limites de orçamento postos à organização[7].
+
+O PLS deve “estar vinculado ao planejamento estratégico do órgão ou entidade, ou instrumento equivalente, e ao plano plurianual”[8], e deverá nortear a elaboração do PCA e dos estudos técnicos preliminares, dos anteprojetos, dos projetos básicos ou dos termos de referência das contratações previstas no PCA.
+
+Como explicado no item 2.3.2.1 deste manual, é necessário que os objetivos específicos para as contratações estejam alinhados com o planejamento estratégico da organização (PEI), o qual se vincula às diretrizes e às prioridades de Estado[9] e de Governo, aos planos dos OGS[10], bem como considera as políticas públicas e programas de governo pelos quais a organização seja responsável ou dos quais esteja diretamente envolvida na implementação[11].
+
+A Figura 6 ilustra a contextualização do metaprocesso de contratação pública no planejamento das contratações da organização como um todo.
+
+Figura 6 – Contextualização do metaprocesso de contratação
+
+Fonte: Elaboração própria.
+
+Os processos que compõem o metaprocesso de contratação pública (planejamento, seleção do fornecedor e gestão do contrato) serão apresentados, respectivamente, nos capítulos 4, 5 e 6 deste manual. Além disso, os itens 3.1 a 3.6, tratados mais abaixo, introduzem alguns conceitos fundamentais.
+
+Antes de iniciar os próximos capítulos, é importante ressaltar que a execução do processo de contratação de forma individualizada ou independente pelas organizações públicas deve ser uma exceção. Isso ocorre porque cada processo de contratação demanda um grande esforço, tempo e envolvimento de várias unidades organizacionais, como a área de contratações, a área técnica, a área requisitante e a consultoria jurídica. Além disso, existem diversos riscos envolvidos nesses processos.
+
+ Para lidar com essa questão, a Lei 14.133/2021 enfatiza a realização de contratações compartilhadas e a padronização de compras, serviços e obras. Essa abordagem tem o potencial de reduzir o custo do processo de contratação, simplificar e agilizar os processos, além de evitar a repetição de erros. Ao promover a economia de escala e de esforços administrativos, a contratação compartilhada se torna uma alternativa mais vantajosa[12].
+
+Dessa forma, é recomendável que a execução do processo de contratação de forma independente pelas organizações públicas seja utilizada apenas quando as especificidades do objeto a ser contratado exigirem um processo individualizado.
+
+Nesse sentido, a Lei estabeleceu diversos mecanismos para a realização de contratações compartilhadas ou centralizadas, que incluem[13]:
+
+- licitação utilizando o Sistema de Registro de Preços (SRP). O SRP, como forma de contratação compartilhada, foi priorizado pela Lei 14.133/2021. Esse sistema permite que várias organizações (organizações participantes) ou mediante adesões tardias (“caronas”) contratem bens e serviços, inclusive obras e serviços de engenharia, com base em preços registrados previamente. O SRP pode ser utilizado tanto em licitações nas modalidades pregão ou concorrência quanto em casos de inexigibilidade ou dispensa de licitação. O Decreto 11.462/2023 regulamentou os procedimentos para o SRP no âmbito da Administração Pública federal. As organizações que usam o sistema Compras do Governo Federal podem fazer o registro de preços pelo SRP digital (vide item 5.9.4);
+
+- licitação centralizada, conduzida por algum órgão central, como a Central de Compras da Seges/MGI[14]. A Lei 14.133/2021 determinou a instituição de centrais de compras, com o objetivo de realizar compras em grande escala para atender a diversos órgãos e entidades. É importante considerar que a centralização de contratações depende de forma mais intensa da qualidade da equipe da central de compras que a promove do que nas contratações individuais. Caso o planejamento seja malfeito ou a negociação de preços junto a um grande fornecedor seja malconduzida, diversas organizações públicas podem ser prejudicadas. Adicionalmente, os servidores dessas centrais de compras também tendem a ser mais assediados por fornecedores, devido aos montantes envolvidos nessas contratações, o que os torna mais suscetíveis a investidas que podem resultar em corrupção. Em função do exposto, é necessário maior rigor na escolha e na capacitação contínua das pessoas envolvidas em contratações das centrais de compras e implantação de controles internos para evidenciar a conformidade e a lisura dos procedimentos dessas contratações;
+
+- instituição de instrumentos que permitam, preferencialmente, a centralização dos procedimentos de aquisição e contratação de bens e serviços;
+
+- utilização de catálogo eletrônico de padronização de compras, serviços e obras, admitida a adoção do catálogo do Poder Executivo federal por todos os entes federativos; e
+
+- utilização de modelos de minutas de editais, termos de referência, contratos padronizados e outros documentos elaborados com auxílio dos órgãos de assessoramento jurídico e de controle interno. Em cumprimento ao comando legal, a Seges/MGI e a AGU têm publicado, no Portal de Compras do Governo Federal, na internet, minutas de documentos aderentes à Lei 14.133/2021[15].
+
+A não utilização do catálogo eletrônico de padronização ou dos modelos de minutas deverá ser justificada por escrito e anexada ao respectivo processo licitatório[16].
+
+Por fim, é importante mencionar que a adoção desses mecanismos requer uma análise cuidadosa sobre sua adequação para atender à necessidade específica que gerou a contratação. Por exemplo, pode ser necessário que a organização faça adaptações nos modelos de documentos utilizados. Além disso, existem casos em que o item registrado no catálogo eletrônico, no SRP, ou contratado pela Central de Compras pode não ser o mais adequado para atender à demanda. Portanto, é necessário avaliar se a estratégia adotada é realmente a mais adequada para o caso em questão.
+
+[1] Tribunal de Contas da União, 2020a. O conceito é semelhante aos apresentados pela Portaria – Seges/ME 8.678/2021, art. 2º e pela Resolução – CNJ 347/2020, Anexo, inciso XIV.
+
+[2] Lei 14.133/2021, art. 17, inciso I, e art. 18.
+
+[3] Tribunal de Contas da União, 2014, item “gestão do contrato” / “O que é?”.
+
+[4] Lei 14.133/2021, art. 12, inciso VII.
+
+[5] Decreto 10.947/2022, art. 2º, inciso IV.
+
+[6] Portaria – Seges/ME 8.678/2021, art. 10, parágrafo único.
+
+[7] Decreto 10.947/2022, art. 15, incisos I e II.
+
+[8] Portaria – Seges/ME 8.678/2021, art. 9º.
+
+[9] Por exemplo, Constituição Federal, art. 3º (objetivos fundamentais da República Federativa do Brasil).
+
+[10] Por exemplo, Estratégia de Governo Digital (EGD) do Poder Executivo federal.
+
+[11] Tribunal de Contas da União, 2020b, p. 79.
+
+[12] Lei 14.133/2021, arts. 19 e 181.
+
+[13] Lei 14.133/2021, art. 6º, inciso XLV, art. 19, art. 40, inciso II, art. 82, §§ 5º e 6º; art. 86, § 6º, art. 181.
+
+[14] Vide Acórdão 2.569/2018-TCU-Plenário, sobre contratações de grandes fornecedores de software, relatório do Ministro-Relator, seção “4.1 A Administração Pública pode adotar novos modelos de coordenação para explorar o poder de compra do Estado”.
+
+[15] Advocacia-Geral da União; Ministério da Gestão e da Inovação em Serviços Públicos em Serviços Públicos, 2023.
+
+[16] Lei 14.133/2021, art. 19, § 2º.

@@ -1,0 +1,28 @@
+1.1. Objetivo e escopo
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/1-1-objetivo-e-escopo/
+======================================================================
+
+A Lei 14.133/2021 estabelece as normas gerais de licitações e contratos administrativos para as Administrações Públicas diretas, autárquicas e fundacionais da União, dos Estados, do Distrito Federal e dos Municípios. Essa lei foi publicada e entrou em vigor em 1º de abril de 2021.
+
+No entanto, até dezembro de 2023, a Lei 14.133/2021 deve coexistir com as legislações anteriores, como a Lei 8.666/1993, a Lei 10.520/2002 (Lei do Pregão) e os art. 1º a 47-A da Lei 12.462/2011 (Regime Diferenciado de Contratações), em um regime de transição[1].
+
+Após o período de transição, a legislação anterior será revogada e as novas contratações das administrações direta, autárquica e fundacional dos diversos entes da federação passarão a ser regidas pela Lei 14.133/2021[2].
+
+Diante dessa importante alteração legislativa, o Tribunal de Contas da União identificou a oportunidade e a necessidade de revisar, atualizar e reestruturar o Manual de Licitações & Contratos, cuja última edição foi publicada em 2010.
+
+O objetivo desta nova edição do manual é fornecer orientações preventivas e pedagógicas para facilitar a interpretação e aplicação da Lei 14.133/2021 por parte da alta administração das organizações públicas e por todos os envolvidos na função de contratações.
+
+A intenção é promover a conformidade das contratações públicas com a nova legislação e estimular a adoção de boas práticas de governança e gestão de contratações pelas organizações da Administração Pública federal, aprimorando a capacidade de contratar do setor público.
+
+É importante ressaltar que, embora ainda não haja uma jurisprudência vasta e consolidada referente aos novos dispositivos da Lei 14.133/2021, nem regulamentação que esclareça todos os aspectos legais, o TCU entendeu ser oportuna a disseminação de orientações iniciais. Essas orientações incluem considerações sobre conceitos, riscos e jurisprudência que, mesmo fazendo referência à legislação anterior, sejam compatíveis com as regras atuais.
+
+A expectativa é de que esta edição seja atualizada periodicamente para acompanhar o amadurecimento natural de aplicação da Lei 14.133/2021, bem como as alterações do texto legal, a publicação da regulamentação pertinente e o surgimento e evolução da jurisprudência do TCU sobre o tema de contratações públicas.
+
+Ressalva-se que o escopo deste manual não abrange a Lei 13.303/2016, que rege as empresas públicas e sociedades de economia mista, nem os regulamentos próprios das entidades do terceiro setor. Além disso, não foram abordados regulamentos e legislações específicos de estados e municípios.
+
+Portanto, os comentários presentes no manual foram direcionados para organizações públicas federais. No entanto, gestores de outros entes federativos podem utilizar as orientações deste manual, no que for aplicável às suas organizações.
+
+[1] Lei 14.133/2021, art. 193, com redação dada pela Lei Complementar 198/2023.
+
+[2] Até 30/12/2023, as organizações tiveram a alternativa de escolher entre licitar e contratar pela legislação anterior, desde que a opção escolhida fosse indicada expressamente no edital ou no aviso ou instrumento de contratação direta (Lei 14.133/2021, art. 191).

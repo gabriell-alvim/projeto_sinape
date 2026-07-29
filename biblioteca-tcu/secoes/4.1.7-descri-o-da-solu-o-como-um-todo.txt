@@ -1,0 +1,77 @@
+4.1.7. Descrição da solução como um todo
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/4-1-7-descricao-da-solucao-como-um-todo/
+======================================================================
+
+Uma solução é o conjunto de todos os elementos (bens, serviços e outros) necessários para, de forma integrada, gerar os resultados que atendam à necessidade que ocasionou a contratação[1].
+
+Para ilustrar, tem-se que uma solução de segurança patrimonial poderia prever os seguintes elementos[2]:
+
+- implantação de barreiras físicas;
+
+- serviço de monitoramento 24h, por meio de postos de trabalho de vigilantes;
+
+- implantação de sistema de circuito fechado de televisão (CFTV) com gravação digital de imagens;
+
+- implantação de sistema de alarme;
+
+- fornecimento de equipamentos de vigilância, como catracas eletrônicas, equipamento de raios-X, detectores de metais etc.;
+
+- serviço de instalação, configuração e implantação da solução; 
+
+- implantação de sistema de geração de energia emergencial;
+
+- implantação de sistemas de combate a incêndio, incluindo alarmes contra incêndio;
+
+- serviço de treinamento de conscientização dos usuários das instalações; e
+
+- serviço de suporte técnico com manutenção preventiva e corretiva.
+
+Já uma solução de impressão poderia ser composta, por exemplo, pelos seguintes elementos:
+
+- locação de equipamentos de impressão e digitalização;
+
+- serviço de instalação e configuração de todos os equipamentos no ambiente de rede interna;
+
+- treinamento para os usuários acerca das soluções contratadas;
+
+- fornecimento de consumíveis de impressão (p. ex. toners) e de peças de reposição;
+
+- serviço de manutenção;
+
+- serviço de suporte técnico preventivo e corretivo no local; e
+
+- sistema de gerenciamento, bilhetagem de impressão, armazenamento de dados e segurança da informação.
+
+A solução pode ser composta por partes que serão contratadas e outras que não serão contratadas, seja porque a organização já as possui ou porque não são passíveis de contratação (p. ex., publicação de normas internas). Ademais, alguns elementos de uma solução podem ser objeto de parcelamento em contratações diversas. Ou seja, um único ETP pode resultar em mais de uma licitação ou processo de contratação direta.
+
+Assim, é importante apresentar a solução como um todo para assegurar, em todas as contratações relacionadas a uma mesma solução, o pleno entendimento acerca do objeto e da finalidade da contratação pelos potenciais fornecedores e das demais partes interessadas (sociedade, órgãos de controle etc.).
+
+Quadro 106 – Referências normativas para a descrição da solução como um todo
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 18. […] § 1º O estudo técnico preliminar a que se refere o inciso I do caput deste artigo deverá evidenciar o problema a ser resolvido e a sua melhor solução, de modo a permitir a avaliação da viabilidade técnica e econômica da contratação, e conterá os seguintes elementos: […] VII – descrição da solução como um todo, inclusive das exigências relacionadas à manutenção e à assistência técnica, quando for o caso; […]
+IN – Seges 58/2022 | Art. 9º Com base no Plano de Contratações Anual, deverão ser registrados no Sistema ETP Digital os seguintes elementos: […] I– – descrição da solução como um todo, inclusive das exigências relacionadas à manutenção e à assistência técnica, quando for o caso; […]
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 107 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 1225/2018-TCU-Plenário | 9.4. dar ciência à [ omissis ] das seguintes impropriedades, para que sejam adotadas medidas com vistas à prevenção de ocorrências futuras: […] 9.4.2. ausência de estudos técnicos preliminares para contratação de serviços continuados, a exemplo do que ocorreu no processo [ omissis ], que deu origem ao contrato [ omissis ], em afronta aos art. 6º, IX e 7º da Lei 8.666/1993; o art. 3º, III, da Lei 10.520/2002; e o art. 24 da Instrução Normativa 5/2017 do Ministério do Planejamento, Desenvolvimento e Gestão; [Relatório] 94. Efeitos reais e potenciais: os estudos técnicos preliminares devem abordar a necessidade da contratação, fazer referência a outros instrumentos do planejamento, arrolar os requisitos da contratação, trazer a estimativa das quantidades, conter levantamento de mercado, estimativa de preço, descrever a solução como um todo, justificar o parcelamento ou não da solução, demonstrar os resultados pretendidos, indicar as providências para adequação do ambiente do órgão para receber a solução contratada, arrolar contratações correlatas, e, trazer declaração expressa da viabilidade da contratação. Sua ausência, portanto, pode trazer a contratação de uma solução que não atenda à necessidade da instituição. 95. Apenas à guisa de exemplo, no caso em questão, o contrato foi firmado para a contratação de motorista. No entanto, a solução que se quer contratar é transporte. Motorista é apenas uma parte da solução, que ainda deve contar com os serviços de combustíveis, manutenção, aquisição de veículos. Essas questões são pensadas no estudo técnico preliminar, quando se trata de descrever a solução como um todo. Será também no estudo técnico preliminar que ficará expressa as alternativas de marcado e porque a opção por determinada alternativa.
+Acórdão 932/2017-TCU-Plenário | [Voto] 18. Mesmo com relação à opção feita, não consta no termo de referência a descrição da solução como um todo, tampouco detalhamento, ainda que preliminar, das suas funcionalidades (“emissão de certidões” e “jurimetria”), com a descrição de seus insumos (entradas), saídas e forma básica de funcionamento. Trata-se, na verdade, de um termo de referência focado em aspectos puramente tecnológicos da infraestrutura de operacionalização da Central e desprovido de subsídios técnicos que permitam a compreensão de como o [omissis] estabeleceu os requisitos ali consignados e de que forma eles trariam benefícios à Cnipe e atenderiam às necessidades de negócio estabelecidas pelo Conselho. […] 21. A ausência de uma solução bem definida, selecionada a partir de estudos que contribuíssem também para garantir a sua viabilidade técnica e diminuir os riscos do projeto, denota falta de planejamento, vem ao encontro da tese de que a contratação foi feita às pressas e tem estreita conexão com o insucesso na implantação do sistema.
+Pesquisa de Jurisprudência | Na Pesquisa integrada , pesquise por: “solução como um todo” E “estudos técnicos preliminares” .
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+Quadro 108 – Riscos relacionados
+
+Riscos
+Contratação de solução incompleta, levando a atrasos no atendimento da necessidade da Administração até que as partes faltantes sejam contratadas, com consequente interrupção de serviços e atividades, ou perda do investimento realizado (um exemplo disso é quando uma organização adquire um tomógrafo computadorizado, mas não contrata a infraestrutura necessária para suportá-lo, bem como os serviços de instalação e manutenção. Como resultado, o equipamento acaba sendo armazenado em caixas durante anos, sem poder ser utilizado).
+Contratação de solução incompleta, levando à necessidade de contratar diretamente um fornecedor específico para adquirir as partes faltantes, a fim de garantir a compatibilidade com o restante da solução já adquirida, com consequente contratação por preços mais elevados que aqueles que seriam obtidos num ambiente competitivo.
+
+Fonte: Adaptado de Tribunal de Contas da União, 2014, item “Descrição da solução como um todo”; e Tribunal de Contas da União, 2012, p. 99-101.
+
+[1] Tribunal de Contas da União, 2014, item “Descrição da solução como um todo” / “O que é?”.
+
+[2] Adaptado de Tribunal de Contas da União, 2014, item “Aquisições públicas”.

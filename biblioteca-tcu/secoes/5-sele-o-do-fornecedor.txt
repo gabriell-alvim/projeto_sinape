@@ -1,0 +1,26 @@
+5. Seleção do fornecedor
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/5-selecao-do-fornecedor/
+======================================================================
+
+O processo de seleção do fornecedor é a segunda etapa do metaprocesso de contratação pública. Inicia-se com a divulgação do edital (ou do aviso de contratação direta) e abrange as fases de apresentação de propostas e lances, se for o caso; de julgamento das propostas; de análise dos documentos de habilitação; dos recursos; e de homologação, previstas no art. 17 da Lei 14.133/2021.
+
+É no processo de seleção do fornecedor que deve ocorrer a ampla e isonômica competição entre os interessados para escolha daquele que executará o objeto pretendido pela Administração Pública, excepcionalizadas as hipóteses de contratação direta[1].
+
+A divulgação do edital inaugura essa etapa e dá conhecimento à sociedade e aos potenciais fornecedores acerca do objeto a ser contratado, bem como das regras e das condições da disputa, às quais se vinculam tanto a Administração quanto as empresas licitantes.
+
+Após a apresentação de propostas, ocorrerá a efetiva competição entre os interessados em executar o objeto, por meio da oferta de lances sucessivos crescentes ou decrescentes, dependendo do critério de julgamento, ressalvando-se o caso em que a licitação adotar o modo de disputa fechado, no qual não há lances, conforme explicado nos itens 3.5 e 5.3 deste manual.
+
+Na etapa de julgamento, ocorre a desclassificação das propostas inexequíveis ou que não atendam aos critérios de aceitabilidade definidos em edital relativos ao preço máximo, especificações técnicas ou por quaisquer outras inconsistências presentes na proposta, e a aceitação daquela compatível com as exigências fixadas no edital.
+
+A fase de habilitação diz respeito à verificação da capacidade do licitante classificado em primeiro lugar de executar o objeto contratado, por meio da avaliação de requisitos de habilitação: jurídica; fiscal, social e trabalhista; técnica; e econômico-financeira. Nos casos em que ocorre a denominada inversão de fases, essa análise é realizada em relação a todos os proponentes antes da fase de julgamento das propostas. Exceto com relação à regularidade fiscal, em que os documentos serão exigidos somente em momento posterior ao julgamento das propostas, e apenas do licitante mais bem classificado[2].
+
+A fase recursal possibilita a correção de falhas ou vícios nas decisões da Administração tomadas no curso da licitação.
+
+Por fim, a homologação, conforme a Lei 14.133/2021, ocorre em conjunto com a adjudicação do objeto à empresa declarada vencedora, é o ato da autoridade superior que confirma a regularidade dos atos praticados na licitação. Esse ato encerra o procedimento licitatório, declarando-o válido e regularmente conduzido.
+
+Os itens seguintes detalharão cada uma dessas fases.
+
+[1] Constituição Federal, art. 37, inciso XXI.
+
+[2] Lei 14.133/2021, art. 63, inciso III.

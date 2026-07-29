@@ -1,0 +1,22 @@
+4.4.2.5. Outros parâmetros
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/4-4-2-5-outros-parametros/
+======================================================================
+
+Deve ser demonstrado que a solução proposta atende bem à necessidade identificada nos estudos preliminares e que apresenta vantagens em relação a outras possíveis soluções. Nesse caso, o anteprojeto detalha um pouco melhor algumas soluções que já apareciam como possibilidade no ETP e os fatores que demonstram a sua vantajosidade em relação a outras opções de projeto.
+
+Importante destacar que os parâmetros não se limitam à execução da obra, mas incluem a sua finalidade última que é a prestação do serviço público ou o desenvolvimento de atividades pela própria população. Há soluções com menor custo ou de menor complexidade na implantação, mas que podem ter altos custos ou alta complexidade de manutenção e operação e vice-versa, o que deve ser adequadamente ponderado no anteprojeto.
+
+Em relação ao impacto ambiental, o anteprojeto deve considerar os impactos tanto da obra em si quanto das atividades que serão realizadas após a conclusão da obra, durante o funcionamento. Exemplos de impacto ambiental são a retirada da vegetação existente no local da obra, geração de entulho e outros resíduos, o alagamento de áreas no caso de obras de barragens, a emissão de esgotos nos rios em obras de saneamento, entre outros. Tais impactos vão condicionar algumas das escolhas de projeto e os custos e a necessidade de prever medidas de mitigação ou compensação.
+
+A depender do tipo de obra, será necessário realizar um processo formal de licenciamento ambiental, conforme previsto na Resolução CONAMA 237/1997. Nesses casos, é recomendável que, ao menos, a licença prévia já tenha sido obtida na etapa de finalização do anteprojeto. Nesse sentido dispõe o art. 115, § 4º, da Lei 14.133/2021:
+
+Art. 115. […] § 4º Nas contratações de obras e serviços de engenharia, sempre que a responsabilidade pelo licenciamento ambiental for da Administração, a manifestação prévia ou licença prévia, quando cabíveis, deverão ser obtidas antes da divulgação do edital.
+
+Em relação à acessibilidade, a legislação a define como a “possibilidade e condição de alcance para utilização, com segurança e autonomia, de espaços, mobiliários, equipamentos urbanos, edificações, transportes, informação e comunicação, inclusive seus sistemas e tecnologias, bem como de outros serviços e instalações abertos ao público, de uso público ou privados de uso coletivo, tanto na zona urbana como na rural, por pessoa com deficiência ou com mobilidade reduzida”[1].
+
+Portanto, embora um dos fatores da acessibilidade seja a eliminação de barreiras físicas para acesso, por exemplo, a pessoas com mobilidade reduzida, não se restringe apenas a esta dimensão. Devem ser consideradas diversas outras dimensões, inclusive a forma de prestação do serviço público, de tal modo que a obra atenda plenamente às exigências normativas e contribua para a inclusão das pessoas com deficiência ou com mobilidade reduzida.
+
+Entre as principais normas que regem esta questão estão as Leis 13.146/2015 (Estatuto da Pessoa com Deficiência), 10.048/2000 e 10.098/2000 — que tratam da inclusão da pessoa com deficiência, do atendimento prioritário (a idosos, gestantes etc.) e da promoção da acessibilidade, e o Decreto 5.296/2004, que regulamenta as leis anteriores. Além disso, destaca-se a Norma Brasileira NBR 9.050/2020, que tem papel importante ao definir, em detalhes, uma série de parâmetros que devem ser observados nos projetos.
+
+[1] Lei 13.146/2015, art. 3º, inciso I.

@@ -1,0 +1,100 @@
+4.4.1. Regimes de execução de obras e serviços de engenharia
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/4-4-1-regimes-de-execucao-de-obras-e-servicos-de-engenharia-2/
+======================================================================
+
+A Lei 14.133/2021 estabelece os regimes para a contratação e execução indireta de obras e ser­viços de engenharia, os chamados regimes de execução[1].
+
+Cada regime de execução terá implicações diversas na modelagem da licitação e na gestão contratual de uma obra ou de um serviço de engenharia, a exemplo da forma como os pagamentos serão realizados, do parcelamento do objeto ou da alocação de riscos por falhas na quantificação dos serviços.
+
+Os regimes dispostos na Lei 14.133/2021 são:
+
+- contratação por tarefa;
+
+- empreitada integral;
+
+- fornecimento e prestação de serviço associado (RFPSA);
+
+- emprei­tada por preço unitário (EPU);
+
+- empreitada por preço global (EPG);
+
+- contratação integrada; e
+
+- contratação semi-integrada.
+
+Além de cada regime ter suas particularidades quanto aos projetos e à licitação, a escolha do regime de contratação impacta a forma de fiscalizar a executar o contrato.
+
+O regime de contratação por tarefa é indicado para contratação de mão de obra para pequenos trabalhos com preço certo, com ou sem o fornecimento de materiais, como a própria Lei defi­ne[2].
+
+A empreitada integral, usualmente denominada turn key (chave na mão), é a contratação de um empreendimento em sua integralidade, compreendida a totalidade das etapas de obras, serviços e instalações necessárias, sob inteira responsabilidade do contratado até sua entrega ao contratante em condições de entrada em operação, com características adequadas às finalidades para as quais foi contratado e atendidos aos requisitos técnicos e legais para sua utilização com segurança estrutural e operacional. Assim, embora não se afaste o uso da empreitada integral para objetos mais simples, ela é usualmente utilizada para empreendimentos de maior complexidade, tais como obras industriais ou para objetos que contenham representativa parcela de fornecimento de equipamentos, instalações especiais e montagem eletromecânica, pois a empreitada integral inclui, no escopo do contrato, a etapa de entrada em operação.
+
+Dessa forma, o emprego desse regime acaba exigindo uma motivação quanto à inviabilidade do parcelamento do objeto.
+
+O regime de fornecimento e prestação de serviço associado, por seu turno, é um novo regime de contratação em que, além do fornecimento do objeto ou da execução da obra, o contratado responsabiliza-se por sua operação, manutenção ou ambas, por tempo determinado[3]. Em tal regime, o contrato terá sua vigência máxima definida pela soma do prazo relativo ao fornecimento inicial ou à entrega da obra com o prazo relativo ao serviço de operação e manutenção, este limitado a cinco anos contados da data de recebimento do objeto inicial, autorizada a prorrogação desde que respeitada a vigência máxima decenal[4]. Trata-se, portanto, de um ajuste híbrido, no qual durante parte de sua vigência são observadas as características de um típico contrato de escopo (fase de fornecimento ou construção da obra), sendo o restante do período de vigência executado como um contrato contínuo (fase de operação/manutenção).
+
+Quanto aos regimes de empreitada por preço unitário (EPU), empreitada por preço global (EPG), contratação integrada e contratação semi-integrada, por serem os mais utilizados nas contratações públicas de obras e serviços de engenharia, serão comentados de forma individualizada nos itens seguir.
+
+Antes, no entanto, cabe fazer algumas observações quanto ao documento de planejamento que deve ser elaborado a depender do regime de execução do objeto, e quanto à forma de medição e pagamento dos serviços.
+
+A escolha do regime de execução contratual está relacionada com o documento de planejamento que será utilizado para fundamentar a licitação, conforme ilustrado a seguir:
+
+Figura 9 – Planejamento e regime de execução contratual
+
+Fonte: Elaboração própria.
+
+Por expressa disposição legal, a contratação integrada será licitada com base no anteprojeto, ao passo que a utilização dos demais regimes de execução pode ocorrer a partir tanto do projeto básico quanto do projeto executivo, com exceção da contratação semi-integrada, em que a elaboração do projeto executivo é expressamente um encargo do contratado.
+
+No caso de serviços de engenharia, o regime de execução contratual torna-se menos relevante para a definição do instrumento de planejamento a ser utilizado na licitação, na medida em que todos os tipos de serviço de engenharia podem ser licitados a partir de termos de referência (embora também seja previsto o uso do projeto básico para licitação de serviços), conforme processo de planejamento ilustrado a seguir:
+
+Figura 10 – Planejamento de serviços de engenharia
+
+Fonte: Elaboração própria.
+
+No que tange à forma de medição e de pagamento dos serviços, a Lei 14.133/2021 dispõe que os regimes de execução por empreitada por preço global, empreitada integral, contratação por tarefa, contratação integrada e contratação semi-integrada serão licitados por preço global e adotarão sistemática de medição e pagamento associada à execução de etapas do cronograma físico-financeiro vinculadas ao cumprimento de metas de resultado. Nesse caso, é proibida a adoção de sistemática de remuneração orientada por preços unitários ou referenciada pela execução de quantidades de itens unitários[5].
+
+Ou seja, nesses regimes é vedado medir os serviços com base nos quantitativos e preços unitários, mas esses quantitativos e preços continuam sendo necessários para balizar o orçamento de referência da administração e, posteriormente, permitir aditivos contratuais e ajustes no cronograma, nos termos da própria Lei 14.133/2021:
+
+Art. 56 […]
+
+§ 5º Nas licitações de obras ou serviços de engenharia, após o julgamento, o licitante vencedor deverá reelaborar e apresentar à Administração, por meio eletrônico, as planilhas com indicação dos quantitativos e dos custos unitários, bem como com detalhamento das Bonificações e Despesas Indiretas (BDI) e dos Encargos Sociais (ES), com os respectivos valores adequados ao valor final da proposta vencedora, admitida a utilização dos preços unitários, no caso de empreitada por preço global, empreitada integral, contratação semi-integrada e contratação integrada, exclusivamente para eventuais adequações indispensáveis no cronograma físico-financeiro e para balizar excepcional aditamento posterior do contrato.
+
+Quadro 164 – Referências normativas para os regimes de execução
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 6º Para os fins desta Lei, consideram-se: […] XXXI – contratação por tarefa: regime de contratação de mão de obra para pequenos trabalhos por preço certo, com ou sem fornecimento de materiais; XXXIV – fornecimento e prestação de serviço associado: regime de contratação em que, além do fornecimento do objeto, o contratado responsabiliza-se por sua operação, manutenção ou ambas, por tempo determinado; […] Art. 46. […] § 1º É vedada a realização de obras e serviços de engenharia sem projeto executivo, ressalvada a hipótese prevista no § 3º do art. 18 desta Lei. § 2º A Administração é dispensada da elaboração de projeto básico nos casos de contratação integrada, hipótese em que deverá ser elaborado anteprojeto de acordo com metodologia definida em ato do órgão competente, observados os requisitos estabelecidos no inciso XXIV do art. 6º desta Lei. § 3º Na contratação integrada, após a elaboração do projeto básico pelo contratado, o conjunto de desenhos, especificações, memoriais e cronograma físico-financeiro deverá ser submetido à aprovação da Administração, que avaliará sua adequação em relação aos parâmetros definidos no edital e conformidade com as normas técnicas, vedadas alterações que reduzam a qualidade ou a vida útil do empreendimento e mantida a responsabilidade integral do contratado pelos riscos associados ao projeto básico. § 4º Nos regimes de contratação integrada e semi-integrada, o edital e o contrato, sempre que for o caso, deverão prever as providências necessárias para a efetivação de desapropriação autorizada pelo poder público, bem como: I – o responsável por cada fase do procedimento expropriatório; II – a responsabilidade pelo pagamento das indenizações devidas; III – a estimativa do valor a ser pago a título de indenização pelos bens expropriados, inclusive de custos correlatos; IV – a distribuição objetiva de riscos entre as partes, incluído o risco pela diferença entre o custo da desapropriação e a estimativa de valor e pelos eventuais danos e prejuízos ocasionados por atraso na disponibilização dos bens expropriados; V – em nome de quem deverá ser promovido o registro de imissão provisória na posse e o registro de propriedade dos bens a serem desapropriados. § 5º Na contratação semi-integrada, mediante prévia autorização da Administração, o projeto básico poderá ser alterado, desde que demonstrada a superioridade das inovações propostas pelo contratado em termos de redução de custos, de aumento da qualidade, de redução do prazo de execução ou de facilidade de manutenção ou operação, assumindo o contratado a responsabilidade integral pelos riscos associados à alteração do projeto básico. § 6º A execução de cada etapa será obrigatoriamente precedida da conclusão e da aprovação, pela autoridade competente, dos trabalhos relativos às etapas anteriores. […] § 9º Os regimes de execução a que se referem os incisos II, III, IV, V e VI do caput deste artigo serão licitados por preço global e adotarão sistemática de medição e pagamento associada à execução de etapas do cronograma físico-financeiro vinculadas ao cumprimento de metas de resultado, vedada a adoção de sistemática de remuneração orientada por preços unitários ou referenciada pela execução de quantidades de itens unitários. […] Art. 56 […] § 5º Nas licitações de obras ou serviços de engenharia, após o julgamento, o licitante vencedor deverá reelaborar e apresentar à Administração, por meio eletrônico, as planilhas com indicação dos quantitativos e dos custos unitários, bem como com detalhamento das Bonificações e Despesas Indiretas (BDI) e dos Encargos Sociais (ES), com os respectivos valores adequados ao valor final da proposta vencedora, admitida a utilização dos preços unitários, no caso de empreitada por preço global, empreitada integral, contratação semi-integrada e contratação integrada, exclusivamente para eventuais adequações indispensáveis no cronograma físico-financeiro e para balizar excepcional aditamento posterior do contrato. […] Art. 107. Os contratos de serviços e fornecimentos contínuos poderão ser prorrogados sucessivamente, respeitada a vigência máxima decenal, desde que haja previsão em edital e que a autoridade competente ateste que as condições e os preços permanecem vantajosos para a Administração, permitida a negociação com o contratado ou a extinção contratual sem ônus para qualquer das partes. […] Art. 113. O contrato firmado sob o regime de fornecimento e prestação de serviço associado terá sua vigência máxima definida pela soma do prazo relativo ao fornecimento inicial ou à entrega da obra com o prazo relativo ao serviço de operação e manutenção, este limitado a 5 (cinco) anos contados da data de recebimento do objeto inicial, autorizada a prorrogação na forma do art. 107 desta Lei.
+
+Fonte: Elaboração própria a partir da norma consultada.
+
+Quadro 165 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 734/2018 – TCU – Plenário | 9.1.3. inclua nos editais, doravante, cláusula que estabeleça, de forma objetiva, o que será objeto de aditamento durante a execução da avença, estabelecendo, por exemplo, percentuais de tolerância quantitativa admitidos em cada item do orçamento que torne descabida a celebração de aditivo, bem como a necessidade de que a imprecisão se refira a serviço materialmente relevante do empreendimento (avaliado de acordo com a metodologia ABC), em observância ao princípio da segurança jurídica, conforme art. 6º, VIII, ‘a’ c/c art. 47, art. 49 e art. 65, II, ‘d’, todos da Lei 8.666/93.
+Acórdão 2136/2017 – TCU – Plenário | [Enunciado] A Administração deve exigir das empresas contratadas no regime de contratação integrada, por ocasião da entrega dos projetos básico e executivo, a apresentação de orçamento detalhado contendo descrições, unidades de medida, quantitativos e preços unitários de todos os serviços da obra, acompanhado das respectivas composições de custo unitário, bem como do detalhamento dos encargos sociais e da taxa de BDI, nos termos do art. 2º, parágrafo único, da Lei 12.462/2011, aplicável a todos os regimes de execução contratual do RDC, e da Súmula TCU 258.
+Acórdão 1569/2017 – TCU – Plenário | [Enunciado] A utilização da contratação integrada sem que estejam devidamente demonstradas e quantificadas, por meio de parâmetros técnicos – aqueles em que se deve demonstrar que as características do objeto permitem que ocorra real competição entre as contratadas para a concepção de metodologias/tecnologias distintas, que levem a soluções capazes de serem aproveitadas vantajosamente pelo Poder Público – e econômicos – aqueles em que a Administração deve demonstrar em termos monetários que os gastos totais a serem realizados com a implantação do empreendimento serão inferiores se comparados aos obtidos com os demais regimes de execução -, as vantagens de utilização do regime, contraria o disposto no art. 9º, da Lei 12.462/2011, assim como a jurisprudência desta Corte de Contas.
+Acórdão 711/2016 – TCU – Plenário | [Enunciado] O regime de empreitada integral previsto no art. 6º, inciso VIII, alínea e, da Lei 8.666/1993 deve ser considerado na condução de projetos de vulto e complexos, em que a perfeita integração entre obras, equipamentos e instalações se mostre essencial para o pleno funcionamento do empreendimento, a exemplo de obras em hidrelétricas. A adoção desse regime em obra pública fora dessas circunstâncias pode ferir o princípio do parcelamento, ao incluir no escopo a ser executado por empresa de construção civil itens que poderiam ser objeto de contratação à parte, como equipamentos e mobiliário.
+Acórdão 2980/2015 – TCU – Plenário | [Enunciado] Nas contratações integradas, é imprescindível a inclusão da matriz de risco detalhada no instrumento convocatório, com alocação a cada signatário dos riscos inerentes ao empreendimento.
+Acórdão 2145/2013 – TCU – Plenário | [Enunciado] Nas contratações do tipo turn key em que a elaboração do projeto básico for de responsabilidade do contratado (contratação integrada), deve ser promovida, previamente à abertura da licitação, a definição adequada das características do objeto a ser contratado, por meio de estudos, ensaios e projetos preliminares de engenharia.
+Acórdão 1977/2013 – TCU – Plenário | 9.1.7. quando constatados, após a assinatura do contrato, erros ou omissões no orçamento relativos a pequenas variações quantitativas nos serviços contratados, em regra, pelo fato de o objeto ter sido contratado por ‘preço certo e total’, não se mostra adequada a prolação de termo aditivo , nos termos do ideal estabelecido no art. 6º, inciso VIII, alínea ‘a’, da Lei 8.666/93, como ainda na cláusula de expressa concordância do contratado com o projeto básico, prevista no art. 13, inciso II, do Decreto 7.983/2013; 9.1.8. excepcionalmente, de maneira a evitar o enriquecimento sem causa de qualquer das partes, como também para garantia do valor fundamental da melhor proposta e da isonomia, caso, por erro ou omissão no orçamento, se encontrarem subestimativas ou superestimativas relevantes nos quantitativos da planilha orçamentária, poderão ser ajustados termos aditivos para restabelecer a equação econômico-financeira da avença, situação em que se tomarão os seguintes cuidados: 9.1.8.1. observar se a alteração contratual decorrente não supera ao estabelecido no art. 13, inciso II, do Decreto 7.983/2013, cumulativamente com o respeito aos limites previstos nos §§ 1º e 2º do art. 65 da Lei 8.666/93, estes últimos, relativos a todos acréscimos e supressões contratuais; 9.1.8.2. examinar se a modificação do ajuste não ensejará a ocorrência do “jogo de planilhas”, com redução injustificada do desconto inicialmente ofertado em relação ao preço base do certame no ato da assinatura do contrato, em prol do que estabelece o art. 14 do Decreto 7.983/2013, como também do art. 37, inciso XXI, da Constituição Federal; 9.1.8.3. avaliar se a correção de quantitativos, bem como a inclusão de serviço omitido, não está compensada por distorções em outros itens contratuais que tornem o valor global da avença compatível com o de mercado; 9.1.8.4. verificar, nas superestimativas relevantes, a redundarem no eventual pagamento do objeto acima do preço de mercado e, consequentemente, em um superfaturamento, se houve a retificação do acordo mediante termo aditivo, em prol do princípio guardado nos arts. 3º, caput c/c art. 6º, inciso IX, alínea “f”; art. 15, § 6º; e art. 43, inciso IV, todos da Lei 8.666/93; 9.1.8.5. verificar, nas subestimativas relevantes, em cada caso concreto, a justeza na prolação do termo aditivo firmado, considerando a envergadura do erro em relação ao valor global da avença, em comparação do que seria exigível incluir como risco/contingência no BDI para o regime de empreitada global, como também da exigibilidade de identificação prévia da falha pelas licitantes – atenuada pelo erro cometido pela própria Administração –, à luz, ainda, dos princípios da vedação ao enriquecimento sem causa, da isonomia, da vinculação ao instrumento convocatório, do dever de licitar, da autotutela, da proporcionalidade, da economicidade, da moralidade, do equilíbrio econômico-financeiro do contrato e do interesse público primário; (Grifou-se)
+Pesquisa de Jurisprudência | Execute consulta na Jurisprudência selecionada . Pesquise na “árvore de classificação” por “regime de execução”, filtre pela área “licitação” .
+
+Fonte: Elaboração própria a partir de consulta a jurisprudência do TCU.
+
+Quadro 166 – Riscos relacionados
+
+Riscos
+Utilização da empreitada global sem que estejam definidas as etapas de medição no contrato, levando à medição por preço unitário, com consequente necessidade não planejada de fiscalização por parte da Administração e a potenciais questionamentos sobre variações de quantitativos.
+Contratação de empreitada integral para a execução de obras que não exijam a integração com equipamentos ou instalações, levando à não observação do princípio do parcelamento, com consequente restrição à competitividade e prejuízo à obtenção da melhor proposta pela Administração.
+Má-fé do contratado e adoção de sistemática de pagamento de forma unitizada (por quilômetro/metro de grupos de serviços executados) em obras lineares com segmentos heterogêneos, levando o contratado a priorizar a execução dos trechos de menor custo de construção em detrimento dos trechos mais onerosos (jogo de cronograma), com consequentes prejuízos à Administração, atrasos ou má execução dos trechos mais onerosos, ou abandono da obra pelo contratado.
+
+Fonte: Elaboração própria.
+
+[1] Lei 14.133/2021, art. 46.
+
+[2] Lei 14.133/2021, art. 6º, inciso XXXI.
+
+[3] Lei 14.133/2021, art. 6º, inciso XXXIV.
+
+[4] Lei 14.133/2021, arts. 113 e 107.
+
+[5] Lei 14.133/2021, art. 46, § 9º.

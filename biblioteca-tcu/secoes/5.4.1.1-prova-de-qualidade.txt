@@ -1,0 +1,68 @@
+5.4.1.1. Prova de qualidade
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/5-4-1-1-prova-de-qualidade/
+======================================================================
+
+Para contratações de fornecimento de bens, a Lei 14.133/2021 possibilita à Administração, em caráter excepcional, e desde que formalmente justificado na fase de planejamento da contratação, indicar uma ou mais marcas ou modelos, nas seguintes hipóteses:
+
+Art. 41. […]
+
+I – […]
+
+a) em decorrência da necessidade de padronização do objeto;
+
+b) em decorrência da necessidade de manter a compatibilidade com plataformas e padrões já adotados pela Administração;
+
+c) quando determinada marca ou modelo comercializados por mais de um fornecedor forem os únicos capazes de atender às necessidades do contratante;
+
+d) quando a descrição do objeto a ser licitado puder ser mais bem compreendida pela identificação de determinada marca ou determinado modelo aptos a servir apenas como referência;
+
+Nas três primeiras hipóteses, previstas nas alíneas “a” a “c”, a contratação ficará restrita às marcas ou modelos indicados.
+
+Na última hipótese, prevista na alínea “d”, a marca ou o modelo indicado servirá como padrão de aceitabilidade da proposta, podendo a Administração contratar objetos similares aos de referência. Neste caso, o art. 42 da Lei 14.133/2021 estabeleceu as seguintes formas para atestar a qualidade dos produtos apresentados pelos licitantes como similares aos das marcas indicadas:
+
+Art. 42. […]:
+
+I – comprovação de que o produto está de acordo com as normas técnicas determinadas pelos órgãos oficiais competentes, pela Associação Brasileira de Normas Técnicas (ABNT) ou por outra entidade credenciada pelo Inmetro;
+
+II – declaração de atendimento satisfatório emitida por outro órgão ou entidade de nível federativo equivalente ou superior que tenha adquirido o produto;
+
+III – certificação, certificado, laudo laboratorial ou documento similar que possibilite a aferição da qualidade e da conformidade do produto ou do processo de fabricação, inclusive sob o aspecto ambiental, emitido por instituição oficial competente ou por entidade credenciada.
+
+Cabe esclarecer que a certificação de qualidade, prevista no inciso III, é referente ao produto ou ao seu processo de fabricação, e não à empresa.
+
+A Lei dispõe que o edital poderá restringir as certificações de qualidade àquelas emitidas por entidade credenciada pelo Conselho Nacional de Metrologia, Normalização e Qualidade Industrial (Conmetro)[1].
+
+Importante observar que, entre as alternativas dispostas pela Lei, a exigência de certificação como condição de aceitabilidade é a que mais requer cautela por parte da Administração, tendo em vista que a obtenção de certificações envolve prazos e custos que podem inviabilizar a participação de diversas empresas no certame, comprometendo a competividade da licitação.
+
+Quadro 240 – Referências normativas para a prova de qualidade
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 42. A prova de qualidade de produto apresentado pelos proponentes como similar ao das marcas eventualmente indicadas no edital será admitida por qualquer um dos seguintes meios: I – comprovação de que o produto está de acordo com as normas técnicas determinadas pelos órgãos oficiais competentes, pela Associação Brasileira de Normas Técnicas (ABNT) ou por outra entidade credenciada pelo Inmetro; II – declaração de atendimento satisfatório emitida por outro órgão ou entidade de nível federativo equivalente ou superior que tenha adquirido o produto; III – certificação, certificado, laudo laboratorial ou documento similar que possibilite a aferição da qualidade e da conformidade do produto ou do processo de fabricação, inclusive sob o aspecto ambiental, emitido por instituição oficial competente ou por entidade credenciada. § 1º O edital poderá exigir, como condição de aceitabilidade da proposta, certificação de qualidade do produto por instituição credenciada pelo Conselho Nacional de Metrologia, Normalização e Qualidade Industrial (Conmetro).
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 241 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Súmula – TCU 270 | Em licitações referentes a compras, inclusive de softwares, é possível a indicação de marca, desde que seja estritamente necessária para atender exigências de padronização e que haja prévia justificação.
+Acórdão 2129/2021-TCU-Plenário | [Enunciado] É irregular a exigência de atendimento a normas técnicas da ABNT, declarações de qualidade, certificações, laudos técnicos e certificados de conformidade sem a demonstração da essencialidade dessas exigências para se garantir a qualidade e o desempenho suficientes do objeto a ser contratado.
+Acórdão 898/2021-TCU-Plenário | [Enunciado] É legítima a exigência de certificação, comprovando que o objeto licitado está em conformidade com norma da Associação Brasileira de Normas Técnicas (ABNT), de forma a garantir a qualidade e o desempenho dos produtos a serem adquiridos pela Administração, desde que tal exigência esteja devidamente justificada no processo licitatório.
+Acórdão 808/2019-TCU- Plenário | [Enunciado] Permite-se menção a marca de referência no edital, como forma ou parâmetro de qualidade para facilitar a descrição do objeto, caso em que se deve necessariamente acrescentar expressões do tipo “ou equivalente”, “ou similar”, “ou de melhor qualidade”, podendo a Administração exigir que a empresa participante do certame demonstre desempenho, qualidade e produtividade compatíveis com a marca de referência mencionada.
+Acórdão 559/2017-TCU-Plenário | [Enunciado] A indicação ou a preferência por marca só é admissível se restar comprovado que a escolha é a mais vantajosa e a única que atende às necessidades da Administração. A licitação não tem por objetivo, necessariamente, a escolha do produto ou do serviço de melhor qualidade disponibilizado no mercado.
+Acórdão 113/2016-TCU-Plenário | [Enunciado] A indicação de marca no edital deve estar amparada em razões de ordem técnica, de forma motivada e documentada, que demonstrem ser aquela marca específica a única capaz de satisfazer o interesse público.
+Acórdão 2829/2015-TCU-Plenário | [Enunciado] A opção pela padronização nas aquisições, uma das hipóteses que autorizam a indicação de marca específica, deve ser pautada em critérios objetivos e fundamentada em estudos, laudos, perícias e pareceres que demonstrem as vantagens econômicas e a satisfação do interesse público com a medida. [Enunciado] A vedação à indicação de marca (artigos 15, § 7º, inciso I, e 25, inciso I, da Lei 8.666/1993) não se confunde com a menção à marca de referência, que deriva da necessidade de caracterizar/descrever de forma adequada, sucinta e clara o objeto da licitação (artigos 14, 38, caput , e 40, inciso I, da mesma Lei). A diferença básica entre os dois institutos é que o primeiro (excepcionado pelo art. 7º, § 5º, da Lei 8.666/1993) admite a realização de licitação de objeto sem similaridade, nos casos em que for tecnicamente justificável, ao passo que o segundo é empregado meramente como forma de melhor identificar o objeto da licitação, impondo-se a aceitação de objeto similar à marca de referência mencionada.
+Acórdão 2387/2013-TCU-Plenário | [Enunciado] A especificação, no edital, de produto ou bem cuja descrição e características correspondem a modelo exclusivo de determinado fabricante, sem que haja justificativas técnicas, afronta o disposto nos artigos 3º, caput e § 1º, e 7º, § 5º, da Lei 8.666/1993 c/c o art. 9º da Lei 10.520/2002.
+Acórdão 1695/2011-TCU-Plenário | [Enunciado] A restrição quanto a participação de determinadas marcas em licitação deve ser formal e tecnicamente justificada no processo de contratação.
+Pesquisa de Jurisprudência | Execute a seguinte consulta na Jurisprudência Selecionada . No campo de busca, realize pesquisa pelos termos separadamente: ABNT ; certificação ; marca .
+
+Fonte: Elaboração própria a partir de consulta a jurisprudência do TCU.
+
+Quadro 242 – Riscos relacionados
+
+Riscos
+Exigência de certificação de qualidade não essencial para demonstração da qualidade e do desempenho do produto licitado, levando ao desestímulo dos potenciais fornecedores para participarem do certame pela impossibilidade de cumprirem os prazos para obtenção da certificação ou incorrerem com seus custos, com consequentes redução do universo de licitantes e contratação por preços mais elevados dos que os que poderiam ser obtidos num cenário mais competitivo.
+
+Fonte: Elaboração própria.
+
+[1] Lei 14.133/2021, art. 42, § 1º.

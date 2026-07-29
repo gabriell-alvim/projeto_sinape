@@ -1,0 +1,29 @@
+5.10.2.10. Atendimento de contingentes militares no exterior (inciso IV, alínea “h”)
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/5-10-2-10-atendimento-de-contingentes-militares-no-exterior-inciso-iv-alinea-h/
+======================================================================
+
+Essa hipótese de dispensa destina-se a contratações de bens e serviços para atendimento a contingentes militares que estejam em operações de paz no exterior. Não é aplicável, portanto, para bens e serviços a serem utilizados em território brasileiro.
+
+A contratação deverá ser justificada quanto ao preço (demonstração de vantajosidade) e à escolha do fornecedor ou executante.
+
+Diversamente da hipótese de dispensa prevista para aquisição de materiais de uso das Forças Armadas (art. 75, inciso IV, alínea “g”), o dispositivo requer ratificação (confirmação) e não autorização (ato prévio) do comandante da força militar.
+
+Quadro 337 – Referências normativas para a dispensa para atendimento de contingentes militares no exterior
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 75. É dispensável a licitação: […] IV – para contratação que tenha por objeto: […] h) bens e serviços para atendimento dos contingentes militares das forças singulares brasileiras empregadas em operações de paz no exterior, hipótese em que a contratação deverá ser justificada quanto ao preço e à escolha do fornecedor ou executante e ratificada pelo comandante da força militar;
+Decreto 10.947/2022 | Art. 6º Até a primeira quinzena de maio de cada exercício, os órgãos e as entidades elaborarão os seus planos de contratações anual, os quais conterão todas as contratações que pretendem realizar no exercício subsequente, incluídas: I – as contratações diretas, nas hipóteses previstas nos art. 74 e art. 75 da Lei nº 14. 133, de 2021;
+IN – Seges/ME 81/2022 | Art. 6º O TR, a partir dos Estudos Técnicos Preliminares – ETP, se elaborados, definirá o objeto para atendimento da necessidade, a ser enviado para o setor de contratações no prazo definido no calendário de contratação de que trata o inciso III do art. 11 do Decreto nº 10.947, de 25 de janeiro de 2022. § 1 º Os processos de contratação direta de que trata o art. 72 da Lei nº 14.133, de 1º de abril de 2021, serão instruídos com o TR, observado em especial os arts. 8º e 10.
+IN – Seges/ME 67/2021 | Art. 4º Os órgãos e entidades adotarão a dispensa de licitação, na forma eletrônica, nas seguintes hipóteses: […] III – contratação de obras, bens e serviços, incluídos os serviços de engenharia, nos termos do disposto no inciso III e seguintes do caput do art. 75 da Lei nº 14.133, de 2021, quando cabível; e
+IN – Seges/ME 65/2021 | Art. 5º A pesquisa de preços para fins de determinação do preço estimado em processo licitatório para a aquisição de bens e contratação de serviços em geral será realizada mediante a utilização dos seguintes parâmetros, empregados de forma combinada ou não: […] Art. 7º Nas contratações diretas por inexigibilidade ou por dispensa de licitação, aplica-se o disposto no art. 5º. […]
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 338 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 3616/2022-Segunda Câmara | 9.3. promover o envio de ciência preventiva e corretiva para que, nos termos do art. 9º da Resolução TCU n.º 315, de 2020, o Comando da Marinha, o Comando do Exército e o Comando da Aeronáutica, sob a coordenação setorial do Ministério da Defesa e a coordenação central da Advocacia-Geral da União (AGU), como representante da União, promovam o procedimento técnico com vistas à integral avaliação sobre todos os ajustes sugeridos pela unidade técnica, às Peças 315 e 317, para a eventual modificação nos correspondentes normativos, em face de a Portaria GM-MD n.º 5.175, de 2021, com as demais normas adicionais pertinentes, tender a necessitar de eventuais ajustes em pleno cotejo, especialmente, com a Constituição de 1998 e a atual Lei n.º 14.133, de 2021, além da correlata Lei n.º 8.666, de 1993, e com a correspondente jurisprudência firmada pelo TCU a partir, por exemplo, dos Acórdãos 541/2021 e 1.850/2020, do Plenário, diante, entre outros, dos seguintes aspectos: (i) critérios para a autorização de aquisições feitas no exterior, incluindo a contratação direta, em prol dos órgãos sediados no Brasil; (ii) aquisição ou contratação, por meio de repartição sediada no exterior, de bens e serviços não classificados como produtos de defesa em prol dos órgãos sediados no Brasil; (iii) aquisições ou contratações, por meio de repartições do Ministério da Defesa sediada no exterior, de bens e serviços para os órgãos sediados no Brasil e não integrantes da estrutura do Ministério da Defesa; e (iv) ampliação da publicidade sobre as referidas contratações promovidas por meio de repartições sediadas no exterior;
+Pesquisa de Jurisprudência | Execute consulta na Jurisprudência Selecionada do TCU . Selecione a “área – Licitação”, tema “dispensa de licitação” .
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.

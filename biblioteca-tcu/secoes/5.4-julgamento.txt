@@ -1,0 +1,18 @@
+5.4. Julgamento
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/5-4-julgamento/
+======================================================================
+
+Finalizada a etapa de envio de lances ou de abertura das propostas (caso seja adotado o modo de disputa fechado), o agente de contratação ou a comissão de contratação realizará a verificação da conformidade das propostas com o edital de licitação.
+
+A Lei 14.133/2021 admite que a verificação da conformidade seja feita exclusivamente em relação à proposta mais bem classificada[1]. Assim, as propostas serão primeiramente ordenadas, de acordo com o critério de julgamento estabelecido (p. ex., menor preço), e só então a proposta mais bem classificada será analisada quanto à adequação ao objeto, ao preço estimado e às demais exigências estabelecidas no edital de licitação[2].
+
+Nessa linha, a jurisprudência do TCU orienta para que a análise detalhada das propostas seja realizada somente após a etapa de lances (no caso de modo de disputa aberto), quando a Administração poderá realizar diligências para sanar dúvidas e avaliar a aceitabilidade da proposta mais bem classificada[3].
+
+Cabe mencionar que, para licitações que utilizem o modo de disputa fechado e aberto, a plataforma Compras do Governo Federal possibilita ao agente ou à comissão de contratação fazer um exame preliminar das propostas antes da etapa de lances. Isso evita que propostas manifestamente inexequíveis passem para a etapa aberta, o que poderia restringir o número de concorrentes nessa etapa.
+
+[1] Lei 14.133/2021, art. 17, § 3º e art. 59, § 1º, a qual incorporou dispositivo previsto na Lei do RDC (Lei 12.462/2011, art. 24, § 1º).
+
+[2] Para a Administração Pública Federal direta, autárquica e fundacional do Poder Executivo, as instruções normativas da Seges/ME impõem que a verificação da conformidade da proposta seja feita exclusivamente na fase de julgamento, em relação à proposta do licitante mais bem classificado (IN – Seges/MGI 2/2023, art. 22, § 1º, IN – Seges/ME 73/2022, art. 20, § 1º, e IN – Seges/ME 96/2022, art. 31, § 1º, e art. 36).
+
+[3] Enunciado do Acórdão 2269/2021-TCU-Plenário; Acórdão 1168/2020-TCU-Plenário, item 1.7.1.1; votos condutores dos Acórdãos 2154/2011, 2390/2007, 539/2007, todos do Plenário do TCU.

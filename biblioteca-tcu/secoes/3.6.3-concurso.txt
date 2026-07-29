@@ -1,0 +1,59 @@
+3.6.3. Concurso
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/3-6-3-concurso/
+======================================================================
+
+Concurso é a modalidade de licitação para escolha de trabalho técnico, científico ou artístico, cujo critério de julgamento será necessariamente o de melhor técnica ou conteúdo artístico, com concessão de prêmio ou remuneração ao vencedor[1].
+
+O objeto dessa modalidade deve ser trabalho técnico, científico ou artístico, e não se confunde com o concurso público para investidura em cargo ou emprego público. A modalidade também não deve ser utilizada para contratação de serviços de mão de obra terceirizada.
+
+A Lei prevê que o concurso observe as regras e condições previstas em edital, que indicará:
+
+Art. 30 […]
+
+I – a qualificação exigida dos participantes;
+
+II – as diretrizes e formas de apresentação do trabalho;
+
+III – as condições de realização e o prêmio ou remuneração a ser concedida ao vencedor.
+
+Além disso, deve haver previsão de cessão dos direitos patrimoniais relativos ao projeto à Administração e autorização de sua execução conforme juízo de conveniência e oportunidade das autoridades competentes[2].
+
+Vale comentar que, no Acórdão 1.079/2019-Plenário, decorrente de ação de controle do TCU que analisou as causas das paralisações de obras, há uma recomendação para fomentar a contratação de projetos por meio de concursos[3]. Isso se deve ao fato de que a deficiência dos projetos é um dos principais fatores que levam à paralisação das obras, e os modelos tradicionais de licitação e contratação de projetos, incluindo licitações de menor preço ou de técnica e preço, têm produzido resultados insatisfatórios ao longo do tempo.
+
+Segundo o relatório que fundamentou a citada deliberação, as principais vantagens do concurso em relação às demais modelagens para a contratação de projetos são:
+
+- com o concurso, contrata-se o melhor projeto e não a melhor empresa, permitindo que a Administração capture diversas concepções do projeto, elaboradas pelos participantes do certame, escolhendo aquele que melhor lhe atenda;
+
+- a Administração Pública tem conhecimento prévio do projeto que está adquirindo, graças ao processo de concurso que permite antecipar o conhecimento sobre os parâmetros da proposta a ser desenvolvida posteriormente. Isso reduz o grau de incerteza sobre as etapas posteriores da contratação;
+
+- o projeto é entregue no prazo, sem aditivos e aumento de custos; na medida em que os parâmetros de prazo e custo são pré-estabelecidos, isso também reduz a incerteza em relação às entregas;
+
+- o melhor projeto é selecionado por especialistas na área, pois o agente ou comissão de contratação serão auxiliados por banca examinadora formada por profissionais de notório conhecimento na matéria do projeto, nos termos do art. 37, § 1º, da Lei 14.133/2021, o que mitiga parte dos riscos associados à crônica deficiência de estrutura de alguns órgãos, que não dispõem de profissionais qualificados para analisar e receber os projetos contratados.
+
+Além dos aspectos mencionados anteriormente, é importante destacar três outros pontos que afetam o desempenho das obras públicas de maneira sistêmica. O primeiro deles é que a adoção de um concurso para seleção de projetos, ou mesmo a adoção do critério técnico, exige que a Administração tenha conhecimento prévio sobre vários parâmetros do objeto que está sendo contratado, bem como do problema que se pretende resolver. Sem esse conhecimento prévio, não é possível estabelecer parâmetros mínimos para subsidiar a avaliação técnica e qualificação dos projetos apresentados. Isso reforça a necessidade de um planejamento mais sistemático e com tempo suficiente para maturação.
+
+O segundo diz respeito à transparência do procedimento de seleção, que leva a público um conjunto de informações sobre o processo de escolha das soluções de projeto, inclusive sobre as alternativas existentes – uma ferramenta importante para prevenir arbitrariedades que poderiam comprometer a viabilidade dos projetos. Esse procedimento permite envolver diversos atores do setor produtivo da construção civil, da área de projetos e da própria sociedade civil, a quem se destinam, em última análise, os benefícios da contratação.
+
+O terceiro relaciona-se ao papel indutor de inovações. A infraestrutura brasileira lida com problemas crônicos que talvez possam ser resolvidos com a adoção de novas práticas. Nesse sentido, a realização de concursos de projetos tende a fomentar o surgimento de novas soluções e, ao premiar tais iniciativas, aumentar o interesse do mercado no desenvolvimento de competências técnicas que lhes garantam vantagem competitiva.
+
+Quadro 77 – Referências normativas para o concurso
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 6º Para os fins desta Lei, consideram-se: […] XXXIX – concurso: modalidade de licitação para escolha de trabalho técnico, científico ou artístico, cujo critério de julgamento será o de melhor técnica ou conteúdo artístico, e para concessão de prêmio ou remuneração ao vencedor; […] Art. 30. O concurso observará as regras e condições previstas em edital, que indicará: I – a qualificação exigida dos participantes; II – as diretrizes e formas de apresentação do trabalho; III – as condições de realização e o prêmio ou remuneração a ser concedida ao vencedor. Parágrafo único. Nos concursos destinados à elaboração de projeto, o vencedor deverá ceder à Administração Pública, nos termos do art. 93 desta Lei , todos os direitos patrimoniais relativos ao projeto e autorizar sua execução conforme juízo de conveniência e oportunidade das autoridades competentes. […] Art. 93. Nas contratações de projetos ou de serviços técnicos especializados, inclusive daqueles que contemplem o desenvolvimento de programas e aplicações de internet para computadores, máquinas, equipamentos e dispositivos de tratamento e de comunicação da informação (software) – e a respectiva documentação técnica associada -, o autor deverá ceder todos os direitos patrimoniais a eles relativos para a Administração Pública, hipótese em que poderão ser livremente utilizados e alterados por ela em outras ocasiões, sem necessidade de nova autorização de seu autor. § 1º Quando o projeto se referir a obra imaterial de caráter tecnológico, insuscetível de privilégio, a cessão dos direitos a que se refere o caput deste artigo incluirá o fornecimento de todos os dados, documentos e elementos de informação pertinentes à tecnologia de concepção, desenvolvimento, fixação em suporte físico de qualquer natureza e aplicação da obra. § 2º É facultado à Administração Pública deixar de exigir a cessão de direitos a que se refere o caput deste artigo quando o objeto da contratação envolver atividade de pesquisa e desenvolvimento de caráter científico, tecnológico ou de inovação, considerados os princípios e os mecanismos instituídos pela Lei nº 10.973, de 2 de dezembro de 2004. § 3º Na hipótese de posterior alteração do projeto pela Administração Pública, o autor deverá ser comunicado, e os registros serão promovidos nos órgãos ou entidades competentes.
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 78 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 1.079/2019 – TCU – Plenário | 9.1. recomendar ao Ministério da Economia que: […] 9.1.5.3. buscar fomentar a realização de concursos de projetos e/ou outros procedimentos de contratação em que a qualificação técnica do objeto seja melhor ponderada como critério de escolha, aferindo a qualidade dos produtos entregues posteriormente;
+Pesquisa de Jurisprudência | Execute consulta nas Acórdãos do TCU . Pesquise pela expressão (não utilize aspas): modalidade adj2 concurso .
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+[1] Lei 14.133/2021, art. 6º, inciso XXXIX.
+
+[2] Lei 14.133/2021, art. 30, parágrafo único c/c art. 93.
+
+[3] Acórdão 1.079/2019-Plenário, item 9.1.5.3.

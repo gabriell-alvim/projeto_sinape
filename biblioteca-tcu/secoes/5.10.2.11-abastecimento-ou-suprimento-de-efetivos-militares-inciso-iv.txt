@@ -1,0 +1,29 @@
+5.10.2.11. Abastecimento ou suprimento de efetivos militares (inciso IV, alínea “i”)
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/5-10-2-11-abastecimento-ou-suprimento-de-efetivos-militares-inciso-iv-alinea-i/
+======================================================================
+
+Trata-se de dispensa de licitação para abastecimento ou suprimento de efetivos militares em estada eventual de curta duração (provisória) em portos, aeroportos ou localidades diferentes de suas sedes, por motivo de movimentação operacional ou de treinamento.
+
+Cabe mencionar que a Lei 14.133/2021 excluiu dois condicionantes que constavam na Lei 8.666/1993 (art. 24, inciso XVIII): possibilidade de a exiguidade dos prazos legais comprometer a normalidade e os propósitos das operações; e valor não exceder ao limite previsto na alínea “a” do inciso II do art. 23 da referida Lei[1].
+
+Quadro 339 – Referências normativas para a dispensa para abastecimento ou suprimento de efetivos militares
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 75. É dispensável a licitação: […] IV – para contratação que tenha por objeto: […] i) abastecimento ou suprimento de efetivos militares em estada eventual de curta duração em portos, aeroportos ou localidades diferentes de suas sedes, por motivo de movimentação operacional ou de adestramento;
+Decreto 10.947/2022 | Art. 6º Até a primeira quinzena de maio de cada exercício, os órgãos e as entidades elaborarão os seus planos de contratações anual, os quais conterão todas as contratações que pretendem realizar no exercício subsequente, incluídas: I – as contratações diretas, nas hipóteses previstas nos art. 74 e art. 75 da Lei nº 14. 133, de 2021;
+IN – Seges/ME 81/2022 | Art. 6º O TR, a partir dos Estudos Técnicos Preliminares – ETP, se elaborados, definirá o objeto para atendimento da necessidade, a ser enviado para o setor de contratações no prazo definido no calendário de contratação de que trata o inciso III do art. 11 do Decreto nº 10.947, de 25 de janeiro de 2022. § 1 º Os processos de contratação direta de que trata o art. 72 da Lei nº 14.133, de 1º de abril de 2021, serão instruídos com o TR, observado em especial os arts. 8º e 10.
+IN – Seges/ME 67/2021 | Art. 4º Os órgãos e entidades adotarão a dispensa de licitação, na forma eletrônica, nas seguintes hipóteses: […] III – contratação de obras, bens e serviços, incluídos os serviços de engenharia, nos termos do disposto no inciso III e seguintes do caput do art. 75 da Lei nº 14.133, de 2021, quando cabível; e
+IN – Seges/ME 65/2021 | Art. 5º A pesquisa de preços para fins de determinação do preço estimado em processo licitatório para a aquisição de bens e contratação de serviços em geral será realizada mediante a utilização dos seguintes parâmetros, empregados de forma combinada ou não: […] Art. 7º Nas contratações diretas por inexigibilidade ou por dispensa de licitação, aplica-se o disposto no art. 5º. […]
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 340 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 1358/2018-TCU-Plenário | [Enunciado] A intervenção federal, por si só, não autoriza a dispensa de licitação fundada no art. 24, incisos IV, IX e XVIII, da Lei 8.666/1993, exceto se preenchidos os requisitos legais para tanto estabelecidos. [Voto] 34.O consulente indagou, ainda, sobre a possibilidade de utilização de dispensas fundadas nos incisos IX e XVIII, do art. 24, da Lei 8.666/1993. […] 41.A dispensa relacionada no inciso XVIII do art. 24 também é bastante específica. Diz ela respeito às compras ou contratações de serviços para o abastecimento de navios, embarcações, unidades aéreas ou tropas, quando provisoriamente deslocadas de sua sede, por motivo de movimentação operacional ou de adestramento. 42.Assim, o ato interventivo somente autorizará a dispensa de licitação sob referido fundamento, quando houver a constatação da necessidade do deslocamento de tropa ou veículos militares para localidade diversa de sua sede e a necessidade da realização de compras ou contratações que não podem ser licitadas, sob pena de comprometimento da normalidade e dos propósitos das operações em questão. 43.Nessa hipótese, a referida contratação direta, conforme mesmo determina o dispositivo legal em apreço, deverá se restringir somente ao atendimento das tropas temporariamente deslocadas de sua sede para operações no âmbito da intervenção federal.
+Pesquisa de Jurisprudência | Execute consulta na Jurisprudência Selecionada do TCU . Selecione a “área – Licitação”, tema “dispensa de licitação” . Na Pesquisa Integrada do TCU , pesquise pelo termo “art. 24, XVIII” ou “art. 75, inc. IV”.
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+[1] Esse limite inicialmente era de R$ 80.000,00, alterando-se para R$ 176.000,00 por força do Decreto 9.412/2018.

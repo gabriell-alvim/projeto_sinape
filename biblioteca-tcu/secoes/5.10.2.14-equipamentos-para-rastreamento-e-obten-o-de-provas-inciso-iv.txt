@@ -1,0 +1,24 @@
+5.10.2.14. Equipamentos para rastreamento e obtenção de provas (inciso IV, alínea “l”)
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/5-10-2-14-equipamentos-para-rastreamento-e-obtencao-de-provas-inciso-iv-alinea-l/
+======================================================================
+
+A hipótese de dispensa de licitação já está prevista na Lei 12.850/2013 (art. 3º, § 1º), norma que dispõe sobre a investigação criminal e os meios de obtenção da prova.
+
+A contratação pode ter como objeto prestação de serviços especializados ou aquisição ou locação de equipamentos destinados ao rastreamento e à obtenção de provas. A justificativa para a dispensa é a necessidade de manutenção do sigilo sobre a investigação.
+
+Convém ressaltar que a referida Lei assim dispõe acerca da publicação resumida desses contratos e seus aditivos (art. 3º, § 2º):
+
+§ 2º No caso do § 1º, fica dispensada a publicação de que trata o parágrafo único do art. 61 da Lei nº 8.666, de 21 de junho de 1993, devendo ser comunicado o órgão de controle interno da realização da contratação.
+
+Quadro 344 – Referências normativas para a dispensa para aquisição ou locação de equipamentos para rastreamento e obtenção de provas
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 75. É dispensável a licitação: […] IV – para contratação que tenha por objeto: […] l) serviços especializados ou aquisição ou locação de equipamentos destinados ao rastreamento e à obtenção de provas previstas nos incisos II e V do caput do art. 3º da Lei nº 12.850, de 2 de agosto de 2013, quando houver necessidade justificada de manutenção de sigilo sobre a investigação;
+Lei 12.850/2013 | Art. 3º Em qualquer fase da persecução penal, serão permitidos, sem prejuízo de outros já previstos em lei, os seguintes meios de obtenção da prova: […] § 1º Havendo necessidade justificada de manter sigilo sobre a capacidade investigatória, poderá ser dispensada licitação para contratação de serviços técnicos especializados, aquisição ou locação de equipamentos destinados à polícia judiciária para o rastreamento e obtenção de provas previstas nos incisos II e V. (Incluído pela Lei nº 13.097, de 2015). […] § 2º No caso do § 1º, fica dispensada a publicação de que trata o parágrafo único do art. 61 da Lei nº 8.666, de 21 de junho de 1993, devendo ser comunicado o órgão de controle interno da realização da contratação (Incluído pela Lei nº 13.097, de 2015).
+Decreto 10.947/2022 | Art. 6º Até a primeira quinzena de maio de cada exercício, os órgãos e as entidades elaborarão os seus planos de contratações anual, os quais conterão todas as contratações que pretendem realizar no exercício subsequente, incluídas: I – as contratações diretas, nas hipóteses previstas nos art. 74 e art. 75 da Lei nº 14. 133, de 2021;
+IN – Seges/ME 81/2022 | Art. 6º O TR, a partir dos Estudos Técnicos Preliminares – ETP, se elaborados, definirá o objeto para atendimento da necessidade, a ser enviado para o setor de contratações no prazo definido no calendário de contratação de que trata o inciso III do art. 11 do Decreto nº 10.947, de 25 de janeiro de 2022. § 1 º Os processos de contratação direta de que trata o art. 72 da Lei nº 14.133, de 1º de abril de 2021, serão instruídos com o TR, observado em especial os arts. 8º e 10.
+IN – Seges/ME 67/2021 | Art. 4º Os órgãos e entidades adotarão a dispensa de licitação, na forma eletrônica, nas seguintes hipóteses: […] III – contratação de obras, bens e serviços, incluídos os serviços de engenharia, nos termos do disposto no inciso III e seguintes do caput do art. 75 da Lei nº 14.133, de 2021, quando cabível; e
+IN – Seges/ME 65/2021 | Art. 5º A pesquisa de preços para fins de determinação do preço estimado em processo licitatório para a aquisição de bens e contratação de serviços em geral será realizada mediante a utilização dos seguintes parâmetros, empregados de forma combinada ou não: […] Art. 7º Nas contratações diretas por inexigibilidade ou por dispensa de licitação, aplica-se o disposto no art. 5º. […]
+
+Fonte: Elaboração própria com base nas normas consultadas.

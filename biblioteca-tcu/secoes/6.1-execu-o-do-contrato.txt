@@ -1,0 +1,79 @@
+6.1. Execução do contrato
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/6-1-execucao-do-contrato/
+======================================================================
+
+O contrato deverá ser executado fielmente pelo contratado e pela Administração, de acordo com as cláusulas avençadas e com as normas da Lei de Licitações e Contratos Administrativos[1].
+
+Além disso, a Administração deverá fiscalizar a sua execução, de acordo com[2]:
+
+- o modelo de execução do contrato, que consiste na definição de como o contrato deverá produzir os resultados pretendidos desde o seu início até o seu encerramento; e
+
+- o modelo de gestão do contrato, que descreve como a execução do objeto será acompanhada e fiscalizada pelo órgão ou entidade.
+
+O descumprimento do contrato, total ou parcialmente, pode levar à extinção contratual, respondendo o culpado pelas consequências que poderão advir desse inadimplemento.
+
+O art. 119 da Lei 14.133/2021 dispõe que o contratado será obrigado a reparar, corrigir, remover, reconstruir ou substituir, a suas expensas, no total ou em parte, o objeto do contrato em que se verificarem vícios, defeitos ou incorreções resultantes de sua execução ou de materiais nela empregados. Trata-se de responsabilidade imputada ao contratado no caso de execução inadequada do objeto.
+
+Adicionalmente, conforme art. 120 da Lei, são de responsabilidade do contratado os danos causados diretamente à Administração ou a terceiros em razão da execução do contrato. Ademais, a fiscalização e o acompanhamento do contrato pela Administração não excluem nem reduzem essa responsabilidade.
+
+Quanto à reponsabilidade pelos encargos trabalhistas, previdenciários, fiscais e comerciais, de que trata o art. 121, remete-se aos comentários do item 6.1.5.
+
+No que tange ao cumprimento do cronograma do contrato, a Lei 14.133/2021 proíbe a Administração atrasar, imotivadamente, a execução de obra ou serviço, ou de suas parcelas. A vedação aplica-se inclusive na hipótese de mudança do chefe do Poder Executivo ou de titular no órgão ou entidade contratante[3]. O objetivo é garantir que a troca de gestor não interfira na continuidade da obra ou do serviço.
+
+Em caso de impedimento, ordem de paralisação ou suspensão do contrato, o cronograma de execução deverá ser prorrogado automaticamente pelo tempo correspondente à descontinuidade da prestação, anotadas tais circunstâncias mediante simples apostila[4].
+
+No caso de contratações de obras, se a execução for descontinuada por mais de um mês, além do apostilamento, a Administração deverá elaborar e divulgar, em sítio eletrônico oficial e em placa a ser afixada em local da obra de fácil visualização pelos cidadãos, aviso público de obra paralisada, com o motivo e o responsável pela inexecução temporária do objeto do contrato e a data prevista para o reinício da sua execução[5].
+
+Como medida de transparência e accountability, a Administração tem o dever de explicitamente emitir decisão sobre todas as solicitações e reclamações relacionadas à execução do contrato, ressalvados os requerimentos manifestamente impertinentes, meramente protelatórios ou de nenhum interesse para a boa execução do contrato. Concluída a instrução do requerimento, o prazo para a Administração decidir será de um mês, admitida a prorrogação motivada por igual período, salvo disposição legal ou cláusula contratual que estabeleça prazo específico[6].
+
+Quadro 393 – Referências normativas para a execução contratual
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 6º Para os fins desta Lei, consideram-se: -…] XXIII – termo de referência: documento necessário para a contratação de bens e serviços, que deve conter os seguintes parâmetros e elementos descritivos: […] e) modelo de execução do objeto, que consiste na definição de como o contrato deverá produzir os resultados pretendidos desde o seu início até o seu encerramento; f) modelo de gestão do contrato, que descreve como a execução do objeto será acompanhada e fiscalizada pelo órgão ou entidade; […] Art. 115. O contrato deverá ser executado fielmente pelas partes, de acordo com as cláusulas avençadas e as normas desta Lei, e cada parte responderá pelas consequências de sua inexecução total ou parcial. […] § 1º É proibido à Administração retardar imotivadamente a execução de obra ou serviço, ou de suas parcelas, inclusive na hipótese de posse do respectivo chefe do Poder Executivo ou de novo titular no órgão ou entidade contratante. […] § 5º Em caso de impedimento, ordem de paralisação ou suspensão do contrato, o cronograma de execução será prorrogado automaticamente pelo tempo correspondente, anotadas tais circunstâncias mediante simples apostila. § 6º Nas contratações de obras, verificada a ocorrência do disposto no § 5º deste artigo por mais de 1 (um) mês, a Administração deverá divulgar, em sítio eletrônico oficial e em placa a ser afixada em local da obra de fácil visualização pelos cidadãos, aviso público de obra paralisada, com o motivo e o responsável pela inexecução temporária do objeto do contrato e a data prevista para o reinício da sua execução. § 7º Os textos com as informações de que trata o § 6º deste artigo deverão ser elaborados pela Administração. […] Art. 119. O contratado será obrigado a reparar, corrigir, remover, reconstruir ou substituir, a suas expensas, no total ou em parte, o objeto do contrato em que se verificarem vícios, defeitos ou incorreções resultantes de sua execução ou de materiais nela empregados. Art. 120. O contratado será responsável pelos danos causados diretamente à Administração ou a terceiros em razão da execução do contrato, e não excluirá nem reduzirá essa responsabilidade a fiscalização ou o acompanhamento pelo contratante. Art. 121. Somente o contratado será responsável pelos encargos trabalhistas, previdenciários, fiscais e comerciais resultantes da execução do contrato. […] Art. 123. A Administração terá o dever de explicitamente emitir decisão sobre todas as solicitações e reclamações relacionadas à execução dos contratos regidos por esta Lei, ressalvados os requerimentos manifestamente impertinentes, meramente protelatórios ou de nenhum interesse para a boa execução do contrato. Parágrafo único. Salvo disposição legal ou cláusula contratual que estabeleça prazo específico, concluída a instrução do requerimento, a Administração terá o prazo de 1 (um) mês para decidir, admitida a prorrogação motivada por igual período. […] Art. 191. Até o decurso do prazo de que trata o inciso II do caput do art. 193, a Administração poderá optar por licitar ou contratar diretamente de acordo com esta Lei ou de acordo com as leis citadas no referido inciso, e a opção escolhida deverá ser indicada expressamente no edital ou no aviso ou instrumento de contratação direta, vedada a aplicação combinada desta Lei com as citadas no referido inciso. Parágrafo único. Na hipótese do caput deste artigo, se a Administração optar por licitar de acordo com as leis citadas no inciso II do caput do art. 193 desta Lei, o contrato respectivo será regido pelas regras nelas previstas durante toda a sua vigência.
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 394 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 675/2022-TCU-Plenário | [Enunciado] O atraso injustificado na execução de obras públicas é ocorrência grave, de maneira que o órgão ou a entidade contratante tem o dever de adotar as medidas cabíveis para aplicar as multas contratuais e demais penalidades previstas em lei, não se tratando de decisão discricionária da Administração.
+Acórdão 2296/2019- TCU – Plenário | [Enunciado] O fiscal de contrato, especialmente designado para o acompanhamento da obra, pode ser responsabilizado quando se omite na adoção de medidas necessárias à manutenção do ritmo de execução normal do empreendimento. [Voto] A inércia de [ omissis ] durante o período de 10 meses em que foi fiscal do Contrato [ omissis ] deu ensejo a grande parte do atraso no andamento do empreendimento, que, em abril de 2015 (data em que deixou de ser fiscal da avença) deveria estar na etapa de instalação de esquadrias, ferragens e vidro e, no entanto, encontrava-se na etapa de execução de fundações.
+Acórdão 1569/2017-TCU-Plenário | [Enunciado] O reajustamento de preços de contratos, em caso de atrasos na execução de serviços atribuíveis à contratada, contraria o disposto no art. 40, inciso XIV, alínea d, e no art. 65, inciso II, alínea d, ambos da Lei 8.666/1993, c/c o art. 39 da Lei 12.462/2011 (RDC).
+Acórdão 2672/2016-TCU-Plenário | [Enunciado] O fiscal da obra responde por prejuízo decorrente de serviços executados com deficiência aparente e por aqueles inexistentes que foram indevidamente atestados, situação na qual, se for terceiro contratado, cabe também a restituição dos honorários recebidos pelo serviço de fiscalização mal executado, uma vez que, conforme o disposto no art. 76 da Lei 8.666/1993, o fiscal tem uma típica obrigação de resultado.
+Acórdão 2714/2015- TCU – Plenário | [Enunciado] O atraso na execução de obras públicas é ocorrência de extrema gravidade, sendo cabível, quando a Administração dá causa ao descumprimento dos prazos, a apuração de responsabilidades dos gestores. Nos atrasos advindos de incapacidade ou mora do contratado, o órgão contratante tem o dever de adotar as medidas cabíveis para aplicar as multas contratuais e demais penalidades previstas em lei.
+Acórdão 2916/2013-TCU-Plenário | [Enunciado] O não cumprimento do contrato enseja aplicação das sanções previstas à empresa contratada, não se tratando de decisão discricionária dos gestores.
+Acórdão 1302/2013-TCU-Plenário | [Enunciado] Ao pactuar termos aditivos de prazo, a instituição pública deve se certificar de que o atraso ocorreu por ausência de culpa do contratado, por razões alheias ao seu conhecimento no ato da firmatura do acordo. Caso identificado que não houve fato superveniente, estranho às condições contratuais inicialmente avençadas, retardadores da execução do objeto, deve estipular novo prazo para o adimplemento do acordo, sem prejuízo das sanções cabíveis no instrumento de contrato.
+Acórdão 1694/2010-TCU – Plenário | [Enunciado] Na gestão de recursos públicos federais, a Administração contratante deve fiscalizar os contratos administrativos celebrados com atenção ao art. 58, inciso III, ao art. 67, caput e § 1º, e ao art. 69 da Lei 8.666/1993, de forma que seu representante anote, em registro próprio, todas as ocorrências relacionadas com a execução do ajuste, determinando o que for necessário à regularização das faltas ou defeitos observados, bem como exigindo a reparação, correção, remoção, reconstrução ou substituição, às expensas do contratado, no total ou em parte, do objeto do contrato em que se verificarem vícios, defeitos ou incorreções resultantes da execução ou de materiais empregados.
+Pesquisa de Jurisprudência | Execute consulta na Jurisprudência Selecionada do TCU . Na pesquisa por árvore de classificação, selecione a área “contrato administrativo”. Os resultados podem ser filtrados pelos temas: “obras e serviços de engenharia” ; execução de contrato ; Execute consulta na Jurisprudência Selecionada do TCU . Na pesquisa por árvore de classificação, selecione a área “responsabilidade”, tema “ contrato administrativo” .
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+Quadro 395 – Riscos relacionados
+
+Riscos
+Os riscos relacionados à execução contratual estão elencados ao longo deste capítulo 6, que trata da gestão do contrato.
+
+Fonte: Elaboração própria.
+
+Quadro 396 – Modelos
+
+Assunto | Modelo disponibilizados por OGS ou por órgãos de controle | OGS
+Orientações | IN – Seges/MP 5/2017 | MP
+Guia de boas práticas em contratação de soluções de tecnologia da informação: riscos e controles para o planejamento da contratação, v 1.0 (Tribunal de Contas da União, 2012) | TCU
+Guia de Contratações de TIC do Poder Judiciário (anexo à Resolução – CNJ 468/2022) | CNJ
+Obras Públicas: recomendações básicas para a contratação e fiscalização de obras de edificações públicas (Tribunal de Contas da União, 2015) | TCU
+
+Fonte: Elaboração própria.
+
+[1] Lei 14.133/2021, art. 115, caput.
+
+[2] Lei 14.133/2021, art. 6º, inciso XXIII, alíneas “e” e “f”.
+
+[3] Lei 14.133/2021, art. 115, § 1º.
+
+[4] Lei 14.133/2021, art. 115, § 5º. Apostila é a anotação ou registro administrativo de modificações contratuais que não alteram a essência da avença ou que não modifiquem as bases contratuais. Na prática, a apostila pode ser feita no termo de contrato ou nos demais instrumentos hábeis que o substituem, normalmente no verso da última página, ou juntada por meio de outro documento ao termo de contrato ou aos demais instrumentos hábeis (Tribunal de Contas da União, 2010, p. 660).
+
+[5] Lei 14.133/2021, art. 115, §§ 6º e 7º.
+
+[6] Lei 14.133/2021, art. 123, caput e parágrafo único.

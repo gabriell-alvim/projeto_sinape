@@ -1,0 +1,130 @@
+5.9.1. Credenciamento
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/5-9-1-credenciamento-2/
+======================================================================
+
+O credenciamento é definido pela Lei 14.133/2021 como[1]:
+
+Processo administrativo de chamamento público em que a Administração Pública convoca interessados em prestar serviços ou fornecer bens para que, preenchidos os requisitos necessários, se credenciem no órgão ou na entidade para executar o objeto quando convocados.
+
+Esse procedimento auxiliar é adotado quando se constata, na fase de planejamento da contratação, que a abordagem mais vantajosa para a administração consiste em permitir que uma gama de fornecedores se qualifique para fornecer os bens ou serviços desejados, em virtude da inviabilidade ou ineficácia de selecionar um único fornecedor por meio de disputa, de modo a atender adequadamente ao interesse público.
+
+Portanto, o processo de credenciamento é adotado quando não é viável ou adequado realizar uma licitação para selecionar o fornecedor. Contudo, é importante ressaltar que o credenciamento não obriga a administração pública a realizar a contratação[2], mas em o fazendo, deverá contratar todos os credenciados.
+
+Cabe esclarecer que esse procedimento auxiliar em nada se confunde com o credenciamento dos representantes dos licitantes, realizado por meio da apresentação de documentos de identificação na fase inicial de determinado certame.
+
+O credenciamento ora analisado é um chamamento público, em que os interessados são credenciados junto à Administração de forma que todos possam ser contratados, observados critérios previamente estabelecidos, por meio de inexigibilidade de licitação[3].
+
+As normas para o credenciamento estão previstas no art. 79 da Lei 14.133/2021. Ademais, o Decreto 11.878/2024 regulamentou esse procedimento no âmbito da administração pública federal direta, autárquica e fundacional.
+
+Organizações que não integrem a APF direta, autárquica e fundacional têm a possibilidade de formalizar termo de acesso ao Compras.gov.br, a fim de operacionalizarem o credenciamento por meio dessa plataforma[4].
+
+O Decreto 11.878/2024 define as fases para realização do credenciamento e exige a designação da comissão de contratação para examinar e julgar os documentos de habilitação[5].
+
+Na fase de habilitação, o procedimento requer a apresentação de documentos que comprovem a capacidade do proponente em executar o objeto da contratação. Além disso, antes da assinatura do contrato ou outro instrumento hábil, o credenciado deve demonstrar que continua atendendo a todos os requisitos de habilitação especificados no edital de credenciamento[6].
+
+São previstas três hipóteses de contratações passíveis de utilização do credenciamento[7]:
+
+- paralela e não excludente: caso em que é viável e vantajosa para a Administração a realização de contratações simultâneas em condições padronizadas;
+
+- com seleção a critério de terceiros: caso em que a seleção do contratado está a cargo do beneficiário direto da prestação;
+
+- em mercados fluidos: caso em que a flutuação constante do valor da prestação e das condições de contratação inviabiliza a seleção do fornecedor por meio de processo de licitação.
+
+A situação paralela e não excludente trata do caso em que a contratação de vários fornecedores ou interessados em prestar os serviços é interessante para a Administração. É hipótese em que se contratam por inexigibilidade, por exemplo, leiloeiros oficiais, serviços de manutenção veicular, de produtores rurais para fornecimento de hortifrutigrangeiros, prestação de serviços de pagamento da folha salarial por instituições bancárias[8]. Nessa hipótese, quando o objeto não permitir a contratação imediata e simultânea de todos os credenciados, deverão ser adotados critérios objetivos de distribuição da demanda[9].
+
+A hipótese de seleção a critério de terceiros é aquela em que a seleção do contratado está a cargo do beneficiário direto da prestação. É o caso, por exemplo, de serviços médicos e de exames laboratoriais[10] e serviços bancários, cabendo ao beneficiário a escolha do prestador que melhor lhe convier. Recentemente, órgãos e entidades têm realizado credenciamentos para serviços de gerenciamento de vale alimentação e vale refeição.
+
+Nas hipóteses de contratação paralela e não excludente e de contratação com seleção a critério de terceiros, além de definir os valores fixados para a contratação, o edital poderá prever índice de reajustamento dos preços, quando couber[11].
+
+A situação de mercados fluidos abarca, por exemplo, a aquisição de passagens aéreas[12], caso em que há grande variação dos preços praticados de acordo com a dinâmica do mercado e é vantajoso para a Administração escolher entres as várias companhias aéreas credenciadas. Nessa hipótese, a Administração deverá registrar as cotações de mercado vigentes no momento da contratação (preço do dia)[13]. Além disso, o edital poderá, quando couber, fixar percentual mínimo de desconto sobre essas cotações[14].
+
+Em todas essas situações de credenciamento, a Administração deverá divulgar e manter à disposição do público, no Portal Nacional de Contratações Públicas – PNCP, o edital de credenciamento, com as condições padronizadas de contratação, de modo a permitir o cadastramento permanente de novos interessados durante a vigência do edital[15]. Também deverá ser publicado no PNCP o resultado, com a lista de credenciados[16].
+
+Os fornecedores credenciados têm o direito de solicitar o descredenciamento a qualquer momento. No entanto, essa solicitação não exime o credenciado das obrigações decorrentes de contratos já assumidos nem das responsabilidades advindas destes[17].
+
+Importante mencionar que a Lei 14.133/2021 proíbe a subcontratação do objeto sem que haja autorização expressa da Administração[18].
+
+Por fim, a Lei dispõe que será admitida a denúncia do contrato por qualquer das partes do contrato, nos prazos fixados no edital[19].
+
+Quadro 283 – Referências normativas para o credenciamento
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 6º Para os fins desta Lei, consideram-se: […] XLIII – credenciamento: processo administrativo de chamamento público em que a Administração Pública convoca interessados em prestar serviços ou fornecer bens para que, preenchidos os requisitos necessários, se credenciem no órgão ou na entidade para executar o objeto quando convocados; Art. 31. O leilão poderá ser cometido a Leiloeiro oficial ou a servidor designado pela autoridade competente da Administração, e regulamento deverá dispor sobre seus procedimentos operacionais. § 1º Se optar pela realização de leilão por intermédio de leiloeiro oficial, a Administração deverá selecioná-lo mediante credenciamento ou licitação na modalidade pregão e adotar o critério de julgamento de maior desconto para as comissões a serem cobradas, utilizados como parâmetro máximo os percentuais definidos na Lei que regula a referida profissão e observados os valores dos bens a serem leiloados. […] Art. 74. É inexigível a licitação quando inviável a competição, em especial nos casos de: […] IV – objetos que devam ou possam ser contratados por meio de credenciamento; Art. 78. São procedimentos auxiliares das licitações e das contratações regidas por esta Lei: I – credenciamento; […] Art. 79. O credenciamento poderá ser usado nas seguintes hipóteses de contratação: I – paralela e não excludente: caso em que é viável e vantajosa para a Administração a realização de contratações simultâneas em condições padronizadas; II – com seleção a critério de terceiros: caso em que a seleção do contratado está a cargo do beneficiário direto da prestação; III – em mercados fluidos: caso em que a flutuação constante do valor da prestação e das condições de contratação inviabiliza a seleção de agente por meio de processo de licitação. Parágrafo único. Os procedimentos de credenciamento serão definidos em regulamento, observadas as seguintes regras: I – a Administração deverá divulgar e manter à disposição do público, em sítio eletrônico oficial, edital de chamamento de interessados, de modo a permitir o cadastramento permanente de novos interessados; II – na hipótese do inciso I do caput deste artigo, quando o objeto não permitir a contratação imediata e simultânea de todos os credenciados, deverão ser adotados critérios objetivos de distribuição da demanda; III – o edital de chamamento de interessados deverá prever as condições padronizadas de contratação e, nas hipóteses dos incisos I e II do caput deste artigo, deverá definir o valor da contratação; IV – na hipótese do inciso III do caput deste artigo, a Administração deverá registrar as cotações de mercado vigentes no momento da contratação; V – não será permitido o cometimento a terceiros do objeto contratado sem autorização expressa da Administração; VI – será admitida a denúncia por qualquer das partes nos prazos fixados no edital.
+Decreto 11.878/2024 | Regulamenta o art. 79 da Lei nº 14.133, de 1º de abril de 2021, para dispor sobre o procedimento auxiliar de credenciamento para a contratação de bens e serviços, no âmbito da administração pública federal direta, autárquica e fundacional. […] Art. 3º O credenciamento poderá ser adotado pela administração nas seguintes hipóteses de contratação: I – paralela e não excludente – caso em que é viável e vantajosa para a administração a realização de contratações simultâneas em condições padronizadas; II – com seleção a critério de terceiros – caso em que a seleção do contratado está a cargo do beneficiário direto da prestação; III – em mercados fluidos – caso em que a flutuação constante do valor da prestação e das condições de contratação inviabiliza a seleção de agente por meio de processo de licitação. Art. 4º O credenciamento não obriga a administração pública a contratar. Art. 5º O credenciamento ficará permanentemente aberto durante a vigência do edital e será realizado por meio do Compras.gov.br, observadas as seguintes fases: I – preparatória;   II – de divulgação do edital de credenciamento; III – de registro do requerimento de participação; IV – de habilitação;   V – recursal; e VI – de divulgação da lista de credenciados. § 1º Para acesso ao Compras.gov.br e operacionalização do credenciamento, serão observados os procedimentos estabelecidos pelo Ministério da Gestão e da Inovação em Serviços Públicos. § 2º Os órgãos e as entidades interessados em utilizar o Compras.gov.br que não integrem a administração pública federal direta, autárquica e fundacional formalizarão termo de acesso, conforme procedimento próprio. Art. 6º A escolha pela contratação por credenciamento deverá ser motivada durante a fase preparatória e atender, em especial: I – aos pressupostos para enquadramento na contratação direta, por inexigibilidade, conforme previsto no inciso IV do caput do art. 74 da Lei nº 14.133, de 2021; e II – à necessidade de designação da comissão de contratação como responsável pelo exame e julgamento dos documentos de habilitação, nos termos do disposto no § 1º do art. 5º do Decreto nº 11.246, de 27 de outubro de 2022. Art. 8º O edital de credenciamento será divulgado e mantido à disposição no Portal Nacional de Contratações Públicas – PNCP, de modo a permitir o cadastramento permanente de novos interessados. Parágrafo único. As modificações no edital serão publicadas no PNCP e observarão os prazos inicialmente previstos no edital, respeitado o tratamento isonômico dos interessados. […]
+IN – Seges/MP 3/2015 | Art. 3º A aquisição de passagens aéreas será realizada diretamente das companhias aéreas credenciadas, sem intermediação de agência de turismo, salvo quando a demanda não estiver contemplada pelo credenciamento, quando houver impedimento para emissão junto à empresa credenciada ou em casos emergenciais devidamente justificados no SCDP, hipóteses em que será aplicado o procedimento previsto na Seção II desta Instrução Normativa.
+IN – Seges/MP 5/2017 | ANEXO I DEFINIÇÕES […] IV – CREDENCIAMENTO: ato administrativo de chamamento público destinado à pré-qualificação de todos os interessados que preencham os requisitos previamente determinados no ato convocatório, visando futura contratação, pelo preço definido pela Administração. […] ANEXO VII-B DIRETRIZES ESPECÍFICAS PARA ELABORAÇÃO DO ATO CONVOCATÓRIO […] 3. Do credenciamento 3.1. Para a contratação de prestação de serviços, os órgãos e entidades poderão utilizar o sistema de credenciamento, desde que atendidas às seguintes diretrizes: a) justificar a inviabilidade de competição pela natureza da contratação do serviço a ser prestado; b) comprovar que o interesse da Administração será melhor atendido mediante a contratação de um maior número de prestadores de serviço; c) promover o chamamento público por meio do ato convocatório que definirá o objeto a ser executado, os requisitos de habilitação, as especificações técnicas indispensáveis, a fixação prévia de preços e os critérios para convocação dos credenciados; d) garantir a igualdade de condições entre todos os interessados hábeis a contratar com a Administração, pelo preço por ela definido; e) contratar todos os que tiverem interesse e que satisfaçam as condições fixadas pela Administração; 3.2. O Sistema de Credenciamento ficará aberto pelo prazo estipulado no ato convocatório, renováveis por iguais e sucessivos períodos, para inscrição de novos interessados, desde que atendam aos requisitos do chamamento.
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 284 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 459/2023-TCU-Plenário | [Enunciado] Na contratação de serviços de administração, intermediação e fornecimento de benefício alimentação e refeição aos seus colaboradores, é recomendável que as entidades do Sistema S, caso decidam pela técnica do credenciamento, observem, por analogia, as disposições do art. 79, parágrafo único, da Lei 14.133/2021 (nova Lei de Licitações e Contratos).
+Acórdão 5495/2022-TCU- Segunda Câmara | [Enunciado] É possível a utilização pelas empresa estatais, por analogia, da hipótese de credenciamento prevista no art. 79, inciso II, da Lei 14.133/2021 visando à contratação de serviço de gerenciamento e fornecimento de vales alimentação e refeição, em substituição à licitação com critério de julgamento pelo menor preço, inviabilizada para esse tipo de contratação após a edição do Decreto 10.854/2021 e da MP 1.108/2021. [Enunciado] É possível a utilização de credenciamento (art. 79, inciso II, da Lei 14.133/2021), inclusive por empresas estatais, para contratação de serviço de gerenciamento e fornecimento de vales alimentação e refeição, em substituição a licitação com critério de julgamento pelo menor preço, inviabilizada para esse tipo de contratação após a edição do Decreto 10.854/2021 e da MP 1.108/2021.
+Acórdão 533/2022-TCU-Plenário | [Enunciado] Não viola o princípio da isonomia a utilização de critérios técnicos objetivos, mediante pontuação, para definir preferência em contratações decorrentes de credenciamento.
+Acórdão 11460/2021-TCU-Primeira Câmara | 1.8.1. dar ciência ao [ omissis ] de que: […] 1.8.1.3. nos termos do art. 7º da Instrução Normativa SED/ME 73/2000, os processos de inexigibilidade de licitação deverão ser instruídos com a devida justificativa de que o preço ofertado à administração é condizente com o praticado pelo mercado; 1.8.1.4. a justificativa de preço em contratação decorrente de inexigibilidade de licitação (art. 26, parágrafo único, inciso III, da Lei 8.666/1993) pode ser feita mediante a comparação do valor ofertado com aqueles praticados pelo contratado junto a outros entes públicos ou privados, em avenças envolvendo o mesmo objeto ou objeto similar (acórdão 2.993/2018-TCU-Plenário).
+Acórdão 2977/2021-TCU-Plenário | [Enunciado] O credenciamento é legítimo quando a administração planeja a realização de múltiplas contratações de um mesmo tipo de objeto, em determinado período, e demonstra que a opção por dispor da maior rede possível de fornecedores para contratação direta, sob condições uniformes e predefinidas, é a única viável ou é mais vantajosa do que outras alternativas para atendimento das finalidades almejadas, tais como licitação única ou múltiplas licitações, obrigando-se a contratar todos os interessados que satisfaçam os requisitos de habilitação e que venham a ser selecionados segundo procedimento objetivo e impessoal, a serem remunerados na forma estipulada no edital.
+Acórdão 1094/2021-TCU-Plenário | [Enunciado] É regular a aquisição, mediante credenciamento, de passagens aéreas em linhas regulares domésticas, sem a intermediação de agência de viagem, por ser inviável a competição entre as companhias aéreas e entre estas e as agências de viagem.
+Acórdão 436/2020-TCU-Plenário | 9.2 nos termos do art. 7º da Resolução-TCU 265/2014, dar ciência à [ omissis ] das seguintes orientações, em virtude das impropriedades identificadas no Credenciamento 2660/2019, com vistas a prevenir reincidências: 9.2.1 a divulgação antecipada, junto às empresas já credenciadas em procedimento anterior, de informações referentes a novo processo de credenciamento antes da publicação do respectivo edital colide com o princípio da isonomia e a jurisprudência do Tribunal de Contas da União (Decisão 104/1995-TCU-Plenário e outras deliberações); 9.2.2 não se coaduna com os princípios regentes dos procedimentos licitatórios e assemelhados, bem como das seleções públicas em geral, a redução de prazos sob a motivação de reduzir o número de participantes; 9.2.3 na elaboração dos avisos de credenciamento, a escolha do prazo entre a publicação do edital e a entrega dos documentos, dentro da margem discricionária prevista no item 3.2.1.1 do Manual Normativo AD244 da Caixa Econômica Federal, deve guiar-se pelo interesse público e pelo princípio da razoabilidade, considerando as peculiaridades do objeto, a urgência da contratação, a extensão da documentação a ser apresentada e, ainda, a necessidade de atrair um número de interessados que represente o universo do mercado; [Enunciado] O credenciamento, entendido como espécie de inexigibilidade de licitação, é ato administrativo de chamamento público de prestadores de serviços que satisfaçam determinados requisitos, constituindo etapa prévia à contratação, devendo-se oferecer a todos igual oportunidade de se credenciar.
+Acórdão 352/2016-TCU-Plenário | [Enunciado] O credenciamento pode ser utilizado para a contratação de profissionais de saúde, tanto para atuarem em unidades públicas de saúde quanto em seus próprios consultórios e clínicas, quando se verifica a inviabilidade de competição para preenchimento das vagas, bem como quando a demanda pelos serviços é superior à oferta e é possível a contratação de todos os interessados, devendo a distribuição dos serviços entre os interessados se dar de forma objetiva e impessoal.
+Acórdão 408/2012-TCU-Plenário | [Enunciado] É ilegal o estabelecimento de critérios de classificação para a escolha de escritórios de advocacia por entidade da Administração em credenciamento.
+Acórdão 351/2010-TCU-Plenário | [Enunciado] Embora não esteja previsto nos incisos do art. 25 da Lei 8.666/1993, admite-se o credenciamento como hipótese de inexigibilidade inserida no caput do referido dispositivo legal, porquanto a inviabilidade de competição configura-se pelo fato de a Administração dispor-se a contratar todos os que tiverem interesse e que satisfaçam as condições por ela estabelecidas, não havendo, portanto, relação de exclusão. Para a regularidade da contratação direta, é indispensável a garantia da igualdade de condições entre todos os interessados hábeis a contratar com a Administração, pelo preço por ela definido.
+Pesquisa de Jurisprudência | Execute consulta na Jurisprudência Selecionada do TCU . No campo de busca, faça buscas pelo seguinte termo: credenciamento ;. Os resultados das buscas podem ser filtrados por “área – Licitação” ou “contrato administrativo”. Execute consulta nas Publicações do TCU . Selecione o tipo de publicação “Informativo de Licitações e Contratos”. Pesquise pelo termo: credenciamento ;
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+Quadro 285 – Riscos relacionados
+
+Riscos
+Levantamento de mercado inadequado e falta de experiência da equipe de planejamento da contratação em relação ao objeto que se pretende credenciar, levando a exigências técnicas e de qualidade inadequadas, com consequentes requisitos de credenciamento insuficientes para garantir uma prestação satisfatória ao atendimento das necessidades do beneficiário.
+Deficientes levantamento de mercado e pesquisa ou acompanhamento de preços, levando ao desconhecimento acerca da forma de atuação do mercado e dos preços praticados, com consequente fixação e manutenção de valores de contratação desvantajosos para a Administração.
+Publicação de edital de chamamento sem os critérios objetivos de distribuição da demanda na hipótese de credenciamento paralelo e não excludente, deixando a cargo do gestor público a escolha dos credenciados, com consequente pessoalidade no tratamento dos credenciados, preterição e beneficiamento de um ou outro credenciado, e criação de ambiente propício à corrupção.
+Prazo muito curto entre a publicação do chamamento público e a apresentação da documentação pelos interessados, levando à impossibilidade de que potenciais interessados elaborem e enviem a tempo os documentos solicitados pela Administração, com consequente menor número de credenciados.
+
+Fonte: Elaboração própria.
+
+Quadro 286 – Modelos
+
+Assunto | Modelo disponibilizados por OGS ou por órgãos de controle | OGS
+Tutorial | Contratação por credenciamento | MGI
+
+Fonte: Elaboração própria.
+
+[1] Lei 14.133/2021, art. 6º, inciso XLIII.
+
+[2] Decreto 11.878/2024, art. 4º.
+
+[3] Lei 14.133/2021, art. 74, inciso IV; Decreto 11.878/2024, art. 6º. Inciso I.
+
+[4] Decreto 11.878/2024, art. 5º, § 2º.
+
+[5] Decreto 11.878/2024, arts. 5º e 6º, inciso II.
+
+[6] Decreto 11.878/2024, arts. 11 e 14.
+
+[7] Lei 14.133/2021, art. 79; Decreto 11.878/2024, art. 3º.
+
+[8] Acórdão 351/2010-TCU-Plenário, item 9.2.1.
+
+[9] Lei 14.133/2021, art. 79, parágrafo único, incisos II e III.
+
+[10] Acórdão 352/2016-TCU-Plenário, item 9.1.2.
+
+[11] Lei 14.133/2021, art. 79, parágrafo único, inciso III; Decreto 11.878/2024, art. 7º, § 2º.
+
+[12] Voto condutor do Acórdão 1094/2021-TCU-Plenário.
+
+[13] Lei 14.133/2021, art. 79, parágrafo único, inciso IV.
+
+[14] Decreto 11.878/2024, art. 7º, § 3º.
+
+[15] Lei 14.133/2021, art. 79, parágrafo único, incisos I e III; Decreto 11.878/2024, arts. 5º e 8º, art. 9º, parágrafo único.
+
+[16] Decreto 11.878/2024, art. 18.
+
+[17] Decreto 11.878/2024, art. 23, inciso I e § 1º.
+
+[18] Lei 14.133/2021, art. 79, parágrafo único, inciso V.
+
+[19] Lei 14.133/2021, art. 79, parágrafo único, inciso VI; Lei 10.406/2002 (Código Civil), art. 473.

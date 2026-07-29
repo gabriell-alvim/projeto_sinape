@@ -1,0 +1,154 @@
+5.11.5. Duração
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/5-11-5-duracao/
+======================================================================
+
+A Lei 14.133/2021 apresenta importantes alterações em relação ao regime da Lei 8.666/1993 no tocante à duração dos contratos. As disposições sobre o assunto constam dos arts. 105 a 114 da nova Lei.
+
+O art. 105 estabelece que a duração dos contratos será a prevista no edital. Assim, desvincula-se a duração dos contratos do exercício financeiro. No entanto, deve ser observada a disponibilidade de créditos orçamentários, no momento da contratação e a cada exercício financeiro[1].
+
+Quando a contratação ultrapassar um exercício financeiro, deve estar prevista no plano plurianual (PPA)[2].
+
+No caso de contratações de serviços e fornecimentos contínuos, além de atestar, no início da contratação e de cada exercício, a existência de créditos orçamentários vinculados à contratação, a Administração deve demonstrar a vantagem em manter o contrato[3].
+
+Cabe esclarecer que os serviços e fornecimentos contínuos são serviços contratados e compras realizadas pela Administração para a manutenção da atividade administrativa, decorrentes de necessidades permanentes ou prolongadas. A Lei permite que esses contratos tenham vigência inicial de até cinco anos, desde que demonstrado que a contratação plurianual seja mais vantajosa economicamente para a Administração[4].
+
+Na hipótese de faltar créditos orçamentários para a continuidade de contrato de prestação contínua, ou se a Administração entender que o contrato não mais lhe oferece vantagem, ela pode extingui-lo, sem ônus[5].
+
+Nesses casos, a extinção ocorrerá apenas na próxima data de aniversário do contrato[6] e não poderá ocorrer em prazo inferior a dois meses, contado da referida data[7].
+
+O disposto no art. 106 da Lei 14.133/2021 para serviços contínuos é aplicável para aluguel de equipamentos e utilização de programas de informática[8].
+
+O art. 107 da Lei permite prorrogações sucessivas dos contratos de serviços e fornecimentos contínuos, até o prazo de dez anos, desde que haja previsão em edital e que as condições e os preços permaneçam vantajosos para a Administração (ver item 6.3). Pode haver a negociação com o contratado ou a extinção contratual.
+
+O art. 108 permite a celebração de contratos com prazo de até dez anos nas seguintes hipóteses de dispensa de licitação:
+
+- bens ou serviços produzidos ou prestados no País que envolvam, cumulativamente, alta complexidade tecnológica e defesa nacional (art. 75, inciso IV, alínea “f”);
+
+- materiais de uso das Forças Armadas, com exceção de materiais de uso pessoal e administrativo, quando houver necessidade de manter a padronização (art. 75, inciso IV, alínea “g”);
+
+- para contratação com vistas ao cumprimento do disposto nos arts. 3º, 3º-A, 4º, 5º e 20 da Lei nº 10.973/2004, que dispõe sobre incentivos à inovação e à pesquisa científica e tecnológica no ambiente produtivo (art. 75, inciso V);
+
+- para contratação que possa acarretar comprometimento da segurança nacional (art. 75, inciso VI);
+
+- para contratação em que houver transferência de tecnologia de produtos estratégicos para o Sistema Único de Saúde (SUS) (art. 75, inciso XII); e
+
+- para aquisição de insumos estratégicos para a saúde (art. 75, inciso XVI).
+
+Para os casos previstos no art. 108 valerá a regra geral disposta no art. 105.
+
+No caso de contratos em que seja usuária de serviço público oferecido em regime de monopólio (valores não sujeitos à livre concorrência, a exemplo de fornecimento de energia elétrica, abastecimento de água e serviço de esgotamento sanitário, correios), a Administração poderá estabelecer a vigência por prazo indeterminado, desde que comprovada, a cada exercício financeiro, a existência de créditos orçamentários vinculados à contratação[9].
+
+Na contratação que gere receita e no contrato de eficiência[10] que gere economia para a Administração, os prazos serão de[11]:
+
+- até dez anos para contratos sem investimento; e
+
+- até 35 anos para contratos com investimento, considerados os que envolvam a elaboração de benfeitorias permanentes realizadas exclusivamente pelo contratado e revertidas ao patrimônio da Administração Pública ao término do contrato.
+
+Para os contratos por escopo, a Lei 14.133/2021 dispõe que o prazo de vigência será automaticamente prorrogado quando seu objeto não for concluído no período firmado no contrato. Assim, se esgotado o prazo de vigência sem que a execução do objeto tenha sido concluída, a vigência será automaticamente prorrogada, sem prejuízo das sanções aplicáveis caso o eventual atraso decorra de culpa do contratado. Além disso, a Administração poderá optar pela extinção do contrato[12].
+
+Quanto ao instrumento a ser utilizado para formalizar a prorrogação contratual, a AGU entendeu que Administração avalie, no caso concreto, a necessidade de formalizar termo aditivo ou apostilamento, conforme a situação[13]:
+
+I – A vigência dos contratos, dos convênios e instrumentos congêneres com escopo predefinido extingue-se pela conclusão de seu objeto, e não pela expiração do prazo originalmente previsto no ajuste, conforme o art. 111 da Lei 14.133, de 2021.
+
+II – É recomendável que a Administração avalie, no caso concreto, a necessidade de formalizar termo aditivo ou apostilamento, conforme a situação, para a fixação de novas datas, prazos ou cronogramas para a execução da obrigação ajustada, mesmo após ser atingido o termo final de vigência originalmente estabelecido, tendo em vista a proibição de instrumentos com prazo de vigência indeterminado.
+
+O art. 112 assevera que os prazos previstos na Lei 14.133/2021 não excluem nem revogam os prazos contratuais previstos em lei especial[14].
+
+A Lei também disciplina a vigência de contratos firmados sob o regime de fornecimento e prestação de serviço, que são aqueles em que, além do fornecimento do objeto, o contratado responsabiliza-se por sua operação, manutenção ou ambas, por tempo determinado[15]. Nessa hipótese, o prazo de vigência máximo será definido pela soma dos prazos das etapas de:
+
+- fornecimento inicial ou entrega da obra; e
+
+- serviço de operação e manutenção, limitado a cinco anos, permitida a prorrogação até o prazo máximo de dez anos.
+
+Quanto aos contratos que previrem a operação continuada de sistemas estruturantes de tecnologia da informação, o art. 114 da Lei 14.133/2021 possibilita a vigência máxima de quinze anos. Sistema estruturante é definido como[16]:
+
+sistema com suporte de tecnologia da informação fundamental e imprescindível para planejamento, coordenação, execução, descentralização, delegação de competência, controle ou auditoria das ações do Estado, além de outras atividades auxiliares, desde que comum a dois ou mais órgãos da Administração e que necessitem de coordenação central.
+
+Os sistemas estruturantes são as plataformas tecnológicas (softwares) de sistemas estruturadores, como o SIORG (Sistema de Organização e Inovação institucional do Governo Federal), o SISG (Sistema de Serviços Gerais) e o SISP (Sistema de Administração dos Recursos de Tecnologia da Informação)[17].
+
+Por fim, cabe resumir os principais avanços da Lei 14.133/2021 relativos à duração dos contratos, comparada à legislação anterior[18]:
+
+- vigência inicial dos contratos é a prevista em edital, não mais limitada ao exercício financeiro;
+
+- celebração de contratos para a prestação de serviços contínuos com prazo de vigência inicial de até cinco anos, inclusive fornecimento contínuo de bens, além da possibilidade de prorrogação desses contratos por até dez anos, e a possibilidade de extinção unilateral quando não houver disponibilidade orçamentária no exercício ou quando não for mais vantajoso para a Administração;
+
+- celebração de contratos com prazo indeterminado; e
+
+- prorrogação automática da vigência dos contratos por escopo, quando o objeto não for concluído no período firmado no contrato.
+
+Quadro 384 – Referências normativas para a duração do contrato administrativo
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 91. Os contratos e seus aditamentos terão forma escrita e serão juntados ao processo que tiver dado origem à contratação, divulgados e mantidos à disposição do público em sítio eletrônico oficial. […] § 4º Antes de formalizar ou prorrogar o prazo de vigência do contrato, a Administração deverá verificar a regularidade fiscal do contratado, consultar o Cadastro Nacional de Empresas Inidôneas e Suspensas (Ceis) e o Cadastro Nacional de Empresas Punidas (Cnep), emitir as certidões negativas de inidoneidade, de impedimento e de débitos trabalhistas e juntá-las ao respectivo processo. […] DA DURAÇÃO DOS CONTRATOS Art. 105. A duração dos contratos regidos por esta Lei será a prevista em edital, e deverão ser observadas, no momento da contratação e a cada exercício financeiro, a disponibilidade de créditos orçamentários, bem como a previsão no plano plurianual, quando ultrapassar 1 (um) exercício financeiro. Art. 106. A Administração poderá celebrar contratos com prazo de até 5 (cinco) anos nas hipóteses de serviços e fornecimentos contínuos, observadas as seguintes diretrizes: I – a autoridade competente do órgão ou entidade contratante deverá atestar a maior vantagem econômica vislumbrada em razão da contratação plurianual; II – a Administração deverá atestar, no início da contratação e de cada exercício, a existência de créditos orçamentários vinculados à contratação e a vantagem em sua manutenção; III – a Administração terá a opção de extinguir o contrato, sem ônus, quando não dispuser de créditos orçamentários para sua continuidade ou quando entender que o contrato não mais lhe oferece vantagem. § 1º A extinção mencionada no inciso III do caput deste artigo ocorrerá apenas na próxima data de aniversário do contrato e não poderá ocorrer em prazo inferior a 2 (dois) meses, contado da referida data. § 2º Aplica-se o disposto neste artigo ao aluguel de equipamentos e à utilização de programas de informática. Art. 107. Os contratos de serviços e fornecimentos contínuos poderão ser prorrogados sucessivamente, respeitada a vigência máxima decenal, desde que haja previsão em edital e que a autoridade competente ateste que as condições e os preços permanecem vantajosos para a Administração, permitida a negociação com o contratado ou a extinção contratual sem ônus para qualquer das partes. Art. 108. A Administração poderá celebrar contratos com prazo de até 10 (dez) anos nas hipóteses previstas nas alíneas “f” e “g” do inciso IV e nos incisos V, VI, XII e XVI do caput do art. 75 desta Lei. Art. 109. A Administração poderá estabelecer a vigência por prazo indeterminado nos contratos em que seja usuária de serviço público oferecido em regime de monopólio, desde que comprovada, a cada exercício financeiro, a existência de créditos orçamentários vinculados à contratação. Art. 110. Na contratação que gere receita e no contrato de eficiência que gere economia para a Administração, os prazos serão de: I – até 10 (dez) anos, nos contratos sem investimento; II – até 35 (trinta e cinco) anos, nos contratos com investimento, assim considerados aqueles que impliquem a elaboração de benfeitorias permanentes, realizadas exclusivamente a expensas do contratado, que serão revertidas ao patrimônio da Administração Pública ao término do contrato. Art. 111. Na contratação que previr a conclusão de escopo predefinido, o prazo de vigência será automaticamente prorrogado quando seu objeto não for concluído no período firmado no contrato. Parágrafo único. Quando a não conclusão decorrer de culpa do contratado: I – o contratado será constituído em mora, aplicáveis a ele as respectivas sanções administrativas; II – a Administração poderá optar pela extinção do contrato e, nesse caso, adotará as medidas admitidas em lei para a continuidade da execução contratual. Art. 112. Os prazos contratuais previstos nesta Lei não excluem nem revogam os prazos contratuais previstos em lei especial. Art. 113. O contrato firmado sob o regime de fornecimento e prestação de serviço associado terá sua vigência máxima definida pela soma do prazo relativo ao fornecimento inicial ou à entrega da obra com o prazo relativo ao serviço de operação e manutenção, este limitado a 5 (cinco) anos contados da data de recebimento do objeto inicial, autorizada a prorrogação na forma do art. 107 desta Lei. Art. 114. O contrato que previr a operação continuada de sistemas estruturantes de tecnologia da informação poderá ter vigência máxima de 15 (quinze) anos. Art. 115. O contrato deverá ser executado fielmente pelas partes, de acordo com as cláusulas avençadas e as normas desta Lei, e cada parte responderá pelas consequências de sua inexecução total ou parcial. […] § 5º Em caso de impedimento, ordem de paralisação ou suspensão do contrato, o cronograma de execução será prorrogado automaticamente pelo tempo correspondente, anotadas tais circunstâncias mediante simples apostila. § 6º Nas contratações de obras, verificada a ocorrência do disposto no § 5º deste artigo por mais de 1 (um) mês, a Administração deverá divulgar, em sítio eletrônico oficial e em placa a ser afixada em local da obra de fácil visualização pelos cidadãos, aviso público de obra paralisada, com o motivo e o responsável pela inexecução temporária do objeto do contrato e a data prevista para o reinício da sua execução. § 7º Os textos com as informações de que trata o § 6º deste artigo deverão ser elaborados pela Administração.
+Portaria – TCU 122/2023 | Art. 1º A gestão e a fiscalização dos contratos de serviços, de compras e de fornecimentos contínuos no âmbito da Secretaria do Tribunal de Contas da União (TCU) obedecem ao disposto nesta Portaria. […] DA DURAÇÃO DOS CONTRATOS Seção I Da Vigência dos Contratos […] Seção II Dos Prazos de Execução dos Contratos
+Ato da Diretoria -Geral do Senado Federal 14/2022 | Estabelece, no âmbito do Senado Federal, disposições regulamentares acerca das atribuições e procedimentos de licitações e contratos administrativos. […] Seção VII Da Prorrogação do Prazo de Vigência e de Execução dos Contratos […]
+Orientação Normativa – AGU 101/2025 | Os contratos regidos pela Lei nº 14.133, de 2021, como previsto no caput do art. 105, da citada Lei, podem ultrapassar o exercício financeiro em que celebrados, desde que as despesas a eles referentes sejam integralmente empenhadas até 31 de dezembro, permitindo-se, assim, sua inscrição em restos a pagar.
+Orientação Normativa – AGU 99/2025 | I – A legalidade da prorrogação do prazo de vigência dos contratos administrativos de serviços e de fornecimentos contínuos, nos termos do artigo 107 da Lei nº 14.133, de 1º de abril de 2021, demanda expressa previsão no edital ou em cláusula contratual. II – No caso dos contratos de serviços e fornecimentos contínuos celebrados por meio de dispensa e inexigibilidade de licitação, a legalidade da prorrogação do prazo de vigência demanda previsão no respectivo termo de referência ou em cláusula contratual.
+Orientação Normativa -AGU 98/2025 | I – A extinção antecipada do contrato de execução contínua com fundamento na ausência de créditos orçamentários ou na perda de vantagem contratual poderá se dar com ônus ou sem ônus para a Administração Pública. II – A extinção antecipada do contrato de execução contínua nestas hipóteses, deverá ser justificada formalmente pela Administração Pública, observada as seguintes balizas: a) a justificativa deve ser fundamentada na ausência de créditos orçamentários ou na perda de vantagem contratual, conforme art. 106, III da Lei nº 14.133/2021; b) a justificativa deve apresentar elementos objetivos e documentados que comprovem a ausência de recursos ou a perda da vantagem contratual. III – A extinção antecipada do contrato de execução contínua sem ônus, prevista no art. 106, III c/c art. 106, §1º, ambos da Lei nº 14.133/2021, ocorrerá na próxima data de aniversário do contrato, garantido um prazo mínimo de dois meses para ciência do contratado, devendo ser observada a regra do art. 183 da Lei nº 14.133/2021 para a contagem destes prazos. IV – A regra do artigo 106, § 1º da Lei 14.133/2021 não é inconstitucional e não obriga a Administração a manter contratos sem crédito orçamentário, pois não impede a Administração Pública de rescindir o contrato, apenas impõe um limite temporal para que a extinção ocorra sem ônus. V – A Administração Pública pode renunciar à prerrogativa de extinção antecipada do contrato de execução contínua sem ônus prevista no art. 106, III da Lei nº 14.133/2021, desde que expressamente prevista no edital e no contrato e que conste no processo administrativo justificativa fundamentada no interesse público e na vantajosidade econômica. VI – A Administração Pública pode extinguir o contrato de execução contínua com fundamento na ausência de créditos orçamentários ou na perda de vantagem contratual antes da data de aniversário do contrato, desde que ocorra com ônus para Administração, conforme previsto no art. 138, §2º da Lei nº 14.133/2021.
+Orientação Normativa – AGU 93/2024 | A vigência do contrato de locação de imóveis no qual a Administração Pública é locatária não se sujeita aos limites constantes dos arts. 106 e 107 da Lei 14.133, de 1º de abril de 2021, sendo facultado que atos normativos internos estipulem limites de vigência contratual.
+Orientação Normativa – AGU 91/2024 | Na análise dos processos relativos à prorrogação de prazo contratos de serviços e fornecimentos continuados, previstos no art. 107 da Lei 14.133, de 2021, cumpre aos órgãos jurídicos verificar se não há extrapolação do atual prazo de vigência, bem como eventual ocorrência de solução de continuidade nos aditivos precedentes, hipóteses que configuram a extinção do ajuste, impedindo a sua prorrogação
+Orientação Normativa – AGU 90/2024 | A vigência do contrato de serviço contínuo ou de fornecimento não está adstrita ao exercício financeiro devendo a Administração atestar, no início da contratação e de cada exercício, a existência de créditos orçamentários vinculados à contratação e a vantagem em sua manutenção.
+Orientação Normativa – AGU 65/2020 | A legalidade da prorrogação do prazo de vigência dos contratos administrativos de prestação de serviços continuados, de que cuida o inciso II do art. 57 da Lei nº 8.666, de 1993, demanda expressa previsão no edital e em cláusula contratual.
+Orientação Normativa – AGU 36/2011 | A administração pode estabelecer a vigência por prazo indeterminado nos contratos em que seja usuária de serviços públicos essenciais de energia elétrica, água e esgoto, serviços postais monopolizados pela ECT (empresa brasileira de correios e telégrafos) e ajustes firmados com a imprensa nacional, desde que no processo da contratação estejam explicitados os motivos que justificam a adoção do prazo indeterminado e comprovadas, a cada exercício financeiro, a estimativa de consumo e a existência de previsão de recursos orçamentários.
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 385 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 2660/2021-TCU-Plenário | [Enunciado] Não há direito líquido e certo à prorrogação de contrato celebrado com o Poder Público, mas sim mera expectativa de direito, uma vez que a decisão sobre a prorrogação do ajuste se insere no âmbito da discricionariedade da Administração Pública.
+Acórdão 9749/2020-TCU-Plenário | [Enunciado] A continuidade da execução de serviços após esgotado o prazo de vigência contratual caracteriza contratação verbal, situação vedada pelo art. 60, parágrafo único, da Lei 8.666/1993.
+Acórdão 213/2017-TCU-Plenário | [Enunciado] Cada ato de prorrogação equivale a uma renovação contratual, motivo pelo qual a decisão pela prorrogação de contratação direta deve ser devidamente planejada e motivada, principalmente mediante a indicação da hipótese legal ensejadora da dispensa ou da inexigibilidade de licitação, válida no momento do ato de prorrogação contratual.
+Acórdão 127/2016-TCU-Plenário | [Enunciado] Em regra a prorrogação do contrato administrativo deve ser efetuada antes do término do prazo de vigência, mediante termo aditivo, para que não se opere a extinção do ajuste. Entretanto, excepcionalmente e para evitar prejuízo ao interesse público, nos contratos de escopo, diante da inércia do agente em formalizar tempestivamente o devido aditamento, é possível considerar os períodos de paralisação das obras por iniciativa da Administração contratante como períodos de suspensão da contagem do prazo de vigência do ajuste.
+Acórdão 1936/2014-TCU-Plenário | [Enunciado] A retomada de contrato cujo prazo de vigência encontra-se expirado configura recontratação sem licitação, o que infringe os arts. 2º e 3º da Lei 8.666/1993 e a Constituição Federal, art. 37, inciso XXI.
+Acórdão 1674/2014-TCU-Plenário | [Enunciado] Nos contratos por escopo, inexistindo motivos para sua rescisão ou anulação, a extinção do ajuste somente se opera com a conclusão do objeto e o seu recebimento pela Administração, diferentemente dos ajustes por tempo determinado, nos quais o prazo constitui elemento essencial e imprescindível para a consecução ou a eficácia do objeto avençado.
+Acórdão 1375/2013-TCU-Plenário | [Enunciado] A fixação de prazo de vigência para as contratações efetuadas pela Administração Pública é, à luz do art. 37, inciso XXI, da Constituição Federal, impositiva, independentemente do regime legal sob o qual foram fundamentadas.
+Acórdão 1302/2013-TCU-Plenário | [Enunciado] Ao pactuar termos aditivos de prazo, a instituição pública deve se certificar de que o atraso ocorreu por ausência de culpa do contratado, por razões alheias ao seu conhecimento no ato da firmatura do acordo. Caso identificado que não houve fato superveniente, estranho às condições contratuais inicialmente avençadas, retardadores da execução do objeto, deve estipular novo prazo para o adimplemento do acordo, sem prejuízo das sanções cabíveis no instrumento de contrato.
+Pesquisa de Jurisprudência | Execute consulta na Jurisprudência Selecionada . Pesquise pela árvore de classificação: área “contrato administrativo” . Filtre os resultados pelos temas: vigência , prorrogação de contrato . Execute consulta na Jurisprudência Selecionada . Pesquise pela árvore de classificação: área “contrato administrativo” . No campo de busca, pesquise separadamente pelos termos “ vigência “ e “duração” .
+
+Fonte: Elaboração própria a partir de consulta a jurisprudência do TCU.
+
+Quadro 386 – Riscos relacionados
+
+Riscos
+Falta de menção no edital e no contrato sobre a possibilidade de prorrogação contratual, levando a: impossibilidade de prorrogar o contrato, com consequente interrupção do serviço ou fornecimento e mais custos para realizar nova licitação quando a vigência contratual chegar a fim; oudecisão equivocada de prorrogar por meio de termo aditivo, com consequente ilegalidade por afronta ao art. 105 da Lei 14.133/2021 e aos princípios da vinculação ao edital e da isonomia do certame que originou a contratação, anulação do termo aditivo e suspensão da execução do contrato.
+Falha no planejamento das contratações da organização (p. ex., atrasos no calendário de contratações do PCA), levando à necessidade de prorrogar o contrato após o término do prazo de vigência, com consequente ilegalidade por recontratação sem licitação, anulação do termo aditivo e suspensão da execução do contrato.
+
+Fonte: Elaboração própria.
+
+[1] Lei 14.133/2021, arts. 105 e 150.
+
+[2] Aplicável às despesas de capital (como, por exemplo, os investimentos) e outras delas decorrentes, além daquelas relativas aos programas de duração continuada (Ministério da Economia, 2022, item 6.1.1).
+
+[3] Lei 14.133/2021, art. 106.
+
+[4] Lei 14.133/2021, art. 6º, inciso XV, e art. 106, caput, inciso I e § 2º.
+
+[5] Lei 14.133/2021, art. 106, inciso III.
+
+[6] Lei 14.133/2021, art. 106, inciso III e § 1º, e art. 107.
+
+[7] A interpretação dada pela Seges/MGI e AGU no modelo de contrato para serviços foi no sentido de que a rescisão pode ocorrer na próxima data de aniversário do contrato, desde que o contratante notifique o contratado com pelo menos dois meses de antecedência dessa data. Se a notificação ocorrer com menos de dois meses de antecedência, a rescisão ocorrerá em dois meses da data da comunicação (Advocacia-Geral da União; Ministério da Gestão e da Inovação em Serviços Públicos em Serviços Públicos, 2023).
+
+[8] Lei 14.133/2021, art. 106, § 2º.
+
+[9] Lei 14.133/2021, art. 109.
+
+[10] Contrato de eficiência: contrato cujo objeto é a prestação de serviços, que pode incluir a realização de obras e o fornecimento de bens, com o objetivo de proporcionar economia ao contratante, na forma de redução de despesas correntes, remunerado o contratado com base em percentual da economia gerada (Lei 14.133/2021, art. 6º, inciso LIII).
+
+[11] Lei 14.133/2021, art. 110, caput e incisos I e II.
+
+[12] Lei 14.133/2021, art. 111, caput e parágrafo único, incisos I e II.
+
+[13] Orientação Normativa – AGU 92/2024
+
+[14] Lei 14.133/2021, art. 112.
+
+[15] Lei 14.133/2021, art. 6º, inciso XXXIV, e art. 113.
+
+[16] Norma Complementar 19/IN01/DSIC/GSIPR, item 3.9. Estabelece padrões mínimos de Segurança da Informação e Comunicações para os sistemas estruturantes da Administração Pública Federal (APF), direta e indireta. Foi homologada pela Portaria GSI/PR 24/2014.
+
+[17] Ministério da Economia, 2019b.
+
+[18] Lei 8.666/1993, art. 57.

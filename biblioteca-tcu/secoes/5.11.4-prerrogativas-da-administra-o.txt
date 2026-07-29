@@ -1,0 +1,49 @@
+5.11.4. Prerrogativas da Administração
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/5-11-4-prerrogativas-da-administracao/
+======================================================================
+
+As prerrogativas da Administração são formalizadas no contrato por meio das chamadas cláusulas exorbitantes. Essas cláusulas são aplicáveis apenas em contratos regidos pelo Direito Público, uma vez que decorrem do princípio da supremacia do interesse público sobre o privado.
+
+O art. 104 da Lei 14.133/2021 dispõe sobre as prerrogativas da Administração:
+
+- alteração unilateral do contrato. Nesse caso, é obrigatório rever as cláusulas econômico-financeiras do contrato para preservar o equilíbrio contratual[1](remete-se aos comentários do item 6.2.1);
+
+- extinção unilateral do contrato (remete-se aos comentários dos itens 6.4.2.1 e 6.4.3.2);
+
+- fiscalização da execução do contrato (remete-se aos comentários dos itens 6.1.4 a 6.1.6);
+
+- aplicação de sanções (remete-se aos comentários do item 6.1.8); e
+
+- ocupação temporária de bens móveis e imóveis, e utilização de pessoal e serviços vinculados ao objeto do contrato (remete-se aos comentários dos itens 6.4.2.1 e 6.4.3.2).
+
+Quadro 381 – Referências normativas para as prerrogativas da Administração
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 104. O regime jurídico dos contratos instituído por esta Lei confere à Administração, em relação a eles, as prerrogativas de: I – modificá-los, unilateralmente, para melhor adequação às finalidades de interesse público, respeitados os direitos do contratado; II – extingui-los, unilateralmente, nos casos especificados nesta Lei; III – fiscalizar sua execução; IV – aplicar sanções motivadas pela inexecução total ou parcial do ajuste; V – ocupar provisoriamente bens móveis e imóveis e utilizar pessoal e serviços vinculados ao objeto do contrato nas hipóteses de: a) risco à prestação de serviços essenciais; b) necessidade de acautelar apuração administrativa de faltas contratuais pelo contratado, inclusive após extinção do contrato. § 1º As cláusulas econômico-financeiras e monetárias dos contratos não poderão ser alteradas sem prévia concordância do contratado. § 2º Na hipótese prevista no inciso I do caput deste artigo, as cláusulas econômico-financeiras do contrato deverão ser revistas para que se mantenha o equilíbrio contratual. […]
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 382 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 3266/2022-TCU-Plenário | [Enunciado] As reduções ou supressões de quantitativos decorrentes de alteração contratual devem ser consideradas de forma isolada, ou seja, o conjunto de reduções e o conjunto de acréscimos devem ser sempre calculados sobre o valor original do contrato, aplicando-se a cada um desses conjuntos, individualmente e sem nenhum tipo de compensação entre eles, os limites de alteração estabelecidos no art. 65, § 1º, da Lei 8.666/1993.
+Acórdão 1984/2021-TCU-Plenário | [Enunciado] Deficiências do projeto executivo não constituem fato ou condição excepcional capaz de justificar a realização de aditivos contratuais que ultrapassem os limites instituídos pelo art. 65, §§ 1º e 2º, da Lei 8.666/1993.
+Acórdão 875/2020-TCU-Plenário | [Enunciado] A contratação de empresa para auxiliar a Administração na fiscalização de contratos (art. 67 da Lei 8.666/1993) não retira desta a obrigação do acompanhamento, porquanto a função do terceiro contratado é de assistência, não de substituição.
+Acórdão 1953/2018-TCU-Plenário | [Enunciado] Nos contratos celebrados entre entidades pertencentes à Administração Pública, são inaplicáveis as cláusulas exorbitantes, previstas nos arts. 58 e 59 da Lei 8.666/1993, porquanto se trata de avenças acordadas por entidades detentoras de prerrogativas de Poder Público, onde há situação de igualdade entre as partes. Assim, qualquer alteração em contratos da espécie somente pode ocorrer por acordo das partes, não havendo espaço, ainda, para anulação ou rescisão pela via administrativa.
+Acórdão 442/2017-TCU-Primeira Câmara | [Enunciado] A concessão de prazo exíguo à contratada para se manifestar sobre decisão da Administração de rescindir unilateralmente o contrato não é razoável e ofende os princípios do contraditório e da ampla defesa, ainda que o art. 78, parágrafo único, da Lei 8.666/1993 não tenha fixado prazo para o exercício desse direito.
+Acórdão 1826/2016-TCU-Plenário | [Enunciado] Tanto as alterações contratuais quantitativas, que modificam a dimensão do objeto, quanto as unilaterais qualitativas, que mantêm intangível o objeto, em natureza e em dimensão, estão sujeitas aos limites preestabelecidos no art. 65, §§ 1º e 2º, da Lei 8.666/1993, em face do respeito aos direitos do contratado, prescrito no art. 58, inciso I, da mesma Lei, do princípio da proporcionalidade e da necessidade de esses limites serem obrigatoriamente fixados em lei.
+Acórdão 2916/2013-TCU-Plenário | [Enunciado] O não cumprimento do contrato enseja aplicação das sanções previstas à empresa contratada, não se tratando de decisão discricionária dos gestores.
+Acórdão 1694/2010-TCU-Plenário | [Enunciado] Na gestão de recursos públicos federais, a Administração contratante deve fiscalizar os contratos administrativos celebrados com atenção ao art. 58, inciso III, ao art. 67, caput e § 1º, e ao art. 69 da Lei 8.666/1993, de forma que seu representante anote, em registro próprio, todas as ocorrências relacionadas com a execução do ajuste, determinando o que for necessário à regularização das faltas ou defeitos observados, bem como exigindo a reparação, correção, remoção, reconstrução ou substituição, às expensas do contratado, no total ou em parte, do objeto do contrato em que se verificarem vícios, defeitos ou incorreções resultantes da execução ou de materiais empregados.
+Pesquisa de Jurisprudência | Na Pesquisa Integrada do TCU , pesquise pelo termo “ 8.666/1993, art. 58” OU “14.133/2021, art. 104” Execute consulta na Jurisprudência Selecionada do TCU . Na pesquisa por árvore de classificação, selecione a área “contrato administrativo”. Os resultados podem ser filtrados pelos temas: aditivo ; fiscalização ; rescisão unilateral ; sanção administrativa .
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+Quadro 383 – Riscos relacionados
+
+Riscos
+Vide riscos relacionados nos itens 6.1.4 a 6.1.6, 6.1.8, 6.2.1, 6.4.2.1 e 6.4.3.2.
+
+Fonte: Elaboração própria.
+
+[1] Lei 14.133/2021, art. 104, § 2º.

@@ -1,0 +1,44 @@
+3.4. Critérios de julgamento
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/3-4-criterios-de-julgamento/
+======================================================================
+
+Durante a fase preparatória do processo licitatório, a Administração deve planejar a forma como será realizada a seleção do fornecedor, por meio da definição do critério de julgamento, do modo de disputa, da ordem das fases de habilitação e de julgamento das propostas, e da modalidade de licitação. A Lei 14.133/2021 estabelece que a combinação desses parâmetros deve ser eficiente para a seleção da proposta “apta a gerar o resultado de contratação mais vantajoso para a Administração Pública”[1].
+
+No regime da Lei 8.666/1993, a forma de conduzir a seleção do fornecedor era definida a partir da definição do objeto e da estimativa do valor da contratação. Por exemplo, uma obra de engenharia com valor superior a R$ 3,3 milhões[2] deveria ser licitada por meio de concorrência, enquanto uma compra de suprimentos no valor de R$ 70 mil poderia ser realizada por meio de convite.
+
+No regime da Lei 14.133/2021, o valor da contratação não impacta a escolha da modalidade de licitação. A natureza do objeto e o critério de julgamento assumem a preponderância na determinação das etapas do procedimento licitatório. Assim, uma vez definido o objeto, a Administração deve escolher o critério de julgamento, estabelecendo parâmetros objetivos e adequados para seleção da proposta que melhor atenda à sua necessidade.
+
+Determinado o critério de julgamento, deve ser fixada a ordem das fases do procedimento, observando-se a necessidade ou não da inversão de fases (habilitação dos licitantes antes do julgamento das propostas). Após, há definição do modo de disputa (fechado, aberto ou combinado) para, enfim, se definir a forma da licitação (eletrônica ou presencial).
+
+Vale lembrar que as licitações “serão realizadas preferencialmente sob a forma eletrônica, admitida a utilização da forma presencial, desde que motivada, devendo a sessão pública ser registrada em ata e gravada em áudio e vídeo”[3].
+
+Com isso, é possível determinar a modalidade de licitação adequada: concorrência, pregão, concurso, leilão ou diálogo competitivo[4]. 
+
+Figura 7 – Combinação de Parâmetros para a Seleção do Fornecedor
+
+Fonte: Elaboração própria.
+
+A Lei 14.133/2021 estabelece seis critérios de julgamento (art. 33):
+
+I – menor preço;
+
+II – maior desconto;
+
+III – melhor técnica ou conteúdo artístico;
+
+IV – técnica e preço;
+
+V – maior lance, no caso de leilão;
+
+VI – maior retorno econômico.
+
+Cada critério estabelecido pela Lei está comentado nos itens a seguir.
+
+[1] Lei 14.133/2021, art. 18, inciso VIII.
+
+[2] Valor atualizado por meio do Decreto 9.412/2018.
+
+[3] Lei 14.133/2021, art. 17, § 2º.
+
+[4] Lei 14.133/2021, art. 28, caput e incisos I a V.

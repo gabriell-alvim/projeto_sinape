@@ -1,0 +1,98 @@
+4.5.3. Regras da licitação
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/4-5-3-regras-da-licitacao/
+======================================================================
+
+Além de definir o objeto e as regras de convocação para o certame, é necessário que o edital estabeleça claramente as demais regras relativas ao procedimento licitatório, que devem compreender as seguintes, entre outras julgadas necessárias[1]:
+
+- critério de julgamento e modalidade de licitação adotados[2];
+
+- infrações relacionadas ao procedimento licitatório e respectivas sanções administrativas[3];
+
+- possibilidade, formas e prazos para impugnações e pedidos de esclarecimento do edital[4];
+
+- forma e conteúdo das propostas, incluindo quantitativos; preços e composição dos custos; materiais e equipamentos para execução do serviço, se for o caso; prazo de validade; exigência de garantia de proposta[5], quando aplicável; exigência de comprovação de atendimento aos requisitos de qualidade mediante a apresentação de amostras, exame de conformidade ou prova de conceito, entre outros testes para o licitante provisoriamente vencedor, se for o caso[6]; exigência de declaração de que a proposta compreende a integralidade dos custos para atendimento dos direitos trabalhistas, quando aplicável[7];
+
+- sequência das etapas do procedimento até o encerramento da licitação[8]. Quando a fase de habilitação anteceder a fase de julgamento de propostas, devem ser expostos os motivos e benefícios decorrentes;
+
+- modos de disputa[9]: aberto ou fechado, aberto/fechado, fechado/aberto. Se houver disputa aberta, informar sobre a duração da etapa de lances, as condições para a prorrogação automática e o encerramento da fase competitiva, o intervalo mínimo de diferença de valores ou de percentuais entre os lances (sejam intermediários ou quanto ao melhor valor de proposta) e a possibilidade de reabertura da fase competitiva;
+
+- requisitos de aceitabilidade das propostas, considerando limites máximos para preços unitários e global, compatibilidade com especificações técnicas e atributos de qualidade; além das regras para consideração e aferição da exequibilidade[10];
+
+- critérios de desempate[11];
+
+- possibilidade de negociação com o primeiro colocado e demais licitantes[12];
+
+- critérios de habilitação jurídica, técnica, fiscal, social e trabalhista, econômico-financeira[13];
+
+- publicação ou não do orçamento estimado elaborado pela organização pública e, se optar-se pela não publicação, justificar essa decisão e estabelecer o momento de divulgação do orçamento estimado[14];
+
+- formas de saneamento de eventuais vícios nas propostas e demais documentos apresentados[15];
+
+- possibilidade, formas e prazos para recursos[16]; e
+
+- adjudicação e homologação[17].
+
+Por oportuno, remete-se o leitor ao capítulo 5 deste manual, que trata das regras de licitação.
+
+Quadro 200 – Referências normativas para as regras da licitação no edital
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 25. O edital deverá conter o objeto da licitação e as regras relativas à convocação, ao julgamento, à habilitação, aos recursos e às penalidades da licitação, à fiscalização e à gestão do contrato, à entrega do objeto e às condições de pagamento.
+IN – Seges/MP 5/2017 | ANEXO VII-A DIRETRIZES GERAIS PARA ELABORAÇÃO DO ATO CONVOCATÓRIO 6. Da proposta: […] 7. Da aceitabilidade da proposta vencedora: […] 8. Do julgamento das propostas: […] 9. Da desclassificação das propostas: […] 10. Da habilitação: […]
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 201 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 529/2018-TCU-Plenário | [Enunciado] Em caso de exigência de amostra, o edital de licitação deve estabelecer critérios objetivos, detalhadamente especificados, para apresentação e avaliação do produto que a Administração deseja adquirir. Além disso, as decisões relativas às amostras apresentadas devem ser devidamente motivadas, a fim de atender aos princípios do julgamento objetivo e da igualdade entre os licitantes.
+Acórdão 2933/2016-TCU-Plenário | [Enunciado] É lícita a exigência de apresentação de amostras apenas na fase de classificação das propostas e somente do licitante provisoriamente classificado em primeiro lugar.
+Acórdão 607/2016-TCU-Plenário | [Enunciado] O edital de licitação e o respectivo contrato […] devem estabelecer claramente as situações para aplicação de penalidades e gradações entre as sanções de acordo com o potencial de lesão que poderá advir de cada conduta a ser apenada.
+Acórdão 1161/2014-TCU-Plenário | A desclassificação de proposta por inexequibilidade deve ser objetivamente demonstrada, a partir de critérios previamente publicados e deve ser franqueada a oportunidade de cada licitante defender a respectiva proposta e demonstrar a sua capacidade de bem executar os serviços, nos termos e condições exigidos pelo instrumento convocatório, antes que ele tenha a sua proposta desclassificada.
+Acórdão 2761/2010-TCU-Plenário | [Enunciado] Os critérios de desclassificação de propostas dos licitantes devem ser clara e objetivamente definidos no edital.
+Pesquisa de Jurisprudência | Execute as seguintes consultas na Jurisprudência selecionada , por árvore de classificação: Selecione a área “licitação”, tema “edital de licitação” .
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+Quadro 202 – Riscos relacionados
+
+Riscos
+Omissão de regras essenciais para reger o procedimento licitatório ou falta de clareza e contradições nas regras definidas, levando a interpretações equivocadas ou dúvidas de interpretação e a elevado número de impugnações, pedidos de esclarecimentos ou recursos, com consequente atraso ou paralisação do certame.
+Cláusulas de sanções genéricas (ou sua ausência) para comportamentos inadequados dos licitantes durante o certame, levando à impossibilidade de aplicar penalidades, com consequente dificuldade de inibir comportamentos que prejudicam ou retardam indevidamente a licitação.
+
+Fonte: Adaptado de Tribunal de Contas da União, 2014, item “Modelo de gestão do contrato”.
+
+[1] Tais regras foram abordadas com mais detalhes no item 5 deste manual.
+
+[2] Lei 14.133/2021, arts. 28 a 32 (modalidades) e 33 a 39 (critérios de julgamento), comentados nos itens 3.4 e 3.6 deste manual.
+
+[3] Lei 14.133/2021, art. 155, incisos IV, V, VIII, IX, X e XII.
+
+[4] Lei 14.133/2021, art. 164.
+
+[5] Lei 14.133/2021, art. 58.
+
+[6] Lei 14.133/2021, art. 17, § 3º, art. 41, inciso II, e art. 42.
+
+[7] Lei 14.133/2021, art. 63, § 1º.
+
+[8] Lei 14.133/2021, arts. 17 e 55 a 71.
+
+[9] Lei 14.133/2021, arts. 56 e 57.
+
+[10] Lei 14.133/2021, art. 59, § 3º, art. 82, § 1º.
+
+[11] Lei 14.133/2021, art. 60.
+
+[12] Lei 14.133/2021, art. 61.
+
+[13] Lei 14.133/2021, arts. 62 a 70.
+
+[14] Lei 14.133/2021, arts. 24 e 18, inciso XI.
+
+[15] Lei 14.133/2021, art. 12, inciso III, c/c art. 59, incisos I e V, e art. 64, § 1º.
+
+[16] Lei 14.133/2021, arts. 165 a 168.
+
+[17] Lei 14.133/2021, art. 71, inciso IV.

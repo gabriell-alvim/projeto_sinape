@@ -1,0 +1,41 @@
+5.10.2.3. Vigência de garantia de equipamentos (inciso IV, alínea “a”)
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/5-10-2-3-vigencia-de-garantia-de-equipamentos-inciso-iv-alinea-a/
+======================================================================
+
+A terceira hipótese de dispensa, disposta no art. 75, inciso IV, alínea “a”, da Lei 14.133/2021, se aplica para contratação de bens, componentes ou peças de origem nacional ou estrangeira necessários à manutenção de equipamentos durante o período de garantia técnica.
+
+Os seguintes requisitos legitimam esse tipo de dispensa:
+
+- é aplicável somente para compras (de bens, componentes ou peças), realizadas de forma acessória ao contrato dos equipamentos, não alcançando prestação de serviços, visto já estarem incluídos na garantia concedida;
+
+- os bens devem ser adquiridos do fornecedor original dos equipamentos. Se houver mais de um fornecedor do bem, componente ou peça, não sendo indispensável aquela condição de exclusividade para a vigência da garantia, é recomendável que Administração realize o procedimento de dispensa eletrônica[1], de forma a obter propostas adicionais e selecionar a mais vantajosa[2];
+
+- a compra deve ocorrer durante o período de garantia técnica;
+
+- deve ser indispensável para manter a garantia do equipamento; e
+
+- essa condição deve ter sido estabelecida no contrato de compra do equipamento.
+
+Quadro 323 – Referências normativas para a dispensa em razão de garantia técnica
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 75. É dispensável a licitação: […] IV – para contratação que tenha por objeto: a) bens, componentes ou peças de origem nacional ou estrangeira necessários à manutenção de equipamentos, a serem adquiridos do fornecedor original desses equipamentos durante o período de garantia técnica, quando essa condição de exclusividade for indispensável para a vigência da garantia;
+Decreto 10.947/2022 | Art. 6º Até a primeira quinzena de maio de cada exercício, os órgãos e as entidades elaborarão os seus planos de contratações anual, os quais conterão todas as contratações que pretendem realizar no exercício subsequente, incluídas: I – as contratações diretas, nas hipóteses previstas nos art. 74 e art. 75 da Lei nº 14. 133, de 2021;
+IN – Seges/ME 81/2022 | Art. 6º O TR, a partir dos Estudos Técnicos Preliminares – ETP, se elaborados, definirá o objeto para atendimento da necessidade, a ser enviado para o setor de contratações no prazo definido no calendário de contratação de que trata o inciso III do art. 11 do Decreto nº 10.947, de 25 de janeiro de 2022. § 1 º Os processos de contratação direta de que trata o art. 72 da Lei nº 14.133, de 1º de abril de 2021, serão instruídos com o TR, observado em especial os arts. 8º e 10.
+IN – Seges/ME 67/2021 | Art. 4º Os órgãos e entidades adotarão a dispensa de licitação, na forma eletrônica, nas seguintes hipóteses: […] III – contratação de obras, bens e serviços, incluídos os serviços de engenharia, nos termos do disposto no inciso III e seguintes do caput do art. 75 da Lei nº 14.133, de 2021, quando cabível; e
+IN – Seges/ME 65/2021 | Art. 5º A pesquisa de preços para fins de determinação do preço estimado em processo licitatório para a aquisição de bens e contratação de serviços em geral será realizada mediante a utilização dos seguintes parâmetros, empregados de forma combinada ou não: […] Art. 7º Nas contratações diretas por inexigibilidade ou por dispensa de licitação, aplica-se o disposto no art. 5º. […]
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 324 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 2716/2009-TCU-Segunda Câmara | [Voto] Inicialmente, com respeito aos contratos [ omissis ], a Unidade Técnica assinalou que o fundamento legal da contratação direta, respaldada na dispensa de licitação capitulada no art. 24, inc. XVII da Lei nº 8.666/93 (aquisição de componentes ou peças necessários à manutenção de equipamentos durante o período de garantia técnica), não se amoldaria à situação fática, vez que ocorreu, na realidade, por meio daquelas avenças, a aquisição de novos equipamentos e até mesmo a contratação de novos serviços. Além disso, restou evidenciado que, tanto nos contratos acima mencionados, bem como naqueles firmados mediante inexigibilidade de licitação [ omissis ], no que concerne aos itens relativos a equipamentos e acessórios deles integrantes (componentes de hardware), inexistiam quaisquer óbices de ordem técnica ou mercadológica para que estes pudessem ter sido adquiridos mediante a realização de regular procedimento licitatório. […] Ainda, nesse contexto, sobressai como agravante o fato de que inexistem garantias de que em todas as contratações diretas firmadas, o preço ofertado pela [ omissis ] estaria em consonância com os praticados pelo mercado. Conforme registrado na instrução técnica, os próprios gestores do Serpro admitiram que as pesquisas de compatibilidade de preços, por vezes, foram realizadas de maneira informal, sem anexação dos registros aos processos de contratação.
+Pesquisa de Jurisprudência | Execute consulta na Jurisprudência Selecionada do TCU . Selecione a “área – Licitação”, tema “dispensa de licitação” .
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+[1] IN – Seges/ME 67/2021.
+
+[2] Lei 14.133/2021, art. 75, § 3º.

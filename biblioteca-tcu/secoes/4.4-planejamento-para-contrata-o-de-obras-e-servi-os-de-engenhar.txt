@@ -1,0 +1,48 @@
+4.4. Planejamento para contratação de obras e serviços de engenharia
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/4-4-planejamento-para-contratacao-de-obras-e-servicos-de-engenharia-2/
+======================================================================
+
+Dentre as formas de a Administração Pública atender às demandas da sociedade, destacam-se a execução de obras e a prestação de serviços de engenharia. Exemplos de obras públicas incluem a construção de edifícios, como escolas e hospitais, ruas e estradas, sistemas de água e esgoto, metrôs, aeroportos e muitas outras. Além disso, há serviços de engenharia que incluem a manutenção de prédios, pequenas reformas e adaptações que preservam as características originais dos imóveis, bem como o desenvolvimento de projetos.
+
+Uma obra pode ser definida como a ação de construir, executar ou edificar algo, reformar para alterar substancialmente as características de partes ou do todo de uma obra, ou ampliar para aumentar a área construída de um bem.
+
+A Lei 14.133/2021 define obra e serviço de engenharia[1]:
+
+Art. 6º [….] XII – obra: toda atividade estabelecida, por força de lei, como privativa das profissões de arquiteto e engenheiro que implica intervenção no meio ambiente por meio de um conjunto harmônico de ações que, agregadas, formam um todo que inova o espaço físico da natureza ou acarreta alteração substancial das características originais de bem imóvel. […]
+
+XXI – serviço de engenharia: toda atividade ou conjunto de atividades destinadas a obter determinada utilidade, intelectual ou material, de interesse para a Administração e que, não enquadradas no conceito de obra a que se refere o inciso XII do caput deste artigo, são estabelecidas, por força de lei, como privativas das profissões de arquiteto e engenheiro ou de técnicos especializados, que compreendem:
+
+a) serviço comum de engenharia: todo serviço de engenharia que tem por objeto ações, objetivamente padronizáveis em termos de desempenho e qualidade, de manutenção, de adequação e de adaptação de bens móveis e imóveis, com preservação das características originais dos bens;
+
+b) serviço especial de engenharia: aquele que, por sua alta heterogeneidade ou complexidade, não pode se enquadrar na definição constante da alínea “a” deste inciso;
+
+A Lei 14.133/2021 não traz os conceitos de “obra comum” ou de “obra especial”. Embora não os tenha definido expressamente, em várias passagens, o texto se refere a ambos os tipos de objeto, tal como no art. 55, inciso II:
+
+Art. 55. Os prazos mínimos para apresentação de propostas e lances, contados a partir da data de divulgação do edital de licitação, são de: […]
+
+II – no caso de serviços e obras:
+
+a) 10 (dez) dias úteis, quando adotados os critérios de julgamento de menor preço ou de maior desconto, no caso de serviços comuns e de obras e serviços comuns de engenharia;
+
+b) 25 (vinte e cinco) dias úteis, quando adotados os critérios de julgamento de menor preço ou de maior desconto, no caso de serviços especiais e de obras e serviços especiais de engenharia;
+
+É possível interpretar o dispositivo acima no sentido de que os termos “comuns” e “especiais” se referem tanto aos serviços como às obras, trazendo uma diferenciação entre as duas alíneas “a” e “b”. Caso contrário, haveria uma dubiedade no estabelecimento do prazo mínimo de divulgação do edital para a licitação de obras, que poderiam ser licitadas com prazo mínimo de dez ou 25 dias úteis.
+
+Além do prazo mínimo de abertura das propostas, a diferenciação entre obra “comum” e “especial” impactaria outros três fatores. O primeiro deles é que a licitação de obras “especiais” poderia ser conduzida por comissão de contratação[2], ao passo que as obras comuns teriam o certame processado por um agente de contratação.
+
+As obras comuns poderiam ser executadas sem projeto executivo[3], desde que o ETP demonstre a inexistência de prejuízo para a aferição dos padrões de desempenho e qualidade almejados.
+
+Por fim, as obras especiais poderiam ser processadas com o critério de julgamento de técnica e preço[4], quando o ETP “demonstrar que a avaliação e a ponderação da qualidade técnica das propostas que superarem os requisitos mínimos estabelecidos no edital forem relevantes aos fins pretendidos pela Administração”.
+
+Em que pese a Lei 14.133/2021 não conter a conceituação do que seriam obras “comuns” e “especiais”, nem haver, até o momento, jurisprudência do TCU que aborde essa questão, há iniciativas que buscam avançar na construção desses conceitos, a exemplo da Nota Técnica IBR 001/2021[5].
+
+[1] Lei 14.133/2021, art. 6º, incisos XII e XXI.
+
+[2] Lei 14.133/2021, art. 8º, § 2º.
+
+[3] Lei 14.133/2021, art. 18, § 3º c/c art. 46, § 1º.
+
+[4] Lei 14.133/2021, art. 36, § 1º, inciso IV.
+
+[5] IBRAOP, 2021.

@@ -7,6 +7,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY app.py index.html login.html prompt_sinki.txt ./
 COPY montador-dossie/ ./montador-dossie/
+COPY biblioteca-tcu/ ./biblioteca-tcu/
 
 RUN mkdir -p /app/uploads
 ENV UPLOAD_DIR=/app/uploads

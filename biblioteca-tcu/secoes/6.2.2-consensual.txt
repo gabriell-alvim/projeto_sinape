@@ -1,0 +1,56 @@
+6.2.2. Consensual
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/6-2-2-consensual/
+======================================================================
+
+O inciso II do art. 124 da Lei 14.133/2021 estabelece hipóteses de alteração do contrato que só podem ser realizadas por acordo entre as partes, a saber:
+
+- quando for conveniente substituir a garantia efetuada para a execução do contrato;
+
+- quando for necessária a modificação:
+
+- do regime de execução da obra ou do serviço, bem como do modo de fornecimento, em face de verificação técnica da inaplicabilidade dos termos originais do contrato;
+
+- da forma de pagamento, por imposição de circunstâncias que surgirem após a assinatura do contrato, devendo ser mantido o valor inicial atualizado;
+
+- para restabelecer o equilíbrio econômico-financeiro inicial do contrato.
+
+A primeira hipótese aplica-se aos casos em que a garantia contratual oferecida pelo contratado não for mais adequada. Assim, as partes devem chegar a um acordo sobre a nova garantia.
+
+A segunda hipótese ocorrerá quando for necessário alterar o regime de execução da obra ou serviço, entre aqueles dispostos no artigo 46 da Lei, ou do modo de fornecimento. Isso pode acontecer em face de verificação técnica da inaplicabilidade dos termos contratuais originários.
+
+A terceira hipótese trata da necessidade de mudar a forma de pagamento devido a circunstâncias supervenientes, mantendo o valor inicial atualizado. Nesse caso, é proibido antecipar o pagamento em relação ao cronograma financeiro fixado sem a correspondente contraprestação de fornecimento de bens ou execução de obra ou serviço.
+
+A quarta hipótese refere-se à alteração para restabelecer o equilíbrio econômico-financeiro inicial do contrato. Isso consiste em manter uma relação estável entre os custos e encargos do contratado e a remuneração da Administração pelo fornecimento do bem, execução de obra ou prestação de serviço (vide comentários do item 6.2.2.1.1).
+
+Quanto à sujeição das alterações consensuais aos limites impostos pelo art. 125 da Lei 14.133/2021, remete-se aos comentários do item 6.2.1.
+
+Em qualquer caso, as alterações consensuais não podem transfigurar o objeto da contratação, de modo que não sirvam de burla à licitação[1], visto que, nesse caso, estaria havendo a contratação de um outro objeto sem a prévia realização de licitação.
+
+Quadro 434 – Referências normativas para a alteração consensual do contrato
+
+Normativos | Dispositivos
+Constituição Federal de 1988 | Art. 37. A Administração Pública direta e indireta de qualquer dos Poderes da União, dos Estados, do Distrito Federal e dos Municípios obedecerá aos princípios de legalidade, impessoalidade, moralidade, publicidade e eficiência e, também, ao seguinte: (Redação dada pela Emenda Constitucional nº 19, de 1998) […] XXI – ressalvados os casos especificados na legislação, as obras, serviços, compras e alienações serão contratados mediante processo de licitação pública que assegure igualdade de condições a todos os concorrentes, com cláusulas que estabeleçam obrigações de pagamento, mantidas as condições efetivas da proposta , nos termos da Lei, o qual somente permitirá as exigências de qualificação técnica e econômica indispensáveis à garantia do cumprimento das obrigações. (Grifo nosso)
+Lei 14.133/2021 | Art. 124. Os contratos regidos por esta Lei poderão ser alterados, com as devidas justificativas, nos seguintes casos: […] II – por acordo entre as partes: a) quando conveniente a substituição da garantia de execução; b) quando necessária a modificação do regime de execução da obra ou do serviço, bem como do modo de fornecimento, em face de verificação técnica da inaplicabilidade dos termos contratuais originários; c) quando necessária a modificação da forma de pagamento por imposição de circunstâncias supervenientes, mantido o valor inicial atualizado e vedada a antecipação do pagamento em relação ao cronograma financeiro fixado sem a correspondente contraprestação de fornecimento de bens ou execução de obra ou serviço; d) para restabelecer o equilíbrio econômico-financeiro inicial do contrato em caso de força maior, caso fortuito ou fato do príncipe ou em decorrência de fatos imprevisíveis ou previsíveis de consequências incalculáveis, que inviabilizem a execução do contrato tal como pactuado, respeitada, em qualquer caso, a repartição objetiva de risco estabelecida no contrato. […] § 2º Será aplicado o disposto na alínea “d” do inciso II do caput deste artigo às contratações de obras e serviços de engenharia, quando a execução for obstada pelo atraso na conclusão de procedimentos de desapropriação, desocupação, servidão administrativa ou licenciamento ambiental, por circunstâncias alheias ao contratado.
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 435 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 781/2021-TCU-Plenário | [Enunciado] A extrapolação excepcionalíssima dos limites estabelecidos no art. 65, §§ 1º e 2º, da Lei 8.666/1993 para alterações consensuais qualitativas de contratos de obras e serviços somente é possível se satisfeitas cumulativamente as seguintes exigências estabelecidas na Decisão 215/1999-Plenário: a) não acarretar para a Administração encargos contratuais superiores àqueles oriundos de uma eventual rescisão contratual por razões de interesse público, acrescidos aos custos da elaboração de um novo procedimento licitatório; b) não possibilitar a inexecução contratual, à vista do nível de capacidade técnica e econômico-financeira do contratado; c) decorrer de fatos supervenientes que impliquem dificuldades não previstas ou imprevisíveis por ocasião da contratação inicial; d) não ocasionar a transfiguração do objeto originalmente contratado em outro de natureza e propósito diversos; e) ser necessária para a completa execução do objeto original do contrato, para a otimização do cronograma de execução e para a antecipação dos benefícios sociais e econômicos decorrentes; f) restar demonstrado, na motivação do ato de alteração do contrato, que as consequências da rescisão contratual, seguida de nova licitação e contratação, importariam sacrifício insuportável ao interesse público a ser atendido pela obra ou serviço, inclusive quanto à sua urgência e emergência.
+Acórdão 1617/2006-TCU-Plenário | [Sumário] É vedado à Administração autorizar alteração no valor da garantia contratual prevista em edital, salvo quando haja alteração do valor do objeto do contrato prevista no § 2º do art. 56 da Lei nº 8.666/93.
+Decisão 215/1999-TCU-Plenário | [Sumário] Consulta sobre a possibilidade de alteração de contrato administrativo em valor que excederia os limites estabelecidos na Lei n. 8.666/93. [Decisão] […] b) nas hipóteses de alterações contratuais consensuais, qualitativas e excepcionalíssimas de contratos de obras e serviços, é facultado à Administração ultrapassar os limites aludidos no item anterior, observados os princípios da finalidade, da razoabilidade e da proporcionalidade, além dos direitos patrimoniais do contratante privado, desde que satisfeitos cumulativamente os seguintes pressupostos : I – não acarretar para a Administração encargos contratuais superiores aos oriundos de uma eventual rescisão contratual por razões de interesse público, acrescidos aos custos da elaboração de um novo procedimento licitatório; II – não possibilitar a inexecução contratual, à vista do nível de capacidade técnica e econômico-financeira do contratado ; III – decorrer de fatos supervenientes que impliquem em dificuldades não previstas ou imprevisíveis por ocasião da contratação inicial; IV – não ocasionar a transfiguração do objeto originalmente contratado em outro de natureza e propósito diversos; V – ser necessárias à completa execução do objeto original do contrato, à otimização do cronograma de execução e à a ntecipação dos benefícios sociais e econômicos decorrentes; VI – demonstrar-se na motivação do ato que autorizar o aditamento contratual que extrapole os limites legais mencionados na alínea “a”, supra – que as c onsequências da outra alternativa (a rescisão contratual, seguida de nova licitação e contratação) importam sacrifício insuportável ao interesse público primário (interesse coletivo) a ser atendido pela obra ou serviço, ou seja gravíssimas a esse interesse; inclusive quanto à sua urgência e emergência; (Grifo nosso)
+Pesquisa de Jurisprudência | Execute consulta na Jurisprudência Selecionada . Pesquise pela árvore de classificação: área “contrato administrativo”, tema “aditivo” .
+
+Fonte: Elaboração própria a partir de consulta a jurisprudência do TCU.
+
+Quadro 436 – Riscos relacionados
+
+Riscos
+Deficiência na concepção da solução a contratar, levando a acréscimos contratuais consensuais acima dos limites impostos pelo art. 125 da Lei 14.133/2021, com consequente descaracterização do objeto, configuração de burla à licitação, afronta aos princípios da vinculação ao edital e da isonomia do certame que resultou na contratação.
+Estimativa de quantidade excessiva, levando à necessidade de alteração consensual do contrato para supressão do objeto acima do limite permitido no art. 125 da Lei 14.133/2021, com consequente frustação da expectativa de ganho do contratado e, no caso de o contratado já ter adquirido os materiais e os colocado no local dos trabalhos, o pagamento pela Administração dos custos de aquisição desses materiais e a indenização ao contratado por prejuízos regularmente comprovados (Lei 14.133/2021, art. 129).
+
+Fonte: Elaboração própria.
+
+[1] CF/1988, art. 37, inciso XXI.

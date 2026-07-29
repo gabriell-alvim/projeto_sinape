@@ -1,0 +1,76 @@
+3.6.5. Diálogo Competitivo
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/3-6-5-dialogo-competitivo-2/
+======================================================================
+
+A Lei 14.133/2021 dispõe que o diálogo competitivo é:
+
+Art. 6º […]
+
+XLII – diálogo competitivo: modalidade de licitação para contratação de obras, serviços e compras em que a Administração Pública realiza diálogos com licitantes previamente selecionados mediante critérios objetivos, com o intuito de desenvolver uma ou mais alternativas capazes de atender às suas necessidades, devendo os licitantes apresentar proposta final após o encerramento dos diálogos;
+
+Nesse sentido, a Administração tem definida uma necessidade, mas, para estabelecer a melhor solução para atender a essa demanda complexa, necessita de uma aproximação com a iniciativa privada, a qual se dá por meio dos referidos diálogos.
+
+A Lei 14.133/2021 estabelece algumas premissas básicas para utilização dessa modalidade, restringindo-a às contratações em que a Administração:
+
+Art. 32. […]
+
+I – vise a contratar objeto que envolva as seguintes condições:
+
+a) inovação tecnológica ou técnica;
+
+b) impossibilidade de o órgão ou entidade ter sua necessidade satisfeita sem a adaptação de soluções disponíveis no mercado; e
+
+c) impossibilidade de as especificações técnicas serem definidas com precisão suficiente pela Administração;
+
+II- verifique a necessidade de definir e identificar os meios e as alternativas que possam satisfazer suas necessidades, com destaque para os seguintes aspectos
+
+a) a solução técnica mais adequada;
+
+b) os requisitos técnicos aptos a concretizar a solução já definida;
+
+c) a estrutura jurídica ou financeira do contrato; […]
+
+As hipóteses do inciso I dizem respeito às seguintes situações: não existe solução no mercado que atenda perfeitamente à demanda da Administração, sendo necessária a inovação (alínea “a”); as soluções existentes no mercado precisam ser adaptadas para atender à necessidade (alínea “b”); a Administração, apesar de conhecer possíveis soluções, não consegue definir precisamente o objeto da licitação (alínea “c”).
+
+As hipóteses do inciso II são relacionadas à necessidade de coletar mais informações sobre a solução mais adequada; ou sobre os requisitos da solução já definida; ou ainda acerca dos aspectos jurídicos e financeiros da futura contratação.
+
+O procedimento dessa modalidade é descrito no art. 32, § 1º, da Lei 14.133/2021, o qual estabelece que o diálogo competitivo será conduzido por comissão de contratação composta por pelo menos três servidores efetivos ou empregados públicos, admitida a contratação de assessoria técnica[1], e realizado por meio de três fases distintas: pré-seleção dos licitantes, diálogo, e fase competitiva[2].
+
+Na fase de pré-seleção, a Administração publicará edital informando as suas necessidades e as exigências para as empresas interessadas em participar da fase de diálogo, e estabelecerá, no mínimo, prazo de 25 dias úteis para os interessados se manifestarem. A Lei prevê que serão admitidos todos os interessados que preencherem os requisitos objetivos estabelecidos[3].
+
+Ainda em relação à fase de pré-seleção, destaca-se a Orientação Normativa AGU nº 82/2024, que estabelece que é possível definir no edital de pré-seleção critérios de exclusão. Esses critérios devem ser observados pelos licitantes tanto para a participação inicial quanto durante o desenvolvimento dos diálogos, sob pena de exclusão da fase competitiva.
+
+Na segunda fase, as empresas selecionadas participarão efetivamente do planejamento da contratação, de modo a definir a melhor solução para atendimento da demanda. É a fase de diálogo, na qual a melhor solução é desenvolvida a partir de discussões com cada fornecedor individualmente, podendo ser escolhida mais de uma inclusive. Tais reuniões serão registradas em ata e gravadas mediante utilização de recursos tecnológicos de áudio e vídeo[4].
+
+Na fase competitiva, com a solução (ou soluções) já especificada(s), a Administração divulgará edital contendo a definição do objeto, os critérios objetivos a serem utilizados para seleção da proposta mais vantajosa e prazo não inferior a 60 dias úteis para que os licitantes pré-selecionados apresentem suas propostas[5]. Destaque-se que a participação é limitada aos licitantes selecionados na fase de pré-seleção.
+
+Quadro 81 – Referências normativas para o diálogo competitivo
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 6º Para os fins desta Lei, consideram-se: […] XLII – diálogo competitivo: modalidade de licitação para contratação de obras, serviços e compras em que a Administração Pública realiza diálogos com licitantes previamente selecionados mediante critérios objetivos, com o intuito de desenvolver uma ou mais alternativas capazes de atender às suas necessidades, devendo os licitantes apresentar proposta final após o encerramento dos diálogos; […] Art. 32. A modalidade diálogo competitivo é restrita a contratações em que a Administração: I – vise a contratar objeto que envolva as seguintes condições: a) inovação tecnológica ou técnica; b) impossibilidade de o órgão ou entidade ter sua necessidade satisfeita sem a adaptação de soluções disponíveis no mercado; e c) impossibilidade de as especificações técnicas serem definidas com precisão suficiente pela Administração; II – verifique a necessidade de definir e identificar os meios e as alternativas que possam satisfazer suas necessidades, com destaque para os seguintes aspectos: a) a solução técnica mais adequada; b) os requisitos técnicos aptos a concretizar a solução já definida; c) a estrutura jurídica ou financeira do contrato; § 1º Na modalidade diálogo competitivo, serão observadas as seguintes disposições: I – a Administração apresentará, por ocasião da divulgação do edital em sítio eletrônico oficial, suas necessidades e as exigências já definidas e estabelecerá prazo mínimo de 25 (vinte e cinco) dias úteis para manifestação de interesse na participação da licitação; II – os critérios empregados para pré-seleção dos licitantes deverão ser previstos em edital, e serão admitidos todos os interessados que preencherem os requisitos objetivos estabelecidos; III – a divulgação de informações de modo discriminatório que possa implicar vantagem para algum licitante será vedada; IV – a Administração não poderá revelar a outros licitantes as soluções propostas ou as informações sigilosas comunicadas por um licitante sem o seu consentimento; V – a fase de diálogo poderá ser mantida até que a Administração, em decisão fundamentada, identifique a solução ou as soluções que atendam às suas necessidades; VI – as reuniões com os licitantes pré-selecionados serão registradas em ata e gravadas mediante utilização de recursos tecnológicos de áudio e vídeo; VII – o edital poderá prever a realização de fases sucessivas, caso em que cada fase poderá restringir as soluções ou as propostas a serem discutidas; VIII – a Administração deverá, ao declarar que o diálogo foi concluído, juntar aos autos do processo licitatório os registros e as gravações da fase de diálogo iniciar a fase competitiva com a divulgação de edital contendo a especificação da solução que atenda às suas necessidades e os critérios objetivos a serem utilizados para seleção da proposta mais vantajosa e abrir prazo, não inferior a 60 (sessenta) dias úteis, para todos os licitantes pré-selecionados na forma do inciso II deste parágrafo apresentarem suas propostas, que deverão conter os elementos necessários para a realização do projeto; IX – a Administração poderá solicitar esclarecimentos ou ajustes às propostas apresentadas, desde que não impliquem discriminação nem distorçam a concorrência entre as propostas; X – a Administração definirá a proposta vencedora de acordo com critérios divulgados no início da fase competitiva, assegurada a contratação mais vantajosa como resultado; XI – o diálogo competitivo será conduzido por comissão de contratação composta de pelo menos 3 (três) servidores efetivos ou empregados públicos pertencentes aos quadros permanentes da Administração, admitida a contratação de profissionais para assessoramento técnico da comissão; § 2º Os profissionais contratados para os fins do inciso XI do § 1º deste artigo assinarão termo de confidencialidade e abster-se-ão de atividades que possam configurar conflito de interesses
+IN – Seges/ME 2/2023 | Art. 4º O critério de julgamento por técnica e preço será adotado: I – na modalidade concorrência; ou II – na fase competitiva da modalidade diálogo competitivo, quando o critério de que trata o caput for entendido como o que melhor se adequa à solução identificada na fase de diálogo.
+IN – Seges/ME 96/2022 | Art. 4º O critério de julgamento por maior retorno econômico será adotado: I – na modalidade concorrência; ou II – na fase competitiva da modalidade diálogo competitivo, quando o critério de que trata o caput for entendido como o que melhor se adequa à solução identificada na fase de diálogo.
+IN – Seges/ME 73/2022 | Art. 1º Esta Instrução Normativa dispõe sobre a licitação pelo critério de julgamento por menor preço ou maior desconto, na forma eletrônica, para a contratação de bens, serviços e obras, no âmbito da Administração Pública federal direta, autárquica e fundacional. […] Art. 4º O critério de julgamento de menor preço ou maior desconto será adotado: […] III – na fase competitiva da modalidade diálogo competitivo, quando for entendido como o mais adequado à solução identificada na fase de diálogo. […] Art. 8º A realização da licitação pelo critério do menor preço ou maior desconto observará as seguintes fases sucessivas: I – preparatória; II – divulgação do edital de licitação; III – apresentação de propostas e lances; IV – julgamento; V – habilitação; VI – recursal; e VII – homologação. […] § 3º Na adoção da modalidade de licitação diálogo competitivo, na forma do disposto no inciso III do art. 4º, serão observadas as fases próprias desta modalidade, nos termos do art. 32 da Lei nº 14.133, de 2021. […] Art. 17. Os prazos mínimos para a apresentação das propostas e lances, contados a partir do 1º do útil subsequente à data de divulgação do edital de licitação no PNCP, são de: […] § 2º O prazo mínimo para apresentação de propostas será de 60 (sessenta) dias úteis na fase competitiva da modalidade licitatória diálogo competitivo, em atenção ao disposto no inciso VIII do § 1º do art. 32 da Lei nº 14.133, de 2021.
+Orientação Normativa AGU 82/2024 | No processo licitatório na modalidade do diálogo competitivo é possível estabelecer no edital de pré-seleção critérios de exclusão a serem observados pelos licitantes para participação e durante o desenvolvimento dos diálogos, sob pena de exclusão da fase competitiva.
+Diretiva 2004/18/UE: | https://eur-lex.europa.eu/legal-content/PT/ALL/?uri=celex:32004L0018
+Diretiva 2014/24/UE | https://eur-lex.europa.eu/legal-content/pt/TXT/?uri=CELEXª3A32014L0024
+
+Fonte: regras legais e internacionais consultadas.
+
+Quadro 82 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Pesquisa de Jurisprudência | Execute consulta nas Acórdãos do TCU . Pesquise pela expressão (não utilize aspas): modalidade adj2 diálogo competitivo.
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+[1] Lei 14.133/2021, art. 32, § 1º, inciso XI.
+
+[2] Lei 14.133/2021, art. 32, § 1º, incisos II, V e VIII.
+
+[3] Lei 14.133/2021, art. 32, § 1º, incisos I e II.
+
+[4] Lei 14.133/2021, art. 32, § 1º, incisos IV, V e VI.
+
+[5] Lei 14.133/2021, art. 32, § 1º, inciso VIII.

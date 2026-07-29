@@ -1,0 +1,79 @@
+6.4.3.4. Outras razões
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/6-4-3-4-outras-razoes/
+======================================================================
+
+A Administração pode extinguir unilateralmente o contrato por outras razões, como para atender ao interesse público ou em decorrência de fatos imprevisíveis que impeçam a continuidade da execução do objeto. A Lei 14.133/2021 estabelece as seguintes hipóteses[1]:
+
+- caso fortuito ou força maior, regularmente comprovados, impeditivos da execução do contrato. Inclui a hipótese de resolução quando o sinistro majorar excessivamente ou impedir a continuidade da execução contratual[2]. Se for possível prever a duração do impedimento e esse for temporário, a Administração poderá optar pela suspensão da execução e prorrogação dos prazos contratuais, em vez de extinguir o contrato, restabelecendo posteriormente a equação econômico-financeira[3];
+
+- razões de interesse público, justificadas pela autoridade máxima do órgão ou da entidade contratante. É importante lembrar que a extinção do contrato deve ser motivada e baseada em fatos, e não apenas em valores jurídicos abstratos. Além disso, as consequências práticas da decisão devem ser levadas em consideração[4];
+
+- atraso na obtenção da licença ambiental, ou impossibilidade de obtê-la, ou alteração substancial do anteprojeto que dela resultar, ainda que obtida no prazo previsto;
+
+- atraso na liberação das áreas sujeitas a desapropriação, a desocupação ou a servidão administrativa, ou impossibilidade de liberação dessas áreas.
+
+Nas duas primeiras situações mencionadas acima (caso fortuito ou força maior, e razões de interesse público), o contratado terá direito a receber os pagamentos devidos pela execução do contrato até a data de extinção, além da devolução da garantia[5]. Quanto à indenização pelos prejuízos regularmente comprovados que o contratado sofreu e ao pagamento do custo da desmobilização, quando a extinção não decorrer de culpa exclusiva da Administração, deve-se observar a repartição objetiva de riscos e responsabilidades estabelecida no contrato[6].
+
+Quanto às demais hipóteses – atraso na obtenção de licença ambiental e de liberação de áreas – também é necessário observar o que foi definido na matriz de riscos[7]. Assim, se as providências ficaram a cargo da Administração, os atrasos e impedimentos se enquadram na situação prevista no art. 137, § 2º, inciso V, da Lei 14.133/2021, dando ao contratado o direito à extinção do contrato, além de indenização pelos prejuízos regularmente comprovados que houver sofrido. Por outro lado, se os eventos decorrerem de ação ou omissão do contratado, caberá a extinção unilateral do contrato, sem prejuízo da aplicação das sanções cabíveis.
+
+Isso mostra a importância de formalizar previamente a alocação de riscos entre a Administração e o contratado por meio de cláusula específica no contrato, definindo explicitamente quais riscos serão assumidos por cada parte contratante e quais serão compartilhados. Essa medida gera maior segurança jurídica entre as partes contratantes, pois já terão definidas as responsabilidades que cabem a cada parte no caso de ocorrência de algum sinistro, evitando conflitos e processos judiciais para solucioná-los.
+
+É importante mencionar que a Lei 14.133/2021 estabelece que, nas contratações de obras e serviços de engenharia, sempre que a responsabilidade pelo licenciamento ambiental for da Administração, a manifestação prévia ou licença prévia, quando cabíveis, deverão ser obtidas antes da divulgação do edital[8]. Isso significa que, se a Administração tem a obrigação legal de providenciar as licenças ambientais antes da divulgação do edital, essa responsabilidade não deve constar de suas obrigações contratuais. Essa responsabilidade seria, portanto, excepcional, somente na inviabilidade de obtenção anteriormente ao edital, sob pena de responsabilização.
+
+Há ainda mais duas causas de extinção prematura do contrato, previstas pela Lei 14.133/2021, aplicáveis a contratações de prestação contínua. Essas hipóteses tiveram tratamento específico na norma[9]:
+
+- falta de créditos orçamentários para a continuidade ou prorrogação do contrato; e
+
+- perda da vantajosidade do contrato.
+
+Nessas situações, a Lei 14.133/2021 permite que a Administração extinga o contrato sem ônus, limitando, no entanto, o período para realizar essa extinção. A extinção deve ocorrer apenas na próxima data de aniversário do contrato[10] e não pode ocorrer em prazo inferior a dois meses, contado da referida data[11].
+
+Quadro 463 – Referências normativas para extinção do contrato por outras razões
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 106. A Administração poderá celebrar contratos com prazo de até 5 (cinco) anos nas hipóteses de serviços e fornecimentos contínuos, observadas as seguintes diretrizes: […] III – a Administração terá a opção de extinguir o contrato, sem ônus, quando não dispuser de créditos orçamentários para sua continuidade ou quando entender que o contrato não mais lhe oferece vantagem. § 1º A extinção mencionada no inciso III do caput deste artigo ocorrerá apenas na próxima data de aniversário do contrato e não poderá ocorrer em prazo inferior a 2 (dois) meses, contado da referida data. […] Art. 115. O contrato deverá ser executado fielmente pelas partes, de acordo com as cláusulas avençadas e as normas desta Lei, e cada parte responderá pelas consequências de sua inexecução total ou parcial. […] § 4º Nas contratações de obras e serviços de engenharia, sempre que a responsabilidade pelo licenciamento ambiental for da Administração, a manifestação prévia ou licença prévia, quando cabíveis, deverão ser obtidas antes da divulgação do edital. (Promulgação partes vetadas) […] Art. 137. Constituirão motivos para extinção do contrato, a qual deverá ser formalmente motivada nos autos do processo, assegurados o contraditório e a ampla defesa, as seguintes situações: […] V – caso fortuito ou força maior, regularmente comprovados, impeditivos da execução do contrato; VI – atraso na obtenção da licença ambiental, ou impossibilidade de obtê-la, ou alteração substancial do anteprojeto que dela resultar, ainda que obtida no prazo previsto; VII – atraso na liberação das áreas sujeitas a desapropriação, a desocupação ou a servidão administrativa, ou impossibilidade de liberação dessas áreas; VIII – razões de interesse público, justificadas pela autoridade máxima do órgão ou da entidade contratante; […] § 1º Regulamento poderá especificar procedimentos e critérios para verificação da ocorrência dos motivos previstos no caput deste artigo. […] Art. 138. A extinção do contrato poderá ser: […] § 2º Quando a extinção decorrer de culpa exclusiva da Administração, o contratado será ressarcido pelos prejuízos regularmente comprovados que houver sofrido e terá direito a: I – devolução da garantia; II – pagamentos devidos pela execução do contrato até a data de extinção; III – pagamento do custo da desmobilização.
+Decreto-Lei 4.657/1942 (LINDB) | Art. 20. Nas esferas administrativa, controladora e judicial, não se decidirá com base em valores jurídicos abstratos sem que sejam consideradas as consequências práticas da decisão. (Incluído pela Lei nº 13.655, de 2018) (Regulamento) Parágrafo único. A motivação demonstrará a necessidade e a adequação da medida imposta ou da invalidação de ato, contrato, ajuste, processo ou norma administrativa, inclusive em face das possíveis alternativas. (Incluído pela Lei nº 13.655, de 2018) Art. 21. A decisão que, nas esferas administrativa, controladora ou judicial, decretar a invalidação de ato, contrato, ajuste, processo ou norma administrativa deverá indicar de modo expresso suas consequências jurídicas e administrativas. (Incluído pela Lei nº 13.655, de 2018) (Regulamento) Parágrafo único. A decisão a que se refere o caput deste artigo deverá, quando for o caso, indicar as condições para que a regularização ocorra de modo proporcional e equânime e sem prejuízo aos interesses gerais, não se podendo impor aos sujeitos atingidos ônus ou perdas que, em função das peculiaridades do caso, sejam anormais ou excessivos. (Incluído pela Lei nº 13.655, de 2018)
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 464 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 851/2023-TCU-Plenário | 9.4. determinar ao [ omissis ] que: 9.4.3. caso a [ omissis ] apresente óbices jurídicos à aplicação do art. 65, II, “d”, da Lei 8.666/1993 ao caso vertente, alegando, por exemplo, que não ocorreu nenhum fato superveniente imprevisível, o Ministério da Ciência, Tecnologia, Inovação e Comunicações deverá avaliar a rescisão dessa avença por razões de interesse público, nos termos do art. 78, XII, da Lei 8.666/1993. Nessa hipótese, deverá haver o pagamento de indenização pelos danos emergentes e pelas despesas de desmobilização, consoante disposto no art. 79, § 2º, da Lei 8.666/1993;
+Acórdão 262/2020-TCU-Plenário | Considerando que o art. 79 da Lei 8.666/1993 prevê a rescisão do contrato por ato unilateral e escrito da Administração na situação prevista no inciso XII do art. 78, qual seja, razões de interesse público, de alta relevância e amplo conhecimento, justificadas e determinadas pela máxima autoridade da esfera administrativa a que está subordinado o contratante, e exaradas no processo administrativo a que se refere o contrato; Considerando a informação de que, com a mudança de cenário que resultou na redução do quadro funcional do órgão e a disponibilidade de local próprio para abrigar todos os servidores que atualmente trabalham no prédio locado, não haveria razões para a manutenção da execução contratual por mais oito anos; Considerando a demonstração do interesse público na rescisão; Considerando, finalmente, que a ausência do fumus boni iuris conduz à não adoção de medida cautelar;
+Acórdão 442/2017-TCU-Primeira Câmara | 25. Por óbvio que não caberia à assessoria jurídica construir embasamento técnico para justificar a rescisão, mas sim verificar e apontar que não constava dos autos a devida motivação. Com visto, a mera afirmação de que o contrato não era mais adequado à realidade e aos desafios propostos, em face de inúmeros fatores elencados a respeito da execução contratual, sem explicitar quais eram esses fatores, não se revela suficiente para amparar a rescisão por razões de interesse público, de alta relevância e amplo conhecimento, prevista no art. 78, inciso XII, da Lei 8.666/93.
+Acórdão 1800/2016-TCU-Primeira Câmara | [Enunciado] O pagamento de desmobilização no caso de interrupção da obra pela Administração, sem culpa do contratado, tem natureza indenizatória (art. 79, § 2º, inciso III, da Lei 8.666/1993), exigindo que os custos efetivamente incorridos sejam demonstrados. Não se confunde essa indenização com o preço unitário contratual previsto para a etapa de desmobilização constante do cronograma físico-financeiro e da planilha orçamentária contratual, vinculada à efetiva conclusão da obra conforme contratada.
+Pesquisa de Jurisprudência | Execute consulta na Jurisprudência Selecionada do TCU . Selecione a área “contrato administrativo”, tema “rescisão unilateral” .
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+Quadro 465 – Riscos relacionados
+
+Riscos
+Falta de clareza quanto aos riscos que serão assumidos por cada parte contratante e quais serão compartilhados na execução contratual, levando à insegurança jurídica e ao conflito entre as partes no caso de ocorrência de algum sinistro que majore excessivamente ou impeça a continuidade da execução contratual, com consequente abertura de processo judicial para solucionar o conflito e prejuízos para a Administração.
+Divulgação do edital de licitação sem antes providenciar as licenças ambientais necessárias, levando ao atraso ou à impossibilidade de o contratado executar o objeto, com consequente prejuízos pelo atraso e, em casos extremos, a extinção do contrato, com a perda dos investimentos realizados pela Administração e obrigação de indenizar o contratado pelos prejuízos decorrentes da não execução e pelos custos de desmobilização (Lei 14.133/2021, art. 138, § 2º).
+
+Fonte: Elaboração própria.
+
+[1] Lei 14.133/2021, art. 137, incisos V a VIII.
+
+[2] Lei 14.133/2021, art. 22, § 2º, inciso II.
+
+[3] Lei 14.133/2021, art. 124, inciso II, alínea “d”.
+
+[4] Decreto-Lei 4.657/1942 (LINDB), art. 20.
+
+[5] Lei 14.133/2021, art. 138, § 2º, incisos I e II, e art. 89 c/c Código Civil, art. 884 (princípio da vedação ao enriquecimento sem causa).
+
+[6] Lei 14.133/2021, art. 6º, inciso XXVII, art. 22, § 2º, art. 103, art. 138, § 2º, caput e inciso III.
+
+[7] Lei 14.133/2021, art. 22, § 2º, art. 25, § 5º, art. 46, § 4º, inciso I,
+
+[8] Lei 14.133/2021, art. 115, § 4º.
+
+[9] Lei 14.133/2021, art. 106, inciso III.
+
+[10] Lei 14.133/2021, art. 106, § 1º.
+
+[11] A interpretação dada pela Seges/MGI e AGU no modelo de contrato para serviços foi no sentido de que a rescisão pode ocorrer na próxima data de aniversário do contrato, desde que o contratante notifique o contratado com pelo menos dois meses de antecedência dessa data. Se a notificação ocorrer com menos de dois meses de antecedência, a rescisão ocorrerá em dois meses da data da comunicação (Advocacia-Geral da União; Ministério da Gestão e da Inovação em Serviços Públicos em Serviços Públicos, 2023).

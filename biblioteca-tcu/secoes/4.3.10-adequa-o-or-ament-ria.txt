@@ -1,0 +1,77 @@
+4.3.10. Adequação orçamentária
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/4-3-10-adequacao-orcamentaria-2/
+======================================================================
+
+Uma vez definido o objeto que se quer contratar, definidas as quantidades a contratar dos itens da solução e estimado o seu valor total, é necessário verificar se há orçamento disponível para a contratação. A indisponibilidade orçamentária frente aos valores estimados pode levar a organização a adiar ou desistir da contratação.
+
+Vale lembrar que é proibido formalizar qualquer contrato sem que haja disponibilidade orçamentária e, quando o prazo ultrapassar o exercício financeiro, exigirá prévia inclusão da despesa no PPA. A falta de indicação dos créditos orçamentários pode resultar na nulidade do contrato[1].
+
+Adicionalmente, a Administração deverá atestar, no início de cada exercício, a existência de créditos orçamentários vinculados à contratação e a vantagem em sua manutenção[2].
+
+Sobre o momento da indicação dos créditos orçamentários, o art. 18 da Lei 14.133/2021 estabelece que a fase preparatória do processo licitatório é caracterizada pelo planejamento e deve compatibilizar-se com o plano de contratações anual, sempre que elaborado, e com as leis orçamentárias.
+
+Na mesma linha, o art. 40 determina que o planejamento de compras deverá atender, entre outros pontos, ao princípio da responsabilidade fiscal, mediante a comparação da despesa estimada com a prevista no orçamento[3].
+
+Por sua vez, o art. 72, inciso IV, dispõe que o processo de contratação direta deverá ser instruído com a demonstração da compatibilidade da previsão de recursos orçamentários com o compromisso a ser assumido.
+
+Vê-se, portanto, que a adequação orçamentária deve ser observada desde o planejamento das contratações. Ressalta-se que o risco de não haver recursos para uma contratação é mitigado pela elaboração do Plano de Contratações Anual, pois, em princípio, esse instrumento servirá para a elaboração de uma proposta de orçamento que contemple as contratações planejadas para o exercício seguinte.
+
+Tal medida evita o risco de se planejar uma contratação e selecionar um fornecedor para uma devida obrigação quando a organização não disporia de recursos para o adimplemento das obrigações, importando em desperdício de recursos da organização alocados em uma atividade que não seria concretizada.
+
+Não é demais lembrar que a Lei de Responsabilidade Fiscal (LC 101/2000) estabelece que a criação, expansão ou aperfeiçoamento de ação governamental que acarrete aumento da despesa seja acompanhado de declaração do ordenador da despesa de que o aumento da despesa tem adequação orçamentária e financeira com a lei orçamentária anual[4]. Ademais, o art. 45 prevê que a lei orçamentária e as de créditos adicionais só incluirão novos projetos após adequadamente atendidos aos em andamento e contempladas as despesas de conservação do patrimônio público.
+
+Cabe fazer ressalva com respeito às licitações para registro de preços, casos em que a indicação de dotação orçamentária ocorrerá quando da formalização do contrato[5].
+
+É importante destacar que a adequação orçamentária pressupõe ajustes constantes do orçamento previsto para todas as contratações, pois os valores contabilizados para a verificação de existência de orçamento flutuam. Por exemplo, o valor contratado de uma determinada contratação A pode acabar sendo muito abaixo do valor estimado, que foi utilizado para efetuar sua adequação orçamentária. Dessa forma, uma nova contratação B pode ser considerada inadequada se for considerado o valor estimado da contratação A, de modo que a sobra de orçamento gerada na contratação A pode não ser considerada no momento da adequação orçamentária da contratação B. Além disso, o valor pago ao longo do tempo pode ser inferior ao valor contratado, devido a fatores como glosas feitas ao longo da execução contratual.
+
+Adicionalmente, a adequação orçamentária deve considerar o momento em que se espera que o respectivo contrato seja assinado. Por exemplo, se é previsto que a contratação de um determinado serviço ocorra no fim de junho de um determinado exercício, a adequação orçamentária dessa contratação deve considerar o pagamento de seis faturas desse serviço (de julho a dezembro), e não o pagamento de doze parcelas desse serviço[6].
+
+Quadro 165 – Referências normativas para a adequação orçamentária
+
+Normativos | Dispositivos
+Constituição Federal de 1988 | Art. 167. São vedados: I – o início de programas ou projetos não incluídos na Lei orçamentária anual; II – a realização de despesas ou a assunção de obrigações diretas que excedam os créditos orçamentários ou adicionais;
+Lei 14.133/2021 | Art. 6º Para os fins desta Lei, consideram-se: […] XXIII – termo de referência: documento necessário para a contratação de bens e serviços, que deve conter os seguintes parâmetros e elementos descritivos: […] j) adequação orçamentária; […] Art. 18. A fase preparatória do processo licitatório é caracterizada pelo planejamento e deve compatibilizar-se com o plano de contratações anual de que trata o inciso VII do caput do art. 12 desta Lei, sempre que elaborado, e com as leis orçamentárias, bem como abordar todas as considerações técnicas, mercadológicas e de gestão que podem interferir na contratação, compreendidos: […] Art. 150. Nenhuma contratação será feita sem a caracterização adequada de seu objeto e sem a indicação dos créditos orçamentários para pagamento das parcelas contratuais vincendas no exercício em que for realizada a contratação, sob pena de nulidade do ato e de responsabilização de quem lhe tiver dado causa.
+LC 101/2000 | Art. 15. Serão consideradas não autorizadas, irregulares e lesivas ao patrimônio público a geração de despesa ou assunção de obrigação que não atendam o disposto nos arts. 16 e 17. Art. 16. A criação, expansão ou aperfeiçoamento de ação governamental que acarrete aumento da despesa será acompanhado de: ( Vide ADI 6357) I – estimativa do impacto orçamentário-financeiro no exercício em que deva entrar em vigor e nos dois subseqüentes; II – declaração do ordenador da despesa de que o aumento tem adequação orçamentária e financeira com a Lei orçamentária anual e compatibilidade com o plano plurianual e com a Lei de diretrizes orçamentárias. § 1º Para os fins desta Lei Complementar, considera-se: I – adequada com a Lei orçamentária anual, a despesa objeto de dotação específica e suficiente, ou que esteja abrangida por crédito genérico, de forma que somadas todas as despesas da mesma espécie , realizadas e a realizar, previstas no programa de trabalho, não sejam ultrapassados os limites estabelecidos para o exercício ; […] § 4º As normas do caput constituem condição prévia para: I – empenho e licitação de serviços, fornecimento de bens ou execução de obras ; […] Art. 45. Observado o disposto no § 5º do art. 5º, a Lei orçamentária e as de créditos adicionais só incluirão novos projetos após adequadamente atendidos os em andamento e contempladas as despesas de conservação do patrimônio público, nos termos em que dispuser a Lei de diretrizes orçamentárias. […] Art. 17. Considera-se obrigatória de caráter continuado a despesa corrente derivada de lei, medida provisória ou ato administrativo normativo que fixem para o ente a obrigação legal de sua execução por um período superior a dois exercícios. ( Vide ADI 6357) § 1º Os atos que criarem ou aumentarem despesa de que trata o caput deverão ser instruídos com a estimativa prevista no inciso I do art. 16 e demonstrar a origem dos recursos para seu custeio. ( Vide Lei Complementar nº 176, de 2020) […] Art. 37. Equiparam-se a operações de crédito e estão vedados: […] IV – assunção de obrigação, sem autorização orçamentária, com fornecedores para pagamento a posteriori de bens e serviços . (Grifo nosso)
+IN – SGD/ME 94/2022 | Art. 12. O Termo de referência ou Projeto básico será elaborado pela Equipe de Planejamento da Contratação a partir do Estudo Técnico Preliminar da Contratação, incluindo, no mínimo, as seguintes informações: […] IX – adequação orçamentária e cronograma físico-financeiro, conforme art. 21; […] Art. 21. A adequação orçamentária e o cronograma físico-financeiro serão elaborados pelos Integrantes Requisitante e Técnico, contendo: I – a estimativa do impacto no orçamento do órgão ou entidade, com indicação das fontes de recurso; e II – cronograma de execução física e financeira, contendo o detalhamento das etapas ou fases da solução a ser contratada, com os principais serviços ou bens que a compõem, e a previsão de desembolso para cada uma delas.
+IN – Seges/ME 81/2022 | Art. 9º Deverão ser registrados no Sistema TR Digital os seguintes parâmetros e elementos descritivos: […] X – adequação orçamentária, quando não se tratar de sistema de registro de preços.
+IN – Seges/MP 5/2017 | Art. 30. O Termo de referência ou Projeto básico deve conter, no mínimo, o seguinte conteúdo: […] XI – adequação orçamentária. […] Anexo V – Diretrizes para elaboração do Projeto básico (PB) ou Termo de referência (TR) […] 2.10. Adequação orçamentária: a) Indicar a dotação orçamentária da contratação.
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 166 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 4910/2013-TCU-Segunda Câmara | [Enunciado] As obras e os serviços somente poderão ser licitados quando houver previsão de recursos orçamentários que assegurem o pagamento das respectivas obrigações no exercício financeiro em curso.
+Acórdão 1464/2012-TCU-Plenário | 9.2. dar ciência à [ omissis ] para que se abstenha de firmar novos contratos de repasses ou qualquer outro instrumento que se destine à execução de obras e serviços de engenharia advindos dos Editais de Concorrência [ omissis ] (contratos vigentes nº [ omissis ]), conduzidos pela [ omissis ], uma vez que esses certames licitatórios foram realizados sem a respectiva fonte de recursos em afronta ao disposto no art. 7º, § 2º, inciso III da Lei 8.666/93;
+Acórdão 956/2010-TCU-Plenário | [Enunciado] É irregular a realização de licitação sem indicação precisa dos recursos orçamentários necessários e suficientes (artigos 167, II, da Constituição Federal, e 7º, § 2º, e 8º da Lei 8.666/1993).
+Pesquisa de Jurisprudência | Execute consulta na Jurisprudência selecionada . Pesquise na “árvore de classificação” por “recursos orçamentários”, filtre pela área “licitação” .
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+Quadro 167 – Riscos relacionados
+
+Riscos
+Realização de procedimento licitatório sem que haja disponibilidade de créditos orçamentários, levando à ilegalidade por descumprimento da LC 101/2000 (art. 15, art. 16, § 4º, inciso I, e art. 37, inciso IV) e à impossibilidade de formalizar o contrato, com consequentes responsabilização do gestor, perda de confiança dos fornecedores e demais partes interessadas, não atendimento da necessidade da Administração e desperdício de recursos na realização do certame (tempo, materiais e humanos).
+Atrasos nos pagamentos devidos ao contratado, levando à suspensão da execução do objeto (Lei 14.133/2021, art. 137, § 2º, inciso IV, c/c § 3º, inciso II), com consequente interrupção de atividades essenciais e perda de investimentos realizados, além de possível extinção contratual por culpa exclusiva da Administração, com condenação a indenizar o contratado pelos prejuízos que houver sofrido (Lei 14.133/2021, art. 138, § 2º ).
+
+Fonte: Elaboração própria.
+
+Quadro 168 – Modelos
+
+Assunto | Modelo disponibilizados por OGS ou por órgãos de controle | OGS
+Modelos e diretrizes para declaração de disponibilidade orçamentária | • Instrumento de Padronização dos Procedimentos de Contratação (Advocacia-Geral da União; Ministério da Gestão e da Inovação em Serviços Públicos em Serviços Públicos, 2023b) | AGU, MGI
+
+Fonte: Elaboração própria.
+
+[1] Lei 14.133/2021, art. 150.
+
+[2] Lei 14.133/2021, art. 105, art. 106, inciso II e art. 150; LC 101/2000 (LRF), art. 15, art. 16, inciso II, e § 4º, inciso I, art. 37, inciso IV.
+
+[3] Lei 14.133/2021, art. 40, inciso V, alínea “c”.
+
+[4] LC 101/2000, art. 16, caput, inciso IIe § 4º.
+
+[5] Decreto 7.892/2013 (publicado sob a égide da Lei 8.666/1993), art. 7º, § 2º; e Decreto 11.462/2023 (publicado sob a égide da Lei 14.133/2021), art. 17.
+
+[6] Lei 14.133/2021, art. 150.

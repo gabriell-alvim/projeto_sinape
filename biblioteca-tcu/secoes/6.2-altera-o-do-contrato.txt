@@ -1,0 +1,104 @@
+6.2. Alteração do contrato
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/6-2-alteracao-do-contrato/
+======================================================================
+
+Os contratos administrativos podem ser alterados nas hipóteses previstas no art. 124 da Lei 14.133/2021. As alterações podem ser unilaterais, quando feitas pela Administração sem a necessidade de prévia anuência do contratado, ou consensuais, por acordo entre as partes.
+
+As alterações contratuais devem ser formalizadas por meio de termos aditivos, que podem ter formato eletrônico e requerem prévia análise jurídica[1]. Esses termos devem ser divulgados no sítio eletrônico oficial da organização e no Portal Nacional de Compras Públicas [2]. Ademais, as justificativas para as alterações devem ser registradas nos autos do processo da execução contratual[3].
+
+A formalização do termo aditivo, devidamente publicado no PNCP, é condição necessária para que o contratado execute as prestações determinadas pela Administração. No entanto, em casos excepcionais, quando há necessidade justificada de antecipação de seus efeitos, o contratado pode executar as prestações antes do aditamento. Nessa hipótese, a formalização do termo aditivo deve ocorrer no prazo máximo de um mês[4].
+
+É importante ressaltar que, nessa hipótese de antecipação de efeitos, a autorização para o início da prestação pelo contratado, com a alteração promovida, deve ser formal, ainda que a elaboração e a assinatura do termo aditivo ocorram posteriormente.
+
+A título de exemplo, no âmbito administrativo do TCU, a Portaria TCU 122/2023 estabeleceu que, na hipótese de antecipação de efeitos da alteração contratual, a autorização para o início da prestação acrescida ou suprimida deve ser formal e devidamente registrada no processo de fiscalização, liquidação e pagamento, postergando-se a formalização do aditivo em até um mês contado dessa autorização[5].
+
+A Lei 14.133/2021 dispõe que registros que não caracterizam alteração do contrato podem ser realizados por simples apostila, dispensada a celebração de termo aditivo, como nas seguintes situações[6]:
+
+- variação do valor contratual decorrente de reajuste ou repactuação de preços previstos no próprio contrato;
+
+- atualizações, compensações ou penalizações financeiras decorrentes das condições de pagamento previstas no contrato;
+
+- alterações na razão ou na denominação social do contratado;
+
+- empenho de dotações orçamentárias.
+
+Em regra, a Lei proíbe a alteração dos valores contratuais nas hipóteses de contratação integrada (quando o contratado é responsável por elaborar os projetos básico e executivo) ou semi-integrada (quando o contratado elabora o projeto executivo e pode alterar o projeto básico utilizado na licitação, desde que a Administração aprove)[7]. Para essas hipóteses, admite-se a alteração dos valores apenas nas seguintes situações:
+
+- para restabelecimento do equilíbrio econômico-financeiro decorrente de caso fortuito ou força maior[8];
+
+- por necessidade de alteração do projeto ou das especificações para melhor adequação técnica aos objetivos da contratação, a pedido da Administração, desde que não decorrente de erros ou omissões por parte do contratado, observados os limites, para acréscimos e supressões, de até 25% do valor inicial atualizado do contrato para obras e serviços de engenharia e, no caso de reforma de edifício, de até 50% para acréscimos[9];
+
+- por necessidade de alteração do projeto nas contratações semi-integradas, nos termos do § 5º do art. 46 da Lei 14.133/2021, o qual dispõe que:
+
+Na contratação semi-integrada, mediante prévia autorização da Administração, o projeto básico poderá ser alterado, desde que demonstrada a superioridade das inovações propostas pelo contratado em termos de redução de custos, de aumento da qualidade, de redução do prazo de execução ou de facilidade de manutenção ou operação, assumindo o contratado a responsabilidade integral pelos riscos associados à alteração do projeto básico.
+
+- por ocorrência de evento superveniente alocado na matriz de riscos como de responsabilidade da Administração[10].
+
+Não se admite modificação do contrato, ainda que por acordo entre as partes, que importe transfiguração do objeto da contratação ou acarrete frustração aos princípios da isonomia e da obrigatoriedade de licitação[11].
+
+Em caso de necessidade de alteração de contrato de obras e serviços de engenharia devido a falhas de projeto, a responsabilidade do responsável técnico deve ser apurada e as medidas necessárias para o ressarcimento dos danos causados à Administração devem ser adotadas[12].
+
+A Administração deve decidir de forma explícita sobre todos os pedidos de alteração contratual. A menos que haja uma lei ou uma cláusula contratual que defina um prazo diferente, a decisão deve ser tomada em um mês, após a conclusão da instrução do requerimento, podendo ser prorrogado por mais um mês, desde que motivadamente[13].
+
+A seguir, estão comentadas cada uma das hipóteses de alteração contratual previstas na Lei 14.133/2021, com os respectivos quadros de referências normativas, de jurisprudência (quando existente, ainda que sob a égide da legislação anterior) e de riscos relacionados aos temas abordados.
+
+Quadro 428 – Referências normativas para a alteração do contrato administrativo
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 53. Ao final da fase preparatória, o processo licitatório seguirá para o órgão de assessoramento jurídico da Administração, que realizará controle prévio de legalidade mediante análise jurídica da contratação. […] § 4º Na forma deste artigo, o órgão de assessoramento jurídico da Administração também realizará controle prévio de legalidade de contratações diretas, acordos, termos de cooperação, convênios, ajustes, adesões a atas de registro de preços, outros instrumentos congêneres e de seus termos aditivos. […] Art. 91. Os contratos e seus aditamentos terão forma escrita e serão juntados ao processo que tiver dado origem à contratação, divulgados e mantidos à disposição do público em sítio eletrônico oficial. […] Art. 174. É criado o Portal Nacional de Contratações Públicas (PNCP), sítio eletrônico oficial destinado à: […] § 2º O PNCP conterá, entre outras, as seguintes informações acerca das contratações: […] V – contratos e termos aditivos; […] Art. 123. A Administração terá o dever de explicitamente emitir decisão sobre todas as solicitações e reclamações relacionadas à execução dos contratos regidos por esta Lei, ressalvados os requerimentos manifestamente impertinentes, meramente protelatórios ou de nenhum interesse para a boa execução do contrato. Parágrafo único. Salvo disposição legal ou cláusula contratual que estabeleça prazo específico, concluída a instrução do requerimento, a Administração terá o prazo de 1 (um) mês para decidir, admitida a prorrogação motivada por igual período. […] Art. 124. Os contratos regidos por esta Lei poderão ser alterados, com as devidas justificativas, nos seguintes casos: […] § 1º Se forem decorrentes de falhas de projeto, as alterações de contratos de obras e serviços de engenharia ensejarão apuração de responsabilidade do responsável técnico e adoção das providências necessárias para o ressarcimento dos danos causados à Administração. […] Art. 132. A formalização do termo aditivo é condição para a execução, pelo contratado, das prestações determinadas pela Administração no curso da execução do contrato, salvo nos casos de justificada necessidade de antecipação de seus efeitos, hipótese em que a formalização deverá ocorrer no prazo máximo de 1 (um) mês. Art. 133. Nas hipóteses em que for adotada a contratação integrada ou semi-integrada, é vedada a alteração dos valores contratuais, exceto nos seguintes casos: I – para restabelecimento do equilíbrio econômico-financeiro decorrente de caso fortuito ou força maior; II – por necessidade de alteração do projeto ou das especificações para melhor adequação técnica aos objetivos da contratação, a pedido da Administração, desde que não decorrente de erros ou omissões por parte do contratado, observados os limites estabelecidos no art. 125 desta Lei; III – por necessidade de alteração do projeto nas contratações semi-integradas, nos termos do § 5º do art. 46 desta Lei; IV – por ocorrência de evento superveniente alocado na matriz de riscos como de responsabilidade da Administração. […] Art. 136. Registros que não caracterizam alteração do contrato podem ser realizados por simples apostila, dispensada a celebração de termo aditivo, como nas seguintes situações: I – variação do valor contratual para fazer face ao reajuste ou à repactuação de preços previstos no próprio contrato; II – atualizações, compensações ou penalizações financeiras decorrentes das condições de pagamento previstas no contrato; III – alterações na razão ou na denominação social do contratado; IV – empenho de dotações orçamentárias.
+Portaria – TCU 122/2023 | Art. 1º A gestão e a fiscalização dos contratos de serviços, de compras e de fornecimentos contínuos no âmbito da Secretaria do Tribunal de Contas da União (TCU) obedecem ao disposto nesta Portaria. […] CAPÍTULO IV DA ALTERAÇÃO DOS CONTRATOS
+Ato da Diretoria -Geral do Senado Federal 14/2022 | Estabelece, no âmbito do Senado Federal, disposições regulamentares acerca das atribuições e procedimentos de licitações e contratos administrativos. […] Seção V Das Alterações dos Contratos […]
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 429 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 266/2024-TCU-Plenário | [Enunciado] A realização de atividades não previstas em contrato, sem que se tenha formalizado termo aditivo, afronta o art. 60, parágrafo único, c/c o art. 61 da Lei 8.666/1993 e o art. 132 da Lei 14.133/2021, ainda que não haja pagamento antecipado ou sem contraprestação de serviços, salvo nos casos excepcionais de justificada necessidade de antecipação de seus efeitos, hipótese em que a formalização deverá ocorrer no prazo máximo de um mês e deverá constar de cláusula expressa do seu instrumento, de modo a atender aos princípios da transparência e da publicidade e a possibilitar a adequada análise pela consultoria jurídica. [Enunciado] O aditamento de contratos de supervisão de obras além do limite legal de 25% afronta o art. 65, § 1º, da Lei 8.666/1993 e o art. 125 da Lei 14.133/2021, ainda que tal aumento seja fruto de prorrogação de prazo na execução da obra supervisionada, devendo-se adotar medidas tempestivas com vistas a realizar nova contratação de supervisão, ressalvada a inequívoca comprovação de desvantajosidade da medida, o que deverá ser devidamente justificado.
+Acórdão 831/2023-TCU-Plenário | [Enunciado] Na execução de contratos, eventuais alterações do projeto licitado devem ser precedidas de procedimento administrativo no qual fiquem adequadamente consignadas as justificativas das alterações tidas por necessárias, que devem ser embasadas em pareceres e estudos técnicos pertinentes, bem como deve estar caracterizada a natureza superveniente, em relação ao momento da licitação, dos fatos ensejadores das alterações, vedada a utilização de quaisquer justificativas genéricas.
+Acórdão 1057/2021-TCU-Plenário | [Enunciado] O art. 38, parágrafo único, da Lei 8.666/1993, segundo o qual as minutas de editais e contratos devem ser examinadas e aprovadas por assessoria jurídica da Administração, também se aplica aos termos aditivos, pois são ajustes aos contratos.
+Acórdão 2619/2019-TCU-Plenário | [Enunciado] As modificações do projeto licitado devem ser precedidas de procedimento administrativo no qual fique adequadamente consignada a justificativa das alterações tidas por necessárias, que devem estar embasadas em pareceres e estudos técnicos pertinentes, bem como deve restar caracterizada a natureza superveniente, em relação ao momento da licitação, dos fatos ensejadores das alterações.
+Acórdão 170/2018-TCU-Plenário | [Enunciado] As alterações contratuais devem estar embasadas em pareceres e estudos técnicos pertinentes, nos quais reste caracterizada a superveniência dos fatos motivadores das alterações em relação à época da licitação.
+Acórdão 3053/2016-TCU-Plenário | [Enunciado] As alterações do objeto contratado devem ser precedidas de procedimento administrativo no qual fique registrada a justificativa das alterações tidas por necessárias, embasadas em pareceres e estudos técnicos pertinentes, bem como restar caracterizada a natureza superveniente, em relação ao momento da licitação, dos fatos ensejadores das alterações. Ademais, a justificativa técnica para o aditamento contratual deve ainda contemplar a análise dos quantitativos e dos valores dos serviços aditados, inclusive com pesquisas de mercado para justificar a economicidade do termo de aditamento contratual.
+Acórdão 7487/2015-TCU-Primeira Câmara | [Enunciado] A utilização de apostilamento não supre a exigência legal de formalização de termo aditivo para alterações quantitativas e qualitativas de objeto (artigos 60 e 61 da Lei 8.666/1993), servindo apenas para fazer constar reajustes do valor do contrato ou para assentamento de medidas burocráticas (art. 65, § 8º, da Lei 8.666/1993).
+Acórdão 2714/2015-TCU-Plenário | [Enunciado] Na execução de contratos, eventuais alterações do projeto licitado devem ser precedidas de procedimento administrativo no qual fiquem adequadamente consignadas as justificativas das alterações tidas por necessárias, que devem ser embasadas em pareceres e estudos técnicos pertinentes, bem como deve estar caracterizada a natureza superveniente, em relação ao momento da licitação, dos fatos ensejadores das alterações, vedada a utilização de quaisquer justificativas genéricas.
+Acórdão 1227/2012-TCU-Plenário | [Enunciado] Alterações contratuais sem a devida formalização mediante termo aditivo configura contrato verbal, que pode levar à apenação dos gestores omissos quanto ao cumprimento do dever.
+Pesquisa de Jurisprudência | Execute consulta na Jurisprudência Selecionada . Pesquise pela árvore de classificação: área “contrato administrativo”, tema “aditivo”, subtema “requisito”. Execute consulta na Jurisprudência Selecionada . Pesquise pela árvore de classificação: área “contrato administrativo”, tema “aditivo”, subtema “contratação integrada” . Execute consulta na Jurisprudência Selecionada . Pesquise pela árvore de classificação: área “contrato administrativo”, tema “contrato verbal” .
+
+Fonte: Elaboração própria a partir de consulta a jurisprudência do TCU.
+
+Quadro 430 – Riscos relacionados
+
+Riscos
+Entendimento equivocado de que adiar a formalização do aditivo, na hipótese prevista no art. 132 da Lei 14.133/2021, permite que a Administração solicite alterações contratuais de forma verbal ou informal ao contratado, levando a Administração a solicitar alterações contratuais sem qualquer tipo de registro dessas solicitações, com consequente ausência de garantias na execução dessas prestações, insegurança jurídica tanto para o fiscal do contrato quanto para o contratado e dificuldade de responsabilizar o contratado em caso de desconformidades na execução.
+Receio do gestor de que, ao autorizar a alteração contratual antes de formalizar o termo aditivo, possa ser responsabilizado por antecipar os efeitos dessa alteração, mesmo que haja urgência na sua execução (Lei 14.133/2021, art. 132), levando-o a não autorizar a alteração, enquanto aguarda o tempo necessário para formalizar o termo aditivo, com consequente dano irreparável ao interesse coletivo, além da dupla responsabilização do gestor pela inércia administrativa e pelos danos dela decorrentes.
+Falta de capacidade técnica dos responsáveis pela fiscalização/gestão do contrato, levando ao acolhimento de pedidos de reequilíbrio econômico-financeiro ou de outras solicitações em favor do contratado relacionados a supostos erros no projeto básico em contratações integradas ou semi-integradas, com consequentes aditivos contratuais irregulares (violação ao arts. 22, § 4º, e 46, § 3º, da Lei 14.133/2021, que estabelecem a responsabilidade integral do contratado pelos riscos associados ao desenvolvimento do projeto básico) e prejuízos à Administração, ou questionamentos e paralisação da execução contratual.
+
+Fonte: Elaboração própria.
+
+[1] Lei 14.133/2021, art. 53, § 4º, art. 91, caput e § 3º, art. 130 e art. 132. A análise jurídica pode ser dispensada nas hipóteses previamente definidas em ato da autoridade jurídica máxima competente, que deverá considerar o baixo valor, a baixa complexidade da contratação, a entrega imediata do bem ou a utilização de minutas de editais e instrumentos de contrato, convênio ou outros ajustes previamente padronizados pelo órgão de assessoramento jurídico (Lei 14.133/2021, art. 53, § 5º).
+
+[2] Lei 14.133/2021, art. 91 e art. 174, § 2º, inciso V. Sigilo é exceção, quando imprescindível à segurança da sociedade e do Estado (Lei 12.527/2011, art. 3º, inciso I, e art. 4º, inciso III).
+
+[3] Enunciados dos Acórdãos 831/2023, 2619/2019 e 170/2018, todos do Plenário do TCU.
+
+[4] Lei 14.133/2021, arts. 94 e 132.
+
+[5] Portaria-TCU 122/2023, art. 54, § 1º.
+
+[6] Lei 14.133/2021, art. 136.
+
+[7] Lei 14.133/2021, art. 133, caput.
+
+[8] Lei 14.133/2021, art. 133, inciso I.
+
+[9] Lei 14.133/2021, art. 133, inciso II.
+
+[10] Lei 14.133/2021, art. 133, inciso IV.
+
+[11] CF/1988, art. 37, inciso XI; Lei 14.133/2021, art. 11, inciso II, art. 126.
+
+[12] CF/1988, art. 37, § 6º; e Decreto-Lei 4.657/1942 (LINDB), art. 28, e Lei 14.133/2021, art. 124, § 1º.
+
+[13] Lei 14.133/2021, art. 123, caput e parágrafo único.

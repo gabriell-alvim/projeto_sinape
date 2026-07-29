@@ -1,0 +1,59 @@
+4.1.10. Providências a serem adotadas pela Administração
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/4-1-10-providencias-a-serem-adotadas-pela-administracao/
+======================================================================
+
+Trata-se das medidas que a Administração precisa tomar para viabilizar a execução contratual. Essas medidas devem ser descritas no ETP, a fim de que sejam concluídas antes de iniciada a execução do contrato. 
+
+As providências podem contemplar mudanças relacionadas a[1]:
+
+- infraestrutura tecnológica, como, por exemplo, o aumento da capacidade de processamento e de armazenamento de dados; 
+
+- infraestrutura elétrica, a exemplo do aumento de cabeamento ou substituição de disjuntores no quadro elétrico, para suportar o funcionamento de novos equipamentos ou o aumento da potência exigida por maior número de usuários;
+
+- climatização de ambientes para alocação de equipamentos;
+
+- adequação de espaço físico, para implantação da solução ou para que a equipe contratada opere dentro da organização;
+
+- fornecimento de materiais previstos para a execução contratual;
+
+- estrutura organizacional. Pode haver a necessidade de modificar departamentos, extinguir alguns e/ou criar outros, editar normativos internos;
+
+- processos de trabalho da organização, como os de segurança da informação, de segurança institucional, de gestão documental, e de gestão de riscos. As mudanças devem ser claramente comunicadas, e deve ser avaliada a necessidade de treinar os envolvidos nos processos;
+
+- adequação do consumo de materiais e serviços já prestados dentro organização, como, por exemplo, limpeza, estacionamento, copa, restaurante, telefonia, água, café, manutenção predial;
+
+- obtenção de alvarás, licenças, outorgas, autorizações e outras exigências legais e infralegais; e
+
+- capacitação de colaboradores da organização, inclusive para a gestão contratual; e de funcionários do contratado para a adaptação ao ambiente do órgão ou entidade.
+
+Os custos das providências devem ser considerados na análise que determina a solução que será escolhida.
+
+Quadro 115 – Referências normativas para as providências da Administração
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 18. § 1º O estudo técnico preliminar a que se refere o inciso I do caput deste artigo deverá evidenciar o problema a ser resolvido e a sua melhor solução, de modo a permitir a avaliação da viabilidade técnica e econômica da contratação, e conterá os seguintes elementos: […] X – providências a serem adotadas pela Administração previamente à celebração do contrato, inclusive quanto à capacitação de servidores ou de empregados para fiscalização e gestão contratual; […] Art. 115. O contrato deverá ser executado fielmente pelas partes, de acordo com as cláusulas avençadas e as normas desta Lei, e cada parte responderá pelas consequências de sua inexecução total ou parcial. […] § 4º Nas contratações de obras e serviços de engenharia, sempre que a responsabilidade pelo licenciamento ambiental for da Administração, a manifestação prévia ou licença prévia, quando cabíveis, deverão ser obtidas antes da divulgação do edital. (Promulgação partes vetadas)
+IN – SGD/ME 94/2022 | Art. 11. O Estudo Técnico Preliminar da Contratação será realizado pelos Integrantes Técnico e Requisitante, compreendendo, no mínimo, as seguintes tarefas: […] II – análise comparativa de soluções, que deve considerar, além do aspecto econômico, os aspectos qualitativos em termos de benefícios para o alcance dos objetivos da contratação, observando: […] e) as necessidades de adequação do ambiente do órgão ou entidade para viabilizar a execução contratual; […]
+IN – Seges 58/2022 | Art. 9º Com base no Plano de Contratações Anual, deverão ser registrados no Sistema ETP Digital os seguintes elementos: […] XI – providências a serem adotadas pela Administração previamente à celebração do contrato, tais como adaptações no ambiente do órgão ou da entidade, necessidade de obtenção de licenças, outorgas ou autorizações, capacitação de servidores ou de empregados para fiscalização e gestão contratual;
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 116 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 274/2020-TCU-Plenário | [Relatório] b.2) Conduta: elaborou e aprovou planejamento da contratação sem levantamento de demanda de potenciais gestores e usuários e sem avaliação das reais necessidades de negócio e das necessidades de adequação do ambiente do órgão para viabilizar a execução contratual levaram à contratação de licenças e serviços de TI acima do necessário para o atendimento da finalidade da contratação (Matriz de Responsabilização – Anexo I, Irregularidade II). [Voto] 15. Quanto ao mérito da presente representação, acolherei na íntegra os exames realizados pela Sefti, os quais foram transcritos no relatório que fundamenta esta deliberação, adotando-os como razões de decidir. No entanto, julgo que o encaminhamento proposto pela unidade técnica mereça alguns aperfeiçoamentos. 16. Inicialmente, em adição às propostas formuladas, considero que esta representação deve ser julgada procedente, em virtude da confirmação das irregularidades apontadas pela instrução preliminar da unidade técnica. 17. Outrossim, entendo que desde já deva ser instaurado processo de tomada de contas especial pelo próprio TCU, pois os presentes autos dispõem de elementos suficientes para a devida quantificação do débito e responsabilização dos agentes envolvidos.
+Acórdão 2897/2019-TCU-Segunda Câmara | 1.9.4.1. avalie a conveniência e a oportunidade de prover capacitação contínua de servidores envolvidos na gestão e fiscalização de contratos com vistas a aperfeiçoar o setor de contratação;
+Acórdão 10868/2018-TCU-Segunda Câmara | [Enunciado] O fiscal de contrato designado, caso entenda não possuir conhecimento técnico para exercer suas competências, deve alegar o fato ao seu superior em tempo hábil, para adoção das medidas pertinentes, sob risco de vir a responder por eventual prejuízo causado ao erário.
+Pesquisa de Jurisprudência | Execute consulta na Pesquisa Integrada do TCU : “necessidades de adequação” ADJ3 “ambiente” .
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+Quadro 117 – Riscos relacionados
+
+Riscos
+Deficiência na avaliação das providências a serem adotadas, levando a Administração a não considerar os custos dessas providências na escolha das diferentes alternativas de solução, com consequente escolha de solução que não é a mais vantajosa para o contratante.
+Intempestividade na adoção das providências necessárias para implementar a solução, levando ao atraso ou à impossibilidade de o contratando iniciar a execução do contrato, com consequente extinção do contrato (Lei 14.133/2021, art. 137) e pagamento de indenização à contratada por prejuízos decorrentes da não execução e por custos de desmobilização (Lei 14.133/2021, art. 138, § 2º).
+
+Fonte: Adaptado de Tribunal de Contas da União, 2014, item “Providências para adequação do ambiente do órgão”; e Tribunal de Contas da União, 2012, p. 115-119.
+
+[1] Tribunal de Contas da União, 2012, p. 110-111.

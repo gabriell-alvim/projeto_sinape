@@ -1,0 +1,105 @@
+6.2.2.1.3. Repactuação
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/6-2-2-1-3-repactuacao/
+======================================================================
+
+É a forma de manutenção do equilíbrio econômico-financeiro de contrato utilizada para serviços contínuos com regime de dedicação exclusiva de mão de obra ou predominância de mão de obra, por meio da análise da variação dos custos contratuais. Deve estar prevista no edital[1].
+
+Os serviços contínuos com regime de dedicação exclusiva de mão de obra são aqueles cujo modelo de execução contratual exige, entre outros requisitos, que[2]:
+
+- os empregados do contratado fiquem à disposição nas dependências do contratante para a prestação dos serviços;
+
+- o contratado não compartilhe os recursos humanos e materiais disponíveis de uma contratação para execução simultânea de outros contratos;
+
+- o contratado possibilite a fiscalização pelo contratante quanto à distribuição, controle e supervisão dos recursos humanos alocados aos seus contratos.
+
+A repactuação dos valores deve ser realizada mediante solicitação do contratado, o qual deve apresentar planilha de custos e formação de preços com a demonstração analítica da variação dos custos, ou o novo acordo, convenção ou sentença normativa que fundamenta a repactuação[3].
+
+A repactuação não é permitida antes de decorrido, pelo menos, um ano, contado[4]:
+
+- para custos decorrentes do mercado (insumos e materiais), da data da apresentação da proposta. Esses custos, por não envolverem mão de obra, serão apenas reajustados (vide item 6.3), desde que haja previsão contratual de um ou mais índices oficiais de reajuste[5]; e
+
+- para os custos de mão de obra[6]:
+
+- para a primeira repactuação, da data-base prevista em acordo, convenção coletiva ou dissídio coletivo ao qual a proposta esteja vinculada, relativa a cada categoria profissional abrangida pelo contrato. Considera-se a data-base como a data de início dos efeitos financeiros decorrentes do acordo, convenção ou dissídio (fato gerador da repactuação);
+
+- nas repactuações subsequentes à primeira, a anualidade será contada a partir da data da última repactuação correspondente à mesma parcela objeto da nova solicitação. Entende-se como última repactuação a data em que iniciados seus efeitos financeiros, independentemente daquela em que apostilada.
+
+A repactuação pode ser dividida em tantas parcelas quantas forem necessárias, observado o princípio da anualidade do reajuste de preços da contratação[7]. Assim, as repactuações dos custos contratuais decorrentes de mão de obra devem ocorrer de acordo com a data base de cada uma das categorias profissionais vinculadas ao contrato.
+
+A variação dos custos decorrentes de mercado (insumos necessários à execução dos serviços) também pode ser avaliada em momento distinto dos decorrentes da mão de obra, a contar da data base (apresentação da proposta).
+
+Não serão considerados como custos de mão de obra as disposições contidas em acordos, convenções ou dissídios coletivos de trabalho que tratem de[8]:
+
+- matéria não trabalhista;
+
+- pagamento de participação dos trabalhadores nos lucros ou resultados do contratado;
+
+- direitos não previstos em lei, como valores ou índices obrigatórios de encargos sociais ou previdenciários
+
+- preços para os insumos relacionados ao exercício da atividade; e
+
+- pagamentos de benefícios que somente se aplicam aos contratos com a Administração Pública.
+
+O pedido de repactuação deve ser formulado antes de eventual prorrogação. Na hipótese de o contratado aceitar prorrogar o contrato sem pleitear a repactuação, ocorrerá a preclusão lógica do seu direito[9], e as condições econômicas da prorrogação serão mantidas[10].
+
+A repactuação de preços pode ser formalizada por apostilamento[11]. O prazo para resposta ao pedido de repactuação de preços será preferencialmente de um mês, contado da data do fornecimento da documentação pertinente[12].
+
+Quadro 443 – Referências normativas para repactuação
+
+Normativos | Dispositivos
+Constituição Federal de 1988 | Art. 37. A Administração Pública direta e indireta de qualquer dos Poderes da União, dos Estados, do Distrito Federal e dos Municípios obedecerá aos princípios de legalidade, impessoalidade, moralidade, publicidade e eficiência e, também, ao seguinte: (Redação dada pela Emenda Constitucional nº 19, de 1998) […] XXI – ressalvados os casos especificados na legislação, as obras, serviços, compras e alienações serão contratados mediante processo de licitação pública que assegure igualdade de condições a todos os concorrentes , com cláusulas que estabeleçam obrigações de pagamento, mantidas as condições efetivas da proposta , nos termos da Lei, o qual somente permitirá as exigências de qualificação técnica e econômica indispensáveis à garantia do cumprimento das obrigações. (Grifo nosso)
+Lei 14.133/2021 | Art. 6º […] XVI – serviços contínuos com regime de dedicação exclusiva de mão de obra: aqueles cujo modelo de execução contratual exige, entre outros requisitos, que: a) os empregados do contratado fiquem à disposição nas dependências do contratante para a prestação dos serviços; b) o contratado não compartilhe os recursos humanos e materiais disponíveis de uma contratação para execução simultânea de outros contratos; c) o contratado possibilite a fiscalização pelo contratante quanto à distribuição, controle e supervisão dos recursos humanos alocados aos seus contratos; […] LIX – repactuação: forma de manutenção do equilíbrio econômico-financeiro de contrato utilizada para serviços contínuos com regime de dedicação exclusiva de mão de obra ou predominância de mão de obra, por meio da análise da variação dos custos contratuais, devendo estar prevista no edital com data vinculada à apresentação das propostas, para os custos decorrentes do mercado, e com data vinculada ao acordo, à convenção coletiva ou ao dissídio coletivo ao qual o orçamento esteja vinculado, para os custos decorrentes da mão de obra; […] Art. 25. O edital deverá conter o objeto da licitação e as regras relativas à convocação, ao julgamento, à habilitação, aos recursos e às penalidades da licitação, à fiscalização e à gestão do contrato, à entrega do objeto e às condições de pagamento. […] § 8º Nas licitações de serviços contínuos, observado o interregno mínimo de 1 (um) ano, o critério de reajustamento será por: […] II – repactuação, quando houver regime de dedicação exclusiva de mão de obra ou predominância de mão de obra, mediante demonstração analítica da variação dos custos. […] Art. 92. São necessárias em todo contrato cláusulas que estabeleçam: […] § 4º Nos contratos de serviços contínuos, observado o interregno mínimo de 1 (um) ano, o critério de reajustamento de preços será por: […] I – repactuação, quando houver regime de dedicação exclusiva de mão de obra ou predominância de mão de obra, mediante demonstração analítica da variação dos custos. […] § 6º Nos contratos para serviços contínuos com regime de dedicação exclusiva de mão de obra ou com predominância de mão de obra, o prazo para resposta ao pedido de repactuação de preços será preferencialmente de 1 (um) mês, contado da data do fornecimento da documentação prevista no § 6º do art. 135 desta Lei. […] Art. 123. A Administração terá o dever de explicitamente emitir decisão sobre todas as solicitações e reclamações relacionadas à execução dos contratos regidos por esta Lei, ressalvados os requerimentos manifestamente impertinentes, meramente protelatórios ou de nenhum interesse para a boa execução do contrato. Parágrafo único. Salvo disposição legal ou cláusula contratual que estabeleça prazo específico, concluída a instrução do requerimento, a Administração terá o prazo de 1 (um) mês para decidir, admitida a prorrogação motivada por igual período. […] Art. 131. A extinção do contrato não configurará óbice para o reconhecimento do desequilíbrio econômico-financeiro, hipótese em que será concedida indenização por meio de termo indenizatório. Parágrafo único. O pedido de restabelecimento do equilíbrio econômico-financeiro deverá ser formulado durante a vigência do contrato e antes de eventual prorrogação nos termos do art. 107 desta Lei. […] Art. 135. Os preços dos contratos para serviços contínuos com regime de dedicação exclusiva de mão de obra ou com predominância de mão de obra serão repactuados para manutenção do equilíbrio econômico-financeiro, mediante demonstração analítica da variação dos custos contratuais, com data vinculada: I – à da apresentação da proposta, para custos decorrentes do mercado; II – ao acordo, à convenção coletiva ou ao dissídio coletivo ao qual a proposta esteja vinculada, para os custos de mão de obra. § 1º A Administração não se vinculará às disposições contidas em acordos, convenções ou dissídios coletivos de trabalho que tratem de matéria não trabalhista, de pagamento de participação dos trabalhadores nos lucros ou resultados do contratado, ou que estabeleçam direitos não previstos em lei, como valores ou índices obrigatórios de encargos sociais ou previdenciários, bem como de preços para os insumos relacionados ao exercício da atividade. § 2º É vedado a órgão ou entidade contratante vincular-se às disposições previstas nos acordos, convenções ou dissídios coletivos de trabalho que tratem de obrigações e direitos que somente se aplicam aos contratos com a Administração Pública. § 3º A repactuação deverá observar o interregno mínimo de 1 (um) ano, contado da data da apresentação da proposta ou da data da última repactuação. § 4º A repactuação poderá ser dividida em tantas parcelas quantas forem necessárias, observado o princípio da anualidade do reajuste de preços da contratação, podendo ser realizada em momentos distintos para discutir a variação de custos que tenham sua anualidade resultante em datas diferenciadas, como os decorrentes de mão de obra e os decorrentes dos insumos necessários à execução dos serviços. § 5º Quando a contratação envolver mais de uma categoria profissional, a repactuação a que se refere o inciso II do caput deste artigo poderá ser dividida em tantos quantos forem os acordos, convenções ou dissídios coletivos de trabalho das categorias envolvidas na contratação. § 6º A repactuação será precedida de solicitação do contratado, acompanhada de demonstração analítica da variação dos custos, por meio de apresentação da planilha de custos e formação de preços, ou do novo acordo, convenção ou sentença normativa que fundamenta a repactuação. Art. 136. Registros que não caracterizam alteração do contrato podem ser realizados por simples apostila, dispensada a celebração de termo aditivo, como nas seguintes situações: I – variação do valor contratual para fazer face ao reajuste ou à repactuação de preços previstos no próprio contrato;
+IN – Seges/MP 5/2017 | Art. 6º A Administração não se vincula às disposições contidas em Acordos, Convenções ou Dissídios Coletivos de Trabalho que tratem de pagamento de participação dos trabalhadores nos lucros ou resultados da empresa contratada, de matéria não trabalhista, ou que estabeleçam direitos não previstos em lei, tais como valores ou índices obrigatórios de encargos sociais ou previdenciários, bem como de preços para os insumos relacionados ao exercício da atividade. Parágrafo único. É vedado ao órgão e entidade vincular-se às disposições previstas nos Acordos, Convenções ou Dissídios Coletivos de Trabalho que tratem de obrigações e direitos que somente se aplicam aos contratos com a Administração Pública. […] Subseção VI Da Repactuação e do Reajuste de Preços dos Contratos Art. 53. O ato convocatório e o contrato de serviço continuado deverão indicar o critério de reajustamento de preços, que deverá ser sob a forma de reajuste em sentido estrito, com a previsão de índices específicos ou setoriais, ou por repactuação, pela demonstração analítica da variação dos componentes dos custos. […] Art. 56. Nas repactuações subsequentes à primeira, a anualidade será contada a partir da data do fato gerador que deu ensejo à última repactuação. […] ANEXO IX DA VIGÊNCIA E DA PRORROGAÇÃO 7. A vantajosidade econômica para prorrogação dos contratos com mão de obra exclusiva estará assegurada, sendo dispensada a realização de pesquisa de mercado, nas seguintes hipóteses: a) quando o contrato contiver previsões de que os reajustes dos itens envolvendo a folha de salários serão efetuados com base em Acordo, Convenção, Dissídio Coletivo de Trabalho ou em decorrência de lei; b) quando o contrato contiver previsões de que os reajustes dos itens envolvendo insumos (exceto quanto a obrigações decorrentes de Acordo, Convenção, Dissídio Coletivo de Trabalho e de lei) e materiais serão efetuados com base em índices oficiais, previamente definidos no contrato, que guardem a maior correlação possível com o segmento econômico em que estejam inseridos tais insumos ou materiais ou, na falta de qualquer índice setorial, o Índice Nacional de Preços ao Consumidor Amplo (IPCA/IBGE); e
+Portaria – TCU 122/2023 | Art. 1º A gestão e a fiscalização dos contratos de serviços, de compras e de fornecimentos contínuos no âmbito da Secretaria do Tribunal de Contas da União (TCU) obedecem ao disposto nesta Portaria. […] Seção III Do Reajustamento
+Orientação Normativa – AGU 26/2011 | No caso das repactuações subsequentes à primeira, o interregno de um ano deve ser contado da última repactuação correspondente à mesma parcela objeto da nova solicitação. entende-se como última repactuação a data em que iniciados seus efeitos financeiros, independentemente daquela em que celebrada ou apostilada.
+Enunciado CJF 25/2022 | O prazo para resposta ao pedido de repactuação de preços determinado no contrato administrativo (art. 92, inciso X, e § 6º da Lei n. 14.133/2021) começa a fluir somente a partir do momento em que o pedido do contratado se encontre correto e completamente instruído.
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 444 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 5151/2014-TCU- Segunda Câmara | [Enunciado] É indevida a fixação, nos editais de licitação, de percentuais, ainda que mínimos, para encargos sociais e trabalhistas. A Administração Pública não está vinculada ao cumprimento de cláusulas de convenções coletivas de trabalho, excetuadas as alusivas às obrigações trabalhistas.
+Acórdão 1601/2014-TCU-Plenário | [Enunciado] Ocorre preclusão lógica do direito à repactuação de preços decorrente de majorações salariais da categoria profissional quando o contratado firma termo aditivo de prorrogação contratual sem suscitar os novos valores pactuados no acordo coletivo, ratificando os preços até então acordados.
+Acórdão 3336/2012-TCU-Plenário | [Enunciado] A concessão do benefício de participação nos lucros e resultados a empregados de empresas que prestam serviços continuados à Administração não pode ser invocada como justificativa para promoção de reequilíbrio econômico-financeiro do respectivo contrato.
+Acórdão 8237/2011-TCU- Segunda Câmara | [Enunciado] Se após a data do acordo coletivo que majorou os salários o contratado concorda em prorrogar o contrato sem ter solicitado o aumento dos preços contratuais, considera-se logicamente precluso seu direito à repactuação/revisão dos preços desde a data inicial do aumento salarial.
+Acórdão 3300/2011-TCU-Plenário | [Enunciado] A Administração deve repactuar o contrato com vistas à adequação dos preços unitários contratuais às referências de preços, de modo a eliminar qualquer sobrepreço identificado, promovendo, inclusive, a compensação de valores indevidamente pagos.
+Acórdão 477/2010-TCU-Plenário | [Enunciado] Se à época da prorrogação do contrato de prestação de serviços contínuos, mediante termo aditivo, o contratado não pleiteou a repactuação a que fazia jus e a Administração decidiu prorrogar a avença com base neste quadro, não pode o contratado, após a assinatura do mencionado aditivo, requisitar o reequilíbrio, pois isto implicaria negar à Administração a faculdade de avaliar se, com a repactuação, seria conveniente, do ponto de vista financeiro, manter o ajuste.
+Acórdão 1827/2008-TCU-Plenário | [Voto] 47. Vale destacar, ainda, que a repactuação de preços poderia dar-se mediante apostilamento, no limite jurídico, já que o artigo 65, § 8º, da Lei nº 8.666/93, faz essa alusão quanto ao reajuste. Contudo, não seria antijurídico e seria, inclusive, mais conveniente que fosse aperfeiçoada por meio de termo aditivo, uma vez que a repactuação tem como requisitos a necessidade de prévia demonstração analítica quanto ao aumento dos custos do contrato, a demonstração de efetiva repercussão dos fatos alegados pelo contratado nos custos dos preços inicialmente pactuados e, ainda, a negociação bilateral entre as partes. E, para reforçar o entendimento ora exposto, vale mencionar que o referido termo aditivo teria natureza declaratória, e não constitutiva de direitos, pois apenas reconheceria o direito à repactuação preexistente.
+Pesquisa de Jurisprudência | Execute consulta na Jurisprudência Selecionada do TCU . Selecione a área “contrato administrativo”, e o tema “repactuação” . Execute consulta na Jurisprudência Selecionada . Pesquise pela árvore de classificação: área “contrato administrativo”, tema “equilíbrio econômico-financeiro” . Execute consulta na base de acórdãos do TCU. Pesquise pelo termo “repactuação”, no campo “sumário” .
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+Quadro 445 – Riscos relacionados
+
+Riscos
+Falta de exigência de detalhamento de custos nas propostas, levando à ausência de linha de base (referência clara dos custos iniciais) para que a Administração identifique, posteriormente, o real aumento do custo do contratado, nas solicitações de repactuação e reequilíbrio econômico-financeiro do contrato, além da criação de oportunidade para que o contratado apresente diferenças de custos mais elevadas que as reais, com consequentes alterações contratuais com valores mais elevados que os efetivamente devidos e prejuízos à Administração.
+Falta de capacidade técnica dos responsáveis pela fiscalização/gestão do contrato, levando à falha na análise da documentação pertinente para fins de repactuação, não identificando aumento irreal de custos, custos que não trate de matéria trabalhista, novos custos não obrigatórios por lei, custos repactuados há menos de um ano, ou de oportunidades de redução dos valores, com consequente concessão de repactuação com valores indevidos e prejuízos à Administração.
+Proposta contratada com base em valores de convenção coletiva desatualizada somada à falta de identificação, por parte da equipe de fiscalização e gestão do contrato, de que os direitos pleiteados para repactuação são referentes à convenção anterior à apresentação da proposta, levando à concessão indevida de repactuação para recompor os valores contratados de acordo com a convenção coletiva vigente, com consequentes prejuízos à Administração.
+
+Fonte: Elaboração própria.
+
+[1] Lei 14.133/2021, art. 6º, inciso LIX.
+
+[2] Lei 14.133/2021, art. 6º, inciso XVI.
+
+[3] Lei 14.133/2021, art. 135, § 6º.
+
+[4] Lei 14.133/2021, art. 135, incisos I e II, e § 3º.
+
+[5] Lei 14.133/2021, art. 92, § 4º, incisos I e II, Acórdão 1.214/2013-TCU-Plenário, item 9.1.17, IN – Seges/MP 5/2017, Anexo IX, item 7 c/c IN – Seges/ME 98/2022, art. 1º.
+
+[6] Lei 14.133/2021, art. 135, inciso II, §§ 3º e 4º, e IN – Seges/MP 5/2017, arts. 56 e 58, Orientação Normativa – AGU 26/2011, modelo de contrato para serviços com mão de obra exclusiva (Advocacia-Geral da União; Ministério da Gestão e da Inovação em Serviços Públicos em Serviços Públicos, 2023).
+
+[7] Lei 14.133/2021, art. 135, §§ 4º e 5º.
+
+[8] Lei 14.133/2021, art. 135, §§ 1º e 2º.
+
+[9] Há a preclusão lógica quando se pretende praticar ato incompatível com outro anteriormente praticado (Voto do Acórdão 1827/2008-TCU-Plenário, parágrafo 61).
+
+[10] Lei 14.133/2021, art. 131, parágrafo único; e IN – Seges/MP 5/2017, art. 57, § 7º c/c IN – Seges/ME 98/2022, art. 1º, enunciados dos Acórdãos 1601/2014, 477/2010 e 1827/2008, do Plenário do TCU, e 8237/2011, 8237/2011, 2094/2010, da Segunda Câmara do TCU.
+
+[11] Lei 14.133/2021, art. 136, inciso I.
+
+[12] Lei 14.133/2021, art. 92, § 6º.

@@ -1,0 +1,50 @@
+5.2.1. Garantia de proposta
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/5-2-1-garantia-de-proposta/
+======================================================================
+
+A Lei 14.133/2021 dispõe sobre a possibilidade de exigir garantia dos licitantes, no momento da apresentação das propostas, como requisito de pré-habilitação, nos termos do art. 58:
+
+Art. 58. Poderá ser exigida, no momento da apresentação da proposta, a comprovação do recolhimento de quantia a título de garantia de proposta, como requisito de pré-habilitação.
+
+§ 1º A garantia de proposta não poderá ser superior a 1% (um por cento) do valor estimado para a contratação.
+
+§ 2º A garantia de proposta será devolvida aos licitantes no prazo de 10 (dez) dias úteis, contado da assinatura do contrato ou da data em que for declarada fracassada a licitação.
+
+§ 3º Implicará execução do valor integral da garantia de proposta a recusa em assinar o contrato ou a não apresentação dos documentos para a contratação.
+
+§ 4º A garantia de proposta poderá ser prestada nas modalidades de que trata o § 1º do art. 96 desta Lei.
+
+Caso adotada, a garantia de proposta deverá ser exigida de todos os licitantes e poderá ser prestada nas modalidades previstas no art. 96, § 1º, da Lei 14.133/2021, à escolha do licitante, quais sejam: caução em dinheiro ou em títulos da dívida pública; seguro-garantia; e fiança bancária.
+
+Essa garantia tem a função de evidenciar a seriedade da proposta apresentada e não se confunde com a garantia contratual, disciplinada por meio dos arts. 96 a 102 da Lei 14.133/2021, a qual tem limites percentuais diferentes e somente pode ser exigida do contratado, com o objetivo de garantir o fiel cumprimento das obrigações assumidas por ele perante a Administração.
+
+Vale lembrar que, enquanto na Lei 8.666/1993, a garantia de proposta era enquadrada como requisito de habilitação econômico-financeira[1], na Lei 14.133/2021, passa ser utilizada como requisito de pré-habilitação, ou seja, como condição para participar do processo licitatório.
+
+Além disso, não há, na Lei 14.133/2021, a vedação à exigência de garantia de proposta na modalidade pregão, como era previsto no art. 5º, inciso I, da Lei 10.520/2002.
+
+Quadro 230 – Referências normativas para garantia de proposta
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 58. Poderá ser exigida, no momento da apresentação da proposta, a comprovação do recolhimento de quantia a título de garantia de proposta, como requisito de pré-habilitação. § 1º A garantia de proposta não poderá ser superior a 1% (um por cento) do valor estimado para a contratação. § 2º A garantia de proposta será devolvida aos licitantes no prazo de 10 (dez) dias úteis, contado da assinatura do contrato ou da data em que for declarada fracassada a licitação. § 3º Implicará execução do valor integral da garantia de proposta a recusa em assinar o contrato ou a não apresentação dos documentos para a contratação. § 4º A garantia de proposta poderá ser prestada nas modalidades de que trata o § 1º do art. 96 desta Lei. Art. 90. A Administração convocará regularmente o licitante vencedor para assinar o termo de contrato ou para aceitar ou retirar o instrumento equivalente, dentro do prazo e nas condições estabelecidas no edital de licitação, sob pena de decair o direito à contratação, sem prejuízo das sanções previstas nesta Lei. […] § 5º A recusa injustificada do adjudicatário em assinar o contrato ou em aceitar ou retirar o instrumento equivalente no prazo estabelecido pela Administração caracterizará o descumprimento total da obrigação assumida e o sujeitará às penalidades legalmente estabelecidas e à imediata perda da garantia de proposta em favor do órgão ou entidade licitante. Art. 96. A critério da autoridade competente, em cada caso, poderá ser exigida, mediante previsão no edital, prestação de garantia nas contratações de obras, serviços e fornecimentos. § 1º Caberá ao contratado optar por uma das seguintes modalidades de garantia: I – caução em dinheiro ou em títulos da dívida pública emitidos sob a forma escritural, mediante registro em sistema centralizado de liquidação e de custódia autorizado pelo Banco Central do Brasil, e avaliados por seus valores econômicos, conforme definido pelo Ministério da Economia; II – seguro-garantia; III – fiança bancária emitida por banco ou instituição financeira devidamente autorizada a operar no País pelo Banco Central do Brasil.
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 231 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 447/2018-TCU-Plenário | [Enunciado] É ilegal a exigência de recolhimento da garantia de participação dos licitantes em data anterior à apresentação das propostas, pois contraria os arts. 31, inciso III, e 43, inciso I, da Lei 8.666/1993.
+Acórdão 804/2016-TCU-Plenário | [Enunciado] Constitui restrição indevida à competitividade da licitação a exigência de garantia da proposta em percentual incidente sobre todo o conjunto de obras previstas para serem licitadas por lotes, em vez de cada obra considerada individualmente em seu respectivo lote.
+Acórdão 6193/2015-TCU-Primeira Câmara | [Enunciado] A exigência de prestação de garantia antes da data de apresentação dos documentos de habilitação não encontra amparo na Lei 8.666/1993, pois, além de constituir fator restritivo à competitividade, permite o conhecimento antecipado das empresas que efetivamente participarão do certame, com possível dano à ampla concorrência.
+Pesquisa de Jurisprudência | Execute a seguinte consulta na Jurisprudência Selecionada por árvore de classificação. Filtre por área “Licitação” e, no campo de busca, realize pesquisa pelo termo: “garantia de proposta” OR “garantia de participação” . Execute a seguinte consulta na Jurisprudência Selecionada por árvore de classificação. Filtre por área “Licitação”, tema “Qualificação econômico-financeira”, subtema “garantia de proposta” . * *esse subtema poderá ser apartado, oportunamente, do tema “qualificação econômico-financeira”, tendo em vista que a Lei 14.133/2021 possibilita a garantia de proposta como pré-habilitação, e não como requisito de habilitação.
+
+Fonte: Elaboração própria a partir de consulta a jurisprudência do TCU.
+
+Quadro 232 – Riscos relacionados
+
+Riscos
+Exigência de que os licitantes forneçam a garantia de participação antes da apresentação das propostas, levando ao conhecimento antecipado, pela Administração, da identidade dos concorrentes, com consequente ilegalidade por redução indevida do prazo legal conferido aos licitantes para apresentarem as garantias, violação do sigilo e da impessoalidade do certame e criação de ambiente propício à formação de conluios.
+
+Fonte: Elaboração própria.
+
+[1] Lei 8.666/1993, art. 31, § 2º.

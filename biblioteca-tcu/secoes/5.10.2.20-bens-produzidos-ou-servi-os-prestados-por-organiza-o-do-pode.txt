@@ -1,0 +1,47 @@
+5.10.2.20. Bens produzidos ou serviços prestados por organização do poder público (inciso IX)
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/5-10-2-20-bens-produzidos-ou-servicos-prestados-por-organizacao-do-poder-publico-inciso-ix/
+======================================================================
+
+O dispositivo autoriza a dispensa de licitação para aquisição de bens ou serviços, desde que atendidas as seguintes condições:
+
+- o contratante deve ser órgão da Administração Pública direta, autarquia, associação pública (ou consórcio público[1])[2] ou fundação pública[3];
+
+- os bens ou serviços devem ser fornecidos por órgão ou entidade que integre a Administração Pública e que tenha sido criado para esse fim específico de suporte à própria Administração[4]. A dispensa não se aplica, portanto, para a contratação de empresas públicas e sociedades de economia mista exploradoras de atividade econômica, as quais estão sujeitas ao regime jurídico próprio das empresas privadas[5]. Importante mencionar que as estatais podem contratar diretamente, com dispensa de licitação, as respectivas subsidiárias, desde que: para aquisição ou alienação de bens e prestação ou obtenção de serviços; os preços sejam compatíveis com os praticados no mercado; e o objeto do contrato tenha relação com a atividade do contratado prevista em seu estatuto social[6]; e
+
+- o preço contratado deve estar compatível com o praticado no mercado.
+
+Quadro 354 – Referências normativas para a dispensa para contratação de bens produzidos ou serviços prestados por organização pública
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 75. É dispensável a licitação: […] IX – para a aquisição, por pessoa jurídica de direito público interno, de bens produzidos ou serviços prestados por órgão ou entidade que integrem a Administração Pública e que tenham sido criados para esse fim específico, desde que o preço contratado seja compatível com o praticado no mercado;
+Decreto 10.947/2022 | Art. 6º Até a primeira quinzena de maio de cada exercício, os órgãos e as entidades elaborarão os seus planos de contratações anual, os quais conterão todas as contratações que pretendem realizar no exercício subsequente, incluídas: I – as contratações diretas, nas hipóteses previstas nos art. 74 e art. 75 da Lei nº 14. 133, de 2021;
+IN – Seges/ME 81/2022 | Art. 6º O TR, a partir dos Estudos Técnicos Preliminares – ETP, se elaborados, definirá o objeto para atendimento da necessidade, a ser enviado para o setor de contratações no prazo definido no calendário de contratação de que trata o inciso III do art. 11 do Decreto nº 10.947, de 25 de janeiro de 2022. § 1 º Os processos de contratação direta de que trata o art. 72 da Lei nº 14.133, de 1º de abril de 2021, serão instruídos com o TR, observado em especial os arts. 8º e 10.
+IN – Seges/ME 67/2021 | Art. 4º Os órgãos e entidades adotarão a dispensa de licitação, na forma eletrônica, nas seguintes hipóteses: […] III – contratação de obras, bens e serviços, incluídos os serviços de engenharia, nos termos do disposto no inciso III e seguintes do caput do art. 75 da Lei nº 14.133, de 2021, quando cabível; e
+IN – Seges/ME 65/2021 | Art. 5º A pesquisa de preços para fins de determinação do preço estimado em processo licitatório para a aquisição de bens e contratação de serviços em geral será realizada mediante a utilização dos seguintes parâmetros, empregados de forma combinada ou não: […] Art. 7º Nas contratações diretas por inexigibilidade ou por dispensa de licitação, aplica-se o disposto no art. 5º. […]
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 355 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 448/2017-TCU-Plenário | [Enunciado] A contratação direta com base no art. 24, inciso VIII, da Lei 8.666/1993 tem como pressuposto elementar a entidade contratada dispor de qualificação técnica e operacional para executar o objeto do contrato, sendo, portanto, irregular a subcontratação total dos serviços.
+Acórdão 1940/2015-TCU-Plenário | 9.3.3 Terceira pergunta: “É viável a contratação direta de banco oficial com amparo no art. 24, VIII, da Lei 8.666/1993?” Resposta: 9.3.3.1. É viável a contratação direta de instituição financeira oficial, com fundamento no artigo 24, inciso VIII, da Lei 8.666/1993, para a prestação de serviço, em caráter exclusivo, de pagamento de remuneração de servidores ativos, inativos e pensionistas e outros serviços similares, devendo, ainda, serem observadas as condições de validade do ato administrativo estabelecidas no artigo 26, caput , e parágrafo único, do referido diploma legal, bem como demonstrada a vantagem da contratação direta em relação à adoção do procedimento licitatório;
+Acórdão 6931/2009-TCU-Primeira Câmara | [Sumário] 2. Apenas as entidades que prestam serviços públicos de suporte à Administração Pública, criadas para esse fim específico, podem ser contratadas com dispensa de licitação, nos termos do art. 24, inciso VIII, da Lei 8.666/1993. 3. As empresas públicas e sociedades de economia mista que se dedicam à exploração de atividade econômica de produção ou comercialização de bens ou de prestação de serviços sujeitam-se ao regime jurídico das empresas privadas (CF, 173), em consonância com os princípios constitucionais da livre concorrência e da isonomia, e não podem ser contratadas com dispensa de licitação fundamentada no art. 24, inciso VIII, da Lei 8.666/1993.
+Acórdão 2203/2005-TCU-Primeira Câmara | 1.7. observe, em especial, o inciso VIII, do art. 24, da Lei n.º 8.666/93 e o § 2.º do art. 173 da Constituição Federal, de forma a aplicar a dispensa de licitação apenas às entidades integrantes da Administração Pública que tenham como finalidade específica a prestação de serviços públicos ou a prestação de serviços de apoio, bem como às empresas públicas e sociedades de economia mista que não desempenhem atividade econômica, sujeita à livre concorrência, pois estas não devem possuir privilégios que não sejam extensíveis às empresas da iniciativa privada
+Acórdão 2063/2005-TCU-Plenário | [Voto] 3. Com efeito, cabe destacar que o Relator da deliberação ora recorrida, Ministro-Substituto José Antônio Barreto de Macedo, já enfatizara, com muita propriedade, a firme jurisprudência do Tribunal, no sentido de que a aquisição de combustível sujeita-se a processo licitatório, na forma do art. 2º da Lei nº 8.666/93, não se aplicando ao caso a hipótese de dispensa de licitação prevista no art. 24, VIII, do mesmo diploma legal, conforme Decisões nºs 118/98 – Segunda Câmara e 253/97 – Plenário e Acórdãos nºs 29/92 e 56/99, ambos do Plenário. Essa uniformidade da jurisprudência, aliás, foi o motivo que levou o Relator a considerar desnecessário firmar entendimento sobre a matéria, acreditando ser suficiente expedir determinações às unidades em questão. Seguem a mesma orientação, além das deliberações mencionadas, os Acórdãos nºs 142/96 – Segunda Câmara, 38/99 – Primeira Câmara e 1.481/2005 – Primeira Câmara. […] 6. Elucidativo a esse respeito é, ainda, o seguinte trecho do Parecer do Ministério Público junto ao TCU no presente processo: “ Convém destacar que o art. 173, § 1º, da Constituição, dispõe que empresas públicas e sociedades de economia mista sujeitam-se ao regime jurídico próprio das empresas privadas e, portanto, não podem gozar de privilégios nas contratações . Admitindo-se como correta a situação examinada (contratação direta), desconsiderar-se-ia um dos princípios maiores da República, qual seja, o da livre concorrência. A sociedade de economia mista em questão (Petrobras Distribuidora S.A.) não foi criada com o fim exclusivo de promover fornecimento de combustível à Administração Pública, faltando assim o quesito necessário à aplicação da norma do art. 24, inciso VIII, da Lei nº 8.666/93 .” (Grifo nosso)
+Pesquisa de Jurisprudência | Execute consulta na Jurisprudência Selecionada do TCU . Selecione a “área – Licitação”, tema “dispensa de licitação” . Na Pesquisa Integrada do TCU , pesquise pelo termo “ art. 24, inciso VIII “ ou “art. 75, inc. IX”.
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+[1] CF/1988, art. 241; e Lei 11.107/2005, art. 6º, inciso I.
+
+[2] Lei 10.406/2002, art. 41 (Código Civil).
+
+[3] CF/1988, art. 37, inciso XIX.
+
+[4] Convém ressaltar que, diferentemente da Lei 8.666/1993 (art. 24, inciso VIII), a NLLC não exigiu que a entidade pública contratada tenha sido criada “para esse fim específico em data anterior à vigência desta Lei”. As futuras deliberações do TCU sobre esse tema irão indicar se esse requisito deverá ou não continuar a ser exigido pela entidade contratante.
+
+[5] CF/1988, art. 173, § 1º, inciso II.
+
+[6] Lei 13.303/2016, art. 29, inciso XI.

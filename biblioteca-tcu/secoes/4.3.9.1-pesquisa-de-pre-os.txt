@@ -1,0 +1,66 @@
+4.3.9.1. Pesquisa de preços
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/4-3-9-1-fontes-para-obtencao-de-precos-2/
+======================================================================
+
+Escolhida a solução a ser contratada (vide item 4.1.5) e definidos os quantitativos e requisitos necessários, a equipe de planejamento da contratação (ou outro que a Administração designar) realizará a pesquisa dos preços praticados no mercado.
+
+Essa é uma atividade obrigatória para as contratações públicas, inclusive contratações diretas e para adesões a atas de registro de preços, como consta de diversos dispositivos sobre a elaboração do orçamento estimado, de forma expressa ou implícita, pois não é possível elaborar o orçamento estimado sem efetuar pesquisa de preços[1].
+
+O primeiro cuidado da equipe de planejamento ao realizar essa pesquisa é utilizar, sempre que possível, diversas fontes de preço. Como explicado na Nota Técnica – AudTI/TCU 8/2023[2]:
+
+Na referida pesquisa, é obtida uma amostra de preços do nicho de mercado de soluções e de respectivas empresas fornecedoras que poderão participar da licitação […], a partir de diversas fontes de preços. Essa amostra serve para que a organização pública tenha uma percepção da faixa de preços do nicho de mercado delimitado no planejamento da contratação para efetuar, com algum grau de segurança, a análise crítica desses preços, os cálculos das estimativas dos preços unitários e global da solução a contratar, e definir os critérios de aceitabilidade de preços, que podem incluir a definição do preço máximo a ser aceito.
+
+Nos incisos do § 1º do art. 23 da Lei 14.133/2021 são estabelecidas as principais fontes de consulta (parâmetros) a serem utilizadas para elaboração da pesquisa de preços para aquisição de bens e contratação de serviços em geral:
+
+- painel para consulta de preços ou no banco de preços em saúde disponíveis no Portal Nacional de Contratações Públicas (PNCP). No Caderno de Pesquisa de Preços[3], o MGI informa que a pesquisa de preços que era feita no Painel de Preços, agora pode ser feita diretamente no sistema Compras.gov.br;
+
+- contratações similares feitas pela Administração Pública, em execução ou concluídas no período de um ano anterior à data da pesquisa de preços, inclusive mediante sistema de registro de preços, observado o índice de atualização de preços correspondente;
+
+- dados de pesquisa publicada em mídia especializada, de tabela de referência formalmente aprovada pelo Poder Executivo federal e de sítios eletrônicos especializados ou de domínio amplo. A IN – Seges/ME 65/2021 estabelece que o uso desse parâmetro observe 3 requisitos: os preços devem estar atualizados no momento da pesquisa; devem estar compreendidos no intervalo de até seis meses de antecedência da data de divulgação do edital; e devem apresentar a data e a hora de acesso. No Caderno de Pesquisa de Preços são apresentados conceitos e exemplos para cada uma desses três tipos de fontes;
+
+- pesquisa direta com no mínimo três fornecedores, mediante solicitação formal de cotação, desde que seja apresentada justificativa da escolha desses fornecedores e que não tenham sido obtidos os orçamentos com mais de seis meses de antecedência da data de divulgação do edital; e
+
+- base nacional de notas fiscais eletrônicas, na forma de regulamento. Esse parâmetro só poderá ser utilizado após a definição da metodologia pela Seges/MGI.
+
+A Lei 14.133/2021 dispõe que os cinco parâmetros citados podem ser adotados de forma combinada ou não. A IN – Seges/ME 65/2021[4] acrescenta que deverão ser priorizados os dois primeiros parâmetros, ou seja, o módulo integrado para pesquisa de preços no sistema Compras.gov.br; e as contratações similares feitas pela Administração Pública.
+
+As demais fontes devem ser utilizadas de forma complementar ou subsidiária, com as devidas justificativas, devendo ser evitada a cotação somente junto a potenciais fornecedores.
+
+Na mesma linha, a IN – SGD/ME 94/2022, que dispõe sobre a contratação de soluções de Tecnologia da Informação e Comunicação – TIC, estabelece que:
+
+Art. 20. A estimativa de preço da contratação deverá ser realizada pelo Integrante Técnico com o apoio do Integrante Administrativo para elaboração do orçamento detalhado, composta por preços unitários e de acordo com a Instrução Normativa SEGES/ME nº 65, de 7 de julho de 2021, e suas atualizações, que versa sobre o procedimento administrativo para a realização de pesquisa de preços para a aquisição de bens e contratação de serviços em geral.
+
+§ 1º A estimativa de preço derivada exclusivamente de propostas de fornecedores somente deverá ser utilizada mediante justificativa, nos casos em que não for possível obter preços de contratações similares de outros entes públicos ou do Painel de Preços.
+
+Essa consulta a diversas fontes é compatível com o que ficou conhecido como “cesta de preços” na jurisprudência do TCU. Cite-se, por exemplo, o Acórdão 1875/2021-TCU-Plenário:
+
+9.5.1. as pesquisas de preços para estimativa de valor de objetos a serem licitados devem ser baseadas em uma “cesta de preços”, devendo dar preferência para preços públicos, oriundos de outros certames;
+
+9.5.2. a pesquisa de preços feita exclusivamente junto a fornecedores deve ser utilizada em último caso, na extrema ausência de preços públicos ou cestas de preços referenciais;
+
+Cite-se ainda a ponderação que consta na Nota Técnica – AudTI/TCU 8/2023 sobre elaboração de orçamento estimado para contratações de TI[5]:
+
+478. Ressalta-se que o uso de várias fontes combinadas, como consta sua possibilidade no § 1º do art. 5º da IN – Seges/ME 73/2020, está em linha com o uso de “cesta de preços aceitáveis” (Acórdão 2.170/2007-TCU-Plenário, voto condutor, parágrafos 32-35). Em adição, isso leva a organização pública a mitigar o risco de levantar somente preços praticados para a Administração Pública, que podem estar inflados devido a práticas anticompetitivas, como as executadas por cartéis de empresas, ou apresentar outras práticas irregulares, como “jogos de planilha”. […]
+
+O outro cuidado a ser tomado pela equipe de planejamento da contratação ao realizar a pesquisa de preços é observar as especificidades do objeto que se deseja contratar. Como comentado no Caderno de Pesquisa de Preços[6]:
+
+P. 14 Na pesquisa de preços, é necessário que o gestor tenha atenção ao coletar um preço, avaliando se as condições de negociação praticadas na contratação que está sendo consultada se assemelham ao seu caso, pois há vários fatores que podem influenciar o preço do produto ou serviço, deixando-o abaixo ou acima daqueles praticados no mercado e impactando o preço de referência.
+
+O uso de itens com especificações diferentes ou em condições diferentes pode ocasionar distorções nos resultados e direcionar erroneamente a avaliação do preço estimado de uma aquisição ou contratação de modo que esta não se mostre economicamente vantajosa para a Administração.
+
+Portanto, é importante considerar, na pesquisa, os fatores que possam influenciar na formação dos custos, a exemplo dos citados no art. 4º da IN – Seges/MGI 65/2021: prazos e locais de entrega; instalação e montagem do bem ou execução do serviço; quantidade contratada; formas e prazos de pagamento; valores de fretes e outros gastos com logística; garantias exigidas; marcas e modelos, quando for o caso; potencial economia de escala; e as peculiaridades do local de execução do objeto.
+
+Além disso, o Caderno de Pesquisa de Preços orienta que, se for constatado que um ou mais requisitos da especificação do objeto fazem o valor da contratação aumentar significativamente, os responsáveis pela elaboração da pesquisa de preço devem reavaliar, junto ao requisitante ou área técnica, se esses requisitos são de fato fundamentais para atender à necessidade a ser suprida. Essa decisão deve ser documentada.
+
+[1] Lei 14.133/2021, art. 6º, inciso XXIII, alínea “i”, art. 18, incisos IV, § 1º, inciso VI, art. 23, §§ 1º a 4º, art. 25, § 8º, inciso II, art. 40, inciso I, art. 72, inciso II, art. 75, inciso IX, art. 82, § 2º c/c § 1º, § 5º, inciso I, art. 84, caput, art. 86, § 2º, inciso II e art. 107; e IN – Seges/ME 65/2021.
+
+[2] Tribunal de Contas da União, 2023, p. 136-137.
+
+[3] Disponível em: https://www.gov.br/compras/pt-br/agente-publico/cadernos-de-logistica. Acesso em 12 jun. 2024.
+
+[4] IN – Seges/ME 65/2021, art. 5º, § 1º.
+
+[5] Tribunal de Contas da União, 2023, p. 219.
+
+[6] Portal de Compras do Governo Federal. Caderno de Logística: Pesquisa de Preços. Disponível em: https://www.gov.br/compras/pt-br/agente-publico/cadernos-de-logistica/. Acesso em: 15 jul. 2024.

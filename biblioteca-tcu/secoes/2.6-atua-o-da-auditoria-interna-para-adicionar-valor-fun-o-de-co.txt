@@ -1,0 +1,318 @@
+2.6. Atuação da auditoria interna para adicionar valor à função de contratações
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/2-6-atuacao-da-auditoria-interna-para-adicionar-valor-a-funcao-de-contratacoes-2/
+======================================================================
+
+A auditoria interna governamental é uma atividade independente e objetiva de avaliação e de consultoria realizada para aumentar e proteger o valor organizacional e melhorar as operações da organização. A auditoria ajuda a organização a atingir seus objetivos, trazendo uma abordagem sistemática e disciplinada para avaliar e melhorar a eficácia dos processos de governança, gerenciamento de riscos e controle[1].
+
+O serviço de avaliação fornece opinião independente e objetiva sobre a eficácia e adequação dos processos de governança e de gestão de riscos e controles internos[2].
+
+A consultoria, por sua vez, envolve atividades de orientação, assessoria, treinamento e facilitação acerca desses mesmos processos, desde que os auditores não assumam responsabilidades da gestão. O objetivo e o escopo da consultoria são decididos em conjunto com o cliente ou solicitante do serviço[3].
+
+A Figura 2 a seguir, adaptada do Manual de Orientações Técnicas da Atividade de Auditoria Interna Governamental do Poder Executivo Federal, apresenta diferenças entre avaliação e consultoria:
+
+Figura 2 – Diferenças entre avaliação e consultoria
+
+Avaliação | Consultoria
+Origem da demanda | Em geral, a demanda dos trabalhos é decorrente do planejamento realizado pela unidade de auditoria interna com base em riscos | Em geral, a demanda dos serviços de consultoria decorre de solicitação da alta administração
+Propósito do trabalho | Conduzido com o objetivo de fornecer avaliação independente | Conduzido com o objetivo de fornecer assessoramento, aconselhamento e serviços relacionados
+Planejamento dos trabalhos de auditoria | Estabelecimento do objetivo e do escopo pela unidade de auditoria interna | Estabelecimento do objetivo e do escopo pela unidade de auditoria interna, em conjunto o solicitante do serviço
+Comunicação dos resultados | O formato da comunicação é relativamente padronizável | O formato da comunicação pode variar na forma e no conteúdo, de acordo com a natureza do trabalho e as necessidades do solicitante do serviço
+Monitoramento | O monitoramento é realizado a partir das recomendações expedidas pela unidade de auditoria interna | Deve ser considerada a forma de monitoramento definida com o solicitante do serviço no planejamento dos trabalhos
+
+Fonte: Adaptado de Controladoria-Geral da União, 2017, p. 23.
+
+Além dos serviços de avaliação e de consultoria, a auditoria interna governamental, por atuar no contexto do setor público, realiza outras atividades que a diferenciam da função de auditoria no setor privado, a exemplo de:
+
+- promover a prevenção, detecção e investigação de irregularidades e de fraudes na utilização de recursos públicos[4]; e
+
+- avaliar a legalidade e o desempenho, quanto à economicidade, à eficiência e à eficácia, da gestão orçamentária, financeira e patrimonial das organizações públicas, bem como a regularidade da aplicação dos recursos por entidades de direito privado[5].
+
+A Controladoria-Geral da União (CGU), com o objetivo de orientar a detecção de atos ilegais ou irregulares na utilização de recursos públicos federais, estabeleceu, no âmbito do Poder Executivo federal, um terceiro tipo de serviço que pode ser prestado pela auditoria interna governamental: a apuração[6].
+
+Independentemente de o serviço de apuração estar previsto no estatuto da auditoria interna, o auditor governamental deve, ao conduzir trabalhos de auditoria: considerar riscos de fraude na avaliação dos controles internos; ter conhecimento suficiente para identificar indícios de fraudes; estar alerta a situações que podem possibilitar fraudes; avaliar os indicadores de fraude e recomendar uma investigação, quando necessário[7]. 
+
+Especificamente quanto à função de contratações públicas, a auditoria interna governamental adiciona valor quando avalia e contribui para a melhoria dos processos de governança das contratações e de gestão de riscos e controles internos dessa função organizacional[8].
+
+Os trabalhos de avaliação da governança das contratações podem abordar, por exemplo[9]:
+
+- a criação, a implantação e a eficácia do programa de integridade na função de contratações, incluindo a cultura de integridade, a definição e a comunicação dos valores éticos e dos padrões de comportamento, o apoio da liderança, a existência e a utilização de mecanismos para identificação e tratamento de conflito de interesses, e a realização de treinamentos sobre integridade;
+
+- a definição da estrutura da área de contratações, e dos processos de trabalho da função de contratações; e a existência de diretrizes para orientar essa função organizacional;
+
+- os processos decisórios na função de contratações;
+
+- os processos de escolha, de sucessão, de transição e de avaliação de desempenho dos ocupantes de funções-chave na função de contratações, incluindo o principal gestor de contratações e os membros do comitê de contratações, se houver;
+
+- a definição de objetivos, indicadores e metas para a função de contratações e o alinhamento desses aos objetivos organizacionais;
+
+- o monitoramento do desempenho da função de contratações;
+
+- os processos de elaboração e de aprovação do PCA, a eficácia desse instrumento de planejamento, e a compatibilidade com o PLS e com o PEI;
+
+- a transparência das contratações; e
+
+- o apoio da tecnologia da informação à função de contratações.
+
+As avaliações do processo de gestão de riscos, incluindo os controles da gestão, podem contemplar a gestão de riscos na função de contratações e em contratações específicas. Os resultados dos trabalhos permitem[10] avaliar o potencial de ocorrência de fraude e a forma como a função de contratações gerencia o risco de fraude, além de verificar se:
+
+- os riscos dos processos relacionados à função de contratações são identificados, avaliados e tratados;
+
+- os riscos de contratações específicas são identificados, avaliados e tratados;
+
+- as medidas de tratamento adotadas são adequadas para manter os riscos dentro de um nível aceitável;
+
+- os controles internos que foram implantados para mitigar esses riscos são apropriados, eficazes e operam conforme planejado; e
+
+- as informações relevantes acerca dos riscos são confiáveis, íntegras e comunicadas de forma tempestiva na organização, permitindo que os gestores e colaboradores que atuam na função de contratações e a instância interna de governança (conselho ou alta administração) cumpram com suas responsabilidades no que diz respeito a riscos.
+
+Podem ser realizadas auditorias de conformidade, para avaliar o grau de adesão às leis, regulamentos, políticas e procedimentos relativos aos processos de contratação; auditorias operacionais, para avaliar a economia, eficiência e eficácia da gestão das contratações; e auditorias contábeis e financeiras, verificando a regularidade de aplicação dos recursos e das informações financeiras reportadas pela organização[11].
+
+Os resultados de múltiplos trabalhos de auditoria, analisados em conjunto, proporcionam uma compreensão dos processos de governança, gestão de riscos e controles da função de contratações. Outras fontes de informação podem corroborar as conclusões da auditoria interna, como trabalhos do controle externo e dos órgãos reguladores, do Ministério Público, da Polícia Federal, autoavaliações da gestão, e histórico de incidentes de riscos na organização.
+
+Os trabalhos de auditoria devem ser realizados com objetividade. As normas de auditoria conceituam objetividade como “uma atitude mental imparcial que permite que os auditores internos executem os trabalhos de auditoria de forma que confiem no resultado de seu trabalho e que não haja qualquer prejuízo à qualidade”[12].
+
+Nesse sentido, a Lei 14.133/2021 dispõe que:
+
+Art. 171 Na fiscalização de controle será observado o seguinte: […]
+
+II – adoção de procedimentos objetivos e imparciais e elaboração de relatórios tecnicamente fundamentados, baseados exclusivamente nas evidências obtidas e organizados de acordo com as normas de auditoria do respectivo órgão de controle, de modo a evitar que interesses pessoais e interpretações tendenciosas interfiram na apresentação e no tratamento dos fatos levantados; (Grifo nosso)
+
+Para definir os trabalhos que serão realizados em determinado período (normalmente de um ano), a auditoria interna elabora um plano baseado em riscos, ou seja, que prioriza as áreas e processos mais expostos a riscos. Sobre o assunto, a Lei 14.133/2021 dispõe sobre critérios a serem utilizados na atividade de fiscalização dos atos previstos na Lei:
+
+Art. 170. Os órgãos de controle adotarão, na fiscalização dos atos previstos nesta Lei, critérios de oportunidade, materialidade, relevância e risco e considerarão as razões apresentadas pelos órgãos e entidades responsáveis e os resultados obtidos com a contratação, observado o disposto no § 3º do art. 169 desta Lei. (Grifo nosso)
+
+O planejamento da auditoria requer interação com a alta administração e com a gestão, a fim de que auditoria adquira entendimento sobre as estratégias e objetivos organizacionais, os riscos associados e os processos de gerenciamento de riscos da organização[13].
+
+Assim, ainda que a organização não possua unidade de auditoria interna em sua estrutura, deve manter comunicação estreita e eficaz com o órgão da Administração que presta os serviços de auditoria[14], a fim de contribuir para que os objetivos da gestão e os principais riscos relacionados sejam considerados na priorização das atividades da auditoria interna.
+
+Esse assunto foi objeto de recomendação à Secretaria Federal de Controle Interno da CGU (SFC/CGU), no Acórdão 1171/2017-TCU-Plenário (vide Quadro 44), oportunidade em que a unidade técnica do Tribunal observou que:
+
+[…] O IPPF 2020 prescreve que o planejamento das atividades da auditoria interna seja comunicado à alta administração da entidade e ao seu conselho, para revisão e aprovação. Tal orientação objetiva garantir que a alta administração e o conselho se certifiquem de que os objetivos da gestão estejam sendo observados na priorização das atividades da auditoria interna. Porém, no caso da SFC, em função de seu posicionamento centralizado, que faz com que a auditoria interna esteja fora da estrutura da gestão avaliada, o planejamento das ações de controle acaba sendo revisto e aprovado por instância interna à própria unidade de auditoria interna.
+
+Em 2016, para diminuir o risco de que o planejamento das ações de controle esteja desconectado dos objetivos da gestão, a SFC orientou que o planejamento de cada Coordenação-Geral seja apresentado aos gestores competentes. Assim, os Ministérios e Órgãos poderiam tomar conhecimento das prioridades da SFC para o exercício e dos resultados já alcançados até então. […]
+
+Segundo entrevistas nas diversas Diretorias de Auditoria, o nível de interesse dos diversos Ministros quanto à apresentação do planejamento das ações de controle foi bastante variado. Enquanto alguns foram comunicados pessoalmente e fizeram suas sugestões e observações, outros delegaram a tarefa para o seus Assessores Especiais de Controle Interno. […]
+
+Assim, percebe-se que ainda se faz necessário fortalecer a aproximação entre o planejamento da SFC e as necessidades dos gestores. Acredita-se que tal aproximação pode ser concretizada de maneira tal que não represente um risco à independência e à objetividade da atividade de auditoria interna. Acredita-se também que tal aproximação tem o potencial de tornar as ações da SFC mais efetivas e fortalecer o papel da auditoria interna do Poder Executivo Federal enquanto atividade de apoio à gestão. (Grifo nosso)
+
+As instruções normativas 3 e 8, de 2017, da SFC/CGU abordaram essa questão, orientando que:
+
+IN – SFC/CGU 3/2017, anexo, p. 18: 84. [….] o planejamento deve considerar as estratégias, os objetivos, as prioridades, as metas da Unidade Auditada e os riscos a que seus processos estão sujeitos. O resultado é um plano de auditoria interna baseado em riscos.
+
+85. A UAIG deve realizar a prévia identificação de todo o universo auditável e considerar as expectativas da alta administração e demais partes interessadas em relação à atividade de auditoria interna para a elaboração do Plano de Auditoria Interna, bem como, a análise de riscos realizada pela Unidade Auditada por meio do seu processo de gerenciamento de riscos.
+
+86. Caso a Unidade Auditada não tenha instituído um processo formal de gerenciamento de riscos, a UAIG deve se comunicar com a alta administração, de forma a coletar informações sobre suas expectativas e obter entendimento dos principais processos e dos riscos associados. Com base nessas informações, a UAIG deverá elaborar seu Plano de Auditoria Interna, priorizando os processos ou unidades organizacionais de maior risco.
+
+IN – SFC/CGU 8/2017, anexo, p. 12 – 13: A proposta de adicionar valor está diretamente vinculada à questão de a auditoria interna considerar, no planejamento dos trabalhos da UAIG, as estratégias, os objetivos, as metas da organização, os riscos a que os processos da Unidade Auditada estão sujeitos, além das expectativas dos destinatários dos trabalhos de auditoria, quais sejam: a alta administração, os gestores das organizações e das entidades públicas federais e a sociedade, de modo geral.
+
+Somente dessa forma, os trabalhos de auditoria não estarão apartados das reais demandas das Unidades Auditaras e poderão contribuir de forma tempestiva e efetiva, em assuntos relevantes, críticos e/ou estratégicos para a organização. […] (Grifo nosso)
+
+Para fortalecer o controle das contratações, a Lei 14.133/2021 estabeleceu o acesso irrestrito da auditoria interna (e demais órgãos de controle) às informações necessárias à realização dos seus trabalhos, além da possibilidade de qualquer licitante, contratado ou pessoa física ou jurídica representar a esses órgãos contra irregularidades na aplicação da Lei[15].
+
+Para terem efetividade, os resultados dos trabalhos da auditoria interna devem ser comunicados à instância interna de governança (conselho e alta administração), a quem cabe tomar conhecimento das recomendações, discutir sobre as ações corretivas a serem adotadas, garantindo a adoção das providências necessárias[16].
+
+É boa prática que, antes mesmo de emitido o relatório final, seja oportunizada aos auditados a possibilidade de se manifestarem com respeito às recomendações. Nessa linha, a Lei 14.133/2021 estabelece que:
+
+Art. 171. Na fiscalização de controle será observado o seguinte:
+
+I – viabilização de oportunidade de manifestação aos gestores sobre possíveis propostas de encaminhamento que terão impacto significativo nas rotinas de trabalho dos órgãos e entidades fiscalizados, a fim de que eles disponibilizem subsídios para avaliação prévia da relação entre custo e benefício dessas possíveis proposições;
+
+Ainda sobre a atuação da auditoria interna na função de contratações, é importante comentar sobre a abordagem das linhas de defesa no controle das contratações, de que trata o art. 169 da Lei 14.133/2021, incluindo pontos em comum e divergentes ao Modelo de Três Linhas de Defesa do Instituto de Auditores Internos (IIA)[17] e as salvaguardas para atuação da auditoria interna nessa abordagem.
+
+A Lei 14.133/2021 estabeleceu três linhas de defesa (papeis) de atuação no controle das contratações[18]. O dispositivo utiliza terminologia semelhante[19] à adotada no Modelo de Três Linhas de Defesa do IIA, mas se diferencia do modelo em alguns pontos.
+
+Segundo o modelo do IIA, as duas primeiras linhas fazem parte da gestão, realizando diretamente e apoiando o processo de gestão de riscos (que inclui o estabelecimento de controles internos). A primeira linha atua gerenciando riscos de forma integrada às atividades do dia a dia e estabelecendo controles internos[20]. A segunda linha tem a função de prestar assistência ao gerenciamento de riscos, fornecendo assessoria, orientação e monitoramento[21].
+
+A terceira linha, diferente das duas primeiras, atua de forma independente da gestão, prestando avaliação e consultoria acerca da adequação e eficácia dos processos de governança, gestão de riscos e controles internos[22]. O papel de terceira linha é exercido pela unidade de auditoria interna.
+
+A Lei 14.133/2021 dispõe que a primeira linha de defesa nas contratações públicas é composta por “servidores e empregados públicos, agentes de licitação e autoridades que atuam na estrutura de governança do órgão ou entidade”[23]. A primeira parte do dispositivo vai ao encontro do modelo do IIA, pois os servidores e empregados públicos (e agentes de licitação) que atuam na função de contratações, de fato, exercem o papel de primeira linha.
+
+Quanto às autoridades que atuam na instância interna de governança da organização, o modelo do IIA não as coloca como primeira linha, mas como “órgão de governança”, responsável por garantir que estruturas e processos adequados estejam em vigor para uma governança eficaz e por supervisionar o processo de gestão de riscos[24]. A governança recebe os reportes da segunda linha e as avaliações independentes da terceira linha.
+
+Apesar de divergir do modelo do IIA (ao incluir, na primeira linha de defesa, as autoridades que atuam na governança), a Lei 14.133/2021 estabelece, no art. 11, parágrafo único, a responsabilidade da alta administração do órgão ou entidade pela governança das contratações pela implementação de processos e estruturas, inclusive de gestão de riscos e controles internos, para avaliar, direcionar e monitorar os processos licitatórios e os respectivos contratos.
+
+Adicionalmente, a Lei 14.133/2021 dispõe, no art. 169, § 1º, sobre a responsabilidade da alta administração por assegurar a implementação das práticas de gestão de riscos e controles internos.
+
+No que diz respeito à segunda linha, a Lei 14.133/2021 dispõe que ela é integrada pelas unidades de assessoramento jurídico e de controle interno do próprio órgão ou entidade[25]. Nesse ponto, se a interpretação for no sentido de que as unidades de controle interno não se confundem com as unidades de auditoria interna, a Lei não diverge do modelo do IIA. No entanto, se a interpretação for no sentido de que as unidades de auditoria interna poderão exercer papel de segunda linha, as organizações deverão definir as salvaguardas necessárias para assegurar a independência da auditoria em relação às responsabilidades da gestão.
+
+O IIA reconhece que, dependendo do tamanho e da maturidade em gestão de riscos, e apenas em situações específicas que demandem essa medida, as organizações podem solicitar que a auditoria interna assuma algumas responsabilidades de segunda linha de defesa. Nesse caso, é importante que o chefe da auditoria comunique os riscos à alta administração. Se a alta administração aceitar os riscos identificados, o chefe de auditoria deve acordar as salvaguardas e controles adequados para garantir que a independência da auditoria e a objetividade dos auditores sejam mantidas[26].
+
+Sobre o assunto, cabe citar que, no âmbito do Poder Judiciário, a Resolução – CNJ 308/2020 proibiu expressamente à auditoria interna exercer atividades típicas de gestão[27]. Além disso, o Conselho da Justiça Federal (CJF) emitiu o Enunciado 2/2022, esclarecendo que:
+
+A atuação da unidade de auditoria interna, para efeitos da aplicação da Lei n. 14.133/2021, dar-se-á na forma de terceira linha de defesa, consoante inciso III do art. 169 e mediante técnicas de auditoria, em atendimento às Resoluções CNJ n. 308 e 309/2020, CJF n. 676 e 677/2020 e aos normativos técnicos de auditoria.
+
+Os tribunais podem instituir estruturas administrativas destinadas a absorver as atribuições necessárias ao cumprimento do inciso II do art. 169 (segunda linha de defesa), com vistas a manter a adequada segregação de funções entre os agentes responsáveis pelos controles internos.
+
+No que tange à terceira linha de defesa, o art. 169, inciso III, da Lei 14.133/2021 estabelece que é integrada pelo órgão central de controle interno da Administração e pelo tribunal de contas. Esse dispositivo diverge do modelo do IIA em dois aspectos.
+
+O primeiro aspecto é restringir a terceira linha de defesa ao órgão central de controle interno da Administração, quando, na Administração Pública federal, a atividade de auditoria interna é exercida por diferentes órgãos, a saber:
+
+- no âmbito do Poder Judiciário[28]:
+
+- pelo Conselho Nacional de Justiça (CNJ), como órgão central do Sistema de Auditoria Interna (SIAUD-JUD);
+
+- pelas unidades de auditoria interna do Conselho da Justiça Federal, do Conselho Superior da Justiça do Trabalho, do Superior Tribunal de Justiça, do Tribunal Superior do Trabalho, do Tribunal Superior Eleitoral e do Superior Tribunal Militar, como órgãos setoriais;
+
+- pelas unidades de auditoria interna dos Tribunais Regionais Federais, Tribunais Regionais do Trabalho e Tribunais Regionais Eleitorais, como unidades regionais do Conselho da Justiça Federal, do Conselho Superior da Justiça do Trabalho e do Tribunal Superior Eleitoral, respectivamente; e
+
+- pelas unidades de auditoria interna dos Tribunais de Justiça dos Estados e do Distrito Federal e dos Tribunais de Justiça Militar, como órgãos regionais singulares;
+
+- no âmbito do Poder Legislativo, pela Auditoria do Senado Federal[29] e pela Secretaria de Controle Interno da Câmara dos Deputados (Secin)[30];
+
+- no âmbito do Tribunal de Contas da União, pela sua Secretaria de Auditoria Interna (Seaud/TCU)[31];
+
+- no âmbito do Poder Executivo e da Advocacia-Geral da União (AGU) [32]:
+
+- pela Secretaria de Controle Interno da Controladoria-Geral da União (SFC/CGU), como órgão central de controle interno;
+
+- pelas Secretarias de Controle Interno (Cisets) da Presidência da República (PR), da AGU, do Ministério das Relações Exteriores (MRE) e do Ministério da Defesa (MD), como órgãos setoriais;
+
+- pelas unidades de controle interno da Ciset Defesa, como unidades setoriais do MD; e
+
+- pelas auditorias internas singulares (Audins) dos órgãos e entidades da Administração Pública Federal Direta e Indireta;
+
+- no âmbito do Ministério Público da União (MPU), pela auditoria interna do MPU (Audin-MPU) como órgão central do Sistema de Controle Interno do MPU[33], o qual abrange todos os ramos do Ministério Público da União – Ministério Público Federal (MPF), Ministério Público do Trabalho (MPT), Ministério Público do Distrito Federal e Territórios (MPDFT) e Ministério Público Militar (MPM), além da Escola Superior do MPU;
+
+- no âmbito do Conselho Nacional do Ministério Público, pela sua unidade de auditoria interna[34]; e
+
+- no âmbito da Defensoria Pública da União (DPU), pela sua Secretaria-Geral de Controle Interno e Auditoria[35].
+
+Assim, na esfera federal, a terceira de linha de defesa não é exercida apenas pela CGU, como órgão central de controle interno do Poder Executivo, mas pelas diversas unidades de auditoria interna supracitadas.
+
+Nessa linha, a CGU emitiu a Nota Informativa 29/2022, em resposta à União dos Auditores do MEC, na qual informa que:
+
+Em relação ao artigo 169, incisos II e III, a terceira linha de defesa é composta pelo órgão central do Sistema de Controle Interno do Executivo Federal. Como o dispositivo trata do controle das contratações, considera-se que, também, as AUDINs e as CISETs também estão na terceira linha de defesa. Por sua vez, a segunda linha é exercida, não exaustivamente, pelas Assessorias Especiais de Controle Interno dos Ministérios.
+
+A segunda divergência é que a Lei incluiu os tribunais de contas na terceira linha de defesa, os quais não são unidades de auditoria interna, mas órgãos de controle externo[36]. No modelo do IIA, esses órgãos são definidos como “prestadores externos de avaliação”.
+
+Por fim, é importante mencionar que o TCU tem exigido, em conformidade com a Lei 14.133/2021, que aqueles que representem ou denunciem ao Tribunal comunicando irregularidades em matéria de contratações, acionem inicialmente o próprio órgão ou entidade promotora do certame, e somente após, se necessário, ingressem com representação no TCU, evitando, por exemplo, a apresentação de pedido de esclarecimentos ou impugnação a edital, ou mesmo de recurso administrativo, concomitantemente com o ingresso de representações/denúncias junto ao TCU. Essa medida evita a duplicidade desnecessária de esforços de apuração, em desfavor do erário e do interesse público, considerando o princípio constitucional da eficiência e as disposições do art. 169 da Lei 14.133/2021 (vide Quadro 44).
+
+Quadro 43 – Referências normativas para a atuação da auditoria interna governamental
+
+Normativos | Dispositivos
+CF/1988 | Art. 74. Os Poderes Legislativo, Executivo e Judiciário manterão, de forma integrada, sistema de controle interno com a finalidade de: I – avaliar o cumprimento das metas previstas no plano plurianual, a execução dos programas de governo e dos orçamentos da União; II – comprovar a legalidade e avaliar os resultados, quanto à eficácia e eficiência, da gestão orçamentária, financeira e patrimonial nos órgãos e entidades da administração federal, bem como da aplicação de recursos públicos por entidades de direito privado ; III – exercer o controle das operações de crédito, avais e garantias, bem como dos direitos e haveres da União; IV – apoiar o controle externo no exercício de sua missão institucional. (Grifo nosso)
+Lei 14.133/2021 | Art. 169. As contratações públicas deverão submeter-se a práticas contínuas e permanentes de gestão de riscos e de controle preventivo , inclusive mediante adoção de recursos de tecnologia da informação, e, além de estar subordinadas ao controle social, sujeitar-se-ão às seguintes linhas de defesa: […] III – terceira linha de defesa, integrada pelo órgão central de controle interno da Administração e pelo tribunal de contas. […] § 2º Para a realização de suas atividades, os órgãos de controle deverão ter acesso irrestrito aos documentos e às informações necessárias à realização dos trabalhos, inclusive aos documentos classificados pelo órgão ou entidade nos termos da Lei nº 12.527, de 18 de novembro de 2011, e o órgão de controle com o qual foi compartilhada eventual informação sigilosa tornar-se-á corresponsável pela manutenção do seu sigilo. § 3º Os integrantes das linhas de defesa a que se referem os incisos I, II e III do caput deste artigo observarão o seguinte: I – quando constatarem simples impropriedade formal, adotarão medidas para o seu saneamento e para a mitigação de riscos de sua nova ocorrência, preferencialmente com o aperfeiçoamento dos controles preventivos e com a capacitação dos agentes públicos responsáveis; II – quando constatarem irregularidade que configure dano à Administração, sem prejuízo das medidas previstas no inciso I deste § 3º, adotarão as providências necessárias para a apuração das infrações administrativas, observadas a segregação de funções e a necessidade de individualização das condutas, bem como remeterão ao Ministério Público competente cópias dos documentos cabíveis para a apuração dos ilícitos de sua competência. Art. 170. Os órgãos de controle adotarão, na fiscalização dos atos previstos nesta Lei, critérios de oportunidade, materialidade, relevância e risco e considerarão as razões apresentadas pelos órgãos e entidades responsáveis e os resultados obtidos com a contratação, observado o disposto no § 3º do art. 169 desta Lei. […] § 4º Qualquer licitante, contratado ou pessoa física ou jurídica poderá representar aos órgãos de controle interno ou ao tribunal de contas competente contra irregularidades na aplicação desta Lei. Art. 171. Na fiscalização de controle será observado o seguinte: I – viabilização de oportunidade de manifestação aos gestores sobre possíveis propostas de encaminhamento que terão impacto significativo nas rotinas de trabalho dos órgãos e entidades fiscalizados, a fim de que eles disponibilizem subsídios para avaliação prévia da relação entre custo e benefício dessas possíveis proposições; II – adoção de procedimentos objetivos e imparciais e elaboração de relatórios tecnicamente fundamentados, baseados exclusivamente nas evidências obtidas e organizados de acordo com as normas de auditoria do respectivo órgão de controle, de modo a evitar que interesses pessoais e interpretações tendenciosas interfiram na apresentação e no tratamento dos fatos levantados; III – definição de objetivos, nos regimes de empreitada por preço global, empreitada integral, contratação semi-integrada e contratação integrada, atendidos os requisitos técnicos, legais, orçamentários e financeiros, de acordo com as finalidades da contratação, devendo, ainda, ser perquirida a conformidade do preço global com os parâmetros de mercado para o objeto contratado, considerada inclusive a dimensão geográfica.
+Lei 14.129/2021 | Art. 49. A auditoria interna governamental deverá adicionar valor e melhorar as operações das organizações para o alcance de seus objetivos, mediante a abordagem sistemática e disciplinada para avaliar e melhorar a eficácia dos processos de governança, de gestão de riscos e de controle , por meio da: I – realização de trabalhos de avaliação e consultoria de forma independente, conforme os padrões de auditoria e de ética profissional reconhecidos internacionalmente; II – adoção de abordagem baseada em risco para o planejamento de suas atividades e para a definição do escopo, da natureza, da época e da extensão dos procedimentos de auditoria; III – promoção da prevenção, da detecção e da investigação de fraudes praticadas por agentes públicos ou privados na utilização de recursos públicos federais. (Grifo nosso)
+Lei 10.180/2001 | Art. 21. O Sistema de Controle Interno do Poder Executivo Federal compreende as atividades de avaliação do cumprimento das metas previstas no plano plurianual, da execução dos programas de governo e dos orçamentos da União e de avaliação da gestão dos administradores públicos federais, utilizando como instrumentos a auditoria e a fiscalização. […] Art. 24. Compete aos órgãos e às unidades do Sistema de Controle Interno do Poder Executivo Federal : […] VI – realizar auditoria sobre a gestão dos recursos públicos federais sob a responsabilidade de órgãos e entidades públicos e privados; VII – apurar os atos ou fatos inquinados de ilegais ou irregulares, praticados por agentes públicos ou privados, na utilização de recursos públicos federais e, quando for o caso, comunicar à unidade responsável pela contabilidade para as providências cabíveis; (Grifo nosso)
+Decreto 9.203/2017 | Art. 18 A auditoria interna governamental deverá adicionar valor e melhorar as operações das organizações para o alcance de seus objetivos, mediante a abordagem sistemática e disciplinada para avaliar e melhorar a eficácia dos processos de gerenciamento de riscos, dos controles e da governança, por meio da : I – realização de trabalhos de avaliação e consultoria de forma independente, segundo os padrões de auditoria e ética profissional reconhecidos internacionalmente; II – adoção de abordagem baseada em risco para o planejamento de suas atividades e para a definição do escopo, da natureza, da época e da extensão dos procedimentos de auditoria; e III – promoção à prevenção, à detecção e à investigação de fraudes praticadas por agentes públicos ou privados na utilização de recursos públicos federais. (Grifo nosso)
+Portaria – Seges/ME 8.678/2021 | Art. 16. Compete ao órgão ou entidade, quanto à gestão de riscos e ao controle preventivo do processo de contratação pública: […] III – incluir nas atividades de auditoria interna a avaliação da governança, da gestão de riscos e do controle preventivo nas contratações ; e […] (Grifo nosso)
+IN – SFC/CGU 3/2017 | ANEXO DA INSTRUÇÃO NORMATIVA Nº 03, DE 09 DE JUNHO DE 2017 REFERENCIAL TÉCNICO DA ATIVIDADE DE AUDITORIA INTERNA GOVERNAMENTAL DO PODER EXECUTIVO FEDERAL CAPÍTULO I – PROPÓSITO E ABRANGÊNCIA DA AUDITORIA INTERNA GOVERNAMENTAL […] CAPÍTULO I – PROPÓSITO E ABRANGÊNCIA DA AUDITORIAINTERNA GOVERNAMENTAL 1. A auditoria interna governamental é uma atividade independente e objetiva de avaliação e de consultoria, desenhada para adicionar valor e melhorar as operações de uma organização. Deve buscar auxiliar as organizações públicas a realizarem seus objetivos, a partir da aplicação de uma abordagem sistemática e disciplinada para avaliar e melhorar a eficácia dos processos de governança, de gerenciamento de riscos e de controles internos. […] A atividade de auditoria interna governamental no Poder Executivo Federal é exercida pelo conjunto de Unidades de Auditoria Interna Governamental (UAIG) elencadas a seguir: a) Secretaria Federal de Controle Interno (SFC) e as Controladorias Regionais da União nos estados, que fazem parte da estrutura do Ministério da Transparência e Controladoria-Geral da União (CGU); b) Secretarias de Controle Interno (Ciset) da Presidência da República, da Advocacia-Geral da União, do Ministério das Relações Exteriores e do Ministério da Defesa, e respectivas unidades setoriais; c) auditorias internas singulares (Audin) dos órgãos e entidades da Administração Pública Federal Direta e Indireta; e d) o Departamento Nacional de Auditoria do Sistema Único de Saúde (Denasus) do Ministério da Saúde. […] 14. A terceira linha de defesa é representada pela atividade de auditoria interna governamental, que presta serviços de avaliação e de consultoria com base nos pressupostos de autonomia técnica e de objetividade. (Grifo nosso)
+Resolução – CNJ 422/2021 | Art. 1º A Resolução – CNJ nº 308/2020 passa a vigorar com as seguintes alterações: “Art. 2º………………………………………………………………….. Parágrafo único. Em função das suas atribuições precípuas, é vedado às unidades de auditoria interna exercer atividades típicas de gestão, não sendo permitida sua participação no curso regular dos processos administrativos ou a realização de práticas que configurem atos de gestão, o que não impede os integrantes da unidade de auditoria de participarem de reuniões com a administração e nem mesmo de responderem a consultas formuladas no caso de dúvidas pertinentes à atuação concreta dos órgãos da administração.
+Resolução – CNJ 347/2020 | CAPÍTULO VIII DA GESTÃO DE RISCOS Art. 30. Compete aos órgãos do Poder Judiciário quanto à gestão de riscos nas contratações : […] V – incluir nas atividades de auditoria interna a avaliação da gestão de riscos nas contratações ;
+Resolução – CNJ 308/2020 | Art. 2º Auditoria interna é a atividade independente e objetiva de avaliação e consultoria com o objetivo de agregar valor às operações da organização , de modo a auxiliar na concretização dos objetivos organizacionais, mediante avaliação da eficácia dos processos de gerenciamento de riscos, de controles internos, de integridade e de governança . Parágrafo único. Em função das suas atribuições precípuas, é vedado às unidades de auditoria interna exercer atividades típicas de gestão , não sendo permitida sua participação no curso regular dos processos administrativos ou a realização de práticas que configurem atos de gestão, o que não impede os integrantes da unidade de auditoria de participarem de reuniões com a administração e nem mesmo de responderem a consultas formuladas no caso de dúvidas pertinentes à atuação concreta dos órgãos da administração. (redação dada pela Resolução n. 422, de 28.9.2021). […] Art.11. São finalidades do SIAUD-Jud : I – avaliar o cumprimento das metas previstas no plano plurianual respectivo; II – acompanhar e avaliar a execução orçamentária e os programas de gestão ; III – verificar a observância e comprovação da legalidade dos atos de gestão ; IV – avaliar os resultados, especialmente quanto à eficiência e à eficácia das ações administrativas , relativas à governança e à gestão orçamentária, financeira, patrimonial e de pessoal, nos seus vários órgãos ; V – examinar as aplicações de recursos públicos alocados por entidades de direito privado; e VI – subsidiar meios e informações, bem como apoiar o controle externo e o CNJ no exercício de sua missão institucional. (Grifo nosso)
+Portaria PGR/MPU 140/2020 | Art. 9º Compete à Diretoria de Auditoria de Gestão Administrativa: I – planejar e propor os serviços de avaliação e consultoria relativos às atividades e processos relacionados à governança e à gestão das aquisições e contratações;
+Enunciado CJF 2/2022 | A atuação da unidade de auditoria interna, para efeitos da aplicação da Lei n. 14.133/2021, dar-se-á na forma de terceira linha de defesa, consoante inciso III do art. 169 e mediante técnicas de auditoria, em atendimento às Resoluções CNJ n. 308 e 309/2020, CJF n. 676 e 677/2020 e aos normativos técnicos de auditoria. Os tribunais podem instituir estruturas administrativas destinadas a absorver as atribuições necessárias ao cumprimento do inciso II do art. 169 (segunda linha de defesa), com vistas a manter a adequada segregação de funções entre os agentes responsáveis pelos controles internos.
+Enunciado CJF 19/2022 | As atribuições e responsabilidades típicas de gestão determinadas à unidade de controle interno por meio da Lei n. 14.133/2021 não podem ser atribuídas à unidade de auditoria interna, por contrariarem o disposto no parágrafo único do art. 2º da Resolução – CNJ n. 308/2020. Por sua vez, a implementação de controles internos da gestão de que trata a Lei, sejam eles preventivos ou corretivos, cabe aos gestores envolvidos na instrução do processo administrativo de contratação e às instâncias de governança na ocasião de elaboração do Plano de Tratamento de Riscos do Macroprocesso de Contratação.
+Enunciado CJF 21/2022 | As unidades de auditoria interna poderão responder a questionamentos formulados pela Administração, como atividade de consultoria prevista no art. 2º, inciso III, da Resolução – CNJ n. 309/2020, observada a capacidade operacional da unidade de auditoria interna, desde que não se refiram a casos concretos, o que configuraria atos de cogestão, prática vedada pelo art. 29, inciso IV, da Resolução – CNJ n. 347/2020
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 44 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 10038/2023-TCU-Plenário | [Enunciado] O interessado em questionar eventuais irregularidades em processo licitatório deve acionar inicialmente o órgão ou a entidade promotora do certame, e somente após, se necessário, ingressar com representação no TCU, a fim de evitar duplicação de esforços de apuração em desfavor do erário e do interesse público, considerando o princípio constitucional da eficiência e as disposições do art. 169 da Lei 14.133/2021 (nova Lei de Licitações e Contratos Administrativos).
+Acórdão 1123/2022-TCU-Plenário | 1.6.1. informar ao representante que, considerando o princípio da eficiência insculpido no art. 37 da Constituição Federal e as disposições previstas no art. 169 da Lei 14.133/2021, deve acionar inicialmente a primeira e a segunda linhas de defesa, no âmbito do próprio órgão/entidade, antes do ingresso junto à terceira linha de defesa, constituída pelo órgão central de controle interno e tribunais de contas, evitando, por exemplo, a apresentação de pedidos de esclarecimentos ou impugnação a edital lançado, ou mesmo de recurso administrativo concomitantemente com o ingresso de representações/denúncias junto a esta Corte de Contas, sob pena de poder acarretar duplos esforços de apuração desnecessariamente, em desfavor do erário e do interesse público.
+Acórdão 1089/2022 – TCU – Plenário | e) informar à representante que, considerando o princípio da eficiência insculpido no art. 37 da Constituição Federal e as disposições previstas no art. 169 da Lei 14.133/2021, deve acionar inicialmente a primeira e a segunda linhas de defesa, no âmbito do próprio órgão/entidade, antes do ingresso junto à terceira linha de defesa, constituída pelo órgão central de controle interno e tribunais de contas, evitando, por exemplo, a apresentação de pedidos de esclarecimentos ou impugnação a edital lançado, ou mesmo de recurso administrativo concomitantemente com o ingresso de representações junto a esta Corte de Contas, sob pena de poder acarretar duplos esforços de apuração desnecessariamente, em desfavor do erário e do interesse público; […]
+Acórdão 1061/2022 – TCU – Plenário | 1.6.1. informar ao representante que, considerando o princípio da eficiência insculpido no art. 37 da Constituição Federal e as disposições previstas no art. 169 da Lei 14.133/2021, deve acionar inicialmente a primeira e a segunda linhas de defesa, no âmbito do próprio órgão/entidade, antes do ingresso junto à terceira linha de defesa, constituída pelo órgão central de controle interno e tribunais de contas, sob pena de poder acarretar duplos esforços de apuração, em desfavor do erário e do interesse público.
+Acórdão 572/2022-TCU-Plenário | c) informar ao representante que, considerando o princípio da eficiência insculpido no art. 37 da Constituição Federal e as disposições previstas no art. 169 da Lei 14.133/2021, deve o interessado acionar inicialmente a primeira e a segunda linhas de defesa, no âmbito do próprio órgão/entidade, antes do ingresso junto à terceira linha de defesa, constituída pelo órgão central de controle interno e tribunais de contas, evitando, por exemplo, a apresentação de pedidos de esclarecimentos ou impugnação a edital lançado, ou mesmo de recurso administrativo concomitantemente com o ingresso de representações/denúncias junto a esta Corte de Contas, sob pena de poder acarretar duplos esforços de apuração desnecessariamente, em desfavor do erário e do interesse público;
+Acórdão 1171/2017 -TCU – Plenário | 9.1. recomendar à Secretaria Federal de Controle do Ministério da Transparência, Fiscalização e Controladoria-Geral da União que: 9.1.1. discipline e sistematize seus processos de trabalho, para que, na medida do possível, passem a convergir com as normas internacionais de Auditoria Interna, especialmente no que se refere às oportunidades de melhoria, identificadas no relatório que fundamenta este Acórdão, em relação à política de desenvolvimento profissional; à metodologia para avaliação dos processos de gerenciamento de riscos, controles e de governança; à implantação da política de avaliação de qualidade e do planejamento anual com base em riscos; ao aprimoramento da seleção de controles internos a serem avaliados pelas ações de controle com base em riscos e à instituição de processos de trabalho de consultoria sobre gestão de riscos, controle e governança; 9.1.2. defina mecanismos destinados a fortalecer a comunicação e a avaliação do planejamento de suas ações de controle por parte dos ministros de estado, de modo que cada ministro possa se apropriar do planejamento das ações de controle voltadas a apoiar o alcance dos objetivos da gestão, observada a necessidade de ser mantida a independência e a objetividade da atividade de auditoria interna, a cargo da SFC;
+Acórdão 2373/2016 – TCU – Plenário | 9.1.15. observar as diferenças conceituais entre controle interno (a cargo dos gestores responsáveis pelos processos que recebem o controle) e auditoria interna, de forma a não atribuir atividades de cogestão à unidade de auditoria interna; 9.1.16. avaliar, em decorrência da distinção conceitual entre controle interno e auditoria interna, a necessidade de segregar as atribuições e competências da atual secretaria de controle interno, de forma que essa unidade organizacional não possua concomitantemente atribuições e competências relativas a atividades de controle interno e a atividades de auditoria interna;
+Acórdão 2373/2016 – TCU – Plenário | 102.1. Recomendar ao [ omissis ] que: a) observe as diferenças conceituais entre controle interno (a cargo dos gestores responsáveis pelos processos que recebem o controle) e auditoria interna, de forma a não atribuir atividades de cogestão à unidade de auditoria interna; b) em decorrência da distinção conceitual acima, avalie a necessidade de segregar as atribuições e competências da atual secretaria de controle interno, de forma que essa unidade organizacional não possua concomitantemente atribuições e competências relativas a atividades de controle interno e a atividades de auditoria interna;
+Acórdãos 2341 , 2342 , 2343 , 2344 , 2345 , 2347 , 2348 , 2350 , todos do ano de 2016 e do Plenário do TCU | No que tange à função de auditoria interna; • adote um sistema de monitoramento para acompanhar o cumprimento das recomendações proferidas pela unidade de auditoria interna; • inclua, nas atividades de auditoria interna, a avaliação da governança e da gestão de riscos da organização; • inclua entre as atividades de auditoria interna a avaliação dos controles internos na função de aquisições;
+Acórdão 2622/2015-TCU-Plenário | 9.5. recomendar à Controladoria-Geral da União (CGU/PR) que continue a orientar as organizações sob sua esfera de atuação para que: 9.5.1. observem as diferenças conceituais entre controle interno e auditoria interna, de forma a não atribuir atividades de cogestão à unidade de auditoria interna;
+Acórdão 1273/2015-TCU-Plenário | 9.1. recomendar à Casa Civil da Presidência da República, ao Conselho Nacional de Justiça e ao Conselho Nacional do Ministério Público que elaborem modelo de governança para aprimorar a atuação das organizações públicas, que contemple medidas para a solução das fragilidades detectadas no presente levantamento afetas a estratégia, gerenciamento de risco, atuação das unidades de auditoria interna , aprovação formal de planos pelo dirigente máximo, direcionamento estratégico e supervisão de resultados; [Relatório] 5 PROPOSTA DE ENCAMINHAMENTO […] 279.1.4. Estabelecimento, ou aprimoramento, das unidades de auditoria interna , inclusive dos órgãos centrais do Sistema de Controle Interno de cada Poder, buscando garantir que: 279.1.4.1. Suas atribuições contemplem a avaliação da eficácia dos processos de gerenciamento de riscos, controle e governança , não lhe cabendo conceber, implementar ou executar esses processos, pois são de responsabilidade dos gestores ; 279.1.4.2. No caso de órgãos ou entidades que possuam unidades de auditoria interna em sua estrutura organizacional, estas se reportem administrativamente ao dirigente máximo da organização, e funcionalmente ao responsável pelo direcionamento estratégico e pela supervisão da organização, que pode ser um conselho de governança ou uma autoridade supervisora. (Grifo nosso)
+Pesquisa de Jurisprudência | Execute a seguinte consulta na Pesquisa Integrada do TCU : ((“auditoria interna” ADJ8 “função de contratações”) OU (“auditoria interna” ADJ8 “função de aquisições”) OU (“auditoria interna” ADJ8 “área de contratações”) OU (“auditoria interna” ADJ8 “gestão de contratações”)).ACORDAO A pesquisa pode ser complementada por meio de busca em: Jurisprudência Selecionada . No campo de busca, realize pesquisa pelo termo: “ auditoria interna “. Os resultados das buscas podem ser filtrados por “área – gestão administrativa”.
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+Quadro 45 – Riscos relacionados
+
+Riscos
+Entendimento, por parte do conselho e/ou da alta administração de que a interação com a auditoria interna é papel único da segunda linha de defesa, deixando de informar à auditoria interna sobre riscos relevantes e sobre objetivos e prioridades da função de contratações, com consequente emprego de recursos de auditoria em áreas/processos/atividades não prioritários para a organização.
+Atividade de auditoria interna não aderente às normas internacionais de auditoria, levando à sobreposição de atividades de controle interno e de auditoria interna, com consequentes perda de independência da auditoria e ausência de avaliação dos processos de governança e de gestão de riscos e controles internos da função de contratações.
+Reportes de auditoria excessivamente extensos, com muito linguajar técnico, intempestivos e/ou imprecisos, levando a interpretações equivocadas ou mesmo ao desconhecimento, por parte do conselho e da alta administração, acerca dos problemas identificados na função de contratações, com consequente impossibilidade de discutir sobre possíveis soluções e de adotar ações corretivas.
+
+Fonte: Adaptado de Tribunal de Contas da União, 2020d.
+
+Quadro 46 – Modelos
+
+Assunto | Modelo disponibilizados por OGS ou por órgãos de controle | OGS
+Serviços de consultoria | • Modelo de Documento de Planejamento de Serviço de Consultoria • Modelo de Termo de Compromisso para Prestação de Serviço de Consultoria • Modelo de Análise Preliminar do Objeto de Consultoria (Controladoria-Geral da União, 2021b) | CGU
+Serviços de Avaliação | • Matriz de Planejamento • Matriz de Achados • Papel de Trabalho • Comunicação inicial para o início dos trabalhos (CGU, 2021b) | CGU
+Orientações técnicas para a atividade de auditoria interna | Manual de Orientações Técnicas da Atividade de Auditoria Interna Governamental do Poder Executivo Federal (Controladoria-Geral da União, 2017) | CGU
+Auditoria em governança das contratações | Matrizes de auditoria em governança das contratações (Tribunal de Contas da União, 2020d) | TCU
+
+Fonte: Elaboração própria.
+
+[1] IIA, 2016, “definição de auditoria interna”; e IIA, 2020b, “internal audity activity”, Lei 14.129/2021, art. 49; Decreto 9.203/2017, art. 18; IN conjunta – MP/CGU 1/2016, art. 2º, inciso III; IN – SFC/CGU 3/2017, Anexo, capítulo I, parágrafo 1; IN – SFC/CGU 8/2017, Anexo, p. 12; e Resolução – CNJ 308/2020, art. 2º.
+
+[2] IIA, 2016, normas 1220.A1, 2201.C1, 2210.C1 e 2220.C1; IIA, 2020b, “assurance services”.
+
+[3] IIA, 2016, normas 2201.C1, 2210.C1 e 2220.C1; IIA, 2020b, “consulting services”.
+
+[4] Lei 14.129/2021, art. 49, inciso III; Lei 10.180/2001, art. 24, inciso VII; Decreto 9.203/2017, art. 18, inciso III; IN – SFC/CGU 8/2017, Anexo, p. 24.
+
+[5] Constituição Federal de 1988, art. 74, inciso II; Lei 10.180/2001, art. 24; Lei 14.133/2021, art. 169, § 3º, inciso II; Decreto 3.591/2000, art. 2º, inciso II; Decreto 10.994/2022, art. 7º, incisos I e II; IN – SFC/CGU 3/2017, Anexo, capítulo I, parágrafo 17; IN – SFC/CGU 8/2017, Anexo, p. 12; Resolução – CNJ 308/2020, art. 11, incisos III e IV; Portaria – PGR/MPU 140/2020, Anexo I, art. 4º, incisos I a V; Resolução – DPU 154/2019, art. 67; IIA, 2019, p. 18, 19 e 43.
+
+[6] IN – SFC/CGU 3/2017, Anexo, capítulo I, parágrafo 17; IN – SFC/CGU 8/2017, Anexo, p. 24.
+
+[7] IN – SFC/CGU 8/2017, Anexo, p. 24; IIA, 2009, p. 13.
+
+[8] Portaria – Seges/ME 8.678/2021, art. 16, inciso III; Resolução – CNJ 347/2020, art. 30, inciso V; Portaria – PGR/MPU 140/2020, art. 9º, inciso I.
+
+[9] Adaptado de IIA, 2019b, p. 130-132, e de IIA, 2014, p. 13-14.
+
+[10] Adaptado de IIA, 2019b, p. 130; IIA, 2016, norma 2120.
+
+[11] IIA, 2019, p. 25 e 37; INTOSAI, 2013, p. 10 (ISSAI 100); e NIGP, 2018 (Audits).
+
+[12] IA, 2016, norma 1100.
+
+[13] IIA, 2019b, p. 98; IIA, 2016, norma 2010; IIA, 2011, p. 2, 5 e 6; IIA, 2020, p. 7; Lei 14.129/2021, art. 49, inciso II; Decreto 9.203/2017, art. 18, inciso II.
+
+[14] Como é o caso da CGU (Lei 10.180/2001, art. 22, inciso I; Decreto 3.591/2000, art. 8º, inciso I; IN – SFC/CGU 3/2017, Anexo, capítulo I, parágrafo 4; capítulo II, parágrafo 25), e da Audin – MPU (LC 75/1993, art. 23, § 2º; Portaria – PGR/MPU 140/2020, Anexo I).
+
+[15] Lei 14.133/2021, art. 169, § 2º, art. 170, § 4º.
+
+[16] IIA, 2016, normas 2400 e 2240; IIA, 2019b, p. 174.
+
+[17] IIA, 2013, atualizado por IIA, 2020.
+
+[18] Lei 14.133/2021, art. 169.
+
+[19] O novo Modelo das Três Linhas do IIA 2020 suprimiu o complemento “de defesa” (IIA, 2020).
+
+[20] Lei 14.133/2021, art. 169, inciso I; e IIA, 2020, p. 4.
+
+[21] Lei 14.133/2021, art. 169, inciso II; e IIA, 2020, p. 4 e 6.
+
+[22] Lei 14.133/2021, art. 169, inciso III; Lei 14.129/2021, art. 49; IN – SFC/CGU 3/2017, capítulo I, parágrafo 14; Resolução – CNJ 308/2020, art. 2º, c/c IIA, 2020, ps. 3 e 6.
+
+[23] Lei 14.133/2021, art. 169, inciso I.
+
+[24] IIA, 2020, p. 2 e 5.
+
+[25] Lei 14.133/2021, art. 169, inciso II.
+
+[26] IIA, 2016b, p. 10-13.
+
+[27] Resolução – CNJ 308/2020, art. 2º, parágrafo único.
+
+[28] Resolução – CNJ 308/2020, art. art. 10.
+
+[29] Regulamento Administrativo do Senado Federal, art. 202, inciso II, alínea “b”, Ato da Comissão Diretora do Senado 14/2022.
+
+[30] Resolução – CD 20/1971, art. 22; e Resolução – CD 69/1994, art. 1º.
+
+[31] Resolução – TCU 347/2022, art. 62.
+
+[32] Lei 10.180/2001, art. 22; Decreto 3.591/2000, art. 8º, incisos I a III; Decreto 10.608/2021, art. 5º; IN – SFC/CGU 3/2017, capítulo I, parágrafo 4; capítulo II, parágrafo 25.
+
+[33] Lei Complementar 75/1993, art. 23, § 2º, art. 24; Portaria – PGR/MPU 140/2020, Anexo I.
+
+[34] Lei 12.412/2011, anexo; e Portaria – CNMP/Presi 84/2017, art. 1º.
+
+[35] Resolução – DPU 154/2019, art. 67.
+
+[36] CF/88, art. 16, § 2º, art. 31, § 1º, art. 71; Lei 8.443/1992, art. 1º.

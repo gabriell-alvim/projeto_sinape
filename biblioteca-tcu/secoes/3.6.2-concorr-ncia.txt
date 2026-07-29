@@ -1,0 +1,64 @@
+3.6.2. Concorrência
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/3-6-2-concorrencia/
+======================================================================
+
+A Lei 14.133/2021 conceitua a concorrência como:
+
+Art. 6º […]
+
+XXXVIII – Concorrência: modalidade de licitação para contratação de bens e serviços especiais e de obras e serviços comuns e especiais de engenharia, cujo critério de julgamento poderá ser:
+
+a) menor preço;
+
+b) melhor técnica ou conteúdo artístico;
+
+c) técnica e preço;
+
+d) maior retorno econômico;
+
+e) maior desconto.
+
+Observa-se que o único critério de julgamento que não pode ser conjugado à concorrência é o de maior lance, próprio da modalidade leilão. Assim como no pregão, podem ser utilizados os critérios de menor preço ou de maior desconto.
+
+Diferentemente do regime adotado pela Lei 8.666/1993, no qual a concorrência era caracterizada por uma fase de habilitação preliminar aplicável a todos os participantes, a Lei 14.133/2021 prevê a utilização do rito comum disposto no art. 17, com a realização primeiramente do julgamento das propostas apresentadas e a posterior análise da habilitação apenas do licitante provisoriamente classificado em primeiro lugar. A inversão de fases passa a se caracterizar pela realização da habilitação preliminar ao julgamento. 
+
+Adicionalmente, a Lei 14.133/2021 deixou de adotar o critério de valor da contratação como determinante para a escolha da modalidade concorrência.
+
+Assim, o que vai determinar a escolha do pregão ou da concorrência é a natureza do objeto: bens e serviços especiais e obras e serviços comuns e especiais de engenharia, no caso da concorrência[1]; e bens e serviços comuns, inclusive os de engenharia, no caso de pregão[2].
+
+Incluem-se entre os serviços a serem licitados por concorrência os técnicos de natureza predominantemente intelectual, ressalvando-se a hipótese do uso do concurso ou desses serviços serem contratados por meio de inexigibilidade de licitação, quando verificada a inviabilidade de competição[3].
+
+Assim, as principais diferenças entre a concorrência e o pregão são:
+
+- o objeto: a concorrência pode ser utilizada para a contratação de bens e serviços especiais e de obras e serviços comuns e especiais de engenharia; sendo o pregão utilizado para a contratação de objetos comuns, incluindo os serviços comuns de engenharia;
+
+- o critério de julgamento das propostas: a concorrência pode utilizar os critérios de julgamento de menor preço, maior desconto, de melhor técnica ou conteúdo artístico, de técnica e preço, e por maior retorno econômico; o pregão restringe-se ao menor preço ou maior desconto;
+
+- prazos entre a divulgação do edital e apresentação das propostas: para cada critério de julgamento adotado na concorrência, podem ser diferenciados os prazos de publicidade do edital (Lei 14.133/2021, art. 55); e
+
+- modo de disputa: o modo fechado poderá ser utilizado para a concorrência; enquanto no pregão sempre haverá a fase de lances (modo de disputa aberto), pois é vedada a utilização isolada do modo fechado (Lei 14.133/2021, art. 56, § 1º).
+
+Quadro 75 – Referências normativas para a concorrência
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 6º Para os fins desta Lei, consideram-se: […] XXXVIII – concorrência: modalidade de licitação para contratação de bens e serviços especiais e de obras e serviços comuns e especiais de engenharia, cujo critério de julgamento poderá ser: a) menor preço; b) melhor técnica ou conteúdo artístico; c) técnica e preço; d) maior retorno econômico; e) maior desconto; […] XLI – pregão: modalidade de licitação obrigatória para aquisição de bens e serviços comuns, cujo critério de julgamento poderá ser o de menor preço ou o de maior desconto; […] Art. 29. A concorrência e o pregão seguem o rito procedimental comum a que se refere o art. 17 desta Lei, adotando-se o pregão sempre que o objeto possuir padrões de desempenho e qualidade que possam ser objetivamente definidos pelo edital, por meio de especificações usuais de mercado. Parágrafo único. O pregão não se aplica às contratações de serviços técnicos especializados de natureza predominantemente intelectual e de obras e serviços de engenharia, exceto os serviços de engenharia de que trata a alínea “a” do inciso XXI do caput do art. 6º desta Lei.
+IN – Seges/ME 2/2023 | Art. 4º O critério de julgamento por técnica e preço será adotado: I – na modalidade concorrência; ou […]
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 76 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 8290/2021 – TCU – Segunda Câmara | 9.2 esclarecer ao [ omissis ] e ao [ omissis ] e à [ omissis ], em complemento às determinações contidas no item 9.2 do Acórdão 5965/2021-TCU-Segunda Câmara, que: 9.2.1 para serviços comuns, com padrões de desempenho e qualidade objetivamente definidos pelo edital, a partir das especificações usuais de mercado, tais quais aqueles objeto da Concorrência Corporativa […] e da Concorrência […], deverá ser adotado preferencialmente a modalidade pregão e não concorrência;
+Acórdão 1737/2021 – TCU – Plenário | 9.3. dar ciência ao [ omissis ], com fundamento no art. 9º, inciso I, da Resolução – TCU 315/2020, sobre as seguintes impropriedades/falhas, identificadas na concorrência […], para que sejam adotadas medidas internas com vistas à prevenção de outras ocorrências semelhantes: 9.3.1. utilização da modalidade concorrência, em vez da modalidade pregão, prioritariamente em sua forma eletrônica, sem a devida justificativa técnica, em desacordo, com a jurisprudência do Tribunal (v.g. Acórdão 2276/2019-TCU-Primeira Câmara, acórdãos 1.584/2016, 1.519/2015 e 1.809/2014, do Plenário, e Acórdão 5613/2012-TCU-Primeira Câmara), considerando que o objeto da licitação são serviços comuns;
+Acórdão 1534/2020 – TCU – Plenário | [Enunciado] É irregular a adoção injustificada da modalidade concorrência em detrimento do pregão eletrônico para a contratação de serviços comuns de engenharia, a exemplo da contratação conjunta de serviços de conservação e manutenção de infraestrutura predial ( facilities ), uma vez que pode resultar na prática de ato de gestão antieconômico.
+Pesquisa de Jurisprudência | Execute consulta nas Publicações do TCU . Selecione o tipo de publicação “Informativo de Licitações e Contratos”. Pesquise pela expressão (não utilize aspas): modalidade adj2 concorrência .
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+[1] Lei 14.133/2021, art. 6º, inciso XXXVIII, e art. 29, parágrafo único.
+
+[2] Lei 14.133/2021, art. 6º, inciso XLI c/c art. 29, caput.
+
+[3] Lei 14.133/2021, art. 74, inciso III.

@@ -1,0 +1,162 @@
+3.2. Princípios das licitações e dos contratos administrativos
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/3-2-principios-das-licitacoes-e-dos-contratos-administrativos/
+======================================================================
+
+São princípios das licitações e dos contratos administrativos[1]:
+
+- legalidade: vincula os licitantes, os contratados e a Administração Pública às regras estabelecidas nas normas e princípios em vigor[2];
+
+- impessoalidade: obriga a Administração a observar, em suas decisões, critérios objetivos previamente estabelecidos, afastando favoritismos e subjetivismo na condução dos processos licitatórios[3];
+
+- moralidade: exige dos licitantes, contratados e dos agentes públicos conduta lícita, íntegra, compatível com os bons costumes e com as regras da boa administração[4];
+
+- publicidade: trata-se de tornar públicos os atos praticados nos processos licitatórios, observando-se o sigilo como exceção. A Lei 14.133/2021 determina a divulgação centralizada e obrigatória dos atos por ela exigidos[5], inclusive como condição indispensável para a eficácia do contrato e de seus aditamentos[6];
+
+- eficiência: é definida como a relação entre os produtos (bens ou serviços) gerados por uma atividade e os custos dos insumos empregados para produzi-los, em um determinado período, mantidos os padrões de qualidade. Essa dimensão refere-se ao esforço do processo de transformação de insumos em produtos. Pode ser examinada sob duas perspectivas: minimização do custo total ou dos meios necessários para obter a mesma quantidade e qualidade de produto; ou otimização da combinação de insumos para maximizar o produto quando o gasto total está previamente fixado[7]. No contexto dos processos licitatórios, diz respeito à combinação otimizada dos parâmetros necessários para seleção da proposta apta a gerar o resultado de contratação mais vantajoso para a Administração Pública[8];
+
+- interesse público: pressupõe a atuação do agente público orientada ao atendimento dos interesses coletivos, prevalecendo sobre os seus próprios interesses ou os de particulares;
+
+- probidade administrativa: diz respeito ao comportamento íntegro e imparcial dos agentes públicos, abstendo-se de agir com má-fé no exercício de suas atividades nas entidades públicas, ou privadas que recebam contribuição de cofres públicos. Esse princípio aplica-se também aos licitantes e aos contratados, que não devem agir em conluio entre si ou com agentes públicos para a prática de atos ilícitos[9];
+
+- igualdade: trata-se de assegurar tratamento isonômico a todos os licitantes. É condição essencial para garantir competição nos processos licitatórios[10];
+
+- planejamento: a Lei 14.133/2021 enfatizou o planejamento das contratações. Dispôs sobre o PCA alinhado ao orçamento e à estratégia da organização, e tornou mais robusta a fase preparatória do processo licitatório, por intermédio do ETP e do TR/PB, nos quais são definidos elementos como a necessidade da contratação, os requisitos da contratação, a forma de seleção do fornecedor, o modelo de execução do objeto (como o contrato deverá produzir os resultados pretendidos) e o modelo de gestão do futuro contrato (como a execução do objeto será acompanhada e fiscalizada)[11];
+
+- transparência: refere-se a disponibilizar, independentemente de requerimentos (transparência ativa), informação primária, íntegra, autêntica e atualizada de interesse coletivo ou geral[12] acerca dos processos licitatórios e contratações públicas. Com esse objetivo, foi criado o Portal Nacional de Contratações Públicas (PNCP)[13];
+
+- eficácia: definida como o grau de alcance das metas previstas, em um determinado período. O conceito de eficácia diz respeito à capacidade da gestão em cumprir objetivos imediatos, traduzidos em metas de produção ou de atendimento, ou seja, a capacidade de prover bens ou serviços de acordo com o estabelecido no planejamento das ações[14];
+
+- segregação de funções: envolve a divisão de responsabilidades entre diferentes agentes públicos, evitando que um único agente ou unidade acumule todas as funções. O objetivo é reduzir as oportunidades para que qualquer pessoa possa cometer e ocultar erros ou fraudes durante o desempenho normal de suas funções. Quando vários atores participam de um processo de trabalho específico, eles podem detectar e questionar aspectos que considerem anômalos, aumentando a transparência e a eficiência do processo. Isso ajuda a prevenir a ocorrência de irregularidades e a garantir a integridade do sistema[15];
+
+- motivação: impõe à Administração motivar explicitamente as suas decisões, apresentando os “pressupostos de fato e de direito” que as embasaram[16], inclusive demonstrando a necessidade e adequação da medida imposta em face das alternativas disponíveis[17]. No que tange aos processos licitatórios, a Lei 14.133/2021 prevê a motivação de atos como, por exemplo, as condições do edital e o momento de divulgação do orçamento da licitação[18]; o processo de padronização de produto[19]; e a extinção de contratos[20];
+
+- vinculação ao edital: obriga a Administração e os licitantes a observarem as normas e condições estabelecidas no edital, desde que estejam em conformidade com a legislação aplicável em vigor. Nada poderá ser criado ou feito sem que haja previsão no instrumento de convocação[21];
+
+- julgamento objetivo: significa que o administrador deve observar critérios objetivos definidos no ato convocatório para julgamento da habilitação e das propostas. Afasta a possibilidade de o julgador utilizar-se de fatores subjetivos ou de critérios não previstos no instrumento de convocação, ainda que em benefício da própria Administração[22];
+
+- segurança jurídica: aplicável a todos os processos administrativos[23]. Este princípio alude à estabilidade das relações jurídicas, à proteção do direito adquirido, do ato jurídico perfeito e da coisa julgada[24], de modo a manter a confiança de que a evolução das normas não prejudicará fatos pretéritos, especialmente os praticados com boa-fé[25];
+
+- razoabilidade e proporcionalidade: aplicáveis aos processos administrativos, em geral, esses princípios visam à “adequação entre meios e fins, vedada a imposição de obrigações, restrições e sanções em medida superior àquelas estritamente necessárias ao atendimento do interesse público”[26]. O Decreto 9.830/2019[27] dispõe que a “motivação demonstrará a necessidade e a adequação da medida imposta, inclusive consideradas as possíveis alternativas e observados os critérios de adequação, proporcionalidade e de razoabilidade”[28];
+
+- competitividade: nos certames de licitação, esse princípio conduz o gestor a buscar sempre o maior número de competidores interessados no objeto licitado[29]. Nesse sentido, a Lei veda estabelecer, nos atos convocatórios, exigências que possam, de alguma forma, admitir, prever ou tolerar, condições que comprometam, restrinjam ou frustrem o caráter competitivo da licitação[30];
+
+- celeridade: busca a simplificação de procedimentos, evitando formalidades desnecessárias[31];
+
+- economicidade: minimização dos custos dos recursos utilizados na consecução de uma atividade, sem comprometimento dos padrões de qualidade. Refere-se à capacidade de uma instituição gerir adequadamente os recursos colocados à sua disposição[32]. Sobre esse princípio, cabe citar trecho da Nota Técnica – AudTI/TCU 8/2023[33]:
+
+55. […] Na análise de economicidade, deve ser avaliado se o orçamento estimado (elaborado a partir de preços de mercado) é compatível com os resultados esperados com a contratação, inclusive os relativos à economia de recursos financeiros com a implantação da solução.
+
+56. Dessa forma, na análise da economicidade, é feita uma avaliação da relação de custo-benefício da solução a contratar, sopesando o gasto necessário para implantá-la com os resultados que se esperam com essa implantação, que devem levar ao atendimento da necessidade de negócio que desencadeou a contratação, que, por sua vez, deve estar atrelado ao interesse público envolvido19. Assim, não basta que o valor estimado da contratação esteja de acordo com preços de mercado ou mais baixo do que alguma alternativa analisada no ETP se não houver a expectativa de que a necessidade de negócio que desencadeou a contratação será atendida. Também não basta que a necessidade seja atendida, se os resultados esperados não forem compatíveis com os valores a desembolsar ao longo do contrato.
+
+- desenvolvimento nacional sustentável: trata-se de função estratégica das contratações públicas para contribuir com o desenvolvimento do país (econômico e social) de forma harmônica com as práticas de preservação do meio ambiente. Visa ao alcance dos Objetivos de Desenvolvimento Sustentável[34]. Para as organizações da Administração Pública direta, autárquica e fundacional da União, acrescente-se o alinhamento com a Estratégia Federal de Desenvolvimento para o Brasil[35]; e
+
+- disposições do Decreto-Lei 4.657/1942 (Lei de Introdução às Normas do Direito Brasileiro): alterado pela Lei 13.655/2018, suas disposições complementam os princípios anteriores, como a segurança jurídica, a eficiência, a motivação, a proporcionalidade e razoabilidade, e estabelecem a responsabilidade do agente público por suas decisões ou opiniões técnicas em caso de dolo ou erro grosseiro[36].
+
+Quadro 49 – Referências normativas para princípios das licitações e contratos
+
+Normativos | Dispositivos
+Constituição Federal de 1988 | Art. 37. A Administração Pública direta e indireta de qualquer dos Poderes da União, dos Estados, do Distrito Federal e dos Municípios obedecerá aos princípios de legalidade, impessoalidade, moralidade, publicidade e eficiência e, também, ao seguinte: […] XXI – ressalvados os casos especificados na legislação, as obras, serviços, compras e alienações serão contratados mediante processo de licitação pública que assegure igualdade de condições a todos os concorrentes, com cláusulas que estabeleçam obrigações de pagamento, mantidas as condições efetivas da proposta, nos termos da Lei, o qual somente permitirá as exigências de qualificação técnica e econômica indispensáveis à garantia do cumprimento das obrigações.
+Lei 14.133/2021 | Art. 5º Na aplicação desta Lei, serão observados os princípios da legalidade, da impessoalidade, da moralidade, da publicidade, da eficiência, do interesse público, da probidade administrativa, da igualdade, do planejamento, da transparência, da eficácia, da segregação de funções, da motivação, da vinculação ao edital, do julgamento objetivo, da segurança jurídica, da razoabilidade, da competitividade, da proporcionalidade, da celeridade, da economicidade e do desenvolvimento nacional sustentável, assim como as disposições do Decreto-Lei nº 4.657, de 4 de setembro de 1942 (Lei de Introdução às Normas do Direito Brasileiro).
+Lei 13.655/2018 | Inclui no Decreto-Lei nº 4.657, de 4 de setembro de 1942 (Lei de Introdução às Normas do Direito Brasileiro), disposições sobre segurança jurídica e eficiência na criação e na aplicação do direito público. Art. 20. Nas esferas administrativa, controladora e judicial, não se decidirá com base em valores jurídicos abstratos sem que sejam consideradas as consequências práticas da decisão. Parágrafo único. A motivação demonstrará a necessidade e a adequação da medida imposta ou da invalidação de ato, contrato, ajuste, processo ou norma administrativa, inclusive em face das possíveis alternativas.” […] Art. 28. O agente público responderá pessoalmente por suas decisões ou opiniões técnicas em caso de dolo ou erro grosseiro.
+Lei 12.527/2011 | Art. 7º O acesso à informação de que trata esta Lei compreende, entre outros, os direitos de obter: […] IV – informação primária, íntegra, autêntica e atualizada; Art. 8º É dever dos órgãos e entidades públicas promover, independentemente de requerimentos, a divulgação em local de fácil acesso, no âmbito de suas competências, de informações de interesse coletivo ou geral por eles produzidas ou custodiadas. § 1º Na divulgação das informações a que se refere o caput , deverão constar, no mínimo: […] IV – informações concernentes a procedimentos licitatórios, inclusive os respectivos editais e resultados, bem como a todos os contratos celebrados; […]
+Lei 9.784/1999 | Art. 2º A Administração Pública obedecerá, dentre outros, aos princípios da legalidade, finalidade, motivação, razoabilidade, proporcionalidade, moralidade, ampla defesa, contraditório, segurança jurídica, interesse público e eficiência.
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 50 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Súmula – TCU 177 | A definição precisa e suficiente do objeto licitado constitui regra indispensável da competição, até mesmo como pressuposto do postulado de igualdade entre os licitantes, do qual é subsidiário o princípio da publicidade, que envolve o conhecimento, pelos concorrentes potenciais das condições básicas da licitação, constituindo, na hipótese particular da licitação para compra, a quantidade demandada uma das especificações mínimas e essenciais à definição do objeto do pregão.
+Acórdão 1065/2024-TCU-Plenário | [Enunciado] A hipótese de restrição à competitividade da licitação não deve ser examinada somente sob a ótica jurídica e teórica, devendo-se levar em conta também se as cláusulas supostamente restritivas culminaram em efetivo prejuízo ao caráter competitivo do certame. [Enunciado] Em pregão, assim como nas demais modalidades de licitação, é necessário registrar a motivação das decisões que desclassifiquem propostas, inabilitem licitantes ou julguem recursos, com nível de detalhamento suficiente para a plena compreensão pelos interessados, em observância ao princípio da motivação.
+Acórdão 489/2024-TCU-Plenário | 1.7. dar ciência ao [ omissis ], com fundamento no art. 9º, inciso I, da Resolução – TCU 315/2020, sobre a seguinte impropriedade/falha, identificada no Pregão Eletrônico 63/2023, para que sejam adotadas medidas internas com vistas à prevenção de outras ocorrências semelhantes: 1.7.1. deficiência na publicização dos atos relativos à análise de propostas e ao processo de habilitação dos licitantes, acarretada pela adoção de meios, como somente a verificação da documentação no Sistema de Cadastramento Unificado de Fornecedores (SICAF), e submissão de documentos via correio eletrônico, em detrimento da utilização integral da plataforma Compras.gov.br ou informação aos demais licitantes da utilização de outras ferramentas, o que comprometeu a transparência perante os demais competidores, uma vez que não foi concedido aos demais licitantes acesso às informações contidas no SICAF acerca do licitante com a melhor proposta no certame, desatendendo ao estabelecido no art. 165, I, da Lei 14.133/2021 e no art. 39, § 5º, da IN – Seges/ME 73/2022, e contrariando a jurisprudência desta Corte, em particular o Acórdão 69/2012-TCU-Plenário, que sublinha a imperatividade da garantia de completa publicidade e do acesso sem restrições aos documentos de habilitação por todos os participantes, em consonância com os princípios de igualdade, competitividade e eficácia que norteiam as licitações públicas;
+Acórdão 1257/2023-TCU-Plenário | [Enunciado] A comissão julgadora de licitação do tipo “técnica e preço” deve fundamentar adequadamente as avaliações das propostas técnicas, deixando-as consignadas em relatório circunstanciado nos autos do processo, não se limitando a meramente expressar as notas ou os conceitos. Para reduzir o grau de subjetividade nas pontuações atribuídas a essas propostas, os critérios de julgamento devem estar suficientemente detalhados no edital do certame, sob pena de violação ao princípio do julgamento objetivo.
+Acórdão 702/2023- TCU – Plenário | [Enunciado] É irregular a aquisição de imóvel para uso institucional por meio de dispensa de licitação (art. 24, inciso X, da Lei 8.666/1993) sem prévio chamamento público, por violar o princípio da publicidade, previsto no art. 37, caput , da Constituição Federal e no art. 3º da Lei 8.666/1993.
+Acórdão 966/2022 – TCU – Plenário | [Enunciado] É lícita a admissão da juntada de documentos, durante as fases de classificação ou de habilitação, que venham a atestar condição pré-existente à abertura da sessão pública do certame, sem que isso represente afronta aos princípios da isonomia e da igualdade entre os licitantes.
+Acórdão 917/2022 -TCU-Plenário | [Enunciado] A apresentação de atestado de capacidade técnica com conteúdo falso, à evidência de conluio entre as empresas envolvidas, fere os princípios da moralidade, da isonomia e da competitividade e conduz à declaração de inidoneidade, tanto da empresa que emitiu o atestado quanto da que o apresentou, para participar de licitação na Administração Pública Federal.
+Acórdão 2529/2021-TCU-Plenário | [Enunciado] Incumbe ao gestor demonstrar que a ausência de parcelamento do objeto da licitação não restringe indevidamente a competitividade do certame, bem como promove ganhos para a Administração Pública. O postulado que veda a restrição da competitividade […] não é um fim em si mesmo, devendo ser observado igualmente o princípio constitucional da eficiência administrativa (art. 37, caput , da Constituição Federal) e, ainda, o ganho de escala nas contratações consolidadas […].
+Acórdão 2032/2021-TCU-Plenário | [Enunciado] A alteração de cláusula editalícia capaz de afetar a formulação das propostas dos licitantes sem a republicação do edital e a reabertura dos prazos para apresentação de novas propostas ofende os princípios da publicidade, da vinculação ao instrumento convocatório e da isonomia. [Enunciado] A alteração de cláusula editalícia capaz de afetar a formulação das propostas dos licitantes sem a republicação do edital e a reabertura dos prazos para apresentação de novas propostas ofende os princípios da publicidade, da vinculação ao instrumento convocatório e da isonomia.
+Acórdão 1641/2021- TCU – Plenário | As despesas à conta de recursos públicos com festividades e eventos comemorativos devem observar os seguintes requisitos, sob pena de responsabilização dos agentes que autorizarem a sua realização: i) vinculação às finalidades e objetivos da entidade; ii) moderação dos valores despendidos; iii) natureza excepcional; e iv) submissão aos princípios da legalidade, moralidade, legitimidade e economicidade
+Acórdão 1176/2021- TCU – Plenário | [Enunciado] É irregular a exigência de que o contratado instale escritório em localidade específica, sem a devida demonstração de que tal medida seja imprescindível à adequada execução do objeto licitado, considerando os custos a serem suportados pelo contratado, sem avaliar a sua pertinência frente à materialidade da contratação e aos impactos no orçamento estimativo e na competitividade do certame, devido ao potencial de restringir o caráter competitivo da licitação, afetar a economicidade do contrato e ferir o princípio da isonomia.
+Acórdão 179/2021-TCU-Plenário | [Enunciado] Os esclarecimentos prestados pela Administração ao longo do certame licitatório possuem natureza vinculante, não sendo possível admitir, quando da análise das propostas, interpretação distinta, sob pena de violação ao instrumento convocatório.
+Acórdão 7428/2019-TCU – Segunda Câmara | [Enunciado] A contratação pela Administração de empresas pertencentes a parentes ou cônjuge de gestor público envolvido no processo de licitação caracteriza, diante do manifesto conflito de interesses, violação aos princípios constitucionais da moralidade e da impessoalidade.
+Acórdão 1033/2019- TCU – Plenário | [Enunciado] A aceitação de equipamento diferente daquele constante da proposta do licitante e com características técnicas inferiores às especificações definidas no termo de referência afronta o princípio da vinculação ao instrumento convocatório e o princípio da isonomia, diante da possibilidade de as diferenças técnicas entre os bens influenciar não só no valor das propostas, como também na intenção de potenciais licitantes em participar do certame
+Acórdão 7982/2017 – TCU – Segunda Câmara | [Enunciado] A visita técnica coletiva ao local de execução dos serviços contraria os princípios da moralidade e da probidade administrativa, pois permite ao gestor público ter prévio conhecimento dos licitantes, bem como às próprias empresas terem ciência do universo de concorrentes, criando condições favoráveis à prática de conluio.
+Acórdão 2829/2015 – TCU – Plenário | [Enunciado] A segregação de funções, princípio básico de controle interno que consiste na separação de atribuições ou responsabilidades entre diferentes pessoas, deve possibilitar o controle das etapas do processo de pregão por setores distintos e impedir que a mesma pessoa seja responsável por mais de uma atividade sensível ao mesmo tempo.
+Acórdão 1574/2015 -TCU – Plenário | [Voto] 15. O STF também já se manifestou em questão semelhante (RMS nº 23.714/DF, 1ª T, em 5/9/2000), tendo entendido que: “Licitação: irregularidade formal na proposta vencedora que, por sua irrelevância não gera nulidade […] Se a irregularidade praticada pela licitante vencedora a ela não trouxe vantagem, nem implicou em desvantagem para as demais participantes, não resultando assim em ofensa à igualdade; se o vício apontado não interfere no julgamento objetivo da proposta, e se não se vislumbra ofensa aos demais princípios exigíveis na atuação da Administração Pública, correta é a adjudicação do objeto da licitação à licitante que ofereceu a proposta mais vantajosa, em prestígio do interesse público, escopo da atividade administrativa.” 16. Portanto, diante da ocorrência de falha no ato de desclassificação de licitante, em razão de vício insanável procedimento licitatório, cumpre ao TCU assinar prazo para que a [ omissis ] adote medidas com vistas à anulação da referida licitação.
+Acórdão 775/2011 – TCU – Plenário | [Voto] 10. […] a competitividade está associada à efetiva disputa entre os participantes do certame. No caso, observa-se que devido ao fato de os licitantes pertencerem aos mesmos proprietários parentes vai prevalecer o interesse do grupo societário como um todo em detrimento dos interesses isolados de cada empresa, o que afasta a real disputa entre elas.
+Pesquisa de Jurisprudência | Execute consulta na Jurisprudência selecionada . Selecione a área “licitação”, busque pelo termo “princípios” . Selecione a área “contratos administrativos” e busque pelo termo “princípios” .
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+[1] Há outros princípios que se aplicam às contratações públicas (p. ex.: formalismo moderado e anualidade do orçamento), mas este item restringiu-se aos princípios expressos no art. 5º da Lei 14.133/2021.
+
+[2] Tribunal de Contas da União, 2010, p. 28.
+
+[3] Tribunal de Contas da União, 2010, p. 28.
+
+[4] Tribunal de Contas da União, 2010, p. 29.
+
+[5] Lei 14.133/2021, art. 174, inciso I.
+
+[6] Lei 14.133/2021, art. 94.
+
+[7] TCU 2020c, p. 17.
+
+[8] Lei 14.133/2021, art. 18, inciso VIII.
+
+[9] Lei 8.429/1992, art. 1º, §§ 1º, 5º e 6º, art. 3º e art. 11.
+
+[10] Lei 14.133/2021, art. 9º, inciso I, alínea “b”, art. 11, inciso II, e art. 26, § 6º.
+
+[11] Lei 14.133/2021, art. 6º, inciso XXIII, art. 12, inciso VII, e art. 18.
+
+[12] Lei 12.527/2011, art. 7º, inciso IV c/c art. 8º, § 1º, inciso IV.
+
+[13] Lei 14.133/2021, art. 174.
+
+[14] Tribunal de Contas da União, 2020c, p. 17.
+
+[15] Lei 14.133/2021, art. 7º, § 1º, e art. 169, § 3º, inciso II; e CFC, 2016, p. 46.
+
+[16] Lei 9.784/1999, art. 2º, caput, e inciso VII; Decreto-Lei 4.657/1942 (LINDB), art. 20, parágrafo único; e Decreto 9.830/2019, arts. 2º a 4º.
+
+[17] Decreto-Lei 4.657/1942 (LINDB), art. 20, parágrafo único; e Decreto 9.830/2019, art. 3º, § 3º.
+
+[18] Lei 14.133/2021, art. 18, incisos IX e XI, respectivamente.
+
+[19] Lei 14.133/2021, art. 43.
+
+[20] Lei 14.133/2021, art. 137.
+
+[21] Tribunal de Contas da União, 2010, p. 29.
+
+[22] Tribunal de Contas da União, 2010, p. 29.
+
+[23] Lei 9.784/1999, art. 2º.
+
+[24] Constituição Federal de 1988, art. 5º, inciso XXXVI.
+
+[25] Lei 9.784/1999, art. 54.
+
+[26] Lei 9.784/1999, art. 2º, caput.
+
+[27] Regulamenta o disposto nos arts. 20 a 30 do Decreto-Lei 4.657/1942 (LINDB), que, foram incluídos no Decreto-Lei citado pela Lei 13.655/2018.
+
+[28] Decreto 9.830/2019, art. 3º, § 3º.
+
+[29] Lei 14.133/2021, art. 11, inciso II, art. 40, § 2º, inciso III, e art. 47, inciso III.
+
+[30] Lei 14.133/2021, art. 9º, inciso I, alínea “a”, e art. 337-F.
+
+[31] Tribunal de Contas da União, 2010, p. 29.
+
+[32] Constituição Federal de 1988, art. 70, caput; e TCU 2020c, p. 16.
+
+[33] Tribunal de Contas da União, 2023, p. 35-36.
+
+[34] Os Objetivos de Desenvolvimento Sustentável são 17 objetivos que abordam os principais desafios de desenvolvimento enfrentados por pessoas no Brasil e no mundo. Disponíveis em: https://brasil.un.org/pt-br/sdgs.
+
+[35] Decreto 10.531/2020, art. 1º.
+
+[36] Decreto-Lei 4.657/1942 (LINDB), art. 28, incluído pela Lei 13.655/2018.

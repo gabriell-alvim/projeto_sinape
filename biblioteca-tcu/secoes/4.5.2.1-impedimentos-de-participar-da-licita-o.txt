@@ -1,0 +1,98 @@
+4.5.2.1. Impedimentos de participar da licitação
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/4-5-2-1-impedimentos-de-participar-da-licitacao/
+======================================================================
+
+O edital de licitação deve dar ampla publicidade à contratação a ser realizada, informando aos interessados acerca das vedações à participação, com o intuito de evitar possíveis conflitos de interesses e afrontas aos princípios da impessoalidade, da probidade administrativa e da moralidade. 
+
+Nesse sentido, a Lei 14.133/2021 dispõe, no art. 14, que não poderão disputar licitação ou participar da execução de contrato, direta ou indiretamente:
+
+I – autor do anteprojeto, do projeto básico ou do projeto executivo, pessoa física ou jurídica, quando a licitação versar sobre obra, serviços ou fornecimento de bens a ele relacionados;
+
+II – empresa, isoladamente ou em consórcio, responsável pela elaboração do projeto básico ou do projeto executivo, ou empresa da qual o autor do projeto seja dirigente, gerente, controlador, acionista ou detentor de mais de 5% (cinco por cento) do capital com direito a voto, responsável técnico ou subcontratado, quando a licitação versar sobre obra, serviços ou fornecimento de bens a ela necessários;
+
+III – pessoa física ou jurídica que se encontre, ao tempo da licitação, impossibilitada de participar da licitação em decorrência de sanção que lhe foi imposta;
+
+IV – aquele que mantenha vínculo de natureza técnica, comercial, econômica, financeira, trabalhista ou civil com dirigente do órgão ou entidade contratante ou com agente público que desempenhe função na licitação ou atue na fiscalização ou na gestão do contrato, ou que deles seja cônjuge, companheiro ou parente em linha reta, colateral ou por afinidade, até o terceiro grau, devendo essa proibição constar expressamente do edital de licitação;
+
+V – empresas controladoras, controladas ou coligadas, nos termos da Lei nº 6.404, de 15 de dezembro de 1976, concorrendo entre si;
+
+VI – pessoa física ou jurídica que, nos 5 (cinco) anos anteriores à divulgação do edital, tenha sido condenada judicialmente, com trânsito em julgado, por exploração de trabalho infantil, por submissão de trabalhadores a condições análogas às de escravo ou por contratação de adolescentes nos casos vedados pela legislação trabalhista.
+
+Os incisos I e II dizem respeito ao impedimento de pessoas físicas e jurídicas responsáveis pelos projetos (anteprojeto, básico ou executivo) de participarem da licitação ou da execução contratual.
+
+O § 2º do art. 14 ressalta a hipótese de o autor dos projetos (pessoa física ou jurídica) participar no apoio das atividades de planejamento da contratação, de execução da licitação ou de gestão do contrato, desde que sob supervisão exclusiva de agentes públicos do órgão ou da entidade, a critério da Administração e exclusivamente a seu serviço.
+
+Ou seja, nessa hipótese, o autor do projeto atuará em apoio à Administração e não exercendo o papel de licitante ou contratado.
+
+Por sua vez, o § 3º do art. 14 equipara as empresas integrantes do mesmo grupo econômico aos autores do projeto. Cabe mencionar que a jurisprudência do TCU, construída sob a égide da Lei 8.666/1993 e da Lei 10.520/2002 (Lei do Pregão), acena no sentido de que “não existe vedação legal à participação, no mesmo certame licitatório, de empresas do mesmo grupo econômico”, a exemplo do enunciado de jurisprudência extraído do Acórdão 2803/2016-Plenário. Portanto, esse entendimento do Tribunal certamente não mais prevalecerá quando estiver sendo aplicada a Lei 14.133/2021.
+
+Já o inciso III do art. 14 se refere ao impedimento de pessoa física ou jurídica que tenha sofrido sanção que a impossibilite de participar de licitação (impedimento de licitar e de contratar e declaração de inidoneidade).
+
+Também será impedido de participar da licitação:
+
+Art. 14 […] § 1º […] o licitante que atue em substituição a outra pessoa, física ou jurídica, com o intuito de burlar a efetividade da sanção a ela aplicada, inclusive a sua controladora, controlada ou coligada, desde que devidamente comprovado o ilícito ou a utilização fraudulenta da personalidade jurídica do licitante.
+
+O inciso VI também se refere a impedimento de pessoa física ou empresa condenada, mas, nesse caso, por exploração de trabalho infantil, por submissão de trabalhadores a condições análogas às de escravo ou por contratação de adolescentes nos casos vedados pela legislação trabalhista.
+
+Ainda sobre impedimento decorrente de sanções, a Lei 14.133/2021 deixou expresso que:
+
+Art. 14 […] § 5º Em licitações e contratações realizadas no âmbito de projetos e programas parcialmente financiados por agência oficial de cooperação estrangeira ou por organismo financeiro internacional com recursos do financiamento ou da contrapartida nacional, não poderá participar pessoa física ou jurídica que integre o rol de pessoas sancionadas por essas entidades.
+
+O inciso IV, por sua vez, busca concretizar a impessoalidade e a vedação ao nepotismo nas contratações e determina que o edital de licitação vede expressamente a participação na licitação ou na execução do contrato, daquele que:
+
+- mantenha vínculo de natureza técnica, comercial, econômica, financeira, trabalhista ou civil com dirigente do órgão ou entidade contratante ou com agente público que desempenhe função na licitação ou atue na fiscalização ou na gestão do contrato; ou
+
+- deles seja cônjuge, companheiro ou parente em linha reta, colateral ou por afinidade, até o terceiro grau.
+
+Exigências semelhantes estão dispostas no art. 5º do Decreto 9.507/2018 e no art. 7º do Decreto 7.203/2010 (vide Quadro 185).
+
+Por fim, o inciso V do art. 14 da Lei 14.133/2021 impede que empresas controladoras, controladas ou coligadas, nos termos da Lei 6.404/1976, concorram entre si. É importante mencionar que a jurisprudência do TCU, construída sob a égide da Lei 8.666/1993 e da Lei 10.520/2002 (Lei do Pregão), acena no sentido de que “a participação de sociedades coligadas em um mesmo certame licitatório, por si só, não é considerada um ato ilícito”, a exemplo do enunciado de jurisprudência extraído do Acórdão 1539/2014-Plenário. Portanto, esse entendimento do Tribunal certamente não mais prevalecerá quando estiver sendo aplicada a Lei 14.133/2021.
+
+Importante mencionar que as vedações do art. 14 da Lei 14.133/2021 não impedem a licitação ou a contratação de obra ou serviço que inclua, como encargo do contratado, a elaboração do projeto básico e do projeto executivo, nas contratações integradas, e do projeto executivo, nos demais regimes de execução (art. 14, § 4º).
+
+São hipóteses em que o autor dos projetos e o contratado serão os mesmos, mas, nesse caso, de forma totalmente compatível com os regimes de execução adotados, a exemplo da contratação integrada.
+
+Ainda sobre o tema impedimento, vale destacar que o art. 14 se refere a situações de impedimentos da pessoa física ou jurídica interessada em participar da licitação e da execução contratual.
+
+Além disso, a Lei 14.133/2021 apresenta hipóteses de impedimento de agentes públicos para desempenharem funções essenciais das contratações na condição de integrante da Administração Pública (art. 7º) e para participarem, direta ou indiretamente, da licitação ou da execução do contrato (art. 9º):
+
+Art. 7º Caberá à autoridade máxima do órgão ou da entidade, ou a quem as normas de organização administrativa indicarem, promover gestão por competências e designar agentes públicos para o desempenho das funções essenciais à execução desta Lei que preencham os seguintes requisitos: […]
+
+III – não sejam cônjuge ou companheiro de licitantes ou contratados habituais da Administração nem tenham com eles vínculo de parentesco, colateral ou por afinidade, até o terceiro grau, ou de natureza técnica, comercial, econômica, financeira, trabalhista e civil. […]
+
+Art. 9º É vedado ao agente público designado para atuar na área de licitações e contratos, ressalvados os casos previstos em lei: […]
+
+§ 1º Não poderá participar, direta ou indiretamente, da licitação ou da execução do contrato agente público de órgão ou entidade licitante ou contratante, devendo ser observadas as situações que possam configurar conflito de interesses no exercício ou após o exercício do cargo ou emprego, nos termos da legislação que disciplina a matéria.
+
+§ 2º As vedações de que trata este artigo estendem-se a terceiro que auxilie a condução da contratação na qualidade de integrante de equipe de apoio, profissional especializado ou funcionário ou representante de empresa que preste assessoria técnica.
+
+Quadro 185 – Referências normativas para os impedimentos de participar da licitação
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 7º Caberá à autoridade máxima do órgão ou da entidade, ou a quem as normas de organização administrativa indicarem, promover gestão por competências e designar agentes públicos para o desempenho das funções essenciais à execução desta Lei que preencham os seguintes requisitos: […] III – não sejam cônjuge ou companheiro de licitantes ou contratados habituais da Administração nem tenham com eles vínculo de parentesco, colateral ou por afinidade, até o terceiro grau, ou de natureza técnica, comercial, econômica, financeira, trabalhista e civil. […] Art. 9º É vedado ao agente público designado para atuar na área de licitações e contratos, ressalvados os casos previstos em lei: […] § 1º Não poderá participar, direta ou indiretamente, da licitação ou da execução do contrato agente público de órgão ou entidade licitante ou contratante, devendo ser observadas as situações que possam configurar conflito de interesses no exercício ou após o exercício do cargo ou emprego, nos termos da legislação que disciplina a matéria. § 2º As vedações de que trata este artigo estendem-se a terceiro que auxilie a condução da contratação na qualidade de integrante de equipe de apoio, profissional especializado ou funcionário ou representante de empresa que preste assessoria técnica. […] Art. 14. Não poderão disputar licitação ou participar da execução de contrato, direta ou indiretamente: I – autor do anteprojeto, do projeto básico ou do projeto executivo, pessoa física ou jurídica, quando a licitação versar sobre obra, serviços ou fornecimento de bens a ele relacionados; II – empresa, isoladamente ou em consórcio, responsável pela elaboração do projeto básico ou do projeto executivo, ou empresa da qual o autor do projeto seja dirigente, gerente, controlador, acionista ou detentor de mais de 5% (cinco por cento) do capital com direito a voto, responsável técnico ou subcontratado, quando a licitação versar sobre obra, serviços ou fornecimento de bens a ela necessários; III – pessoa física ou jurídica que se encontre, ao tempo da licitação, impossibilitada de participar da licitação em decorrência de sanção que lhe foi imposta; IV – aquele que mantenha vínculo de natureza técnica, comercial, econômica, financeira, trabalhista ou civil com dirigente do órgão ou entidade contratante ou com agente público que desempenhe função na licitação ou atue na fiscalização ou na gestão do contrato, ou que deles seja cônjuge, companheiro ou parente em linha reta, colateral ou por afinidade, até o terceiro grau, devendo essa proibição constar expressamente do edital de licitação; V – empresas controladoras, controladas ou coligadas, nos termos da Lei nº 6.404, de 15 de dezembro de 1976, concorrendo entre si; VI – pessoa física ou jurídica que, nos 5 (cinco) anos anteriores à divulgação do edital, tenha sido condenada judicialmente, com trânsito em julgado, por exploração de trabalho infantil, por submissão de trabalhadores a condições análogas às de escravo ou por contratação de adolescentes nos casos vedados pela legislação trabalhista. § 1º O impedimento de que trata o inciso III do caput deste artigo será também aplicado ao licitante que atue em substituição a outra pessoa, física ou jurídica, com o intuito de burlar a efetividade da sanção a ela aplicada, inclusive a sua controladora, controlada ou coligada, desde que devidamente comprovado o ilícito ou a utilização fraudulenta da personalidade jurídica do licitante. § 2º A critério da Administração e exclusivamente a seu serviço, o autor dos projetos e a empresa a que se referem os incisos I e II do caput deste artigo poderão participar no apoio das atividades de planejamento da contratação, de execução da licitação ou de gestão do contrato, desde que sob supervisão exclusiva de agentes públicos do órgão ou entidade. § 3º Equiparam-se aos autores do projeto as empresas integrantes do mesmo grupo econômico. § 4º O disposto neste artigo não impede a licitação ou a contratação de obra ou serviço que inclua como encargo do contratado a elaboração do projeto básico e do projeto executivo, nas contratações integradas, e do projeto executivo, nos demais regimes de execução. § 5º Em licitações e contratações realizadas no âmbito de projetos e programas parcialmente financiados por agência oficial de cooperação estrangeira ou por organismo financeiro internacional com recursos do financiamento ou da contrapartida nacional, não poderá participar pessoa física ou jurídica que integre o rol de pessoas sancionadas por essas entidades ou que seja declarada inidônea nos termos desta Lei. […]
+Decreto 11.246/2022 | Art. 10. O agente público designado para o cumprimento do disposto neste Decreto deverá preencher os seguintes requisitos: […] III – não ser cônjuge ou companheiro de licitantes ou contratados habituais da administração nem tenha com eles vínculo de parentesco, colateral ou por afinidade, até o terceiro grau, ou de natureza técnica, comercial, econômica, financeira, trabalhista e civil. § 1º Para fins do disposto no inciso III do caput , consideram-se contratados habituais as pessoas físicas e jurídicas cujo histórico recorrente de contratação com o órgão ou com a entidade evidencie significativa probabilidade de novas contratações. § 2º A vedação de que trata o inciso III do caput incide sobre o agente público que atue em processo de contratação cujo objeto seja do mesmo ramo de atividade em que atue o licitante ou o contratado habitual com o qual haja o relacionamento. […] Art. 13. O agente público designado para atuar na área de licitações e contratos e o terceiro que auxilie a condução da contratação, na qualidade de integrante de equipe de apoio, de profissional especializado ou de funcionário ou representante de empresa que preste assessoria técnica, deverão observar as vedações previstas no art. 9º da Lei nº 14.133, de 2021.
+Decreto 9.507/2018 | Art. 5º É vedada a contratação, por órgão ou entidade de que trata o art. 1º, de pessoa jurídica na qual haja administrador ou sócio com poder de direção que tenham relação de parentesco com: I – detentor de cargo em comissão ou função de confiança que atue na área responsável pela demanda ou pela contratação; ou II – autoridade hierarquicamente superior no âmbito de cada órgão ou entidade.
+Decreto 7.203/2010 | Art. 7º Os editais de licitação para a contratação de empresa prestadora de serviço terceirizado, assim como os convênios e instrumentos equivalentes para contratação de entidade que desenvolva projeto no âmbito de órgão ou entidade da Administração Pública federal, deverão estabelecer vedação de que familiar de agente público preste serviços no órgão ou entidade em que este exerça cargo em comissão ou função de confiança.
+Enunciado – CJF 45/2023 | Considera-se participação indireta, para fins do disposto no art. 14 da Lei n. 14.133/2021, a existência de vínculo de natureza técnica, comercial, econômica, financeira ou trabalhista entre o autor do projeto, pessoa física ou jurídica, e o licitante ou responsável pelos serviços, fornecimentos e obras, incluindo-se os fornecimentos de bens e serviços a estes necessários, exceto nos casos das contratações integradas e semi-integradas.
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 186 – Jurisprudência do TCU – impedimentos de participar da licitação
+
+Acórdãos | Dispositivos
+Acórdão 1511/2022-TCU-Plenário | [Enunciado] A participação em licitações e a contratação direta de empresas que tenham como sócios militares da ativa servindo na organização militar contratante infringem os princípios da moralidade e da impessoalidade e o art. 9º, inciso III, da Lei 8.666/1993.
+Acórdão 534/2020-TCU-Primeira Câmara | [Enunciado] O órgão ou a entidade promotora do certame não deve obstar a participação de empresa licitante com fundamento na existência de ocorrências impeditivas indiretas de licitar constantes do Sistema de Cadastramento Unificado de Fornecedores (Sicaf) sem que haja elementos suficientes para evidenciar que a sua constituição teve por objetivo burlar penalidade aplicada a outra sociedade empresarial e sem que seja dada oportunidade à interessada para manifestação prévia (art. 29 da IN – Seges/MPDG 3/2018).
+Acórdão 7428/2019-TCU-Segunda Câmara | [Enunciado] A contratação pela Administração de empresas pertencentes a parentes ou cônjuge de gestor público envolvido no processo de licitação caracteriza, diante do manifesto conflito de interesses, violação aos princípios constitucionais da moralidade e da impessoalidade.
+Acórdão 158/2015-TCU-Plenário | [Enunciado] Conquanto não haja exata subsunção literal do fato à proibição normativa (art. 9º da Lei 8.666/1993), a eventual participação de empresa cujos sócios tenham relações societárias, profissionais e pessoais com o projetista impõe a necessidade de prevenir riscos de frustração ao caráter competitivo da licitação pública e ao princípio da isonomia entre licitantes.
+Acórdão 1793/2011-TCU-Plenário | 9.2.1. oriente os gestores dos órgãos integrantes do Sisg: […] 9.2.1.5. a verificarem, durante a fase de habilitação das empresas, a existência de registros impeditivos da contratação no Cadastro Nacional de Empresas Inidôneas e Suspensas/CGU, disponível no Portal da Transparência (http://www.portaltransparencia.gov.br), além da habitual pesquisa já realizada no módulo Sicaf do sistema Siasg, em atenção ao art. 97, caput e parágrafo único, da Lei nº 8.666/1993;
+Pesquisa de Jurisprudência | Execute consulta na Jurisprudência Selecionada. Pesquise pela árvore de classificação: área “licitação”, temas “Parentesco” ou “Participação”.
+
+Fonte: Elaboração própria a partir de consulta a jurisprudência do TCU.
+
+Quadro 187 – Riscos relacionados
+
+Riscos
+Conflito de interesses não identificados e mal gerenciados, levando à recorrência de participação, nas licitações, de licitantes que se enquadram nos impedimentos relacionados no art. 14 da Lei 14.133/2021, com consequentes favorecimentos de interesse privado em detrimento do interesse público, comprometimento da competitividade e da isonomia dos certames, e perda de interesse dos fornecedores honestos em participar de licitações públicas, por considerarem o processo licitatório inadequado.
+
+Fonte: Elaboração própria.

@@ -1,0 +1,24 @@
+4.4.1.4. Contratação semi-integrada
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/4-4-1-4-contratacao-semi-integrada/
+======================================================================
+
+A Lei 14.133/2021 conceituou a contratação semi-integrada como:
+
+Art. 6º […]
+
+XXXIII – contratação semi-integrada: regime de contratação de obras e serviços de engenharia em que o contratado é responsável por elaborar e desenvolver o projeto executivo, executar obras e serviços de engenharia, fornecer bens ou prestar serviços especiais e realizar montagem, teste, pré-operação e as demais operações necessárias e suficientes para a entrega final do objeto.
+
+A contratação semi-integrada contempla somente a elaboração do projeto executivo pelo contratado, devendo o projeto básico constar do edital, com definição precisa das frações do empreendimento em que haverá liberdade de as contratadas inovarem em soluções metodológicas ou tecnológicas; e matriz de riscos. A Lei 14.133/2021 determina que as contratações semi-integradas e integradas somente podem ser utilizadas para a contratação de obras ou serviços de engenharia[1].
+
+Na contratação semi-integrada, mediante prévia autorização da Administração, o projeto básico poderá ser alterado, desde que demonstrada a superioridade das inovações propostas pelo contratado em termos de redução de custos, de aumento da qualidade, de redução do prazo de execução ou de facilidade de manutenção ou operação, assumindo o contratado a responsabilidade integral pelos riscos associados à alteração do projeto básico[2].
+
+Dito de outra forma, tanto a contratação integrada quanto a semi-integrada resultam em ajustes permeados por obrigações de fim ou de resultado, em que se contrata “o que fazer”, ficando a cargo do construtor a definição do “como fazer”.
+
+Por fim, assim como na contratação integrada, os riscos decorrentes de fatos supervenientes à contratação associados à escolha da solução de projeto básico pelo contratado deverão ser alocados como de sua responsabilidade na matriz de riscos[3].
+
+[1] Lei 14.133/2021, art. 6º, incisos XXXII e XXXIII.
+
+[2] Lei 14.133/2021, art. 46, § 5º.
+
+[3] Lei 14.133/2021, art. 22, § 4º.

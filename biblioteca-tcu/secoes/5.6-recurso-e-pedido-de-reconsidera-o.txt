@@ -1,0 +1,113 @@
+5.6. Recurso e pedido de reconsideração
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/5-6-recurso-e-pedido-de-reconsideracao/
+======================================================================
+
+O recurso é instrumento utilizado para impugnar as seguintes decisões relativas ao metaprocesso de contratação[1]:
+
+- deferimento ou indeferimento de pedido de pré-qualificação de interessado ou de inscrição em registro cadastral, sua alteração ou cancelamento, procedimentos abordados, respectivamente, nos arts. 80 e 87 da Lei 14.133/2021;
+
+- julgamento das propostas;
+
+- habilitação ou inabilitação de licitante;
+
+- anulação ou revogação da licitação;
+
+- extinção do contrato, quando determinada por ato unilateral e escrito da Administração; e
+
+- aplicação de sanções de advertência, multa e de impedimento de licitar e contratar.
+
+Interpõe-se recurso por meio de requerimento no qual o recorrente deverá expor os fundamentos do pedido de reexame, podendo juntar os documentos que julgar convenientes[2]. Para isso, será assegurado ao licitante a vista dos elementos indispensáveis à defesa de seus interesses[3].
+
+O prazo para apresentar o recurso é de três dias úteis, contado da data de intimação ou de lavratura da ata da respectiva decisão. Contudo, para recurso referente à aplicação de sanções, o prazo para interposição é mais extenso – 15 dias úteis[4].
+
+Convém ressaltar ainda que, para impugnar decisões relativas ao julgamento das propostas e à habilitação ou inabilitação, o licitante deverá manifestar imediatamente a intenção de recorrer, sob pena de preclusão, tanto na conclusão da etapa de julgamento, que ocorrerá com a aceitação de uma das propostas, como também no momento da habilitação do fornecedor[5].
+
+Como a fase recursal é única, o prazo para apresentação das razões recursais será contado a partir da data de intimação ou de lavratura da ata de habilitação ou inabilitação ou, na hipótese de adoção da inversão de fases (habilitação antes do julgamento), da ata de julgamento das propostas[6].
+
+Importante mencionar que a contagem dos prazos segue o disposto no art. 183 da Lei 14.133/2021.
+
+O recurso deve ser dirigido à autoridade que tiver editado o ato ou proferido a decisão recorrida, que terá três dias úteis para reconsiderar ou encaminhar o recurso à autoridade superior, a qual deverá proferir sua decisão no prazo máximo de dez dias úteis, contado do recebimento dos autos. Para impugnação da aplicação das sanções de advertência, multa e de impedimento de licitar e contratar, a autoridade recorrida terá cinco dias úteis para acolher o recurso ou encaminhar à autoridade superior, a qual terá vinte dias úteis para decidir[7].
+
+Para os atos dos quais não caiba recurso (decisões não elencadas no art. 165, inciso I, e no art. 166 da Lei 14.133/2021), é possível fazer pedido de reconsideração à autoridade que tiver proferido a decisão, a ser apresentado também no prazo de três dias úteis contado da data de intimação relativa ao ato.
+
+O pedido de reconsideração é cabível ainda para contestar a aplicação da sanção de declaração de inidoneidade para licitar ou contratar e, nesse caso, o prazo para interposição será de quinze dias úteis, contado da data da intimação, e deverá ser decidido no prazo máximo de vinte dias úteis (pelas autoridades mencionadas no art. 156, § 6º, da Lei 14.133/2021), contado do seu recebimento[8].
+
+Ambas as formas de impugnação têm efeito suspensivo até a decisão final da autoridade competente[9]. Ademais, os outros licitantes poderão apresentar contrarrazões para o recurso interposto, também no prazo de três dias úteis, que terá início na data de intimação pessoal ou de divulgação da interposição do recurso[10].
+
+Conforme dispõe a Lei 14.133/2021, a autoridade competente, na elaboração de suas decisões recursais, será auxiliada pelo órgão de assessoramento jurídico, que deverá dirimir dúvidas e subsidiá-la com as informações necessárias[11]. Se o recurso for acolhido, será invalidado apenas ato insuscetível de aproveitamento[12].
+
+O recurso não será conhecido quando interposto fora do prazo, por quem não seja legitimado, após exaurida a esfera administrativa, ou perante órgão incompetente. Nessa última hipótese, será indicada ao recorrente a autoridade competente, sendo-lhe devolvido o prazo para recurso[13].
+
+O recurso não conhecido não impede a Administração de rever de ofício qualquer ato ilegal, desde que não ocorrida a preclusão administrativa[14].
+
+Mais uma vez, vale lembrar que julgados do TCU têm orientado aos autores de representações que acionem, primeiramente, o órgão ou entidade licitante, evitando a apresentação de recurso administrativo concomitantemente com o ingresso de representações/denúncias junto ao Tribunal, sob pena de acarretar duplos esforços de apuração desnecessariamente, em desfavor do erário e do interesse público[15].
+
+Quadro 272 – Referências normativas para os recursos
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 165. Dos atos da Administração decorrentes da aplicação desta Lei cabem: I – recurso, no prazo de 3 (três) dias úteis, contado da data de intimação ou de lavratura da ata, em face de: a) ato que defira ou indefira pedido de pré-qualificação de interessado ou de inscrição em registro cadastral, sua alteração ou cancelamento; b) julgamento das propostas; c) ato de habilitação ou inabilitação de licitante; d) anulação ou revogação da licitação; e) extinção do contrato, quando determinada por ato unilateral e escrito da Administração; II – pedido de reconsideração, no prazo de 3 (três) dias úteis, contado da data de intimação, relativamente a ato do qual não caiba recurso hierárquico. § 1º Quanto ao recurso apresentado em virtude do disposto nas alíneas “b” e “c” do inciso I do caput deste artigo, serão observadas as seguintes disposições: I – a intenção de recorrer deverá ser manifestada imediatamente, sob pena de preclusão, e o prazo para apresentação das razões recursais previsto no inciso I do caput deste artigo será iniciado na data de intimação ou de lavratura da ata de habilitação ou inabilitação ou, na hipótese de adoção da inversão de fases prevista no § 1º do art. 17 desta Lei, da ata de julgamento; II – a apreciação dar-se-á em fase única. § 2º O recurso de que trata o inciso I do caput deste artigo será dirigido à autoridade que tiver editado o ato ou proferido a decisão recorrida, que, se não reconsiderar o ato ou a decisão no prazo de 3 (três) dias úteis, encaminhará o recurso com a sua motivação à autoridade superior, a qual deverá proferir sua decisão no prazo máximo de 10 (dez) dias úteis, contado do recebimento dos autos. § 3º O acolhimento do recurso implicará invalidação apenas de ato insuscetível de aproveitamento. § 4º O prazo para apresentação de contrarrazões será o mesmo do recurso e terá início na data de intimação pessoal ou de divulgação da interposição do recurso. § 5º Será assegurado ao licitante vista dos elementos indispensáveis à defesa de seus interesses. Art. 166. Da aplicação das sanções previstas nos incisos I, II e III do caput do art. 156 desta Lei caberá recurso no prazo de 15 (quinze) dias úteis, contado da data da intimação. Parágrafo único. O recurso de que trata o caput deste artigo será dirigido à autoridade que tiver proferido a decisão recorrida, que, se não a reconsiderar no prazo de 5 (cinco) dias úteis, encaminhará o recurso com sua motivação à autoridade superior, a qual deverá proferir sua decisão no prazo máximo de 20 (vinte) dias úteis, contado do recebimento dos autos. Art. 167. Da aplicação da sanção prevista no inciso IV do caput do art. 156 desta Lei caberá apenas pedido de reconsideração, que deverá ser apresentado no prazo de 15 (quinze) dias úteis, contado da data da intimação, e decidido no prazo máximo de 20 (vinte) dias úteis, contado do seu recebimento. Art. 168. O recurso e o pedido de reconsideração terão efeito suspensivo do ato ou da decisão recorrida até que sobrevenha decisão final da autoridade competente. Parágrafo único. Na elaboração de suas decisões, a autoridade competente será auxiliada pelo órgão de assessoramento jurídico, que deverá dirimir dúvidas e subsidiá-la com as informações necessárias.
+Lei 9.784/1999 | Art. 60. O recurso interpõe-se por meio de requerimento no qual o recorrente deverá expor os fundamentos do pedido de reexame, podendo juntar os documentos que julgar convenientes. […] Art. 63. O recurso não será conhecido quando interposto: I – fora do prazo; II – perante órgão incompetente; III – por quem não seja legitimado; IV – após exaurida a esfera administrativa. § 1º Na hipótese do inciso II, será indicada ao recorrente a autoridade competente, sendo-lhe devolvido o prazo para recurso. § 2º O não conhecimento do recurso não impede a Administração de rever de ofício o ato ilegal, desde que não ocorrida preclusão administrativa.
+IN – Seges/ME 2/2023 | Art. 1º Esta Instrução Normativa dispõe sobre a licitação pelo critério de julgamento por técnica e preço, na forma eletrônica, no âmbito da Administração Pública federal direta, autárquica e fundacional. […] Intenção de recorrer e prazo para recurso Art. 37. Qualquer licitante poderá, durante o prazo concedido na sessão pública, não inferior a 10 minutos, após o término do julgamento das propostas e do ato de habilitação ou inabilitação, em campo próprio do sistema, manifestar sua intenção de recorrer, sob pena de preclusão, ficando a autoridade superior autorizada a adjudicar o objeto ao licitante declarado vencedor. § 1º As razões do recurso deverão ser apresentadas em momento único, em campo próprio no sistema, no prazo de três dias úteis, contados a partir da data de intimação ou de lavratura da ata de habilitação ou inabilitação ou, na hipótese de adoção da inversão de fases prevista no § 1º do art. 7º, da ata de julgamento. § 2º Os demais licitantes ficarão intimados para, se desejarem, apresentar suas contrarrazões, no prazo de três dias úteis, contado da data de intimação pessoal ou de divulgação da interposição do recurso. § 3º Será assegurado ao licitante vista dos elementos indispensáveis à defesa de seus interesses. § 4º O acolhimento do recurso importará na invalidação apenas dos atos que não possam ser aproveitados.
+IN – Seges/ME 96/2022 | Art. 1º Esta Instrução Normativa dispõe sobre a licitação pelo critério de julgamento por maior retorno econômico, na forma eletrônica, no âmbito da Administração Pública federal direta, autárquica e fundacional. […] Intenção de recorrer e prazo para recurso Art. 47. Qualquer licitante poderá, durante o prazo concedido na sessão pública, não inferior a 10 minutos, após o término do julgamento das propostas e do ato de habilitação ou inabilitação, em campo próprio do sistema, manifestar sua intenção de recorrer, sob pena de preclusão, ficando a autoridade superior autorizada a adjudicar o objeto ao licitante declarado vencedor. § 1º As razões do recurso deverão ser apresentadas em momento único, em campo próprio no sistema, no prazo de três dias úteis, contados a partir da data de intimação ou de lavratura da ata de habilitação ou inabilitação ou, na hipótese de adoção da inversão de fases prevista no § 1º do art. 8º, da ata de julgamento. § 2º Os demais licitantes ficarão intimados para, se desejarem, apresentar suas contrarrazões, no prazo de três dias úteis, contado da data de intimação pessoal ou de divulgação da interposição do recurso. § 3º Será assegurado ao licitante vista dos elementos indispensáveis à defesa de seus interesses. § 4º O acolhimento do recurso importará na invalidação apenas dos atos que não possam ser aproveitados.
+IN – Seges/ME 73/2022 | Art. 1º Esta Instrução Normativa dispõe sobre a licitação pelo critério de julgamento por menor preço ou maior desconto, na forma eletrônica, para a contratação de bens, serviços e obras, no âmbito da Administração Pública federal direta, autárquica e fundacional. […] DA INTENÇÃO DE RECORRER E DA FASE RECURSAL Intenção de recorrer e prazo para recurso Art. 40. Qualquer licitante poderá, durante o prazo concedido na sessão pública, não inferior a 10 minutos, de forma imediata após o término do julgamento das propostas e do ato de habilitação ou inabilitação, em campo próprio do sistema, manifestar sua intenção de recorrer, sob pena de preclusão, ficando a autoridade superior autorizada a adjudicar o objeto ao licitante declarado vencedor. § 1º As razões do recurso deverão ser apresentadas em momento único, em campo próprio no sistema, no prazo de três dias úteis, contados a partir da data de intimação ou de lavratura da ata de habilitação ou inabilitação ou, na hipótese de adoção da inversão de fases prevista no § 1º do art. 8º, da ata de julgamento. § 2º Os demais licitantes ficarão intimados para, se desejarem, apresentar suas contrarrazões, no prazo de três dias úteis, contado da data de intimação pessoal ou de divulgação da interposição do recurso. § 3º Será assegurado ao licitante vista dos elementos indispensáveis à defesa de seus interesses. § 4º O acolhimento do recurso importará na invalidação apenas dos atos que não possam ser aproveitados.
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 273 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 378/2022-TCU-Plenário | 9.4. dar ciência ao [ omissis ], com fundamento no art. 9º, inciso I, da Resolução-TCU 315/2020, sobre as seguintes impropriedades/falhas, identificadas na Concorrência 2/2021, para que sejam adotadas medidas internas com vistas à prevenção de outras ocorrências semelhantes: […] 9.4.4. a ausência de exposição de motivos para a rejeição de cada uma das alegações do recorrente contraria a jurisprudência deste Tribunal, a exemplo do Acórdãos do Plenário 1188/2011 e 709/2007;
+Acórdão 2699/2021-TCU-Plenário | [Enunciado] A rejeição sumária da intenção de recurso no âmbito de pregão eletrônico afronta os arts. 2º, § 1º, e 4º, incisos XVIII e XX, da Lei 10.520/2002, e 44, § 3º, do Decreto 10.024/2019, uma vez que o registro da intenção de recurso deve atender aos requisitos de sucumbência, tempestividade, legitimidade, interesse e motivação, não podendo ter seu mérito julgado de antemão.
+Acórdão 2435/2021-TCU-Plenário | [Enunciado] No pregão, eletrônico ou presencial, o juízo de admissibilidade das intenções de recurso deve avaliar tão somente a presença dos pressupostos recursais (sucumbência, tempestividade, legitimidade, interesse e motivação), constituindo irregularidade a denegação fundada em exame prévio do mérito do pedido.
+Acórdão 2143/2021-TCU-Plenário | 9.4. determinar aos [ omissis ], com fundamento no art. 4º, inciso I, da Resolução – TCU 315/2020, que, no prazo de 30 dias, providenciem a anulação do Pregão Eletrônico 28/2020, informando ao TCU, no mesmo prazo, os encaminhamentos realizados, e, caso optem pela realização de novo certame, elaborem seu edital escoimado dos vícios abaixo listados: […] 9.4.4. ampliação do critério para desclassificação do representante, incialmente embasada no critério de inexequibilidade da proposta, para inexequibilidade e descumprimento do item 12.3.6 do edital, sem que à licitante fosse dada oportunidade de defesa, em inobservância aos princípios da motivação dos atos administrativos, contraditório e ampla defesa;
+Acórdão 337/2021-TCU-Plenário | [Voto] 14. Apesar de o [ omissis ] ter alegado que a desclassificação das representantes deveu-se à divergência na marca indicada no certificado, a motivação da desclassificação das propostas das representantes, registrada em ata (peça 5, p. 5), foi a ausência de apresentação de certificado com acreditação do Inmetro e tradução juramentada. 15. Ocorre que, no julgamento dos recursos, o [ omissis ], registrou que o motivo principal da recusa dos certificados teria sido a divergência na marca indicada. 16.Tal mudança de entendimento caracteriza inovação em fase recursal, prática contrária às garantias do devido processo legal, do contraditório e da ampla defesa, extraídas do art. 5º, incisos LIV e LV, da Constituição Federal.
+Acórdão 1167/2018-TCU-Segunda Câmara | 9.7 dar ciência à [ omissis ] das seguintes falhas identificadas na execução do Pregão Eletrônico 72/2015: […] 9.7.3 demora excessiva no processamento de análise de proposta comercial e recurso, com infringência aos princípios da eficiência (CF art. 37, caput ), da razoável duração do processo (CF art. 5º, LXXVIII), bem como à Lei 8.666/1993, art. 109, § 4º; e Lei 9.784/1999, art. 24;
+Acórdão 11373/2016-TCU-Segunda Câmara | 9.2. dar ciência à [ omissis ] dos seguintes fatos, a fim de que sejam adotadas medidas para prevenção de ocorrências semelhantes: 9.2.1. ausência de publicidade das informações do recurso e motivos da desqualificação de licitante, em desacordo com o art. 3º da Lei 8.666/1993 e com o Decreto 5.450/2005, art. 30, incisos XI e XII;
+Acórdão 815/2015-TCU-Segunda Câmara | [Enunciado] É ilegal o indeferimento sumário do mérito de recurso fundamentado e apresentado tempestivamente durante a fase da manifestação de intenção de recorrer (art. 4º, inciso XVIII, da Lei 10.520/2002).
+Acórdão 3240/2014-TCU-Plenário | 1.7.1. dar ciência, nos termos da Portaria Segecex 13/2011, ao [ omissis ], que a ausência de motivação aos seus atos administrativos, como o ocorrido na resposta dada pela CPL ao recurso administrativo apresentado pela empresa [ omissis ] em face da decisão que declarou vencedora do certame a empresa [ omissis ., afronta o disposto no art. 50 da Lei 9.784/99;
+Acórdão 1542/2014-TCU-Plenário | [Enunciado] Em pregão eletrônico ou presencial, o juízo de admissibilidade das intenções de recurso deve avaliar tão somente a presença dos pressupostos recursais. Evidenciada a ausência de motivação para a interposição, compete ao pregoeiro a rejeição do recurso.
+Acórdão 795/2014-TCU-Segunda Câmara | 1.7.1.1. Faça constar no Sistema Comprasnet os fundamentos para o indeferimento dos recursos administrativos, em respeito aos princípios constitucionais da publicidade e da eficiência;
+Acórdão 2883/2013-TCU-Plenário | [Enunciado] A finalidade de o pregoeiro examinar, previamente, a admissibilidade de um recurso é afastar do certame aquelas manifestações de licitantes de caráter meramente protelatório, seja por ausência do interesse de agir, demonstrada pela falta da necessidade e da utilidade da via recursal, seja por não atender aos requisitos extrínsecos, como o da tempestividade, de modo a se aferir se a intenção do recorrente possui, em tese, um mínimo de plausibilidade para seu seguimento. Não se trata de examinar o mérito recursal, o que compete à autoridade superior.
+Acórdão 9036/2011-TCU-Primeira Câmara | 9.3. dar ciência ao [ omissis ] acerca das seguintes irregularidades identificadas na condução do Pregão Eletrônico 26/10, com o objetivo de que se evite a reincidência de tais ocorrências na realização de futuros procedimentos licitatórios no âmbito daquela Instituição: 9.3.2. recusa imotivada da intenção de recurso da empresa [ omissis ], no que se refere ao item 5 do Pregão Eletrônico 26/2010, uma vez que os motivos eleitos para recusa não guardam pertinência com os motivos da intenção, em desacordo, pois, com dever de motivação dos atos administrativos expresso no art. 50 da Lei 9.784/1999; [Enunciado] A negativa quanto à intenção de recurso em pregão apresentado por empresa licitante deve encontrar motivação expressa, ante o que estabelece o art. 50 da Lei 9.784/1999.
+Pesquisa de Jurisprudência | Execute consulta na Jurisprudência Selecionada do TCU . Selecione a “área – Licitação”, tema “recurso” . Execute consulta na Jurisprudência Selecionada do TCU . Selecione a “área – Licitação”, tema “intenção de recurso” . Execute consulta na base de acórdãos do TCU. Pesquise por: “14.133/2021” AND “recurso administrativo”.
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+Quadro 274 – Riscos relacionados
+
+Riscos
+Avaliação do mérito do recurso durante a fase de intenção de recursos, levando ao indeferimento de recurso em fase inapropriada e por órgão ou autoridade incompetente para apreciar o recurso, com consequente nulidade da decisão, necessidade de refazimento de todos os atos decorrentes do ato nulo e, portanto, atraso do procedimento licitatório.
+Indeferimento de recurso com base em novos argumentos, não apresentados quando do ato decisório, levando à afronta aos princípios do devido processo legal, do contraditório e da ampla defesa, com consequente nulidade da decisão, necessidade de refazimento de todos os atos decorrentes do ato nulo e, portanto, atraso do procedimento licitatório.
+
+Fonte: Elaboração própria; Tribunal de Contas da União, 2014, item “seleção do fornecedor”.
+
+[1] Lei 14.133/2021, art. 165, inciso I, art. 166.
+
+[2] Lei 9.784/1999, art. 60.
+
+[3] Lei 14.133/2021, art. 165, § 5º.
+
+[4] Lei 14.133/2021, art. 165, inciso I, e art. 166.
+
+[5] Lei 14.133/2021, art. 165, § 1º, inciso I; e IN – Seges/ME 73/2022, art. 40, caput.
+
+[6] Lei 14.133/2021, art. 165, § 1º, incisos I e II; IN – Seges/ME 73/2022, art. 40, § 1º.
+
+[7] Lei 14.133/2021, art. 165, § 2º, e art. 166, parágrafo único.
+
+[8] Lei 14.133/2021, art. 165, inciso II, e art. 167.
+
+[9] Lei 14.133/2021, art. 168.
+
+[10] Lei 14.133/2021, art. 165, § 4º.
+
+[11] Lei 14.133/2021, art. 168, parágrafo único.
+
+[12] Lei 14.133/2021, art. 165, § 3º.
+
+[13] Lei 9.784/1999, art. 63, caput.
+
+[14] Lei 9.784/1999, art. 63, § 2º.
+
+[15] Acórdão 572/2022, item c, Acórdão 1089/2022, item e, Acórdão 1061/2022, item 1.6.1, Acórdão 1123/2022, item 1.6.1, todos do Plenário do TCU.

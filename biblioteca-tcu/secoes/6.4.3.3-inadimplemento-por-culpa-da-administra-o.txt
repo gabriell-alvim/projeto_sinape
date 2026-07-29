@@ -1,0 +1,71 @@
+6.4.3.3. Inadimplemento por culpa da Administração
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/6-4-3-3-inadimplemento-por-culpa-da-administracao/
+======================================================================
+
+O contratado terá direito à extinção do contrato nas seguintes hipóteses[1]:
+
+- supressão, por parte da Administração, de obras, serviços ou compras que acarrete modificação do valor inicial do contrato além do limite permitido no art. 125 da Lei 14.133/2021 (remete-se aos comentários do item 6.2.1);
+
+- suspensão de execução do contrato, por ordem escrita da Administração, por prazo superior a três meses, ou repetidas suspensões que totalizem noventa dias úteis;
+
+- atraso superior a dois meses, contado da emissão da nota fiscal, dos pagamentos ou de parcelas de pagamentos devidos pela Administração. Aplicável somente às parcelas incontroversas, conforme art. 143 da Lei 14.133/2021;
+
+- não liberação pela Administração, nos prazos contratuais, de área, local ou objeto, para execução de obra, serviço ou fornecimento, e de fontes de materiais naturais especificadas no projeto, inclusive devido a atraso ou descumprimento das obrigações atribuídas pelo contrato à Administração relacionadas a desapropriação, a desocupação de áreas públicas ou a licenciamento ambiental.
+
+Nas hipóteses de suspensão de execução do contrato por mais de três meses (ou repetidas suspensões que totalizem noventa dias úteis) ou de atraso nos pagamentos superior a dois meses, é assegurado ao contratado o direito de optar pela suspensão do cumprimento das obrigações assumidas até a normalização da situação, admitido o restabelecimento do equilíbrio econômico-financeiro do contrato[2].
+
+É importante ressaltar que, embora as situações mencionadas deem ao contratado o direito à extinção do contrato, elas não o autorizam a encerrá-lo unilateralmente, mas apenas suspender a execução nas hipóteses previstas pela Lei. A extinção deve ser, portanto, solicitada à Administração e, em caso de recusa, pode ser pleiteada por meio de arbitragem ou processo judicial.
+
+Quando houver suspensão de execução do contrato ou atrasos nos pagamentos, em situações de calamidade pública, de grave perturbação da ordem interna ou de guerra, não será admitida a extinção do contrato. Isso também ocorrerá se a suspensão ou os atrasos forem causados por atos ou fatos praticados pelo contratado, ou dos quais tenha participado ou para os quais tenha contribuído[3].
+
+Em quaisquer das hipóteses ora comentadas, quando a extinção decorrer de culpa exclusiva da Administração, o contratado terá direito a[4]:
+
+- ser ressarcido pelos prejuízos regularmente comprovados que houver sofrido;
+
+- ter devolvida a garantia prestada, atualizada monetariamente;
+
+- receber os pagamentos devidos pela execução do contrato até a data de extinção; e
+
+- receber o pagamento pelo custo da desmobilização.
+
+Por fim, cabe mencionar que, para as organizações da Administração Pública federal direta, autárquica e fundacional do Poder Executivo, a IN – Seges/ME 77/2022 estabeleceu que o pagamento das indenizações previstas no § 2º do art. 138 e no art. 149 da Lei 14.133/2021 deverá observar a ordem cronológica de exigibilidade, ainda que o contrato já tenha sido encerrado[5].
+
+Quadro 460 – Referências normativas para extinção do contrato por culpa da Administração
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 100. A garantia prestada pelo contratado será liberada ou restituída após a fiel execução do contrato ou após a sua extinção por culpa exclusiva da Administração e, quando em dinheiro, atualizada monetariamente. […] Art. 137. Constituirão motivos para extinção do contrato, a qual deverá ser formalmente motivada nos autos do processo, assegurados o contraditório e a ampla defesa, as seguintes situações: […] § 2º O contratado terá direito à extinção do contrato nas seguintes hipóteses: I – supressão, por parte da Administração, de obras, serviços ou compras que acarrete modificação do valor inicial do contrato além do limite permitido no art. 125 desta Lei; II – suspensão de execução do contrato, por ordem escrita da Administração, por prazo superior a 3 (três) meses; III – repetidas suspensões que totalizem 90 (noventa) dias úteis, independentemente do pagamento obrigatório de indenização pelas sucessivas e contratualmente imprevistas desmobilizações e mobilizações e outras previstas; IV – atraso superior a 2 (dois) meses, contado da emissão da nota fiscal, dos pagamentos ou de parcelas de pagamentos devidos pela Administração por despesas de obras, serviços ou fornecimentos; V – não liberação pela Administração, nos prazos contratuais, de área, local ou objeto, para execução de obra, serviço ou fornecimento, e de fontes de materiais naturais especificadas no projeto, inclusive devido a atraso ou descumprimento das obrigações atribuídas pelo contrato à Administração relacionadas a desapropriação, a desocupação de áreas públicas ou a licenciamento ambiental. § 3º As hipóteses de extinção a que se referem os incisos II, III e IV do § 2º deste artigo observarão as seguintes disposições: I – não serão admitidas em caso de calamidade pública, de grave perturbação da ordem interna ou de guerra, bem como quando decorrerem de ato ou fato que o contratado tenha praticado, do qual tenha participado ou para o qual tenha contribuído; II – assegurarão ao contratado o direito de optar pela suspensão do cumprimento das obrigações assumidas até a normalização da situação, admitido o restabelecimento do equilíbrio econômico-financeiro do contrato, na forma da alínea “d” do inciso II do caput do art. 124 desta Lei. […] Art. 138. A extinção do contrato poderá ser: […] § 2º Quando a extinção decorrer de culpa exclusiva da Administração, o contratado será ressarcido pelos prejuízos regularmente comprovados que houver sofrido e terá direito a: I – devolução da garantia; II – pagamentos devidos pela execução do contrato até a data de extinção; III – pagamento do custo da desmobilização.
+IN – Seges/ME 77/2022 | Art. 5º A ordem cronológica de exigibilidade terá como marco inicial, para efeito de inclusão do crédito na sequência de pagamentos, a liquidação de despesa. […] § 5º O pagamento das indenizações previstas no § 2º do art. 138 e no art. 149 da Lei nº 14.133, de 1º de abril de 2021, deverá observar a ordem cronológica de exigibilidade, ainda que o contrato já tenha sido encerrado.
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 461 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 50/2019- TCU-Plenário | [Enunciado] Nas hipóteses excepcionalíssimas de alterações consensuais qualitativas de contratos de obras e serviços, é facultado à Administração ultrapassar os limites estabelecidos no art. 65, §§ 1º e 2º, da Lei 8.666/1993, observados os princípios da finalidade, da razoabilidade e da proporcionalidade, além dos direitos patrimoniais do contratante privado, desde que satisfeitos cumulativamente os seguintes pressupostos: a) não acarretar para a Administração encargos contratuais superiores aos oriundos de uma eventual rescisão contratual por razões de interesse público, acrescidos aos custos da elaboração de um novo procedimento licitatório; b) não possibilitar a inexecução contratual, à vista do nível de capacidade técnica e econômico-financeira do contratado; c) decorrer de fatos supervenientes que impliquem dificuldades não previstas ou imprevisíveis por ocasião da contratação inicial; d) não ocasionar a transfiguração do objeto originalmente contratado em outro de natureza e propósito diversos; e) ser necessária à completa execução do objeto original do contrato, à otimização do cronograma de execução e à antecipação dos benefícios sociais e econômicos decorrentes; f) demonstrar-se – na motivação do ato que autorizar o aditamento contratual – que as consequências da outra alternativa (a rescisão contratual, seguida de nova licitação e contratação) importam sacrifício insuportável ao interesse público primário (interesse coletivo) a ser atendido pela obra ou serviço, ou sejam gravíssimas a esse interesse, inclusive quanto à sua urgência e emergência.
+Acórdão 949/2018-TCU-Plenário | 1.7.6. dar ciência à [ omissis ] das seguintes falhas a fim de que sejam adotadas medidas preventivas e de forma a evitar a ocorrência de outras semelhantes: 1.7.6.1. aceitação da paralisação unilateral dos serviços por empresa contratada sem que se tenha por configurada a superação de prazo a que alude o art. 78, inc. XV, da Lei 8.666/1993, observada na execução do Contrato 3/2017;
+Acórdão 2524/2017-Primeira Câmara | [Voto] 2. Por meio do Acórdão 1881/2015-TCU-Primeira Câmara, este Tribunal julgou irregulares as contas do [ omissis ], e da empresa [ omissis ], condenou-os, solidariamente, ao pagamento do débito apurado no montante de […]. 3. Conforme consignado no voto condutor da deliberação recorrida, o débito decorreu “principalmente em razão do não pagamento da segunda medição, o que levou a empresa a interromper a execução da obra”. Posteriormente, com a chegada das chuvas, a parcela executada se deteriorou. 4. Dessa forma, a empresa [ omissis ] foi condenada em razão de não haver respaldo legal para a paralisação empreendida pela empresa, uma vez que, “segundo o art. 78, inciso XV, da Lei 8.666/1993, apenas o atraso superior a noventa dias dos pagamentos devidos pela Administração constitui motivo para rescisão, salvo em caso de calamidade pública, grave perturbação da ordem interna ou guerra”. 5. Já o então prefeito, [ omissis ], foi condenado em razão de ter celebrado o contrato para a execução da obra sem ter recursos suficientes para cumpri-lo.
+Acórdão 1800/2016-TCU-Primeira Câmara | [Enunciado] O pagamento de desmobilização no caso de interrupção da obra pela Administração, sem culpa do contratado, tem natureza indenizatória (art. 79, § 2º, inciso III, da Lei 8.666/1993), exigindo que os custos efetivamente incorridos sejam demonstrados. Não se confunde essa indenização com o preço unitário contratual previsto para a etapa de desmobilização constante do cronograma físico-financeiro e da planilha orçamentária contratual, vinculada à efetiva conclusão da obra conforme contratada.
+Acórdão 1679/2008-TCU-Plenário | 9.2. determinar à [ omissis ] que: […] 9.2.3. envide esforços com vistas a evitar atrasos superiores a noventa dias nos pagamentos das medições de serviços de conservação e manutenção de estradas, nos casos em que a etapa da liquidação das despesas correspondentes estiver regularmente cumprida, […]
+Pesquisa de Jurisprudência | Execute consulta na Jurisprudência Selecionada do TCU . Selecione a área “contrato administrativo”, tema “aditivo”, subtema “limite” . Realize as seguintes buscas na base de acórdãos do TCU: “art. 78, inc. XV”.VOTO “art. 78, inc. XV”.ACORDAO “art. 78, inc. XIV”.VOTO
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+Quadro 462 – Riscos relacionados
+
+Riscos
+Estimativa de quantidade excessiva, levando à alteração do contrato com supressão do objeto acima do limite permitido no art. 125 da Lei 14.133/2021, com consequente direito do contratado à extinção do contrato (Lei 14.133/2021, art. 137, § 2º, inciso I) e ao ressarcimento de prejuízos regularmente comprovados (Lei 14.133/2021, art. 138, § 2º, desde que a extinção decorra de culpa exclusiva da Administração).
+Restrições orçamentárias, falta de capacidade técnica da equipe responsável pelo pagamento e/ou sobrecarga de trabalho dessa equipe, levando a atrasos no pagamento ao contratado, com consequentes: a) suspensão da execução do contrato por parte do contratado (Lei 14.133/2021, art. 137, § 3º, inciso II) e prejuízos decorrentes (p. ex., formação de reputação de mal pagador com relação à organização pública contratante); ou b) no caso de atraso superior a dois meses, extinção do contrato (Lei 14.133/2021, art. 137, § 2º, inciso IV) e ressarcimento ao contratado pelos prejuízos regularmente comprovados (quando não decorrer de culpa exclusiva da Administração – Lei 14.133/2021, art. 138, § 2º).
+Divulgação do edital de licitação sem antes providenciar as licenças ambientais necessárias, levando ao atraso ou à impossibilidade de o contratado executar o objeto, com consequente prejuízos pelo atraso e, em casos extremos, a extinção do contrato, com a perda dos investimentos realizados pela Administração e obrigação de indenizar o contratado pelos prejuízos decorrentes da não execução e pelos custos de desmobilização (Lei 14.133/2021, art. 138, § 2º, desde que a extinção decorra de culpa exclusiva da Administração).
+
+Fonte: Elaboração própria.
+
+[1] Lei 14.133/2021, art. 137, § 2º.
+
+[2] Lei 14.133/2021, art. 137, § 3º, inciso II.
+
+[3] Lei 14.133/2021, art. 137, § 3º, inciso I.
+
+[4] Lei 14.133/2021, art. 100, art. 138, § 2º.
+
+[5] IN – Seges/ME 77/2022, art. 5º, § 5º.

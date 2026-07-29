@@ -1,0 +1,46 @@
+3.1.2. Por que licitar?
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/3-1-2-por-que-licitar-2/
+======================================================================
+
+A licitação tem previsão constitucional[1] e a Lei 14.133/2021 estabeleceu normas gerais sobre contratação para as Administrações Públicas direta, autárquica e fundacional da União, dos Estados, do Distrito Federal e dos Municípios[2]. Assim, ressalvadas as hipóteses excepcionais de dispensa e de inexigibilidade, a celebração de contratos com terceiros na Administração Pública deve ser necessariamente precedida de licitação. Licitar é a regra e contratar diretamente é exceção. Dessa forma, as contratações diretas devem ser devidamente justificadas.
+
+No seu art. 11, a Lei 14.133/2021 expressa os objetivos do processo licitatório:
+
+Art. 11.O processo licitatório tem por objetivos:
+
+I – assegurar a seleção da proposta apta a gerar o resultado de contratação mais vantajoso para a Administração Pública, inclusive no que se refere ao ciclo de vida do objeto;
+
+II – assegurar tratamento isonômico entre os licitantes, bem como a justa competição;
+
+III – evitar contratações com sobrepreço ou com preços manifestamente inexequíveis e superfaturamento na execução dos contratos;
+
+IV – incentivar a inovação e o desenvolvimento nacional sustentável.
+
+O processo licitatório visa, portanto, obter o resultado de contratação mais vantajoso para a Administração, não somente considerando o valor a ser desembolsado de imediato, mas ao longo do tempo (ao longo do ciclo de vida do objeto), o que mitiga o risco de contratar um objeto mais barato inicialmente, mas que ao longo do tempo termina custando mais caro, de acordo com a expressão “o barato sai caro”.
+
+Também busca garantir a justa competição entre os licitantes, evitar contratos com sobrepreço, superfaturamento, ou com preços manifestamente inexequíveis, e incentivar a inovação e o desenvolvimento nacional sustentável.
+
+Vale mencionar que a Lei 14.133/2021 conceitua o sobrepreço e o superfaturamento como:
+
+Art. 6º Para os fins desta Lei, consideram-se:
+
+[…] LVI – sobrepreço: preço orçado para licitação ou contratado em valor expressivamente superior aos preços referenciais de mercado, seja de apenas 1 (um) item, se a licitação ou a contratação for por preços unitários de serviço, seja do valor global do objeto, se a licitação ou a contratação for por tarefa, empreitada por preço global ou empreitada integral, semi-integrada ou integrada;
+
+LVII – superfaturamento: dano provocado ao patrimônio da Administração, caracterizado, entre outras situações, por:
+
+a) medição de quantidades superiores às efetivamente executadas ou fornecidas;
+
+b) deficiência na execução de obras e de serviços de engenharia que resulte em diminuição da sua qualidade, vida útil ou segurança;
+
+c) alterações no orçamento de obras e de serviços de engenharia que causem desequilíbrio econômico-financeiro do contrato em favor do contratado;
+
+d) outras alterações de cláusulas financeiras que gerem recebimentos contratuais antecipados, distorção do cronograma físico-financeiro, prorrogação injustificada do prazo contratual com custos adicionais para a Administração ou reajuste irregular de preços;
+
+A referida Lei não cita a situação do superfaturamento decorrente de sobrepreço, embora deixe claro que as situações elencadas no inciso LVII do art. 6º não são exaustivas.
+
+Quanto aos preços manifestamente inexequíveis, são valores irrisórios, insuficientes para cobrir os custos do produto, serviço ou obra. São, portanto, incompatíveis com a execução do objeto da licitação.
+
+[1] Constituição Federal de 1988, art. 37, inciso XXI.
+
+[2] Como as empresas estatais já haviam recebido os regramentos específicos por meio da Lei 13.303/2016, a Lei 14.133/2021 restringiu-se aos órgãos da Administração Pública direta, autarquias e fundações da União, estados, Distrito Federal e municípios, que devem aplicá-la no exercício das suas funções administrativas.

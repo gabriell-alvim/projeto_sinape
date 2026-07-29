@@ -1,0 +1,16 @@
+4.4.2.2. Condições de solidez, de segurança e de durabilidade
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/4-4-2-2-condicoes-de-solidez-de-seguranca-e-de-durabilidade/
+======================================================================
+
+O anteprojeto deve indicar características de execução, de uso e de funcionamento de tal modo que a obra tenha um adequado desempenho ao longo de sua vida útil, que também é definida nesse momento e de forma combinada com essas características.
+
+No caso de edificações, por exemplo, a vida útil estimada de projeto para o sistema estrutural costuma ser de 50 anos (NBR 8681-2003). A vida útil dos demais componentes da edificação, como pisos, revestimentos, instalações, vai depender das características de uso (residencial, comercial, industrial etc.) e do nível de desempenho esperado.
+
+No caso de obras de pavimentação, essas condições também podem variar bastante, a depender do tipo de pavimento, do tipo de tráfego, das condições do local como clima, relevo etc. Tudo isso deve ser avaliado e definido, em linhas gerais, no anteprojeto.
+
+A Lei 14.133/2021 estipula, como uma das cláusulas obrigatórias de todo contrato administrativo, o prazo de garantia mínima do objeto, observados os prazos mínimos estabelecidos na própria Lei e nas normas técnicas aplicáveis, e as condições de manutenção e assistência técnica, quando for o caso.
+
+Nesse sentido, o art. 140, § 6º, da Lei 14.133/2021, ao disciplinar o recebimento definitivo do objeto, dispõe que o prazo mínimo de garantia das obras será de cinco anos, permitida a previsão de prazo superior no edital e no contrato:
+
+Art. 140 […] § 6º Em se tratando de obra, o recebimento definitivo pela Administração não eximirá o contratado, pelo prazo mínimo de 5 (cinco) anos, admitida a previsão de prazo de garantia superior no edital e no contrato, da responsabilidade objetiva pela solidez e pela segurança dos materiais e dos serviços executados e pela funcionalidade da construção, da reforma, da recuperação ou da ampliação do bem imóvel, e, em caso de vício, defeito ou incorreção identificados, o contratado ficará responsável pela reparação, pela correção, pela reconstrução ou pela substituição necessárias.

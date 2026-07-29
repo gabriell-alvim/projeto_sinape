@@ -1,0 +1,48 @@
+5.10.2. Dispensa de licitação
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/5-10-2-dispensa-de-licitacao/
+======================================================================
+
+Nas hipóteses de dispensa de licitação, admite-se que a Administração contrate diretamente, sem prévio procedimento licitatório, ainda que seja viável a competição pois, nesses casos, previstos em lei, é provável que a licitação não seja a solução mais adequada para atender ao interesse público, já que os custos (incluindo o tempo empregado) para a realização do procedimento licitatório não compensariam os benefícios que poderiam ser obtidos.
+
+Caberá ao gestor, portanto, avaliar as circunstâncias do caso concreto e decidir, segundo juízo de conveniência e oportunidade, se a opção mais vantajosa é realizar a licitação ou é contratar diretamente.
+
+O art. 75 da Lei 14.133/2021 lista todas as hipóteses em que a licitação pode ser dispensada. O rol é taxativo, não podendo, portanto, ser ampliado pelo aplicador da norma. Convém mencionar que, em comparação com a Lei 8.666/1993, houve as seguintes alterações:
+
+- as hipóteses previstas nos seguintes incisos foram excluídas: XVI (impressão dos diários oficiais); XII (energia elétrica e gás natural com concessionário); XXIII (estatais com suas subsidiárias e controladas); XXIV (prestação de serviços com as organizações sociais); XXX (serviços de assistência técnica e extensão rural); e XXXV (estabelecimentos penais);
+
+- o inciso X do art. 24 da norma anterior (compra ou locação de imóvel, em virtude das características de instalação e localização) foi disciplinado no inciso V do art. 74 da Lei 14.133/2021, como hipótese de inexigibilidade de licitação;
+
+- o inciso XI (contratação de remanescente de obra, serviço ou fornecimento) deixou de ser hipótese de dispensa e foi tratado, no art. 90, § 7º, como caso de convocação dos demais licitantes classificados; e
+
+- três hipóteses de dispensa foram criadas: inciso IV, alínea “l” (serviços de rastreamento e obtenção de provas); inciso IV, alínea “m” (aquisição de medicamentos para tratamento de doenças raras); e inciso XIII (contratação de profissionais para compor a comissão de avaliação de critérios de técnica).
+
+Vale ressaltar que, antes de efetivar a contratação, a Administração deve comprovar a sua vantajosidade, incluindo a razoabilidade do preço a ser contratado, entre outras exigências estabelecidas no art. 72 da Lei 14.133/2021 (já comentadas no item 5.10).
+
+Importante citar que a IN – Seges/ME 67/2021 determina, para a Administração Pública federal direta, autárquica e fundacional do Poder Executivo, que a contratação direta por dispensa seja realizada por meio de dispensa eletrônica[1], procedimento que deve ser adotado nas hipóteses de contratação direta em razão do valor (art. 75, incisos I e II, Lei 14.133/2021), e, quando couber, nas demais hipóteses de dispensa de licitação admitidas pela Lei.
+
+A seguir, estão comentadas cada uma das hipóteses de dispensa previstas na Lei 14.133/2021, com os respectivos quadros de referências normativas e de jurisprudência (quando existente, ainda que sob a égide da legislação anterior). Ademais, o Quadro 317 abaixo consolida riscos relacionados a dispensa de licitação.
+
+Quadro 317 – Riscos relacionados
+
+Riscos
+Desconhecimento das demandas da organização para o ano subsequente, levando à realização por uma unidade gestora, no exercício financeiro, de várias contratações diretas de objetos de mesma natureza, que, quando somadas, ultrapassam os limites estabelecidos pelo art. 75, incisos I e II, da Lei 14.133/2021, com consequente ilegalidade por fracionamento de despesa e afastamento indevido da licitação.
+Dispensa de licitação com pesquisa de preços realizada utilizando apenas a consulta a potenciais contratados e/ou sem a divulgação prevista no art. 75, § 3º, da Lei 14.133/2021, levando à demora na obtenção de cotações, ao recebimento de baixo número de cotações de preços e à impossibilidade de outros possíveis interessados participarem (ante o desconhecimento), com consequentes atrasos e aumento do custo da contratação.
+Insucesso do certame anterior (deserto ou fracassado) ocasionado por erros da Administração (a exemplo de exigências excessivamente restritivas ou incompatíveis com as normas vigentes, ou desclassificação de licitantes por falhas sanáveis), levando à decisão equivocada por dispensar licitação com fundamento no art. 75, inciso III, da Lei 14.133/2021, com consequente ilegalidade por afastamento indevido da licitação e aumento do custo da contratação.
+Falha no planejamento das contratações da organização, levando à utilização indevida da hipótese de dispensa de licitação prevista no art. 75, inciso IV, alínea “a”, da Lei 14.133/2021 (vigência de garantia) para adquirir diretamente novos bens, com consequente burla ao processo licitatório, afronta ao princípio da isonomia e aumento do custo da aquisição.
+Falha no levantamento de mercado, levando à conclusão equivocada acerca da contratação direta de fornecedor de peças originais, com base no art. 75, inciso IV, alínea “a”, da Lei 14.133/2021 (vigência de garantia), havendo outros fornecedores no mercado aptos a fornecer essas peças, com consequente ilegalidade por afastamento indevido da licitação e aumento do custo da aquisição.
+Falha no planejamento das contratações da organização, levando a Administração a se socorrer da hipótese de dispensa de licitação prevista no art. 75, inciso IV, alínea “c”, da Lei 14.133/2021 (produto para pesquisa) para contratar diretamente bens, serviços e obras não pertinentes à atividade de pesquisa e não abarcados nos projetos de pesquisa conduzidos pela organização, com consequente ilegalidade por burla à licitação e aumento do custo da contratação.
+Atrasos na instauração dos procedimentos licitatórios para adquirir gêneros perecíveis, com consequente recorrência de dispensas de licitação para adquirir esses alimentos (com base no art. 75, inciso IV, alínea “e”, da Lei 14.133/2021), com consequente ilegalidade por fracionamento de despesa e afastamento indevido da licitação.
+Receio do gestor de ser responsabilizado pela decisão de contratar emergencialmente caso a emergência seja resultado da falta de planejamento, levando-o a optar por não contratar imediatamente e aguardar o tempo necessário para realizar um processo licitatório, com consequente descontinuidade de serviços públicos, com prejuízo ou comprometimento da segurança de pessoas e de bens públicos ou particulares, além de possível dupla responsabilização do gestor pela desídia administrativa, ou seja, pela falta de cuidado e diligência na realização do planejamento adequado para evitar a emergência, e pelos danos decorrentes dessa desídia, ou seja, pelos prejuízos causados pela falta da contratação emergencial.
+Nos casos de emergência ou de calamidade pública, deixar de avaliar o que é realmente necessário contratar diretamente para evitar a consumação do dano ou a descontinuidade de serviço público, levando à contratação com escopo contratual que ultrapassa o estritamente necessário para atendimento da situação emergencial ou calamitosa, ou à contratação de parcelas com prazo de execução que ultrapassam um ano do fato gerador, com consequente ilegalidade por afastamento indevido da licitação, descumprimento do art. 75, inciso VIII, da Lei 14.133/2021, e aumento injustificado do custo da contratação.
+
+Fonte: Elaboração própria.
+
+Quadro 318 – Modelos
+
+Assunto | Modelo disponibilizados por OGS ou por órgãos de controle | OGS
+Diretrizes | Vídeo explicativo | AGU, MGI
+
+Fonte: Elaboração própria.
+
+[1] Bem como dos órgãos e entidades da Administração Pública estadual, distrital ou municipal, direta ou indireta, quando executarem recursos da União decorrentes de transferências voluntárias.

@@ -1,0 +1,65 @@
+4.1.1. Descrição da necessidade da contratação
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/4-1-1-descricao-da-necessidade-da-contratacao/
+======================================================================
+
+É a identificação e caracterização do problema a ser resolvido. Justifica a decisão de contratar uma solução ou parte de uma solução. É elemento obrigatório do ETP[1] e deve responder a questões como:
+
+- qual é o problema que se pretende resolver? Por exemplo, tempo de espera prolongado para a prestação de um serviço público e dificuldade de solicitar esse serviço;
+
+- quais são os atores interessados na solução desse problema e quais as perspectivas desses atores sobre o problema? Por exemplo, área requisitante, servidores que atuam diretamente na prestação do serviço e usuários do serviço;
+
+- qual é o interesse público a ser atendido[2]? Como, por exemplo, aprimorar a prestação do serviço; e
+
+- quais os resultados e os benefícios que serão alcançados ao resolvê-lo? A exemplo da redução do tempo de atendimento ou da disponibilização do serviço por meio de autoatendimento, e da possibilidade de prestação do serviço de forma digital, possibilitando que os usuários não necessitem se deslocar a uma repartição pública. Esses resultados e benefícios poderão ser comparados com o custo para resolver o problema.
+
+A área requisitante deve justificar a necessidade da contratação com base no documento de formalização de demanda[3] e indicar a possível solução, descrita em termos de bens, serviços e/ou obras.
+
+Para demandas complexas, pode ocorrer que a Administração identifique a sua necessidade, mas precise de uma maior interação com a iniciativa privada para estabelecer a melhor solução[4]. Nesses casos, o ETP poderá, inclusive, recomendar o emprego do diálogo competitivo[5], da contratação integrada[6] ou do procedimento de manifestação de interesse[7].
+
+A equipe de planejamento da contratação deve elaborar a necessidade da contratação de forma a relacionar o objeto da contratação com as atividades-fim da organização pública.
+
+Não se deve apenas contratar obras, bens e serviços, mas, sim, objetos que contribuam para dar suporte às atividades de cada organização contratante, de forma alinhada com as leis orçamentárias e com os demais instrumentos de planejamento da organização, como o PCA, o PLS, e o PEI[8].
+
+Quadro 87 – Referências normativas para a descrição da necessidade da contratação
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 11. O processo licitatório tem por objetivos: […] Parágrafo único. A alta administração do órgão ou entidade é responsável pela governança das contratações e deve implementar processos e estruturas, inclusive de gestão de riscos e controles internos, para avaliar, direcionar e monitorar os processos licitatórios e os respectivos contratos, com o intuito de alcançar os objetivos estabelecidos no caput deste artigo, promover um ambiente íntegro e confiável, assegurar o alinhamento das contratações ao planejamento estratégico e às leis orçamentárias e promover eficiência, efetividade e eficácia em suas contratações. […] Art. 18. A fase preparatória do processo licitatório é caracterizada pelo planejamento e deve compatibilizar-se com o plano de contratações anual de que trata o inciso VII do caput do art. 12 desta Lei, sempre que elaborado, e com as leis orçamentárias, bem como abordar todas as considerações técnicas, mercadológicas e de gestão que podem interferir na contratação, compreendidos: I – a descrição da necessidade da contratação fundamentada em estudo técnico preliminar que caracterize o interesse público envolvido ; […] § 1º O estudo técnico preliminar a que se refere o inciso I do caput deste artigo deverá evidenciar o problema a ser resolvido e a sua melhor solução , de modo a permitir a avaliação da viabilidade técnica e econômica da contratação, e conterá os seguintes elementos: I – descrição da necessidade da contratação, considerado o problema a ser resolvido sob a perspectiva do interesse público; […] (Grifo nosso)
+IN – Seges/ME 58/2022 | Art. 9º Com base no Plano de Contratações Anual, deverão ser registrados no Sistema ETP Digital os seguintes elementos: I – descrição da necessidade da contratação, considerado o problema a ser resolvido sob a perspectiva do interesse público; […]
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 88 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 2221/2012-TCU-Plenário | [Enunciado] As aquisições de bens pela Administração devem estar baseadas em estudos prévios que demonstrem a necessidade e viabilidade das aquisições, a fim de evitar o mau uso de recursos públicos e não limitar o sucesso dos objetivos que se buscam atingir.
+Pesquisa de Jurisprudência | Execute consulta na Pesquisa Integrada do TCU . Pesquise pela expressão: “justificativa” ADJ5 (“necessidade” ADJ7 “contratação”) Execute consulta na Jurisprudência selecionada : “necessidade” ADJ3 “contratação” Execute consulta na Jurisprudência selecionada pela árvore de classificação. Selecione a área “licitação” e o tema “planejamento” .
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+Quadro 89 – Riscos relacionados
+
+Riscos
+Escolha precipitada da solução, sem identificação prévia e exata do problema a ser resolvido, levando à contratação que poderia ter sido evitada ou com requisitos desnecessários (supérfluos), que limitam a competitividade e elevam o preço contratado, com consequentes subutilização da solução e desperdício de recursos.
+Escolha precipitada da solução, sem identificação prévia e precisa do problema a ser resolvido, levando à contratação de solução que não atende à demanda da Administração, necessitando de ajustes frequentes ou resultando no abandono da solução, com consequentes desperdícios de recursos financeiros, de tempo e de esforço administrativo.
+Descrição da necessidade da contratação sem análise das perspectivas e prioridades dos requisitantes e de outros atores relevantes para a solução do problema, levando à definição imprecisa do problema, com consequente contratação de solução inadequada para resolvê-lo.
+Descrição da necessidade da contratação sem avaliar se os processos de trabalho a serem suportados pela solução precisam ser otimizados ou repensados antes da contratação, levando à contratação de uma solução que poderia ter sido evitada ou ter sido executada em melhores condições (p.ex.: melhores definições de requisitos), com consequentes desperdícios de recursos financeiros, de tempo e de esforço administrativo.
+Ausência de análise quanto à oportunidade e conveniência de prorrogar o contrato, levando à manutenção de uma solução e de seu(s) contrato(s) que não atenda mais a uma necessidade da organização, seja porque a solução não consiga mais atender a essa necessidade, seja porque essa necessidade deixou de existir, com consequente desperdício de recursos.
+
+Fonte: Adaptado de Tribunal de Contas da União, 2014, item “Necessidade da contratação”; e Tribunal de Contas da União, 2012, p. 65-67.
+
+[1] Lei 14.133/2021, art. 18, § 2º c/c § 1º, inciso I.
+
+[2] Lei 14.133/2021, art. 18, inciso I, e § 1º, inciso I.
+
+[3] IN – Seges/MP 5/2017, art. 24, alterada pela IN – Seges/ME 49/2020, art. 1º.
+
+[4] Para esses casos, a Lei 14.133/2021 prevê o diálogo competitivo (art. 32) e o procedimento auxiliar de manifestação de interesse (art. 81).
+
+[5] Consulte o item 3.6.5 deste manual.
+
+[6] Consulte o item 4.4.1.3 deste manual.
+
+[7] Remete-se aos comentários do item 5.9.3 deste manual.
+
+[8] Lei 14.133/2021, art. 11, parágrafo único, e art. 18, caput.

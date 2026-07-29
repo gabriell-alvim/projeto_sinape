@@ -1,0 +1,54 @@
+3.4.1. Menor preço
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/3-4-1-menor-preco/
+======================================================================
+
+O objetivo do julgamento por menor preço é selecionar a proposta que represente o menor dispêndio para a Administração, observados os parâmetros mínimos de qualidade definidos em edital, que assegurem o atendimento da necessidade que originou a licitação[1].
+
+Diferente do critério por técnica e preço, não há ponderação da qualidade técnica das propostas que superarem os requisitos mínimos de qualidade previstos no edital[2]. Assim, as propostas que cumprirem os parâmetros mínimos de aceitabilidade disputarão pelo valor a ser pago pela Administração.
+
+Importante observar que menor dispêndio não se limita a menor valor de proposta, pois os custos indiretos (quando objetivamente mensurados) relacionados ao ciclo de vida do objeto licitado deverão ser considerados na análise quanto à vantajosidade da proposta[3].
+
+O julgamento por menor preço pode ser adotado nas concorrências e nos pregões, inclusive para registros de preços[4], e na fase competitiva da modalidade diálogo competitivo[5]. Quando utilizado esse critério de julgamento, é vedada a utilização isolada do modo de disputa fechado, estando prevista, portanto, a apresentação de lances públicos e sucessivos na competição[6].
+
+Para qualificação e descrição do objeto licitado, deve ser utilizado o Catálogo Eletrônico de Padronização de Compras, Serviços e Obras, previsto no art. 19, inciso II, da Lei 14.133/2021. A não utilização do catálogo é situação excepcional, a ser justificada[7]. No âmbito da APF, o referido catálogo foi instituído por meio da Portaria – Seges/ME 938/2022.
+
+Quadro 55 – Referências normativas para o critério Menor Preço
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 6º XXXVIII – concorrência: modalidade de licitação para contratação de bens e serviços especiais e de obras e serviços comuns e especiais de engenharia, cujo critério de julgamento poderá ser: a) menor preço; […] XLI – pregão: modalidade de licitação obrigatória para aquisição de bens e serviços comuns, cujo critério de julgamento poderá ser o de menor preço ou o de maior desconto; Art. 19. Os órgãos da Administração com competências regulamentares relativas às atividades de administração de materiais, de obras e serviços e de licitações e contratos deverão: […] II – criar catálogo eletrônico de padronização de compras, serviços e obras, admitida a adoção do catálogo do Poder Executivo federal por todos os entes federativos; […]§ 1º O catálogo referido no inciso II do caput deste artigo poderá ser utilizado em licitações cujo critério de julgamento seja o de menor preço ou o de maior desconto […]. Art. 33. O julgamento das propostas será realizado de acordo com os seguintes critérios: I – menor preço; […] Art. 34. O julgamento por menor preço ou maior desconto e, quando couber, por técnica e preço considerará o menor dispêndio para a Administração, atendidos os parâmetros mínimos de qualidade definidos no edital de licitação. § 1º Os custos indiretos, relacionados com as despesas de manutenção, utilização, reposição, depreciação e impacto ambiental do objeto licitado, entre outros fatores vinculados ao seu ciclo de vida, poderão ser considerados para a definição do menor dispêndio, sempre que objetivamente mensuráveis, conforme disposto em regulamento. […] Art. 55. Os prazos mínimos para apresentação de propostas e lances, contados a partir da data de divulgação do edital de licitação, são de: […] I – para aquisição de bens: a) 8 (oito) dias úteis, quando adotados os critérios de julgamento de menor preço ou de maior desconto; […] II – no caso de serviços e obras: a) 10 (dez) dias úteis, quando adotados os critérios de julgamento de menor preço ou de maior desconto, no caso de serviços comuns e de obras e serviços comuns de engenharia; […] Art. 56. O modo de disputa poderá ser, isolada ou conjuntamente: I – aberto, hipótese em que os licitantes apresentarão suas propostas por meio de lances públicos e sucessivos, crescentes ou decrescentes; II – fechado, hipótese em que as propostas permanecerão em sigilo até a data e hora designadas para sua divulgação. § 1º A utilização isolada do modo de disputa fechado será vedada quando adotados os critérios de julgamento de menor preço ou de maior desconto. […]
+IN – Seges/ME 73/2022 | Art. 1º Esta Instrução Normativa dispõe sobre a licitação pelo critério de julgamento por menor preço ou maior desconto, na forma eletrônica, para a contratação de bens, serviços e obras, no âmbito da Administração Pública federal direta, autárquica e fundacional. […]
+
+Fonte: normas consultadas.
+
+Quadro 56 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 214/2020 – TCU – Plenário | 9.5. determinar, [ omissis ], novamente com fundamento no art. 250, inciso II, do Regimento Interno do TCU, que, caso opte por realizar novo procedimento licitatório para aquisição de pá carregadeira com recursos públicos federais, atente, em especial, para o seguinte: 9.5.1. de acordo com o princípio da especificidade mínima que garante o cumprimento das obrigações, estabelecido pela Constituição Federal, art. 37, inciso XXI, as especificações técnicas dos objetos das licitações, inclusive pás carregadeiras, precisam ser justificadas tecnicamente, devendo estes critérios ser os mínimos necessários para a garantia do alcance do objetivo da licitação, havendo, ainda, a necessidade de que todo esse nexo relacional esteja justificado nos autos do processo licitatório
+Acórdão 2600/2015-TCU-Plenário | b) dar ciência à [ omissis ] sobre as seguintes impropriedades identificadas no Pregão Eletrônico [ omissis ]: b.1) a não definição de requisitos objetivos e claros a respeito da qualidade mínima dos produtos objeto da licitação afronta o disposto no art. 3º, inciso II, da Lei 10.520/2002, o qual estabelece que a definição do objeto do pregão deve ser precisa, suficiente e clara;
+Acórdão 1225/2014-TCU-Plenário | [Voto] 6. Evidentemente, essa busca pela qualidade não significa descuidar da economicidade ou desconsiderar a necessidade de ampliação da competitividade das licitações. Mas a obtenção de preços de aquisição mais baixos não pode ser atingida às custas da contratação de produtos de baixa qualidade ou de empresas sem condições de prestar serviços adequados. 7. Licitar implica, necessariamente, fazer restrições, pois no momento em que se definem as características do produto/serviço que se deseja, afasta-se a possibilidade das empresas que não detêm produtos ou serviços com aquelas características de fornecerem para a administração. O que não se admite, e assim prevê o art. 3º, § 1º, inciso I, da Lei 8.666/93, é o estabelecimento de condições que restrinjam o caráter competitivo das licitações em razão de circunstância impertinente ou irrelevante para o específico objeto do contrato . (Grifo nosso)
+Acórdão 904/2006-TCU-Plenário | Sumário: […] Na licitação do tipo menor preço deve ser escolhido o melhor preço para a administração, aí entendido preço consentâneo com o praticado no mercado, assegurada a prestação do serviço ou a entrega do bem, a contento, não havendo impedimento a que se determine requisitos de qualidade técnica mínima. A descrição do objeto deve ser clara e deve descrever os requisitos técnicos necessários à satisfação do interesse da administração.
+Pesquisa de Jurisprudência | Execute consulta na Pesquisa Integrada do TCU. Pesquise pelas expressões: “Licitação” ADJ3 “tipo menor preço” “Licitação” ADJ3 “menor preço”
+
+Fonte: Elaboração própria a partir de consulta à jurisprudência do TCU.
+
+Quadro 57 – Modelos
+
+Assunto | Modelo disponibilizados por OGS ou por órgãos de controle | OGS
+Diretrizes | Vídeo explicativo Vídeo explicativo (lances) | AGU, MGI
+
+Fonte: Elaboração própria.
+
+[1] Lei 14.133/2021, art. 34.
+
+[2] Lei 14.133/2021, art. 36, § 1º.
+
+[3] Lei 14.133/2021, art. 6º, inciso XXIII, alínea “c”, art. 11, inciso I, art. 18, inciso VIII, e art. 34, § 1º.
+
+[4] Lei 14.133/2021, art. 82, inciso V.
+
+[5] Lei 14.133/2021, art. 6º, inciso XXXVIII, alínea “a”, e XLI, respectivamente; IN Seges/ME 73/2022, art. 4º, incisos I, II e III.
+
+[6] Lei 14.133/2021, art. 56, § 1º.
+
+[7] Lei 14.133/2021, art. 19, § 2º.

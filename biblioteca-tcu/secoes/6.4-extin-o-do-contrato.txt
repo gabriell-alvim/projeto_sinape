@@ -1,0 +1,20 @@
+6.4. Extinção do contrato
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/6-4-extincao-do-contrato/
+======================================================================
+
+O contrato se extingue naturalmente com o cumprimento das obrigações contratuais ou pelo término do prazo de vigência. No entanto, existem situações que podem causar a extinção prematura do contrato, sem que seu objeto seja concluído e antes do prazo previsto de duração.
+
+A primeira causa de extinção prematura do contrato pode ocorrer quando há uma irregularidade insanável no processo licitatório (ou de contratação direta) ou na formalização da avença, tornando o contrato passível de anulação, mesmo após o início da sua execução[1].
+
+As demais situações que podem levar à extinção prematura estão listadas nos arts. 137, e 106, inciso III, da Lei 14.133/2021. Elas podem ocorrer por motivos diversos, decorrentes de eventos posteriores à celebração do contrato, seja por culpa exclusiva do contratado, ou da Administração, por razões de interesse público ou pela ocorrência de fatos imprevisíveis.
+
+O art. 138 da Lei 14.133/2021 estabelece as formas de extinção antecipada do contrato administrativo, a saber: unilateralmente pela Administração; por consenso entre as partes; por decisão arbitral ou por decisão judicial.
+
+É importante mencionar que a extinção do contrato não impede o reconhecimento de desequilíbrio econômico-financeiro. Nesse caso, será concedida indenização por meio de termo indenizatório. No entanto, cabe ao contratado solicitar o restabelecimento do equilíbrio econômico-financeiro durante a vigência do contrato[2].
+
+Nos próximos itens, serão discutidas a extinção normal do contrato (item 6.4.1), as formas de extinção prematura (item 6.4.2) e as causas para a extinção prematura (item 6.4.3). Todos os itens incluirão quadros de referências normativas e de jurisprudência do TCU (quando disponível, mesmo sob a égide da legislação anterior). Além disso, os itens 6.4.1 e 6.4.3 incluirão quadros com os riscos relacionados à extinção dos contratos.
+
+[1] Lei 14.133/2021, art. 147.
+
+[2] Lei 14.133/2021, art. 131.

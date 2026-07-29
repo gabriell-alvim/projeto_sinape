@@ -1,0 +1,91 @@
+4.5.2.2. Participação de consórcios
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/4-5-2-2-participacao-de-consorcios/
+======================================================================
+
+A fase preparatória do processo licitatório deve conter a motivação acerca da possibilidade ou não de participação de empresas em consórcio, conforme previsto no art. 18, inciso IX, da Lei 14.133/2021. O silêncio do edital acerca da participação de consórcio de empresas em certame licitatório equivale à sua autorização, ao passo que a decisão quanto à vedação dessa participação, por ser discricionária, deve estar prevista no instrumento convocatório e devidamente motivada no processo administrativo[1].
+
+O art. 15 da Lei 14.133/2021 admite, em regra, a participação de empresas em consórcio nas licitações, salvo vedação devidamente justificada no processo licitatório. Assim, quando for permitida a participação de consórcio, as seguintes exigências devem ser cumpridas:
+
+Art. 15 […] I – comprovação de compromisso público ou particular de constituição de consórcio, subscrito pelos consorciados;
+
+II – indicação da empresa líder do consórcio, que será responsável por sua representação perante a Administração;
+
+III – admissão, para efeito de habilitação técnica, do somatório dos quantitativos de cada consorciado e, para efeito de habilitação econômico-financeira, do somatório dos valores de cada consorciado;
+
+IV – impedimento de a empresa consorciada participar, na mesma licitação, de mais de um consórcio ou de forma isolada;
+
+V – responsabilidade solidária dos integrantes pelos atos praticados em consórcio, tanto na fase de licitação quanto na de execução do contrato.
+
+Observe-se que não se deve exigir a constituição prévia do consórcio para fins de licitação, mas tão somente a comprovação de compromisso público ou particular de constituição, subscrito pelos consorciados.
+
+Somente o licitante vencedor é obrigado a promover a constituição e o registro do consórcio, antes da celebração do contrato[2].
+
+Diferentemente da legislação anterior, a Lei 14.133/2021 não requer que, em consórcio integrado por empresas nacionais e estrangeiras, a liderança seja obrigatoriamente de empresa brasileira.
+
+Adicionalmente, é vedado às empresas consorciadas participarem de mais de um consórcio na mesma licitação ou concorrerem isoladamente no certame[3].
+
+Ressalte-se que a responsabilidade dos integrantes do consórcio pelos atos praticados na licitação e na execução contratual será solidária[4].
+
+Quanto aos requisitos de habilitação[5], a Lei 14.133/2021 possibilita o somatório dos quantitativos de cada consorciado para a habilitação técnica[6].
+
+Para a habilitação econômico-financeira, é permitido que o cálculo dos indicadores seja realizado a partir do somatório dos valores constantes das contas contábeis de cada consorciado (não é permitido o somatório de índices) [7]. 
+
+Ainda, o edital deve prever o acréscimo de 10% a 30% sobre o valor exigido de licitante individual para a habilitação econômico-financeira, salvo justificação[8]. Esse acréscimo não será aplicável aos consórcios compostos, em sua totalidade, de microempresas e pequenas empresas[9].
+
+A Lei 14.133/2021 possibilita o estabelecimento de limite máximo para o número de empresas participantes por consórcio, desde que haja justificativa técnica aprovada pela autoridade competente[10].
+
+É admitida a eventual substituição de consorciado, desde que haja prévia autorização da Administração e comprovação de que a nova empresa do consórcio possui, no mínimo, os mesmos quantitativos para efeito de habilitação técnica e os mesmos valores para efeito de qualificação econômico-financeira[11].
+
+Quadro 188 – Referências normativas para a participação de consórcios
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 15. Salvo vedação devidamente justificada no processo licitatório, pessoa jurídica poderá participar de licitação em consórcio, observadas as seguintes normas: I – comprovação de compromisso público ou particular de constituição de consórcio, subscrito pelos consorciados; II – indicação da empresa líder do consórcio, que será responsável por sua representação perante a Administração; III – admissão, para efeito de habilitação técnica, do somatório dos quantitativos de cada consorciado e, para efeito de habilitação econômico-financeira, do somatório dos valores de cada consorciado; IV – impedimento de a empresa consorciada participar, na mesma licitação, de mais de um consórcio ou de forma isolada; V – responsabilidade solidária dos integrantes pelos atos praticados em consórcio, tanto na fase de licitação quanto na de execução do contrato. § 1º O edital deverá estabelecer para o consórcio acréscimo de 10% (dez por cento) a 30% (trinta por cento) sobre o valor exigido de licitante individual para a habilitação econômico-financeira, salvo justificação. § 2º O acréscimo previsto no § 1º deste artigo não se aplica aos consórcios compostos, em sua totalidade, de microempresas e pequenas empresas, assim definidas em lei. § 3º O licitante vencedor é obrigado a promover, antes da celebração do contrato, a constituição e o registro do consórcio, nos termos do compromisso referido no inciso I do caput deste artigo. § 4º Desde que haja justificativa técnica aprovada pela autoridade competente, o edital de licitação poderá estabelecer limite máximo para o número de empresas consorciadas. § 5º A substituição de consorciado deverá ser expressamente autorizada pelo órgão ou entidade contratante e condicionada à comprovação de que a nova empresa do consórcio possui, no mínimo, os mesmos quantitativos para efeito de habilitação técnica e os mesmos valores para efeito de qualificação econômico-financeira apresentados pela empresa substituída para fins de habilitação do consórcio no processo licitatório que originou o contrato. Art. 18. A fase preparatória do processo licitatório é caracterizada pelo planejamento e deve compatibilizar-se com o plano de contratações anual de que trata o inciso VII do caput do art. 12 desta Lei , sempre que elaborado, e com as leis orçamentárias, bem como abordar todas as considerações técnicas, mercadológicas e de gestão que podem interferir na contratação, compreendidos: […] IX – a motivação circunstanciada das condições do edital, tais como justificativa de exigências de qualificação técnica, mediante indicação das parcelas de maior relevância técnica ou valor significativo do objeto, e de qualificação econômico-financeira, justificativa dos critérios de pontuação e julgamento das propostas técnicas, nas licitações com julgamento por melhor técnica ou técnica e preço, e justificativa das regras pertinentes à participação de empresas em consórcio;
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 189 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 2929/2021-TCU-Plenário | [Enunciado] A sanção de inidoneidade para participar de licitação na Administração Pública Federal (art. 46 da Lei 8.443/1992) não deve ser imposta ao consórcio em si, e sim à(s) empresa(s) integrante(s) que efetivamente participou(aram) dos ilícitos apurados, diante dos princípios da responsabilidade pessoal e da individualização da pena, e pelo fato de o consórcio não possuir personalidade jurídica, caracterizando-se tão somente como associação entre sociedades empresárias em que há comunhão temporária de esforços para o desenvolvimento de empreendimento em comum (art. 278 da Lei 6.404/1976).
+Acórdão 3699/2019-Segunda Câmara | [Enunciado] Não deve ser exigido, na licitação, registro em cartório do compromisso de constituição de consórcio, uma vez que tal exigência não consta no rol dos instrumentos sujeitos obrigatoriamente ao registro de títulos e documentos para surtir efeitos perante terceiros (art. 129 da Lei 6.015/1973) e o Estatuto das Licitações somente o exige para fim de celebração do contrato (art. 33, inciso I e § 2º, da Lei 8.666/1993).
+Acórdão 2633/2019-Plenário | [Enunciado] A decisão pela vedação de participação de consórcio de empresas em licitação é discricionária, porém deve ser devidamente motivada no processo administrativo.
+Acórdão 1852/2019-Plenário | [Enunciado] A fixação, no edital, do número máximo de empresas integrantes de consórcio deve ser devidamente justificada no processo licitatório.
+Acórdão 10264/2018-Segunda Câmara | [Enunciado] Em licitações de serviços diversos em contrato único ( Facilities Full ), a permissão de formação de consórcios e a possibilidade de subcontratação de serviços são meios que podem amenizar a restrição a concorrência decorrente da junção de inúmeros serviços em único objeto.
+Acórdão 1711/2017-Plenário | [Enunciado] A decisão da Administração de permitir a participação de empresas sob a forma de consórcio nas licitações deve ser devidamente motivada e não deve implicar a proibição da participação de empresas que, individualmente, possam cumprir o objeto a ser contratado, sob pena de restrição à competitividade.
+Acórdão 929/2017-Plenário | [Enunciado] A Administração, em respeito à transparência e à motivação dos atos administrativos, deve explicitar as razões para a admissão ou vedação à participação de consórcios de empresas quando da contratação de objetos de maior vulto e complexidade.
+Acórdão 2130/2016-Plenário | [Enunciado] Na execução de contrato celebrado com consórcio, tendo a empresa líder solicitado rescisão contratual, a Administração pode manter o contrato modificado pelo ingresso de outra interessada em continuar a obra, sem necessidade de anuência expressa da empresa dissidente.
+Acórdão 1946/2006-Plenário | [Voto] 26. Quando o objeto a ser licitado envolve questões de alta complexidade, via de regra, a Administração, com intuito de aumentar o número de participantes, admite a formação de consórcio. No entanto, essa hipótese não ocorre no contexto ora em análise, pois, como já mencionado acima, os serviços licitados não envolvem questões de alta complexidade técnica, mas apenas serão mais bem prestados se não parcelados. 27. Ademais, a participação de consórcios em torneios licitatórios não garante aumento de competitividade, consoante arestos do Relatório e Voto que impulsionaram o Acórdão 2813/2004-TCU-Primeira Câmara, que reproduzo abaixo: “Relatório que antecede o Voto 26. O art. 33 da Lei de Licitações expressamente atribui à Administração a prerrogativa de admitir a participação de consórcios. Está, portanto, no âmbito da discricionariedade da Administração. Isto porque, ao nosso ver, a formação de consórcio tanto pode se prestar a fomentar a concorrência (consórcio de empresas menores que, de outra forma, não participariam do certame), quanto a cerceá-la (associação de empresas que, caso contrário, concorreriam entre si). Com os exemplos fornecidos pelo Bacen, vemos que é prática comum a não-aceitação de consórcios. Voto 5. Nesse sentido, estou de acordo com as conclusões obtidas pela Unidade Técnica no exame pontual de todas as alegações contidas na representação, as quais resultaram improcedentes, tendo em vista, basicamente, que: a) embora, em tese, fosse tecnicamente possível a divisão do objeto da licitação em parcelas, para adjudicação por itens, tal medida resultaria, na situação concreta, em prejuízo para a economicidade e a eficiência global dos serviços, desnaturando a funcionalidade do sistema integrado de gestão empresarial na modalidade ERP – Enterprise Resource Planning; b) nem sempre a participação de empresas em consórcio implica incremento de competitividade (associação de pequenas empresas para participação em conjunto), podendo vir a constituir, ao contrário, limitação à concorrência (diminuição do número de empresas de porte interessadas por integrarem um mesmo consórcio);”
+Pesquisa de Jurisprudência | Execute consulta na Jurisprudência Selecionada, por árvore de classificação. Selecione a área “licitação”, e o tema “Consórcio”.
+
+Fonte: Elaboração própria a partir de consulta a jurisprudência do TCU.
+
+Quadro 190 – Riscos relacionados
+
+Riscos
+Deficiência no levantamento de mercado durante o planejamento da contratação, levando à decisão equivocada quando à proibição de consórcios de empresas na licitação, com consequentes questionamentos e paralisação do certame, ou contratação de pessoa física ou jurídica incapaz de executar a avença.
+Deficiência no levantamento de mercado durante o planejamento da contratação, levando à decisão equivocada quanto à permissão de consórcios de empresas na licitação, com consequente redução do número de potenciais competidores, que deixam de concorrer entre si para se associarem em consórcio.
+
+Fonte: Elaboração própria.
+
+[1] Acórdão 1170/2025- TCU-Plenário
+
+[2] Lei 14.133/2021, art. 15, § 3º.
+
+[3] Lei 14.133/2021, art. 15, inciso IV
+
+[4] Lei 14.133/2021, art. 15, inciso V.
+
+[5] Mais detalhes no item 5.5 deste manual.
+
+[6] Lei 14.133/2021, art. 15, inciso III.
+
+[7] Lei 14.133/2021, art. 15, inciso III.
+
+[8] Lei 14.133/2021, art. 15, § 1º.
+
+[9]Lei 14.133/2021, art. 15, § 2º.
+
+[10] Lei 14.133/2021, art. 15, § 4º.
+
+[11] Lei 14.133/2021, art. 15, § 5º.

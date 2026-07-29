@@ -1,0 +1,75 @@
+5.4.2. Desempate
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/5-4-2-desempate-2/
+======================================================================
+
+Quando ocorrer empate entre duas ou mais propostas, serão aplicados os critérios dispostos no art. 60 da Lei 14.133/2021, os quais devem ser utilizados na ordem em que foram elencados na norma (ver Quadro 246).
+
+Esses critérios, conforme o § 2º do art. 60, não afastam o direito de preferência para microempresas e empresas de pequeno porte, previsto no art. 44 da LC 123/2006, que dispõe sobre o empate ficto nas situações em que as propostas apresentadas por elas sejam iguais ou até 10% superiores à proposta mais bem classificada (5% no caso de pregão). Segundo o art. 45 da referida lei complementar, ocorrendo o empate ficto, a ME/EPP poderá apresentar proposta de preço inferior àquela até então vencedora do certame (que não seja ME/EPP), situação em que o objeto será adjudicado em seu favor[1]. Essa regra de desempate é norma especial, devendo ser observada, portanto, antes das demais regras dispostas no art. 60 da Lei 14.133/2021.
+
+Assim, se mesmo após o exercício de eventual direito de preferência das ME/EPPs, houver empate entre propostas, deverão ser aplicados os critérios dispostos no art. 60 da Lei 14.133/2021.
+
+O primeiro critério que a Lei estabelece para o desempate é o de disputa final, em que os licitantes empatados serão chamados a apresentar nova proposta.
+
+Se o primeiro critério não solucionar o desempate, poderá ser utilizada a avaliação de desempenho pretérito dos licitantes em contratos celebrados com a Administração, conforme regulamento. Para isso, será necessária a consulta a registro cadastral para verificar se, em contratação prévia, houve ou não descumprimento das obrigações por parte do contratado.
+
+O terceiro critério trata das ações de equidade entre homens e mulheres no ambiente de trabalho. O conjunto de ações que podem ser consideradas para a aplicação deste critério foi definido pelo Decreto 11.430/2023 (vide Quadro 246). Além disso, o artigo 3º da Lei nº 14.682/2023 estabelece que o selo “Empresa Amiga da Mulher” também será levado em conta nesse contexto.
+
+O último critério é o de desenvolvimento pelo licitante de programa de integridade, conforme orientações dos órgãos de controle. Exemplos de orientações nesse sentido são os informativos e cartilhas que a CGU tem publicado para orientar a implementação de programas de integridade por fornecedores. Recomenda-se, por oportuno, a Leitura do item 2.1 deste manual.
+
+Se, mesmo aplicando os critérios anteriores, o empate persistir, a Lei 14.133/2021 dispõe que será assegurada preferência, sucessivamente, aos bens e serviços produzidos ou prestados por:
+
+I – empresas estabelecidas no território do Estado ou do Distrito Federal do órgão ou entidade da Administração Pública estadual ou distrital licitante ou, no caso de licitação realizada por órgão ou entidade de Município, no território do Estado em que este se localize;
+
+II – empresas brasileiras;
+
+III – empresas que invistam em pesquisa e no desenvolvimento de tecnologia no País; e
+
+IV – empresas que comprovem a prática de mitigação, nos termos da Lei nº 12.187, de 29 de dezembro de 2009.
+
+Com relação ao inciso IV, vale mencionar que as práticas de mitigação são as que provocam[2]:
+
+[…] mudanças e substituições tecnológicas que reduzam o uso de recursos e as emissões por unidade de produção, bem como a implementação de medidas que reduzam as emissões de gases de efeito estufa e aumentem os sumidouros.
+
+Quadro 246 – Referências normativas para o desempate
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 60. Em caso de empate entre duas ou mais propostas, serão utilizados os seguintes critérios de desempate, nesta ordem: I – disputa final, hipótese em que os licitantes empatados poderão apresentar nova proposta em ato contínuo à classificação; II – avaliação do desempenho contratual prévio dos licitantes, para a qual deverão preferencialmente ser utilizados registros cadastrais para efeito de atesto de cumprimento de obrigações previstos nesta Lei; III – desenvolvimento pelo licitante de ações de equidade entre homens e mulheres no ambiente de trabalho, conforme regulamento; IV – desenvolvimento pelo licitante de programa de integridade, conforme orientações dos órgãos de controle. § 1º Em igualdade de condições, se não houver desempate, será assegurada preferência, sucessivamente, aos bens e serviços produzidos ou prestados por: I – empresas estabelecidas no território do Estado ou do Distrito Federal do órgão ou entidade da Administração Pública estadual ou distrital licitante ou, no caso de licitação realizada por órgão ou entidade de Município, no território do Estado em que este se localize; II – empresas brasileiras; III – empresas que invistam em pesquisa e no desenvolvimento de tecnologia no País; IV – empresas que comprovem a prática de mitigação, nos termos da Lei nº 12.187, de 29 de dezembro de 2009. § 2º As regras previstas no caput deste artigo não prejudicarão a aplicação do disposto no art. 44 da Lei Complementar nº 123, de 14 de dezembro de 2006.
+Lei 14.682/2023 | Art. 3º O selo Empresa Amiga da Mulher será considerado desenvolvimento de ações de equidade entre homens e mulheres no ambiente de trabalho, de que trata o inciso III do caput do art. 60 da Lei nº 14.133, de 1º de abril de 2021.
+Decreto 11.430/2023 | Regulamenta a Lei nº 14.133, de 1º de abril de 2021, para dispor sobre a exigência, em contratações públicas, de percentual mínimo de mão de obra constituída por mulheres vítimas de violência doméstica e sobre a utilização do desenvolvimento, pelo licitante, de ações de equidade entre mulheres e homens no ambiente de trabalho como critério de desempate em licitações, no âmbito da Administração Pública federal direta, autárquica e fundacional. […] Desempate nos processos licitatórios Art. 5º O desenvolvimento, pelo licitante, de ações de equidade entre mulheres e homens no ambiente de trabalho será critério de desempate em processos licitatórios, nos termos do disposto no inciso III do caput do art. 60 da Lei nº 14.133, de 2021. § 1º Para fins do disposto no caput , serão consideradas ações de equidade, respeitada a seguinte ordem: I – medidas de inserção, de participação e de ascensão profissional igualitária entre mulheres e homens, incluída a proporção de mulheres em cargos de direção do licitante; II – ações de promoção da igualdade de oportunidades e de tratamento entre mulheres e homens em matéria de emprego e ocupação; III – igualdade de remuneração e paridade salarial entre mulheres e homens; IV – práticas de prevenção e de enfrentamento do assédio moral e sexual; V – programas destinados à equidade de gênero e de raça; e VI – ações em saúde e segurança do trabalho que considerem as diferenças entre os gêneros. § 2º Ato do Secretário de Gestão e Inovação do Ministério da Gestão e da Inovação em Serviços Públicos em Serviços Públicos disporá sobre a forma de aferição, pela administração, e sobre a forma de comprovação, pelo licitante, do desenvolvimento das ações de que trata o § 1º.
+IN – Seges/ME 2/2023 | Art. 1º Esta Instrução Normativa dispõe sobre a licitação pelo critério de julgamento por técnica e preço, na forma eletrônica, no âmbito da Administração Pública federal direta, autárquica e fundacional. […] Critérios de desempate Art. 24. Em caso de empate entre duas ou mais notas finais atribuídas à ponderação entre as propostas de técnica e de preço, serão utilizados os critérios de desempate previstos no art. 60 da Lei nº 14.133, de 2021. Parágrafo único. O critério previsto no inciso I do art. 60 da Lei nº 14.133, de 2021, será aplicado apenas com relação à proposta de preço.
+IN – Seges/ME 96/2022 | Art. 1º Esta Instrução Normativa dispõe sobre a licitação pelo critério de julgamento por maior retorno econômico, na forma eletrônica, no âmbito da Administração Pública federal direta, autárquica e fundacional. […] Critérios de desempate Art. 35. Em caso de empate entre dois ou mais valores finais de retorno econômico, serão utilizados os critérios de desempate previstos no art. 60 da Lei nº 14.133, de 2021. Parágrafo único. O critério previsto no inciso I do art. 60 da Lei nº 14.133, de 2021, será aplicado apenas com relação à proposta de preço
+IN – Seges/ME 73/2022 | Art. 1º Esta Instrução Normativa dispõe sobre a licitação pelo critério de julgamento por menor preço ou maior desconto, na forma eletrônica, para a contratação de bens, serviços e obras, no âmbito da Administração Pública federal direta, autárquica e fundacional. […] Critérios de desempate Art. 28. Em caso de empate entre duas ou mais propostas, serão utilizados os critérios de desempate previstos no art. 60 da Lei nº 14.133, de 2021. Parágrafo único. Empatadas as propostas iniciais e não havendo o envio de lances após o início da fase competitiva, aplicam-se os critérios de desempate de que trata o caput .
+IN – Seges/MGI 79/2024 | Altera a Instrução Normativa nº 73, de 30 de setembro de 2022, publicada no Diário Oficial da União de 03 de outubro de 2022. para prever a hipótese de sorteio, bem como para atualizar porcentuais máximos para convocação de licitantes nas modalidades aberto/fechado e fechado/aberto quando for prevista a aplicação de margens de preferência.
+Enunciado do IBDA nº 20/2024 | Esgotados os critérios previstos no art. 60 da Lei n. 14.133/2021 e mantendo-se o empate, é admissível a utilização de critérios objetivos e isonômicos para desempate, tal como o sorteio, desde que previstos em edital e que a procedimentalização esteja objetivamente descrita, garantida a transparência, acompanhamento do procedimento pelos interessados e auditabilidade da ferramenta.
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 247 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 1733/2025-TCU-Plenário | [Enunciado] O critério de desempate por localidade (art. 60, § 1º, inciso I, da Lei 14.133/2021) não se aplica a licitações realizadas no âmbito da Administração Pública Federal, por ausência de expressa previsão legal. A preferência por empresas estabelecidas no território do promotor do certame é restrita às licitações realizadas por órgãos e entidades dos entes subnacionais.
+Acórdão 723/2024-TCU-Plenário | c) dar ciência à [ omissis ], ao [ omissis ] e ao [ omissis ], com fundamento no art. 9º, inciso I, da Resolução TCU 315/2020, sobre a seguinte impropriedade/falha, identificada nos Pregões [ omissis ], respectivamente, para que sejam adotadas medidas internas com vistas à prevenção de outras ocorrências semelhantes: c.1) utilização do sorteio como critério de desempate sem que haja previsão no edital, uma vez que, por não estar previsto expressamente no ordenamento jurídico, em especial na Lei 14.133/2021, não pode ser utilizado sem sua previsão no instrumento convocatório , em atenção aos princípios da vinculação ao edital, da impessoalidade e da segurança jurídica; d) informar a Secretaria de Gestão e Inovação, vinculada ao Ministério da Gestão e da Inovação em Serviços Públicos, e a Advocacia-Geral da União, acerca do teor desta deliberação para que adotem as medidas que entenderem necessárias e adequadas em relação ao tema tratado nestes autos; (Grifo nosso)
+Acórdão 1251/2017-TCU-Plenário | [Enunciado] Nas licitações para a contratação de serviços de agenciamento de viagens para voos regulares internacionais e domésticos, a aferição do empate relacionado ao direito de preferência para microempresas e empresas de pequeno porte (art. 44 da LC 123/2006) deve considerar somente as comissões e adicionais recebidos pela agência na intermediação dos bilhetes e serviços, e não os valores a serem repassados às companhias aéreas.
+Pesquisa de Jurisprudência | Execute consulta na Jurisprudência Selecionada do TCU , por árvore de classificação. Selecione a área “Licitação”, o tema “pregão”, subtema “direito de preferência” . Execute consulta na Jurisprudência Selecionada do TCU , por árvore de classificação. Selecione a área “Licitação”, e pesquise pelo termo “empate” .
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+Quadro 248 – Riscos relacionados
+
+Riscos
+Ausência de registro cadastral no PNCP e de parâmetros objetivos para avaliar o desempenho contratual prévio dos licitantes, levando a: impossibilidade de aplicar o disposto no art. 60, inciso II, da Lei 14.133/2021, como critério de desempate, com consequente ineficácia do dispositivo legal; ou aplicação do dispositivo com base em avaliações subjetivas e discricionárias, com consequentes questionamentos e paralisação do certame.
+Falta de capacidade técnica do agente ou dos membros da comissão de contratação, levando-os a não observar o empate ficto como critério de preferência de ME/EPP para a contratação, ou a aplicar outros critérios de desempate antes de permitir à ME/EPP exercer seu direito de preferência, com consequente descumprimento da política pública de incentivo à contratação de ME/EPP, além de possíveis questionamentos e paralisação do certame.
+
+Fonte: Elaboração própria.
+
+Quadro 249 – Modelos
+
+Assunto | Modelo disponibilizados por OGS ou por órgãos de controle | OGS
+Implementação do Decreto 11.430/2023 | Caderno de Logística: Implementação do Decreto 11.430/2023 (MGI, 2024) | MGI
+
+Fonte: Elaboração própria.
+
+[1] Remete-se aos comentários do item 4.5.2.4 deste manual.
+
+[2] Lei 12.187/2009, art. 2º, inciso VII.

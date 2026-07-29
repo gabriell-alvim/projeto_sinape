@@ -1,0 +1,38 @@
+3.4.5. Maior lance (no caso de leilão)
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/3-4-5-maior-lance-no-caso-de-leilao/
+======================================================================
+
+Como o nome indica, é o critério específico da modalidade leilão, utilizado para “alienação de bens imóveis ou de bens móveis inservíveis ou legalmente apreendidos”[1].
+
+A Administração deve avaliar previamente o bem a ser leiloado e definir o preço mínimo pelo qual poderá ser alienado, as condições de pagamento e a comissão do leiloeiro designado (se for o caso)[2]. Tais informações deverão constar do edital, além das informações constantes do art. 31, § 2º, incisos I, III, IV e V, da Lei 14.133/2021[3].
+
+Como não haverá fase de habilitação, o vencedor da licitação será aquele que oferecer o maior lance, de valor igual ou superior ao preço mínimo de alienação[4].
+
+Para mais detalhes sobre o leilão, recomenda-se a Leitura do item 3.6.4. deste manual.
+
+Quadro 65 – Referências normativas para o critério maior lance
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 6º Para os fins desta Lei, consideram-se: […] XL – leilão: modalidade de licitação para alienação de bens imóveis ou de bens móveis inservíveis ou legalmente apreendidos a quem oferecer o maior lance; […] Art. 31. […] § 2º O leilão será precedido da divulgação do edital em sítio eletrônico oficial, que conterá: […] II – o valor pelo qual o bem foi avaliado, o preço mínimo pelo qual poderá ser alienado, as condições de pagamento e, se for o caso, a comissão do leiloeiro designado; […] § 4º O leilão não exigirá registro cadastral prévio, não terá fase de habilitação e deverá ser homologado assim que concluída a fase de lances, superada a fase recursal e efetivado o pagamento pelo licitante vencedor, na forma definida no edital. […] Art. 33. O julgamento das propostas será realizado de acordo com os seguintes critérios: […] V – maior lance, no caso de leilão; […] Art. 55. Os prazos mínimos para apresentação de propostas e lances, contados a partir da data de divulgação do edital de licitação, são de: […] III – para licitação em que se adote o critério de julgamento de maior lance, 15 (quinze) dias úteis;
+Decreto 11.461/2023 | Regulamenta o art. 31 da Lei nº 14.133, de 1º de abril de 2021, para dispor sobre os procedimentos operacionais da licitação na modalidade leilão, na forma eletrônica, para a alienação de bens imóveis ou de bens móveis inservíveis ou legalmente apreendidos, e instituir o Sistema de Leilão Eletrônico, no âmbito da Administração Pública federal direta, autárquica e fundacional. […] Art. 9º O critério de julgamento adotado para escolha da proposta mais vantajosa na modalidade leilão será o de maior lance, a constar obrigatoriamente do edital. […] Art. 10. O edital, divulgado pelo órgão ou pela entidade, como agente promotor do leilão, ou pelo leiloeiro oficial, conterá as seguintes informações sobre a realização do leilão: […] VI – critério de julgamento das propostas pelo maior lance, nos termos do disposto no art. 9º; VII – intervalo mínimo de diferença de valores ou de percentuais entre os lances, quando necessário, que incidirá tanto em relação a lances intermediários quanto a lance que cobrir a melhor oferta; […]
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 66 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão1626/2017 – TCU – Plenário | [Enunciado] É de 5% o patamar máximo da comissão a ser paga a Leiloeiro oficial contratado por conselho de fiscalização profissional, conforme art. 24, inciso VI, da Lei 9.636/1998, a qual, embora se refira expressamente à alienação de bens de domínio da União, aplica-se à disposição de bens imóveis por parte daquelas entidades.
+Acórdão 788/2016 – TCU – Plenário | [Voto] 9. Também não é apropriado a extensão, por analogia, do tratamento diferenciado às microempresas e empresa de pequeno porte no leilão, considerando que, nesse caso, deve-se fazer interpretação restritiva da Lei Complementar que regulamentou esse benefício.
+Acórdão 1614/2009 – TCU – Primeira Câmara | 1.5.4. atente para a fixação do preço mínimo de arrematação em caso de realização de leilões […]
+Pesquisa de Jurisprudência | Execute consulta nas Acórdãos do TCU . Pesquise pela expressão (não utilize aspas): leilão selog.UNIDADETECNICA ou pela expressão: “modalidade” adj2 “leilão” não “desestatização”
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+[1] Lei 14.133/2021, art. 6º, inciso XL.
+
+[2] Lei 14.133/2021, art. 31, § 2º, inciso II.
+
+[3] Lei 14.133/2021, art. 31, § 2º.
+
+[4] Lei 14.133/2021, art. 6º, inciso XL c/c art. 31, § 4º.

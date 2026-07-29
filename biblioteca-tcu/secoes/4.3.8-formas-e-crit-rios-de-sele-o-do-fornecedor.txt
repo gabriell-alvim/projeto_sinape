@@ -1,0 +1,79 @@
+4.3.8. Formas e critérios de seleção do fornecedor
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/4-3-8-formas-e-criterios-de-selecao-do-fornecedor/
+======================================================================
+
+A definição da forma e dos critérios de seleção do fornecedor pressupõe a definição do objeto da contratação, já comentada no item 4.3.1.
+
+O objeto deve estar classificado como comum ou especial, como fornecimento de bem ou prestação de serviço, de forma contínua ou não contínua, com ou sem dedicação exclusiva de mão de obra ou predominância de mão de obra.
+
+Se não houver viabilidade de competição para o objeto definido, configura-se a hipótese de inexigibilidade de licitação[1]. Havendo viabilidade de competição, há que se verificar se é caso de dispensa ou se deve ocorrer a licitação. Há que se definir ainda se é adequada a utilização do registro de preços[2]. Ressalta-se que a regra é licitar[3].
+
+Se for realizada a licitação, serão escolhidos o critério de julgamento, o modo de disputa, a forma e a modalidade da licitação[4], parâmetros que esclarecerão aos potenciais licitantes como as propostas serão ordenadas e quais serão as etapas e os procedimentos da disputa.
+
+O critério de julgamento deve ser escolhido entre os seguintes: menor preço; maior desconto; melhor técnica ou conteúdo artístico; e técnica e preço, conforme comentado no item 3.4 deste manual. Para quaisquer desses critérios, devem ser estabelecidos requisitos mínimos de qualidade, necessários e relevantes que, caso não atendidos, implicarão a desclassificação da proposta.
+
+Para contratos de eficiência, o critério será o de maior retorno econômico. No caso de alienação de bens, o critério será o de maior lance.
+
+Para o julgamento por melhor técnica ou por técnica e preço, deve-se esclarecer quais requisitos de natureza qualitativa serão avaliados (superiores ao mínimo estabelecido), como serão atribuídas notas a tais requisitos e os fatores de ponderação entre preço e técnica, se for o caso. Lembrando que a Lei 14.133/2021, no art. 37, inciso III, prevê a atribuição de notas por desempenho do licitante em contratações anteriores, desde que aferida nos documentos comprobatórios de que trata o § 3º do art. 88 da Lei e em registro cadastral unificado disponível no Portal Nacional de Contratações Públicas (PNCP).
+
+Deve ser fixada a ordem das fases do procedimento, observando-se a necessidade ou não da inversão de fases (habilitação antes do julgamento das propostas, desde que motivada).
+
+É necessário também definir o modo de disputa: fechado, aberto ou combinado, bem como a forma da licitação: eletrônica ou presencial. Lembrando que as licitações “serão realizadas preferencialmente sob a forma eletrônica, admitida a utilização da forma presencial, desde que motivada, devendo a sessão pública ser registrada em ata e gravada em áudio e vídeo”[5].
+
+A modalidade de licitação pode ser pregão, concorrência, concurso, leilão, ou diálogo competitivo.
+
+Por fim, também devem ser definidos[6]:
+
+- possibilidade ou não de participação de consórcios, de cooperativas, de microempresas e de empresas de pequeno porte;
+
+- margem de preferência, se for o caso;
+
+- forma de adjudicação do objeto, se por itens, por lotes, grupos ou global;
+
+- requisitos para as habilitações, jurídica, técnica, fiscal, social e trabalhista, e econômico-financeira, que demonstrem que os licitantes possuem condições técnicas e econômicas para executar o objeto, que estão adimplentes com suas obrigações fiscais, sociais e trabalhistas, e que têm condição jurídica de assumir os direitos e obrigações do contrato[7]. Vale mencionar a equipe de planejamento é mais apta a indicar os requisitos de habilitação, sobretudo critérios de habilitação técnica e econômico-financeira;
+
+- critérios de aceitabilidade da proposta, incluindo os limites de preços unitário e global, que verifiquem a compatibilidade dos preços ofertados com os preços praticados no segmento de mercado[8]; e
+
+- critérios de desempate.
+
+Quadro 158 – Referências normativas para as formas e critérios de seleção do fornecedor
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 6º Para os fins desta Lei, consideram-se: […] XXIII – termo de referência: documento necessário para a contratação de bens e serviços, que deve conter os seguintes parâmetros e elementos descritivos: […] h) forma e critérios de seleção do fornecedor;
+IN – SGD/ME 94/2022 | Art. 12. O Termo de referência ou Projeto básico será elaborado pela Equipe de Planejamento da Contratação a partir do Estudo Técnico Preliminar da Contratação, incluindo, no mínimo, as seguintes informações: […] XI – critérios técnicos para seleção do fornecedor, conforme art. 23; e […] Art. 23. A definição dos critérios de julgamento da proposta (menor preço, maior desconto, técnica e preço ou maior retorno econômico) e dos critérios para habilitação técnica será feita pelo Integrante Técnico, nos termos do art. 67 da Lei nº 14.133, de 2021, que deverá observar o seguinte: I – a utilização de critérios correntes no mercado; II – a necessidade de justificativa técnica nos casos em que não seja permitido o somatório de atestados para comprovar os quantitativos mínimos relativos ao mesmo quesito de capacidade técnica; III – a vedação da indicação de entidade certificadora, exceto nos casos previamente dispostos em normas da Administração Pública; IV – a vedação de exigência, para fins de qualificação técnica na fase de habilitação, de atestado, declaração, carta de solidariedade, comprovação de parceria ou credenciamento emitidos por fabricantes; V – a vedação de pontuação com base em atestados relativos à duração de trabalhos realizados pelo licitante, que adotem o critério de julgamento por técnica e preço; e VI – a justificativa dos critérios de pontuação em termos do benefício que trazem para a contratante, para licitações do tipo técnica e preço.
+IN – Seges/ME 81/2022 | Art. 9º Deverão ser registrados no Sistema TR Digital os seguintes parâmetros e elementos descritivos: […] VIII – forma e critérios de seleção do fornecedor, optando-se pelo critério de julgamento de técnica e preço, conforme o disposto no § 1º do art. 36 da Lei nº 14.133, de 2021, sempre que a avaliação e a ponderação da qualidade técnica das propostas que superarem os requisitos mínimos estabelecidos no edital forem relevantes aos fins pretendidos pela Administração;
+IN – Seges/MP 5/2017 | Dos Serviços Comuns Art. 14. Os serviços considerados comuns são aqueles cujos padrões de desempenho e qualidade possam ser objetivamente definidos pelo ato convocatório, por meio de especificações usuais do mercado. Parágrafo único. Independentemente de sua complexidade, os serviços podem ser enquadrados na condição de serviços comuns, desde que atendam aos requisitos dispostos no caput deste artigo. Subseção II Dos Serviços Prestados de Forma Contínua e Não Contínua Art. 15. Os serviços prestados de forma contínua são aqueles que, pela sua essencialidade, visam atender à necessidade pública de forma permanente e contínua, por mais de um exercício financeiro, assegurando a integridade do patrimônio público ou o funcionamento das atividades finalísticas do órgão ou entidade, de modo que sua interrupção possa comprometer a prestação de um serviço público ou o cumprimento da missão institucional. Parágrafo único. A contratação de serviços prestados de forma contínua deverá observar os prazos previstos no art. 57 da Lei nº 8.666, de 1993. Art. 16. Os serviços considerados não continuados ou contratados por escopo são aqueles que impõem aos contratados o dever de realizar a prestação de um serviço específico em um período predeterminado, podendo ser prorrogado, desde que justificadamente, pelo prazo necessário à conclusão do objeto, observadas as hipóteses previstas no § 1º do art. 57 da Lei nº 8.666, de 1993. Subseção III Dos Serviços com Regime de Dedicação Exclusiva de Mão de Obra Art. 17. Os serviços com regime de dedicação exclusiva de mão de obra são aqueles em que o modelo de execução contratual exija, dentre outros requisitos, que: I – os empregados do contratado fiquem à disposição nas dependências da contratante para a prestação dos serviços; II – o contratado não compartilhe os recursos humanos e materiais disponíveis de uma contratação para execução simultânea de outros contratos; e III – o contratado possibilite a fiscalização pela contratante quanto à distribuição, controle e supervisão dos recursos humanos alocados aos seus contratos. Parágrafo único. Os serviços de que trata o caput poderão ser prestados fora das dependências do órgão ou entidade, desde que não seja nas dependências do contratado e presentes os requisitos dos incisos II e III Art. 30. O Termo de referência ou Projeto básico deve conter, no mínimo, o seguinte conteúdo: […] VIII – forma de seleção do fornecedor; IX – critérios de seleção do fornecedor; […] Anexo V – Diretrizes para elaboração do Projeto básico (PB) ou Termo de referência (TR) […] 2.7 Forma de seleção do fornecedor: a) Estabelecer a classificação dos serviços, conforme arts. 14 a 17 desta Instrução Normativa e legislação correlata; b) Identificar a forma de selecionar o fornecedor (licitação, inexigibilidade, dispensa), justificando a escolha; c) No caso de a seleção do fornecedor ocorrer por processo licitatório, enquadrar o serviço como comum ou não, para fins do disposto no art. 4º do Decreto nº 5.450, de 31 de maio de 2005. 2.8. Critérios de seleção do fornecedor: a) Definir os critérios de habilitação indicados para a contratação, atentando para: a.1. analisar e identificar os critérios de qualificação econômico-financeira a serem exigidos, considerando a prestação dos serviços e os riscos da contratação; a.2. analisar e identificar os critérios de qualificação técnica a serem exigidos, considerando a prestação dos serviços e os riscos da contratação; b) Definir os critérios técnicos obrigatórios indicados para a contratação que deverão se basear nos requisitos técnicos especificados na seção “Requisitos da contratação”; c) No caso de licitações técnica e preço ou melhor técnica, definir os critérios técnicos pontuáveis, indicados para a contratação, que deverão se basear nos requisitos técnicos especificados na seção “Requisitos da contratação”; d) Definir os critérios de aceitabilidade de preços, com fixação de preços máximos aceitáveis, tanto globais quanto unitários; e) Definir os critérios de julgamento das propostas, incluindo: e.1. os critérios de preferência e desempate aplicáveis; e.2. margem de preferência, se aplicável.
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 159 – Jurisprudência do TCU
+
+A jurisprudência do TCU a respeito de formas e critérios de seleção do fornecedor pode ser encontrada em tópicos próprios deste manual como aqueles referentes às modalidades de licitação, aos critérios de julgamento das propostas e aos critérios de habilitação dos fornecedores.
+
+Fonte: Elaboração própria.
+
+Quadro 160 – Riscos relacionados[9]
+
+Riscos
+Definição, no termo de referência, de forma e critérios de seleção do fornecedor sem considerar os requisitos e a natureza do objeto a ser contratado, levando a uma modelagem inadequada da licitação, com a consequente paralisação do certame, ou impossibilidade de obter proposta que atenda à necessidade da Administração.
+
+Fonte: Elaboração própria.
+
+[1] Remete-se aos comentários sobre “contratação direta” no item 5.10.1 deste manual.
+
+[2] Para compras, a Lei 14.133/2021, art. 40, inciso I, prevê expressamente o processamento de registro de preços quando pertinente. O Sistema de Registro de Preços foi abordado no item 5.9.4 deste manual.
+
+[3] Constituição Federal, art. 37, inciso XXI.
+
+[4] Comentados, respectivamente, nos itens 3.4, 3.5 e 3.6 deste manual.
+
+[5] Lei 14.133/2021, art. 17, § 2º.
+
+[6] Todas essas informações são fundamentais para elaboração do edital de licitação. Remete-se aos comentários do capítulo 5 deste manual, referentes ao processo de seleção do fornecedor.
+
+[7] Remete-se aos comentários do item 5.5.
+
+[8] A questão da presunção relativa da inexequibilidade, que pode levar à comprovação da exequibilidade do preço por parte dos licitantes, foi tratada em diversos julgados do TCU, como nos Acórdãos 697/2006, voto condutor, parágrafos 8-13; 614/2008, voto do Ministro-Relator, parágrafos 127-134; 1.100/2008, declaração de voto, parágrafo 2; 1.248/2009, item 9.2.2.1; 1.678/2013, voto condutor, parágrafo 22-30; 2.362/2015, relatório, item 4.2.1; e 2.340/2016, item 9.1.10, alínea “e”; todos do Plenário do TCU; 612/2004, item 9.4; e 559/2009, item 9.2; ambos da Primeira Câmara; e 1.720/2010-TCU-Segunda Câmara, item 9.6.2.
+
+[9] Riscos específicos relacionados à forma e aos critérios de seleção do fornecedor foram abordados no capítulo 5 deste manual.

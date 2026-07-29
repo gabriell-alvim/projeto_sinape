@@ -1,0 +1,100 @@
+4.5.2.5. Margem de preferência
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/801-2/
+======================================================================
+
+A margem de preferência é um instrumento utilizado para fomentar o desenvolvimento nacional sustentável, a partir do estímulo aos fornecedores de[1]:
+
+- bens manufaturados[2] e serviços nacionais que atendem a normas técnicas brasileiras; e
+
+- bens reciclados, recicláveis e biodegradáveis.
+
+ Assim, numa licitação em que esteja prevista a margem de preferência, a Administração poderá contratar esses produtos ou serviços, mesmo que apresentem preços superiores ao da melhor proposta que não atenda aos requisitos de preferência (até o limite do percentual estabelecido), priorizando a contratação de objetos nacionais frente a estrangeiros, bem como os mais sustentáveis ambientalmente.
+
+Vale mencionar que a margem de preferência não se confunde com a preferência para contratação de ME/EPP, estabelecida pela LC 123/2006. Enquanto a margem de preferência permite a contratação de produtos e serviços nacionais (ou de bens reciclados, recicláveis ou biodegradáveis) por preço superior ao da melhor proposta apresentada na licitação, o direito de preferência das ME/EPP visa garantir a essas empresas a oportunidade de “cobrir” a melhor oferta, ou seja, de ofertar valor inferior à proposta até então mais bem classificada[3].
+
+Adicionalmente, quando a licitação definir margem de preferência de produtos nacionais em relação a produtos estrangeiros, o direito de preferência das ME/EPP será aplicado exclusivamente entre as propostas que fizerem jus às margens de preferência[4].
+
+Cabe ao Poder Executivo federal estabelecer os bens manufaturados e de serviços nacionais que serão beneficiados com a margem de preferência, bem como os respectivos percentuais[5]. A primeira lista foi divulgada por meio da Resolução Seges/Cics/MGI 1/2024, que especifica quais produtos manufaturados nacionais serão contemplados com uma margem de preferência de 10% em licitações públicas, conforme estabelecido pelo Decreto nº 11.890/2024.
+
+Para tanto, o Decreto 11.890/2024 instituiu a Comissão Interministerial de Contratações Públicas para o Desenvolvimento Sustentável (CICS), de caráter permanente. A CICS tem a função de propor essas margens de preferência e especificar os produtos e serviços aos quais serão aplicadas.
+
+É possível aplicar uma margem de referência de até 10% para priorizar a contratação de[6]:
+
+- produtos manufaturados nacionais em detrimento de produtos manufaturados estrangeiros;
+
+- serviços nacionais em vez de serviços estrangeiros; e
+
+- pela APF direta, autárquica e fundacional, bens reciclados, recicláveis ou biodegradáveis em detrimento de bens não enquadrados como tal.
+
+Além disso, é possível aplicar uma margem de preferência adicional, que pode ser acumulada com a normal em até 20%, para privilegiar a contratação de produtos e serviços nacionais resultantes de desenvolvimento e inovação tecnológica realizados no País, quando em competição com produtos e serviços estrangeiros[7].
+
+Há, portanto, possibilidade de aumento da margem de preferência para produtos e serviços nacionais que promovem o desenvolvimento e inovação tecnológica no Brasil, como era previsto na Lei 8.666/1993[8].
+
+A margem de preferência pode ser estendida a bens manufaturados e serviços originários dos países do Mercado Comum do Sul (Mercosul), desde que haja reciprocidade com o País prevista em acordo internacional aprovado pelo Congresso Nacional e ratificado pelo Presidente da República[9]. Dessa forma, havendo reciprocidade entre os países do referido bloco econômico, os produtos por eles produzidos podem ser equiparados aos nacionais em disputas licitatórias com produtos de países não pertencentes ao Mercosul.
+
+As margens de preferência normal e adicional não serão aplicadas aos bens manufaturados nacionais e aos serviços nacionais se a capacidade de produção ou de prestação no País for inferior[10]:
+
+- à quantidade de bens a ser adquirida ou de serviços a ser contratada; ou
+
+- aos quantitativos fixados em razão do parcelamento do objeto, quando for o caso.
+
+A cada exercício financeiro, o Poder Executivo federal deverá divulgar, em sítio eletrônico oficial, a relação de empresas favorecidas com a margem de preferência, com indicação do volume de recursos destinados a cada uma delas[11].
+
+É importante destacar que o parágrafo 7º do artigo 26 da Lei 14.133/2021 estabelece uma condição que vai além da simples aplicação de margens de preferência. Esse dispositivo permite, especificamente para contratações que envolvem a implantação, manutenção e aprimoramento dos sistemas de tecnologia da informação e comunicação considerados estratégicos por ato do Poder Executivo federal, a possibilidade de restringir licitações a bens e serviços que utilizem tecnologia desenvolvida no Brasil e que sejam produzidos conforme o processo produtivo básico descrito na Lei 10.176/2001. Nesses casos, uma resolução da CICS determinará quais serão os bens e serviços considerados estratégicos[12].
+
+Por fim, é importante esclarecer que o § 6º do art. 26 da Lei 14.133/2021 dispõe sobre assunto distinto da margem de preferência, qual seja, medidas de compensação comercial, industrial ou tecnológica ou acesso a condições vantajosas de financiamento (política de offset) que podem ser exigidas do contratado em favor de órgão ou entidade integrante da Administração Pública.
+
+Nessa hipótese, mais comum em contratações internacionais, mais frequentes no setor de defesa, o que ocorre é a contratação de um bem ou serviço pela Administração, mediante a exigência de medidas por parte do contratado, previstas em edital, como, por exemplo, transferência de tecnologia. Cabe à CICS estabelecer critérios e elaborar proposições normativas para a aplicação de medidas de compensação[13].
+
+Quadro 197 – Referências normativas para a margem de preferência
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 26. No processo de licitação, poderá ser estabelecida margem de preferência para: I – bens manufaturados e serviços nacionais que atendam a normas técnicas brasileiras; II – bens reciclados, recicláveis ou biodegradáveis, conforme regulamento. § 1º A margem de preferência de que trata o caput deste artigo: I – será definida em decisão fundamentada do Poder Executivo federal, no caso do inciso I do caput deste artigo; II – poderá ser de até 10% (dez por cento) sobre o preço dos bens e serviços que não se enquadrem no disposto nos incisos I ou II do caput deste artigo; III – poderá ser estendida a bens manufaturados e serviços originários de Estados Partes do Mercado Comum do Sul (Mercosul), desde que haja reciprocidade com o País prevista em acordo internacional aprovado pelo Congresso Nacional e ratificado pelo Presidente da República. § 2º Para os bens manufaturados nacionais e serviços nacionais resultantes de desenvolvimento e inovação tecnológica no País, definidos conforme regulamento do Poder Executivo federal, a margem de preferência a que se refere o caput deste artigo poderá ser de até 20% (vinte por cento). […] § 5º A margem de preferência não se aplica aos bens manufaturados nacionais e aos serviços nacionais se a capacidade de produção desses bens ou de prestação desses serviços no País for inferior: I – à quantidade a ser adquirida ou contratada; ou II – aos quantitativos fixados em razão do parcelamento do objeto, quando for o caso. § 6º Os editais de licitação para a contratação de bens, serviços e obras poderão, mediante prévia justificativa da autoridade competente, exigir que o contratado promova, em favor de órgão ou entidade integrante da Administração Pública ou daqueles por ela indicados a partir de processo isonômico, medidas de compensação comercial, industrial ou tecnológica ou acesso a condições vantajosas de financiamento, cumulativamente ou não, na forma estabelecida pelo Poder Executivo federal. § 7º Nas contratações destinadas à implantação, à manutenção e ao aperfeiçoamento dos sistemas de tecnologia de informação e comunicação considerados estratégicos em ato do Poder Executivo federal, a licitação poderá ser restrita a bens e serviços com tecnologia desenvolvida no País produzidos de acordo com o processo produtivo básico de que trata a Lei nº 10.176, de 11 de janeiro de 2001. Art. 27. Será divulgada, em sítio eletrônico oficial, a cada exercício financeiro, a relação de empresas favorecidas em decorrência do disposto no art. 26 desta Lei, com indicação do volume de recursos destinados a cada uma delas. […] Art. 52. Nas licitações de âmbito internacional, o edital deverá ajustar-se às diretrizes da política monetária e do comércio exterior e atender às exigências dos órgãos competentes. […] § 6º Observados os termos desta Lei, o edital não poderá prever condições de habilitação, classificação e julgamento que constituam barreiras de acesso ao licitante estrangeiro, admitida a previsão de margem de preferência para bens produzidos no País e serviços nacionais que atendam às normas técnicas brasileiras, na forma definida no art. 26 desta Lei.
+Lei 12.305/2010 | Art. 7º São objetivos da Política Nacional de Resíduos Sólidos: […] XI – prioridade, nas aquisições e contratações governamentais, para: a) produtos reciclados e recicláveis; b) bens, serviços e obras que considerem critérios compatíveis com padrões de consumo social e ambientalmente sustentáveis;
+Decreto 11.890/2024 | Regulamenta o art. 26 da Lei nº 14.133, de 1º de abril de 2021, para dispor sobre a aplicação da margem de preferência no âmbito da administração pública federal direta, autárquica e fundacional, e institui a Comissão Interministerial de Contratações Públicas para o Desenvolvimento Sustentável. […]
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 198 – Jurisprudência do TCU – margem de preferência
+
+Acórdãos | Dispositivos
+Acórdão 286/2014-TCU-Plenário | [Enunciado] É ilegal, nos editais de licitação, o estabelecimento de: (a) vedação a produtos e serviços estrangeiros, uma vez que a Lei 12.349/2010 não previu tal restrição; (b) margem de preferência para contratação de bens e serviços sem a devida regulamentação, via decreto do Poder Executivo Federal, estabelecendo os percentuais para as margens de preferência normais e adicionais, conforme o caso, e discriminando a abrangência de sua aplicação.
+Acórdão 1550/2013-TCU-Plenário | [Enunciado] São ilegais, nos editais licitatórios: (i) o estabelecimento de vedação a produtos e serviços estrangeiros, e (ii) a admissão de margem de preferência para contratação de bens e serviços, sem a devida regulamentação por decreto do Poder Executivo Federal.
+Acórdão 1317/2013-TCU-Plenário | [Enunciado] A introdução do conceito de “Desenvolvimento Nacional Sustentável” no art. 3º da Lei 8.666/1993 não autoriza: (i) o estabelecimento de vedação a produtos e serviços estrangeiros e, (ii) a admissão de margem de preferência para contratação de bens e serviços, sem a devida regulamentação por decreto do Poder Executivo Federal.
+Pesquisa de Jurisprudência | Execute a seguinte consulta na Jurisprudência Selecionada . Selecione a área “licitação”, tema “margem de preferência”.
+
+Fonte: Elaboração própria a partir de consulta a jurisprudência do TCU.
+
+Quadro 199 – Riscos relacionados
+
+Riscos
+Estabelecimento de margem de preferência para contratação de bens e serviços sem a devida regulamentação via decreto do Poder Executivo federal ou não estabelecimento dessa margem caso haja decreto regulamentando-a, levando a questionamentos por parte dos licitantes e outros interessados, com consequente paralisação do certame (p. ex., mandado de segurança no Poder Judiciário, atuação dos órgãos de controle).
+
+Fonte: Tribunal de Contas da União, 2014, item “critérios de seleção do fornecedor”.
+
+[1] Lei 14.133/2021, art. 26. A Lei 14.133/2021 define o desenvolvimento nacional sustentável como um princípio no art. 5º e como um objetivos da licitação no art. 11, inciso IV.
+
+[2] O Decreto 11.890/2024, art. 2º, inciso III, define produto manufaturado nacional como: produto manufaturado produzido no território nacional de acordo com o processo produtivo básico ou com as regras de origem estabelecidas em resolução da Comissão Interministerial de Contratações Públicas para o Desenvolvimento Sustentável (CICS).
+
+[3] LC 123/2006, art. 44.
+
+[4] Decreto 8.538/2015, art. 5º, § 9º, inciso I.
+
+[5] Lei 14.133/2021, art. 26, inciso II, § 1º, inciso I, e § 2º.
+
+[6] Lei 14.133/2021, art. 26, § 1º, inciso II; Decreto 11.890/2024, art. 2º, inciso I, art. 3º, caput.
+
+[7] Lei 14.133/2021, art. 26, § 2º; Decreto 11.890/2024, art. 2º, inciso II, e art. 3º, § 1º.
+
+[8] Lei 8.666/1993, art. 3º, § 7º.
+
+[9] Lei 14.133/2021, art. 26, § 1º, inciso III.
+
+[10] Lei 14.133/2021, art. 26, § 5º; Decreto 11.890/2024, art. 4º.
+
+[11] Lei 14.133/2021, art. 27.
+
+[12] Decreto 11.890/2024, art. 6º.
+
+[13] Decreto 11.890/2024, art. 8º, inciso I, alínea “b”.

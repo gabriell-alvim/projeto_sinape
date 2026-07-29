@@ -1,0 +1,62 @@
+3.4.3. Melhor técnica ou conteúdo artístico
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/3-4-3-melhor-tecnica-ou-conteudo-artistico/
+======================================================================
+
+É o critério de julgamento utilizado para avaliação de propostas de licitantes para a contratação de projetos e trabalhos de natureza técnica, científica ou artística, em que o vencedor da licitação receberá prêmio ou remuneração previamente definidos no edital, segundo o art. 35 da Lei 14.133/2021.
+
+O critério de julgamento por melhor técnica pode ser adotado para contratações de[1]:
+
+- bens e serviços especiais;
+
+- anteprojetos ou de projetos para obras e serviços especiais de engenharia; e
+
+- anteprojetos e de projetos, incluídos os arquitetônicos e urbanísticos, e para a escolha de trabalhos de natureza técnica, científica ou artística.
+
+Também pode ser utilizado nas licitações para a contratação dos serviços técnicos especializados de natureza predominantemente intelectual relativos a[2]:
+
+- estudos técnicos, planejamentos, projetos básicos e projetos executivos;
+
+- fiscalização, supervisão e gerenciamento de obras e serviços; e
+
+- controles de qualidade e tecnológico, análises, testes e ensaios de campo e laboratoriais, instrumentação e monitoramento de parâmetros específicos de obras e do meio ambiente e demais serviços de engenharia que se enquadrem como serviços técnicos especializados de natureza predominantemente intelectual.
+
+A modalidade de licitação a ser adotada será o concurso quando se tratar de contratação de anteprojetos e projetos, incluindo arquitetônicos e urbanísticos, ou escolha de trabalhos de natureza técnica, científica ou artística. Nas demais contratações, será utilizada a modalidade concorrência. Pode ser utilizado ainda na fase competitiva da modalidade diálogo competitivo, quando for o mais adequado à solução identificada na fase de diálogo[3].
+
+O julgamento por melhor técnica ou conteúdo artístico considerará exclusivamente as propostas técnicas ou artísticas apresentadas pelos licitantes. O edital deverá indicar claramente os fatores que serão analisados para ponderação e valoração da proposta técnica ou artística, estando motivadas tais decisões[4].
+
+Devem ser considerados requisitos como[5]:
+
+- a capacitação e a experiência do licitante;
+
+- pontuação da capacitação técnico-profissional, se for o caso, vinculada à exigência de participação direta e pessoal do(s) profissional(is) indicado(s) na proposta;
+
+- o desempenho do licitante em contratações anteriores; e
+
+- quesitos de natureza qualitativa que considerem o conhecimento do objeto, a metodologia e o programa de trabalho, a qualificação das equipes técnicas e a relação dos produtos que serão entregues.
+
+Quadro 60 – Referências normativas para o critério de melhor técnica ou conteúdo artístico
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 6º Para os fins desta Lei, consideram-se: […] XXXVIII – concorrência: modalidade de licitação para contratação de bens e serviços especiais e de obras e serviços comuns e especiais de engenharia, cujo critério de julgamento poderá ser: b) melhor técnica ou conteúdo artístico; […] XXXIX – concurso: modalidade de licitação para escolha de trabalho técnico, científico ou artístico, cujo critério de julgamento será o de melhor técnica ou conteúdo artístico, e para concessão de prêmio ou remuneração ao vencedor; Art. 33. O julgamento das propostas será realizado de acordo com os seguintes critérios: […] III – melhor técnica ou conteúdo artístico; […] Art. 35. O julgamento por melhor técnica ou conteúdo artístico considerará exclusivamente as propostas técnicas ou artísticas apresentadas pelos licitantes, e o edital deverá definir o prêmio ou a remuneração que será atribuída aos vencedores. Parágrafo único. O critério de julgamento de que trata o caput deste artigo poderá ser utilizado para a contratação de projetos e trabalhos de natureza técnica, científica ou artística. […] Art. 37. O julgamento por melhor técnica ou por técnica e preço deverá ser realizado por: I – verificação da capacitação e da experiência do licitante, comprovadas por meio da apresentação de atestados de obras, produtos ou serviços previamente realizados; II – atribuição de notas a quesitos de natureza qualitativa por banca designada para esse fim, de acordo com orientações e limites definidos em edital, considerados a demonstração de conhecimento do objeto, a metodologia e o programa de trabalho, a qualificação das equipes técnicas e a relação dos produtos que serão entregues; III – atribuição de notas por desempenho do licitante em contratações anteriores aferida nos documentos comprobatórios de que trata o § 3º do art. 88 desta Lei e em registro cadastral unificado disponível no Portal Nacional de Contratações Públicas (PNCP). § 1º A banca referida no inciso II do caput deste artigo terá no mínimo 3 (três) membros e poderá ser composta de: I – servidores efetivos ou empregados públicos pertencentes aos quadros permanentes da Administração Pública; II – profissionais contratados por conhecimento técnico, experiência ou renome na avaliação dos quesitos especificados em edital, desde que seus trabalhos sejam supervisionados por profissionais designados conforme o disposto no art. 7º desta Lei. § 2º Ressalvados os casos de inexigibilidade de licitação, na licitação para contratação dos serviços técnicos especializados de natureza predominantemente intelectual previstos nas alíneas “a”, “d” e “h” do inciso XVIII do caput do art. 6º desta Lei cujo valor estimado da contratação seja superior a R$ 300.000,00 (trezentos mil reais), o julgamento será por: (Promulgação partes vetadas) ( Vide Decreto nº 11.317, de 2022) […] I – melhor técnica; ou II – técnica e preço, na proporção de 70% (setenta por cento) de valoração da proposta técnica.” Art. 38. No julgamento por melhor técnica ou por técnica e preço, a obtenção de pontuação devido à capacitação técnico-profissional exigirá que a execução do respectivo contrato tenha participação direta e pessoal do profissional correspondente. […] Art. 55. Os prazos mínimos para apresentação de propostas e lances, contados a partir da data de divulgação do edital de licitação, são de: […] IV – para licitação em que se adote o critério de julgamento de técnica e preço ou de melhor técnica ou conteúdo artístico, 35 (trinta e cinco) dias úteis.
+IN – Seges/MGI 12/2023 | Art. 1º Esta Instrução Normativa dispõe sobre a licitação pelo critério de julgamento por melhor técnica ou conteúdo artístico, na forma eletrônica, no âmbito da Administração Pública federal direta, autárquica e fundacional. […]
+
+Fonte: normas consultadas.
+
+Quadro 61 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 265/2010-TCU-Plenário | 9.1. determinar à [ omissis ] que: […] 9.1.21. no caso de aquisições de bens e serviços que não sejam considerados comuns, estabeleça critérios de pontuação da proposta técnica que guardem estrita correlação com o modelo de serviço desejado, explicitando no processo a devida fundamentação para cada um dos atributos técnicos pontuáveis e a avaliação do impacto de pontuação atribuída em relação ao total, observando se os critérios de maior peso são de fato os mais relevantes, em atendimento ao princípio da razoabilidade e da proporcionalidade […]
+Pesquisa de Jurisprudência | Execute consulta na Pesquisa Integrada do TCU. Pesquise pela expressão: “melhor técnica” . Os resultados da busca poderão ser filtrados por “jurisprudência selecionada” ou por “publicações de jurisprudência”.
+
+Fonte: Elaboração própria a partir de consulta à jurisprudência do TCU
+
+[1] IN – Seges/MGI 12/2023, art. 3º, incisos I a III.
+
+[2] Lei 14.133/2021, art. 37, § 2º, inciso I, IN – Seges/MGI 12/2023, art. 3º, parágrafo único.
+
+[3] Lei 14.133/2021, art. 6º, inciso XXXVIII, alínea “b”, e XXXIX, art. 35, IN – Seges/MGI 12/2023, art. 4º.
+
+[4] Lei 14.133/2021, art. 37, inciso II c/c art. 18, inciso IX.
+
+[5] Lei 14.133/2021, art. 37, incisos I a III, art. 38, caput, IN – Seges/MGI 12/2023, art. 14.

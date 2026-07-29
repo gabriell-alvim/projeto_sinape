@@ -1,0 +1,74 @@
+4.4.3.6. Orçamento detalhado do custo global da obra
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/4-4-3-6-orcamento-detalhado-do-custo-global-da-obra/
+======================================================================
+
+No caso de contratações com base em projeto básico, é necessário que haja um orçamento detalhado do custo global da obra, discriminando, para cada serviço e fornecimento, o respectivo preço unitário, quantidade e preço total, bem como as taxas de BDI e de encargos sociais incidentes, cada qual com a sua correspondente composição e demonstração, de forma a evidenciar todos os itens e insumos necessários.
+
+Além de planilha de preços unitários (orçamento sintético), no processo licitatório para contratação de obras e projetos de engenharia, o projeto básico deve conter orçamento analítico com as composições de todos os custos unitários dos serviços[1].
+
+O orçamento detalhado constante do projeto básico é o orçamento estimado previsto no planejamento da licitação[2] e tem como objetivo servir de paradigma para a Administração estabelecer os critérios de aceitabilidade de preços, visto que serão desclassificadas as propostas que permanecerem acima do orçamento estimado para a contratação[3].
+
+A Lei 14.133/2021 estabelece que o valor de referência da licitação deve ser compatível com os valores praticados no mercado, considerados os preços constantes de bancos de dados públicos e as quantidades a serem contratadas[4]. O texto da Lei ainda chama a atenção para que sejam observadas a economia de escala e as peculiaridades do local de execução da obra, isto é, para as eventuais reduções de preço de materiais, equipamentos ou mão de obra decorrentes de uma possível grande quantidade a ser empregada no objeto ou para condições específicas do local de execução da obra que impactem no seu orçamento.
+
+O valor estimado da contratação deve ser definido por meio da utilização de parâmetros na seguinte ordem[5]:
+
+I – composição de custos unitários menores ou iguais à mediana do item correspondente do Sistema de Custos Referenciais de Obras (Sicro), para serviços e obras de infraestrutura de transportes, ou do Sistema Nacional de Pesquisa de Custos e Índices de Construção Civil (Sinapi), para as demais obras e serviços de engenharia;
+
+II – utilização de dados de pesquisa publicada em mídia especializada, de tabela de referência formalmente aprovada pelo Poder Executivo federal e de sítios eletrônicos especializados ou de domínio amplo, desde que contenham a data e a hora de acesso;
+
+III – contratações similares feitas pela Administração Pública, em execução ou concluídas no período de 1 (um) ano anterior à data da pesquisa de preços, observado o índice de atualização de preços correspondente; e
+
+IV – pesquisa na base nacional de notas fiscais eletrônicas, na forma de regulamento.
+
+Cabe ressaltar que o art. 23, § 2º, da Lei 14.133/2021 estabelece uma ordem de precedência entre as referências de preços de obras e serviços de engenharia, priorizando o uso do Sinapi e do Sicro, conforme o caso, tal como ocorre no Decreto 7.983/2013 ou na Lei 13.303/2016.
+
+No âmbito das organizações do Poder Executivo federal, a matéria foi regulamentada pela Instrução Normativa SEGES/ME 91/2022, que detalhou os procedimentos para cálculo do valor estimado para a contratação de obras e serviços de engenharia nos processos de licitação e de contratação direta.
+
+Segundo a referida instrução normativa, foi autorizada a utilização do disposto no Decreto 7.983/2013 para a definição do valor estimado das contratações de obras e serviços de engenharia no âmbito da Lei 14.133/2021. O referido decreto, por sua vez, prevê no seu art. 6º que, caso não seja possível utilizar as tabelas oficiais de custos (Sicro e Sinapi), os serviços da obra poderão ter a sua estimativa de custo apurada por meio da utilização de dados contidos em tabela de referência formalmente aprovada por órgãos ou entidades da Administração Pública federal em publicações técnicas especializadas, em sistema específico instituído para o setor ou por pesquisa de mercado com os respectivos fornecedores.
+
+Cabe ressaltar que a omissão do art. 23, § 2º, da Lei 14.133/2021, quanto à possibilidade da realização de cotação local no caso de obras e serviços de engenharia, não deve obstar, por si só, a prática de pesquisa local de valores de insumos para definição do preço estimado da contratação, desde que sua adoção seja devidamente justificada e a vantagem em relação ao sistema referencial de custos demonstrada pelo orçamentista, nos termos do art. 8º do Decreto 7.983/2013, cuja aplicação no âmbito da referida lei está autorizada pela IN Seges-ME 91/2022[6].
+
+O art. 23, § 3º, da Lei 14.133/2021, dispõe que, nas contratações de obra públicas e serviços de engenharia realizadas por municípios, estados e Distrito Federal, desde que não envolvam recursos da União, o valor previamente estimado da contratação poderá ser definido por meio da utilização de outros sistemas de custos adotados pelo respectivo ente federativo.
+
+Então, se o objeto for uma obra custeada com verbas federais, o ente federativo estará sujeito às regras do art. 23, § 2º, que preconizam em seu primeiro inciso o emprego das tabelas Sicro e Sinapi.
+
+Por outro lado, ainda que a contratação envolva exclusivamente recursos próprios do ente, não há óbice para o emprego voluntário das tabelas referenciais de custos Sicro e Sinapi. Alternativamente, os entes federativos poderão usar outras tabelas de custos mantidas por eles e aceitas pelos respectivos Tribunais de Contas. Citam-se, como exemplo, a tabela da Emop, amplamente utilizada pela Administração Pública do Estado do Rio de Janeiro, e a tabela da Seinfra do Ceará.
+
+Também existem reconhecidas tabelas mantidas por municípios, tais como a tabela da Sudecap, gerida pelo município de Belo Horizonte, e a tabela da SCO, do município do Rio de Janeiro.
+
+Respeitada a competência para o ente federativo regulamentar a aplicação da nova Lei, assim como o entendimento do Tribunal de Contas local, a jurisprudência do TCU possui precedentes em que aceita o uso de tabelas referenciais de custos mantidas pela iniciativa privada, como a que é divulgada pela Editora Pini. Entretanto, tais referências são fontes subsidiárias de preços para obras públicas federais, sendo precedidas pelas fontes oficiais (Sinapi e Sicro).
+
+Nesse sentido, cita-se o Acórdão 2.333/2011-Plenário, que acolheu o uso da tabela da Editora Pini, e o Acórdão 2.595/2021-Plenário, que aceitou o uso do Informativo SBC (Sistema Brasileiro de Custos). Como ressaltado no voto condutor dessa segunda deliberação, é necessário, no entanto, que exista algum juízo crítico sobre a adequação de tabelas referenciais privadas.
+
+Assim, por intermédio dessa última deliberação, o TCU deu ciência ao órgão jurisdicionado de que:
+
+9.1.4 o uso de sistemas privados de referência de custos para obras e serviços de engenharia, como o SBC, sem avaliação de sua compatibilidade com os parâmetros de mercado, e sem a realização de adequadas pesquisas de preços, para fins comparativos, está em desacordo com o art. 6º, inciso IX, “f”, da Lei 8.666/1993, com o princípios da eficiência e da economicidade, e é contrária ao entendimento do TCU formatado nos Acórdãos 555/2008, 702/2008, 837/2008, 283/2008, 1.108/2007, 2.062/2007 e 1.947/2007, todos do Plenário.
+
+Deverá constar do projeto básico, inclusive de suas eventuais alterações, a Anotação de Responsabilidade Técnica (ART) pelas planilhas orçamentárias, o que constitui, de fato, declaração do orçamentista de que o orçamento é compatível com o projeto e com os custos do sistema de referência[7].
+
+Desde que justificado, o orçamento estimado da contratação poderá ter caráter sigiloso, sem prejuízo da divulgação do detalhamento dos quantitativos e das demais informações necessárias para a elaboração das propostas, e, nesse caso, o sigilo não prevalecerá para os órgãos de controle interno e externo[8].
+
+Além disso, o contrato deverá conter cláusula que estabeleça o índice de reajustamento de preço, com data-base vinculada à data do orçamento estimado[9].
+
+Reforça-se que o orçamento detalhado, que integra o edital de licitação, se diferencia da estimativa de valor da contratação realizada nos estudo técnico preliminar, visto que a estimativa tem o objetivo de levantar o eventual custo da solução escolhida de modo a avaliar sua viabilidade econômica, bem como comparar possíveis soluções alternativas, ou seja, trata-se de levantamentos de custo expeditos e/ou paramétricos, os quais, em regra, não possuem o nível de detalhamento suficiente para ser utilizado como referência da licitação.
+
+Por fim, considerando-se a complexidade do assunto relacionado com a precificação das obras públicas e serviços de engenharia, sugere-se a Leitura da cartilha “Orientações para Elaboração de Planilhas Orçamentárias de Obras Públicas”, disponível no Portal do TCU (Tribunal de Contas da União, 2014b).
+
+[1] Lei 14.133/2021, art. 23, § 2º, inciso I.
+
+[2] Lei 14.133/2021, art. 18, inciso VI.
+
+[3] Lei 14.133/2021, art. 59, inciso III.
+
+[4] Lei 14.133/2021, art. 23.
+
+[5] Lei 14.133/2021, art. 23, § 2º.
+
+[6] Acórdão 136/2025-TCU-Plenário
+
+[7] Decreto 7.983/2013, art. 10.
+
+[8] Lei 14.133/2021, art. 24.
+
+[9] Lei 14.133/2021, art. 92, § 3º.

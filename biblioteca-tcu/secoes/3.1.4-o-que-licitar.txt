@@ -1,0 +1,104 @@
+3.1.4. O que licitar?
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/3-1-4-o-que-licitar/
+======================================================================
+
+A Lei 14.133/2021 aplica-se a:
+
+Art. 2º […]
+
+I – alienação e concessão de direito real de uso de bens;
+
+II – compra, inclusive por encomenda;
+
+III – locação;
+
+IV – concessão e permissão de uso de bens públicos;
+
+V – prestação de serviços, inclusive os técnico-profissionais especializados;
+
+VI – obras e serviços de arquitetura e engenharia;
+
+VII – contratações de tecnologia da informação e de comunicação.
+
+A alienação de bens móveis e imóveis está disciplinada no art. 76 da Lei 14.133/2021, dispositivo que prevê a prévia avaliação dos bens e a justificativa que evidencie o interesse público envolvido na alienação.
+
+Os bens imóveis só poderão ser alienados mediante prévia autorização legislativa, com exceção daqueles adquiridos pela Administração Pública em virtude de procedimentos judiciais ou de dação em pagamento[1]. A alienação deverá ocorrer por licitação na modalidade leilão[2], podendo ser dispensada nos casos de dação em pagamento (pagamento de dívida), doação ou venda a outra organização pública[3], permuta, investidura[4], legitimação de posse[5] ou fundiária[6].
+
+Os bens móveis também poderão ser leiloados, podendo-se dispensar a licitação nas hipóteses de doação (fins de interesse social), permuta entre organizações públicas, venda de ações em bolsas de valores e de títulos públicos, venda de bens produzidos ou comercializados por entidades da Administração Pública, venda de materiais e equipamentos para outras organizações públicas (que não serão utilizados por quem deles dispõe)[7].
+
+As diretrizes para realização de compras, obras e serviços de engenharia, e serviços em geral estão dispostas na seção IV (arts. 40 a 50) da Lei 14.133/2021. Os conceitos estão apresentados na Lei citada:
+
+Art. 6º Para os fins desta Lei, consideram-se: […]
+
+X – compra: aquisição remunerada de bens para fornecimento de uma só vez ou parceladamente, considerada imediata aquela com prazo de entrega de até 30 (trinta) dias da ordem de fornecimento;
+
+XI – serviço: atividade ou conjunto de atividades destinadas a obter determinada utilidade, intelectual ou material, de interesse da Administração;
+
+XII – obra: toda atividade estabelecida, por força de lei, como privativa das profissões de arquiteto e engenheiro que implica intervenção no meio ambiente por meio de um conjunto harmônico de ações que, agregadas, formam um todo que inova o espaço físico da natureza ou acarreta alteração substancial das características originais de bem imóvel; […]
+
+XVIII – serviços técnicos especializados de natureza predominantemente intelectual: aqueles realizados em trabalhos relativos a:
+
+a) estudos técnicos, planejamentos, projetos básicos e projetos executivos;
+
+b) pareceres, perícias e avaliações em geral;
+
+c) assessorias e consultorias técnicas e auditorias financeiras e tributárias;
+
+d) fiscalização, supervisão e gerenciamento de obras e serviços;
+
+e) patrocínio ou defesa de causas judiciais e administrativas;
+
+f) treinamento e aperfeiçoamento de pessoal;
+
+g) restauração de obras de arte e de bens de valor histórico;
+
+h) controles de qualidade e tecnológico, análises, testes e ensaios de campo e laboratoriais, instrumentação e monitoramento de parâmetros específicos de obras e do meio ambiente e demais serviços de engenharia que se enquadrem na definição deste inciso; […]
+
+XXI – serviço de engenharia: toda atividade ou conjunto de atividades destinadas a obter determinada utilidade, intelectual ou material, de interesse para a Administração e que, não enquadradas no conceito de obra a que se refere o inciso XII do caput deste artigo, são estabelecidas, por força de lei, como privativas das profissões de arquiteto e engenheiro ou de técnicos especializados, que compreendem: […]
+
+A locação também está disciplinada na Lei 14.133/2021, destacando-se o dispositivo que obriga a avaliação prévia e a licitação para locação de bens imóveis (art. 51), e o que dispõe sobre a inexigibilidade de licitação para alugar imóvel “cujas características de instalações e de localização tornem necessária sua escolha” (art. 74, inciso V). Sobre o assunto, há jurisprudência do TCU que alerta para o risco de direcionamento da contratação quando há excessivo detalhamento das características do imóvel que se pretende adquirir ou alugar, sem a demonstração da necessidade dessas particularidades[8].
+
+Quanto à permissão e à concessão de uso de bem público, a permissão é ato administrativo unilateral, de natureza precária, pelo qual um particular é autorizado a fazer uso do bem, para atender ao interesse coletivo. A concessão é um contrato administrativo, pelo qual a Administração atribui a particular a utilização privativa de bem público, para que o explore por prazo determinado. Ambas serão precedidas de licitação.
+
+O art. 3º da Lei 14.133/2021 dispõe sobre as situações que não estão sujeitas ao regime desta Lei :
+
+I – os contratos que tenham por objeto operação de crédito, interno ou externo, e gestão de dívida pública, incluídas as contratações de agente financeiro e a concessão de garantia relacionadas a esses contratos;
+
+II – contratações sujeitas a normas previstas em legislação própria.
+
+Como exemplos de contratações sujeitas a normas previstas em legislação própria, pode-se citar:
+
+- contratações de serviços de publicidade. Essas são regidas pela Lei 12.232/2010, que estabelece normas gerais para licitação e contratação de serviços de publicidade prestados por intermédio de agências de propaganda;
+
+- concessões de serviços públicos e de obras públicas e as permissões de serviços públicos previstas no art. 175 da Constituição Federal de 1988, as quais são regidas pela Lei 8.987/1995;
+
+- parcerias público-privada no âmbito da administração pública, as quais se submetem à Lei 11.079/2004;
+
+- contratações de produtos e sistemas de defesa, ou do seu desenvolvimento, que frequentemente exigem sigilo, tecnologia avançada e considerações estratégicas que não se alinham com os processos de licitação tradicionais. Essas contratações são regidas pela Lei 12.598/2012, regulamentada pelo Decreto 7.970/2013;
+
+- contratações relacionadas à exploração direta de atividade econômica pelo Estado, conforme estabelecido pelo artigo 173, § 1º, da Constituição Federal de 1988. Tais contratações são reguladas pelas normas de direito privado. Nessa hipótese, as empresas públicas, sociedades de economia mista e suas subsidiárias são dispensadas do dever de licitar, conforme art. 28, § 3º, da Lei 13.303/2016. Essa isenção legal proporciona uma maior flexibilidade na gestão das atividades econômicas estatais, visando alcançar competitividade e eficiência comparáveis ao setor privado. É importante ressaltar, conforme o caput do artigo 28 da mesma lei, que as demais contratações dessas entidades devem, porém, ser precedidas de licitação;
+
+- contratações de startups para teste de soluções inovadoras por elas desenvolvidas ou a ser desenvolvidas, com ou sem risco tecnológico, como dispõe a Lei Complementar 182/2021, art. 12, § 1º e art. 13. Embora a Lei 14.133/2021 expressamente autorize a realização de Procedimento de Manifestação de Interesse (PMI) exclusivo para startups[9], e tenha incorporado a modalidade de licitação diálogo competitivo, a contratação da startup poderá ocorrer por meio de licitação na modalidade especial regida pela LC 182/2021. Após o processo licitatório, os vencedores assinam o Contrato Público para Solução Inovadora (CPSI), que viabiliza a execução de testes remunerados em ambiente real. Se a solução inovadora proposta for bem-sucedida, a Administração poderá celebrar com a mesma contratada, sem nova licitação, contrato para o fornecimento do produto, do processo ou da solução resultante do CPSI, de acordo com os arts. 14 e 15 da referida lei complementar; e
+
+- contratações realizadas por organizações do terceiro setor, tais como Oscips, organizações sociais e serviços sociais autônomos. Estas não estão estritamente vinculadas à Lei 14.133/2021, devendo seguir seus próprios regulamentos, os quais precisam estar devidamente publicados e devem se pautar pelos princípios gerais da Administração Pública (vide item 3.1.3).
+
+Conforme previsto no art. 186 da Lei 14.133/2021, as normas gerais de licitações e contratos administrativos se aplicam apenas de forma subsidiária às Leis 8.987/1995 (concessões e permissões), 11.079/2004 (parcerias público-privada), e 12.232/2010 (serviços de publicidade).
+
+[1] Lei 14.133/2021, art. 76, § 1º.
+
+[2] Lei 14.133/2021, art. 76, inciso I.
+
+[3] A doação também poderá ocorrer para particulares, nas hipóteses das alíneas “f”, “g” e “h” do inciso I do art. 76 da Lei 14.133/2021.
+
+[4] Conceito apresentado no art. 76, § 5º, da Lei 14.133/2021.
+
+[5] Nos termos da Lei 13.465/2017, art. 11, inciso VI, ou da Lei 6.383/1976, art. 29.
+
+[6] Mecanismo de reconhecimento da aquisição originária do direito real de propriedade sobre unidade imobiliária objeto da Reurb – Regularização Fundiária Urbana (Lei 13.465/2017, art. 11, inciso VII).
+
+[7] Lei 14.133/2021, art. 76, inciso II.
+
+[8] Enunciado de jurisprudência do Acórdão 1656/2015-TCU-Plenário.
+
+[9] Lei 14.133/2021, art. 81, § 4º, vide item 5.9.3 deste manual.

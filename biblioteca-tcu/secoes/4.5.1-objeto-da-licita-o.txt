@@ -1,0 +1,43 @@
+4.5.1. Objeto da Licitação
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/4-5-1-objeto-da-licitacao/
+======================================================================
+
+O edital deve apresentar o objeto da contratação, definido de forma concisa, clara e precisa, em conformidade com a etapa de definição do objeto do termo de referência ou do projeto básico, o que se remete aos comentários expostos nos itens 4.3.1 e 4.4.3 deste manual.
+
+A finalidade é possibilitar o pleno entendimento, por parte dos fornecedores e de outras partes interessadas, sobre o que está sendo contratado.
+
+Sobre o assunto, cabe citar a Súmula – TCU 177:
+
+A definição precisa e suficiente do objeto licitado constitui regra indispensável da competição, até mesmo como pressuposto do postulado de igualdade entre os licitantes, do qual é subsidiário o princípio da publicidade, que envolve o conhecimento, pelos concorrentes potenciais das condições básicas da licitação, constituindo, na hipótese particular da licitação para compra, a quantidade demandada uma das especificações mínimas e essenciais à definição do objeto do pregão.
+
+Além disso, é importante mencionar que o acesso ao ETP, como anexo ao edital, pode contribuir para que os licitantes interpretem adequadamente o edital, pois aspectos como a necessidade a ser atendida é explicitada neste artefato (documento).
+
+Quadro 179 – Referências normativas para o objeto da licitação no edital
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 25. O edital deverá conter o objeto da licitação e as regras relativas à convocação, ao julgamento, à habilitação, aos recursos e às penalidades da licitação, à fiscalização e à gestão do contrato, à entrega do objeto e às condições de pagamento.
+Decreto 9.507/2018 | Art. 6º Para a execução indireta de serviços, no âmbito dos órgãos e das entidades de que trata o art. 1º, as contratações deverão ser precedidas de planejamento e o objeto será definido de forma precisa no instrumento convocatório, no projeto básico ou no termo de referência e no contrato como exclusivamente de prestação de serviços.
+IN – SGD/ME 94/2022 | Art. 13. A definição do objeto da contratação deverá ser precisa, suficiente e clara, vedadas especificações que, por excessivas, irrelevantes ou desnecessárias, limitem ou frustrem a competição ou a realização do fornecimento da solução, e deverá conter a indicação do prazo de duração do contrato e, se for o caso, a possibilidade de sua prorrogação. § 1º O prazo de duração dos contratos deverá observar os limites estabelecidos nos arts. 105 a 114 da Lei nº 14.133, de 2021. § 2º O contrato que previr a operação continuada de sistemas estruturantes de tecnologia da informação, nos termos do inciso XXXI do art. 2º desta Instrução Normativa, poderá ter vigência máxima de 15 (quinze) anos.
+IN – Seges/MP 5/2017 | Anexo VII – Diretrizes para elaboração do Ato Convocatório […] 2. Do objeto: 2.1. Na definição do objeto deverá ser informado qual o serviço a ser contratado com indicação expressa à observância das especificações previstas no Termo de Referência ou Projeto básico, podendo haver previsão de margem de preferência nos termos do § 5º do art. 3º da Lei nº 8.666, de 1993.
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 180 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Súmula – TCU 177 | A definição precisa e suficiente do objeto licitado constitui regra indispensável da competição, até mesmo como pressuposto do postulado de igualdade entre os licitantes, do qual é subsidiário o princípio da publicidade, que envolve o conhecimento, pelos concorrentes potenciais das condições básicas da licitação, constituindo, na hipótese particular da licitação para compra, a quantidade demandada uma das especificações mínimas e essenciais à definição do objeto do pregão.
+Acórdão 7555/2019-TCU-Segunda Câmara | 1.7.1. dar ciência desta decisão à empresa autora desta Representação e à [ omissis ], cientificando essa unidade jurisdicionada, com vistas à prevenção de novas ocorrências semelhantes, sobre a constatação, nestes autos de Representação, de falha na condução do [ omissis ], consubstanciada na ausência de clareza no subitem 1.2.2 do Anexo I do Termo de referência integrante do Edital do aludido certame, o que propiciou interpretação dúbia por parte de licitantes, ferindo o disposto no art. 14 da Lei 8.666/1993 e o princípio da eficiência; […]
+Acórdão 2441/2017- TCU – Plenário | [Enunciado] A redação dos editais deve ser clara e objetiva, de forma a evitar erros ou contradições que dificultem seu entendimento, levem a interpretações equivocadas ou dificultem a compreensão dos licitantes quanto às condições estabelecidas.
+Acórdão 1078/2017-TCU-Plenário | [Enunciado] A ausência no edital de especificação técnica dos bens a serem adquiridos, bem como das respectivas quantidades, implica ofensa ao art. 15, § 7º, incisos I e II, da Lei 8.666/1993.
+Pesquisa de Jurisprudência | Execute consulta na Jurisprudência selecionada . Pesquise na “árvore de classificação” pela área “licitação”, tema “edital de licitação” .
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+Quadro 181 – Riscos relacionados
+
+Riscos
+Definição imprecisa do objeto, levando a interpretações equivocadas, por parte dos potenciais fornecedores, sobre o que se quer contratar e ao recebimento de propostas de soluções inadequadas ao atendimento da necessidade, com o consequente fracasso da licitação, ou contratação de solução que não atende à demanda da Administração e desperdício de recursos.
+Definição do objeto que contenha requisitos excessivos ou irrelevantes ao atendimento da necessidade, levando à limitação da competição, com consequentes desembolsos desnecessários pela Administração e desperdício de recursos, ou questionamentos e paralisação do certame.
+
+Fonte: Adaptado de Tribunal de Contas da União, 2014, item “Definição do objeto”.

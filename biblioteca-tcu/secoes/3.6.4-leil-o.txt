@@ -1,0 +1,95 @@
+3.6.4. Leilão
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/3-6-4-leilao/
+======================================================================
+
+Leilão é a modalidade de licitação para alienação[1] de bens imóveis ou de bens móveis inservíveis ou legalmente apreendidos a quem oferecer o maior lance[2].
+
+A Lei 14.133/2021 dispõe que a alienação de bens da Administração Pública deve estar subordinada à existência de interesse público devidamente justificado, e deverá ser precedida de avaliação. Tratando-se de bens imóveis, exigirá autorização legislativa[3].
+
+Diferentemente da Lei 8.666/1993 que previa, como regra, a utilização de concorrência para a alienação de bens imóveis e a possibilidade de utilização de leilão em casos específicos, a Lei 14.133/2021 prevê a utilização da modalidade leilão para bens móveis e imóveis, ressalvadas as hipóteses em que a licitação é dispensada[4].
+
+O critério de julgamento adotado será necessariamente o de maior lance[5]. 
+
+A Lei 14.133/2021 dispõe que, a fim de ampliar a publicidade e a competitividade do leilão, o seu edital deverá ser previamente divulgado em sítio eletrônico oficial, afixado em local de ampla circulação de pessoas na Administração, e em outros meios que se façam necessários[6], contendo as seguintes informações:
+
+Art. 31 […]
+
+§ 2º […]
+
+I – a descrição do bem, com suas características, e, no caso de imóvel, sua situação e suas divisas, com remissão à matrícula e aos registros;
+
+II – o valor pelo qual o bem foi avaliado, o preço mínimo pelo qual poderá ser alienado, as condições de pagamento e, se for o caso, a comissão do leiloeiro designado;
+
+III – a indicação do lugar onde estiverem os móveis, os veículos e os semoventes;
+
+IV – o sítio da internet e o período em que ocorrerá o leilão, salvo se excepcionalmente for realizado sob a forma presencial por comprovada inviabilidade técnica ou desvantagem para a Administração, hipótese em que serão indicados o local, o dia e a hora de sua realização;
+
+V – a especificação de eventuais ônus, gravames ou pendências existentes sobre os bens a serem leiloados.
+
+O leilão poderá ser cometido a Leiloeiro oficial ou a servidor designado pela autoridade competente da Administração. Na hipótese de condução por leiloeiro oficial, a Lei exige que:
+
+Art. 31. […] § 1º Se optar pela realização de leilão por intermédio de leiloeiro oficial, a Administração deverá selecioná-lo mediante credenciamento ou licitação na modalidade pregão e adotar o critério de julgamento de maior desconto para as comissões a serem cobradas, utilizados como parâmetro máximo os percentuais definidos na Lei que regula a referida profissão e observados os valores dos bens a serem leiloados.
+
+Conforme comando do art. 31 da Lei 14.133/2021, o Decreto 11.461/2023 regulou os procedimentos operacionais do leilão, no âmbito da Administração Pública federal direta, autárquica e fundacional[7].
+
+O referido decreto estabelece que contratação de leiloeiro oficial será realizada mediante credenciamento, utilizando-se, como parâmetro máximo da taxa de comissão a ser paga, o montante de 5% do valor do bem arrematado. Ademais, a taxa deverá ser paga pelos arrematantes[8].
+
+O Decreto 11.461/2023 dispõe ainda que a contratação de leiloeiro deverá ser justificada, considerando aspectos como:
+
+Art. 5º […] § 1º […]
+
+I – a disponibilidade de recursos de pessoal da Administração para a realização do leilão;
+
+II – a complexidade dos serviços necessários para a preparação e a execução do leilão;
+
+III – a necessidade de conhecimentos específicos para a alienação;
+
+IV – o custo procedimental para a Administração; e
+
+V – a ampliação prevista da publicidade e da competitividade do leilão.
+
+A Administração deve avaliar previamente o bem a ser leiloado e definir o preço mínimo pelo qual poderá ser alienado, as condições de pagamento e a comissão do leiloeiro (se for o caso)[9]. Tais informações deverão constar do edital[10].
+
+Como não haverá registro cadastral prévio, tampouco fase de habilitação, o vencedor do leilão será aquele que oferecer o maior lance, de valor igual ou superior ao preço mínimo de alienação[11].
+
+Conforme disposto no Decreto 11.461/2023, o órgão ou entidade, definido o resultado do julgamento, poderá negociar condições mais vantajosas com o primeiro colocado, quando sua proposta permanecer abaixo do preço mínimo estipulado pela Administração para a arrematação. Se a proposta permanecer abaixo do estipulado, a negociação poderá ser feita com os demais licitantes, respeitada a ordem de classificação[12].
+
+Quadro 79 – Referências normativas para o leilão
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 6º Para os fins desta Lei, consideram-se: […] XL – leilão: modalidade de licitação para alienação de bens imóveis ou de bens móveis inservíveis ou legalmente apreendidos a quem oferecer o maior lance; […] Art. 31. O leilão poderá ser cometido a Leiloeiro oficial ou a servidor designado pela autoridade competente da Administração, e regulamento deverá dispor sobre seus procedimentos operacionais. § 1º Se optar pela realização de leilão por intermédio de leiloeiro oficial, a Administração deverá selecioná-lo mediante credenciamento ou licitação na modalidade pregão e adotar o critério de julgamento de maior desconto para as comissões a serem cobradas, utilizados como parâmetro máximo os percentuais definidos na Lei que regula a referida profissão e observados os valores dos bens a serem leiloados. § 2º O leilão será precedido da divulgação do edital em sítio eletrônico oficial, que conterá: I – a descrição do bem, com suas características, e, no caso de imóvel, sua situação e suas divisas, com remissão à matrícula e aos registros; II – o valor pelo qual o bem foi avaliado, o preço mínimo pelo qual poderá ser alienado, as condições de pagamento e, se for o caso, a comissão do leiloeiro designado; III – a indicação do lugar onde estiverem os móveis, os veículos e os semoventes; IV – o sítio da internet e o período em que ocorrerá o leilão, salvo se excepcionalmente for realizado sob a forma presencial por comprovada inviabilidade técnica ou desvantagem para a Administração, hipótese em que serão indicados o local, o dia e a hora de sua realização; V – a especificação de eventuais ônus, gravames ou pendências existentes sobre os bens a serem leiloados. § 3º Além da divulgação no sítio eletrônico oficial, o edital do leilão será afixado em local de ampla circulação de pessoas na sede da Administração e poderá, ainda, ser divulgado por outros meios necessários para ampliar a publicidade e a competitividade da licitação. § 4º O leilão não exigirá registro cadastral prévio, não terá fase de habilitação e deverá ser homologado assim que concluída a fase de lances, superada a fase recursal e efetivado o pagamento pelo licitante vencedor, na forma definida no edital. Art. 33. O julgamento das propostas será realizado de acordo com os seguintes critérios: […] V – maior lance, no caso de leilão; […] Art. 76.A alienação de bens da Administração Pública, subordinada à existência de interesse público devidamente justificado, será precedida de avaliação e obedecerá às seguintes normas: I – tratando-se de bens imóveis, inclusive os pertencentes às autarquias e às fundações, exigirá autorização legislativa e dependerá de licitação na modalidade leilão, dispensada a realização de licitação nos casos de: […] II – tratando-se de bens móveis, dependerá de licitação na modalidade leilão, dispensada a realização de licitação nos casos de: […]
+Decreto 11.461/2023 | Regulamenta o art. 31 da Lei nº 14.133, de 1º de abril de 2021, para dispor sobre os procedimentos operacionais da licitação na modalidade leilão, na forma eletrônica, para a alienação de bens imóveis ou de bens móveis inservíveis ou legalmente apreendidos, e instituir o Sistema de Leilão Eletrônico, no âmbito da Administração Pública federal direta, autárquica e fundacional. […] Art. 5º O leilão poderá ser cometido a servidor designado pela autoridade competente ou a Leiloeiro oficial. § 1º A opção por leiloeiro oficial deverá ser justificada, observados: I – a disponibilidade de recursos de pessoal da Administração para a realização do leilão; II – a complexidade dos serviços necessários para a preparação e a execução do leilão; III – a necessidade de conhecimentos específicos para a alienação; IV – o custo procedimental para a Administração; e V – a ampliação prevista da publicidade e da competitividade do leilão. § 2º Ao leiloeiro oficial poderão ser designadas tarefas como vistoria e avaliação de bens, loteamento, verificação de ônus e débitos, desembaraço de documentos, organização da visitação, atendimento integral aos interessados e arrematantes, entre outras. § 3º É vedado pagamento de comissão a servidor designado para atuar como leiloeiro. Art. 6º Na hipótese de realização de leilão por intermédio de leiloeiro oficial, sua seleção será mediante credenciamento. § 1º O credenciamento de que trata o caput observará, como parâmetro máximo da taxa de comissão a ser paga pelos arrematantes a todos os credenciados, o montante de cinco por cento do valor do bem arrematado. § 2º É vedada a previsão de taxa de comissão a ser paga pelos comitentes. […] Art. 22. Definido o resultado do julgamento, o leiloeiro oficial ou o servidor designado poderá negociar condições mais vantajosas para a Administração com o primeiro colocado, por meio do sistema, quando a proposta permanecer abaixo do preço mínimo estipulado pela Administração para arrematação. § 1º Os demais licitantes poderão acompanhar a negociação de que trata o caput . § 2º Concluída a negociação, se houver, o resultado será registrado na ata do procedimento de licitação, a ser anexada aos autos do processo de contratação. Art. 23. A negociação poderá ser feita com os demais licitantes classificados, exclusivamente por meio do sistema, respeitada a ordem de classificação, quando o primeiro colocado, mesmo após a negociação, for desclassificado em razão de sua proposta permanecer abaixo do preço mínimo estipulado pela Administração para arrematação, observado o disposto no § 2º do art. 22.
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 80 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Pesquisa de Jurisprudência | Execute consulta nas Acórdãos do TCU . Pesquise pela expressão (não utilize aspas): leilão selog.UNIDADETECNICA ou pela expressão: “modalidade” adj2 “leilão” não “desestatização”
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+[1] Alienação é a cessão ou entrega de bens ou direitos para domínio alheio.
+
+[2] Lei 14.133/2021, art. 6º, inciso XL.
+
+[3] Lei 14.133/2021, art. 76, caput e inciso I.
+
+[4] Lei 14.133/2021, art. 76, incisos I e II.
+
+[5] Lei 14.133/2021, art. 33, inciso V.
+
+[6] Lei 14.133/2021, art. 31, § 3º.
+
+[7] O Decreto em questão é aplicável às organizações da Administração Pública federal direta, autárquica e fundacional do Poder Executivo federal. Esse Decreto está fundamentado no poder regulamentar do Presidente da República, conforme disposto no artigo 84, inciso IV, da CF/1988. No entanto, a recepção desse regulamento por parte das organizações dos poderes Legislativo e Judiciário pode variar, dependendo de fatores como compatibilidade com suas competências e existência de normas específicas que regulamentam a matéria abordada pelo Decreto. Um exemplo disso é o normativo interno do Senado Federal, que estabelece que os regulamentos do Poder Executivo só serão aplicados nas contratações do Senado quando houver uma previsão expressa nesse sentido em ato normativo próprio, decisão de autoridade competente ou disposição editalícia (ADG 14/2022, art. 1º, § 1º). Por isso, é fundamental que os termos de referência e editais de licitação esclareçam qual é a fundamentação jurídica da contratação, garantindo assim que todos os envolvidos tenham conhecimento das regras do processo.
+
+[8] Decreto 11.461/2023, art. 6º, §§ 1º e 2º.
+
+[9] Lei 14.133/2021, art. 31, § 2º, inciso II.
+
+[10] Lei 14.133/2021, art. 31, § 2º.
+
+[11] Lei 14.133/2021, art. 6º, inciso XL, art. 31, § 4º.
+
+[12] Decreto 11.461/2023, arts. 22 e 23.

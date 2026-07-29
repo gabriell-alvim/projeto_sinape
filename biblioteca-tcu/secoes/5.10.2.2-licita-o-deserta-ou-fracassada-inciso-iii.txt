@@ -1,0 +1,40 @@
+5.10.2.2. Licitação deserta ou fracassada (inciso III)
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/5-10-2-2-licitacao-deserta-ou-fracassada-inciso-iii/
+======================================================================
+
+O art. 75, inciso III, da Lei 14.133/2021, dispõe sobre a segunda hipótese de dispensa, aplicável quando ocorrer[1]:
+
+- licitação deserta: em que não surgiram interessados em participar da licitação; ou
+
+- licitação fracassada: por ausência de propostas válidas, incluindo os casos em que as propostas apresentadas consignaram preços manifestamente superiores aos praticados no mercado, ou incompatíveis com os fixados pelos órgãos oficiais competentes. Ou seja, todas as propostas foram desclassificadas, mesmo após as negociações e convocações previstas no arts. 61 e 90, § 4º, da Lei 14.133/2021.
+
+A contratação direta somente será admitida se a licitação anterior tiver sido válida e quando puderem ser mantidas todas as condições definidas no edital. Ademais, deverá ser realizada em menos de um ano após o certame frustrado[2]. Tais cautelas incentivam o gestor a avaliar o potencial de sucesso de uma nova licitação, antes de optar pela dispensa.
+
+Cabe ressaltar que essa hipótese de dispensa se justifica quando a frustração do certame não tiver sido provocada por erros manifestos da Administração, a exemplo de inconsistências no edital de licitação, exigências indevidamente restritivas, descumprimento dos prazos mínimos para apresentação de propostas, entre outros. Assim, quando houver vícios no processo licitatório, deverá ser realizada nova licitação sem essas falhas.
+
+Quadro 321 – Referências normativas para a dispensa em razão de licitação deserta ou fracassada
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 75. É dispensável a licitação: […] III – para contratação que mantenha todas as condições definidas em edital de licitação realizada há menos de 1 (um) ano, quando se verificar que naquela licitação: a) não surgiram licitantes interessados ou não foram apresentadas propostas válidas; b) as propostas apresentadas consignaram preços manifestamente superiores aos praticados no mercado ou incompatíveis com os fixados pelos órgãos oficiais competentes;
+Decreto 10.947/2022 | Art. 6º Até a primeira quinzena de maio de cada exercício, os órgãos e as entidades elaborarão os seus planos de contratações anual, os quais conterão todas as contratações que pretendem realizar no exercício subsequente, incluídas: I – as contratações diretas, nas hipóteses previstas nos art. 74 e art. 75 da Lei nº 14. 133, de 2021;
+IN – Seges/ME 81/2022 | Art. 6º O TR, a partir dos Estudos Técnicos Preliminares – ETP, se elaborados, definirá o objeto para atendimento da necessidade, a ser enviado para o setor de contratações no prazo definido no calendário de contratação de que trata o inciso III do art. 11 do Decreto nº 10.947, de 25 de janeiro de 2022. § 1 º Os processos de contratação direta de que trata o art. 72 da Lei nº 14.133, de 1º de abril de 2021, serão instruídos com o TR, observado em especial os arts. 8º e 10.
+IN – Seges/ME 58/2022 | Art. 14. A elaboração do ETP: […] II – é dispensada na hipótese do inciso III do art. 75 da Lei nº 14.133, de 2021, e nos casos de prorrogações dos contratos de serviços e fornecimentos contínuos.
+IN – Seges/ME 67/2021 | Art. 4º Os órgãos e entidades adotarão a dispensa de licitação, na forma eletrônica, nas seguintes hipóteses: […] III – contratação de obras, bens e serviços, incluídos os serviços de engenharia, nos termos do disposto no inciso III e seguintes do caput do art. 75 da Lei nº 14.133, de 2021, quando cabível; e
+IN – Seges/ME 65/2021 | Art. 5º A pesquisa de preços para fins de determinação do preço estimado em processo licitatório para a aquisição de bens e contratação de serviços em geral será realizada mediante a utilização dos seguintes parâmetros, empregados de forma combinada ou não: […] Art. 7º Nas contratações diretas por inexigibilidade ou por dispensa de licitação, aplica-se o disposto no art. 5º. […]
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 322 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 6786/2012-TCU-Primeira Câmara | [Enunciado] A tese de ausência de interessados, para fins de contratação direta, também ocorre quando os licitantes são todos inabilitados ou as propostas são todas desclassificadas. Todavia, essa tese não se aplica quando a inabilitação dos participantes resultar de equívoco da Administração, em função da não apresentação de documento exigido no edital do certame que poderia ser facilmente obtido na Internet.
+Acórdão 3233/2012-TCU-Primeira Câmara | [Voto] 17. Sob o prisma do mais singelo bom senso, numa licitação em que apenas duos licitantes compareceram, em que ambas foram omissas quanto ao mesmo documento (de nenhuma relevância quanto à proposta de preço), em que a pregoeira tinha conhecimento da existência do documento a ser apresentado (convenção coletiva), sabia como e podia obtê-lo facilmente, pois a convenção estava publicamente disponível no site do sindicato na internet, era absolutamente desarrazoado desclassificar ambos os licitantes e provocar o cancelamento do certame e sua total inutilidade. […] 24. Adicionalmente, o secretário invocou dispositivo legal que claramente não se refere ao que ocorreu no pregão eletrônico [ omissis ]. O inciso V do art. 24 da Lei 8.666/1993 autoriza a dispensa de licitação “quando não acudirem interessados à licitação anterior e esta, justificadamente, não puder ser repetida sem prejuízo para a Administração, mantidas, neste caso, todas as condições preestabelecidas”. 25. Acudiram dois interessados ao referido pregão, um deles já prestava os mesmos serviços no órgão licitante. Ambos foram desclassificados por falha absolutamente sanável por iniciativa do pregoeiro ou mediante a concessão de prazo nos termos do art. 48, § 3º, da Lei 8666/1993. […] 33. 33. Portanto, é ilegal a contratação da empresa [ omissis ] sem licitação sob o fundamento da incidência do art. 24, V, da Lei 8.666/1993, quesito principal da audiência a que respondeu o sr. [ omissis ], então secretário de Administração e Orçamento do [ omissis ].
+Acórdão 576/2009-TCU-Plenário | 1.5.2. Determinar à [ omissis ] que, na hipótese de dispensa de licitação do art. 24, VII, da Lei 8.666/93, realize pesquisa de preços a fim de demonstrar a equivalência entre o preço contratado e os praticados pelo mercado, abstendo de adotar, como parâmetro de aceitabilidade, o preço de contratações em exercícios anteriores;
+Pesquisa de Jurisprudência | Execute consulta na Jurisprudência Selecionada do TCU . Selecione a “área – Licitação”, tema “dispensa de licitação” . Pode ser aplicado o filtro adicional dos subtemas “licitação fracassada” e “licitação deserta” .
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+[1] Lei 14.133/2021, art. 75, inciso III, alíneas “a” e “b”.
+
+[2] Lei 14.133/2021, art. 75, inciso III.

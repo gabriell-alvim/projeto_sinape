@@ -1,0 +1,33 @@
+5.10.2.7. Aquisições de gêneros perecíveis (inciso IV, alínea “e”)
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/5-10-2-7-aquisicoes-de-generos-pereciveis-inciso-iv-alinea-e/
+======================================================================
+
+Essa hipótese de dispensa aplica-se para compras de hortifrutigranjeiros, pães e outros gêneros perecíveis, apenas pelo tempo necessário à realização do procedimento licitatório correspondente e com base no preço do dia.
+
+Ou seja, espera-se que haja o devido planejamento a fim de que as aquisições de gêneros perecíveis sejam realizadas por meio de licitação, evitando situações que ensejem a dispensa.
+
+Contudo, se essa situação ocorrer devido, por exemplo, a atraso na realização da licitação, a Administração poderá se valer da dispensa de licitação até que a contratação decorrente do processo licitatório ocorra, sem prejuízo de se verificar se houve responsabilidade de algum agente público pelo atraso ocorrido.
+
+Vale lembrar que a aquisição de alimento perecível é uma das situações que possibilitam a realização de registro de preços com indicação limitada a unidades de contratação, sem indicação do total a ser adquirido (art. 82, § 3º, inciso II, da Lei 14.133/2021), caso em que é obrigatória a indicação do valor máximo da despesa a ser realizada e vedada a participação de outro órgão ou entidade na ata a ser celebrada (art. 82, § 4º, da Lei 14.133/2021).
+
+Quadro 331 – Referências normativas para a dispensa para compras de gêneros perecíveis
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 75. É dispensável a licitação: […] IV – para contratação que tenha por objeto: […] e) hortifrutigranjeiros, pães e outros gêneros perecíveis, no período necessário para a realização dos processos licitatórios correspondentes, hipótese em que a contratação será realizada diretamente com base no preço do dia;
+Decreto 10.947/2022 | Art. 6º Até a primeira quinzena de maio de cada exercício, os órgãos e as entidades elaborarão os seus planos de contratações anual, os quais conterão todas as contratações que pretendem realizar no exercício subsequente, incluídas: I – as contratações diretas, nas hipóteses previstas nos art. 74 e art. 75 da Lei nº 14. 133, de 2021;
+IN – Seges/ME 81/2022 | Art. 6º O TR, a partir dos Estudos Técnicos Preliminares – ETP, se elaborados, definirá o objeto para atendimento da necessidade, a ser enviado para o setor de contratações no prazo definido no calendário de contratação de que trata o inciso III do art. 11 do Decreto nº 10.947, de 25 de janeiro de 2022. § 1 º Os processos de contratação direta de que trata o art. 72 da Lei nº 14.133, de 1º de abril de 2021, serão instruídos com o TR, observado em especial os arts. 8º e 10.
+IN – Seges/ME 67/2021 | Art. 4º Os órgãos e entidades adotarão a dispensa de licitação, na forma eletrônica, nas seguintes hipóteses: […] III – contratação de obras, bens e serviços, incluídos os serviços de engenharia, nos termos do disposto no inciso III e seguintes do caput do art. 75 da Lei nº 14.133, de 2021, quando cabível; e
+IN – Seges/ME 65/2021 | Art. 5º A pesquisa de preços para fins de determinação do preço estimado em processo licitatório para a aquisição de bens e contratação de serviços em geral será realizada mediante a utilização dos seguintes parâmetros, empregados de forma combinada ou não: […] Art. 7º Nas contratações diretas por inexigibilidade ou por dispensa de licitação, aplica-se o disposto no art. 5º. […]
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 332 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 2109/2011-TCU-Plenário | [Enunciado] Na licitação para aquisição de produtos de merenda escolar, argumentos como a limitação de espaço para estocagem de alimentos ou o prazo de validade dos produtos perecíveis não impedem que seja utilizada a correta modalidade de licitação, desde que seja realizada a elaboração de cronograma de fornecimento, o qual deve integrar o instrumento convocatório do certame.
+Acórdão 1082/2008-TCU-Plenário | [Voto] 39. Abro parêntese para registrar que o contrato celebrado com a empresa Premiere, objetivando o fornecimento das 41 toneladas de carne, inseriu-se no bojo de outros produtos adquiridos mediante dispensa, no mês de dezembro de 1995. 40. De um exame mais detido do rol de produtos alimentícios adquiridos por meios dos citados processos de dispensa, percebo que se tratou de gêneros tipicamente perecíveis, a exemplos de leite pasteurizado, pão, hortifrutigranjeiros, biscoito, ovos de galinha e outros que não se enquadram no conceito de perecebilidade extraído da interpretação do inciso XII do art. 24 da Lei nº 8.666/1993, como carne bovina congelada, filé de peixe congelado, açúcar, sal e óleo de soja. […] 43. Por outro lado, esteve munido de razão o relator a quo, ao considerar indevida a dispensa destinada à aquisição de carne bovina congelada, por não ser o caso de produto perecível para efeito do disposto no art. 24, inciso XII, da Lei nº 8.666/1993.
+Decisão 187/1996-TCU-Plenário | [Voto] 17. Entretanto, é preciso deixar bastante claro que a perecibilidade de um produto alimentício não pode ser considerada como condição para que a sua aquisição seja efetuada sem o competente processo licitatório. 18. Ora, o dispositivo legal (art. 24, inciso XII) impôs que a licitação para aquisição dos produtos alimentícios só pode ser dispensada no tempo necessário para a realização dos processos licitatórios correspondentes. Significa dizer que os órgãos da Administração Pública devem instaurar o competente processo licitatório e durante o seu transcorrer o licitante poderá, em caso de necessidade, adquirir, diretamente, o gênero alimentício perecível.
+Pesquisa de Jurisprudência | Execute consulta na Jurisprudência Selecionada do TCU . Selecione a “área – Licitação”, tema “dispensa de licitação” .
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.

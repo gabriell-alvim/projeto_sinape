@@ -1,0 +1,42 @@
+5.10.1. Inexigibilidade de licitação
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/5-10-1-inexigibilidade-de-licitacao/
+======================================================================
+
+A primeira hipótese de contratação direta é a inexigibilidade, que ocorre quando a competição é inviável.
+
+Como é difícil prever antecipadamente todas as situações em que não será possível a competição, a Lei 14.133/2021 estabelece, no art. 74, um rol meramente exemplificativo de hipóteses, em consonância com a lógica adotada no regime da Lei 8.666/1993:
+
+Art. 74. É inexigível a licitação quando inviável a competição, em especial nos casos de:
+
+I – aquisição de materiais, de equipamentos ou de gêneros ou contratação de serviços que só possam ser fornecidos por produtor, empresa ou representante comercial exclusivos;
+
+II – contratação de profissional do setor artístico, diretamente ou por meio de empresário exclusivo, desde que consagrado pela crítica especializada ou pela opinião pública;
+
+III – contratação dos seguintes serviços técnicos especializados de natureza predominantemente intelectual com profissionais ou empresas de notória especialização, vedada a inexigibilidade para serviços de publicidade e divulgação:
+
+a) estudos técnicos, planejamentos, projetos básicos ou projetos executivos;
+
+b) pareceres, perícias e avaliações em geral;
+
+c) assessorias ou consultorias técnicas e auditorias financeiras ou tributárias;
+
+d) fiscalização, supervisão ou gerenciamento de obras ou serviços;
+
+e) patrocínio ou defesa de causas judiciais ou administrativas;
+
+f) treinamento e aperfeiçoamento de pessoal;
+
+g) restauração de obras de arte e de bens de valor histórico;
+
+h) controles de qualidade e tecnológico, análises, testes e ensaios de campo e laboratoriais, instrumentação e monitoramento de parâmetros específicos de obras e do meio ambiente e demais serviços de engenharia que se enquadrem no disposto neste inciso;
+
+IV – objetos que devam ou possam ser contratados por meio de credenciamento;
+
+V – aquisição ou locação de imóvel cujas características de instalações e de localização tornem necessária sua escolha. (Grifo nosso)
+
+As três primeiras hipóteses já eram previstas pela Lei 8.666/1993. A hipótese do inciso IV representa novidade em âmbito legal, indicando a possibilidade de contratação de credenciados por inexigibilidade[1]. A hipótese do inciso V era tratada como caso de dispensa de licitação na Lei 8.666/1993 e foi deslocada para as situações de inexigibilidade na Lei 14.133/2021.
+
+ A seguir, estão comentadas cada uma das hipóteses de inexigibilidade previstas na Lei 14.133/2021, com os respectivos quadros de referências normativas e de jurisprudência (quando existente, ainda que sob a égide da legislação anterior), além dos riscos relacionados.
+
+[1] Lei 14.133/2021, art. 79.

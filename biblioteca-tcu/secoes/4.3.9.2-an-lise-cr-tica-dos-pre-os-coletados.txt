@@ -1,0 +1,16 @@
+4.3.9.2. Análise crítica dos preços coletados
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/4-3-9-2-analise-critica-dos-precos-coletados/
+======================================================================
+
+A IN – Seges/ME 65/2021 define o preço estimado como[1]:
+
+valor obtido a partir de método matemático aplicado em série de preços coletados, devendo desconsiderar, na sua formação, os valores inexequíveis, os inconsistentes e os excessivamente elevados.
+
+Assim, após a etapa inicial de coleta de preços, deve ser realizada a análise dos preços obtidos, para observar se há valores discrepantes que podem influenciar indevidamente o valor estimado, devendo ser descartados os valores inexequíveis, os inconsistentes e os excessivamente elevados.
+
+O art. 6º, § 3º, da IN mencionada estabelece que: “para desconsideração dos valores inexequíveis, inconsistentes ou excessivamente elevados, deverão ser adotados critérios fundamentados e descritos no processo administrativo”.
+
+Portanto, cabe aos agentes públicos a definição do método de elaboração do orçamento estimado, inclusive com os critérios para análise crítica e para desconsideração de valores inexequíveis, inconsistentes e excessivamente elevados (p. ex., média saneada).
+
+[1] IN – Seges/ME 65/2021, art. 2º, inciso I.

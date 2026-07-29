@@ -1,0 +1,108 @@
+6.1.1. Subcontratação
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/6-1-1-subcontratacao/
+======================================================================
+
+A Lei 14.133/2021 permite a subcontratação a terceiro de partes da obra, serviço ou fornecimento, até o limite autorizado, em cada caso, pela Administração[1].
+
+É proibida, portanto, a subcontratação total do objeto, não podendo a atuação do contratado transformar-se em mera intermediação ou administração de contrato. Além disso, o contratado permanece como responsável legal e contratualmente pela parte subcontratada.
+
+Durante o planejamento da contratação, a Administração deve avaliar a possibilidade de subcontratação parcial do objeto, considerando práticas usuais adotadas no mercado e o interesse público. A subcontratação será necessária, por exemplo, quando a execução integral do objeto por parte do contratado não se mostrar técnica e/ou economicamente viável.
+
+O edital ou regulamento pode proibir, restringir ou estabelecer condições para a subcontratação. Quando permitida, é importante que o edital especifique as condições para a subcontratação, incluindo quais partes do objeto podem ser subcontratadas e os requisitos exigidos do subcontratado. Dessa forma, a subcontratação será possível dentro dos limites estabelecidos no edital de licitação ou no Regulamento[2].
+
+Estando autorizada a subcontratação, a Administração deve avaliar se o subcontratado atende aos requisitos de qualificação técnica necessários para a execução do objeto. Para tanto, o contratado deve apresentar documentação que comprove a capacidade técnica do subcontratado, que será avaliada e anexada ao processo correspondente[3].
+
+A subcontratação não autorizada é motivo para a extinção do contrato pela Administração, por descumprimento de cláusula contratual, conforme prevê o art. 137, inciso I, da Lei 14.133/2021, sem prejuízo das penalidades cabíveis.
+
+Na hipótese de contratação de serviços técnicos especializados de natureza predominantemente intelectual com profissionais ou empresas de notória especialização é vedada a subcontratação[4].
+
+A Lei também proíbe a subcontratação de pessoa física ou jurídica que tenha vínculo técnico, comercial, econômico, financeiro, trabalhista ou civil com dirigente da organização contratante ou com agente público envolvido na licitação, na fiscalização ou na gestão do contrato. A proibição aplica-se ainda a cônjuges, companheiros ou parentes em linha reta, colateral, ou por afinidade, até o terceiro grau dessas pessoas. Essa restrição deve constar expressamente no edital de licitação[5].
+
+Nas contratações de obras e serviços, a Administração pode exigir no edital a subcontratação de microempresas ou de empresas de pequeno porte, quando o licitante vencedor não for microempresa (ME) e empresa de pequeno porte (EPP) ou consórcio composto total ou parcialmente por ME/EPP[6].
+
+Nesse caso, o edital deverá esclarecer as hipóteses em que a subcontratação não é aplicável e não poderá exigir a subcontratação de itens ou parcelas determinadas ou de empresas específicas[7]. Além disso, é proibida a subcontratação[8]:
+
+- completa ou da parcela principal da contratação;
+
+- das parcelas de maior relevância técnica;
+
+- de ME/EPP que esteja participando da licitação;
+
+- de ME/EPP que tenha um ou mais sócios em comum com a empresa contratante; e
+
+- para o fornecimento de bens, exceto quando estiver vinculado à prestação de serviços acessórios.
+
+Esse tratamento diferenciado para ME/EPP só pode ser concedido quando[9]:
+
+- houver pelo menos três fornecedores competitivos enquadrados como ME ou EPP sediados local ou regionalmente e capazes de cumprir as exigências do edital. Há jurisprudência do TCU[10] que interpreta o art. 49, inciso II, da LC 123/2006 no sentido de exigir a efetiva participação dos três fornecedores no certame, não bastando que essas ME/EPP apenas existam na localidade ou região;
+
+- for vantajoso para a Administração e não representar prejuízo para o conjunto do objeto a ser contratado; e
+
+- não se enquadrar nos casos de dispensa ou inexigibilidade de licitação previstos nos arts. 74 e 75 da Lei 14.133/2021, exceto dispensas por valor tratadas nos incisos I e II do art. 75 da referida Lei, nas quais a compra deverá ser feita preferencialmente de microempresas e empresas de pequeno porte[11].
+
+Os empenhos e pagamentos referentes às parcelas subcontratadas poderão ser destinados diretamente à ME/EPP subcontratada[12].
+
+Quadro 397 – Referências normativas para a subcontratação
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 14. Não poderão disputar licitação ou participar da execução de contrato, direta ou indiretamente: […] II – empresa, isoladamente ou em consórcio, responsável pela elaboração do projeto básico ou do projeto executivo, ou empresa da qual o autor do projeto seja dirigente, gerente, controlador, acionista ou detentor de mais de 5% (cinco por cento) do capital com direito a voto, responsável técnico ou subcontratado, quando a licitação versar sobre obra, serviços ou fornecimento de bens a ela necessários; […] Art. 67. A documentação relativa à qualificação técnico-profissional e técnico-operacional será restrita a: […] § 9º O edital poderá prever, para aspectos técnicos específicos, que a qualificação técnica seja demonstrada por meio de atestados relativos a potencial subcontratado, limitado a 25% (vinte e cinco por cento) do objeto a ser licitado, hipótese em que mais de um licitante poderá apresentar atestado relativo ao mesmo potencial subcontratado. […] Art. 74. É inexigível a licitação quando inviável a competição, em especial nos casos de: […] III – contratação dos seguintes serviços técnicos especializados de natureza predominantemente intelectual com profissionais ou empresas de notória especialização, vedada a inexigibilidade para serviços de publicidade e divulgação: […] § 4º Nas contratações com fundamento no inciso III do caput deste artigo, é vedada a subcontratação de empresas ou a atuação de profissionais distintos daqueles que tenham justificado a inexigibilidade. […] Art. 122. Na execução do contrato e sem prejuízo das responsabilidades contratuais e legais, o contratado poderá subcontratar partes da obra, do serviço ou do fornecimento até o limite autorizado, em cada caso, pela Administração. § 1º O contratado apresentará à Administração documentação que comprove a capacidade técnica do subcontratado, que será avaliada e juntada aos autos do processo correspondente. § 2º Regulamento ou edital de licitação poderão vedar, restringir ou estabelecer condições para a subcontratação. § 3º Será vedada a subcontratação de pessoa física ou jurídica, se aquela ou os dirigentes desta mantiverem vínculo de natureza técnica, comercial, econômica, financeira, trabalhista ou civil com dirigente do órgão ou entidade contratante ou com agente público que desempenhe função na licitação ou atue na fiscalização ou na gestão do contrato, ou se deles forem cônjuge, companheiro ou parente em linha reta, colateral, ou por afinidade, até o terceiro grau, devendo essa proibição constar expressamente do edital de licitação.
+LC 123/2006 | Art. 48. Para o cumprimento do disposto no art. 47 desta Lei Complementar, a Administração Pública: (Redação dada pela Lei Complementar nº 147, de 2014) ( Vide Lei nº 14.133, de 2021 […] II – poderá, em relação aos processos licitatórios destinados à aquisição de obras e serviços, exigir dos licitantes a subcontratação de microempresa ou empresa de pequeno porte; (Redação dada pela Lei Complementar nº 147, de 2014) […] § 2º Na hipótese do inciso II do caput deste artigo, os empenhos e pagamentos do órgão ou entidade da Administração Pública poderão ser destinados diretamente às microempresas e empresas de pequeno porte subcontratadas.
+Decreto 8.538/2015 | Art. 7º Nas licitações para contratação de serviços e obras, os órgãos e as entidades contratantes poderão estabelecer, nos instrumentos convocatórios, a exigência de subcontratação de microempresas ou empresas de pequeno porte, sob pena de rescisão contratual, sem prejuízo das sanções legais, determinando: […] I – o percentual mínimo a ser subcontratado e o percentual máximo admitido, a serem estabelecidos no edital, sendo vedada a sub-rogação completa ou da parcela principal da contratação; II – que as microempresas e as empresas de pequeno porte a serem subcontratadas sejam indicadas e qualificadas pelos licitantes com a descrição dos bens e serviços a serem fornecidos e seus respectivos valores; III – que, no momento da habilitação e ao longo da vigência contratual, seja apresentada a documentação de regularidade fiscal das microempresas e empresas de pequeno porte subcontratadas, sob pena de rescisão, aplicando-se o prazo para regularização previsto no § 1º do art. 4º; IV – que a empresa contratada comprometa-se a substituir a subcontratada, no prazo máximo de trinta dias, na hipótese de extinção da subcontratação, mantendo o percentual originalmente subcontratado até a sua execução total, notificando o órgão ou entidade contratante, sob pena de rescisão, sem prejuízo das sanções cabíveis, ou a demonstrar a inviabilidade da substituição, hipótese em que ficará responsável pela execução da parcela originalmente subcontratada; e V – que a empresa contratada responsabilize-se pela padronização, pela compatibilidade, pelo gerenciamento centralizado e pela qualidade da subcontratação. § 1º Deverá constar do instrumento convocatório que a exigência de subcontratação não será aplicável quando o licitante for: I – microempresa ou empresa de pequeno porte; II – consórcio composto em sua totalidade por microempresas e empresas de pequeno porte, respeitado o disposto no art. 33 da Lei nº 8.666, de 1993; e III – consórcio composto parcialmente por microempresas ou empresas de pequeno porte com participação igual ou superior ao percentual exigido de subcontratação. § 2º Não se admite a exigência de subcontratação para o fornecimento de bens, exceto quando estiver vinculado à prestação de serviços acessórios. § 3º O disposto no inciso II do caput deverá ser comprovado no momento da aceitação, na hipótese de a modalidade de licitação ser pregão, ou no momento da habilitação, nas demais modalidades, sob pena de desclassificação. § 4º É vedada a exigência no instrumento convocatório de subcontratação de itens ou parcelas determinadas ou de empresas específicas. § 5º Os empenhos e pagamentos referentes às parcelas subcontratadas serão destinados diretamente às microempresas e empresas de pequeno porte subcontratadas. § 6º São vedadas: I – a subcontratação das parcelas de maior relevância técnica, assim definidas no instrumento convocatório; II – a subcontratação de microempresas e empresas de pequeno porte que estejam participando da licitação; e III – a subcontratação de microempresas ou empresas de pequeno porte que tenham um ou mais sócios em comum com a empresa contratante.
+IN – SGD/ME 94/2022 | Art. 12. O Termo de referência ou Projeto básico será elaborado pela Equipe de Planejamento da Contratação a partir do Estudo Técnico Preliminar da Contratação, incluindo, no mínimo, as seguintes informações: […] § 2º A Equipe de Planejamento da Contratação avaliará a viabilidade de: […] II – permitir consórcio ou subcontratação da solução de TIC, observado o disposto nos arts. 15 e 122 da Lei nº 14.133, de 2021, justificando-se a decisão.
+IN – Seges/MP 5/2017 | ANEXO V DIRETRIZES PARA ELABORAÇÃO DO PROJETO BÁSICO (PB) OU TERMO DE REFERÊNCIA (TR) […] 2.5. Modelo de execução do objeto: […] f) Definir com base nas informações dos Estudos Preliminares: f.1. se haverá ou não possibilidade de subcontratação de parte do objeto, e, em caso afirmativo, identificar a parte que pode ser subcontratada; f.2. se haverá ou não obrigação de subcontratação de parte do objeto de ME ou EPP;
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 398 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 5472/2022-TCU – Segunda Câmara | [Enunciado] A subcontratação total do objeto, em que se evidencia a mera colocação de interposto entre a Administração Pública contratante e a empresa efetivamente executora (subcontratada), é irregularidade ensejadora de débito, o qual corresponde à diferença entre os pagamentos recebidos pela empresa contratada e os valores por ela pagos na subcontratação integral.
+Acórdão 10397/2021-TCU – Segunda Câmara | [Enunciado] Na subcontratação total do objeto, em que a empresa contratada atua como mera intermediária entre a Administração e a empresa efetivamente executora (subcontratada), o superfaturamento deve ser quantificado em função dos preços de mercado e não, simplesmente, pela diferença entre os pagamentos recebidos pela empresa contratada e os valores por ela pagos à subcontratada.
+Acórdão 1678/2021- TCU – Plenário | [Enunciado] Não é irregular a previsão, no edital, de que a comprovação da regularidade fiscal de filiais ou de subcontratadas seja ônus da empresa contratada, no decurso da execução contratual, e não exigida da licitante na fase de habilitação.
+Acórdão 2021/2020- TCU – Plenário | 9.1. dar ciência às [ omissis ] que a cláusula 12, § 4º, da minuta do termo de contrato em regime de execução por empreitada integral, constante do Edital da Concorrência [ omissis ], vedou, de forma indevida, a subcontratação do fornecimento de bancos de capacitores série – o que restringiu o caráter competitivo da licitação apenas aos fornecedores e/ou fabricantes do equipamento -, quando poderia tê-la permitido mediante exigência de comprovação de capacidade técnica de empresas que viessem a ser subcontratadas, no tocante à gestão e execução de obras ou serviços análogos, em afronta ao disposto no art. 78, caput , e § 1º, da Lei 13.303/2016; [Enunciado] Em contratação sob o regime de empreitada integral, admite-se a previsão de subcontratação de parte relevante do objeto licitado quando, de antemão, a Administração sabe que existem poucas empresas no mercado aptas à sua execução, devendo, em tais situações, se exigir a comprovação de capacidade técnica, relativamente a essa parte do objeto, apenas da empresa que vier a ser subcontratada.
+Acórdão 6189/2019-TCU – Segunda Câmara | [Enunciado] É vedada a subcontratação integral em contratos administrativos, sendo possível a subcontratação parcial quando não se mostrar viável, sob a ótica técnico-econômica, a execução integral do objeto por parte do contratado e desde que tenha havido autorização formal do contratante.
+Acórdão 799/2019- TCU – Plenário | [Enunciado] A subcontratação em patamar superior ao permitido contratualmente, à revelia do contratante e por preços significativamente inferiores aos fixados no instrumento pactuado com a Administração Pública, desnatura as condições estabelecidas no procedimento licitatório, caracterizando fraude à licitação.
+Acórdão 14193/2018-TCU – Primeira Câmara | [Enunciado] A subcontratação do objeto é admitida apenas parcialmente, desde que motivada sob a ótica do interesse público e com os seus limites devidamente fixados pelo contratante, não podendo a atuação do contratado transformar-se em mera intermediação ou administração de contrato.
+Acórdão 10264/2018-TCU – Segunda Câmara | [Enunciado] Em licitações de serviços diversos em contrato único ( Facilities Full ), a permissão de formação de consórcios e a possibilidade de subcontratação de serviços são meios que podem amenizar a restrição a concorrência decorrente da junção de inúmeros serviços em único objeto.
+Acórdão 2392/2018-TCU – Plenário | [Enunciado] A dispensa de licitação com base no art. 24, inciso XIII, da Lei 8.666/1993 exige comprovação de que o contratado detenha inquestionável reputação ético-profissional e capacidade para a execução do objeto pactuado por meios próprios, sendo regra a inadmissibilidade de subcontratação.
+Acórdão 10508/2017-TCU – Primeira Câmara | [Enunciado] As empresas subcontratadas pelas agências de publicidade em contratos de publicidade e propaganda firmados pela Administração Pública Federal podem ser responsabilizadas pelo TCU no caso de dano ao erário na execução dos referidos contratos.
+Acórdão 2992/2011-TCU – Plenário | [Enunciado] No caso de subcontratação de parcela da obra para a qual houve solicitação de atestados de qualificação técnica na licitação, ou na hipótese de não terem sido exigidos atestados por se tratar de serviço usualmente prestado por limitadíssimo número de empresas, o contratado original deve exigir da subcontratada comprovação de capacidade técnica, disposição essa que deve constar, necessariamente, do instrumento convocatório.
+Acórdão 1151/2011-TCU – Segunda Câmara | [Sumário] 1. A subcontratação é regra de exceção, somente admitida quando não se mostrar viável sob a ótica técnica e/ou econômica a execução integral do objeto por parte da contratada, e desde que mediante autorização formal do ente contratante. 2. A subcontratação do objeto em sua inteireza não encontra amparo nas normas que disciplinam os contratos administrativos.
+Acórdão 662/2008-TCU – Plenário | [Sumário] 1. é indevida a subcontratação da execução do objeto nos casos de dispensa de licitação em que a identidade do contratado é a razão que fundamenta sua escolha para a celebração do contrato.
+Pesquisa de Jurisprudência | Execute consulta na Jurisprudência Selecionada do TCU , por árvore de classificação. Selecione a área “contrato administrativo” e o tema “subcontratação”. Execute consulta na Jurisprudência Selecionada do TCU , busque pelo termo “subcontratação” .
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+Quadro 399 – Riscos relacionados
+
+Riscos
+Falha no levantamento de mercado, levando a Administração a não permitir a subcontratação de objeto que possui etapas ou parcelas que são normalmente executadas pelo mercado com subcontratação de empresas especializadas, com consequentes redução da competitividade da licitação e contratação por preços mais elevados ou frustração do certame.
+Falta de clareza do edital de licitação e do contrato sobre os limites e requisitos para subcontratação, somada a falhas na fiscalização contratual, levando à subcontratação indevida ou acima do limite permitido contratualmente e/ou subcontratação de empresa sem a qualificação técnica necessária, com consequentes atrasos na execução do objeto, ou entrega de objeto que não atende às exigências técnicas estabelecidas no contrato.
+Exigência de requisitos excessivamente restritivos para a subcontratação, levando à dificuldade ou inviabilidade de o contratado fazer a subcontratação das parcelas autorizadas, com consequentes atrasos na execução do objeto.
+
+Fonte: Elaboração própria.
+
+[1] Lei 14.133/2021, art. 122.
+
+[2] Lei 14.133/2021, art. 122, caput e § 2º.
+
+[3] Lei 14.133/2021, art. 122, § 1º.
+
+[4] Lei 14.133/2021, art. 74, § 4º.
+
+[5] Lei 14.133/2021, art. 122, § 3º.
+
+[6] Lei Complementar 123/2006, art. 48, inciso II; e Decreto 8.538/2015, art. 7º, caput e § 1º.
+
+[7] Decreto 8.538/2015, art. 7º, § 4º.
+
+[8] Decreto 8.538/2015, art. 7º, inciso I, § 2º, e § 6º, incisos I a III.
+
+[9] Lei Complementar 123/2006, art. 49, Decreto 8.538/2015, art. 10.
+
+[10] Acórdão 6329/2020 – TCU – Segunda Câmara e Voto do Acórdão 3771/2011-TCU-Primeira Câmara.
+
+[11] LC 123/2006, art. 48, inciso I; Decreto 8.538/2015, art. 6º.
+
+[12] Lei Complementar 123/2006, art. 48, § 2º; e Decreto 8.538/2015, art. 7º, § 5º.

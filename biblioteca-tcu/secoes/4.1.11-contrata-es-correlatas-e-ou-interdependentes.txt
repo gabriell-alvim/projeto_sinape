@@ -1,0 +1,46 @@
+4.1.11. Contratações correlatas e/ou interdependentes
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/4-1-11-contratacoes-correlatas-e-ou-interdependentes/
+======================================================================
+
+A descrição da solução com um todo permite identificar todos os elementos que integram a solução e os objetos de contratação decorrentes, considerando o ciclo de vida desses objetos (vide item 4.1.7). Já a relação de providências a serem adotadas pela Administração registra as medidas necessárias (a serem ou não contratadas) para viabilizar a execução contratual (vide item 4.1.10).
+
+A conciliação com contratações correlatas e/ou interdependentes, por sua vez, complementa as análises supramencionadas, identificando as contratações planejadas, em andamento ou já realizadas pela organização que possam impactar a solução escolhida ou serem por ela impactadas. Objetiva o tratamento integrado das contratações. Por exemplo, no levantamento de providências para ajuste de infraestrutura que a organização terá que fazer para implementar determinada solução, a equipe de planejamento poderá identificar contratações já realizadas ou planejadas que suprem esses ajustes.
+
+As contratações correlatas tratam de objetos similares ou complementares aos que serão demandados pela nova solução. A análise deverá considerar, por exemplo, a possibilidade de agregar objetos semelhantes, com vistas à economia de escala ou à padronização; e a necessidade de substituir contratos vigentes prevendo período para a transição contratual.
+
+No caso de serviços ou fornecimentos contínuos, é fundamental realizar uma transição contratual adequada para garantir a continuidade da prestação.
+
+Para os objetos complementares, deve ser verificada a compatibilidade entre os cronogramas de execução, os quantitativos demandados, e as especificações técnicas. Como exemplo, as aquisições ou alienações de veículos alteram os serviços de seguro automotivo e o fornecimento de combustíveis; as atualizações de softwares de banco de dados podem requerer migrações de outros softwares que os utilizam; compras de computadores podem implicar contratação de novas licenças de software.
+
+As contratações interdependentes são aquelas que são pré-requisitos para o sucesso da nova solução, ou contratações cujo sucesso depende da solução ora examinada. Para o outsourcing de impressão, por exemplo, será necessário o fornecimento de papel e de mobiliário para acomodação dos equipamentos e guarda de consumíveis; para o serviço de segurança patrimonial eletrônica, deverá haver o fornecimento de conexão à internet via cabo para as câmeras de vigilância e a aquisição e manutenção de aparelhos de ar-condicionado para os ambientes em que ficarão os servidores e demais equipamentos de armazenamento de dados de segurança patrimonial. 
+
+O resultado da análise das contratações correlatas e/ou interdependentes pode influenciar não somente o quantitativo pretendido, como os requisitos técnicos e até a escolha da própria solução.
+
+Quadro 118 – Referências normativas para a verificação de contratações correlatas
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 18. § 1º O estudo técnico preliminar a que se refere o inciso I do caput deste artigo deverá evidenciar o problema a ser resolvido e a sua melhor solução, de modo a permitir a avaliação da viabilidade técnica e econômica da contratação, e conterá os seguintes elementos: […] IV – estimativas das quantidades para a contratação, acompanhadas das memórias de cálculo e dos documentos que lhes dão suporte, que considerem interdependências com outras contratações, de modo a possibilitar economia de escala; […] XI – contratações correlatas e/ou interdependentes; […]
+IN – Seges 58/2022 | Art. 9º Com base no Plano de Contratações Anual, deverão ser registrados no Sistema ETP Digital os seguintes elementos: […] VIII – contratações correlatas e/ou interdependentes; […]
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 119 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 274/2020-TCU-Plenário | [Relatório] b.2) Conduta: elaborou e aprovou planejamento da contratação sem levantamento de demanda de potenciais gestores e usuários e sem avaliação das reais necessidades de negócio e das necessidades de adequação do ambiente do órgão para viabilizar a execução contratual levaram à contratação de licenças e serviços de TI acima do necessário para o atendimento da finalidade da contratação (Matriz de Responsabilização – Anexo I, Irregularidade II). [Voto] 15. Quanto ao mérito da presente representação, acolherei na íntegra os exames realizados pela Sefti, os quais foram transcritos no relatório que fundamenta esta deliberação, adotando-os como razões de decidir. No entanto, julgo que o encaminhamento proposto pela unidade técnica mereça alguns aperfeiçoamentos. 16. Inicialmente, em adição às propostas formuladas, considero que esta representação deve ser julgada procedente, em virtude da confirmação das irregularidades apontadas pela instrução preliminar da unidade técnica. 17. Outrossim, entendo que desde já deva ser instaurado processo de tomada de contas especial pelo próprio TCU, pois os presentes autos dispõem de elementos suficientes para a devida quantificação do débito e responsabilização dos agentes envolvidos.
+Acórdão1851/2018-TCU-Plenário | 9.5. dar ciência ao [ omissis ] sobre as seguintes impropriedades, para que sejam adotadas medidas com vistas à prevenção de ocorrências futuras: […] 9.5.5. ausência de estudos técnicos preliminares para contratação de serviços continuados, a exemplo do que ocorreu com o contrato [ omissis ], para prestação de serviços de limpeza, asseio e conservação com controle, manuseio, coleta seletiva, transporte e destinação final dos resíduos recicláveis gerados nas instalações físicas e mobiliárias do [ omissis ], em afronta aos art. 6º, IX e 7º da Lei 8.666/1993; o art. 3º, III, da Lei 10.520/2002; e o art. 24 da Instrução Normativa 5/2017 do Ministério do Planejamento, Desenvolvimento e Gestão; [Relatório] 91. Efeitos reais e potenciais: os estudos técnicos preliminares devem abordar a necessidade da contratação, fazer referência a outros instrumentos do planejamento, arrolar os requisitos da contratação, trazer a estimativa das quantidades, conter levantamento de mercado, estimativa de preço, descrever a solução como um todo, justificar o parcelamento ou não da solução, demonstrar os resultados pretendidos, indicar as providências para adequação do ambiente do órgão para receber a solução contratada, arrolar contratações correlatas, e, trazer declaração expressa da viabilidade da contratação. Sua ausência, portanto, pode trazer a contratação de uma solução que não atenda à necessidade da instituição.
+Pesquisa de Jurisprudência | Execute consulta na Pesquisa Integrada do TCU : “contratações correlatas” . Execute consulta na Pesquisa Integrada do TCU: “contratações interdependentes” .
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+Quadro 120 – Riscos relacionados
+
+Riscos
+Incoerências entre contratações que compõem uma mesma solução, levando a atrasos ou inviabilização de toda a solução, com consequente não atendimento da necessidade da contratação.
+Falta de comunicação entre a sede da organização e suas unidades regionais, levando à aquisição de soluções diferentes para tratar um mesmo problema ou a aquisições repetidas ou similares sem a devida justificativa (p. ex., redundância para aumentar a disponibilidade da solução), com consequente sobreposição ou duplicação de esforços administrativos, perda de oportunidade de obter economia de escala e desperdício de recursos.
+Mudança de modelo de prestação de serviços continuados sem planejamento de transição contratual, levando à descontinuidade de serviços até que a nova solução seja contratada e implementada, com consequente prejuízo a processos de trabalho que utilizem os serviços contratados (p. ex., serviços públicos que dependam dos serviços que foram descontinuados).
+Contratações de objetos similares realizadas isoladamente, levando à perda de oportunidade de obter ganhos de escala ou à perda da padronização, com consequente necessidade de novas contratações e desperdício de recursos.
+Falta de coerência entre quantidades e/ou especificações técnicas de objetos correlatos ou interdependentes (p. ex., contratar computadores sem que haja a quantidade correspondente de licenças de determinados softwares que serão usados nessas máquinas), levando à impossibilidade de utilização de produtos que dependam de outros produtos ou serviços contratados sem os quantitativos ou especificações adequados, com consequente não atendimento das necessidades dessas contratações e desperdício de recursos.
+
+Fonte: Elaboração própria.

@@ -1,0 +1,24 @@
+4.4.1.2. Empreitada por preço global (EPG)
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/4-4-1-2-empreitada-por-preco-global-epg/
+======================================================================
+
+Na empreitada por preço global, a obra será contratada “por preço certo e total”[1]. Tendo em vista essa definição, esse regime é indicado quando as quantidades dos serviços a serem executados puderem ser definidas com precisão. Por essa razão, o regime de empreitada por preço global exige que o projeto licitado permita o levantamento dos quantitativos com elevada acurácia, bem como que contenha um detalhamento completo de todos os componentes da obra, a fim de que a incerteza seja mínima na orçamentação da obra.
+
+No regime de empreitada por preço global, a medição e o pagamento do contratado são feitos após a conclusão de cada marco contratual, parcela ou etapa da obra[2], previamente definida em um eventograma (ou tabela com eventos geradores de pagamento). Essa sistemática facilita a fiscalização da obra, já que esse critério de medição não envolve o levantamento preciso dos quantitativos de todos os serviços executados.
+
+A título de exemplo, apresenta-se a seguir exemplo de eventograma extraído da publicação “Orientações para elaboração de planilhas orçamentárias de obras públicas”, editada pelo TCU, ilustrando percentuais e montantes de pagamento previstos ao término de cada etapa da construção de uma pequena obra de arte especial (uma ponte com 60 metros de extensão).
+
+Figura 11 – Exemplo de eventograma
+
+Fonte: Tribunal de Contas da União, 2014b, p. 116.
+
+Por causa dessas características, é fundamental que o projeto básico de uma obra a ser licitada por empreitada por preço global seja bem detalhado. Além disso, eventuais falhas no projeto básico trazem consequências que impactam a execução contratual das obras, uma vez que, ao não haver a medição das quantidades efetivamente executadas de todos os serviços, o contratado poderá ter de suportar a execução de quantidades superiores à prevista sem a correspondente medição e seu pagamento ou, em situação oposta, há o risco de haver o pagamento de quantidades que extrapolam o que foi executado.
+
+Por isso, recomenda-se adotar esse regime em obras nas quais seja possível prever com elevado grau de precisão os serviços necessários e as quantidades envolvidas.
+
+Nas situações em que, mesmo diante de objeto com imprecisão intrínseca de quantitativos for utilizada a empreitada por preço global, sua escolha deve ser justificada no processo licitatório e ser demonstrada a vantagem da transferência maior de riscos para o particular (e o maior potencial de elevação dos preços ofertados) em termos técnicos, econômicos ou outro objetivamente motivado, bem assim como os impactos decorrentes desses riscos na composição do orçamento da obra, em especial a taxa de BDI – Benefícios e Despesas Indiretas.
+
+[1] Lei 14.133/2021, art. 6º, inciso XXIX.
+
+[2] Lei 14.133/2021, art. 46, § 9º.

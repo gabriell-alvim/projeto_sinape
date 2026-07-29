@@ -116,6 +116,16 @@ MAX_PDF_TOTAL_MB = int(os.environ.get("MAX_PDF_TOTAL_MB", "24"))  # margem p/ li
 # Prompt único do Sinki (a IA do DATA SIN): vale tanto pra conversa quanto pra
 # análise estruturada de edital — antes eram dois textos que saíam de sincronia.
 PROMPT_SINKI = (BASE_DIR / "prompt_sinki.txt").read_text(encoding="utf-8")
+# Biblioteca de jurisprudência do TCU (manual "Licitações e Contratos", 5ª ed.).
+# São 209 seções, ~3 milhões de caracteres — não cabe no prompt e não faria
+# sentido: o Sinki consulta sob demanda, e o índice marca quais seções são do
+# nosso escopo (habilitação, impugnação, recurso...) e quais ignorar
+# (governança interna do órgão, dispensas específicas).
+BIBLIOTECA_TCU_DIR = BASE_DIR / "biblioteca-tcu"
+try:
+    BIBLIOTECA_TCU = json.loads((BIBLIOTECA_TCU_DIR / "indice.json").read_text(encoding="utf-8"))
+except Exception:
+    BIBLIOTECA_TCU = {"secoes": []}
 # Pedido que liga o "modo análise" descrito no prompt do Sinki. Vai como última
 # coisa do turno do usuário (posição de maior peso), logo após os documentos.
 PEDIDO_ANALISE = (
@@ -1179,6 +1189,32 @@ SINKI_FERRAMENTAS = [
                        "conferir se entrou processo novo.",
         "input_schema": {"type": "object", "properties": {}},
     },
+    {
+        "name": "consultar_jurisprudencia",
+        "description": "Consulta a biblioteca de jurisprudência do TCU (manual oficial "
+                       "\"Licitações e Contratos\", 5ª edição) pra fundamentar impugnação, "
+                       "pedido de esclarecimento ou recurso — e pra checar se uma exigência do "
+                       "edital extrapola o que o TCU admite. Busque por tema ('atestado de "
+                       "capacidade técnica', 'capital social mínimo', 'prazo de impugnação'), "
+                       "por número de acórdão ('1604/2025'), por súmula ('Súmula 263') ou pelo "
+                       "número da seção ('5.5.2'). Use SEMPRE que for citar entendimento do TCU "
+                       "— nunca cite acórdão de memória, porque errar o número desmoraliza a "
+                       "peça inteira. Vale só pra processo PÚBLICO (Lei 14.133/2021); em "
+                       "processo privado não se cita TCU.",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "busca": {"type": "string",
+                          "description": "Tema, número de acórdão, súmula ou número da seção."},
+                "modo": {"type": "string", "enum": ["resumo", "completo"],
+                         "description": "'resumo' (padrão) traz só os enunciados de acórdão e "
+                                        "súmula da seção — compacto e suficiente pra citar. "
+                                        "'completo' traz o texto inteiro, use quando precisar "
+                                        "do raciocínio e do contexto normativo."},
+            },
+            "required": ["busca"],
+        },
+    },
 ]
 
 
@@ -1199,6 +1235,89 @@ def _norm(texto):
         for c in de:
             s = s.replace(c, para)
     return s
+
+
+# ── biblioteca de jurisprudência do TCU ───────────────────────────────────
+RE_SECAO = re.compile(r"^\s*(\d+(?:\.\d+){0,4})\.?\s*$")
+RE_ACORDAO_BUSCA = re.compile(r"(\d{1,5})\s*/\s*(\d{4})")
+RE_SUMULA_BUSCA = re.compile(r"s[uú]mula[\s\-–—]*(?:tcu)?[\s\-–—]*(\d{1,3})", re.I)
+# no texto convertido, cada entendimento vira uma linha "Acórdão X/Y-TCU-Órgão | ..."
+RE_ENUNCIADO = re.compile(r"^\s*(Ac[óo]rd[ãa]o\s+\d{1,5}/\d{4}[^|]*|S[úu]mula[^|]{0,30})\|\s*(.+)$")
+
+
+def _tcu_texto_da_secao(entrada):
+    caminho = BIBLIOTECA_TCU_DIR / "secoes" / entrada["arquivo"]
+    try:
+        return caminho.read_text(encoding="utf-8")
+    except Exception:
+        return ""
+
+
+def _tcu_enunciados(texto, limite=60):
+    """Extrai só as linhas de acórdão/súmula — é o que serve pra citar numa peça,
+    e cabe numa fração dos tokens do texto completo da seção."""
+    achados = []
+    for linha in texto.splitlines():
+        m = RE_ENUNCIADO.match(linha)
+        if m:
+            corpo = m.group(2).strip()
+            if corpo.lower().startswith("[enunciado]"):
+                corpo = corpo[len("[enunciado]"):].strip()
+            achados.append({"referencia": m.group(1).strip(), "entendimento": corpo[:700]})
+        if len(achados) >= limite:
+            break
+    return achados
+
+
+def _tcu_buscar(busca):
+    """Devolve as seções que batem com a busca, mais relevante primeiro.
+    Aceita número de seção ('5.5.2'), acórdão ('1604/2025'), súmula ou tema."""
+    secoes = BIBLIOTECA_TCU.get("secoes") or []
+    if not secoes:
+        return []
+    termo = (busca or "").strip()
+
+    m = RE_SECAO.match(termo)
+    if m:  # pediu uma seção específica: entrega ela, mesmo se estiver fora do escopo
+        return [s for s in secoes if s["numero"] == m.group(1)]
+
+    m = RE_SUMULA_BUSCA.search(termo)
+    if m:
+        n = int(m.group(1))
+        return [s for s in secoes if n in (s.get("sumulas") or []) and s["escopo"] != "fora"]
+
+    m = RE_ACORDAO_BUSCA.search(termo)
+    if m:
+        alvo = f"{int(m.group(1))}/{m.group(2)}"
+        achados = [s for s in secoes if alvo in (s.get("acordaos") or [])]
+        return sorted(achados, key=lambda s: s["escopo"] != "nucleo")
+
+    # busca por tema: pontua palavras-chave e título, ignorando o que está fora do escopo
+    alvo = _norm(termo)
+    palavras = [p for p in re.split(r"\W+", alvo) if len(p) > 3]
+    pontuados = []
+    for s in secoes:
+        if s["escopo"] == "fora":
+            continue
+        pontos = 0
+        for chave in s.get("palavras_chave") or []:
+            ch = _norm(chave)
+            if ch in alvo or alvo in ch:
+                pontos += 10
+            elif palavras and all(p in ch for p in palavras):
+                pontos += 6
+        titulo = _norm(s["titulo"])
+        if alvo in titulo:
+            pontos += 8
+        pontos += sum(2 for p in palavras if p in titulo)
+        pontos += sum(1 for p in palavras
+                      if any(p in _norm(c) for c in s.get("palavras_chave") or []))
+        if s["escopo"] == "nucleo":
+            pontos = int(pontos * 1.3)
+        if pontos:
+            pontuados.append((pontos, s))
+    pontuados.sort(key=lambda t: -t[0])
+    return [s for _, s in pontuados[:5]]
 
 
 def _sinki_rodar_ferramenta(nome: str, entrada: dict, modelo_usado: str = ""):
@@ -1269,6 +1388,42 @@ def _sinki_rodar_ferramenta(nome: str, entrada: dict, modelo_usado: str = ""):
         if not verificacoes:
             return {"erro": "Nenhuma verificação de concorrente encontrada com esses filtros."}, None
         return {"total": len(verificacoes), "verificacoes": verificacoes}, None
+
+    if nome == "consultar_jurisprudencia":
+        busca = (entrada.get("busca") or "").strip()
+        if not busca:
+            return {"erro": "Diga o que procurar: um tema, um número de acórdão ou uma seção."}, None
+        achados = _tcu_buscar(busca)
+        if not achados:
+            return {"erro": f"Nada encontrado para '{busca}' na biblioteca do TCU.",
+                    "dica": "Tente o tema por extenso (ex.: 'atestado de capacidade técnica'), "
+                            "o número do acórdão (ex.: '1604/2025') ou o número da seção "
+                            "(ex.: '5.5.2'). Assuntos de governança interna do órgão e de "
+                            "dispensa/inexigibilidade ficam fora da biblioteca de propósito."}, None
+
+        completo = entrada.get("modo") == "completo"
+        principal = achados[0]
+        texto = _tcu_texto_da_secao(principal)
+        resultado = {
+            "secao": principal["numero"],
+            "titulo": principal["titulo"],
+            "escopo": principal["escopo"],
+            "url": principal["url"],
+            "fonte": BIBLIOTECA_TCU.get("fonte"),
+            "aviso": BIBLIOTECA_TCU.get("observacao"),
+        }
+        if completo:
+            resultado["texto"] = texto[:45000]
+            resultado["truncado"] = len(texto) > 45000
+        else:
+            resultado["entendimentos"] = _tcu_enunciados(texto)
+            resultado["nota"] = ("Estes são os enunciados da seção. Peça modo 'completo' se "
+                                 "precisar do raciocínio e das referências normativas.")
+        if len(achados) > 1:
+            resultado["outras_secoes"] = [
+                {"secao": s["numero"], "titulo": s["titulo"]} for s in achados[1:]
+            ]
+        return resultado, None
 
     if nome == "ver_gastos":
         registros = list(col_gastos.find(sort=[("criadoEm", DESCENDING)]))

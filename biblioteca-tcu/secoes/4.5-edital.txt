@@ -1,0 +1,72 @@
+4.5. Edital
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/4-5-edital/
+======================================================================
+
+A fase externa do processo licitatório se inicia com a divulgação do edital. No entanto, a sua elaboração é prevista para a fase de planejamento ou preparatória. Assim, após a conclusão do ETP, da análise de riscos e do TR, o edital será elaborado e deverá conter os seguintes elementos[1]:
+
+[…] o objeto da licitação e as regras relativas à convocação, ao julgamento, à habilitação, aos recursos e às penalidades da licitação, à fiscalização e à gestão do contrato, à entrega do objeto e às condições de pagamento.
+
+O edital é peça fundamental de um processo licitatório, por meio do qual são apresentadas regras gerais de convocação dos interessados, de condução do certame e da execução do contrato. A especificação e o detalhamento do objeto serão os mesmos definidos no termo de referência ou no projeto básico.
+
+Desde que o edital esteja em conformidade com a legislação aplicável em vigor, a Administração e os licitantes a ele se vinculam, em conformidade com o princípio da vinculação ao edital[2].
+
+A Lei 14.133/2021 determina que, sempre que o objeto permitir, a Administração deve adotar minutas padronizadas de edital e contrato com cláusulas uniformes[3]. Para tanto, os órgãos da Administração com competências regulamentares relativas às atividades de administração de materiais, obras, serviços, licitações e contratos devem instituir modelos de minutas de editais, termos de referência, contratos padronizados e outros documentos. A não utilização dos modelos de minutas deve ser justificada por escrito e anexada ao respectivo processo licitatório.[4].
+
+Deve ser dada ampla publicidade ao edital, mediante divulgação e manutenção do inteiro teor do edital e de seus anexos no Portal Nacional de Contratações Públicas (PNCP).
+
+Também é obrigatória a publicação de extrato do edital no Diário Oficial da União, do Estado, do Distrito Federal ou do Município, ou, no caso de consórcio público, do ente de maior nível entre eles, bem como em jornal diário de grande circulação[5].
+
+Por fim, a Lei dispõe que é facultada a divulgação adicional e a manutenção do inteiro teor do edital e de seus anexos em sítio eletrônico oficial da organização responsável pela licitação ou, no caso de consórcio público, do ente de maior nível entre eles, admitida, ainda, a divulgação direta a interessados devidamente cadastrados para esse fim[6].
+
+Quadro 175 – Referências normativas para o edital
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 17. O processo de licitação observará as seguintes fases, em sequência: I – preparatória; II – de divulgação do edital de licitação; […] Art. 18. A fase preparatória do processo licitatório é caracterizada pelo planejamento e deve compatibilizar-se com o plano de contratações anual de que trata o inciso VII do caput do art. 12 desta Lei, sempre que elaborado, e com as leis orçamentárias, bem como abordar todas as considerações técnicas, mercadológicas e de gestão que podem interferir na contratação, compreendidos: […] V – a elaboração do edital de licitação; […] Art. 25. O edital deverá conter o objeto da licitação e as regras relativas à convocação, ao julgamento, à habilitação, aos recursos e às penalidades da licitação, à fiscalização e à gestão do contrato, à entrega do objeto e às condições de pagamento. § 1º Sempre que o objeto permitir, a Administração adotará minutas padronizadas de edital e de contrato com cláusulas uniformes. […] § 3º Todos os elementos do edital, incluídos minuta de contrato, termos de referência, anteprojeto, projetos e outros anexos, deverão ser divulgados em sítio eletrônico oficial na mesma data de divulgação do edital, sem necessidade de registro ou de identificação para acesso. […] Art. 54. A publicidade do edital de licitação será realizada mediante divulgação e manutenção do inteiro teor do ato convocatório e de seus anexos no Portal Nacional de Contratações Públicas (PNCP).
+IN – Seges/ME 96/2022 | Art. 1º Esta Instrução Normativa dispõe sobre a licitação pelo critério de julgamento por maior retorno econômico, na forma eletrônica, no âmbito da Administração Pública federal direta, autárquica e fundacional. […] Art. 16. O edital de licitação deverá prever, no mínimo: I – parâmetros objetivos de mensuração da economia gerada com a execução do contrato, que servirá de base de cálculo para a remuneração devida ao contratado; II – o limite máximo do déficit da economia efetivamente obtida em relação à economio contratado, acima da qual haverá apuração de responsabilidade, podendo culminar em sanção ao particular; III – nível mínimo de economia que se pretende gerar; e IV – direito de realização de vistoria prévia, nos termos dos §§ 2º a 4º do art. 63 da Lei nº 14.133, de 2021, na hipótese de a avaliação prévia do local de intervenção ser imprescindível para a confecção da proposta de trabalho. § 1º Os parâmetros objetivos de mensuração de que trata o inciso I adequar-se-ão ao comportamento sazonal da despesa corrente a qual se pretende minimizar, com medição mensal. § 2º As mensurações em prazos superiores ao disposto no § 1º são excepcionais e deverão ser justificadas nos autos correspondentes. […] Art. 18. A fase externa da licitação, na forma eletrônica, será iniciada com a convocação dos interessados por meio da publicação do inteiro teor do edital de licitação e de seus anexos no PNCP. Parágrafo único. Sem prejuízo do disposto no caput , é obrigatória a publicação de extrato do edital no Diário Oficial da União, do Estado, do Distrito Federal ou do Município, ou, no caso de consórcio público, do ente de maior nível entre eles, bem como em jornal diário de grande circulação.
+IN – Seges/MP 5/2017 | Art. 35. Devem ser utilizados os modelos de minutas padronizados de atos convocatórios e contratos da Advocacia-Geral União, observado o disposto no Anexo VII, bem como os Cadernos de Logística expedidos por esta Secretaria de Gestão do Ministério do Planejamento, Desenvolvimento e Gestão, no que couber. § 1º Quando o órgão ou entidade não utilizar os modelos de que trata o caput , ou utilizá-los com alterações, deverá apresentar as devidas justificativas, anexando-as aos autos. ANEXO VII-A DIRETRIZES PARA ELABORAÇÃO DO ATO CONVOCATÓRIO […] 1. Do ato convocatório: […] 2. Do objeto: […] 3. Das condições de participação no processo licitatório: […] 6. Da proposta: […] 7. Da aceitabilidade da proposta vencedora: […] 8. Do julgamento das propostas: […] 9. Da desclassificação das propostas: […] 10. Da habilitação: […] ANEXO VII-B DIRETRIZES ESPECÍFICAS PARA ELABORAÇÃO DO ATO CONVOCATÓRIO […]
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 176 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 2032/2021-TCU-Plenário | [Enunciado] A alteração de cláusula editalícia capaz de afetar a formulação das propostas dos licitantes sem a republicação do edital e a reabertura dos prazos para apresentação de novas propostas ofende os princípios da publicidade, da vinculação ao instrumento convocatório e da isonomia.
+Acórdão 2426/2020-TCU-Plenário | 9.4. dar ciência ao [ omissis ], com fundamento no art. 9º, inciso I, da Resolução – TCU 315/2020, de que modificações editalícias que tendem a provocar o aumento do número de interessados a participar do certame, independente de afetação de propostas de licitantes que já detenham o conhecimento do instrumento convocatório, identificadas no Pregão Eletrônico 3/2020, devem ser divulgadas pela mesma forma que se deu o texto original, nos termos do art. 21, § 4º, da Lei 8.666/1993, e art. 22 do Decreto 10.024/2019, visando a preservar o princípio da competividade nas licitações públicas, insculpido nas seguintes legislações: Lei 8.666/1993, art. 3º, § 1º, inciso I; e Decreto 10.024/2019, art. 2º, caput , para que sejam adotadas medidas internas com vistas à prevenção de ocorrências semelhantes;
+Acórdão 2361/2018-TCU-Plenário | [Enunciado] É ilegal a exigência de prévio requerimento formal do interessado à comissão de licitação como condição para acesso a documentos técnicos que integram o edital, pois tal prática pode possibilitar a ciência antecipada do universo de potenciais competidores.
+Acórdão 2441/2017-TCU-Plenário | [Enunciado] A redação dos editais deve ser clara e objetiva, de forma a evitar erros ou contradições que dificultem seu entendimento, levem a interpretações equivocadas ou dificultem a compreensão dos licitantes quanto às condições estabelecidas.
+Acórdão 2377/2008-TCU-Segunda Câmara | [Enunciado] O edital de licitação não deve conter termos ou expressões que permitam dupla interpretação, dificultando a compreensão dos licitantes quanto às condições estabelecidas.
+Pesquisa de Jurisprudência | Execute consulta na Jurisprudência selecionada do TCU : área “licitação”; tema “edital de licitação”.
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+Quadro 177 – Riscos relacionados
+
+Riscos
+Falha de comunicação entre os envolvidos na elaboração do TR/PB e do edital, levando a discrepâncias entre edital e TR/PB, com consequente contratação de solução inadequada ao atendimento da necessidade que a originou.
+Utilização de expressões ambíguas no edital de licitação, levando a interpretações equivocadas ou dúvidas de interpretação e a elevado número de impugnações e/ou pedidos de esclarecimentos, com consequentes atrasos ou paralisação do certame.
+Não utilização de minutas de edital padronizadas, levando à multiplicidade de esforços para realizar contratações semelhantes em diferentes organizações públicas e na mesma organização, com consequente ineficiência administrativa e repetição de erros.
+Utilização de minutas de edital padronizadas para contratações peculiares, isto é, que requeiram adaptação às especificidades do caso concreto, levando a falhas ou omissões na definição do objeto, das regras da licitação ou das condições contratuais, com consequentes insucesso do certame, ou contratação de objeto que não atenda à necessidade que ensejou a contratação ou que não seja a melhor opção para o atendimento da demanda.
+
+Fonte: Adaptado de Tribunal de Contas da União, 2014, item “Edital”.
+
+Quadro 178 – Modelos
+
+Assunto | Modelo disponibilizados por OGS ou por órgãos de controle | OGS
+Minutas padronizadas | Modelos de licitações e contratos para a Lei 14.133/2021 (Advocacia-Geral da União; Ministério da Gestão e da Inovação em Serviços Públicos em Serviços Públicos, 2023) Modelos da Lei 14.133/2021 para bens e serviços de TIC | AGU MGI
+Orientações para Contratação de TIC (Ministério da Gestão e da Inovação em Serviços Públicos, 2023) | MGI
+Diretrizes | Instrumento de Padronização dos Procedimentos de Contratação (Advocacia-Geral da União; Ministério da Gestão e da Inovação em Serviços Públicos em Serviços Públicos, 2023b) | AGU, MGI
+
+Fonte: Elaboração própria.
+
+[1] Lei 14.133/2021, art. 18, inciso V, e art. 25, caput.
+
+[2] Lei 14.133/2021, art. 5º.
+
+[3] Lei 14.133/2021, art. 25, § 1º.
+
+[4] Lei 14.133/2021, art. 19, inciso IV e § 2º.
+
+[5] Lei 14.133/2021, art. 54, § 1º.
+
+[6] Lei 14.133/2021, art. 54, caput e § 2º, art. 25, § 3º.

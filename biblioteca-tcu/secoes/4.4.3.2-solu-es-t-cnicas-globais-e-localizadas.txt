@@ -1,0 +1,10 @@
+4.4.3.2. Soluções técnicas globais e localizadas
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/4-4-3-2-solucoes-tecnicas-globais-e-localizadas/
+======================================================================
+
+As soluções técnicas do projeto básico representam o conjunto de definições a respeito do objeto que se pretende obter, indicando suas características, funcionalidades, objetivos e capacidades. São representações do objeto a ser executado, com o intuito de estabelecer com precisão a forma, as dimensões e todos os elementos construtivos do empreendimento.
+
+Em regra, são a representação gráfica de um conjunto de informações, como especificações, memoriais, cadernos técnicos, levantamentos. O conteúdo e os tipos de projetos variam de acordo com a tipologia de obra e com as particularidades de cada empreendimento.
+
+Nos serviços de engenharia e obras públicas em geral, o conteúdo envolve os desenhos, projetos arquitetônicos e de engenharia, indicando a implantação da obra no terreno, as plantas baixas, elevações; projetos de terraplenagem contendo a indicação dos níveis de piso, indicação dos perfis do terreno, seções transversais, definição de taludes e contenção de terra; projeto de fundações e definição do método construtivo; projeto estrutural com lançamento da estrutura e cálculos de dimensionamento; projetos de instalações hidráulica, elétrica, telefônica, de prevenção de incêndio, instalações especiais, de ar-condicionado, dos elevadores; projetos de pavimentação, paisagismo, drenagem pluvial, sinalização, entre outros.

@@ -1,0 +1,179 @@
+4.4.3. Projeto básico (PB)
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/4-4-3-projeto-basico-pb/
+======================================================================
+
+O projeto básico é um dos elementos mais importantes tanto para a licitação como para a execução de obras públicas. Ele define, detalhadamente, o objeto a ser licitado e seu respectivo custo.
+
+As irregularidades causadas por projetos básicos incompletos, deficientes ou desatualizados são encontradas com frequência nas auditorias realizadas pelo TCU e podem causar uma série de problemas, seja durante a execução da obra ou após a sua conclusão, gerando prejuízo ao funcionamento e à durabilidade da construção.
+
+A Lei 14.133/2021 define o projeto básico[1] como o conjunto de elementos necessários e suficientes, com nível de precisão adequado para definir e dimensionar a obra ou o serviço, ou o complexo de obras ou de serviços objeto da licitação, elaborado com base nas indicações dos estudos técnicos preliminares, que assegure a viabilidade técnica e o adequado tratamento do impacto ambiental do empreendimento e que possibilite a avaliação do custo da obra e a definição dos métodos e do prazo de execução, devendo conter os seguintes elementos:
+
+- levantamentos topográficos e cadastrais, sondagens e ensaios geotécnicos, ensaios e análises laboratoriais, estudos socioambientais e demais dados e levantamentos necessários para execução da solução escolhida;
+
+- soluções técnicas globais e localizadas, suficientemente detalhadas, de forma a evitar, por ocasião da elaboração do projeto executivo e da realização das obras e montagem, a necessidade de reformulações ou variantes quanto à qualidade, ao preço e ao prazo inicialmente definidos;
+
+- identificação dos tipos de serviços a executar e dos materiais e equipamentos a incorporar à obra, bem como das suas especificações, de modo a assegurar os melhores resultados para o empreendimento e a segurança executiva na utilização do objeto, para os fins a que se destina, considerados os riscos e os perigos identificáveis, sem frustrar o caráter competitivo para a sua execução;
+
+- informações que possibilitem o estudo e a definição de métodos construtivos, de instalações provisórias e de condições organizacionais para a obra, sem frustrar o caráter competitivo para a sua execução;
+
+- subsídios para montagem do plano de licitação e gestão da obra, compreendidos a sua programação, a estratégia de suprimentos, as normas de fiscalização e outros dados necessários em cada caso; e
+
+- orçamento detalhado do custo global da obra, fundamentado em quantitativos de serviços e fornecimentos propriamente avaliados.
+
+O projeto básico deve conter informações detalhadas para que se compreenda com precisão o objeto que está sendo licitado, como ele se desenvolverá, em que prazo, e ainda possibilite a identificação e quantificação de todos os serviços que serão executados, bem como a caracterização e quantificação de todos os insumos (mão de obra, materiais e equipamentos) e seus custos.
+
+Dessa forma, o projeto básico permanece sendo uma diretriz essencial para que o licitante entenda o objeto da licitação da qual irá participar, sendo um instrumento importante para o sucesso da contratação.
+
+De forma geral, o projeto básico é constituído tanto por elementos dos projetos de engenharia propriamente ditos (plantas, desenhos, especificações, memoriais, orçamento estimativo, cronograma físico-financeiro etc.) quanto de informações e documentos contendo aspectos legais e parâmetros a serem utilizados no processo licitatório e na gestão do futuro contrato, os quais podem decorrer de decisões adotadas na etapa de elaboração do estudo técnico preliminar.
+
+Vale lembrar que o projeto básico de engenharia de uma obra deve ser elaborado por profis­sional legalmente habilitado, com registro no conselho profissional competente, podendo ser contratada empresa específica de engenharia ou arquitetura para sua elaboração, nos casos em que o órgão não disponha de uma quantidade suficiente de profissionais técnicos especializados. Mesmo no caso de contratação de empresa especializada, o administrador público permanece com a responsabilidade de avaliar se os documentos e projetos fornecidos são adequados, devendo exigir do contratado a realização de todos os ajustes necessários.
+
+No que tange à parcela do conteúdo do projeto básico que será utilizada para definir a modelagem da licitação, bem como para subsidiar a elaboração do edital e as regras de gestão contratual, é possível elencar os seguintes tópicos, dentre outros:
+
+- descrição do objeto a ser licitado;
+
+- justificativa e objetivo da contratação;
+
+- descrição da(s) solução(ões);
+
+- classificação das obras e/ou serviços como comuns ou especiais;
+
+- forma de seleção do prestador de serviço/fornecedor;
+
+- requisitos da contratação;
+
+- diretrizes sobre a sustentabilidade da contratação e demonstração do alinhamento da contratação com as diretrizes do plano de gestão de logística sustentável do órgão licitante;
+
+- regime de execução contratual;
+
+- forma de adjudicação do objeto;
+
+- justificativas para o parcelamento ou não do objeto;
+
+- requisitos de habilitação técnica e econômico-financeira;
+
+- necessidade ou não de vistoria dos licitantes ao local de prestação dos serviços, observando a possibilidade de os participantes da licitação apresentarem declaração afirmando que conhecem as condições dos locais de execução;
+
+- cláusulas de reajuste contratual, estipulando o(s) índice(s) aplicável(eis);
+
+- penalidades;
+
+- normas gerais de fiscalização contratual;
+
+- se for o caso, definição sobre a elaboração do projeto executivo pelo contratado, com especificação de prazos de execução, produtos a serem entregues e demais especificações cabíveis;
+
+- regras sobre a subcontratação (percentual máximo admitido; parcelas do objeto possíveis de serem subcontratadas; documentos a serem exigidos para autorização da subcontratação);
+
+- forma de pagamento ou critérios de medição dos serviços;
+
+- definição sobre a periodicidades das medições; prazos para pagamento; documentos exigidos para atestação das faturas;
+
+- nas empreitadas por preço global, tabela com eventos geradores de pagamento (eventograma), com marcos/etapas contratuais contendo percentuais pré-definidos para pagamentos
+
+- critérios de recebimento dos serviços (prazos de recebimento provisório e definitivo; documentos exigidos; teses e ensaios a serem realizados, definição dos responsáveis pelo recebimento, bem como outras regras aplicáveis);
+
+- critérios de aceitabilidade global e unitário de preços;
+
+- regras diversas sobre o julgamento das propostas;
+
+- prazos da execução dos serviços e vigência contratual;
+
+- prazo para início dos serviços;
+
+- local de prestação dos serviços;
+
+- materiais, ferramentas e equipamentos a serem disponibilizados e/ou mobilizados pelo contratado;
+
+- obrigações do contratante e do contratado;
+
+- matriz de riscos com a alocação de responsabilidades por eventos supervenientes à contratação;
+
+- instrumentos de medição por resultado (acordo de níveis de serviço);
+
+- definição sobre a permissão para a participação ou não de consórcios no certame, com as regras aplicáveis;
+
+- em licitações de técnica e preço, detalhar os critérios de pontuação técnica e da nota de preço;
+
+- exigências de garantia contratual e seguros etc.;
+
+- prazo e regras de garantia sobre os fornecimentos e serviços prestados;
+
+- disposições diversas sobre a elaboração do As built;
+
+- indicação dos recursos orçamentários;
+
+- se for o caso, o projeto básico deverá discorrer sobre as condições relacionadas com a responsabilidade do contratado pela obtenção do licenciamento ambiental e/ou pela realização da desapropriação autorizada pelo poder público.
+
+A Lei 14.133/2021 dispensa a elaboração prévia de projeto básico apenas no caso de contratação integrada. Nesse regime de execução, a elaboração do projeto básico é de responsabilidade do contratado. Para esses casos, deverá ser elaborado anteprojeto, conforme tratado no item 4.4.2. O anteprojeto contém os subsídios necessários à elaboração do projeto básico[2], constituindo um elemento prévio, que vai direcionar o contratado na elaboração do projeto básico.
+
+Merece registro que é vedada a participação na licitação e/ou na execução da obra de qualquer pessoa física ou jurídica que tenha participado da elaboração do anteprojeto, do projeto básico ou do projeto executivo da obra, com exceção das contratações integradas, em que é permitido contratar o próprio projeto básico e o projeto executivo juntamente com a execução da obra. Por outro lado, nos demais regimes de execução contratual, a Lei permite a contratação conjunta do projeto executivo com a obra[3].
+
+Os autores dos anteprojetos e projetos podem participar da contratação “no apoio das atividades de planejamento da contratação, de execução da licitação ou de gestão do contrato, desde que sob supervisão exclusiva de agentes públicos o órgão ou entidade”[4].
+
+Além disso, a norma dispõe que, como regra, o projeto executivo é obrigatório para a realização de obras e serviços de engenharia. Todavia, prevê a exceção[5] de dispensa da elaboração de projetos executivos[6], com especificação do objeto apenas em projeto básico ou em termo de referência, em se tratando de estudo técnico preliminar para a contratação de obras ou serviços comuns de engenharia, respectivamente, se demonstrada a inexistência de prejuízo para a aferição dos padrões de desempenho e qualidade almejados.
+
+Por fim, a Lei 14.133/2021 determinou que, nas licitações de obras e serviços de engenharia e arquitetura, sempre que adequada ao objeto da licitação, será preferencialmente adotada a Modelagem da Informação da Construção (Building Information Modelling – BIM) ou tecnologias e processos integrados similares ou mais avançados que venham a substitui-la[7]. 
+
+O termo “preferencialmente”, constante do § 3º do art. 19 da Lei n. 14.133/2021, implica um dever legal para a Administração, de modo que a opção pela não adoção da Modelagem da Informação da Construção (Building Information Modelling – BIM), ou tecnologias e processos integrados similares ou mais avançados que venham a substitui-la, dependerá de justificativa[8].
+
+A modelagem BIM pode ser definida como o conjunto de tecnologias e processos integrados que permite a criação, a utilização e a atualização de modelos digitais de uma construção, de modo colaborativo[9].
+
+Nesse sentido, o Governo Federal estabeleceu, por meio do Decreto 10.306/2020, a utilização do BIM na execução direta ou indireta de obras e serviços de engenharia realizadas pelos órgãos e pelas entidades da Administração Pública federal.
+
+Nos subitens seguintes abordaremos os principais elementos que formam o projeto básico.
+
+Quadro 169 – Referências normativas para o projeto básico
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 6º […] XXV – projeto básico: conjunto de elementos necessários e suficientes, com nível de precisão adequado para definir e dimensionar a obra ou o serviço, ou o complexo de obras ou de serviços objeto da licitação, elaborado com base nas indicações dos estudos técnicos preliminares, que assegure a viabilidade técnica e o adequado tratamento do impacto ambiental do empreendimento e que possibilite a avaliação do custo da obra e a definição dos métodos e do prazo de execução , devendo conter os seguintes elementos: a) levantamentos topográficos e cadastrais, sondagens e ensaios geotécnicos, ensaios e análises laboratoriais, estudos socioambientais e demais dados e levantamentos necessários para execução da solução escolhida; b) soluções técnicas globais e localizadas, suficientemente detalhadas, de forma a evitar, por ocasião da elaboração do projeto executivo e da realização das obras e montagem, a necessidade de reformulações ou variantes quanto à qualidade, ao preço e ao prazo inicialmente definidos; c) identificação dos tipos de serviços a executar e dos materiais e equipamentos a incorporar à obra, bem como das suas especificações, de modo a assegurar os melhores resultados para o empreendimento e a segurança executiva na utilização do objeto, para os fins a que se destina, considerados os riscos e os perigos identificáveis, sem frustrar o caráter competitivo para a sua execução; d) informações que possibilitem o estudo e a definição de métodos construtivos, de instalações provisórias e de condições organizacionais para a obra, sem frustrar o caráter competitivo para a sua execução; e) subsídios para montagem do plano de licitação e gestão da obra, compreendidos a sua programação, a estratégia de suprimentos, as normas de fiscalização e outros dados necessários em cada caso; f) orçamento detalhado do custo global da obra, fundamentado em quantitativos de serviços e fornecimentos propriamente avaliados, obrigatório exclusivamente para os regimes de execução previstos nos incisos I, II, III, IV e VII do caput do art. 46 desta Lei; […] Art. 14. Não poderão disputar licitação ou participar da execução de contrato, direta ou indiretamente : I – autor do anteprojeto, do projeto básico ou do projeto executivo , pessoa física ou jurídica, quando a licitação versar sobre obra, serviços ou fornecimento de bens a ele relacionados; […] Art. 18. A fase preparatória do processo licitatório é caracterizada pelo planejamento e deve compatibilizar-se com o plano de contratações anual de que trata o inciso VII do caput do art. 12 desta Lei, sempre que elaborado, e com as leis orçamentárias, bem como abordar todas as considerações técnicas, mercadológicas e de gestão que podem interferir na contratação, compreendidos: […] IV – o orçamento estimado, com as composições dos preços utilizados para sua formação; […] Art. 19 […] § 3º Nas licitações de obras e serviços de engenharia e arquitetura, sempre que adequada ao objeto da licitação, será preferencialmente adotada a Modelagem da Informação da Construção ( Building Information Modelling – BIM) ou tecnologias e processos integrados similares ou mais avançados que venham a substitui-la. […] Art. 23. O valor previamente estimado da contratação deverá ser compatível com os valores praticados pelo mercado, considerados os preços constantes de bancos de dados públicos e as quantidades a serem contratadas, observadas a potencial economia de escala e as peculiaridades do local de execução do objeto. […] § 2º No processo licitatório para contratação de obras e serviços de engenharia, conforme regulamento, o valor estimado, acrescido do percentual de Benefícios e Despesas Indiretas (BDI) de referência e dos Encargos Sociais (ES) cabíveis, será definido por meio da utilização de parâmetros na seguinte ordem: I – composição de custos unitários menores ou iguais à mediana do item correspondente do Sistema de Custos Referenciais de Obras (Sicro), para serviços e obras de infraestrutura de transportes, ou do Sistema Nacional de Pesquisa de Custos e Índices de Construção Civil (Sinapi), para as demais obras e serviços de engenharia; II – utilização de dados de pesquisa publicada em mídia especializada, de tabela de referência formalmente aprovada pelo Poder Executivo federal e de sítios eletrônicos especializados ou de domínio amplo, desde que contenham a data e a hora de acesso; III – contratações similares feitas pela Administração Pública, em execução ou concluídas no período de 1 (um) ano anterior à data da pesquisa de preços, observado o índice de atualização de preços correspondente; […] IV – pesquisa na base nacional de notas fiscais eletrônicas, na forma de regulamento. […] § 5º No processo licitatório para contratação de obras e serviços de engenharia sob os regimes de contratação integrada ou semi-integrada, o valor estimado da contratação será calculado nos termos do § 2º deste artigo, acrescido ou não de parcela referente à remuneração do risco, e, sempre que necessário e o anteprojeto o permitir, a estimativa de preço será baseada em orçamento sintético, balizado em sistema de custo definido no inciso I do § 2º deste artigo, devendo a utilização de metodologia expedita ou paramétrica e de avaliação aproximada baseada em outras contratações similares ser reservada às frações do empreendimento não suficientemente detalhadas no anteprojeto. § 6º Na hipótese do § 5º deste artigo, será exigido dos licitantes ou contratados, no orçamento que compuser suas respectivas propostas, no mínimo, o mesmo nível de detalhamento do orçamento sintético referido no mencionado parágrafo. […] Art. 24. Desde que justificado, o orçamento estimado da contratação poderá ter caráter sigiloso, sem prejuízo da divulgação do detalhamento dos quantitativos e das demais informações necessárias para a elaboração das propostas, e, nesse caso: I – o sigilo não prevalecerá para os órgãos de controle interno e externo; […] Art. 25 § 7º Independentemente do prazo de duração do contrato, será obrigatória a previsão no edital de índice de reajustamento de preço, com data-base vinculada à data do orçamento estimado e com a possibilidade de ser estabelecido mais de um índice específico ou setorial, em conformidade com a realidade de mercado dos respectivos insumos. […] Art. 46. […] § 1º É vedada a realização de obras e serviços de engenharia sem projeto executivo, ressalvada a hipótese prevista no § 3º do art. 18 desta Lei . § 2º A Administração é dispensada da elaboração de projeto básico nos casos de contratação integrada , hipótese em que deverá ser elaborado anteprojeto de acordo com metodologia definida em ato do órgão competente, observados os requisitos estabelecidos no inciso XXIV do art. 6º desta Lei. § 3º Na contratação integrada, após a elaboração do projeto básico pelo contratado, o conjunto de desenhos, especificações, memoriais e cronograma físico-financeiro deverá ser submetido à aprovação da Administração, que avaliará sua adequação em relação aos parâmetros definidos no edital e conformidade com as normas técnicas, vedadas alterações que reduzam a qualidade ou a vida útil do empreendimento e mantida a responsabilidade integral do contratado pelos riscos associados ao projeto básico. […] Art. 59. Serão desclassificadas as propostas que: […] III – apresentarem preços inexequíveis ou permanecerem acima do orçamento estimado para a contratação; […] Art. 92 […] § 3º Independentemente do prazo de duração, o contrato deverá conter cláusula que estabeleça o índice de reajustamento de preço, com data-base vinculada à data do orçamento estimado, e poderá ser estabelecido mais de um índice específico ou setorial, em conformidade com a realidade de mercado dos respectivos insumos. (Grifo nosso)
+Decreto 10.306/2020 | Art. 3º […] II – Building Information Modelling – BIM ou Modelagem da Informação da Construção – conjunto de tecnologias e processos integrados que permite a criação, a utilização e a atualização de modelos digitais de uma construção, de modo colaborativo, que sirva a todos os participantes do empreendimento, em qualquer etapa do ciclo de vida da construção;
+Enunciado do IBDA nº 11/2024 | O termo “preferencialmente”, constante do § 3º do art. 19 da Lei n. 14.133/2021, implica um dever legal para a Administração, de modo que a opção pela não adoção da Modelagem da Informação da Construção (Building Information Modelling – BIM), ou tecnologias e processos integrados similares ou mais avançados que venham a substitui-la, dependerá de justificativa.
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 170 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Súmula – TCU 261 | Em licitações de obras e serviços de engenharia, é necessária a elaboração de projeto básico adequado e atualizado, assim considerado aquele aprovado com todos os elementos descritos no art. 6º, inciso IX, da Lei 8.666, de 21 de junho de 1993, constituindo prática ilegal a revisão de projeto básico ou a elaboração de projeto executivo que transfigurem o objeto originalmente contratado em outro de natureza e propósito diversos . (Grifo nosso)
+Súmula – TCU 258 | As composições de custos unitários e o detalhamento de encargos sociais e do BDI integram o orçamento que compõe o projeto básico da obra ou serviço de engenharia, devem constar dos anexos do edital de licitação e das propostas dos licitantes e não podem ser indicados mediante uso da expressão “verba” ou de unidades genéricas.
+Acórdão 2123/2017-TCU-Plenário | A Administração deve exigir das empresas contratadas no regime de contratação integrada, quando da apresentação do projeto básico e/ou executivo, a apresentação de orçamento detalhado contendo a descrição, unidade de medida, quantitativo, preços unitários de todos os serviços da obra, acompanhado das respectivas composições de custo unitário, bem como do detalhamento de encargos sociais e da taxa de BDI.
+Acórdão 896/2015-TCU-Plenário | [Enunciado] A utilização de taxas estimativas de consumo de aço por volume de concreto, para o cálculo do quantitativo da armadura dos elementos estruturais de obras, não atende às exigências legais relativas à elaboração do projeto básico (art. 6º, inciso IX, da Lei 8.666/93), por não representar elemento necessário e suficiente, com nível de precisão adequado, para caracterizar a obra e avaliar o respectivo custo, bem como definir os métodos e o prazo de execução.
+Acórdão 678/2015-TCU-Plenário | [Enunciado] A utilização de projeto básico desatualizado ou incompleto, baseado em normas técnicas revogadas e que não reúne todos os elementos necessários capazes de demonstrar a viabilidade técnica do empreendimento, configura atuação desidiosa da administração contratante, podendo acarretar a responsabilização do corpo técnico de engenheiros responsáveis por sua aprovação.
+Acórdão 46/2012-TCU-Plenário | O orçamento-base da licitação deve estar detalhado em planilhas que expressem a composição de todos os seus custos unitários, devendo também discriminar todos os itens constantes nas planilhas orçamentárias de serviços em subitens que expressem a composição de todos os seus custos unitários. Não devem ser apresentados ou aceitos itens agregados como serviço, verba, conjunto ou similares.
+Acórdão 1733/2011-TCU- Plenário | [Sumário] O projeto estrutural, os projetos de instalações e os projetos dos demais subsistemas da construção são peças integrantes e indispensáveis do projeto básico das licitações para execução de obras aeroportuárias e de edificações, nos termos do art. 6º, inciso IX, da Lei 8.666/1993.
+Acórdão 2581/2009-TCU-Plenário | [Enunciado] Havendo modificação de projeto, a Administração deve providenciar a atualização da Anotação de Responsabilidade Técnica (ART) da obra junto ao Conselho Regional de Engenharia, Arquitetura e Agronomia (Crea) competente, de modo a deixar registrada a alteração.
+Acórdão 1981/2009-TCU-Plenário | [Enunciado] A Administração deve identificar cada peça técnica que compõe o Projeto básico/Executivo (plantas, orçamento-base, composições de custos unitários, cronograma físico-financeiro etc.) por meio das Anotações de Responsabilidade Técnica (ART) dos responsáveis por sua autoria, identificando, também, os últimos revisores, em conformidade com os arts. 1º e 2º da Resolução CONFEA 425, atualizando-as a cada modificação de projeto, com o intuito de permitir a identificação e imputação de responsabilidade do projeto inicial e após suas alterações, em conformidade com o disposto no art. 18, caput , c/c § 1o, da Lei 5.194/1966.
+Acórdão 1874/2007-TCU-Plenário | [Sumário] 1. Falece de fundamentação legal e respaldo técnico a elaboração de planilhas orçamentárias de obras públicas com injustificada superestimativa dos quantitativos dos serviços previstos. Não se pode deixar à fiscalização do contrato a tarefa de reter os quantitativos excedentes uma vez que ela própria deve estar sujeita aos controles internos ditados naturalmente pelo projeto da obra, que se constitui no referencial físico e financeiro do empreendimento. […] 4. As licitações para execução de obras somente podem ser iniciadas quando se dispuser de projeto básico ou executivo devidamente atualizado e em perfeitas condições de ser executado, estando vedada a aprovação de relatórios de revisão do projeto que o ignore ou o desvirtue total ou parcialmente, ressalvada alterações pontuais sem grandes repercussões financeiras, devendo a eventual inépcia do projeto, constatada após a licitação, acarretar a anulação da licitação e do contrato decorrente, bem como a punição, em processo administrativo regular, de todos os agentes responsáveis pela incorreção do projeto. 5. Admite-se que sejam entregues à responsabilidade das empresas contratadas, como encargo, e desde que expressamente previsto no edital, apenas a elaboração do projeto executivo da obra, cujo principal escopo é o de continuação e detalhamento do projeto básico, não se admitindo, por isso, que o projeto executivo traga alterações significativas nos quantitativos dos serviços mais relevantes, em termos financeiros, estimados pelo projeto básico e nas principais soluções técnicas nele adotadas.
+Pesquisa de Jurisprudência | Execute a seguinte consulta na Pesquisa Integrada do TCU : (“projeto básico”).ACORDAO A pesquisa pode ser complementada por meio de busca na Jurisprudência Selecionada . No campo de busca, realize pesquisas pelos seguintes termos individualmente: projeto básico ; orçamento estimado ; orçamento-base ; orçamento detalhado . Os resultados das buscas podem ser filtrados por “área – Licitação” ou “contrato administrativo”. Publicações de Jurisprudência . Execute a seguinte consulta na Jurisprudência Selecionada . Selecione a área “responsabilidade”, o tema “licitação”, subtema “projeto básico” .
+
+Fonte: Elaboração própria a partir de consulta a jurisprudência do TCU.
+
+Quadro 171 – Riscos relacionados
+
+Riscos
+Projetos básicos desatualizados, incompletos ou imprecisos, levando à necessidade de alterações significativas durante a execução da obra, com consequentes extrapolação dos limites legais de alteração contratual, transfiguração do objeto inicialmente contratado ou atrasos e paralisação da obra.
+Projeto básico sem definição adequada do objeto ou sem descrição das soluções técnicas, levando a interpretações equivocadas, por parte dos licitantes, com consequente recebimento de soluções que não atendem à necessidade que originou a contratação.
+Falta de exigência de proposta com detalhamento de custos (planilhas com indicação dos quantitativos e dos custos unitários, bem como do detalhamento das taxas de encargos sociais e de BDI), levando à ausência de linha de base para que a Administração identifique, nas eventuais alterações do escopo do projeto licitado ou nos futuros pedidos de reequilíbrio econômico-financeiro do contrato, o real aumento do custo do contratado, além da criação de oportunidade para que este apresente diferenças de custos mais elevadas que as reais, com consequentes alterações contratuais com valores mais elevados que o efetivamente devido e prejuízos à Administração.
+Projeto básico desenvolvido com parâmetros de desempenho, qualidade, durabilidade ou segurança inferiores aos requisitos do anteprojeto, levando à contratação de objeto inadequado ao atendimento da necessidade que originou a contratação, com consequente prejuízo à Administração.
+Aprovação parcial do projeto básico de parcelas ou etapas da obra, levando ao início da obra sem a aprovação integral do projeto básico, com consequentes rescisões contratuais, exposição ao risco de jogo de cronograma ou de aceitação de soluções impróprias apresentadas para as etapas cujos projetos sejam desenvolvidos posteriormente.
+
+Fonte: Elaboração própria.
+
+[1] Lei 14.133/2021, art. 6º, inciso XXV.
+
+[2] Lei 14.133/2021, art. 6º, inciso XXIV.
+
+[3] Lei 14.133/2021, art. 14, incisos I e II, e § 4º
+
+[4] Lei 14.133/2021, art. 14, incisos I e II, e § 2º.
+
+[5] Lei 14.133/2021, art. 46, § 1º e art. 18, § 3º.
+
+[6] Lei 14.133/2021, art. 46, § 1º
+
+[7] Lei 14.133/2021, art. 19, § 3º.
+
+[8] Enunciado do IBDA nº 11/2024
+
+[9] Decreto 10.306/2020, art. 3, inciso II.

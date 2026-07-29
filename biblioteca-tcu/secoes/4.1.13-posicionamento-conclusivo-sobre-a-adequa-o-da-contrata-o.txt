@@ -1,0 +1,47 @@
+4.1.13. Posicionamento conclusivo sobre a adequação da contratação
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/4-1-13-posicionamento-conclusivo-sobre-a-adequacao-da-contratacao/
+======================================================================
+
+A partir das informações levantadas no ETP, a equipe de planejamento conclui sobre a adequação da contratação para o atendimento da necessidade a que se destina, que inclui, de forma fundamentada, a avaliação se a contratação é ou não viável técnica e economicamente[1]. Deve-se propor pelo prosseguimento ou pela desistência da contratação “antes que investimentos maiores sejam feitos”.
+
+Além de verificar se todos os itens do ETP estão adequados e coerentes, a análise de viabilidade deve avaliar se[2]:
+
+- a necessidade da Administração é clara e pertinente, e a solução escolhida é a mais adequada para atendê-la;
+
+- a contratação da solução ou de partes dela é necessária e oportuna;
+
+- o objeto pode ser legalmente contratado (p. ex., observação do disposto no art. 3º do Decreto 9.507/2018, que trata da terceirização de serviços); e
+
+- os benefícios potenciais da contratação compensam os custos estimados para o contratante.
+
+Se a contratação for viável técnica e economicamente, a equipe de planejamento prosseguirá com as demais etapas de planejamento da contratação, elaborando o termo de referência (ou nortear o desenvolvimento ou contratação do projeto básico, ou anteprojeto), para subsequente elaboração do edital ou do instrumento de contratação direta.
+
+Quadro 125 – Referências normativas para o posicionamento conclusivo
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 18. § 1º O estudo técnico preliminar a que se refere o inciso I do caput deste artigo deverá evidenciar o problema a ser resolvido e a sua melhor solução, de modo a permitir a avaliação da viabilidade técnica e econômica da contratação, e conterá os seguintes elementos: […] XIII – posicionamento conclusivo sobre a adequação da contratação para o atendimento da necessidade a que se destina.
+IN – Seges 58/2022 | Art. 9º Com base no Plano de Contratações Anual, deverão ser registrados no Sistema ETP Digital os seguintes elementos: […] XIII – posicionamento conclusivo sobre a adequação da contratação para o atendimento da necessidade a que se destina.
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 126 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 2221/2012- TCU – Plenário | [Enunciado] As aquisições de bens pela Administração devem estar baseadas em estudos prévios que demonstrem a necessidade e viabilidade das aquisições, a fim de evitar o mau uso de recursos públicos e não limitar o sucesso dos objetivos que se buscam atingir.
+Acórdão 3624/2011 – TCU – Segunda Câmara | [Enunciado] É irregular a contratação de serviços sem prévios estudos de viabilidade técnica e econômica para justificar a economicidade da contratação.
+Pesquisa de Jurisprudência | Execute consulta na Jurisprudência selecionada . Pesquise na “árvore de classificação” pela área “licitação”, tema “planejamento”, subtema “estudo de viabilidade”.
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+Quadro 127 – Riscos relacionados
+
+Riscos
+Falta de abrangência da análise de viabilidade da contratação, levando a não consideração de aspectos relevantes para essa análise, com consequente decisão equivocada por não contratar, ou contratação: desnecessária;inadequada ao atendimento da necessidade da Administração;incompatível com as prioridades organizacionais; com custo-benefício desfavorável; oucujos impactos (na organização ou fora dela) impossibilitam o alcance dos resultados pretendidos (p.ex.: melhoria da prestação de algum serviço público).
+Ausência de análise de custo-benefício da contratação, levando a ato antieconômico por desnecessidade da contratação, ou por escolha que não seja a alternativa mais adequada ao atendimento da necessidade da contratação, ou por ser em momento inoportuno, com o consequente desperdício de recursos públicos.
+
+Fonte: Adaptado de Tribunal de Contas da União, 2014, item “Declaração da viabilidade ou não da contratação”; e Tribunal de Contas da União, 2012, p. 122-126.
+
+[1] Lei 14.133/2021, art. 18, § 1º, inciso XIII.
+
+[2] Tribunal de Contas da União, 2009; Tribunal de Contas da União, 2012, p. 122-126; Tribunal de Contas da União, 2014.

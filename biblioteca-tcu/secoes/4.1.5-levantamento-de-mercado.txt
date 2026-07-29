@@ -1,0 +1,98 @@
+4.1.5. Levantamento de mercado
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/4-1-5-levantamento-de-mercado/
+======================================================================
+
+Consiste em realizar pesquisa de mercado, a fim de identificar as soluções disponíveis que atendam à necessidade da contratação e aos requisitos estabelecidos, bem como conhecer as condições usuais de aquisição ou de execução do objeto.
+
+Essa pesquisa possibilita à equipe de planejamento identificar o que o mercado tem a oferecer para atender à necessidade da Administração, e ter uma noção dos custos envolvidos, comparando o custo-benefício de cada tipo de solução cogitado para a resolução do problema.
+
+É importante que a equipe considere se a solução em análise criaria outros problemas ou gargalos para a Administração e se esses gargalos gerados seriam problemas maiores que o problema a ser resolvido, tendo em vista que cada solução a contratar pode expor a organização pública a riscos novos e implica gastos, inclusive com manutenção da solução ao longo do tempo[1].
+
+Deve-se utilizar fontes de pesquisa diversificadas, incluindo, por exemplo: consulta direta a número razoável de potenciais fornecedores; consulta junto a outras organizações públicas que tenham realizado contratações similares[2]; e pesquisa publicada em mídia especializada e em sistemas oficiais de governo, como o Catálogo Eletrônico de Padronização de Compras, Serviços e Obras[3]; ou até mesmo realizar audiências públicas ou submeter a licitação a prévia consulta pública[4].
+
+Quando houver a possibilidade de compra ou de locação de bens, devem ser considerados os custos e os benefícios de cada opção, com indicação da alternativa mais vantajosa[5].
+
+Sobre a interação com potenciais fornecedores, é necessário que a organização estabeleça algumas cautelas, como as seguintes[6]:
+
+- definir critérios objetivos para selecionar os fornecedores do mercado a consultar, a exemplo de buscar empresas que sejam do mercado da solução a contratar e que não tenham relacionamentos entre si (como sócios, funcionários ou endereços em comum);
+
+- definir quais informações serão enviadas às empresas nas comunicações formais, para que elas possam compreender a necessidade da Administração a ser atendida e assim enviarem uma resposta minimamente adequada;
+
+- definir a forma de envio de solicitações formais aos fornecedores selecionados;
+
+- incluir, nos autos do processo de contratação, o registro das comunicações realizadas com as empresas do mercado, de modo que se possa rastrear com facilidade a relação das empresas consultadas, as informações consultadas, quais empresas não enviaram respostas, e os agentes públicos que fizeram a consulta; e
+
+- estabelecer controles internos adicionais, para evitar a proximidade inadequada entre servidores da equipe de planejamento da contratação e empresa(s) do mercado, levando à quebra da imparcialidade da equipe e direcionamento da contratação[7], a exemplo de:
+
+- caso sejam necessárias reuniões entre a organização e as empresas do mercado, tais encontros devem ocorrer com a presença de pelo menos dois servidores do órgão ou entidade, bem como serem documentados nos autos do processo de contratação; e
+
+- fique vedado aos servidores da organização pública participarem de eventos custeados por fornecedores exclusivamente para esses servidores, como almoços, jantares e viagens.
+
+Para o tipo de solução escolhido, caberá à equipe de planejamento demonstrar o atendimento aos requisitos estabelecidos, levando em conta razões técnicas e econômicas.
+
+Nessa etapa, pode surgir a necessidade de reavaliar os requisitos da contratação, complementando-os, detalhando-os ou simplificando-os. Por exemplo, se for constatado que os requisitos restringem bastante a quantidade de potenciais fornecedores, deve ser avaliado qual(is) dele(s) estão levando a essa maior restrição, para se certificar de que ele(s) de fato é(são) imprescindível(is). Sobre o assunto, na IN – Seges/ME 58/2022, consta que[8]:
+
+Art. 9º § 2º Caso, após o levantamento do mercado de que trata o inciso III, a quantidade de fornecedores for considerada restrita, deve-se verificar se os requisitos que limitam a participação são realmente indispensáveis, flexibilizando-os sempre que possível.
+
+Se os requisitos que restringem o nicho de mercado ou elevam os preços forem considerados necessários para atender à necessidade da contratação, eles poderão ser mantidos, desde que acompanhados das devidas justificativas. Afinal, não é vantajoso contratar algo a um preço baixo se isso não atender às necessidades da contratação, pois uma compra ineficaz não pode ser considerada econômica[9].
+
+Quadro 99 – Referências normativas para o levantamento de mercado
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 18. […] § 1º O estudo técnico preliminar a que se refere o inciso I do caput deste artigo deverá evidenciar o problema a ser resolvido e a sua melhor solução, de modo a permitir a avaliação da viabilidade técnica e econômica da contratação, e conterá os seguintes elementos: […] V – levantamento de mercado, que consiste na análise das alternativas possíveis, e justificativa técnica e econômica da escolha do tipo de solução a contratar;
+Portaria – Seges/ME 8.678/2021 | Art. 15. Compete ao órgão ou entidade, quanto à interação com o mercado fornecedor e com associações empresariais: I – promover regular e transparente diálogo quando da confecção dos estudos técnicos preliminares, de forma a se obterem insumos para a otimização das especificações dos objetos a serem contratados, dos parâmetros de mercado para melhor técnica e custo das contratações, e das obrigações d futuro contratado, conforme dispõe o art. 21 da Lei nº 14.133, de 1º de abril de 2021.
+IN – SGD/ME 94/2022 | Art. 11. O Estudo Técnico Preliminar da Contratação será realizado pelos Integrantes Técnico e Requisitante, compreendendo, no mínimo, as seguintes tarefas: […] II – análise comparativa de soluções, que deve considerar, além do aspecto econômico, os aspectos qualitativos em termos de benefícios para o alcance dos objetivos da contratação, observando: a) necessidades similares em outros órgãos ou entidades da Administração Pública e as soluções adotadas; b) as alternativas do mercado; […] III – análise comparativa de custos, que deverá considerar apenas as soluções técnica e funcionalmente viáveis, incluindo: […]
+IN – Seges 58/2022 | Art. 9º Com base no Plano de Contratações Anual, deverão ser registrados no Sistema ETP Digital os seguintes elementos: […] III – levantamento de mercado, que consiste na análise das alternativas possíveis, e justificativa técnica e econômica da escolha do tipo de solução a contratar, podendo, entre outras opções: […] § 2º Caso, após o levantamento do mercado de que trata o inciso III, a quantidade de fornecedores for considerada restrita, deve-se verificar se os requisitos que limitam a participação são realmente indispensáveis, flexibilizando-os sempre que possível.
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 100 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 3244/2020-TCU – Plenário | [Voto] 21. Conforme a Sefti, o Gerente de Tecnologia da Informação do HCU: […] c) realizou um levantamento de mercado deficiente; não executou a análise e comparação entre os custos totais de propriedade das soluções identificadas; não elaborou justificativa para a solução escolhida; não avaliou as necessidades de adequação do ambiente; não avaliou os recursos humanos e materiais necessários; e não definiu os mecanismos para continuidade do fornecimento em caso de eventual interrupção contratual (art. 12 da IN-4/2014 da SLTI/MP); […] 26. Entendo que esse conjunto de omissões, na fase preparatória da licitação, tinha o potencial de acarretar uma contratação antieconômica ou desproporcional, considerando as necessidades do Hospital, os recursos disponíveis e as opções de mercado. 27. Esse passo a passo da norma não me parece algo eminentemente formal. Em minha visão, ele tem uma razão de ser, que é a racionalização dos procedimentos visando à definição da demanda do órgão proponente da licitação, à especificação do objeto e à mitigação dos riscos relacionados à contratação.
+Acórdão 2486/2020 – TCU – Plenário | 9.17. dar ciência à [ omissis ] sobre as seguintes impropriedades identificadas nos estudos técnicos preliminares [ omissis ], para que sejam adotadas medidas internas com vistas à prevenção de ocorrências semelhantes em futuras licitações: […] 9.17.3. ausência de estudo comparativo do custo total de propriedade (TCO, em inglês Total Cost of Ownership) entre as opções existentes de licenciamento de banco de dados para atender software Enterprise Resource Planning (ERP), em afronta aos princípios da motivação e da eficiência (Lei 9.784/1999, art. 2º, caput ) c/c o art. 6º, inciso IX, da Lei 8.666/1993.
+Acórdão 2078/2020-TCU-Plenário | 1.6. Dar ciência ao [ omissis ], com fundamento no art. 9º, inciso I, da Resolução – TCU 315/2020, sobre as seguintes impropriedades/falhas, identificadas na […], para que sejam adotadas medidas internas com vistas à prevenção de outras ocorrências semelhantes: 1.6.1. falta de revisão das especificações do objeto, representando risco de perda de oportunidade de aquisição de novos produtos lançados no mercado, com igual ou melhor qualidade e menor custo relativamente a produtos usuais/convencionais, contrariando o princípio da eficiência;
+Acórdão 214/2020-TCU – Plenário | [Enunciado] Em licitações para aquisição de equipamentos, havendo no mercado diversos modelos que atendam às necessidades da Administração, deve o órgão licitante identificar um conjunto representativo desses modelos antes de elaborar as especificações técnicas e a cotação de preços, de modo a evitar o direcionamento do certame para marca ou modelo específicos e a caracterizar a realização de ampla pesquisa de mercado.
+Acórdão 1956/2018-TCU-Plenário | 9.3. com fulcro no art. 250, inciso III, do RITCU, recomendar ao Ministério da Integração Nacional que, caso venha a realizar novo procedimento licitatório com o mesmo objeto do Pregão Eletrônico nº 3/2018, promova previamente chamada pública com vistas a prospectar as soluções tecnológicas de monitoramento de veículos existentes no mercado; 9.4. nos termos da Resolução TCU nº 265/2014 e com vistas à adoção de providências internas que previnam outras ocorrências semelhantes, dar ciência ao Ministério da Integração Nacional de que: 9.4.1. os estudos técnicos preliminares devem contemplar o exame das soluções de monitoramento tecnológicos existentes no mercado, de modo a ampliar a competitividade da licitação, a segurança da contratação e a obtenção de preços mais vantajosos; [Relatório] 32. Em que pese o esforço do [omissis] em se reunir com prestadores de serviço de monitoramento de veículos, não se constata, nos estudos técnicos preliminares (ETP), comparativo detalhado das soluções existentes no mercado, contendo informações e dados relativos às vantagens e desvantagens de cada solução tecnológica, respectivos custos e eventuais dificuldades de implantação e treinamento de cada uma delas. A iniciativa de realização dos encontros, apesar de importante e salutar, não supre a insuficiência de elementos necessários no ETP de maneira a confirmar que a solução adotada é a ideal frente a outras opções ofertadas pelo mercado, especialmente considerando a possibilidade de dependência tecnologicamente da solução ora utilizada para a continuidade de monitoramento dos caminhões-pipa. 33. A deficiência verificada nos estudos preliminares do Pregão Eletrônico […] afronta os princípios fundamentais dos procedimentos licitatórios e a legislação vigente. Em adição, as especificações técnicas muito específicas inseridas no instrumento convocatório, sobretudo dos dispositivos a serem acoplados nos veículos, podem ter afastado potenciais licitantes, prejudicando a ampla competitividade do certame. Tal premissa é ratificada pela apresentação de apenas duas propostas na licitação. 34. A afirmação de que os usuários do sistema não possuiriam habilidade para manusear os dispositivos em decorrência de características socioeconômicas não justifica a ausência de uma análise detalhada de soluções alternativas durante a fase de planejamento da contratação, com vistas à obtenção da solução mais vantajosa para a Administração, em aspectos econômicos e tecnológicos.
+Acórdão 1567/2018 – TCU – Plenário | [Voto] 20. Caso o planejamento deste pregão tivesse sido adequado, o estudo técnico preliminar mostraria quais as formas e/ou modelos de licenciamento da solução pretendida existem no mercado e, dentre essas, qual(is) a(s) mais adequada(s) ao que o [órgão] buscava contratar. Ou seja, o ETP deveria ter avaliado, entre outras questões, as seguintes: (i) quais empresas atuam no mercado da solução pretendida pelo [órgão]; (ii) como essas empresas atuam, quais são seus modelos de licenciamento; (iii) qual a sistemática utilizada por essas empresas para formação de preços; e (iv) qual a opção mais adequada ao atendimento das necessidades do [órgão].
+Acórdão 248/2017-TCU – Plenário | [Enunciado] Na aquisição de soluções de armazenamento ( storage ) em tecnologia da informação, não é aceitável a justificativa de padronização ou de aproveitamento de equipamento para restringir o fornecimento a um único fabricante, sem que essa decisão esteja amparada em estudo técnico preliminar, fundamentado em ampla pesquisa e comparação efetiva com alternativas possíveis, avaliando-se os custos de cada alternativa, de modo a se viabilizar a efetiva competição entre diversos fabricantes e resguardar o interesse público
+Acórdão 2829/2015 – TCU – Plenário | [Enunciado] No planejamento de suas aquisições de equipamentos, a Administração deve identificar um conjunto representativo dos diversos modelos existentes no mercado que atendam completamente suas necessidades antes de elaborar as especificações técnicas e a cotação de preços, de modo a caracterizar a realização de ampla pesquisa de mercado e evitar o direcionamento do certame para modelo específico pela inserção no edital de características atípicas.
+Acórdão 1297/2015-TCU-Plenário | [Enunciado] Nas contratações de serviços terceirizados de impressão (outsourcing), a Administração deve comprovar, nos autos do procedimento, que a solução eleita para o modelo de contratação é aquela que efetivamente atende à demanda da entidade com o menor custo, entre os modelos de remuneração possíveis (por página, por franquia ou híbrido).
+Pesquisa de Jurisprudência | Execute consulta na Jurisprudência selecionada nas publicações de jurisprudência: (“análise de mercado” OU “pesquisa de mercado” OU “prospecção de mercado” OU “levantamento de mercado”) Na Pesquisa integrada , pesquise por: (“ausência” ADJ5 “pesquisa de mercado”) OU (“ausência” ADJ5 “análise de mercado”)
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+Quadro 101 – Riscos relacionados
+
+Riscos
+Levantamento de mercado mal elaborado, levando a requisitos irrelevantes ou indevidamente restritivos, com consequente limitação da competição e contratação por valores com sobrepreço ou com relação custo-benefício desfavorável.
+Utilização de somente uma solução do mercado como base para a definição de requisitos, levando ao direcionamento da licitação, com a consequente elevação do preço contratado e/ou interrupção do processo de contratação por questionamentos e impugnações.
+Proximidade inadequada entre a equipe de planejamento da contratação e empresas do mercado, levando à quebra da imparcialidade da equipe, com o consequente direcionamento da licitação e elevação do preço contratado e/ou interrupção do processo de contratação.
+Levantamento de mercado deficiente, de modo que não se detecta que não existe fornecedor para o tipo de solução com os requisitos especificados, incluindo requisitos de habilitação e técnicos, levando à licitação deserta (ou seja, nenhuma proposta é apresentada na licitação), com consequentes retrabalho e desperdício de recursos para planejar e realizar novo certame e atraso no atendimento da necessidade que originou a contratação.
+Escolha de tipo de solução imatura, isto é, que ainda apresenta diversos problemas na operação, levando a problemas na implantação ou descontinuidade da solução antes de a organização conseguir desfrutar do investimento feito nela, com o consequente não atendimento da necessidade que gerou a contratação.
+Escolha de tipo de solução obsoleta ou próxima da obsolescência, levando à descontinuidade da solução antes de a organização conseguir desfrutar do investimento feito nela, com consequente não atendimento da necessidade que gerou a contratação.
+Escolha de tipo de solução com alto custo de mudança de fornecedor, levando a Administração a depender excessivamente do contratado, com consequentes elevação do custo de manutenção da solução ou descontinuidade de fornecimento (em caso de o contratado ficar impossibilitada de continuar suas operações).
+Definição precipitada da solução devido à falta de compreensão da necessidade da Administração a atender, levando à contratação de objeto que não resolva o problema indicado pela área requisitante, com consequente não atendimento da necessidade da Administração e desperdício de esforço administrativo e recursos.
+Ausência de (ou deficiência na) análise comparativa entre as alternativas de solução, levando à contratação de objeto cujos custos de implantação, manutenção ou gestão superem os benefícios potenciais (a exemplo de soluções de grande magnitude sem a realização prévia de um ou mais projetos-piloto para conhecer adequadamente o problema, os benefícios, os custos, os esforços e os riscos envolvidos), com consequente desperdício de recursos.
+Ausência de (ou deficiência na) análise comparativa entre as alternativas de locação e de aquisição de bens, levando à contratação de objeto cujos custos de implantação, manutenção ou gestão superem os benefícios potenciais, com consequente desperdício de recursos.
+
+Fonte: Adaptado de Tribunal de Contas da União, 2014, itens “Justificativas da escolha do tipo de solução a contratar” e “Levantamento de mercado”; e Tribunal de Contas da União, 2012, p. 88-91.
+
+[1] Tribunal de Contas da União, 2009. Planejamento da Contratação, Planejamento preliminar da contratação / Fundamentação do objetivo da contratação / Como fundamentar um objetivo? (necessidades do contratante e políticas de governo) / 2.
+
+[2] IN – Seges/ME 58/2022, art. 9º, inciso III alíneas “a” e “b”.
+
+[3] Lei 14.133/2021, art. 19; Portaria – Seges/ME 938/2022, art. 1º.
+
+[4] Lei 14.133/2021, art. 21, caput e parágrafo único, Portaria – Seges/ME 8.678/2021, art. 15, inciso I.
+
+[5] Lei 14.133/2021, art. 44.
+
+[6] Tribunal de Contas da União, 2023, item 8.8.2 e subitens, p. 250-259.
+
+[7] Tribunal de Contas da União, 2012b, p. 90.
+
+[8] IN – Seges/ME 58/2022, art. 9º, § 2º.
+
+[9] Tribunal de Contas da União, 2012, p. 77.

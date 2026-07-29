@@ -1,0 +1,44 @@
+3.1.3. Quem deve licitar?
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/3-1-3-quem-deve-licitar/
+======================================================================
+
+A obrigatoriedade de licitar abrange os órgãos integrantes da Administração Pública direta, as autarquias, as fundações públicas, os fundos especiais e demais entidades controladas direta ou indiretamente pela União, Estados, Distrito Federal e Municípios[1].
+
+As empresas públicas e as sociedades de economia mista devem licitar em conformidade com a Lei 13.303/2016, observada a ressalva da Lei 14.133/2021 referente a crimes em licitações e contratos administrativos, cujos dispositivos são aplicados também a essas entidades da Administração Indireta[2].
+
+Os conselhos de fiscalização profissional, por terem natureza jurídica de autarquias especiais ou corporativas, e arrecadarem e gerenciarem recursos públicos de natureza parafiscal, também estão sujeitos às normas de licitações e contratações públicas.
+
+Quanto ao terceiro setor, tem-se que, para os serviços sociais autônomos (Sistema S), que recebem contribuições parafiscais, a jurisprudência do TCU[3] é no sentido de que tais entidades não se sujeitam à estrita observância da Lei de Licitações e Contratos, mas sim aos seus regulamentos próprios devidamente publicados, os quais devem se pautar pelos princípios gerais da Administração Pública e específicos do processo licitatório. Tais regulamentos não podem, contudo, inovar na ordem jurídica, por exemplo, instituindo novas hipóteses de dispensa e inexigibilidade de licitação[4].
+
+Nas hipóteses de omissão dos regulamentos ou afronta (ou risco de afronta) aos princípios citados, o TCU pode recomendar ou determinar alterações dessas normas próprias[5].
+
+Nesse sentido, o Tribunal tem determinado ao Sistema S a utilização do pregão, preferencialmente eletrônico, para aquisição de bens e serviços comuns, inclusive de engenharia[6]; o parcelamento do objeto, quando divisível[7]; e a realização de procedimentos para o adequado planejamento das contratações, como a elaboração de estudo técnico preliminar e termo de referência ou projeto básico[8].
+
+O mesmo entendimento aplica-se às organizações sociais (OS)[9] e às entidades que se classifiquem como Organizações da Sociedade Civil de Interesse Público (OSCIP), as quais devem editar regulamentos próprios para aplicação dos recursos públicos por ela geridos, de forma compatível com os princípios constitucionais da Administração Pública[10]. Conforme acórdão do STF referente à ADI 1.923-DF, de 16/04/2015:
+
+15. As organizações sociais, por integrarem o Terceiro Setor, não fazem parte do conceito constitucional de Administração Pública, razão pela qual não se submetem, em suas contratações com terceiros, ao dever de licitar, o que consistiria em quebra da lógica de flexibilidade do setor privado, finalidade por detrás de todo o marco regulatório instituído pela Lei. Por receberem recursos públicos, bens públicos e servidores públicos, porém, seu regime jurídico tem de ser minimamente informado pela incidência do núcleo essencial dos princípios da Administração Pública (CF, art. 37, caput), dentre os quais se destaca o princípio da impessoalidade, de modo que suas contratações devem observar o disposto em regulamento próprio (Lei nº 9.637/98, art. 4º, VIII), fixando regras objetivas e impessoais para o dispêndio de recursos públicos. […]
+
+[Voto Min. Luiz Fux] A mesma lógica, felizmente de modo mais abrangente, presidiu com mais intensidade a posterior edição da Lei das OSCIP’s -Organizações da Sociedade Civil de Interesse Público, Lei nº 9.790/99, que não está em análise, mas que guarda um vínculo muito íntimo de pertinência com a matéria aqui tratada, já que relativa também ao Terceiro Setor: é o que se lê do art. 4º, inc. I, que subordina as entidades, para que se qualifiquem como Organizações da Sociedade Civil de Interesse Público, à “observância dos princípios da legalidade, impessoalidade, moralidade, publicidade, economicidade e da eficiência”.
+
+Nas hipóteses em que as entidades do terceiro setor celebrem convênio ou contrato de repasse com a União, deverão apresentar os instrumentos de planejamento de que trata o art. 13 do Decreto 11.531/2023.
+
+[1] Lei 14.133/2021, art. 1º.
+
+[2] Lei 14.133/2021, art. 185 c/c art. 178.
+
+[3] Por exemplo: enunciados de jurisprudência dos Acórdãos 1280/2018-TCU-Plenário; 744/2017-TCU-Plenário; 7596/2016-TCU-Primeira Câmara; 1584/2016-TCU-Plenário e 2198/2015-TCU-Plenário.
+
+[4] Enunciados de jurisprudência dos Acórdãos 3195/2014 e 1785/2013, ambos do Plenário do TCU.
+
+[5] Enunciado de jurisprudência do Acórdão 3037/2014-TCU-Plenário.
+
+[6] Acórdãos 1534/2020, item 9.4; 275/2022, item 1.6.2; e 3073/2021, item 1.6.1.2.2, todos do Plenário do TCU.
+
+[7] Enunciados de jurisprudência dos Acórdãos 1770/2013-TCU-Plenário e 11516/2016-TCU-Segunda Câmara.
+
+[8] Acórdãos 526/2013-TCU-Plenário, item 9.2.1; 3016/2015-TCU-Plenário, item 9.3 e subitens; 2676/2019 – Primeira Câmara, item 9.4 e subitens; 10264/2018 – Segunda Câmara, item 9.3 e subitens; e 1167/2020-TCU-Plenário, item 1.7.1.2.
+
+[9] Acórdãos 3239/2013-TCU-Plenário, item 9.8.2.5, e 5236/2015-TCU-Segunda Câmara, item 9.8.2.5.
+
+[10] Lei 9.637/1998, art. 17 e Lei 9.790/1999, art.14.

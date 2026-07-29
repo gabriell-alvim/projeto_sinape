@@ -1,0 +1,38 @@
+1.2. Organização do conteúdo
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/1-2-organizacao-do-conteudo/
+======================================================================
+
+Esta edição do Manual de Licitações & Contratos aborda a governança e o metaprocesso de contratação, incluindo os processos de planejamento da contratação, seleção do fornecedor e gestão do contrato.
+
+No primeiro capítulo, é feita a introdução do manual, no qual são apresentados os principais temas abordados nas demais partes do livro.
+
+O segundo capítulo trata da governança das contratações públicas, que consiste em mecanismos e práticas adotados pelas instâncias internas de governança das organizações para direcionar, avaliar e monitorar a gestão das contratações. Neste capítulo, são apresentados os conceitos e práticas relacionados ao tema.
+
+Já o terceiro capítulo apresenta o metaprocesso de contratação e os conceitos básicos da Lei 14.133/2021. Neste capítulo, são explicados os principais termos e fundamentos que devem ser compreendidos para o correto entendimento do metaprocesso.
+
+O quarto capítulo detalha o processo de planejamento das contratações. Neste capítulo, são apresentados diversos instrumentos e artefatos de planejamento, como o estudo técnico preliminar, o termo de referência, a análise de riscos e o edital. Cada um desses instrumentos é explicado de forma detalhada, com o objetivo de auxiliar os gestores na realização de um planejamento de contratação eficiente e transparente.
+
+O quinto capítulo aborda o processo de seleção do fornecedor. Aqui são apresentadas as etapas do procedimento licitatório, o processo de contratação direta, os procedimentos auxiliares e a formalização do contrato.
+
+Por fim, o sexto capítulo trata da gestão contratual. Neste capítulo, são abordados os principais aspectos relacionados à execução e fiscalização dos contratos.
+
+Para cada um dos temas abordados nos capítulos, são apresentados quadros com informações complementares, descritos a seguir.
+
+O quadro de referências normativas traz a base legal e regulamentar do assunto tratado, incluindo enunciados do Conselho da Justiça Federal (CJF)[1] e Orientações Normativas da Advocacia-Geral da União (AGU)[2]. Também são citados normativos relacionados à Lei 8.666/1993, quando ainda não foram substituídos por outros relativos à Lei 14.133/2021.
+
+O quadro de jurisprudência do Tribunal de Contas da União (TCU) reúne súmulas e acórdãos em ordem cronológica, evidenciando os entendimentos do Tribunal sobre o tema em questão. Mesmo que as decisões tenham sido proferidas sob a égide de legislações anteriores, como a Lei 8.666/1993 ou a Lei 13.303/2016, são considerados os dispositivos da Lei 14.133/2021.
+
+Cabe esclarecer que, embora grande parte da jurisprudência esteja relacionada ao ordenamento da Lei 8.666/1993, é importante citá-la, pois os raciocínios subjacentes a essas interpretações ainda podem ser considerados válidos e aplicáveis às licitações e contratos regidos pela Lei 14.133/2021.
+
+Adicionalmente, são sugeridas expressões de pesquisa no portal do TCU na internet, para que os interessados possam se familiarizar com as ferramentas de busca e realizar pesquisas mais específicas e atualizadas.
+
+O quadro de riscos identificados destaca os potenciais riscos que podem comprometer o alcance dos objetivos em cada etapa dos processos de trabalho abordados no manual. Esses riscos podem servir como base para a implementação de controles internos pelos gestores.
+
+A descrição dos riscos apresenta a seguinte estrutura: “descrição da causa do risco”, levando ao “evento de risco”, com a consequente “consequência do risco”. Essa abordagem segue a lógica de outras publicações de referência do TCU, como o Guia de Boas Práticas em Contratação de Soluções de Tecnologia da Informação e o documento Riscos e Controles nas Aquisições (RCA).
+
+No capítulo 3, que trata exclusivamente dos conceitos fundamentais sobre licitações e contratos, não são apresentados quadros de riscos. Isso ocorre porque o objetivo desse capítulo é fornecer uma base conceitual para os leitores, sem aprofundar-se nos riscos específicos associados a cada etapa do metaprocesso de contratação. Esses riscos são abordados em capítulos posteriores do manual. Por fim, o manual também apresenta modelos de documentos, diretrizes e orientações publicados por órgãos governantes superiores (OGS) ou por órgãos de controle, quando existentes. Esses modelos podem servir como referência para os gestores na elaboração de documentos e na condução dos processos de contratação. 
+
+[1] Como dispõe o art. 26 da Portaria CJF 371/2022, os enunciados/entendimentos aprovados no Simpósio de Licitações e Contratos da Justiça Federal são meramente doutrinários e têm força persuasiva de caráter técnico-jurídico.
+
+[2] Orientações de caráter vinculante aos órgãos e entidades da Administração Pública Federal direta do Poder Executivo, autarquias e fundações (Lei Complementar 73/1993, art. 4º, inciso XIII c/c art. 11, inciso III e art. 28, inciso II).

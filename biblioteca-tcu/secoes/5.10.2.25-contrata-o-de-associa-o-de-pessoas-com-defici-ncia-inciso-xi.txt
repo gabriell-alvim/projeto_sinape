@@ -1,0 +1,36 @@
+5.10.2.25. Contratação de associação de pessoas com deficiência (inciso XIV)
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/5-10-2-25-contratacao-de-associacao-de-pessoas-com-deficiencia-inciso-xiv/
+======================================================================
+
+Trata-se de hipótese de dispensa de licitação para contratação de serviços prestados por associação de pessoas com deficiência, desde que cumpridos os seguintes requisitos:
+
+- a organização não tenha fins lucrativos;
+
+- a organização tenha idoneidade comprovada;
+
+- os serviços sejam prestados exclusivamente por pessoas com deficiência; e
+
+- o preço contratado seja compatível com o praticado no mercado.
+
+Quadro 361 – Referências normativas para a dispensa para contratação de associação de pessoas com deficiência
+
+Normativos | Dispositivos
+CF/1988 | Art. 203. A assistência social será prestada a quem dela necessitar, independentemente de contribuição à seguridade social, e tem por objetivos: […] IV – a habilitação e reabilitação das pessoas portadoras de deficiência e a promoção de sua integração à vida comunitária;
+Lei 14.133/2021 | Art. 75. É dispensável a licitação: […] XIV – para contratação de associação de pessoas com deficiência, sem fins lucrativos e de comprovada idoneidade, por órgão ou entidade da Administração Pública, para a prestação de serviços, desde que o preço contratado seja compatível com o praticado no mercado e os serviços contratados sejam prestados exclusivamente por pessoas com deficiência;
+Decreto 10.947/2022 | Art. 6º Até a primeira quinzena de maio de cada exercício, os órgãos e as entidades elaborarão os seus planos de contratações anual, os quais conterão todas as contratações que pretendem realizar no exercício subsequente, incluídas: I – as contratações diretas, nas hipóteses previstas nos art. 74 e art. 75 da Lei nº 14. 133, de 2021;
+IN – Seges/ME 81/2022 | Art. 6º O TR, a partir dos Estudos Técnicos Preliminares – ETP, se elaborados, definirá o objeto para atendimento da necessidade, a ser enviado para o setor de contratações no prazo definido no calendário de contratação de que trata o inciso III do art. 11 do Decreto nº 10.947, de 25 de janeiro de 2022. § 1 º Os processos de contratação direta de que trata o art. 72 da Lei nº 14.133, de 1º de abril de 2021, serão instruídos com o TR, observado em especial os arts. 8º e 10.
+IN – Seges/ME 67/2021 | Art. 4º Os órgãos e entidades adotarão a dispensa de licitação, na forma eletrônica, nas seguintes hipóteses: […] III – contratação de obras, bens e serviços, incluídos os serviços de engenharia, nos termos do disposto no inciso III e seguintes do caput do art. 75 da Lei nº 14.133, de 2021, quando cabível; e
+IN – Seges/ME 65/2021 | Art. 5º A pesquisa de preços para fins de determinação do preço estimado em processo licitatório para a aquisição de bens e contratação de serviços em geral será realizada mediante a utilização dos seguintes parâmetros, empregados de forma combinada ou não: […] Art. 7º Nas contratações diretas por inexigibilidade ou por dispensa de licitação, aplica-se o disposto no art. 5º. […]
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 362 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 1157/2013-TCU-Plenário | [voto] 12. Nessa linha, a existência de outras propostas de preços, além daquelo contratado, possui por objetivo justificar o preço a ser contratado. Não há que falar, como aponta a unidade técnica, na realização de um procedimento de disputa para se averiguar a proposta mais vantajosa. Caso assim fosse, não se estaria falando de dispensa de licitação, mas de licitação propriamente dita. 13. É bem verdade que, caso a contratação não ocorra pela proposta de menor preço, o gestor deve justificar o preço praticado e demonstrar as razões de seu procedimento . Nos casos em tela, entretanto, não há indicativos de que não tenha sido contratada a proposta mais vantajosa economicamente e tampouco os gestores foram instados a se manifestar a respeito. (Grifo nosso)
+Acórdão 7459/2010-TCU-Segunda Câmara | 9.1.1. determinar que não habilitem, nos certames licitatórios para a contratação de serviços de terceirização ou assemelhados, entidades sem fins lucrativos cujos estatutos e objetivos sociais não tenham nexo com os serviços a serem prestados; e
+Acórdão 3696/2010-TCU-Segunda Câmara | 9.8. determinar ao [ omissis ] que: […] 9.8.3. em qualquer contratação de mão de obra, ou outra modalidade de prestação de serviços, observe os preços praticados no mercado para as funções requeridas ou trabalhos realizados, atentando, ainda, para a apresentação composição dos preços unitários no procedimento licitatório (Lei 8666/1993 e art. 37, inciso XXI, da Constituição Federal); [voto] 10. Na verdade, o contrato firmado com a [ omissis ] por dispensa de licitação com fundamento no art. 24, inciso XX, da Lei 8.666/1993 (contratação de associação de portadores de deficiência física) não foi devidamente justificado. Ao contrário, extraio dos autos que o mesmo serviu, apenas, como instrumento para se contratar os funcionários terceirizados sem que se estivesse devidamente justificada a dispensa de licitação.
+Pesquisa de Jurisprudência | Na Pesquisa Integrada do TCU , pesquise pelos termos: “associação de portadores de deficiência” ; “pessoas com deficiência”; “art. 24, XX” ou “art. 75, inc. XIV”.
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.

@@ -1,0 +1,65 @@
+6.4.3.2. Inadimplemento por culpa do contratado
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/6-4-3-2-inadimplemento-por-culpa-do-contratado/
+======================================================================
+
+A Administração pode extinguir unilateralmente o contrato, por culpa do contratado, nas seguintes situações[1]:
+
+- descumprimento total ou parcial de normas editalícias ou de cláusulas contratuais, de especificações, de projetos ou de prazos;
+
+- desatendimento das determinações regulares emitidas pela equipe de fiscalização do contrato ou por autoridade superior;
+
+- alteração social ou modificação da finalidade ou da estrutura da empresa que restrinja sua capacidade de concluir o contrato. Vale destacar que o contrato não será extinto se a alteração não restringir a capacidade do contratado de concluir o contrato;
+
+- decretação de falência ou de insolvência civil, dissolução da sociedade ou falecimento do contratado; e
+
+- descumprimento das obrigações relativas à reserva de cargos prevista em lei, bem como em outras normas específicas, para pessoa com deficiência, para reabilitado da Previdência Social ou para aprendiz.
+
+Como mencionado no item 6.4.2.1, nessas hipóteses a Administração poderá, sem prejuízo das sanções cabíveis[2]:
+
+- assumir imediatamente o objeto do contrato, no estado e local em que se encontrar;
+
+- ocupar e utilizar o local, as instalações, os equipamentos, o material e o pessoal empregados na execução do contrato e necessários à sua continuidade. Essa medida exige prévia autorização do ministro de Estado, do secretário estadual ou do secretário municipal competente, conforme o caso[3];
+
+- executar a garantia contratual para ressarcimento de prejuízos decorrentes da não execução, pagamento de verbas trabalhistas, fundiárias e previdenciárias, e pagamentos de multas devidas à Administração; e
+
+- reter os créditos decorrentes do contrato até o limite dos prejuízos causados à Administração Pública e das multas aplicadas. Em contratos de prestação contínua, a Administração poderá efetuar o pagamento das obrigações trabalhistas diretamente aos empregados que tenham participado da execução dos serviços objeto do contrato, deduzindo o respectivo valor do pagamento devido ao contratado[4].
+
+Vale reiterar que a Administração deve utilizar de proporcionalidade e razoabilidade ao decidir pela extinção do contrato, considerando as especificidades do caso concreto.
+
+Quadro 457 – Referências normativas para extinção por culpa do contratado
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 14. Não poderão disputar licitação ou participar da execução de contrato, direta ou indiretamente: […] IV – aquele que mantenha vínculo de natureza técnica, comercial, econômica, financeira, trabalhista ou civil com dirigente do órgão ou entidade contratante ou com agente público que desempenhe função na licitação ou atue na fiscalização ou na gestão do contrato, ou que deles seja cônjuge, companheiro ou parente em linha reta, colateral ou por afinidade, até o terceiro grau, devendo essa proibição constar expressamente do edital de licitação; […] Art. 121. Somente o contratado será responsável pelos encargos trabalhistas, previdenciários, fiscais e comerciais resultantes da execução do contrato. […] § 3º Nas contratações de serviços contínuos com regime de dedicação exclusiva de mão de obra, para assegurar o cumprimento de obrigações trabalhistas pelo contratado, a Administração, mediante disposição em edital ou em contrato, poderá, entre outras medidas: I – exigir caução, fiança bancária ou contratação de seguro-garantia com cobertura para verbas rescisórias inadimplidas; […] IV – em caso de inadimplemento, efetuar diretamente o pagamento das verbas trabalhistas, que serão deduzidas do pagamento devido ao contratado; […] Art. 137. Constituirão motivos para extinção do contrato, a qual deverá ser formalmente motivada nos autos do processo, assegurados o contraditório e a ampla defesa, as seguintes situações: I – não cumprimento ou cumprimento irregular de normas editalícias ou de cláusulas contratuais, de especificações, de projetos ou de prazos; II – desatendimento das determinações regulares emitidas pela autoridade designada para acompanhar e fiscalizar sua execução ou por autoridade superior; III – alteração social ou modificação da finalidade ou da estrutura da empresa que restrinja sua capacidade de concluir o contrato; IV – decretação de falência ou de insolvência civil, dissolução da sociedade ou falecimento do contratado; […] IX – não cumprimento das obrigações relativas à reserva de cargos prevista em lei, bem como em outras normas específicas, para pessoa com deficiência, para reabilitado da Previdência Social ou para aprendiz. § 1º Regulamento poderá especificar procedimentos e critérios para verificação da ocorrência dos motivos previstos no caput deste artigo. […] Art. 139. A extinção determinada por ato unilateral da Administração poderá acarretar, sem prejuízo das sanções previstas nesta Lei, as seguintes consequências: I – assunção imediata do objeto do contrato, no estado e local em que se encontrar, por ato próprio da Administração; II – ocupação e utilização do local, das instalações, dos equipamentos, do material e do pessoal empregados na execução do contrato e necessários à sua continuidade; III – execução da garantia contratual para: a) ressarcimento da Administração Pública por prejuízos decorrentes da não execução; b) pagamento de verbas trabalhistas, fundiárias e previdenciárias, quando cabível; c) pagamento das multas devidas à Administração Pública; d) exigência da assunção da execução e da conclusão do objeto do contrato pela seguradora, quando cabível; IV – retenção dos créditos decorrentes do contrato até o limite dos prejuízos causados à Administração Pública e das multas aplicadas. § 1º A aplicação das medidas previstas nos incisos I e II do caput deste artigo ficará a critério da Administração, que poderá dar continuidade à obra ou ao serviço por execução direta ou indireta. § 2º Na hipótese do inciso II do caput deste artigo, o ato deverá ser precedido de autorização expressa do ministro de Estado, do secretário estadual ou do secretário municipal competente, conforme o caso.
+Decreto-Lei 4.657/1942 (LINDB) | Art. 20. Nas esferas administrativa, controladora e judicial, não se decidirá com base em valores jurídicos abstratos sem que sejam consideradas as consequências práticas da decisão. (Incluído pela Lei nº 13.655, de 2018) (Regulamento) Parágrafo único. A motivação demonstrará a necessidade e a adequação da medida imposta ou da invalidação de ato, contrato, ajuste, processo ou norma administrativa, inclusive em face das possíveis alternativas. (Incluído pela Lei nº 13.655, de 2018) Art. 21. A decisão que, nas esferas administrativa, controladora ou judicial, decretar a invalidação de ato, contrato, ajuste, processo ou norma administrativa deverá indicar de modo expresso suas consequências jurídicas e administrativas. (Incluído pela Lei nº 13.655, de 2018) (Regulamento) Parágrafo único. A decisão a que se refere o caput deste artigo deverá, quando for o caso, indicar as condições para que a regularização ocorra de modo proporcional e equânime e sem prejuízo aos interesses gerais, não se podendo impor aos sujeitos atingidos ônus ou perdas que, em função das peculiaridades do caso, sejam anormais ou excessivos. (Incluído pela Lei nº 13.655, de 2018)
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 458 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 2537/2020-TCU-Plenário | [Voto] A jurisprudência do Tribunal é pacífica no sentido de que a declaração de inidoneidade produz efeitos ex-nunc , ou seja, não enseja a rescisão imediata de todos os contratos firmados entre as empresas sancionadas com a Administração Pública, pois tal medida nem sempre é a solução mais adequada para o Poder Público. Dependendo da natureza dos serviços pactuados, não seria vantajoso para a administração rescindir contratos cuja execução estivesse adequada para celebrar contratos emergenciais, no geral mais onerosos e com nível de prestação de serviços diverso, qualitativamente, daquele que seria obtido no regular procedimento licitatório. Assim, caberia aos órgãos e entidades contratantes da empresa declarada inidônea avaliar, no âmbito de suas autonomias, a necessidade de adoção de medidas administrativas com vistas a eventuais rescisões, caso julgadas necessárias, cumpridas as formalidades legais para tanto. Consoante precedentes do Superior Tribunal de Justiça e desta Corte de Contas, “a ausência do efeito rescisório automático não compromete nem restringe a faculdade que têm as entidades da Administração Pública de, no âmbito da sua esfera autônoma de atuação, promover medidas administrativas específicas para rescindir os contratos, nos casos autorizados em lei nos casos autorizados e observadas as formalidades estabelecidas nos artigos 77 a 80 da Lei 8.666/93.” (MS 13.964/DF – 2008 do Superior Tribunal de Justiça e Acórdão 1340/2011-TCU-Plenário) Não obstante o exposto, considero que, em relação às licitações pelo Sistema de Registro de Preços, uma vez transitado em julgado o acórdão que aplicou a penalidade estampada no art. 46 da Lei 8.443/1992, não há que admitir a assinatura de novos contratos ou a emissão de novos empenhos em favor da empresa sancionada após este momento, como pretende a recorrente.
+Acórdão 2079/2014-TCU-Plenário | [Enunciado] Nos contratos de execução continuada ou parcelada, o inadimplemento das obrigações fiscais do contratado, incluindo a seguridade social, enseja, além das penalidades legais, a rescisão do contrato e a execução das garantias para ressarcimento de valores e indenizações devidos à Administração, sendo vedada a retenção de pagamento por serviço já executado, ou fornecimento já entregue, sob pena de enriquecimento sem causa da Administração.
+Acórdão 432/2014-TCU-Plenário | [Enunciado] A sanção de declaração de inidoneidade, prevista no art. 46 da Lei 8.443/1992, produz efeitos ex-nunc , não afetando, automaticamente, contratos em andamento celebrados antes da aplicação da penalidade.
+Acórdão 2050/2014-TCU-Plenário | [Enunciado] É admitida a reorganização da pessoa jurídica da contratada, por meio de cisão, incorporação, fusão, alteração social ou modificação da finalidade ou da estrutura da empresa, desde que: (i) haja previsão no edital e no contrato (art. 78, inciso VI, da Lei 8.666/1993); (ii) a nova empresa atenda aos requisitos de habilitação originalmente previstos na licitação (art. 27, da Lei 8.666/1993); e (iii) as condições estabelecidas no contrato original sejam mantidas.
+Acórdão 5946/2012-TCU-Primeira Câmara | [Enunciado] Alterações na denominação da sociedade ou na composição societária, sem a criação de uma nova entidade, não produzem efeitos sobre as obrigações de empresa contratada pela Administração.
+Acórdão 3400/2011-TCU-Segunda Câmara | [Enunciado] É possível a Administração contratar ou manter contrato com empresas que tenham sofrido processo de cisão, fusão ou incorporação, desde que não haja impedimento no edital ou no contrato, que sejam cumpridos os requisitos de habilitação, manutenção das condições contratuais, inexistência de prejuízo para execução do objeto e anuência expressa da Administração.
+Pesquisa de Jurisprudência | Execute consulta na Jurisprudência Selecionada do TCU . Selecione a área “contrato administrativo”, tema “contratado” .
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+Quadro 459 – Riscos relacionados
+
+Riscos
+Urgência em concluir o processo administrativo com vistas à extinção unilateral do contrato e/ou falta de capacidade técnica da comissão processante, levando à instrução do processo sem os elementos mínimos necessários a sua validade (p. ex., estabelecimento da conduta, tipificação, nexo de causalidade, culpabilidade, provas, garantia de contraditório e ampla defesa, notificação aos emitentes das garantias, avaliação das consequências práticas da decisão), com consequente nulidade do ato de extinção do contrato ou extinção com prejuízos ainda maiores ao interesse público.
+Receio, por parte do gestor, de ser responsabilizado por proceder a ocupação provisória de bens móveis e imóveis e a utilização de pessoal e serviços vinculados ao objeto do contrato, levando-o a tomar a decisão de rescindir o contrato e aguardar o tempo necessário para apurar as faltas contratuais e realizar uma nova licitação, sem tomar providências acauteladoras para manter a prestação do serviço, com consequente interrupção de serviço essencial e prejuízo ou comprometimento da segurança de pessoas e de bens públicos ou particulares.
+
+Fonte: Elaboração própria.
+
+[1] Lei 14.133/2021, art. 137, incisos I a IV e IX.
+
+[2] Lei 14.133/2021, art. 121, § 3º, inciso I, art. 139.
+
+[3] Lei 14.133/2021, art. 139, § 2º.
+
+[4] Lei 14.133/2021, art. 121, § 3º, inciso IV.

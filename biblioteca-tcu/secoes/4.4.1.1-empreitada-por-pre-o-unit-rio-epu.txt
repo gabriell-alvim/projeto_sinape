@@ -1,0 +1,12 @@
+4.4.1.1. Empreitada por preço unitário (EPU)
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/4-4-1-1-empreitada-por-preco-unitario-epu/
+======================================================================
+
+A empreitada por preço unitário consiste na contratação da execução da obra ou do serviço por preço certo de unidades determinadas[1]. Disso decorre que é o regime mais indicado para obras e serviços de engenharia cujos quantitativos tenham relevada imprecisão intrínseca no seu levantamento, ou possuam maior probabilidade de serem alterados ao longo da execução do contrato, como no caso de reformas de edifícios ou obras com expressiva movimentação de terra, já que mesmo que os quantitativos executados difiram do previsto, a Administração pagará pelos que foram efetivamente executados.
+
+Dito de outra forma, na EPU são contratados apenas os preços unitários, sendo os quantitativos meramente referenciais que deverão ser futuramente aferidos e pagos de acordo com as medições do fiscal do contrato.
+
+Dessa forma, em relação à EPG e aos outros regimes com medição por preço global, a EPU retira parcela significativa do risco atribuído ao contratado para a execução dos serviços, uma vez que o contratado tem a garantia de que o volume dos serviços medidos em campo corresponderá aos pagamentos, enquanto na medição por preço global não há, necessariamente, o levantamento do quantitativo, mas apenas a verificação da conclusão da etapa necessária à medição.
+
+[1] Lei 14.133/2021, art. 6º, inciso XXXVIII.

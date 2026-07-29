@@ -1,0 +1,34 @@
+5.10.2.27. Aquisição de insumos estratégicos para a saúde (inciso XVI)
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/5-10-2-27-aquisicao-de-insumos-estrategicos-para-a-saude-inciso-xvi/
+======================================================================
+
+Trata-se de hipótese de dispensa em que o contratante seja pessoa jurídica de direito público (órgão da Administração Pública direta, autarquia, associação pública (ou consórcio público[1] ou fundação pública[2]) e o contratado seja fundação que, regimental ou estatutariamente, tenha por finalidade apoiar a Administração em:
+
+- projetos de ensino, pesquisa, extensão, desenvolvimento institucional, científico e tecnológico e de estímulo à inovação, inclusive na gestão administrativa e financeira necessária à execução desses projetos; ou
+
+- em parcerias que envolvam transferência de tecnologia de produtos estratégicos para o SUS[3].
+
+A dispensa é aplicável somente a fundação que tenha sido criada para esse fim específico em data anterior à entrada em vigor da Lei 14.133/2021.
+
+O objeto da contratação deve ser a aquisição de insumos estratégicos para a saúde, produzidos pela fundação.
+
+Adicionalmente, o preço pactuado deve ser compatível com o praticado no mercado.
+
+Quadro 365 – Referências normativas para a dispensa para aquisição de insumos estratégicos para a saúde
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 75. É dispensável a licitação: […] XVI – para aquisição, por pessoa jurídica de direito público interno, de insumos estratégicos para a saúde produzidos por fundação que, regimental ou estatutariamente, tenha por finalidade apoiar órgão da Administração Pública direta, sua autarquia ou fundação em projetos de ensino, pesquisa, extensão, desenvolvimento institucional, científico e tecnológico e de estímulo à inovação, inclusive na gestão administrativa e financeira necessária à execução desses projetos, ou em parcerias que envolvam transferência de tecnologia de produtos estratégicos para o SUS, nos termos do inciso XII do caput deste artigo, e que tenha sido criada para esse fim específico em data anterior à entrada em vigor desta Lei, desde que o preço contratado seja compatível com o praticado no mercado.
+Decreto 10.947/2022 | Art. 6º Até a primeira quinzena de maio de cada exercício, os órgãos e as entidades elaborarão os seus planos de contratações anual, os quais conterão todas as contratações que pretendem realizar no exercício subsequente, incluídas: I – as contratações diretas, nas hipóteses previstas nos art. 74 e art. 75 da Lei nº 14. 133, de 2021;
+PRC – MS 5/2017 | [Anexo XCV] Art. 2º Para efeitos deste Anexo, são adotados os seguintes conceitos (Origem: PRT MS/GM 2531/2014, Art. 2º) […] II – produtos estratégicos para o SUS: produtos necessários ao SUS para ações de promoção, prevenção e recuperação da saúde, com aquisições centralizadas ou passíveis de centralização pelo Ministério da Saúde e cuja produção nacional e de seus insumos farmacêuticos ativos ou componentes tecnológicos críticos são relevantes para o CEIS; (Origem: PRT MS/GM 2531/2014, Art. 2º, II)
+IN – Seges/ME 81/2022 | Art. 6º O TR, a partir dos Estudos Técnicos Preliminares – ETP, se elaborados, definirá o objeto para atendimento da necessidade, a ser enviado para o setor de contratações no prazo definido no calendário de contratação de que trata o inciso III do art. 11 do Decreto nº 10.947, de 25 de janeiro de 2022. § 1 º Os processos de contratação direta de que trata o art. 72 da Lei nº 14.133, de 1º de abril de 2021, serão instruídos com o TR, observado em especial os arts. 8º e 10.
+IN – Seges/ME 67/2021 | Art. 4º Os órgãos e entidades adotarão a dispensa de licitação, na forma eletrônica, nas seguintes hipóteses: […] III – contratação de obras, bens e serviços, incluídos os serviços de engenharia, nos termos do disposto no inciso III e seguintes do caput do art. 75 da Lei nº 14.133, de 2021, quando cabível; e
+IN – Seges/ME 65/2021 | Art. 5º A pesquisa de preços para fins de determinação do preço estimado em processo licitatório para a aquisição de bens e contratação de serviços em geral será realizada mediante a utilização dos seguintes parâmetros, empregados de forma combinada ou não: […] Art. 7º Nas contratações diretas por inexigibilidade ou por dispensa de licitação, aplica-se o disposto no art. 5º. […]
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+[1] CF/1988, art. 241 e Lei 11.107/2005, art. 6º, inciso I, Lei 10.406/2002, art. 41 (Código Civil).
+
+[2] CF/1988, art. 37, inciso XIX.
+
+[3] Produtos estratégicos para o SUS: produtos necessários ao SUS para ações de promoção, prevenção e recuperação da saúde, com aquisições centralizadas ou passíveis de centralização pelo Ministério da Saúde e cuja produção nacional e de seus insumos farmacêuticos ativos ou componentes tecnológicos críticos são relevantes para o CEIS (PRC – MS 5/2017, Anexo XCV, art. 2º, inciso II).

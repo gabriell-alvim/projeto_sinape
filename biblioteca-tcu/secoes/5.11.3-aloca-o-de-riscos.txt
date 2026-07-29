@@ -1,0 +1,118 @@
+5.11.3. Alocação de riscos
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/5-11-3-alocacao-de-riscos/
+======================================================================
+
+A matriz de riscos é a cláusula contratual definidora de riscos de eventos supervenientes à contratação e de responsabilidades entre as partes contratantes. Serve para estabelecer o equilíbrio econômico-financeiro inicial do contrato em relação ao ônus financeiro decorrente da eventual concretização desses riscos durante a execução contratual[1].
+
+A matriz de riscos deverá[2]:
+
+- listar possíveis eventos supervenientes à assinatura do contrato, previstos e presumíveis, que possam causar impacto em seu equilíbrio econômico-financeiro;
+
+- repartir a responsabilidade, entre contratante e contratado, pelo ônus financeiro decorrente desses riscos, caso se concretizem (algumas serão compartilhadas);
+
+- os riscos que tenham cobertura oferecida por seguradoras serão preferencialmente transferidos ao contratado[3];
+
+- nas contratações integradas ou semi-integradas[4], os riscos decorrentes de fatos supervenientes à contratação associados à escolha da solução de projeto básico pelo contratado deverão ser alocados como de sua responsabilidade na matriz de riscos[5]; e
+
+- definir mecanismos que afastem a ocorrência do sinistro e mitiguem os seus efeitos, caso se concretize.
+
+A alocação dos riscos deve ser eficiente. Para tanto, deve considerar a compatibilidade com as obrigações e os encargos atribuídos às partes no contrato, a natureza do risco, o beneficiário das prestações a que se vincula e a capacidade de cada parte contratante para melhor gerenciá-lo[6].
+
+É recomendável que órgãos e entidades da Administração Pública, ao elaborarem matrizes de riscos em suas contratações de obras públicas, observem as seguintes diretrizes[7]:
+
+a. detalhamento claro, exaustivo e objetivo dos eventos supervenientes considerados como riscos, discriminando aqueles atribuídos à Administração, à contratada ou partilhados entre as partes, com base em critérios técnicos e jurídicos coerentes com o regime de execução adotado;
+ b. compatibilização da matriz de riscos com o tipo de regime contratual, especialmente no caso de empreitada por preço unitário, observando que esse regime transfere à Administração alguns riscos, como os de variação nos quantitativos de serviços contratados, não sendo adequada a simples transposição de modelos utilizados em contratações integradas ou por preço global;
+ c. indicação expressa das premissas utilizadas para alocação de cada risco, inclusive quanto à natureza do risco (exógeno ou endógeno), probabilidade de ocorrência, impacto financeiro estimado e mecanismos de mitigação;
+ d. compatibilização da matriz de riscos com os demais elementos contratuais e com o projeto executivo vinculante, conforme disposto no art. 92, inciso II, da Lei 14.133/2021, de modo a garantir coerência entre planejamento, orçamento e obrigações contratuais;
+ e. institucionalização de modelos-padrão de matriz de riscos para os diferentes regimes de execução contratual, com possibilidade de ajustes conforme as peculiaridades de cada obra, e com base em boas práticas nacionais e internacionais já consolidadas;
+ f. submissão prévia da matriz de riscos à análise jurídica e técnica, antes da publicação do edital, com especial atenção à verificação de sua aplicabilidade concreta e adequação à realidade do empreendimento.
+
+Além disso, a alocação dos riscos deverá ser quantificada para fins de cálculo do valor estimado da contratação, de acordo com metodologia predefinida pelo ente federativo. A taxa de risco deverá ser compatível com o objeto da licitação e com os riscos atribuídos ao contratado[8]. Ademais, o custo da contratação de seguros obrigatórios será integrado ao preço a ser pago pela Administração ao contratado[9].
+
+A Lei 14.133/2021 estabelece duas hipóteses em que a matriz de riscos será obrigatória[10]:
+
+- obras e serviços de grande vulto, consideradas aquelas de valor estimado superior a R$ 250.902.323,87[11]; e
+
+- quando forem adotados os regimes de contratação integrada e semi-integrada (disciplinadas pelo art. 46 da Lei 14.133/2021);
+
+Para as demais contratações, caberá à Administração avaliar o caso concreto e decidir acerca da formalização da matriz. Há jurisprudência do TCU no sentido de que seja elaborada a matriz de riscos em todas as contratações que envolvam incertezas relevantes[12].
+
+A matriz de riscos deverá ser refletida nos direitos e nas responsabilidades das partes definidos no contrato. A Lei 14.133/2021 estabelece situações que devem ser obrigatoriamente consideradas na alocação de riscos[13]:
+
+- hipóteses de alteração para o restabelecimento da equação econômico-financeira do contrato nos casos em que o sinistro seja considerado na matriz de riscos como causa de desequilíbrio não suportada pela parte que pretenda o restabelecimento. Nesse caso, o sinistro afeta parte distinta daquela a quem o risco havia sido alocado na matriz de riscos, assim a parte afetada terá interesse no restabelecimento do equilíbrio econômico-financeiro, mas o ônus de suportá-lo será da outra parte, a quem o risco tinha sido originalmente alocado; e
+
+- possibilidade de resolução quando o sinistro majorar excessivamente ou impedir a continuidade da execução contratual. Nesse caso, ainda que o risco tenha sido previsto na matriz, se a sua concretização tiver impacto muito superior ao estimado, de modo que inviabilize a continuidade da execução contratual, haverá a possibilidade de extinguir o contrato.
+
+O equilíbrio econômico-financeiro do contrato deve ser considerado mantido sempre que atendidas as condições do contrato e da matriz de ricos. Assim, caso se concretize algum evento previsto na matriz de riscos, as partes não poderão solicitar o restabelecimento do equilíbrio para arcar com o ônus financeiro decorrente dos riscos assumidos no contrato[14]. Excepcionam-se, no entanto, as seguintes situações[15]:
+
+- alterações unilaterais determinadas pela Administração;
+
+- aumento ou redução, pela legislação superveniente, dos tributos diretamente pagos pelo contratado em decorrência do contrato.
+
+Ocorrendo as situações supramencionadas, deverá ser providenciado o reequilíbrio econômico-financeiro do contrato.
+
+Quadro 377 – Referências normativas para a alocação de riscos no contrato
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 6º […] XXVII – matriz de riscos: cláusula contratual definidora de riscos e de responsabilidades entre as partes e caracterizadora do equilíbrio econômico-financeiro inicial do contrato, em termos de ônus financeiro decorrente de eventos supervenientes à contratação, contendo, no mínimo, as seguintes informações: a) listagem de possíveis eventos supervenientes à assinatura do contrato que possam causar impacto em seu equilíbrio econômico-financeiro e previsão de eventual necessidade de prolação de termo aditivo por ocasião de sua ocorrência; b) no caso de obrigações de resultado, estabelecimento das frações do objeto com relação às quais haverá liberdade para os contratados inovarem em soluções metodológicas ou tecnológicas, em termos de modificação das soluções previamente delineadas no anteprojeto ou no projeto básico; c) no caso de obrigações de meio, estabelecimento preciso das frações do objeto com relação às quais não haverá liberdade para os contratados inovarem em soluções metodológicas ou tecnológicas, devendo haver obrigação de aderência entre a execução e a solução predefinida no anteprojeto ou no projeto básico, consideradas as características do regime de execução no caso de obras e serviços de engenharia; […] Art. 22. O edital poderá contemplar matriz de alocação de riscos entre o contratante e o contratado, hipótese em que o cálculo do valor estimado da contratação poderá considerar taxa de risco compatível com o objeto da licitação e com os riscos atribuídos ao contratado, de acordo com metodologia predefinida pelo ente federativo. § 1º A matriz de que trata o caput deste artigo deverá promover a alocação eficiente dos riscos de cada contrato e estabelecer a responsabilidade que caiba a cada parte contratante, bem como os mecanismos que afastem a ocorrência do sinistro e mitiguem os seus efeitos, caso este ocorra durante a execução contratual. § 2º O contrato deverá refletir a alocação realizada pela matriz de riscos, especialmente quanto: I – às hipóteses de alteração para o restabelecimento da equação econômico-financeira do contrato nos casos em que o sinistro seja considerado na matriz de riscos como causa de desequilíbrio não suportada pela parte que pretenda o restabelecimento; II – à possibilidade de resolução quando o sinistro majorar excessivamente ou impedir a continuidade da execução contratual; III – à contratação de seguros obrigatórios previamente definidos no contrato, integrado o custo de contratação ao preço ofertado. § 3º Quando a contratação se referir a obras e serviços de grande vulto ou forem adotados os regimes de contratação integrada e semi-integrada, o edital obrigatoriamente contemplará matriz de alocação de riscos entre o contratante e o contratado. § 4º Nas contratações integradas ou semi-integradas, os riscos decorrentes de fatos supervenientes à contratação associados à escolha da solução de projeto básico pelo contratado deverão ser alocados como de sua responsabilidade na matriz de riscos. […] Art. 92. São necessárias em todo contrato cláusulas que estabeleçam: […] IX – a matriz de risco, quando for o caso; […] Art. 103. O contrato poderá identificar os riscos contratuais previstos e presumíveis e prever matriz de alocação de riscos, alocando-os entre contratante e contratado, mediante indicação daqueles a serem assumidos pelo setor público ou pelo setor privado ou daqueles a serem compartilhados. § 1º A alocação de riscos de que trata o caput deste artigo considerará, em compatibilidade com as obrigações e os encargos atribuídos às partes no contrato, a natureza do risco, o beneficiário das prestações a que se vincula e a capacidade de cada setor para melhor gerenciá-lo. § 2º Os riscos que tenham cobertura oferecida por seguradoras serão preferencialmente transferidos ao contratado. § 3º A alocação dos riscos contratuais será quantificada para fins de projeção dos reflexos de seus custos no valor estimado da contratação. § 4º A matriz de alocação de riscos definirá o equilíbrio econômico-financeiro inicial do contrato em relação a eventos supervenientes e deverá ser observada na solução de eventuais pleitos das partes. § 5º Sempre que atendidas as condições do contrato e da matriz de alocação de riscos, será considerado mantido o equilíbrio econômico-financeiro, renunciando as partes aos pedidos de restabelecimento do equilíbrio relacionados aos riscos assumidos, exceto no que se refere: I – às alterações unilaterais determinadas pela Administração, nas hipóteses do inciso I do caput do art. 124 desta Lei; II – ao aumento ou à redução, por legislação superveniente, dos tributos diretamente pagos pelo contratado em decorrência do contrato. § 6º Na alocação de que trata o caput deste artigo, poderão ser adotados métodos e padrões usualmente utilizados por entidades públicas e privadas, e os ministérios e secretarias supervisores dos órgãos e das entidades da Administração Pública poderão definir os parâmetros e o detalhamento dos procedimentos necessários a sua identificação, alocação e quantificação financeira
+IN – Seges/ME 65/2021 | Art. 4º Na pesquisa de preços, sempre que possível, deverão ser observadas as condições comerciais praticadas, incluindo prazos e locais de entrega, instalação e montagem do bem ou execução do serviço, quantidade contratada, formas e prazos de pagamento, fretes, garantias exigidas e marcas e modelos, quando for o caso, observadas a potencial economia de escala e as peculiaridades do local de execução do objeto. Parágrafo único. No caso de previsão de matriz de alocação de riscos entre o contratante e o contratado, o cálculo do valor estimado da contratação poderá considerar taxa de risco compatível com o objeto da licitação e os riscos atribuídos ao contratado, de acordo com a metodologia estabelecida no Caderno de Logística, elaborado pela Secretaria de Gestão da Secretaria Especial de Desburocratização, Gestão e Governo Digital do Ministério da Economia.
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 378 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 1210/2024-TCU-Plenário | [Enunciado] É lícito que o contrato estabeleça divisão de riscos entre as partes, inclusive no que se refere a faixas aceitáveis de variação nos custos de determinados insumos, principalmente nos casos em que o insumo seja representativo no contexto dos serviços contratados e esteja sujeito a flutuações decorrentes de fatores de difícil previsão, a exemplo dos materiais betuminosos em obras rodoviárias. Para tais faixas de variação, não cabe reequilíbrio econômico-financeiro, resguardado, em todo o caso, o reajustamento periódico (arts. 6º, inciso LVIII; 92, § 3º; e 124, inciso II, alínea d, da Lei 14.133/2021).
+Acórdão 320/2023-TCU-Plenário | [Enunciado] As empresas estatais devem, obrigatoriamente, incluir a matriz de riscos em seus editais e contratos de obras e serviços de engenharia (art. 69, inciso X, da Lei 13.303/2016), independentemente do modelo de contratação adotado, com a finalidade de garantir o equilíbrio econômico-financeiro da avença e de favorecer a elaboração das propostas dos licitantes, na medida em que lhes é dado conhecimento dos riscos a que serão submetidos durante a execução contratual.
+Acórdão 2980/2015-TCU-Plenário | [Enunciado] Nas contratações integradas, é imprescindível a inclusão da matriz de risco detalhada no instrumento convocatório, com alocação a cada signatário dos riscos inerentes ao empreendimento.
+Acórdão 2172/2013-TCU-Plenário | [Enunciado] Nos casos em que há incertezas relevantes e mesmo assim se opta pela contratação por preço global, é recomendável que, a exemplo da contratação integrada – e, por semelhança, do EPC (Engineering Procurement and Construction) -, a Administração elabore uma matriz de riscos, com vistas à objetivação dos eventos que podem afetar o empreendimento, tais como as imprecisões de projeto ou anteprojeto, prevendo contratualmente a quem caberá suportá-los, se ocorrerem na fase de execução.
+Acórdão 1465/2013-TCU-Plenário | [Voto] 10. Daí a recomendação […] para que o […] passe a preparar uma matriz de riscos, a ser integrada ao edital e ao contrato, definindo o mais claro possível a responsabilidade pelos riscos inerentes à execução do projeto. Evidentemente, há problemas imprevisíveis, mas a ideia é que possam ser relacionados os eventos que a experiência permite antecipar como de acontecimento razoavelmente provável.
+Acórdão 1510/2013-TCU-Plenário | 9.1.3. a “matriz de riscos”, instrumento que define a repartição objetiva de responsabilidades advindas de eventos supervenientes à contratação, na medida em que é informação indispensável para a caracterização do objeto e das respectivas responsabilidades contratuais, como também essencial para o dimensionamento das propostas por parte dos licitantes, é elemento essencial e obrigatório do anteprojeto de engenharia, em prestígio ao definido no art. 9º, § 2º, inciso I, da Lei 12.462/2011, como ainda nos princípios da segurança jurídica, da isonomia, do julgamento objetivo, da eficiência e da obtenção da melhor proposta; [voto] Sem querer ser maçante, retorno que o preço oferecido pelos particulares para o adimplemento do objeto será proporcional aos riscos por eles assumidos. Quando essa distribuição de responsabilidades não é clara, além de não haver perfeitas condições para a formulação das propostas, a situação expõe a contratação em um ambiente forte de instabilidade e insegurança jurídica. Apresento a seguinte situação hipotética: se, ao se executar a obra, o contratado constate que o solo encontrado in loco é distinto do definido nas sondagens fornecidas no anteprojeto. Uma fundação muito mais cara haverá de ser executada para suportar as cargas da superestrutura. Nesse caso, haverá termo aditivo? Existe, no mínimo, uma situação de insegurança, passível de interpretações distintas. Em avaliação perfunctória, na medida em que não era passível de conhecimento prévio de qualquer dos licitantes, avalio que a “surpresa” quebrou a equação econômico-financeira do ajuste, definida como imutável pelo art. 37, inciso XXI, da Constituição Federal. Como não existe disposição editalícia contrária, ajuízo que o aditivo será devido. Não tenho dúvidas, por outro lado, que é uma porta para a celeuma contratual. Bastaria uma disposição clara no contrato para evitar a situação. Mesma dúvida pode ter ocorrido a qualquer dos licitantes (a impactar nos preços ofertados).
+Pesquisa de Jurisprudência | Execute a seguinte consulta na Pesquisa Integrada do TCU , por: (“matriz de alocação de riscos” OU “matriz de riscos”) AND “contrato” Execute a seguinte consulta na Jurisprudência Selecionada do TCU , por: matriz de riscos
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+Quadro 379 – Riscos relacionados
+
+Riscos
+Vide riscos relacionados no Quadro 208.
+
+Fonte: Elaboração própria.
+
+Quadro 380 – Modelos
+
+Assunto | Modelo disponibilizados por OGS ou por órgãos de controle | OGS
+Matriz de riscos | Guia de Gerenciamento de Riscos de Obras Rodoviárias (DNIT, 2013) | DNIT
+
+Fonte: Elaboração própria.
+
+[1] Lei 14.133/2021, art. 6º, inciso XXVII.
+
+[2] Lei 14.133/2021, art. 6º, inciso XXVII, alínea “a”, e art. 22, § 1º.
+
+[3] Lei 14.133/2021, art. 103, § 2º.
+
+[4] Nas contratações integradas, o projeto básico é elaborado pelo contratado, que assume assim os riscos do seu projeto. Nas semi-integradas, o PB é elaborado pela Administração, mas pode ser alterado pelo contratado, mediante autorização da contratante, desde que demonstrada a superioridade das inovações propostas pelo contratado em termos de redução de custos, de aumento da qualidade, de redução do prazo de execução ou de facilidade de manutenção ou operação, hipótese em que o contratado assume os riscos dessa alteração (Lei 14.133/2021, art. 46, §§ 3º e 5º).
+
+[5] Lei 14.133/2021, art. 22, § 4º.
+
+[6] Lei 14.133/2021, art. 22, § 1º, e art. 103, § 1º.
+
+[7] Acórdão 1182/2025 – TCU – Plenário
+
+[8] Lei 14.133/2021, art. 22, caput, § 2º, inciso II, e art. 103, § 3º; IN – Seges 65/2021, art. 4º, parágrafo único.
+
+[9] Lei 14.133/2021, art. 22, § 2º, inciso III.
+
+[10] Lei 14.133/2021, art. 22, § 3º.
+
+[11] Lei 14.133/2021, art. 6º, inciso XXII. Valor atualizado anualmente pelo Poder Executivo federal.
+
+[12] Acórdãos 2616/2020, item 9.1.2, 1441/2015, item 9.1.2, 2172/2013, item 9.2, todos do Plenário do TCU.
+
+[13] Lei 14.133/2021, art. 22, § 2º, incisos I e II.
+
+[14] Lei 14.133/2021, art. 103, § 5º.
+
+[15] Lei 14.133/2021, art. 103, § 5º, incisos I e II.

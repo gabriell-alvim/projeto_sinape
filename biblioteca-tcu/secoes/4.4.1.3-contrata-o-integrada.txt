@@ -1,0 +1,102 @@
+4.4.1.3. Contratação Integrada
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/4-4-1-3-contratacao-integrada/
+======================================================================
+
+A Lei 14.133/2021 define contratação integrada como:
+
+Art. 6º [….] XXXII – contratação integrada: o regime de contratação de obras e serviços de engenharia em que o contratado é responsável por elaborar e desenvolver os projetos básico e executivo, executar obras e serviços de engenharia, fornecer bens ou prestar serviços especiais e realizar montagem, teste, pré-operação e as demais operações necessárias e suficientes para a entrega final do objeto.
+
+Na contratação integrada, a Administração realiza a licitação com base no anteprojeto e a elaboração dos projetos básico e executivo fica a cargo do contratado, que assumirá a responsabilidade integral pelos riscos associados ao projeto básico[1]. Nesse regime, a Administração deve definir com clareza como se dará a divisão dos demais riscos entre contratante e contratada, por meio de uma matriz de riscos.
+
+Nesse regime de execução, o edital deverá conter o anteprojeto, que é uma peça técnica com todos os subsídios necessários à elaboração do projeto básico, que deve conter, no mínimo, os seguintes elementos[2]:
+
+- demonstração e justificativa do programa de necessidades, avaliação de demanda do público-alvo, motivação técnico-econômico-social do empreendimento, visão global dos investimentos e definições relacionadas ao nível de serviço desejado;
+
+- condições de solidez, de segurança e de durabilidade;
+
+- prazo de entrega;
+
+- estética do projeto arquitetônico, traçado geométrico e/ou projeto da área de influência, quando cabível;
+
+- parâmetros de adequação ao interesse público, de economia na utilização, de facilidade na execução, de impacto ambiental e de acessibilidade;
+
+- proposta de concepção da obra ou do serviço de engenharia;
+
+- projetos anteriores ou estudos preliminares que embasaram a concepção proposta;
+
+- levantamento topográfico e cadastral;
+
+- pareceres de sondagem; e
+
+- memorial descritivo dos elementos da edificação, dos componentes construtivos e dos materiais de construção, de forma a estabelecer padrões mínimos para a contratação.
+
+Em outras palavras, o regime de contratação integrada permite que uma licitação de obra de engenharia seja lançada sem que seu projeto básico esteja elaborado, deixando-o a cargo do contratado.
+
+Além disso, em virtude de o anteprojeto não conter todos os elementos para elaborar um orçamento analítico preciso, a legislação prevê que as obras licitadas pelo regime de contratação integrada poderão ser orçadas com base em orçamento sintético, ou em estimativas expeditas e paramétricas, realizadas com base nos valores praticados pelo mercado ou nos valores pagos pela Administração Pública em serviços e obras similares.
+
+Se houver no anteprojeto alguma parcela com nível de detalhamento que permita a elaboração de um orçamento detalhado, essa parte não deve utilizar metodologia expedita ou paramétrica, sendo obrigatório o orçamento detalhado[3].
+
+Nesse caso, o orçamento detalhado deve, conforme regulamento, definir o valor estimado, incluindo o percentual de Benefícios e Despesas Indiretas (BDI) de referência e os Encargos Sociais (ES) cabíveis, por meio da utilização de parâmetros na seguinte ordem[4]:
+
+- composição de custos unitários menores ou iguais à mediana do item correspondente do Sistema de Custos Referenciais de Obras (Sicro), para serviços e obras de infraestrutura de transportes, ou do Sistema Nacional de Pesquisa de Custos e Índices de Construção Civil (Sinapi), para as demais obras e serviços de engenharia;
+
+- utilização de dados de pesquisa publicada em mídia especializada, de tabela de referência formalmente aprovada pelo Poder Executivo federal e de sítios eletrônicos especializados ou de domínio amplo, desde que contenham a data e a hora de acesso;
+
+- contratações similares feitas pela Administração Pública, em execução ou concluídas no período de 1 ano anterior à data da pesquisa de preços, observado o índice de atualização de preços correspondente; e
+
+- pesquisa na base nacional de notas fiscais eletrônicas, na forma de regulamento.
+
+Ainda que o orçamento detalhado não seja obrigatório para a licitação da obra no regime de contratação integrada, a jurisprudência do TCU entende que estes devem ser elaborados posteriormente pelo contratado e submetidos à aprovação da Administração juntamente com o projeto básico da obra, durante a etapa de execução contratual. O orçamento detalhado deve conter as descrições dos serviços a serem executados, suas unidades de medida, quantitativos e preços unitários, acompanhados das respectivas composições de custo unitário, conforme Acórdãos 1.167/2014, 2.433/2016, 2.312/2017, 2.136/2017 e 544/2021, todos do Plenário. A Lei 14.133/2021 traz um importante comando nesse sentido:
+
+Art. 56 […] § 5º Nas licitações de obras ou serviços de engenharia, após o julgamento, o licitante vencedor deverá reelaborar e apresentar à Administração, por meio eletrônico, as planilhas com indicação dos quantitativos e dos custos unitários, bem como com detalhamento das Bonificações e Despesas Indiretas (BDI) e dos Encargos Sociais (ES), com os respectivos valores adequados ao valor final da proposta vencedora, admitida a utilização dos preços unitários, no caso de empreitada por preço global, empreitada integral, contratação semi-integrada e contratação integrada, exclusivamente para eventuais adequações indispensáveis no cronograma físico-financeiro e para balizar excepcional aditamento posterior do contrato.
+
+O dispositivo deixa claro que o motivo para a exigência do orçamento detalhado na contratação integrada é precipuamente servir como referência para eventual aditamento contratual diante da necessidade de a Administração promover alterações qualitativas ou quantitativas no objeto licitado. No entanto, além disso, o orçamento detalhado pode facilitar a análise de pleitos de reequilíbrio econômico-financeiro do contrato, bem como permitir que o cronograma físico-financeiro do contrato seja elaborado com maior precisão a partir das produções das equipes extraídas das composições de custo unitário presentes no orçamento detalhado.
+
+A Lei 14.133/2021 dispõe que:
+
+Art. 46 […]
+
+§ 3º Na contratação integrada, após a elaboração do projeto básico pelo contratado, o conjunto de desenhos, especificações, memoriais e cronograma físico-financeiro deverá ser submetido à aprovação da Administração, que avaliará sua adequação em relação aos parâmetros definidos no edital e conformidade com as normas técnicas, vedadas alterações que reduzam a qualidade ou a vida útil do empreendimento e mantida a responsabilidade integral do contratado pelos riscos associados ao projeto básico.
+
+Sendo assim, após a elaboração do projeto básico pelo contratado, cabe à equipe de gestão do contrato e/ou a comissão que vier a ser designada para o seu recebimento avaliar se as premissas e condições iniciais de desempenho do objeto estão sendo perfeitamente obedecidas no projeto desenvolvido pela empresa, aprovando-o somente no caso de atender plenamente aos requisitos de desempenho fixados no anteprojeto.
+
+Além disso, nas contratações integradas, os riscos decorrentes de fatos supervenientes à contratação associados à escolha da solução de projeto básico pelo contratado deverão ser alocados como de sua responsabilidade na matriz de riscos[5]. Ou seja, são considerados ilegais os aditamentos contratuais baseados em alegações de que há erros ou falhas no anteprojeto, conforme está se consolidando a jurisprudência do TCU[6].
+
+A leitura sistemática da Lei 14.133/2021 permite concluir que tanto o projeto básico quanto o projeto executivo são obrigatórios na contratação integrada[7] e a execução de cada etapa será obrigatoriamente precedida da conclusão e da aprovação, pela autoridade competente, dos trabalhos relativos às etapas anteriores[8]. Chama a atenção o fato de que a nova Lei de Licitações não trouxe dispositivo semelhante ao existente no art. 7º, § 1º, da Lei 8.666/1993, que permitia o desenvolvimento concomitante do projeto executivo com a execução das obras.
+
+Há decisões do TCU concluindo pela inviabilidade de aprovações parciais do projeto básico de apenas algumas parcelas ou etapas da obra, permitindo o seu início sem a aprovação integral do projeto básico, prática que pode ocasionar vários riscos, tais como futuras rescisões contratuais, jogo de cronograma, ou expor a administração ao risco de não aceitar soluções impróprias apresentadas para as etapas cujos projetos sejam desenvolvidos posteriormente[9].
+
+Finalmente, deve ser destacada a possibilidade de haver transferência ao particular contratado de etapas do processo de desapropriação da obra, nos termos explicitados pela Lei 14.133/2021:
+
+Art. 46 […]
+
+§ 4º Nos regimes de contratação integrada e semi-integrada, o edital e o contrato, sempre que for o caso, deverão prever as providências necessárias para a efetivação de desapropriação autorizada pelo poder público, bem como:
+
+I – o responsável por cada fase do procedimento expropriatório;
+
+II – a responsabilidade pelo pagamento das indenizações devidas;
+
+III – a estimativa do valor a ser pago a título de indenização pelos bens expropriados, inclusive de custos correlatos;
+
+IV – a distribuição objetiva de riscos entre as partes, incluído o risco pela diferença entre o custo da desapropriação e a estimativa de valor e pelos eventuais danos e prejuízos ocasionados por atraso na disponibilização dos bens expropriados;
+
+V – em nome de quem deverá ser promovido o registro de imissão provisória na posse e o registro de propriedade dos bens a serem desapropriados.
+
+[1] Lei 14.133/2021, art. 46, § 3º
+
+[2] Lei 14.133/2021, art. 6º, inciso XXIV.
+
+[3] Lei 14.133/2021, art. 23, § 5º.
+
+[4] Lei 14.133/2021, art. 23, § 2º.
+
+[5] Lei 14.133/2021, art. 22, § 4º.
+
+[6] Por exemplo, os Acórdãos 2.591/2017, 622/2018 e 544/2021, todos do Plenário do TCU.
+
+[7] Lei 14.133/2021, art. 46, §§ 1º, 2º e 3º.
+
+[8] Lei 14.133/2021, art. 46, § 6º.
+
+[9] Por exemplo, cita-se o Acórdão 2.291/2022-TCU-Plenário.

@@ -1,0 +1,214 @@
+5.8. Infrações e sanções administrativas – licitantes
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/5-8-infracoes-e-sancoes-administrativas-licitantes/
+======================================================================
+
+Primeiramente vale esclarecer que, como esta parte do manual trata do processo de seleção do fornecedor, serão abordadas neste momento somente as sanções aplicáveis aos licitantes. As sanções aplicáveis aos contratados estão citadas no item 6.1.8, referente à gestão contratual.
+
+A Lei 14.133/2021 prevê as condutas passíveis de sancionamento para os licitantes e relaciona as sanções a elas aplicáveis[1]. As infrações são as seguintes[2]:
+
+- deixar de entregar a documentação exigida para o certame;
+
+- não manter a proposta, salvo em decorrência de fato superveniente devidamente justificado;
+
+- não celebrar o contrato ou não entregar a documentação exigida para a contratação, quando convocado dentro do prazo de validade de sua proposta;
+
+- apresentar declaração ou documentação falsa exigida para o certame ou prestar declaração falsa durante a licitação;
+
+- fraudar a licitação;
+
+- comportar-se de modo inidôneo ou cometer fraude de qualquer natureza;
+
+- praticar atos ilícitos com vistas a frustrar os objetivos da licitação; e
+
+- praticar ato lesivo previsto no art. 5º da Lei 12.846/2013 (Lei Anticorrupção, vide Quadro 279). Nesse caso, as infrações devem ser apuradas de forma conjunta, num mesmo processo, sob o rito procedimental e a autoridade competente previstos na Lei Anticorrupção[3].
+
+As sanções aplicáveis a cada tipo de infração administrativa são as seguintes [4]:
+
+- multa, calculada na forma do edital. Não poderá ser inferior a 0,5% nem superior a 30% do valor do contrato licitado ou celebrado com contratação direta;
+
+- impedimento de licitar e contratar, que impedirá o responsável de licitar ou contratar no âmbito da Administração Pública direta e indireta do ente federativo que tiver aplicado a sanção, pelo prazo máximo de três anos; e
+
+- declaração de inidoneidade para licitar ou contratar. Impedirá o responsável de licitar ou contratar no âmbito da Administração Pública direta e indireta de todos os entes federativos, pelo prazo mínimo de três anos e máximo de seis anos. Deve ser precedida de análise jurídica. No que tange à competência para aplicação, a Lei 14.133/2021 dispõe que:
+Art. 156 […]
+§ 6º […]
+I – quando aplicada por órgão do Poder Executivo, será de competência exclusiva de ministro de Estado, de secretário estadual ou de secretário municipal e, quando aplicada por autarquia ou fundação, será de competência exclusiva da autoridade máxima da entidade;
+II – quando aplicada por órgãos dos Poderes Legislativo e Judiciário, pelo Ministério Público e pela Defensoria Pública no desempenho da função administrativa, será de competência exclusiva de autoridade de nível hierárquico equivalente às autoridades referidas no inciso I deste parágrafo, na forma de regulamento. (Grifo nosso)
+
+A suspensão temporária de participação em licitação e impedimento de contratar com a Administração, prevista na Lei 8.666/1993, deixa de existir. Em vez disso, é incorporado o impedimento de licitar, previsto no art. 7º da Lei 10.520/2002. Ademais, enquanto o prazo para suspensão temporária e impedimento de contratar era de até dois anos, o novo prazo para o impedimento de licitar é de até três anos[5].
+
+O Quadro 278 a seguir resume as infrações pelas quais os licitantes podem ser responsabilizados e as respectivas sanções.
+
+ Quadro 278 – Infrações relacionadas ao processo de seleção do fornecedor
+
+Infrações | Sanções aplicáveis
+deixar de entregar a documentação exigida para o certame (art. 155, inciso IV)não manter a proposta, salvo em decorrência de fato superveniente devidamente justificado (art. 155, inciso V)não celebrar o contrato ou não entregar a documentação exigida para a contratação, quando convocado dentro do prazo de validade de sua proposta; (art. 155, inciso VI) | impedimento de licitar e contratar (art. 156, inciso III, § 4º) ou com declaração de inidoneidade, quando a infração justificar imposição de penalidade mais grave que o impedimento de licitar e contratar (art. 156, inciso IV, § 5º) cumulativamente com multa (art. 156, inciso II, §§ 3º e 7º)
+apresentar declaração ou documentação falsa exigida para o certame ou prestar declaração falsa durante a licitação (art. 155, inciso VIII)fraudar a licitação (art. 155, inciso IX)comportar-se de modo inidôneo ou cometer fraude de qualquer natureza (art. 155, inciso X)praticar atos ilícitos com vistas a frustrar os objetivos da licitação (art. 155, inciso XI)praticar ato lesivo previsto no art. 5º da Lei 12.846/2013 (art. 155, inciso XII) | declaração de inidoneidade (art. 156, inciso IV, § 5º) cumulativamente com multa (art. 156, inciso II, §§ 3º e 7º)
+
+Fonte: Elaboração própria.
+
+A terceira mudança importante é a previsão de um prazo para a declaração de inidoneidade. Enquanto a Lei 8.666/1993 previa a aplicação da pena enquanto perdurassem os motivos determinantes da punição ou até que fosse promovida a reabilitação perante a própria autoridade que aplicou a penalidade, a Lei 14.133/2021 estabelece um prazo de três a seis anos[6].
+
+A declaração de inidoneidade pode ser aplicada também pelo TCU, pelo prazo de até cinco anos, nos termos do art. 46 da Lei 8.443/1992, em casos de fraude comprovada à licitação em certames realizados pela Administração Pública federal ou por organizações públicas de outros entes federativos quando aplicando recursos federais decorrentes de transferências voluntárias da União[7].
+
+Essa sanção não deve ser confundida com a declaração de inidoneidade para licitar ou contratar prevista na Lei 14.133/2021, que pode ser aplicada pela própria Administração contratante. De acordo com a Nova Lei de Licitações, o licitante declarado inidôneo poderá buscar reabilitação após o transcurso do prazo de três anos e quando atendidos cumulativamente os requisitos do art. 163 da Lei.
+
+Por sua vez, a declaração de inidoneidade imposta pelo TCU só pode ser revista mediante a utilização, pelo interessado, dos meios recursais disponíveis nas normas de processos do Tribunal. Além disso, o prazo de suspensão que o TCU pode impor é de até cinco anos e não de seis anos, conforme estabelecido na Lei 14.133/2021.
+
+É importante observar que, quanto ao alcance das sanções, a Lei 14.133/2021 prevê que o impedimento de licitar e contratar tem extensão limitada ao âmbito da Administração Pública direta e indireta do ente federativo que a tiver aplicado. Já para a declaração de inidoneidade, a Lei estende esse alcance para atingir a Administração Pública direta e indireta de todos os entes federativos[8]. Além disso, ambas as restrições podem não afetar contratos em andamento celebrados antes da aplicação da penalidade, comprometendo apenas os futuros contratos ou as renovações contratuais[9] (efeito ex nunc).
+
+Contudo, a ausência do efeito rescisório automático não impede a Administração, no uso do seu poder discricionário, rescindir os contratos em andamento, nos casos previstos em lei.
+
+A aplicação de sanções só pode ocorrer após processo administrativo sancionatório que garanta ao responsável o contraditório e ampla defesa[10]. Nas hipóteses de aplicação das sanções de impedimento de licitar e contratar e de declaração de inidoneidade, será necessário instaurar processo de responsabilização, conduzido por comissão especial composta de dois ou mais servidores estáveis[11].
+
+Se o contratante não dispuser de servidores estatutários em seu quadro funcional, a comissão processante deve ser composta por empregados públicos dos quadros permanentes, preferencialmente com, no mínimo, três anos de serviço na organização[12].
+
+A Lei prevê, no processo de responsabilização, que caso haja deferimento de pedido de produção de novas provas ou de juntada de provas julgadas indispensáveis pela comissão, o licitante terá o prazo de quinze dias úteis para apresentar alegações finais, contados a partir da data da intimação. Além disso, provas ilícitas, impertinentes, desnecessárias, protelatórias ou intempestivas devem ser indeferidas [13].
+
+Para aplicação de multa, a Administração deve dar ao interessado a oportunidade de se defender no prazo de quinze dias úteis, contados da data de sua intimação[14].
+
+O prazo prescricional para aplicação das sanções de impedimento de licitar e contratar e de declaração de inidoneidade é de cinco anos, contados da ciência da infração pela Administração[15]. A prescrição é interrompida[16] pela instauração do processo de responsabilização, ou suspensa pela celebração de acordo de leniência ou por decisão judicial que inviabilize a conclusão da apuração administrativa[17].
+
+Adicionalmente, a dosimetria das penas deve considerar o grau de culpabilidade do responsável, observando-se[18]:
+
+I – a natureza e a gravidade da infração cometida;
+
+II – as peculiaridades do caso concreto;
+
+III – as circunstâncias agravantes ou atenuantes;
+
+IV – os danos que dela provierem para a Administração Pública;
+
+V – a implantação ou o aperfeiçoamento de programa de integridade, conforme normas e orientações dos órgãos de controle.
+
+Da decisão proferida, cabe recurso na forma dos arts. 166 e 167 da Lei 14.133/2021 em relação à multa e ao impedimento de licitar e contratar. No que tange à declaração de inidoneidade, cabe pedido de reconsideração. Tanto o recurso quanto o pedido de reconsideração terão efeito suspensivo do ato ou da decisão recorrida até que sobrevenha decisão final da autoridade competente[19].
+
+A Administração deve atualizar o Cadastro Nacional de Empresas Inidôneas e Suspensas (Ceis) e o Cadastro Nacional de Empresas Punidas (Cnep), no prazo máximo quinze dias úteis, contado da data de aplicação da sanção[20]. Ambos os cadastros poderão ser acessados por meio do Portal Nacional de Compras Públicas [21]. Vale mencionar que admitir à licitação ou contratar empresa ou profissional declarado inidôneo pode ensejar a responsabilização na esfera penal[22].
+
+A Lei 14.133/2021 permite a reabilitação do licitante perante a própria autoridade que aplicou a penalidade, exigidos os seguintes requisitos, cumulativamente[23]:
+
+- reparação integral do dano causado à Administração Pública;
+
+- pagamento da multa;
+
+- transcurso do prazo mínimo de um ano da aplicação da penalidade, no caso de impedimento de licitar e contratar, ou de três anos da aplicação da penalidade, no caso de declaração de inidoneidade;
+
+- cumprimento das condições de reabilitação definidas no ato punitivo; e
+
+- análise jurídica prévia, com posicionamento conclusivo quanto ao cumprimento dos requisitos definidos neste artigo.
+
+Para sanções decorrentes de apresentação de declaração ou documentação falsa ou de prática de ato lesivo previsto no art. 5º da Lei 12.846/2013, a Lei 14.133/2021 exige, como condição de reabilitação do licitante, a implantação ou aperfeiçoamento de programa de integridade pelo responsável[24].
+
+Ressalta-se que a aplicação das sanções não exclui a obrigação de reparação integral do dano causado à Administração Pública[25].
+
+Por fim, destaca-se a previsão do art. 160 da Lei 14.133/2021 referente ao instituto da desconsideração da personalidade jurídica, para que os efeitos das sanções aplicadas a pessoas jurídicas sejam estendidos aos seus administradores e sócios com poderes de administração, bem como às empresas sucessoras ou às controladas ou coligadas, de fato ou de direito, com o sancionado[26].
+
+A desconsideração da personalidade é permitida apenas quando comprovado que a pessoa jurídica foi utilizada para facilitar, encobrir ou dissimular a prática dos atos ilícitos ou para provocar confusão patrimonial. Em todos os casos, devem ser observados o contraditório, a ampla defesa e a obrigatoriedade de análise jurídica prévia[27].
+
+Quadro 279 – Referências normativas para infrações e sanções administrativas
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 155. O licitante ou o contratado será responsabilizado administrativamente pelas seguintes infrações: I – dar causa à inexecução parcial do contrato; II – dar causa à inexecução parcial do contrato que cause grave dano à Administração, ao funcionamento dos serviços públicos ou ao interesse coletivo; III – dar causa à inexecução total do contrato; IV – deixar de entregar a documentação exigida para o certame; V – não manter a proposta, salvo em decorrência de fato superveniente devidamente justificado; VI – não celebrar o contrato ou não entregar a documentação exigida para a contratação, quando convocado dentro do prazo de validade de sua proposta; VII – ensejar o retardamento da execução ou da entrega do objeto da licitação sem motivo justificado; VIII – apresentar declaração ou documentação falsa exigida para o certame ou prestar declaração falsa durante a licitação ou a execução do contrato; IX – fraudar a licitação ou praticar ato fraudulento na execução do contrato; X – comportar-se de modo inidôneo ou cometer fraude de qualquer natureza; XI – praticar atos ilícitos com vistas a frustrar os objetivos da licitação; XII – praticar ato lesivo previsto no art. 5º da Lei nº 12.846, de 1º de agosto de 2013. Art. 156. Serão aplicadas ao responsável pelas infrações administrativas previstas nesta Lei as seguintes sanções: I – advertência; II – multa; III – impedimento de licitar e contratar; IV – declaração de inidoneidade para licitar ou contratar. § 1º Na aplicação das sanções serão considerados: I – a natureza e a gravidade da infração cometida; II – as peculiaridades do caso concreto; III – as circunstâncias agravantes ou atenuantes; IV – os danos que dela provierem para a Administração Pública; V – a implantação ou o aperfeiçoamento de programa de integridade, conforme normas e orientações dos órgãos de controle. § 2º A sanção prevista no inciso I do caput deste artigo será aplicada exclusivamente pela infração administrativa prevista no inciso I do caput do art. 155 desta Lei, quando não se justificar a imposição de penalidade mais grave. § 3º A sanção prevista no inciso II do caput deste artigo, calculada na forma do edital ou do contrato, não poderá ser inferior a 0,5% (cinco décimos por cento) nem superior a 30% (trinta por cento) do valor do contrato licitado ou celebrado com contratação direta e será aplicada ao responsável por qualquer das infrações administrativas previstas no art. 155 desta Lei. § 4º A sanção prevista no inciso III do caput deste artigo será aplicada ao responsável pelas infrações administrativas previstas nos incisos II, III, IV, V, VI e VII do caput do art. 155 desta Lei, quando não se justificar a imposição de penalidade mais grave, e impedirá o responsável de licitar ou contratar no âmbito da Administração Pública direta e indireta do ente federativo que tiver aplicado a sanção, pelo prazo máximo de 3 (três) anos. § 5º A sanção prevista no inciso IV do caput deste artigo será aplicada ao responsável pelas infrações administrativas previstas nos incisos VIII, IX, X, XI e XII do caput do art. 155 desta Lei, bem como pelas infrações administrativas previstas nos incisos II, III, IV, V, VI e VII do caput do referido artigo que justifiquem a imposição de penalidade mais grave que a sanção referida no § 4º deste artigo, e impedirá o responsável de licitar ou contratar no âmbito da Administração Pública direta e indireta de todos os entes federativos, pelo prazo mínimo de 3 (três) anos e máximo de 6 (seis) anos. § 6º A sanção estabelecida no inciso IV do caput deste artigo será precedida de análise jurídica e observará as seguintes regras: I – quando aplicada por órgão do Poder Executivo, será de competência exclusiva de ministro de Estado, de secretário estadual ou de secretário municipal e, quando aplicada por autarquia ou fundação, será de competência exclusiva da autoridade máxima da entidade; II – quando aplicada por órgãos dos Poderes Legislativo e Judiciário, pelo Ministério Público e pela Defensoria Pública no desempenho da função administrativa, será de competência exclusiva de autoridade de nível hierárquico equivalente às autoridades referidas no inciso I deste parágrafo, na forma de regulamento. § 7º As sanções previstas nos incisos I, III e IV do caput deste artigo poderão ser aplicadas cumulativamente com a prevista no inciso II do caput deste artigo. § 8º Se a multa aplicada e as indenizações cabíveis forem superiores ao valor de pagamento eventualmente devido pela Administração ao contratado, além da perda desse valor, a diferença será descontada da garantia prestada ou será cobrada judicialmente. § 9º A aplicação das sanções previstas no caput deste artigo não exclui, em hipótese alguma, a obrigação de reparação integral do dano causado à Administração Pública. Art. 157. Na aplicação da sanção prevista no inciso II do caput do art. 156 desta Lei, será facultada a defesa do interessado no prazo de 15 (quinze) dias úteis, contado da data de sua intimação. Art. 158. A aplicação das sanções previstas nos incisos III e IV do caput do art. 156 desta Lei requererá a instauração de processo de responsabilização, a ser conduzido por comissão composta de 2 (dois) ou mais servidores estáveis, que avaliará fatos e circunstâncias conhecidos e intimará o licitante ou o contratado para, no prazo de 15 (quinze) dias úteis, contado da data de intimação, apresentar defesa escrita e especificar as provas que pretenda produzir. § 1º Em órgão ou entidade da Administração Pública cujo quadro funcional não seja formado de servidores estatutários, a comissão a que se refere o caput deste artigo será composta de 2 (dois) ou mais empregados públicos pertencentes aos seus quadros permanentes, preferencialmente com, no mínimo, 3 (três) anos de tempo de serviço no órgão ou entidade. § 2º Na hipótese de deferimento de pedido de produção de novas provas ou de juntada de provas julgadas indispensáveis pela comissão, o licitante ou o contratado poderá apresentar alegações finais no prazo de 15 (quinze) dias úteis, contado da data da intimação. § 3º Serão indeferidas pela comissão, mediante decisão fundamentada, provas ilícitas, impertinentes, desnecessárias, protelatórias ou intempestivas. § 4º A prescrição ocorrerá em 5 (cinco) anos, contados da ciência da infração pela Administração, e será: I – interrompida pela instauração do processo de responsabilização a que se refere o caput deste artigo; II – suspensa pela celebração de acordo de leniência previsto na Lei nº 12.846, de 1º de agosto de 2013; III – suspensa por decisão judicial que inviabilize a conclusão da apuração administrativa. Art. 159. Os atos previstos como infrações administrativas nesta Lei ou em outras leis de licitações e contratos da Administração Pública que também sejam tipificados como atos lesivos na Lei nº 12.846, de 1º de agosto de 2013, serão apurados e julgados conjuntamente, nos mesmos autos, observados o rito procedimental e a autoridade competente definidos na referida Lei. Parágrafo único. (VETADO). Art. 160. A personalidade jurídica poderá ser desconsiderada sempre que utilizada com abuso do direito para facilitar, encobrir ou dissimular a prática dos atos ilícitos previstos nesta Lei ou para provocar confusão patrimonial, e, nesse caso, todos os efeitos das sanções aplicadas à pessoa jurídica serão estendidos aos seus administradores e sócios com poderes de administração, a pessoa jurídica sucessora ou a empresa do mesmo ramo com relação de coligação ou controle, de fato ou de direito, com o sancionado, observados, em todos os casos, o contraditório, a ampla defesa e a obrigatoriedade de análise jurídica prévia. Art. 161. Os órgãos e entidades dos Poderes Executivo, Legislativo e Judiciário de todos os entes federativos deverão, no prazo máximo 15 (quinze) dias úteis, contado da data de aplicação da sanção, informar e manter atualizados os dados relativos às sanções por eles aplicadas, para fins de publicidade no Cadastro Nacional de Empresas Inidôneas e Suspensas (Ceis) e no Cadastro Nacional de Empresas Punidas (Cnep), instituídos no âmbito do Poder Executivo federal. Parágrafo único. Para fins de aplicação das sanções previstas nos incisos I, II, III e IV do caput do art. 156 desta Lei, o Poder Executivo regulamentará a forma de cômputo e as consequências da soma de diversas sanções aplicadas a uma mesma empresa e derivadas de contratos distintos. Art. 162. O atraso injustificado na execução do contrato sujeitará o contratado a multa de mora, na forma prevista em edital ou em contrato. Parágrafo único. A aplicação de multa de mora não impedirá que a Administração a converta em compensatória e promova a extinção unilateral do contrato com a aplicação cumulada de outras sanções previstas nesta Lei. Art. 163. É admitida a reabilitação do licitante ou contratado perante a própria autoridade que aplicou a penalidade, exigidos, cumulativamente: I – reparação integral do dano causado à Administração Pública; II – pagamento da multa; III – transcurso do prazo mínimo de 1 (um) ano da aplicação da penalidade, no caso de impedimento de licitar e contratar, ou de 3 (três) anos da aplicação da penalidade, no caso de declaração de inidoneidade; IV – cumprimento das condições de reabilitação definidas no ato punitivo; V – análise jurídica prévia, com posicionamento conclusivo quanto ao cumprimento dos requisitos definidos neste artigo. Parágrafo único. A sanção pelas infrações previstas nos incisos VIII e XII do caput do art. 155 desta Lei exigirá, como condição de reabilitação do licitante ou contratado, a implantação ou aperfeiçoamento de programa de integridade pelo responsável. […] Art. 166. Da aplicação das sanções previstas nos incisos I, II e III do caput do art. 156 desta Lei caberá recurso no prazo de 15 (quinze) dias úteis, contado da data da intimação. Parágrafo único. O recurso de que trata o caput deste artigo será dirigido à autoridade que tiver proferido a decisão recorrida, que, se não a reconsiderar no prazo de 5 (cinco) dias úteis, encaminhará o recurso com sua motivação à autoridade superior, a qual deverá proferir sua decisão no prazo máximo de 20 (vinte) dias úteis, contado do recebimento dos autos. Art. 167. Da aplicação da sanção prevista no inciso IV do caput do art. 156 desta Lei caberá apenas pedido de reconsideração, que deverá ser apresentado no prazo de 15 (quinze) dias úteis, contado da data da intimação, e decidido no prazo máximo de 20 (vinte) dias úteis, contado do seu recebimento. Art. 168. O recurso e o pedido de reconsideração terão efeito suspensivo do ato ou da decisão recorrida até que sobrevenha decisão final da autoridade competente. Parágrafo único. Na elaboração de suas decisões, a autoridade competente será auxiliada pelo órgão de assessoramento jurídico, que deverá dirimir dúvidas e subsidiá-la com as informações necessárias. […] Art. 178. O Título XI da Parte Especial do Decreto-Lei nº 2.848, de 7 de dezembro de 1940 (Código Penal), passa a vigorar acrescido do seguinte Capítulo II-B: “CAPÍTULO II-B DOS CRIMES EM LICITAÇÕES E CONTRATOS ADMINISTRATIVOS […] Contratação inidônea Art. 337-M. Admitir à licitação empresa ou profissional declarado inidôneo: Pena – reclusão, de 1 (um) ano a 3 (três) anos, e multa. § 1º Celebrar contrato com empresa ou profissional declarado inidôneo: Pena – reclusão, de 3 (três) anos a 6 (seis) anos, e multa. § 2º Incide na mesma pena do caput deste artigo aquele que, declarado inidôneo, venha a participar de licitação e, na mesma pena do § 1º deste artigo, aquele que, declarado inidôneo, venha a contratar com a Administração Pública.
+Lei 12.846/2013 | Art. 5º Constituem atos lesivos à Administração Pública, nacional ou estrangeira, para os fins desta Lei, todos aqueles praticados pelas pessoas jurídicas mencionadas no parágrafo único do art. 1º, que atentem contra o patrimônio público nacional ou estrangeiro, contra princípios da Administração Pública ou contra os compromissos internacionais assumidos pelo Brasil, assim definidos: I – prometer, oferecer ou dar, direta ou indiretamente, vantagem indevida a agente público, ou a terceira pessoa a ele relacionada; II – comprovadamente, financiar, custear, patrocinar ou de qualquer modo subvencionar a prática dos atos ilícitos previstos nesta Lei; III – comprovadamente, utilizar-se de interposta pessoa física ou jurídica para ocultar ou dissimular seus reais interesses ou a identidade dos beneficiários dos atos praticados; IV – no tocante a licitações e contratos: a) frustrar ou fraudar, mediante ajuste, combinação ou qualquer outro expediente, o caráter competitivo de procedimento licitatório público; b) impedir, perturbar ou fraudar a realização de qualquer ato de procedimento licitatório público; c) afastar ou procurar afastar licitante, por meio de fraude ou oferecimento de vantagem de qualquer tipo; d) fraudar licitação pública ou contrato dela decorrente; e) criar, de modo fraudulento ou irregular, pessoa jurídica para participar de licitação pública ou celebrar contrato administrativo; f) obter vantagem ou benefício indevido, de modo fraudulento, de modificações ou prorrogações de contratos celebrados com a Administração Pública, sem autorização em lei, no ato convocatório da licitação pública ou nos respectivos instrumentos contratuais; ou g) manipular ou fraudar o equilíbrio econômico-financeiro dos contratos celebrados com a Administração Pública; V – dificultar atividade de investigação ou fiscalização de órgãos, entidades ou agentes públicos, ou intervir em sua atuação, inclusive no âmbito das agências reguladoras e dos órgãos de fiscalização do sistema financeiro nacional. § 1º Considera-se Administração Pública estrangeira os órgãos e entidades estatais ou representações diplomáticas de país estrangeiro, de qualquer nível ou esfera de governo, bem como as pessoas jurídicas controladas, direta ou indiretamente, pelo poder público de país estrangeiro. § 2º Para os efeitos desta Lei, equiparam-se à Administração Pública estrangeira as organizações públicas internacionais. § 3º Considera-se agente público estrangeiro, para os fins desta Lei, quem, ainda que transitoriamente ou sem remuneração, exerça cargo, emprego ou função pública em órgãos, entidades estatais ou em representações diplomáticas de país estrangeiro, assim como em pessoas jurídicas controladas, direta ou indiretamente, pelo poder público de país estrangeiro ou em organizações públicas internacionais.
+Lei 10.406/2002 (Código Civil) | Art. 50. Em caso de abuso da personalidade jurídica, caracterizado pelo desvio de finalidade ou pela confusão patrimonial, pode o juiz, a requerimento da parte, ou do Ministério Público quando lhe couber intervir no processo, desconsiderá-la para que os efeitos de certas e determinadas relações de obrigações sejam estendidos aos bens particulares de administradores ou de sócios da pessoa jurídica beneficiados direta ou indiretamente pelo abuso. (Redação dada pela Lei nº 13.874, de 2019) § 1º Para os fins do disposto neste artigo, desvio de finalidade é a utilização da pessoa jurídica com o propósito de lesar credores e para a prática de atos ilícitos de qualquer natureza. (Incluído pela Lei nº 13.874, de 2019) § 2º Entende-se por confusão patrimonial a ausência de separação de fato entre os patrimônios, caracterizada por: (Incluído pela Lei nº 13.874, de 2019) I – cumprimento repetitivo pela sociedade de obrigações do sócio ou do administrador ou vice-versa; (Incluído pela Lei nº 13.874, de 2019) II – transferência de ativos ou de passivos sem efetivas contraprestações, exceto os de valor proporcionalmente insignificante; e (Incluído pela Lei nº 13.874, de 2019) III – outros atos de descumprimento da autonomia patrimonial. (Incluído pela Lei nº 13.874, de 2019) § 3º O disposto no caput e nos §§ 1º e 2º deste artigo também se aplica à extensão das obrigações de sócios ou de administradores à pessoa jurídica. (Incluído pela Lei nº 13.874, de 2019) § 4º A mera existência de grupo econômico sem a presença dos requisitos de que trata o caput deste artigo não autoriza a desconsideração da personalidade da pessoa jurídica. (Incluído pela Lei nº 13.874, de 2019) § 5º Não constitui desvio de finalidade a mera expansão ou a alteração da finalidade original da atividade econômica específica da pessoa jurídica. (Incluído pela Lei nº 13.874, de 2019)
+Lei 9.784/1999 | Art. 1º Esta Lei estabelece normas básicas sobre o processo administrativo no âmbito da Administração Federal direta e indireta, visando, em especial, à proteção dos direitos dos administrados e ao melhor cumprimento dos fins da Administração. […] Art. 2º A Administração Pública obedecerá, dentre outros, aos princípios da legalidade, finalidade, motivação, razoabilidade, proporcionalidade, moralidade, ampla defesa, contraditório, segurança jurídica, interesse público e eficiência. […] Art. 17. Inexistindo competência legal específica, o processo administrativo deverá ser iniciado perante a autoridade de menor grau hierárquico para decidir. […]
+Decreto-Lei 4.657/1942 (LINDB) | Art. 22. Na interpretação de normas sobre gestão pública, serão considerados os obstáculos e as dificuldades reais do gestor e as exigências das políticas públicas a seu cargo, sem prejuízo dos direitos dos administrados. (Regulamento) § 1º Em decisão sobre regularidade de conduta ou validade de ato, contrato, ajuste, processo ou norma administrativa, serão consideradas as circunstâncias práticas que houverem imposto, limitado ou condicionado a ação do agente. (Incluído pela Lei nº 13.655, de 2018) § 2º Na aplicação de sanções, serão consideradas a natureza e a gravidade da infração cometida, os danos que dela provierem para a Administração Pública, as circunstâncias agravantes ou atenuantes e os antecedentes do agente. (Incluído pela Lei nº 13.655, de 2018) § 3º As sanções aplicadas ao agente serão levadas em conta na dosimetria das demais sanções de mesma natureza e relativas ao mesmo fato. (Incluído pela Lei nº 13.655, de 2018)
+Decreto-Lei 2.848/1940 (Código Penal) | Art. 337-M. Admitir à licitação empresa ou profissional declarado inidôneo: (Incluído pela Lei nº 14.133, de 2021) Pena – reclusão, de 1 (um) ano a 3 (três) anos, e multa. (Incluído pela Lei nº 14.133, de 2021) § 1º Celebrar contrato com empresa ou profissional declarado inidôneo: (Incluído pela Lei nº 14.133, de 2021) Pena – reclusão, de 3 (três) anos a 6 (seis) anos, e multa. (Incluído pela Lei nº 14.133, de 2021) § 2º Incide na mesma pena do caput deste artigo aquele que, declarado inidôneo, venha a participar de licitação e, na mesma pena do § 1º deste artigo, aquele que, declarado inidôneo, venha a contratar com a Administração Pública. (Incluído pela Lei nº 14.133, de 2021)
+IN – Seges/ME 2/2023 | Art. 1º Esta Instrução Normativa dispõe sobre a licitação pelo critério de julgamento por técnica e preço, na forma eletrônica, no âmbito da Administração Pública federal direta, autárquica e fundacional. […] Art. 43. Os licitantes estarão sujeitos às sanções administrativas previstas na Lei nº 14.133, de 2021, e às demais cominações legais, resguardado o direito à ampla defesa.
+IN – Seges/ME 96/2022 | Art. 1º Esta Instrução Normativa dispõe sobre a licitação pelo critério de julgamento por maior retorno econômico, na forma eletrônica, no âmbito da Administração Pública federal direta, autárquica e fundacional. […] Art. 56. Os licitantes estarão sujeitos às sanções administrativas previstas na Lei nº 14.133, de 2021, e às demais cominações legais, resguardado o direito à ampla defesa.
+IN – Seges/ME 73/2022 | Art. 1º Esta Instrução Normativa dispõe sobre a licitação pelo critério de julgamento por menor preço ou maior desconto, na forma eletrônica, para a contratação de bens, serviços e obras, no âmbito da Administração Pública federal direta, autárquica e fundacional. […] Art. 46. Os licitantes estarão sujeitos às sanções administrativas previstas na Lei nº 14.133, de 2021, e às demais cominações legais, resguardado o direito à ampla defesa.
+IN – CNJ 94/2023 | Dispõe sobre o procedimento de apuração e aplicação de penalidades às empresas participantes de licitação e às contratadas pelo Conselho Nacional de Justiça.
+Portaria – TCU 127/2023 | Dispõe sobre o processo de apuração de responsabilidade e aplicação de sanções em licitações e contratos administrativos no âmbito do Tribunal de Contas da União (TCU).
+Enunciado – CJF 36/2023 | Os limites previstos no art. 156, § 3º, da Lei n. 14.133/2021 deverão ser analisados em conjunto com o art. 20 da Lei de Introdução às Normas do Direito Brasileiro – LINDB.
+Ato da Diretoria -Geral do Senado Federal 15/2022 | Dispõe sobre o processo administrativo sancionatório e a dosimetria na aplicação de penalidades decorrentes da prática de infrações definidas no art. 155 da Lei nº 14.133, de 1º de abril de 2021, no âmbito do Senado Federal. […]
+Orientação Normativa – AGU 49/2014 | A aplicação das sanções de impedimento de licitar e contratar no âmbito da união (art. 7° da Lei n° 10.520, de 2002) e de declaração de inidoneidade (art. 87, inc. IV, da Lei n° 8.666, de 1993) possuem efeito ex nunc , competindo à administração, diante de contratos existentes, avaliar a imediata rescisão no caso concreto.
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 280 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 316/2024-TCU-Plenário | [Enunciado] Os gestores das áreas responsáveis por conduzir licitações devem autuar processo administrativo com vistas à apenação das empresas que praticarem, injustificadamente, na licitação, ato ilegal tipificado no art. 7º da Lei 10.520/2002 ou no art. 155 da Lei 14.133/2021, ainda que não tenha ocorrido prejuízo ao erário, sob pena de responsabilização.
+Acórdão 8497/2022-TCU – Segunda Câmara | [Enunciado] As empresas que oferecem propostas com valores acima dos praticados pelo mercado, tirando proveito de orçamentos superestimados elaborados pelos órgãos públicos contratantes, contribuem para o superfaturamento dos serviços, sujeitando-se à responsabilização solidária pelo dano evidenciado.
+Acórdão 2146/2022-TCU-Plenário | [Enunciado] A não instauração de processo administrativo com vistas à aplicação de penalidade ao licitante que deixa de entregar a documentação de habilitação exigida no edital do pregão contraria o art. 7º da Lei 10.520/2002 e o art. 49, inciso II, do Decreto 10.024/2019.
+Acórdão 8987/2020-TCU-Primeira Câmara | [Enunciado] Quando o vínculo entre a Administração Pública e o particular deriva de um contrato, a responsabilidade é prioritariamente da pessoa jurídico contratado, por ter sido ela que se obrigou perante o Estado, não podendo o TCU atribuir a obrigação de indenizar às pessoas físicas que assinaram o termo contratual ou praticaram atos relacionados à avença na condição de representantes do contratado; salvo em hipóteses excepcionais relativas a conluios, abuso de direito ou prática de atos ilegais ou contrários às normas constitutivas ou regulamentares da entidade contratada, situações em que se aplica a desconsideração da personalidade jurídica para alcançar sócios ou administradores.
+Acórdão 1999/2019-TCU-Plenário | 1.7.1. dar ciência à [ omissis ], com fundamento no art. 7º da Resolução-TCU 265/2014, que a ausência da adoção, pelos agentes públicos responsáveis pelo processo licitatório, das providências administrativas cabíveis para apuração da conduta de empresas participantes de pregão que, uma vez convocadas pelo pregoeiro, deixam de apresentar a documentação exigida no certame com vistas à aferição de suas propostas segundo os preços supostamente mais vantajosos para a Administração, a exemplo do verificado quanto aos itens 1 e 2 do Pregão Eletrônico [ omissis ] (SRP) , constitui inobservância, por esses agentes, das medidas necessárias ao efetivo cumprimento do art. 7º da Lei 10.520/2002 para prevenção da conduta irregular desses participantes, podendo a conduta vir a ser objeto de sanção por este Tribunal.
+Acórdão 7525/2017-TCU-Segunda Câmara | 1.7. Dar ciência à [ omissis ] que, conforme orientação contida no item 9.5.1 do Acórdão 754/2015-TCU-Plenário, deve ser autuado processo administrativo com vistas a apurar os indícios de fraude identificados no Pregão Eletrônico 24/2017 – STF, aplicando as penalidades cabíveis às empresas que praticarem, injustificadamente, ato ilegal tipificado no art. 7º da Lei 10.520/2002, não cabendo ao TCU atuar em antecipação ou concorrência com os demais intervenientes de controle, salvo se presentes condições especialíssimas que assim justifiquem;
+Acórdão 4481/2015-TCU-Primeira Câmara | [Enunciado] Havendo abuso da personalidade jurídica, caracterizado pelo desvio de finalidade ou pela confusão patrimonial, o TCU aplica a teoria da desconsideração da personalidade jurídica para responsabilizar os sócios da empresa contratada pelo dano causado ao erário, com fundamento no art. 50 do Código Civil.
+Acórdão 754/2015-TCU-Plenário | [Enunciado] A aplicação da sanção de impedimento de licitar e contratar com a União, estados, Distrito Federal ou municípios, em face de irregularidade elencada no art. 7º da Lei 10.520/2002, não depende da comprovação de dolo ou má-fé. Requer tão somente a evidenciação da prática injustificada de ato ilegal tipificado nesse dispositivo legal.
+Acórdão 1831/2014-TCU-Plenário | [Enunciado] O abuso da personalidade jurídica evidenciado a partir de fatos como (i) a completa identidade dos sócios-proprietários de empresa sucedida e sucessora, (ii) a atuação no mesmo ramo de atividades e (iii) a transferência integral do acervo técnico e humano de empresa sucedida para a sucessora permitem a desconsideração da personalidade jurídica desta última para estender a ela os efeitos da declaração de inidoneidade aplicada à primeira, já que evidenciado o propósito de dar continuidade às atividades da empresa inidônea, sob nova denominação.
+Pesquisa de Jurisprudência | Execute consulta na Jurisprudência Selecionada do TCU . No campo de busca, faça buscas pelos seguintes termos individualmente (não utilize aspas): “ sanção ; desconsideração da personalidade jurídica . Os resultados das buscas podem ser filtrados por “área – Licitação” ou “contrato administrativo”. * Não é recomendável buscar por todos os termos numa só pesquisa. Execute consulta na Jurisprudência Selecionada do TCU . Selecione a área “Licitação” tema “sanção administrativa”. Execute consulta na Jurisprudência Selecionada do TCU . Selecione a área “Licitação”, tema “pregão” , subtema: sanção administrativa.
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+Quadro 281 – Riscos relacionados
+
+Riscos
+Falta de capacidade técnica das comissões processantes, falta de clareza acerca das responsabilidades e dos procedimentos para condução dos processos administrativos com vistas à apuração de infrações cometidas por licitantes, e normas pertinentes para condução desses processos estão esparsas, levando à não instauração dos processos ou à instrução dos processos sem os elementos mínimos necessários à validade (p. ex., estabelecimento da conduta, tipificação, nexo de causalidade, culpabilidade, provas, garantia de contraditório e ampla defesa), com consequente nulidade dos procedimentos, quando aplicados, impossibilidade de sancionar o licitante pelas infrações cometidas, sensação de impunidade e ambiente propício à recorrência de condutas irregulares.
+Desconsideração da dosimetria na aplicação das sanções (Lei 14.133/2021, art. 156, § 1º – natureza e a gravidade da infração, peculiaridades do caso concreto, circunstâncias agravantes ou atenuantes, danos), levando à falta de proporcionalidade e de razoabilidade da decisão, com consequentes questionamentos e anulação da sanção.
+Falta de capacidade técnica do agente ou da comissão de contratação, levando à falta de (ou falha na) consulta de impedimentos de licitantes para participar da licitação e/ou contratar com a Administração Pública, levando à contratação de empresa com restrições, ou à paralisação da licitação e atraso no atendimento da necessidade da Administração.
+Falta de atualização ou atualização intempestiva do Cadastro Nacional de Empresas Inidôneas e Suspensas (Ceis) e do Cadastro Nacional de Empresas Punidas (Cnep), levando à falta de publicidade da sanção aplicada e à ilegalidade por afronta ao art. 161 da Lei 14.133/2021, com consequente ineficácia da sanção e participação indevida em licitações e/ou contratação, por outras organizações públicas, de empresa com restrições.
+
+Fonte: Elaboração própria.
+
+Quadro 282 – Modelos
+
+Assunto | Modelo disponibilizados por OGS ou por órgãos de controle | OGS
+Responsabilização de pessoas jurídicas na Lei Anticorrupção | Manual de Responsabilização de Entes Privados | CGU
+Dosimetria na aplicação de sanções | Sugestão de Escalonamento das Circunstâncias Agravantes e Atenuantes | CGU
+
+Fonte: Elaboração própria.
+
+[1] Lei 14.133/2021, arts. 155 e 156.
+
+[2] Lei 14.133/2021, art. 155.
+
+[3] Lei 14.133/2021, art. 159.
+
+[4] Lei 14.133/2021, art. 156, §§ 2º a 5º.
+
+[5] Lei 8.666/1993, art. 87, inciso III; Lei 14.133/2021, art. 156, § 3º.
+
+[6] Lei 14.133/2021, art. 156, § 4º.
+
+[7] Enunciados dos Acórdãos 917/2021, 1691/2021, 1831/2020, 813/2019, 348/2016, todos do Plenário do TCU.
+
+[8] Lei 14.133/2021, art. 156, § 4º e § 5º.
+
+[9] Enunciado do Acórdão 1246/2020-TCU-Plenário.
+
+[10] CF/1988, art. 5º, inciso LV; e Lei 9.784/1999, art. 2º.
+
+[11] Lei 14.133/2021, art. 158.
+
+[12] Lei 14.133/2021, art. 158, § 1º.
+
+[13] Lei 14.133/2021, art. 158, §§ 2º e 3º.
+
+[14] Lei 14.133/2021, art. 157.
+
+[15] Lei 14.133/2021, art. 158, § 4º.
+
+[16] A prescrição interrompida recomeça a correr da data do ato que a interrompeu, ou do último ato do processo para a interromper (Código Civil de 2002, art. 202, parágrafo único).
+
+[17] Lei 14.133/2021, art. 158, § 4º.
+
+[18] Lei 14.133/2021, art. 156, § 1º.
+
+[19] Lei 14.133/2021, art. 168.
+
+[20] Lei 14.133/2021, art. 161; e Lei 12.846/2013, arts. 22 e 23.
+
+[21] Lei 14.133/2021, art. 174, § 3º, inciso V.
+
+[22] Lei 14.133/2021, art. 178, Decreto-Lei 2.848/1940 (Código Penal), art. 337-M.
+
+[23] Lei 14.133/2021, art. 163.
+
+[24] Lei 14.133/2021, art. 163, parágrafo único.
+
+[25] Lei 14.133/2021, art. 156, § 9º.
+
+[26] Lei 14.133/2021, art. 160.
+
+[27] Lei 14.133/2021, art. 160; e Lei 10.406/2002 (Código Civil), art. 50, caput e §§ 1º e 2º.

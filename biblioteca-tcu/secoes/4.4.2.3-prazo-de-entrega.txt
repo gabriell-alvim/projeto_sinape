@@ -1,0 +1,10 @@
+4.4.2.3. Prazo de entrega
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/4-4-2-3-prazo-de-entrega/
+======================================================================
+
+A definição do prazo de entrega é um elemento muito importante e traz impactos para o planejamento da obra ou serviço não somente em relação ao tempo de execução, mas sobre os custos e até sobre a especificação dos materiais.
+
+Uma obra que precise ser concluída para responder a um desastre natural como fortes chuvas, por exemplo, poderá demandar a conclusão em um prazo mais célere do que o normal, necessitar de tecnologias construtivas diferenciadas, além do uso intensivo de mão de obra, inclusive com a sua execução em vários turnos de trabalho, o que impacta diversas outras variáveis do empreendimento.
+
+Em geral, o prazo da obra é definido por meio de técnicas de planejamento como a elaboração de redes PERT/CPM, linhas de balanço, histogramas diversos, que resultarão em um cronograma físico-financeiro que relaciona as etapas da obra, respectivos valores financeiros e os prazos de conclusão de cada etapa. Na fase de anteprojeto, esse cronograma conterá etapas um pouco mais detalhadas do que nos ETP e menos detalhadas do que no PB.

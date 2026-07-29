@@ -1,0 +1,88 @@
+3.6.1. Pregão
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/3-6-1-pregao-2/
+======================================================================
+
+Pregão é a modalidade de licitação adotada para a aquisição de bens e serviços comuns, conceituados pela Lei 14.133/2021 como “aqueles cujos padrões de desempenho e qualidade podem ser objetivamente definidos pelo edital, por meio de especificações usuais de mercado”[1].
+
+É proibida, portanto, a utilização do pregão para contratação de serviços técnicos especializados de natureza predominantemente intelectual, e de obras e serviços especiais de engenharia[2].
+
+Os serviços comuns de engenharia podem ser contratados por pregão[3]. A Lei os define como “todo serviço de engenharia que tem por objeto ações, objetivamente padronizáveis em termos de desempenho e qualidade, de manutenção, de adequação e de adaptação de bens móveis e imóveis, com preservação das características originais dos bens”[4].
+
+O pregoeiro conduzirá o certame e responderá individualmente pelos atos que praticar, salvo quando induzido a erro pela atuação da equipe de apoio[5].
+
+O pregão deverá ser realizado preferencialmente no formato eletrônico. A forma presencial será, portanto, exceção, a ser motivada, devendo, nesse caso, a sessão pública ser registrada em ata e gravada em áudio e vídeo[6].
+
+Poderão ser adotados os critérios de julgamento de menor preço ou de maior desconto, desde que alcancem o menor dispêndio para a Administração e atendam aos “parâmetros mínimos de qualidade definidos no edital de licitação” [7]. Ou seja, a proposta a ser selecionada deve ser a de melhor preço, de modo a assegurar o resultado de contratação mais vantajoso para a Administração Pública (objetivo do processo licitatório previsto no art. 11, inciso I, da Lei 14.133/2021).
+
+Assim como na modalidade concorrência, a Lei prevê que o pregão siga rito procedimental comum, composto por fases definidas[8], em que a apresentação e o julgamento das propostas antecedem a análise quanto à habilitação, podendo, no entanto, ocorrer a inversão das fases de julgamento de proposta e de habilitação, desde que prevista em edital e mediante ato motivado com explicitação dos benefícios decorrentes[9].
+
+No âmbito da Administração Pública federal direta, autárquica e fundacional do Poder Executivo, os procedimentos para o pregão, na égide da Lei 14.133/2021, foram regulados por meio da IN – Seges/ME 73/2022, que dispõe sobre a licitação pelo critério de julgamento por menor preço ou maior desconto.
+
+O modo de disputa a ser adotado no pregão deve ser estabelecido na fase preparatória[10] e pode ser aberto (em que os licitantes apresentam as suas propostas por meio de sucessivos lances públicos de valores crescentes ou decrescentes[11]); ou combinado (em que os dois modos de disputa – aberto e fechado[12] – são utilizados de forma conjunta, estando a ordem de utilização prevista em edital).
+
+Como o pregão só pode adotar os critérios de julgamento de menor preço ou de maior desconto, está vedada a utilização isolada do modo de disputa fechado para tal modalidade[13].
+
+Quadro 72 – Referências normativas para o pregão
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 6º Para os fins desta Lei, consideram-se: […] XIII – bens e serviços comuns: aqueles cujos padrões de desempenho e qualidade podem ser objetivamente definidos pelo edital, por meio de especificações usuais de mercado; […] XLI – pregão: modalidade de licitação obrigatória para aquisição de bens e serviços comuns, cujo critério de julgamento poderá ser o de menor preço ou o de maior desconto; Art. 8º A licitação será conduzida por agente de contratação, pessoa designada pela autoridade competente, entre servidores efetivos ou empregados públicos dos quadros permanentes da Administração Pública, para tomar decisões, acompanhar o trâmite da licitação, dar impulso ao procedimento licitatório e executar quaisquer outras atividades necessárias ao bom andamento do certame até a homologação. § 1º O agente de contratação será auxiliado por equipe de apoio e responderá individualmente pelos atos que praticar, salvo quando induzido a erro pela atuação da equipe. […] § 5º Em licitação na modalidade pregão, o agente responsável pela condução do certame será designado pregoeiro. Art. 17 […] § 2º As licitações serão realizadas preferencialmente sob a forma eletrônica, admitida a utilização da forma presencial, desde que motivada, devendo a sessão pública ser registrada em ata e gravada em áudio e vídeo. § 3º Desde que previsto no edital, na fase a que se refere o inciso IV do caput deste artigo, o órgão ou entidade licitante poderá, em relação ao licitante provisoriamente vencedor, realizar análise e avaliação da conformidade da proposta, mediante homologação de amostras, exame de conformidade e prova de conceito, entre outros testes de interesse da Administração, de modo a comprovar sua aderência às especificações definidas no termo de referência ou no projeto básico. […] Art. 25. O edital deverá conter o objeto da licitação e as regras relativas à convocação, ao julgamento, à habilitação, aos recursos e às penalidades da licitação, à fiscalização e à gestão do contrato, à entrega do objeto e às condições de pagamento. […] Art. 29. A concorrência e o pregão seguem o rito procedimental comum a que se refere o art. 17 desta Lei, adotando-se o pregão sempre que o objeto possuir padrões de desempenho e qualidade que possam ser objetivamente definidos pelo edital, por meio de especificações usuais de mercado. Parágrafo único. O pregão não se aplica às contratações de serviços técnicos especializados de natureza predominantemente intelectual e de obras e serviços de engenharia, exceto os serviços de engenharia de que trata a alínea “a” do inciso XXI do caput do art. 6º desta Lei. Art. 56. O modo de disputa poderá ser, isolada ou conjuntamente: I – aberto, hipótese em que os licitantes apresentarão suas propostas por meio de lances públicos e sucessivos, crescentes ou decrescentes; II – fechado, hipótese em que as propostas permanecerão em sigilo até a data e hora designadas para sua divulgação. […] § 1º A utilização isolada do modo de disputa fechado será vedada quando adotados os critérios de julgamento de menor preço ou de maior desconto.
+IN – Seges/ME 73/2022 | Art. 1º Esta Instrução Normativa dispõe sobre a licitação pelo critério de julgamento por menor preço ou maior desconto, na forma eletrônica, para a contratação de bens, serviços e obras, no âmbito da Administração Pública federal direta, autárquica e fundacional. […]
+Orientação Normativa – AGU 67/2020 | Não há óbice jurídico para adoção da modalidade pregão para contratação de serviços de engenharia caso o objeto seja tecnicamente caracterizado como serviço de natureza comum, na forma do parágrafo único do art. 1º da Lei nº 10.520, de 2002.
+Orientação Normativa – AGU 54/2014 | Compete ao agente ou setor técnico da administração declarar que o objeto licitatório é de natureza comum para efeito de utilização da modalidade pregão e definir se o objeto corresponde a obra ou serviço de engenharia, sendo atribuição do órgão jurídico analisar o devido enquadramento da modalidade licitatória aplicável.
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 73 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 977/2024-TCU-Plenário | [Enunciado] Em pregão, assim como nas demais modalidades de licitação, é necessário registrar a motivação das decisões que desclassifiquem propostas, inabilitem licitantes ou julguem recursos, com nível de detalhamento suficiente para a plena compreensão pelos interessados, em observância ao princípio da motivação.
+Acórdão 639/2024-TCU-Plenário | b) dar ciência ao [ omissis ], com fundamento no art. 9º, inciso I, da Resolução-TCU 315/2020, sobre a seguinte impropriedade/falha, identificada no Pregão Presencial 14/2023, para que sejam adotadas medidas internas com vistas à prevenção de outras ocorrências semelhantes: b.1) utilização de pregão presencial, em preterição ao pregão eletrônico, desacompanhada de justificativa, em afronta a jurisprudência do TCU, notadamente assentada nos Acórdãos 7.897/2022 e 6.441/2011, ambos da 1ª Câmara do TCU, e 4.531/2020, 1.584/2016 e 1.099/2010, do Plenário do TCU;
+Acórdão 2622/2021-TCU-Plenário | [Enunciado] Na modalidade pregão, a negociação com o licitante vencedor visando obter melhor proposta para a Administração deve ser realizada mesmo se o valor ofertado for inferior àquele orçado pelo órgão ou pela entidade promotora do certame […].
+Acórdão 2920/2020-TCU-Plenário | [Enunciado] No modo de disputa aberto e fechado […], o pregoeiro deve desclassificar lances manifestamente inexequíveis durante a etapa aberta, uma vez que estes não podem servir de parâmetro à convocação de licitantes para a etapa fechada […], sob risco de prejuízo à competitividade do certame.
+Acórdão 980/2018-TCU-Plenário | [Enunciado] É irregular o uso da modalidade pregão para licitação de obra, sendo permitido nas contratações de serviços comuns de engenharia.
+Acórdão 2569/2017- TCU – Plenário | 1.7. Dar ciência ao [ omissis ] de que: 1.7.1 para a realização de pregão na forma presencial, deve estar formalmente justificada a inviabilidade da utilização da forma eletrônica.
+Acórdão 1667/2017-TCU-Plenário | [Enunciado] Em pregão, o instrumento convocatório pode prever a exigência de amostras com a finalidade de verificação do atendimento aos requisitos de qualidade previstos no edital.
+Acórdão 592/2016- TCU – Plenário | [Enunciado]A terraplenagem constitui uma etapa da obra, não cabendo sua classificação como serviço comum de engenharia, razão pela qual é irregular sua contratação mediante utilização da modalidade pregão eletrônico, expressamente vedada pelo art. 6º do Decreto 5.450/2005.
+Acórdão 3395/2015- TCU – Plenário | [Enunciado] São considerados serviços comuns, tornando viável a utilização do pregão para sua contratação, os serviços de gerenciamento de obras, desde que possuam padrões de desempenho e qualidade que possam ser objetivamente definidos no edital de licitação, por meio de especificações usuais no mercado.
+Acórdão 3359/2015- TCU – Plenário | [Voto] 40. Conforme destacado na instrução da Selog (peça 21), o fato de a realização da licitação exigir “avaliação de amostras” não impede a realização do pregão eletrônico, conforme assentada jurisprudência desta Corte, a exemplos dos acórdãos 2368/2013-TCU-Plenário e 1099/2010-TCU-Plenário.
+Acórdão 754/2015-TCU-Plenário | [Enunciado] Configura comportamento fraudulento conhecido como coelho, ensejando declaração de inidoneidade para participar de licitação da Administração Pública Federal, a apresentação por licitante de proposta excessivamente baixa em pregão para induzir outras empresas a desistirem de competir, em conluio com uma segunda licitante que oferece o segundo melhor lance e que, com a desclassificação intencional da primeira, acaba sendo contratada por um valor superior àquele que poderia ser obtido em ambiente de ampla concorrência, sem a influência do coelho.
+Acórdão 2050/2014- TCU – Plenário | [Enunciado] O pregão, presencial ou eletrônico, não permite a conjugação de fatores para seleção da proposta vencedora, visto que, nessa modalidade licitatória, o preço é o único critério a ser utilizado para aferir o ganhador do certame.
+Acórdão 1540/2014- TCU – Plenário | 9.2.7. conforme jurisprudência desta Corte, não se aplica a modalidade pregão à contratação de obras de engenharia, locações imobiliárias e alienações, sendo permitida nas contratações de serviços comuns de engenharia (Súmula TCU nº 257/2010);
+Acórdão 2789/2013- TCU – Plenário | 9.4. dar ciência à […] que, no exame destes autos, foram constatados os seguintes achados […]: 9.4.1. não adoção da modalidade pregão eletrônico para a contratação do […], infringindo o disposto no […], que estabelece que “o pregão deve ser utilizado na forma eletrônica, salvo nos casos de comprovada inviabilidade, a ser justificada pela autoridade competente” , conforme Acórdãos 1.700/2007 e 2.660/2007, ambos do Plenário, bem como o entendimento deste Tribunal de que a escolha não justificada pelo pregão presencial pode caracterizar ato de gestão antieconômico (Acórdãos 2.368/2010 e 1.515/2011, ambos do Plenário);
+Pesquisa de Jurisprudência | Realize “pesquisa por árvore de classificação” na Jurisprudência Selecionada do TCU . Selecione área “Licitação” e tema “pregão”. Execute consulta nas Publicações do TCU . Selecione o tipo de publicação “Informativo de Licitações e Contratos”. Pesquise pelo termo (não utilize aspas): pregão .
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+Quadro 74 – Modelos
+
+Assunto | Modelo disponibilizados por OGS ou por órgãos de controle | OGS
+Pregão | Modelos da Lei 14.133/21 (Advocacia-Geral da União; Ministério da Gestão e da Inovação em Serviços Públicos em Serviços Públicos, 2023) | AGU, MGI
+
+Fonte: Elaboração própria.
+
+[1] Lei 14.133/2021, art. 6º, inciso XIII, e art. 29, caput.
+
+[2] Lei 14.133/2021, art. 29, parágrafo único. Destaca-se que, de acordo com a Lei 14.133/2021, quando for adotado o critério de julgamento de “menor preço” ou “maior desconto”, haverá duas opções de modalidades de licitação: o pregão ou a concorrência (art. 6º, incisos XXXVIII a XLII). Ambas as modalidades apresentam um rito procedimental comum, de acordo com o caput do art. 29 da Lei citada. A escolha dependerá da natureza do objeto a contratar, adotando-se o pregão sempre que o objeto possuir padrões de desempenho e qualidade que possam ser objetivamente definidos pelo edital, por meio de especificações usuais de mercado (bens e serviços comuns) (Tribunal de Contas da União, 2023, p. 304).
+
+[3] Lei 14.133/2021, art. 6º, inciso XLI.
+
+[4] Lei 14.133/2021, art. 6º, inciso XXI, alínea “a”, e art. 29, parágrafo único.
+
+[5] Lei 14.133/2021, art. 8º, §§ 1º e 5º.
+
+[6] Lei 14.133/2021, art. 17, § 2º.
+
+[7] Lei 14.133/2021, art. 6º, inciso XLI, e art. 34.
+
+[8] Fases: preparatória (que se encerra com a elaboração do edital e da minuta de contrato); divulgação do edital; apresentação das propostas e lances; julgamento; habilitação; recursal; e homologação (Lei 14.133/2021, art. 17).
+
+[9] Lei 14.133/2021, art. 17, § 1º
+
+[10] Lei 14.133/2021, art. 18, inciso VIII, e art. 25, caput.
+
+[11] Lei 14.133/2021, art. 56, inciso I. Decrescentes quando o critério for o menor preço; crescentes quando for o maior desconto.
+
+[12] Fechado, hipótese em que as propostas permanecerão em sigilo até a data e hora designadas para sua divulgação (Lei 14.133/2021, art. 56, inciso II).
+
+[13] Lei 14.133/2021, art. 6º, inciso XLI c/c art. 56, § 1º.

@@ -1,0 +1,110 @@
+4.5.6. Orçamento sigiloso
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/4-5-6-orcamento-sigiloso/
+======================================================================
+
+A Lei 14.133/2021 dispõe, como regra, que os atos praticados no processo licitatório são públicos, mas que a publicidade poderá ser diferida quanto ao orçamento da Administração:
+
+Art. 13. Os atos praticados no processo licitatório são públicos, ressalvadas as hipóteses de informações cujo sigilo seja imprescindível à segurança da sociedade e do Estado, na forma da Lei.
+
+Parágrafo único. A publicidade será diferida: […]
+
+II – quanto ao orçamento da Administração, nos termos do art. 24 desta Lei.
+
+O mencionado art. 24 informa que o orçamento estimado da contratação poderá ter caráter sigiloso, sem prejuízo da divulgação do detalhamento dos quantitativos e das demais informações necessárias para a elaboração das propostas:
+
+Art. 24. Desde que justificado, o orçamento estimado da contratação poderá ter caráter sigiloso, sem prejuízo da divulgação do detalhamento dos quantitativos e das demais informações necessárias para a elaboração das propostas, e, nesse caso:
+
+I – o sigilo não prevalecerá para os órgãos de controle interno e externo;
+
+II – (VETADO).
+
+Parágrafo único. Na hipótese de licitação em que for adotado o critério de julgamento por maior desconto, o preço estimado ou o máximo aceitável constará do edital da licitação.
+
+A decisão acerca do sigilo do orçamento deve ser justificada e os órgãos de controle interno e externo poderão ter acesso ao orçamento estimado, mesmo quando sigiloso.
+
+Quando adotado o critério de julgamento por maior desconto, o preço estimado ou o máximo aceitável constará do edital da licitação, uma vez que se trata de informação essencial para apresentação de proposta por parte dos interessados[1].
+
+A ocultação do valor também não se aplica a licitações com critério de julgamento por melhor técnica, pois o edital deverá definir o prêmio ou a remuneração que será atribuída aos vencedores[2].
+
+A Lei 14.133/2021 acrescenta que, se a Administração optar pelo sigilo do orçamento, a estimativa do valor da contratação elaborada no ETP, bem como aquela produzida no TR, constará como anexo classificado como sigiloso do processo de licitação, acompanhada dos preços unitários referenciais, das memórias de cálculo e dos documentos que lhe dão suporte[3].
+
+A IN – Seges/ME 65/2021 também prevê que o orçamento estimado da contratação poderá ter caráter sigiloso, desde que justificado.
+
+Art. 10. Desde que justificado, o orçamento estimado da contratação poderá ter caráter sigiloso, sem prejuízo da divulgação do detalhamento dos quantitativos e das demais informações necessárias para a elaboração das propostas, salvo na hipótese de licitação cujo critério de julgamento for por maior desconto.
+
+O momento da divulgação do orçamento sigiloso deve ser motivado na fase planejamento, conforme o art. 18, inciso XI, da Lei 14.133/2021:
+
+Art. 18. A fase preparatória do processo licitatório é caracterizada pelo planejamento e deve compatibilizar-se com o plano de contratações anual de que trata o inciso VII do caput do art. 12 desta Lei, sempre que elaborado, e com as leis orçamentárias, bem como abordar todas as considerações técnicas, mercadológicas e de gestão que podem interferir na contratação, compreendidos:
+
+[…]
+
+XI – a motivação sobre o momento da divulgação do orçamento da licitação, observado o art. 24 desta Lei.
+
+O art. 18, § 1º, inciso VI, da Lei 14.133/2021 dispõe sobre a possibilidade de preservar o sigilo do orçamento elaborado no ETP até a conclusão da licitação. No entanto, há discussões acerca do momento ideal para tal divulgação, tendo em vista que a publicação somente ao final do certame poderia atrapalhar eventual fase de negociação com o licitante classificado provisoriamente em primeiro lugar.
+
+Por esse motivo, a IN – Seges/ME 73/2022 (art. 12, § 1º), aplicável à Administração Pública federal direta, autárquica e fundacional do Poder Executivo, estabeleceu que o orçamento estimado para a contratação poderá ser tornado público na etapa anterior à negociação, quando a proposta mais vantajosa já tiver sido selecionada (Figura 13), de forma a evitar uma contratação fracassada.
+
+Figura 13 – Momento de divulgação do orçamento sigiloso
+
+Fonte: Ministério da Economia, 2022.
+
+Embora sob o regime da Lei 8.666/93 e da Lei 10.520/2002, em especial, tenha havido diversas discussões doutrinárias e jurisprudenciais acerca do sigilo do orçamento das licitações, é fato que a Lei 14.133/2021 positivou essa possibilidade, mediante as devidas justificativas acerca da sua conveniência e do momento adequado de sua divulgação.
+
+Em recente julgado, o TCU entendeu que deve ser permitida a abertura do sigilo do custo estimado da contratação após a fase de lances, quando as propostas permanecerem com preços acima dos de referência, desde que em ato público e com a devida justificativa, de modo a tornar a fase de negociação de preços com os licitantes mais efetiva e evitar a ocorrência de tratamento não isonômico [4].
+
+Resumindo, de acordo com a Lei 14.133/2021[5]:
+
+- o sigilo do orçamento é decisão discricionária do gestor, mas a divulgação do detalhamento dos quantitativos e demais informações necessárias para elaboração das propostas é obrigatória (art. 24, caput);
+
+- a decisão de não publicar o orçamento deve ser justificada (art. 24, caput);
+
+- a fase preparatória do processo licitatório deve abordar a motivação sobre o momento da divulgação do orçamento da licitação (art. 18, inciso XI);
+
+- se o orçamento for mantido sigiloso durante a licitação, deve ser publicado após a conclusão da licitação (art. 18, inciso XI, e § 1º, inciso VI);
+
+- se for adotado o critério de julgamento por maior desconto, o preço estimado ou o máximo aceitável constará do edital (art. 24, parágrafo único); e
+
+- se for adotado o critério de julgamento por melhor técnica, o valor da remuneração ou do prêmio constará do edital (art. 35).
+
+Quadro 210 – Referências normativas para o orçamento sigiloso
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 6º Para os fins desta Lei, consideram-se: […] XXIII – termo de referência: documento necessário para a contratação de bens e serviços, que deve conter os seguintes parâmetros e elementos descritivos: […] i) estimativas do valor da contratação, acompanhadas dos preços unitários referenciais, das memórias de cálculo e dos documentos que lhe dão suporte, com os parâmetros utilizados para a obtenção dos preços e para os respectivos cálculos, que devem constar de documento separado e classificado; […] Art. 13. Os atos praticados no processo licitatório são públicos, ressalvadas as hipóteses de informações cujo sigilo seja imprescindível à segurança da sociedade e do Estado, na forma da Lei. Parágrafo único. A publicidade será diferida: […] II – quanto ao orçamento da Administração, nos termos do art. 24 desta Lei. Art. 18. A fase preparatória do processo licitatório é caracterizada pelo planejamento e deve compatibilizar-se com o plano de contratações anual de que trata o inciso VII do caput do art. 12 desta Lei, sempre que elaborado, e com as leis orçamentárias, bem como abordar todas as considerações técnicas, mercadológicas e de gestão que podem interferir na contratação, compreendidos: […] XI – a motivação sobre o momento da divulgação do orçamento da licitação, observado o art. 24 desta Lei. […] § 1º O estudo técnico preliminar a que se refere o inciso I do caput deste artigo deverá evidenciar o problema a ser resolvido e a sua melhor solução, de modo a permitir a avaliação da viabilidade técnica e econômica da contratação, e conterá os seguintes elementos: […] VI – estimativa do valor da contratação, acompanhada dos preços unitários referenciais, das memórias de cálculo e dos documentos que lhe dão suporte, que poderão constar de anexo classificado, se a Administração optar por preservar o seu sigilo até a conclusão da licitação; […] Art. 24. Desde que justificado, o orçamento estimado da contratação poderá ter caráter sigiloso, sem prejuízo da divulgação do detalhamento dos quantitativos e das demais informações necessárias para a elaboração das propostas, e, nesse caso: I – o sigilo não prevalecerá para os órgãos de controle interno e externo; II – (VETADO). Parágrafo único. Na hipótese de licitação em que for adotado o critério de julgamento por maior desconto, o preço estimado ou o máximo aceitável constará do edital da licitação. […] Art. 35. O julgamento por melhor técnica ou conteúdo artístico considerará exclusivamente as propostas técnicas ou artísticas apresentadas pelos licitantes, e o edital deverá definir o prêmio ou a remuneração que será atribuída aos vencedores.
+IN – Seges/ME 73/2022 | Art. 1º Esta Instrução Normativa dispõe sobre a licitação pelo critério de julgamento por menor preço ou maior desconto, na forma eletrônica, para a contratação de bens, serviços e obras, no âmbito da Administração Pública federal direta, autárquica e fundacional. […] Orçamento estimado sigiloso Art. 12. Desde que justificado, o orçamento estimado da contratação poderá ter caráter sigiloso, sem prejuízo da divulgação do detalhamento dos quantitativos e das demais informações necessárias para a elaboração das propostas. § 1º Para fins do disposto no caput , o orçamento estimado para a contratação não será tornado público antes de definido o resultado do julgamento das propostas, observado o § 1º do art. 30. § 2º O caráter sigiloso do orçamento estimado para a contratação não prevalecerá para os órgãos de controle interno e externo. § 3º Nas hipóteses em que for adotado o critério de julgamento pelo maior desconto, o valor estimado ou o valor de referência para aplicação do desconto constará obrigatoriamente do edital de licitação.
+IN – Seges/ME 65/2021 | Art. 10. Desde que justiﬁcado, o orçamento estimado da contratação poderá ter caráter sigiloso, sem prejuízo da divulgação do detalhamento dos quantitativos e das demais informações necessárias para a elaboração das propostas, salvo na hipótese de licitação cujo critério de julgamento for por maior desconto.
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 211 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 232/2022-TCU-Plenário | [Voto] Quanto às alegações de que a não publicação teria decorrido do orçamento sigiloso, comungo do entendimento da unidade instrutora de que tal fato não deveria embargar a publicação do ETP, devendo o órgão resguardar apenas as suas partes sigilosas, em linha com o que sugere a própria parte final do art. 34 da IN-SGD 1/2019, em consonância também com o previsto no art. 6º, XXIII, “b” da Lei 14.133/2021.
+Acórdão 2989/2018-TCU-Plenário | [Voto do Ministro revisor] 20. Por esses motivos, compreendo que a Lei 10.520/2000 admite que o orçamento seja mantido em sigilo, mesmo que ele seja adotado como critério de julgamento da proposta.
+Acórdão 2832/2015-TCU-Plenário | [Enunciado] A elaboração do orçamento base após publicação do edital constitui descumprimento dos art. 8º, § 5º, e art. 2º, parágrafo único, da Lei 12.462/2011, que instituiu o Regime Diferenciado de Contratações Públicas (RDC), ainda que a Administração opte pelo sigilo do orçamento (art. 6º, § 3º, da mesma Lei).
+Acórdão 2150/2015-TCU-Plenário | [Sumário] 3. Na realização de pregões para compras de medicamentos e materiais hospitalares, a divulgação, nos editais, dos preços estimados pela administração não se mostra vantajosa, devendo ocorrer apenas após a fase de lances. [Voto] 7. Compartilho plenamente do entendimento desses doutrinadores. De fato, o princípio da publicidade deve ser ponderado pelo interesse da administração em obter a proposta mais vantajosa. Nesse caso, a divulgação da informação não só pode, como deve ser postergada para que esse interesse seja protegido. Nesse sentido, é o voto que fundamentou o Acórdão 2080/2012-TCU-Plenário, no qual foram considerados os benefícios para a manutenção do sigilo do orçamento estimativo até a fase de lances e a violação ao princípio da isonomia que poderia ocasionar o acesso ao orçamento antes dessa fase. [Acórdão] 9.1.4. divulgação, nos editais de pregões, dos preços estimados da contratação, prejudicando a obtenção de propostas mais vantajosas, nos termos do art. 3º da Lei 8.666/1993, e deixando de considerar entendimento jurisprudencial desta Corte exposto no Acórdão 2080/2012-TCU-Plenário.
+Acórdão 306/2013-TCU-Plenário | [Enunciado] Nas licitações regidas pelo RDC é possível a abertura do sigilo do orçamento na fase de negociação de preços com o primeiro colocado, desde que em ato público e devidamente justificado.
+Acórdão 2080/2012-TCU-Plenário | 9.2. deferir o pedido de vistas dos formulado pela empresa representante, determinando-se, contudo, à 6ª Secex que adote as medidas necessárias, inclusive o desentranhamento de peças dos autos, se o for caso, com vistas a resguardar o sigilo do orçamento elaborado pelo [ omissis ] até a fase de lances da licitação em comento; [Voto] 7. Embora também seja posição desta Corte de que a Administração deve franquear o acesso aos licitantes do referido documento, bem explicitou a instrução que há divergências acerca do momento oportuno para tanto, ou seja, antes ou depois da fase de lances, sendo apontado, neste último caso, os benefícios para manutenção do sigilo do orçamento estimativo até essa fase. 8. Conquanto a ampla publicidade seja imperativa na Administração Pública, julgo que, em situações semelhantes a que se apresenta, o acesso ao referido orçamento colidiria com outros princípios não menos importantes, como o da busca da proposta mais vantajosa para a administração, de modo que a reserva do seu conteúdo não se configura violação ao princípio da publicidade, nem mesmo ao seu propósito de assegurar o controle pela sociedade da legalidade e legitimidade dos atos administrativos. 9. Ademais, a prática tem se revelado, inclusive no âmbito do próprio [ omissis ], que a manutenção do sigilo do orçamento estimativo tem sido positiva para Administração, com a redução dos preços das contratações, já que incentiva a competitividade entre os licitantes, evitando assim que os concorrentes limitem suas ofertas aos valores previamente cotados pela Administração.
+Pesquisa de Jurisprudência | Execute a seguinte consulta na Pesquisa Integrada do TCU : “14.133/2021” AND (“divulgação” adj3 “orçamento”) OR “orçamento sigiloso” OR (“divulgação” adj3 “valor estimado”) OR (“divulgação” adj3 “estimativa de preços)
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+Quadro 212 – Riscos relacionados
+
+Riscos
+Quebra do sigilo do valor do orçamento devido a práticas ilícitas para favorecimento de licitantes específicos (p. ex., vazamento de informações sobre o orçamento estimado para determinados licitantes), levando à perda da isonomia e ao comprometimento da competitividade do certame, com consequentes questionamentos e paralisação do processo licitatório.
+Impossibilidade de, posteriormente à divulgação do orçamento estimado da organização pública, mas antes da finalização do certame, os licitantes terem acesso amplo ao orçamento estimado, aos critérios de exequibilidade e da aceitabilidade das propostas, bem como a toda documentação que ampara tais critérios, levando à impossibilidade de os licitantes interporem recursos relativos ao orçamento estimado, caso considerem que os preços da proposta vencedora sejam inaceitáveis, por apresentarem sobrepreço ou por serem inexequíveis, bem como sobre suas próprias desclassificações, caso ocorram devido aos seus orçamentos ofertados, com consequentes questionamentos posteriores e paralisação do processo de contratação.
+Orçamento sigiloso mal elaborado (preços estimados não refletem os praticados no mercado), levando à impossibilidade de os licitantes e entes engajados no controle social questionarem esse orçamento antes do início do certame e provocarem a correção necessária, com consequente licitação fracassada (devido a preços estimados inexequíveis) ou contratação com sobrepreço (devido a preços estimados superiores aos praticados no mercado).
+Ausência de justificativas sobre a decisão de estabelecer o sigilo do orçamento estimado ou sobre o momento de divulgação do orçamento sigiloso, levando à impugnação do edital ou a questionamentos durante o certame, com consequentes atrasos no atendimento da necessidade da Administração.
+
+Fonte: Elaboração própria e adaptação de Tribunal de Contas da União, 2023, p. 380-381.
+
+[1] Lei 14.133/2021, art. 24, parágrafo único.
+
+[2] Lei 14.133/2021, art. 35.
+
+[3] Lei 14.133/2021, art. 18, § 1º, inciso VI, e art. 6º, inciso XXIII, alínea “i”.
+
+[4] Acórdão 2190/2024 – TCU – Plenário
+
+[5] Tribunal de Contas da União, 2023, item 8.13.3, p. 371-382.

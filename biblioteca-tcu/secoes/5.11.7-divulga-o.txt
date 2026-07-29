@@ -1,0 +1,54 @@
+5.11.7. Divulgação
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/5-11-7-divulgacao/
+======================================================================
+
+A publicidade é um dos princípios dispostos no art. 5º da Lei 14.133/2021 e é aplicável tanto às licitações quanto aos contratos delas decorrentes, ainda que formalizados por dispensa ou inexigibilidade de licitação:
+
+O art. 13 assevera que “os atos praticados no processo licitatório são públicos, ressalvadas as hipóteses de informações cujo sigilo seja imprescindível à segurança da sociedade e do Estado, na forma da Lei”.
+
+Assim, os contratos e seus aditamentos deverão ser juntados ao processo que tiver dado origem à contratação, divulgados e mantidos à disposição do público em sítio eletrônico oficial, admitido o sigilo somente quando imprescindível à segurança da sociedade e do Estado[1].
+
+O contrato e seus aditamentos só terão eficácia quando divulgados no Portal Nacional de Contratações Públicas (PNCP). Os decorrentes de licitação devem ser publicados no prazo de até vinte dias úteis da data de sua assinatura, enquanto os contratos decorrentes de processos de dispensa ou de inexigibilidade de licitação devem ser publicados no prazo de até dez dias úteis, também contados a partir da data de assinatura [2].
+
+Os contratos celebrados em caso de urgência terão eficácia imediata, a partir da assinatura, sem prejuízo da publicidade nos prazos assinalados, sob pena de nulidade[3].
+
+A Lei 14.133/2021 estabelece particularidades relacionadas à publicidade de contratações de profissionais do setor artístico por inexigibilidade, bem como contratos de obras públicas.
+
+Quanto à contratação de profissional do setor artístico por inexigibilidade, a divulgação deverá identificar “os custos do cachê do artista, dos músicos ou da banda, quando houver, do transporte, da hospedagem, da infraestrutura, da logística do evento e das demais despesas específicas”[4].
+
+Quanto aos contratos de obras, a Administração deverá divulgar, em até 25 dias úteis após a assinatura do contrato, em sítio eletrônico oficial, os quantitativos e os preços unitários e totais que contratar e, em até 45 dias úteis após a conclusão do contrato, os quantitativos executados e os preços praticados[5].
+
+Quadro 390 – Referências normativas para a divulgação do contrato administrativo
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 91. Os contratos e seus aditamentos terão forma escrita e serão juntados ao processo que tiver dado origem à contratação, divulgados e mantidos à disposição do público em sítio eletrônico oficial. § 1º Será admitida a manutenção em sigilo de contratos e de termos aditivos quando imprescindível à segurança da sociedade e do Estado, nos termos da legislação que regula o acesso à informação. […] Art. 94. A divulgação no Portal Nacional de Contratações Públicas (PNCP) é condição indispensável para a eficácia do contrato e de seus aditamentos e deverá ocorrer nos seguintes prazos, contados da data de sua assinatura: I – 20 (vinte) dias úteis, no caso de licitação; II – 10 (dez) dias úteis, no caso de contratação direta. § 1º Os contratos celebrados em caso de urgência terão eficácia a partir de sua assinatura e deverão ser publicados nos prazos previstos nos incisos I e II do caput deste artigo, sob pena de nulidade. § 2º A divulgação de que trata o caput deste artigo, quando referente à contratação de profissional do setor artístico por inexigibilidade, deverá identificar os custos do cachê do artista, dos músicos ou da banda, quando houver, do transporte, da hospedagem, da infraestrutura, da logística do evento e das demais despesas específicas. § 3º No caso de obras, a Administração divulgará em sítio eletrônico oficial, em até 25 (vinte e cinco) dias úteis após a assinatura do contrato, os quantitativos e os preços unitários e totais que contratar e, em até 45 (quarenta e cinco) dias úteis após a conclusão do contrato, os quantitativos executados e os preços praticados.
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 391 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 585/2023-TCU – Plenário | 9.1. conhecer do presente pedido de reexame e, no mérito, dar-lhe parcial provimento, para prorrogar por 180 dias, a partir da notificação deste acórdão, para o recorrente e as demais entidades destinatárias, o prazo para cumprimento da determinação do subitem 9.1 do Acórdão 924/2020-TCU-Plenário, que deverá ser alterada para: “ 9.1 determinar ao Banco do Brasil, à Caixa Econômica Federal e à BB Tecnologia e Serviços S.A. que, no prazo de 180 dias, com fulcro no art. 17 da Lei 14.436/2022 e no art. 250, inciso II, do Regimento Interno do TCU (RI/TCU), disponibilizem informações atualizadas referentes a seus contratos no Portal Nacional de Compras Públicas (PNCP);” 9.2. dar ciência ao Banco do Brasil S.A., ao BB Tecnologia e Serviços S.A. e à Caixa Econômica Federal. (Grifo nosso) [Enunciado] Além da observância da legislação pertinente à publicação de seus contratos, em especial a Lei 13.303/2016 (Lei das Estatais) e a Lei 12.527/2011 (Lei de Acesso à Informação), as empresas estatais devem disponibilizar informações atualizadas referentes a seus contratos no Portal Nacional de Contratações Públicas (PNCP), de que trata a Lei 14.133/2021 (nova Lei de Licitações e Contratos Administrativos), em cumprimento ao art. 17 da Lei 14.436/2022 (LDO de 2023).
+Acórdão 1562/2019-TCU-Plenário | 1.6.1. dar ciência ao [ omissis ], com fundamento no art. 7º da Resolução – TCU 265/2014, sobre as seguintes impropriedades/falhas, para que sejam adotadas medidas internas com vistas à prevenção de ocorrência de outras semelhantes: […] 1.6.1.2. incompletude e desatualização de dados e informações sobre licitações e contratos no sítio eletrônico institucional, contrariando as disposições aplicáveis da Lei 12.527/2011.
+Acórdão 1855/2018-TCU-Plenário | [Enunciado] Os órgãos e entidades da Administração Pública Federal devem promover a publicação do inteiro teor de todos os seus contratos administrativos, inclusive anexos e aditivos, em seus sítios oficiais na Internet, em atendimento ao art. 8º, § 1º, inciso IV, da Lei 12.527/2011 (LAI), preferencialmente em formato aberto (art. 8º, § 3º, inciso III, da mesma Lei) e que permita a pesquisa de texto.
+Pesquisa de Jurisprudência | Execute consulta na Jurisprudência Selecionada . Pesquise pela árvore de classificação: área “contrato administrativo” . Filtre os resultados pelo tema “princípio da publicidade” .
+
+Fonte: Elaboração própria a partir de consulta a jurisprudência do TCU.
+
+Quadro 392 – Riscos relacionados
+
+Riscos
+Inexistência de sistemas de tecnologia da informação e comunicação aptos a dar suporte à função de contratações na organização, levando à impossibilidade ou à dificuldade de publicar, no Portal Nacional de Contratações Públicas, os contratos e seus aditamentos, com consequente ineficácia desses instrumentos (Lei 14.133/2021, art. 94).
+
+Fonte: Adaptado de Ministério da Economia, 2022c.
+
+[1] Lei 14.133/2021, art. 91, caput e § 1º.
+
+[2] Lei 14.133/2021, art. 94, caput e incisos I e II.
+
+[3] Lei 14.133/2021, art. 94, § 1º.
+
+[4] Lei 14.133/2021, art. 94, § 2º
+
+[5] Lei 14.133/2021, art. 94, § 3º

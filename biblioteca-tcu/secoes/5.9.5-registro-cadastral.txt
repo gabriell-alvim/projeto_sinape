@@ -1,0 +1,74 @@
+5.9.5. Registro Cadastral
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/5-9-5-registro-cadastral/
+======================================================================
+
+O registro cadastral é um procedimento auxiliar que visa ganhos de eficiência e diminuição de custos ao possibilitar que os licitantes antecipem o cadastro de alguns documentos de habilitação, os quais poderão ser utilizados em diversas licitações.
+
+De acordo com a Lei 14.133/2021, os órgãos e entidades da Administração Pública deverão utilizar o sistema de registro cadastral unificado disponível no Portal Nacional de Contratações Públicas (PNCP), para efeito de cadastro unificado de licitantes, na forma disposta em regulamento[1].
+
+O objetivo é reduzir o número de cadastros locais, como o Sistema de Cadastramento Unificado de Fornecedores (Sicaf) no âmbito federal e outros cadastros dos entes federados. Para isso, a Lei propõe a unificação desses cadastros em uma plataforma única e nacional, disponível no PNCP, e proíbe que órgãos ou entidades licitantes exijam registros cadastrais complementares para acesso a edital e anexos e, portanto, para participação na licitação[2].
+
+O sistema de registro cadastral unificado será público e amplamente divulgado, estando permanentemente aberto para que novos interessados possam ingressar a qualquer momento. Além disso, será obrigatória a realização de um chamamento público pela internet, no mínimo anualmente, para atualizar os registros existentes e permitir o ingresso de novos participantes. Dessa forma, o sistema busca garantir transparência e ampla participação no processo de cadastramento[3].
+
+Para se inscrever ou atualizar o cadastro, o interessado deverá fornecer os elementos necessários exigidos pela Lei 14.133/2021 para habilitação. O sistema classificará o inscrito em categorias, de acordo com sua área de atuação, e em grupos, com base na avaliação de sua qualificação técnica e econômico-financeira. Além disso, o sistema fornecerá ao inscrito um certificado, que será renovado sempre que o registro for atualizado[4].
+
+O registro de inscrição no sistema de registro cadastral unificado pode ser alterado, suspenso ou cancelado a qualquer momento, caso o inscrito deixe de atender às exigências legais ou regulamentares. Isso significa que é importante manter o cadastro atualizado e em conformidade com as normas estabelecidas para garantir a continuidade do registro[5].
+
+De todo modo, é possível recorrer da decisão que deferir, indeferir, alterar ou cancelar a inscrição em registro cadastral. Isso significa que, caso o interessado não concorde com a decisão tomada em relação ao seu cadastro, ele poderá apresentar um recurso para contestá-la[6].
+
+Além de documentos relacionados à habilitação, a Lei 14.133/2021 também prevê a inclusão, no registro cadastral, de documentos e informações sobre penalidades e desempenho de fornecedores em outras contratações realizadas pelos entes públicos. Nesse sentido, o art. 88, § 3º da referida Lei estabelece que:
+
+A atuação do contratado no cumprimento de obrigações assumidas será avaliada pelo contratante, que emitirá documento comprobatório da avaliação realizada, com menção ao seu desempenho na execução contratual, baseado em indicadores objetivamente definidos e aferidos, e a eventuais penalidades aplicadas, o que constará do registro cadastral em que a inscrição for realizada.
+
+O desempenho dos fornecedores em contratações pretéritas pode ser utilizado para fins de pontuação técnica na licitação, para avaliação da qualificação técnica ou como critério de desempate[7]. No entanto, o registro desse desempenho está condicionado à implantação e regulamentação do cadastro de atesto de cumprimento de obrigações. Esse cadastro deverá indicar de forma objetiva o desempenho do contratado, em atendimento aos princípios da impessoalidade, igualdade, isonomia, publicidade e transparência. Dessa forma, será possível implementar medidas de incentivo aos licitantes que possuírem ótimo desempenho anotado em seu registro cadastral[8].
+
+De acordo com o § 3º do art. 87 da Lei 14.133/2021, é permitida a realização de licitações restritas a fornecedores cadastrados, desde que sejam atendidos os critérios, condições e limites estabelecidos em regulamento. Além disso, é necessário garantir a ampla publicidade dos procedimentos para o cadastramento.
+
+Nesse caso, será admitido o fornecedor que realizar o cadastro dentro do prazo previsto no edital para apresentação de propostas. Esse fornecedor poderá participar do processo licitatório em curso, mas a celebração do contrato ficará condicionada à emissão do certificado de registro cadastral[9].
+
+Quadro 298 – Referências normativas para o registro cadastral
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 78. São procedimentos auxiliares das licitações e das contratações regidas por esta Lei: […] V – registro cadastral; […] Art. 87. Para os fins desta Lei, os órgãos e entidades da Administração Pública deverão utilizar o sistema de registro cadastral unificado disponível no Portal Nacional de Contratações Públicas (PNCP), para efeito de cadastro unificado de licitantes, na forma disposta em regulamento. § 1º O sistema de registro cadastral unificado será público e deverá ser amplamente divulgado e estar permanentemente aberto aos interessados, e será obrigatória a realização de chamamento público pela internet, no mínimo anualmente, para atualização dos registros existentes e para ingresso de novos interessados. § 2º É proibida a exigência, pelo órgão ou entidade licitante, de registro cadastral complementar para acesso a edital e anexos. § 3º A Administração poderá realizar licitação restrita a fornecedores cadastrados, atendidos os critérios, as condições e os limites estabelecidos em regulamento, bem como a ampla publicidade dos procedimentos para o cadastramento. § 4º Na hipótese a que se refere o § 3º deste artigo, será admitido fornecedor que realize seu cadastro dentro do prazo previsto no edital para apresentação de propostas. Art. 88. Ao requerer, a qualquer tempo, inscrição no cadastro ou a sua atualização, o interessado fornecerá os elementos necessários exigidos para habilitação previstos nesta Lei. § 1º O inscrito, considerada sua área de atuação, será classificado por categorias, subdivididas em grupos, segundo a qualificação técnica e econômico-financeira avaliada, de acordo com regras objetivas divulgadas em sítio eletrônico oficial. § 2º Ao inscrito será fornecido certificado, renovável sempre que atualizar o registro. § 3º A atuação do contratado no cumprimento de obrigações assumidas será avaliada pelo contratante, que emitirá documento comprobatório da avaliação realizada, com menção ao seu desempenho na execução contratual, baseado em indicadores objetivamente definidos e aferidos, e a eventuais penalidades aplicadas, o que constará do registro cadastral em que a inscrição for realizada. § 4º A anotação do cumprimento de obrigações pelo contratado, de que trata o § 3º deste artigo, será condicionada à implantação e à regulamentação do cadastro de atesto de cumprimento de obrigações, apto à realização do registro de forma objetiva, em atendimento aos princípios da impessoalidade, da igualdade, da isonomia, da publicidade e da transparência, de modo a possibilitar a implementação de medidas de incentivo aos licitantes que possuírem ótimo desempenho anotado em seu registro cadastral. § 5º A qualquer tempo poderá ser alterado, suspenso ou cancelado o registro de inscrito que deixar de satisfazer exigências determinadas por esta Lei ou por regulamento. § 6º O interessado que requerer o cadastro na forma do caput deste artigo poderá participar de processo licitatório até a decisão da Administração, e a celebração do contrato ficará condicionada à emissão do certificado referido no § 2º deste artigo. […] Art. 165. Dos atos da Administração decorrentes da aplicação desta Lei cabem: I – recurso, no prazo de 3 (três) dias úteis, contado da data de intimação ou de lavratura da ata, em face de: a) ato que defira ou indefira pedido de pré-qualificação de interessado ou de inscrição em registro cadastral, sua alteração ou cancelamento; […]
+Decreto – Lei 2.848/1940 (Código Penal) | Impedimento indevido (Incluído pela Lei nº 14.133, de 2021) Art. 337-N. Obstar, impedir ou dificultar injustamente a inscrição de qualquer interessado nos registros cadastrais ou promover indevidamente a alteração, a suspensão ou o cancelamento de registro do inscrito: (Incluído pela Lei nº 14.133, de 2021) Pena – reclusão, de 6 (seis) meses a 2 (dois) anos, e multa. (Incluído pela Lei nº 14.133, de 2021)
+IN – Seges/ME 2/2023 | Art. 13. O edital de licitação deverá prever, no mínimo: […] II – procedimentos para a ponderação e a valoração da proposta de técnica, por meio da atribuição de: a) notas por desempenho do licitante em contratações anteriores aferida nos documentos comprobatórios de que trata os §§ 3º e 4º do art. 88 da Lei nº 14.133, de 2021, e em registro cadastral unificado disponível no PNCP, conforme definido em regulamento;
+Enunciado CJF 22/2022 | A proibição de exigência de registro cadastral complementar dos licitantes deve ser entendida de forma ampla, a partir dos objetivos da vedação, entre eles, desobrigar o particular de manter ativos diversos cadastros, com a mesma finalidade, incrementando custos de transação.
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 299 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 7295/2013 – TCU – Segunda Câmara | [Enunciado] É legal a exigência de cadastramento e habilitação dos licitantes no Sicaf como condição de participação nos pregões eletrônicos realizados por meio do Portal de Compras do Governo Federal (ComprasNet).
+Acórdão 1312/2023-TCU-Plenário | [Voto] 83. Ademais, ainda que não aplicável a este caso, observo que a novel Lei de Licitações (Lei 14.133/2021), em seus artigos 87 e 88, instituiu o registro cadastral unificado de licitantes, em que deverá constar informações sobre o desempenho da empresa na execução contratual, baseado em indicadores objetivamente definidos e aferidos, e eventuais penalidades aplicadas. Ou seja, instrumento correlato ao utilizado pela Petrobras. 84. Com o registro cadastral, o legislador busca diminuir a assimetria de informações existentes entre a Administração e o licitante e criar incentivo para o que os fornecedores cumpram o contrato adequadamente, ante a expectativa de controle gerada pela possível divulgação de informações desabonadoras em seu cadastro.
+Acórdão 504/1996-TCU-Plenário | 2 – Determinar à [ omissis ] que adote providências no sentido de: 2.1 – promover ampla divulgação do registro cadastral, nos termos do art. 34, § 1º da Lei nº 8.666/93; 2.2 – estabelecer controles que permitam, a qualquer tempo, a alteração, a suspensão ou o cancelamento dos registros cadastrais, conforme o art. 37 da Lei nº 8.666/93; 2.3 – anotar nos respectivos registros cadastrais a atuação dos licitantes no cumprimento das obrigações assumidas, em obediência ao art. 36, § 2 da Lei nº 8.666/93;
+Pesquisa de Jurisprudência | Execute consulta na Jurisprudência Selecionada do TCU . No campo de busca, faça buscas pelos seguinte termos: “ registro cadastral “ ou “ cadastramento “ Os resultados das buscas podem ser filtrados por “área – Licitação” ou “contrato administrativo”.
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+Quadro 300 – Riscos relacionados
+
+Riscos
+Ausência de registro cadastral no PNCP e de parâmetros objetivos para avaliar o desempenho contratual prévio dos licitantes, levando a divergências sobre o nível de cumprimento das obrigações e impossibilitando o registro do desempenho do contratado, com consequente dificuldade de utilizar as informações para subsidiar contratações futuras, a exemplo de considerar o desempenho para pontuação técnica de propostas (art. 36, § 3º e art. 37, inciso III), para avaliação da qualificação técnica (art. 67, inciso II) ou como critério de desempate (art. 60, inciso II).
+Restrição de participação, em determinado certame, a licitantes cadastrados, sem observar se as informações disponíveis no cadastro (ou na categoria escolhida) são suficientes e estão atualizadas para comprovar o atendimento aos requisitos de habilitação exigidos, levando à necessidade de requerer comprovações adicionais, com consequentes recursos quanto à habilitação, questionamentos quanto à legitimidade da restrição do acesso à licitação, e atraso na conclusão do certame.
+
+Fonte: Elaboração própria.
+
+[1] Lei 14.133/2021, art. 87.
+
+[2] Lei 14.133/2021, art. 87, § 2º.
+
+[3] Lei 14.133/2021, art. 87, § 1º.
+
+[4] Lei 14.133/2021, art. 88, §§ 1º e 2º.
+
+[5] Lei 14.133/2021, art. 88, § 5º.
+
+[6] Lei 14.133/2021, art. 165, inciso I, alínea “a”.
+
+[7] Lei 14.133/2021, art. 36, § 3º, art. 37, inciso III, art. 60, inciso II, e art. 67, inciso II.
+
+[8] Lei 14.133/2021, art. 88, § 4º.
+
+[9] Lei 14.133/2021, art. 87, § 4º e art. 88, § 6º.

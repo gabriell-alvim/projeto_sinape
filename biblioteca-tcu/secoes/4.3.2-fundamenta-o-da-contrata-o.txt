@@ -1,0 +1,56 @@
+4.3.2. Fundamentação da Contratação
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/4-3-2-fundamentacao-da-contratacao/
+======================================================================
+
+A fundamentação reúne os elementos do ETP que embasaram a escolha do objeto, bem como a decisão de realizar a contratação. Devem ser apresentados ou sintetizados os seguintes tópicos do ETP[1]:
+
+- descrição da necessidade da contratação, que explica qual é a demanda a ser atendida e justifica como a contratação pode atender a essa demanda;
+
+- demonstração da previsão da contratação no PCA. Se a contratação não constar do PCA, o setor de contratações irá sinalizar para a necessidade de revisão do plano e de inclusão dessa demanda, se justificada[2];
+
+- levantamento de mercado, “que consiste na análise das alternativas possíveis, e justificativa técnica e econômica da escolha do tipo de solução a contratar”[3];
+
+- estimativas das quantidades. Deve-se apresentar a relação entre a demanda prevista e os quantitativos a serem contratados, com as respectivas memórias de cálculo;
+
+- justificativas para o parcelamento ou não da contratação, demonstrando a viabilidade técnica e a vantajosidade econômica do parcelamento;
+
+- demonstrativo dos resultados pretendidos com a contratação, esclarecendo quais benefícios diretos que a organização pretende obter;
+
+- posicionamento conclusivo sobre a adequação da contratação, indicando as conclusões da equipe de planejamento pelo prosseguimento da contratação; e
+
+- fundamentação jurídica, ou seja, as normas legais e infralegais que amparam a contratação.
+
+Quadro 139 – Referências normativas para a fundamentação da contratação
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 6º Para os fins desta Lei, consideram-se: […] XXIII – termo de referência: documento necessário para a contratação de bens e serviços, que deve conter os seguintes parâmetros e elementos descritivos: […] b) fundamentação da contratação, que consiste na referência aos estudos técnicos preliminares correspondentes ou, quando não for possível divulgar esses estudos, no extrato das partes que não contiverem informações sigilosas;
+IN – SGD/ME 94/2022 | Art. 12. O Termo de referência ou Projeto básico será elaborado pela Equipe de Planejamento da Contratação a partir do Estudo Técnico Preliminar da Contratação, incluindo, no mínimo, as seguintes informações: […] IV – justificativa para contratação da solução, conforme art. 15; […] Art. 15. A justificativa para contratação deverá conter, pelo menos: I – o alinhamento da solução de TIC com os instrumentos de planejamento elencados no art. 6º; II – a relação entre a necessidade da contratação da solução de TIC e os respectivos volumes e características do objeto; III – a forma de cálculo utilizada para a definição do quantitativo de bens e serviços que compõem a solução; IV – os resultados e benefícios a serem alcançados com a contratação; e V – a motivação para permitir adesões por parte de órgãos ou entidades não participantes, nos casos de formação de Ata de Registro de Preços passível de adesões. Parágrafo único. A justificativa deve ser clara, precisa e suficiente, sendo vedadas justificativas genéricas, incapazes de demonstrar as reais necessidades da contratação.
+IN – Seges/ME 81/2022 | Art. 9º Deverão ser registrados no Sistema TR Digital os seguintes parâmetros e elementos descritivos: […] II – fundamentação da contratação, que consiste na referência aos estudos técnicos preliminares correspondentes, quando elaborados, ou, quando não for possível divulgar esses estudos, no extrato das partes que não contiverem informações sigilosas;
+IN – Seges/MP 5/2017 | Art. 30. O Termo de referência ou Projeto básico deve conter, no mínimo, o seguinte conteúdo: […] II – fundamentação da contratação; […] ANEXO V DIRETRIZES PARA ELABORAÇÃO DO PROJETO BÁSICO (PB) OU TERMO DE REFERÊNCIA (TR) 2. São diretrizes específicas a cada elemento do Termo de referência ou Projeto básico: […] 2.2. Fundamentação da contratação: a) Os Estudos Preliminares serão anexos do TR ou PB, quando for possível a sua divulgação; b) Quando não for possível divulgar os Estudos Preliminares devido a sua classificação, conforme a Lei nº 12. 527, de 2011, deverá ser divulgado como anexo do TR ou PB um extrato das partes que não contiverem informações sigilosas.
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 140 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 3205/2018 – TCU – Segunda Câmara | 9.6. dar ciência à [omissis] sobre as seguintes impropriedades: 9.6.4. contratação de serviços de fornecimento de energia elétrica com inexigibilidade de licitação, em dissonância com as normas que regem tais contratos, dispostas no art. 24, inciso XXII, da Lei 8.666/1993 (dispensa de licitação), bem como modificação do procedimento, não constando do processo a justificativa para a contratação do fornecimento pretendido , violando do princípio da motivação dos atos administrativos, identificada no subitem 11.2 desta instrução; (Grifo nosso)
+Acórdão 9907/2016-TCU-Segunda Câmara | 1.7. Determinar: 1.7.2. à [ omissis ]que se abstenha de incorrer nas falhas identificadas no Processo [ omissis ], adotando as medidas pertinentes com vistas a evitar a sua reincidência, atentando para a prevenção das seguintes falhas: 1.7.2.1. não localização no referido processo de contratação da análise e aprovação de minuta de edital pela assessoria jurídica; da publicação de aviso do edital ; das justificativas para a contratação; da pesquisa de preços; do termo de referência; e da autorização da unidade de gestão gerenciadora, […]; (Grifo nosso)
+Pesquisa de Jurisprudência | Execute a seguinte consulta na Pesquisa Integrada do TCU : (“fundamentação da contratação” ou “justificativas para a contratação”).ACORDAO
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+Quadro 141 – Riscos relacionados
+
+Riscos [4]
+Fundamentação da contratação não explicitada em nível de detalhe adequado, levando a dificuldades para as partes interessadas, como fornecedores, órgãos de controle e cidadãos, compreenderem a necessidade do gasto público, com consequentes questionamentos e atrasos na contratação até que as justificativas sejam reunidas e apresentadas (para, por exemplo, atender à solicitação de informações em processo de mandado de segurança com pedido de suspensão liminar da licitação).
+
+Fonte: Adaptado de Tribunal de Contas da União, 2014, item “Fundamentação da contratação”; e Tribunal de Contas da União, 2012, p. 136.
+
+[1] Tribunal de Contas da União, 2012, p. 132 – 134.
+
+[2] Decreto 10.947/2022, art. 17, caput e parágrafo único.
+
+[3] Lei 14.133/2021, art. 18, § 1º, inciso V.
+
+[4] Risco exclusivo da etapa de elaboração do TR. Os demais riscos relacionados aos elementos que compõem a fundamentação da contratação são tratados durante a elaboração do ETP.

@@ -1,0 +1,81 @@
+6.1.9. Meios alternativos de resolução de controvérsias
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/6-1-9-meios-alternativos-de-resolucao-de-controversias/
+======================================================================
+
+A Lei 14.133/2021 permite o uso de métodos alternativos para solucionar controvérsias na execução de contratos administrativos. Entre esses métodos estão a conciliação, a mediação, o comitê de resolução de disputas (dispute board) e a arbitragem. O objetivo é evitar a necessidade de recorrer ao processo judicial, proporcionando assim uma resolução mais ágil e eficiente dos impasses[1].
+
+Os meios alternativos podem ser adotados para as controvérsias relacionadas a direitos patrimoniais disponíveis, a exemplo das questões relacionadas ao restabelecimento do equilíbrio econômico-financeiro do contrato, ao inadimplemento de obrigações contratuais por quaisquer das partes e ao cálculo de indenizações.
+
+A conciliação e a mediação são métodos de solução consensual de conflitos. Nesses métodos, as partes envolvidas escolhem um terceiro imparcial para facilitar o diálogo e ajudar a resolver a controvérsia. O mediador e o conciliador não possuem poder decisório, mas buscam solucionar o conflito por meio do consenso entre as partes[2].
+
+Embora sejam processos parecidos, existem algumas diferenças entre a conciliação e a mediação. A conciliação é mais adequada para casos em que as partes não têm um vínculo anterior, pois o conciliador se concentra mais em resolver o problema, podendo sugerir alternativas de acordo. A mediação, por outro lado, é mais indicada para casos em que as partes têm uma relação anterior, pois o mediador se foca mais em restaurar o diálogo, ajudando as partes a compreenderem melhor as necessidades e interesses de cada uma e a encontrarem, por si mesmas, soluções consensuais que gerem benefícios mútuos[3].
+
+A arbitragem é meio para solução de litígios em que as partes concordam em se submeter à decisão de um ou mais árbitros, em vez de recorrer ao Poder Judiciário. A sentença arbitral é, portanto, impositiva para as partes[4]. A sentença arbitral somente pode ser declarada nula pelo Poder Judiciário caso apresente algum dos vícios insanáveis dispostos no art. 32 da Lei 9.307/1996[5]. Caso a Justiça declare nula uma sentença arbitral, determinará, se for o caso, que o árbitro ou o tribunal profira nova sentença arbitral[6].
+
+A arbitragem envolvendo a Administração Pública deve ser sempre de direito, ou seja, a decisão deve ser fundamentada na legislação aplicável ao caso concreto. É proibida a arbitragem por equidade, que utiliza critérios subjetivos, baseados no conhecimento dos árbitros. Além disso, deve ser dada publicidade ao procedimento arbitral[7].
+
+Quanto ao comitê de resolução de disputas, trata-se de colegiado composto por especialistas independentes em relação às partes, com conhecimento reconhecido na área do objeto do contrato. É nomeado para atuar durante toda a execução do contrato e pode ter poderes decisórios, ou atuar apenas como consultor ou de forma híbrida, dependendo dos poderes concedidos pelas partes[8].
+
+A Lei 14.133/2021 dispõe que o processo de escolha dos árbitros, dos colegiados arbitrais e dos comitês de resolução de disputas deve observar critérios isonômicos, técnicos e transparentes[9].
+
+Mesmo que não estejam previstos no contrato, as partes podem propor termo aditivo que permita o uso de meios alternativos para resolver controvérsias[10]. No caso da arbitragem, poderão firmar, depois da contratação, o compromisso arbitral.
+
+No caso da arbitragem[11], a previsão em contrato é feita por meio de cláusula compromissória, que pode detalhar as regras para a instituição do procedimento arbitral (cláusula cheia), ou não detalhar (cláusula vazia). Se as partes optarem por detalhar as condições de arbitragem, podem definir suas próprias regras (arbitragem ad hoc) ou indicar as regras de algum órgão arbitral institucional ou entidade especializada (arbitragem institucional)[12].
+
+Por fim, vale comentar que o Decreto 10.025/2019 dispôs sobre o uso da arbitragem para dirimir litígios que envolvam a Administração Pública federal nos setores portuário e de transporte rodoviário, ferroviário, aquaviário e aeroportuário, regulamentando o inciso XVI do caput do art. 35 da Lei 10.233/2001, o § 1º do art. 62 da Lei 12.815/2013, e o § 5º do art. 31 da Lei 13.448/2017.
+
+Quadro 425 – Referências normativas para meios alternativos de resolução de controvérsias
+
+Normativos | Dispositivos
+Lei 14.133/2021 | DOS MEIOS ALTERNATIVOS DE RESOLUÇÃO DE CONTROVÉRSIAS Art. 151. Nas contratações regidas por esta Lei, poderão ser utilizados meios alternativos de prevenção e resolução de controvérsias, notadamente a conciliação, a mediação, o comitê de resolução de disputas e a arbitragem. Parágrafo único. Será aplicado o disposto no caput deste artigo às controvérsias relacionadas a direitos patrimoniais disponíveis, como as questões relacionadas ao restabelecimento do equilíbrio econômico-financeiro do contrato, ao inadimplemento de obrigações contratuais por quaisquer das partes e ao cálculo de indenizações. Art. 152. A arbitragem será sempre de direito e observará o princípio da publicidade. Art. 153. Os contratos poderão ser aditados para permitir a adoção dos meios alternativos de resolução de controvérsias. Art. 154. O processo de escolha dos árbitros, dos colegiados arbitrais e dos comitês de resolução de disputas observará critérios isonômicos, técnicos e transparentes.
+Lei 13.140/2015 | Art. 1º Esta Lei dispõe sobre a mediação como meio de solução de controvérsias entre particulares e sobre a autocomposição de conflitos no âmbito da Administração Pública. Parágrafo único. Considera-se mediação a atividade técnica exercida por terceiro imparcial sem poder decisório, que, escolhido ou aceito pelas partes, as auxilia e estimula a identificar ou desenvolver soluções consensuais para a controvérsia. […] Art. 32. A União, os Estados, o Distrito Federal e os Municípios poderão criar câmaras de prevenção e resolução administrativa de conflitos, no âmbito dos respectivos órgãos da Advocacia Pública, onde houver, com competência para: I – dirimir conflitos entre órgãos e entidades da Administração Pública; II – avaliar a admissibilidade dos pedidos de resolução de conflitos, por meio de composição, no caso de controvérsia entre particular e pessoa jurídica de direito público; […] § 5º Compreendem-se na competência das câmaras de que trata o caput a prevenção e a resolução de conflitos que envolvam equilíbrio econômico-financeiro de contratos celebrados pela administração com particulares.
+Lei 13.105/2015 (Código de Processo Civil) | Art. 165. Os tribunais criarão centros judiciários de solução consensual de conflitos, responsáveis pela realização de sessões e audiências de conciliação e mediação e pelo desenvolvimento de programas destinados a auxiliar, orientar e estimular a autocomposição. […] § 2º O conciliador, que atuará preferencialmente nos casos em que não houver vínculo anterior entre as partes, poderá sugerir soluções para o litígio, sendo vedada a utilização de qualquer tipo de constrangimento ou intimidação para que as partes conciliem. § 3º O mediador, que atuará preferencialmente nos casos em que houver vínculo anterior entre as partes, auxiliará aos interessados a compreender as questões e os interesses em conflito, de modo que eles possam, pelo restabelecimento da comunicação, identificar, por si próprios, soluções consensuais que gerem benefícios mútuos.
+Lei 9.307/1996 | Art. 1º As pessoas capazes de contratar poderão valer-se da arbitragem para dirimir litígios relativos a direitos patrimoniais disponíveis. § 1º A Administração Pública direta e indireta poderá utilizar-se da arbitragem para dirimir conflitos relativos a direitos patrimoniais disponíveis. (Incluído pela Lei nº 13.129, de 2015) (Vigência) […] Art. 2º A arbitragem poderá ser de direito ou de eqüidade, a critério das partes. § 1º Poderão as partes escolher, livremente, as regras de direito que serão aplicadas na arbitragem, desde que não haja violação aos bons costumes e à ordem pública. § 2º Poderão, também, as partes convencionar que a arbitragem se realize com base nos princípios gerais de direito, nos usos e costumes e nas regras internacionais de comércio. § 3º A arbitragem que envolva a Administração Pública será sempre de direito e respeitará o princípio da publicidade. (Incluído pela Lei nº 13.129, de 2015) (Vigência)
+Recomendação – CNJ 140/2023 | Recomenda e regulamenta a adoção de métodos de resolução consensual de conflitos pela Administração Pública dos órgãos do Poder Judiciário em controvérsias oriundas de contratos administrativos.
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 426 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 1333/2022-TCU-Plenário | [Voto] Quanto à previsão de arbitragem e mediação para solução de conflitos contratuais, a jurisprudência do TCU indica que é lícita a utilização de câmaras privadas de arbitragem para a solução de conflitos em contratos de concessão. Todavia, esses mecanismos não afastam o exercício do controle externo sobre a regular aplicação de recursos públicos, a exemplo dos Acórdão 3160/2020-TCU-Plenário e 1.760/2016-TCU-Plenário, ambos de minha relatoria. No presente caso, não se tratava de litígio entre contratada e contratante, conforme frisou a unidade instrutiva.
+Acórdão 3160/2020-TCU-Plenário | [Voto] 9. Como bem definiu a unidade técnica, a arbitragem é um instrumento de política pública que tem o efeito de aumentar a segurança jurídica e melhorar o ambiente institucional da desestatização da infraestrutura. O instituto é apto a enfrentar o problema da excessiva judicialização dos contratos de concessão, sendo um meio alternativo de composição de conflitos envolvendo direitos patrimoniais disponíveis, no qual as partes, por meio de um árbitro por elas escolhido, comprometem-se a cumprir fielmente a decisão arbitral, abstendo-se de submeter o assunto ao Poder Judiciário. […] 21. Nesse contexto, pertinente a ponderação feita pela SeinfraPortoFerrovia no sentido de que a Administração deve ter a liberdade de poder avaliar tecnicamente qual o método adequado para determinados litígios, pois há casos em que a complexidade envolvida é tão grande que é razoável deixar margem de liberdade para se escolher entre uma câmara pública ou uma privada, especializada na questão. 22. Ressalto que a seleção indistinta de umas das câmaras credenciadas, públicas ou privadas, sempre por acordo entre as partes envolvidas, atende ao princípio da consensualidade e da imparcialidade, próprios do instituto da arbitragem. 23. Como asseverou Flávio Amaral Garcia, procurador do estado do Rio de Janeiro e professor da Fundação Getúlio Vargas, na escolha da câmara arbitral, há que se “levar em consideração, dentre outros fatores, a tradição e respeitabilidade da Câmara Arbitral, a sua especialização, a lista dos árbitros disponíveis, a qualidade do seu regulamento, os custos do processo, a localização da sede e outros critérios ou parâmetros que venham a ser fixados nos respectivos atos normativos”. Arremata o autor que a escolha seria fundamentalmente consensual: “Consensualidade pressupõe discricionariedade. Discricionariedade pressupõe razoabilidade, transparência e motivação. Não devemos temer estas ideias, mas conformá-las com equilíbrio e moderação”. […] 28. Aspecto importante a realçar é que, quando está envolvido ente público, por princípio constitucional e por estar positivado na Lei de Arbitragem, o processo arbitral, como regra geral, sempre deverá respeitar o princípio da publicidade, com respeito à transparência. Nessa seara, o sigilo não foi previsto como princípio da arbitragem, em contraposição à tradição do instituto. 29. Desse modo, deve ser divulgada a existência de arbitragem com a Administração Pública, com a identificação das partes, do objeto, dos principais atos (convenção arbitral, termo arbitral, a íntegra da sentença arbitral e o relatório do desenrolar da arbitragem) e das despesas que o erário teve com o processo (honorários de árbitros, verbas de sucumbência, custas da câmara arbitral e despesas periciais).
+Pesquisa de Jurisprudência | Execute consulta na Jurisprudência Selecionada do TCU . No campo de busca, consulte o termo “arbitragem” .
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+Quadro 427 – Riscos relacionados
+
+Riscos
+Falta de avaliação sobre a conveniência, os custos e os benefícios de usar meios alternativos para resolver conflitos e sobre qual meio escolher, levando à: inclusão de cláusula contratual para utilização de meio alternativo sem que haja real necessidade no caso concreto, com consequentes gastos desnecessários com contratação de arbitragem ou com comitê de resolução de disputas, onerando injustificadamente a execução do contrato;ausência de previsão, no edital e no contrato, de um meio alternativo ou das regras para usá-lo, com consequentes atrasos na solução de conflitos, e necessidade de aditivo para autorizar o uso do meio alternativo.
+Inclusão de cláusula compromissória na minuta do contrato sem estabelecer as regras para a instituição da arbitragem, levando a diferenças de entendimentos e expectativas entre as partes para a realização da arbitragem, com consequente atraso ou impossibilidade de instauração da arbitragem e, portanto, da solução da controvérsia e/ou necessidade de entrar com uma ação judicial para definir as condições da arbitragem ou para resolver em definitivo a controvérsia.
+Inclusão de cláusula compromissória na minuta do contrato com opção de arbitragem ad hoc (em vez da arbitragem institucional), levando à insegurança para instaurar o processo arbitral quando se fizer necessário, com consequente atraso ou impossibilidade de instauração da arbitragem e, portanto, da solução da controvérsia e/ou necessidade de entrar com uma ação judicial para definir as condições da arbitragem ou para resolver em definitivo a controvérsia.
+
+Fonte: Elaboração própria com base em Oliveira, 2022, item 4.5; e Sarai et al, 2022, p. 1.386.
+
+[1] Lei 14.133/2021, art. 151.
+
+[2] Lei 13.105/2015 (Código de Processo Civil), art. 3º, § 3º, Lei 13.140/2015, art. 1º, parágrafo único, art. 4º, caput e § 1º.
+
+[3] Lei 13.105/2015 (Código de Processo Civil), art. 165, §§ 2º e 3º.
+
+[4] Lei 9.307/1996, arts. 18 e 19.
+
+[5] Lei 9.307/1996, art. 33, caput.
+
+[6] Lei 9.307/1996, art. 33, §2º.
+
+[7] Lei 14.133/2021, art. 152; Lei 9.307/1996, art. 2º, § 3º.
+
+[8] Projeto de Lei 2.421/2021, para regulamentar a instalação de Comitês de Prevenção e Solução de Disputas em
+
+contratos celebrados pela União, pelos Estados, pelo Distrito Federal e pelos Municípios.
+
+[9] Lei 14.133/2021, art. 154.
+
+[10] Lei 14.133/2021, art. 153.
+
+[11] Lei 9.307/1996, arts. 3º a 7º, art. 13, § 3º, art. 21, caput e § 1º.
+
+[12] Justen Filho, 2021, p. 1.589; Oliveira, 2022, item 4.5.

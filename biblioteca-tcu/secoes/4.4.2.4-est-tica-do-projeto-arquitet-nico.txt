@@ -1,0 +1,36 @@
+4.4.2.4. Estética do projeto arquitetônico
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/4-4-2-4-estetica-do-projeto-arquitetonico/
+======================================================================
+
+A estética do projeto arquitetônico é a “cara” do projeto. No anteprojeto de uma edificação é a sua planta de implantação, layout dos pavimentos-tipo, subsolos e cobertura, bem como a arquitetura da fachada. No caso de um ginásio esportivo, por exemplo, já pode ser definido se o telhado será em arco ou um telhado plano. O conteúdo técnico de um anteprojeto de arquitetura para uma obra de edificação encontra-se definido na norma da ABNT NBR 13.539/1995:
+
+- desenhos:
+
+- planta geral de implantação;
+
+- planta de terraplenagem;
+
+- cortes de terraplenagem;
+
+- plantas dos pavimentos;
+
+- plantas das coberturas;
+
+- cortes (longitudinais e transversais);
+
+- elevações (fachadas); e
+
+- detalhes (de elementos da edificação e de seus componentes construtivos);
+
+- texto:
+
+- memorial descritivo da edificação; e
+
+- memorial descritivo dos elementos da edificação, dos componentes construtivos e dos materiais de construção.
+
+Já numa obra de pavimentação ou de saneamento (coleta de esgoto, drenagem pluvial ou abastecimento de água), é usual que o anteprojeto defina o traçado geométrico da via a ser pavimentada ou da rede de abastecimento de água ou de coleta de esgoto ou de drenagem. Traçado geométrico é o caminho a ser percorrido pela rua a ser pavimentada ou pelas tubulações da rede de esgoto ou de drenagem, por exemplo.
+
+A área de influência é a área atendida pelo projeto e pode variar conforme a tipologia de obra. No caso de projetos de drenagem, é definida de acordo com o relevo e as regiões de captação das águas da chuva; em projetos de equipamentos públicos, define a região geográfica de cobertura do atendimento.
+
+Essas informações serão disponibilizadas em formato de textos e de gráficos, desenhos, mapas e outras formas de representação que permitam indicar os parâmetros de projeto em grau de detalhamento compatível com esse estágio de evolução.

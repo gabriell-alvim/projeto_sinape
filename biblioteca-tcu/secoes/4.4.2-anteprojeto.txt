@@ -1,0 +1,91 @@
+4.4.2. Anteprojeto
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/4-4-2-anteprojeto/
+======================================================================
+
+O anteprojeto (AP) é o documento produzido na fase de planejamento de contratações de obras e serviços de engenharia, a fim de especificar o objeto escolhido para o atendimento da necessidade da Administração.
+
+O AP é o documento principal que subsidia a contratação no regime de contratação integrada, sendo composto de desenhos, memoriais, demonstrativos, especificações e definições necessárias para a modelagem da licitação com emprego desse regime. Nos demais regimes, a contratação é baseada no projeto básico (PB), tratado no item 4.4.3. Mesmo nos casos de contratação integrada, o PB deverá ser elaborado em etapa posterior à contratação e guardar correspondência com o anteprojeto, assegurando-se as condições de qualidade, vida útil e desempenho nele definidas.
+
+Assim como o termo de referência, esse documento deve ser fundamentado em estudo técnico preliminar que tenha concluído pela viabilidade da contratação.
+
+O anteprojeto deve contemplar os seguintes parâmetros e elementos descritivos[1]:
+
+- demonstração e justificativa do programa de necessidades, avaliação de demanda do público-alvo, motivação técnico-econômico-social do empreendimento, visão global dos investimentos e definições relacionadas ao nível de serviço desejado;
+
+- condições de solidez, de segurança e de durabilidade;
+
+- prazo de entrega;
+
+- estética do projeto arquitetônico, traçado geométrico e/ou projeto da área de influência, quando cabível;
+
+- parâmetros de adequação ao interesse público, de economia na utilização, de facilidade na execução, de impacto ambiental e de acessibilidade;
+
+- proposta de concepção da obra ou do serviço de engenharia;
+
+- projetos anteriores ou estudos preliminares que embasaram a concepção proposta;
+
+- levantamento topográfico e cadastral;
+
+- pareceres de sondagem; e
+
+- memorial descritivo dos elementos da edificação, dos componentes construtivos e dos materiais de construção, de forma a estabelecer padrões mínimos para a contratação.
+
+O termo de referência, o anteprojeto e o projeto básico consolidam um refinamento das informações contidas no ETP, que serão ampliadas e aprofundadas. Eles representam o planejamento definitivo para especificação e detalhamento da solução escolhida, conforme objeto a ser contratado. Comumente, o termo de referência é utilizado para bens e serviços, o anteprojeto para obras e serviços de engenharia em regime de contratação integrada, e o projeto básico para obras e serviços de engenharia nos demais regimes.
+
+Com as novidades na forma de contratação trazidas pela Lei 14.133/2021, a etapa do anteprojeto ganhou especial importância. Nessa etapa, alguns elementos principais do projeto já deverão estar definidos, porém, é possível que haja ainda alguma flexibilidade no detalhamento de soluções, de acordo com a estratégia de contratação a ser definida.
+
+Há casos, por exemplo, em que haverá liberdade para que a empresa executora da obra adote soluções metodológicas e tecnológicas inovadoras. Nesses casos, é essencial que as partes do projeto que admitam alguma flexibilidade quanto à solução adotada, assim como aquelas que devam ser seguidas exatamente como previstas, estejam bem definidas em uma matriz de riscos.
+
+Importante observar que, em regra, as premissas e obrigações de resultado não podem ser alteradas pela contratante. Por isso, caso haja liberdade para implementar modificações nestas, a Administração deverá estabelecer explicitamente quais frações dela poderão ser alteradas.
+
+É possível, por exemplo, contratar a obra de uma escola, definindo no anteprojeto o desenho arquitetônico, com o tamanho das salas, das janelas e a posição, mas deixando a cargo do contratado optar por diferentes tipos de estrutura, como metálica, de concreto armado ou de alvenaria estrutural.
+
+Especificamente nos regimes de contratação integrada e semi-integrada[2], a Lei proíbe a alteração dos valores contratuais causada por erros ou falhas do projeto, desenvolvido posteriormente pelo contratado, a partir das informações do anteprojeto. Isso não significa que as obras realizadas nesses modelos de contratação não possam ter seus contratos aditivados, o que é possível em situações mais restritas do que ocorre nos demais regimes de execução, conforme a seguir[3]:
+
+- para restabelecimento do equilíbrio econômico-financeiro decorrente de caso fortuito ou força maior;
+
+- por necessidade de alteração do projeto ou das especificações para melhor adequação técnica aos objetivos da contratação, a pedido da Administração, desde que não decorrente de erros ou omissões por parte do contratado, observados os limites para alteração contratual da Lei 14.133/2021;
+
+- por alteração do projeto básico nas contratações semi-integradas, mediante prévia autorização da Administração, nos casos em que o construtor propõe inovações ou soluções superiores, que trarão algum tipo de benefício ao setor público, em termos de economia de custos, redução de prazos, facilidade de manutenção ou operação ou melhoria da qualidade; e
+
+- por ocorrência de evento superveniente alocado na matriz de riscos como de responsabilidade da Administração.
+
+Quadro 164 – Referências normativas para o anteprojeto
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 6º Para os fins desta Lei, consideram-se: XXIV – anteprojeto: peça técnica com todos os subsídios necessários à elaboração do projeto básico, que deve conter, no mínimo, os seguintes elementos: a) demonstração e justificativa do programa de necessidades, avaliação de demanda do público-alvo, motivação técnico-econômico-social do empreendimento, visão global dos investimentos e definições relacionadas ao nível de serviço desejado; b) condições de solidez, de segurança e de durabilidade; c) prazo de entrega; d) estética do projeto arquitetônico, traçado geométrico e/ou projeto da área de influência, quando cabível; e) parâmetros de adequação ao interesse público, de economia na utilização, de facilidade na execução, de impacto ambiental e de acessibilidade; f) proposta de concepção da obra ou do serviço de engenharia; g) projetos anteriores ou estudos preliminares que embasaram a concepção proposta; h) levantamento topográfico e cadastral; i) pareceres de sondagem; j) memorial descritivo dos elementos da edificação, dos componentes construtivos e dos materiais de construção, de forma a estabelecer padrões mínimos para a contratação; Art. 14. Não poderão disputar licitação ou participar da execução de contrato, direta ou indiretamente : I – autor do anteprojeto, do projeto básico ou do projeto executivo , pessoa física ou jurídica, quando a licitação versar sobre obra, serviços ou fornecimento de bens a ele relacionados; Art. 19 § 3º Nas licitações de obras e serviços de engenharia e arquitetura, sempre que adequada ao objeto da licitação, será preferencialmente adotada a Modelagem da Informação da Construção ( Building Information Modelling – BIM) ou tecnologias e processos integrados similares ou mais avançados que venham a substituí-la. […] Art. 46. § 1º É vedada a realização de obras e serviços de engenharia sem projeto executivo, ressalvada a hipótese prevista no § 3º do art. 18 desta Lei . § 2º A Administração é dispensada da elaboração de projeto básico nos casos de contratação integrada , hipótese em que deverá ser elaborado anteprojeto de acordo com metodologia definida em ato do órgão competente, observados os requisitos estabelecidos no inciso XXIV do art. 6º desta Lei. § 3º Na contratação integrada, após a elaboração do projeto básico pelo contratado, o conjunto de desenhos, especificações, memoriais e cronograma físico-financeiro deverá ser submetido à aprovação da Administração, que avaliará sua adequação em relação aos parâmetros definidos no edital e conformidade com as normas técnicas, vedadas alterações que reduzam a qualidade ou a vida útil do empreendimento e mantida a responsabilidade integral do contratado pelos riscos associados ao projeto básico. § 4º Nos regimes de contratação integrada e semi-integrada, o edital e o contrato, sempre que for o caso, deverão prever as providências necessárias para a efetivação de desapropriação autorizada pelo poder público, bem como: I – o responsável por cada fase do procedimento expropriatório; II – a responsabilidade pelo pagamento das indenizações devidas; III – a estimativa do valor a ser pago a título de indenização pelos bens expropriados, inclusive de custos correlatos; IV – a distribuição objetiva de riscos entre as partes, incluído o risco pela diferença entre o custo da desapropriação e a estimativa de valor e pelos eventuais danos e prejuízos ocasionados por atraso na disponibilização dos bens expropriados; V – em nome de quem deverá ser promovido o registro de imissão provisória na posse e o registro de propriedade dos bens a serem desapropriados. § 5º Na contratação semi-integrada, mediante prévia autorização da Administração, o projeto básico poderá ser alterado, desde que demonstrada a superioridade das inovações propostas pelo contratado em termos de redução de custos, de aumento da qualidade, de redução do prazo de execução ou de facilidade de manutenção ou operação, assumindo o contratado a responsabilidade integral pelos riscos associados à alteração do projeto básico. (Grifo nosso)
+
+Fonte: Elaboração própria a partir da norma consultada.
+
+Quadro 165 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 831/2023 – TCU – Plenário | 9.1.4. alguns acréscimos observados decorreram da não aceitação do projeto básico pela administração por sua inadequação ao anteprojeto e não de alterações de escopo ou de novos encargos impostos pela Infraero, caracterizando aditamento irregular do ajuste, haja vista que a inadequação do projeto desenvolvido pelo contratado deve ensejar a sua rejeição, e não a alteração do contrato para contemplar a solução desejada pelo contratante, em violação ao art. 66, § 2º, do Decreto 7.581/2011; Na contratação integrada, são irregulares acréscimos contratuais observados devido a não aceitação do projeto básico pela Administração por sua inadequação ao anteprojeto, haja vista que a inadequação dos projetos desenvolvidos pelo contratado deve ensejar a sua rejeição e não o aditamento contratual para contemplar a solução desejada pelo contratante, em violação ao art. 66, § 2º, do Decreto 7.581/2011. Somente são admitidos aditamentos contratuais em virtude de alterações de escopo ou de novos encargos impostos pela administração.
+Acórdão 2291/2022 – TCU – Plenário | 9.4. com fundamento no art. 9º da Resolução 315/2020, dar ciência ao [ omissis ] de que, nas contratações integradas, a sistemática de pagamentos de forma unitizada, ou seja, por quilômetro de grupos de serviços executados na rodovia, ocasiona o risco de jogo de planilha e de jogo de cronograma, caso o contratado priorize a execução dos trechos de menor custo de construção, cabendo o emprego de mecanismos contratuais alternativos de pagamento para mitigação desses riscos, a exemplo da adoção de valores por quilômetro diferenciados em função da dificuldade de execução de trechos heterogêneos;
+Acórdão 544/2021 – TCU – Plenário | [Enunciado] Na contratação integrada, se não houver alocação objetiva de riscos entre as partes, prevista no edital do certame, o contratado deve assumir eventuais encargos resultantes de erros, incompletudes e omissões do anteprojeto, identificados quando da elaboração dos projetos básico e executivo, uma vez que tal situação, inerente a esse regime de contratação, pode ser considerada álea ordinária.
+Acórdão 2591/2017 – TCU – Plenário | [Enunciado] Na contratação integrada do RDC, eventuais ganhos ou encargos oriundos das soluções adotadas pelo contratado na elaboração do projeto básico devem ser auferidos ou suportados única e exclusivamente pelo particular, independentemente da existência de uma matriz de riscos disciplinando a contratação. Eventuais omissões ou indefinições no anteprojeto, em regra, não ensejam a celebração de termos de aditamento contratual, pois anteprojeto não é projeto básico.
+Acórdão 3005/2015 – TCU – Plenário | [Enunciado] Mesmo nas hipóteses em que a legislação permite a contratação mediante anteprojeto de engenharia, exige-se a elaboração de pareceres de sondagens para a caracterização do objeto a ser licitado, quando a definição da metodologia construtiva depender da capacidade de suporte dos solos.
+Acórdão 2980/2015 – TCU – Plenário | [Enunciado] Nas contratações integradas, é imprescindível a inclusão da matriz de risco detalhada no instrumento convocatório, com alocação a cada signatário dos riscos inerentes ao empreendimento.
+Acórdão 2580/2014 – TCU – Plenário | [Enunciado] Nas licitações para a realização de obras ou serviços em que for permitido à futuro contratado a modificação da metodologia ou tecnologia construtiva a ser utilizada, o projeto básico (ou anteprojeto) funciona como parâmetro para o respectivo referencial de preços e para a avaliação da vantagem e economicidade das propostas a serem apresentadas. Portanto, deve prever, em seu pré-dimensionamento, a utilização de metodologias/tecnologias conhecidas pela administração mais prováveis de serem utilizadas, em termos da solução menos onerosa que atenda aos requisitos de serviço, de uso, de desempenho, de garantia, de manutenção, de sustentabilidade e de durabilidade demandados, dentre outros a serem objetivamente definidos.
+Acórdão 2145/2013 – TCU – Plenário | [Enunciado] Nas contratações do tipo turn key em que a elaboração do projeto básico for de responsabilidade do contratado (contratação integrada), deve ser promovida, previamente à abertura da licitação, a definição adequada das características do objeto a ser contratado, por meio de estudos, ensaios e projetos preliminares de engenharia.
+Acórdão 1510/2013 – TCU – Plenário | [Enunciado] Nas licitações baseadas no regime de contratação integrada do RDC, e tratando-se de obra de edificação, mostra-se necessário, em regra, que o anteprojeto preveja a arquitetura aplicada ao empreendimento, uma vez que essa informação é definidora do produto a ser entregue à Administração e constitui-se em elemento fundamental para a avaliação de eventuais metodologias diferenciadas para o seu adimplemento, como também para a elaboração dos demais projetos de engenharia a serem desenvolvidos à época do projeto básico.
+Acórdão 1310/2013 – TCU – Plenário | 9.1.4) envide esforços para que os anteprojetos utilizados nas contratações integradas sejam sempre analisados e criticados pelo setor técnico competente em projetos da Autarquia; […] 9.1.6) exija do contratado, juntamente com o projeto básico a ser aprovado pelo setor de projetos do Dnit, a apresentação de cronograma da obra, levando em conta a produtividade esperada para cada serviço e as relações de interdependência entre eles, sugerindo-se para isso a utilização da técnica diagrama PERT-CPM;
+Pesquisa de Jurisprudência | Execute consulta na Jurisprudência selecionada . Pesquise na “árvore de classificação” por “anteprojeto”, filtre pela área “licitação” .
+
+Fonte: Elaboração própria a partir de consulta a jurisprudência do TCU.
+
+Quadro 166 – Riscos relacionados
+
+Riscos
+Anteprojeto com soluções antieconômicas, levando ao desenvolvimento de projetos básico e executivo baseados em premissas antieconômicas, com consequente elevação dos custos suportados pela Administração sem que haja um benefício correspondente, pois ainda que o projeto básico seja aprimorado pelas construtoras, as economias obtidas não serão refletidas no preço ofertado e serão captadas apenas pelo agente privado.
+Programa de necessidades que não reflete a real necessidade a ser atendida, levando à elaboração de um projeto básico deficiente, com consequente execução de um empreendimento inadequado às necessidades da população a ser atendida.
+Estudo técnico preliminar mal elaborado e falhas no levantamento da situação do local da obra durante a elaboração do anteprojeto, levando à elaboração de projetos básicos incompletos ou deficientes, com consequente aumento do prazo e do custo de execução do empreendimento e paralisação da obra pública.
+
+Fonte: Elaboração própria.
+
+[1] Lei 14.133/2021, art. 6º, inciso XXIV.
+
+[2] Lei 14.133/2021, art. 133, inciso II.
+
+[3] Lei 14.133/2021, art. 46, § 5º e art. 133.

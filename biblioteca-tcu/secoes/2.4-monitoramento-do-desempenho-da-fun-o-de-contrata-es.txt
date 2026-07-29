@@ -1,0 +1,82 @@
+2.4. Monitoramento do desempenho da função de contratações
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/2-4-monitoramento-do-desempenho-da-funcao-de-contratacoes/
+======================================================================
+
+Definidos objetivos, indicadores e metas para a função de contratações (vide item 2.3.2.1), cabe à governança monitorar o desempenho dessa função organizacional[1].
+
+Uma das formas de monitorar o desempenho é por meio de relatórios de controle da gestão[2]. Esses relatórios devem fornecer informações atualizadas e precisas, apontando alertas ou problemas, para que a instância interna de governança (conselho ou alta administração) aprove as medidas para resolver os problemas detectados ou para evitar que eles ocorram.
+
+Outra fonte de informação que pode ser utilizada para monitorar o desempenho da função de contratações é o feedback de clientes internos e externos.
+
+Uma das principais utilidades das informações resultantes do monitoramento é a identificação de oportunidades de melhoria. Ao analisar os dados coletados, é possível identificar áreas ou processos que podem ser aprimorados para obter melhores resultados. Por exemplo, se o monitoramento revelar um alto índice de retrabalho em determinada etapa do processo de contratações, isso pode indicar a necessidade de revisar e melhorar os procedimentos nessa área específica.
+
+Além disso, as informações obtidas também permitem a correção de desvios de objetivos e metas estabelecidos. Durante o monitoramento, é possível identificar se os resultados estão aquém do esperado. Caso sejam identificados desvios, é importante tomar medidas corretivas para garantir que os objetivos sejam alcançados. Por exemplo, se o tempo médio de contratação estiver muito acima da meta estabelecida, podem ser implementadas ações para agilizar o processo e reduzir esse tempo.
+
+Outra utilidade das informações resultantes do monitoramento é o reconhecimento do bom desempenho. Ao analisar os dados coletados, é possível identificar áreas ou indivíduos que estão se destacando e obtendo resultados positivos. Esse reconhecimento pode ser feito por meio de premiações, incentivos ou simplesmente pelo elogio e reconhecimento público. Isso contribui para motivar os colaboradores e reforçar a importância do bom desempenho.
+
+As informações obtidas por meio do monitoramento também são essenciais para retroalimentar o planejamento. Com base nos dados coletados, é possível avaliar se as metas e objetivos estabelecidos foram alcançados, se novas metas e objetivos devem ser estabelecidos e se alguma oportunidade de melhoria identificada deve ser priorizada. Essa retroalimentação é fundamental para garantir que o planejamento esteja sempre alinhado com a realidade e as necessidades da organização.
+
+Para que seja possível monitorar o desempenho da função de contratações, é necessário estabelecer rotinas, a serem executadas pela gestão, de coleta e análise dos dados. Além disso, é importante atribuir responsabilidades pela coleta e análise, definir o formato e a frequência dos relatórios, e a forma de disponibilização desses relatórios à instância interna de governança.
+
+Podem ser adotados indicadores de diferentes tipos, como os de insumos, produtos, resultados e eficiência. Esses indicadores podem abranger uma série de aspectos, como a eficácia e eficiência dos processos de trabalho de contratações, a transparência das contratações, a gestão de contratos e o desenvolvimento profissional dos colaboradores e gestores envolvidos na função de contratações, entre outros[3].
+
+É fundamental que o monitoramento seja realizado de forma contínua e sistemática, para que seja possível identificar eventuais problemas e implementar melhorias. Os relatórios gerados devem ser claros e acessíveis, de forma a facilitar a compreensão e tomada de decisões por parte da instância interna de governança.
+
+Também é necessário criar um ambiente propício para a coleta de dados e análise, garantindo a disponibilidade de recursos adequados e a capacitação dos profissionais envolvidos.
+
+Um exemplo prático de atividade de monitoramento relacionada à eficácia do planejamento das contratações é o controle do cronograma do PCA associado ao controle da execução do orçamento.
+
+Nesse contexto, o indicador do PCA pode alertar que o cronograma está atrasado e que não será possível determinado setor executar o seu orçamento. Diante desse alerta, a área de contratações deve informar à alta administração para que ela possa intervir e tomar medidas corretivas. Uma possível ação seria autorizar o remanejamento dos recursos para outra área que esteja apta a executar as atividades previstas no orçamento.
+
+Além disso, outra ação que pode ser tomada é a realização de aditivos em contratos que não haviam sido priorizados no plano inicial. Isso permite que as contratações necessárias sejam feitas, mesmo que não estivessem previstas anteriormente. No entanto, é importante ressaltar que essa medida deve ser realizada de forma cautelosa, garantindo que as contratações adicionais sejam realmente essenciais e que não comprometam o orçamento de outras áreas.
+
+Nesse exemplo, o alerta dado pelo indicador e a atuação oportuna da governança evitarão a devolução do orçamento, as contratações realizadas às pressas ou as adesões a atas de registro de preços sem o devido planejamento.
+
+Sobre o assunto, cabe lembrar que o Decreto 10.947/2022 determina a elaboração, a cada dois meses, de um relatório de gestão de riscos do PCA. Esse relatório é essencial para monitorar os riscos associados à possibilidade de que alguns itens do plano não sejam efetivamente contratados até o final do ano fiscal[4].
+
+Quadro 36 – Referências normativas para monitorar o desempenho da função de contratações
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 11. […] Parágrafo único. A alta administração do órgão ou entidade é responsável pela governança das contratações e deve implementar processos e estruturas , inclusive de gestão de riscos e controles internos, para avaliar, direcionar e monitorar os processos licitatórios e os respectivos contratos […] (Grifo nosso)
+Lei 12.527/2011 | Art. 7º O acesso à informação de que trata esta Lei compreende , entre outros, os direitos de obter: […] VII – informação relativa : a) à implementação, acompanhamento e resultados dos programas, projetos e ações dos órgãos e entidades públicas, bem como metas e indicadores propostos ; […] (Grifo nosso)
+Decreto 9.203/2017 | Art. 15-A. São competências dos comitês internos de governança, instituídos pelos órgãos e entidades da Administração Pública federal direta, autárquica e fundacional: (Incluído pelo Decreto nº 9.901, de 2019) […] II – incentivar e promover iniciativas que busquem implementar o acompanhamento de resultados no órgão ou na entidade , que promovam soluções para melhoria do desempenho institucional ou que adotem instrumentos para o aprimoramento do processo decisório; (Incluído pelo Decreto nº 9.901, de 2019) […] (Grifo nosso)
+Portaria – Seges/ME 8.678/2021 | Art. 20. A alta administração dos órgãos e entidades deverá implementar e manter mecanismos e instrumentos de governança das contratações públicas estabelecendo, no âmbito de sua competência, no mínimo: I – formas de acompanhamento de resultados , com indicadores e metas para a gestão dos processos de contratações ; II – iniciativas que promovam soluções para melhoria do desempenho institucional , com apoio, quando possível, dos resultados da gestão de riscos e do controle preventivo; […] (Grifo nosso)
+IN – Seges/ME 24/2020 | Art. 2º Para fins desta Instrução Normativa, considera-se: […] III – gestão estratégica : processo de gerenciamento superior, direcionado para a implementação da estratégia, que busca obter a melhor relação entre estruturas, recursos de toda ordem e processos de trabalho, interatuantes e harmônicos entre si, operados a partir de um processo decisório estratégico, com o propósito de conduzir, monitorar e avaliar a execução de projetos, programas, atividades, ou ações, de uma instituição, visando a obtenção de eficiência, eficácia e efetividade na produção dos resultados desejados . O planejamento estratégico é o principal instrumento da gestão estratégica; e […] (Grifo nosso)
+Resolução – CNJ 347/2020 | Art. 33. Compete à alta administração dos órgãos do Poder Judiciário, observadas as diretrizes do art. 3º e as demais disposições desta Resolução, implementar objetivos, indicadores e metas para a gestão de contratações , que evidenciem: I – formas de acompanhamento de desempenho e de resultados; II – iniciativas que promovam soluções para melhoria do desempenho institucional , com apoio, quando possível, dos resultados da gestão de riscos; (Grifo nosso)
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 37 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 1049/2019-TCU-Plenario | 9.1.1.1. estabeleça formalmente mecanismos que a administração adotará para acompanhar o desempenho da gestão das aquisições ; […] 9.1.2.1. estabeleça formalmente e de modo unificado: 9.1.2.1.1. a. objetivos organizacionais para a gestão das aquisições, alinhados às estratégias de negócio ; 9.1.2.1.2. iniciativas/ações a serem implementadas para atingir os objetivos estabelecidos; 9.1.2.1.3. pelo menos um indicador para cada objetivo definido, preferencialmente em termos de benefícios para o negócio da organização; 9.1.2.1.4. metas para cada indicador definido; 9.1.2.1.5. mecanismos que a administração adotará para acompanhar o desempenho da gestão das aquisições; (Grifo nosso)
+Acórdãos 2340 , 2341 , 2342 , 2343 , 2344 , 2345 , 2346 , 2347 , 2348 , 2349 , 2350 , todos do ano de 2016 e do Plenário do TCU | Estabeleça formalmente: objetivos organizacionais para a gestão das aquisições, alinhados às estratégias de negócio ; iniciativas/ações a serem implementadas para atingir os objetivos estabelecidos; pelo menos um indicador para cada objetivo definido na forma acima, preferencialmente em termos de benefícios para o negócio da organização; metas para cada indicador definido na forma acima; mecanismos que a alta administração adotará para acompanhar o desempenho da gestão das aquisições . (Grifo nosso)
+Acórdão 2622/2015-TCU-Plenário | […] 9.4.1. oriente as organizações sob sua esfera de atuação sobre a necessidade de a respectiva alta administração estabelecer formalmente: 9.4.1.1. objetivos organizacionais para a gestão das aquisições, alinhados às estratégias de negócio ; 9.4.1.2. pelo menos um indicador para cada objetivo definido na forma acima, preferencialmente em termos de benefícios para o negócio da organização; 9.4.1.3. metas para cada indicador definido na forma acima; 9.4.1.4. mecanismos que a alta administração adotará para acompanhar o desempenho da gestão das aquisições . (Grifo nosso)
+Pesquisa de Jurisprudência | Execute a seguinte consulta na Pesquisa Integrada do TCU : (“plano estratégico” ADJ3 contratações) OU (“planejamento estratégico” ADJ3 contratações) OU (“alinhamento estratégico” ADJ3 contratações) OU (“gestão estratégica” ADJ3 contratações) OU (“objetivos” ADJ1 “indicadores e metas” ADJ5 “contratações”) OU (“plano estratégico” ADJ3 aquisições) OU (“planejamento estratégico” ADJ3 aquisições) OU (“alinhamento estratégico” ADJ3 aquisições) OU (“gestão estratégica” ADJ3 aquisições) OU (“objetivos”ADJ1 “indicadores e metas” ADJ5 aquisições) E indicador.ACORDAO
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+Quadro 38 – Riscos relacionados
+
+Riscos
+Monitoramento da função de contratações realizado de forma assistemática e sob demanda, levando à falta de informações precisas, confiáveis e tempestivas à alta administração, com consequente impossibilidade de: aferir a efetividade das contratações, ou seja, se as necessidades de negócio estão sendo atendidas pelas contratações;aferir o cumprimento das diretrizes estabelecidas, como, p.ex., as relacionadas a sustentabilidade;aferir a qualidade das contratações (p.ex.: alcance de níveis de serviço das contratações de serviço e de níveis de satisfação dos usuários com as soluções contratadas);aferir o alcance de outras metas definidas; eatuar de forma oportuna para remover obstáculos e para aprovar medidas para resolver os problemas detectados ou para evitar que eles ocorram.
+Ausência de rotinas para monitoramento da execução do PCA, levando à impossibilidade de gerenciar adequadamente as contratações, com consequente dificuldade de: acompanhar os gastos efetuados ao longo do tempo, de modo que a adequação orçamentária seja acurada;acompanhar os processos de contratação, de modo a remover obstáculos para sua consecução;identificar a não realização de parte das contratações planejadas e autorizar tempestivamente o remanejamento do orçamento para outras áreas, viabilizando o aproveitamento desses recursos; eidentificar a não realização de grande parte das contratações ao longo do ano e adotar ações corretivas, evitando a concentração das contratações no fim do ano.
+
+Fonte: Adaptado de Tribunal de Contas da União, 2020d.
+
+Quadro 39 – Modelos
+
+Assunto | Modelo disponibilizados por OGS ou por órgãos de controle | OGS
+Definição de Indicadores | Guia Referencial para Construção e análise de Indicadores (BAHIA L. O., 2021) | MGI
+Monitoramento do PCA | Orientações para elaboração do relatório de riscos do Plano de Contratações Anual (PCA)
+
+Fonte: Elaboração própria.
+
+[1] Lei 14.133/2021, art. 11, parágrafo único; Portaria – Seges/ME 8.678/2021, art. 20, incisos I e II; Resolução – CNJ 347/2020, art. 33, incisos I e II.
+
+[2] Tribunal de Contas da União, 2020b, p. 86.
+
+[3] CIPS; NIGP, 2012c; Naspo, 2016, p. 2-7.
+
+[4] Decreto 10.947/2022, art. 19.

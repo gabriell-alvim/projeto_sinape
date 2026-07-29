@@ -1,0 +1,46 @@
+4.6. Audiência pública e consulta pública
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/4-6-audiencia-publica-e-consulta-publica/
+======================================================================
+
+A audiência pública e a consulta pública são instrumentos utilizados pela Administração para possibilitar a discussão do planejamento da contratação com diversas partes interessadas, em especial os potenciais licitantes.
+
+Esses instrumentos permitem discutir diversos aspectos da contratação, como a natureza do objeto, o modelo de execução, o modelo de gestão do contrato, a forma de remuneração, o orçamento estimado, a planilha de custos e formação de preços e as sanções previstas. Dessa forma, pode ser diminuída a assimetria de informações entre a organização pública e as empresas privadas interessadas.
+
+Além disso, com a audiência e a consulta pública, é possível franquear a participação da sociedade no processo de contratação, permitindo que sugestões e críticas sejam oferecidas em relação a diversos aspectos da contratação, incluindo a necessidade que a motivou, os resultados esperados, o orçamento estimado, a relação custo-benefício da contratação e interesses de partes envolvidas.
+
+Na Lei 14.133/2021, a utilização desses instrumentos é facultativa, ficando a cargo do gestor avaliar a necessidade e a oportunidade de convocar os potenciais fornecedores e a sociedade em geral para opinar sobre a contratação a ser realizada.
+
+Quando o gestor optar pela realização de audiência pública, a convocação deve ter antecedência mínima de oito dias úteis[1]. No caso de consulta pública, a Administração disponibilizará as informações e fixará prazo para que os interessados se manifestem.
+
+A audiência pode ser realizada presencialmente ou à distância, na forma eletrônica, sendo necessário disponibilizar as informações pertinentes para análise do certame, bem como permitir manifestação de todos os interessados, de forma a conferir efetividade à utilização do instrumento.
+
+A diferença entre audiência e consulta pública é que a audiência pressupõe uma reunião. Já a consulta pública não necessita de uma reunião, sendo suficiente a submissão de um projeto de lei, de decreto, ou mesmo um pacote de medidas, e no caso em questão, de documentos de uma licitação, à manifestação de qualquer pessoa[2]. 
+
+ Quadro 213 – Referências normativas para a audiência e consulta pública
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 21.A Administração poderá convocar, com antecedência mínima de 8 (oito) dias úteis, audiência pública, presencial ou a distância, na forma eletrônica, sobre licitação que pretenda realizar, com disponibilização prévia de informações pertinentes, inclusive de estudo técnico preliminar e elementos do edital de licitação, e com possibilidade de manifestação de todos os interessados. Parágrafo único. A Administração também poderá submeter a licitação a prévia consulta pública, mediante a disponibilização de seus elementos a todos os interessados, que poderão formular sugestões no prazo fixado.
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 214 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 2104/2008-TCU-Plenário | [Enunciado] As contribuições e sugestões colhidas em audiência pública devem ser divulgadas no sítio na Internet da instituição pública que a promoveu, assim como a análise e a consolidação efetuadas acerca das contribuições recebidas, aceitas ou rejeitadas, de acordo com o princípio da publicidade.
+Acórdão 1945/2008-TCU-Plenário | [Enunciado] Os resultados dos debates promovidos em audiência pública devem ser divulgados, em respeito ao princípio constitucional da publicidade.
+Acórdão 715/2004-TCU-Plenário | [Voto] 27. A audiência pública tem por finalidade, nas palavras do doutrinador Marçal Justen Filho, in Comentários à Lei de Licitações e Contrato Administrativos, “assegurar a transparência da atividade administrativa, permitindo-se a ampla discussão do administrador com a comunidade”, ou seja, atender o princípio da publicidade, evitando que investimentos de alto impacto financeiro fiquem sem a conscientização popular, não somente para ser alvo de questionamentos mas, principalmente, para sofrer os aperfeiçoamentos porventura necessários, uma vez que o administrador público pode não estar a par de todos os detalhes das demandas sociais. 28.A ausência de tal rito é, portanto, violação de princípio administrativo, podendo causar nulidade ao processo licitatório, ainda que, de acordo com o estágio evolutivo da implantação do objeto, a nulidade possa causar danos de difícil reparação à sociedade, seja pelo comprometimento da economicidade, seja pelos transtornos causados. 29.A justificativa apresentada pelo responsável, destacada no parecer do analista, de que foi realizada audiência pública para apreciação do Relatório de Impacto Ambiental e que esta contemplaria o projeto básico do metrô, não pode ser aceita. 30.Tratam-se de assuntos distintos. A exigência legal vincula-se à discussão do projeto como um todo, tanto em relação aos impactos ambientais, quanto em relação ao custo do objeto, seu projeto, o atendimento das necessidades sociais, prazos, em suma, todos os principais aspectos que interessam à sociedade para avaliação do projeto que será implementado, diferente da audiência de Meio Ambiente, que enfoca os problemas ambientais relacionados à implantação do projeto. 31.Porém, neste caso, por tratar-se da implantação de um sistema de trens urbanos, projeto de impacto extraordinário na vida dos habitantes de Salvador e gerador de grande divulgação jornalística, inúmeras discussões públicas e nos círculos técnicos, além das naturais discussões políticas nas diversas esferas de poder, pode-se assegurar que a publicidade necessária foi alcançada, ainda que isto não dispense, de forma alguma, a formalização da realização da audiência, que é exigência legal.”
+Pesquisa de Jurisprudência | Execute a seguinte consulta na Jurisprudência Selecionada : “audiência pública” OR “consulta pública”
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+Quadro 215 – Riscos relacionados
+
+Riscos
+Realização apenas proforma da audiência ou consulta, com concessão de prazos exíguos ou de informações insuficientes para a manifestação dos interessados, ou sem posterior análise das contribuições recebidas, levando à ineficácia desses instrumentos, com consequente realização de processo licitatório que não atende ao interesse público e descrédito desses instrumentos (audiência ou consulta pública).
+
+Fonte: Elaboração própria.
+
+[1] Lei 14.133/2021, art. 21.
+
+[2] Ministério da Justiça e Segurança Pública, 2019.

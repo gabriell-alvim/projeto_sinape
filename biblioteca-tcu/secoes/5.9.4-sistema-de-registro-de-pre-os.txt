@@ -1,0 +1,325 @@
+5.9.4. Sistema de Registro de Preços
+Fonte: TCU — Licitações e Contratos: Orientações e Jurisprudência (5ª ed.)
+URL: https://licitacoesecontratos.tcu.gov.br/5-9-4-sistema-de-registro-de-precos-2/
+======================================================================
+
+O Sistema de Registro de Preços (SRP) é um conjunto de procedimentos adotados pela Administração para registro formal de preços relativos à prestação de serviços, a obras e a aquisição e locação de bens para contratações futuras[1].
+
+No âmbito da Administração Pública federal direta, autárquica e fundacional[2], o Decreto 11.462/2023 dispôs sobre os procedimentos para o SRP. As organizações que utilizam o sistema Compras do Governo Federal poderão realizar o registro de preços por meio do SRP digital.
+
+Os preços podem ser registrados mediante contratação direta ou licitação nas modalidades pregão ou concorrência[3]. O critério de julgamento será por menor preço ou maior desconto.
+
+O SRP poderá ser adotado quando a Administração julgar pertinente, em especial quando[4]:
+
+- pelas características do objeto, houver necessidade de contratações permanentes ou frequentes;
+
+- pela natureza do objeto não for possível definir previamente o quantitativo a ser demandado pela Administração;
+
+- for conveniente a aquisição de bens com previsão de entregas parceladas ou contratação de serviços remunerados por unidade de medida, como quantidade de horas de serviço, postos de trabalho ou em regime de tarefa;
+
+- for conveniente para atendimento a mais de um órgão ou entidade, inclusive nas compras centralizadas; e
+
+- for atender à execução descentralizada de programa ou projeto federal, por meio de compra nacional ou da adesão à ata de registro de preços por órgãos e entidades da Administração Pública estadual, distrital e municipal para fins de transferências voluntárias. No caso de compras nacionais, não haverá a necessidade de manifestação de interesse durante o período de divulgação da intenção de registro de preços- IRP[5].
+
+A principal diferença do SRP com relação às contratações convencionais é que, no sistema convencional, a cada necessidade da Administração realiza-se procedimento licitatório para selecionar fornecedor e proposta para contratação específica, efetivada pela Administração ao final do procedimento. No registro de preços, a licitação direciona-se a selecionar fornecedor e proposta para contratações não específicas, que poderão ser realizadas, tantas vezes quantas forem necessárias, durante o período de validade da ata e respeitados os quantitativos máximos definidos em edital[6].
+
+Assim, o SRP, quando utilizado adequadamente, proporciona agilidade nas contratações, reduz os esforços administrativos e possibilita ganhos de escala, especialmente quando um só certame puder ser utilizado para satisfazer as necessidades de diferentes organizações públicas.
+
+Por esse motivo, o Decreto 11.462/2023 estabelece que os órgãos e as entidades da Administração Pública federal direta, autárquica e fundacional[7], antes de iniciarem processo licitatório ou contratação direta, consultem as intenções de registro de preços (IRPs) em andamento e deliberem a respeito da conveniência de sua participação, fazendo constar nos autos do processo de contratação a manifestação do órgão ou da entidade sobre essa deliberação[8].
+
+O órgão ou entidade gerenciadora é responsável pela condução do conjunto de procedimentos para registro de preços e pelo gerenciamento da ata de registro de preços dele decorrente[9]. Já o órgão ou entidade participante é o que participa dos procedimentos iniciais da contratação para registro de preços e integra a ata de registro de preços[10].
+
+É importante destacar que a responsabilidade do gerenciador se limita à realização do certame e à gestão da ata. A responsabilidade pela gestão das contratações específicas decorrentes do registro de preços é de cada organização contratante[11]. No entanto, o Decreto 11.462/2023 estabelece uma exceção para compras nacionais ou centralizadas[12], em que o órgão ou entidade gerenciadora poderá centralizar a aplicação de penalidades decorrentes do descumprimento do pactuado na ata de registro de preços para todos os participantes[13].
+
+Ainda na fase preparatória da contratação, o gerenciador deve realizar procedimento público de intenção de registro de preços (IRP) para, nos termos do regulamento, possibilitar, pelo prazo mínimo de oito dias úteis, a participação de outras organizações na ata de registro de preços[14] (órgão ou entidade participante[15]). O procedimento de IRP pode ser dispensado quando o gerenciador for o único contratante[16].
+
+O referido regulamento, no âmbito federal, é o Decreto 11.462/2023, que prevê ainda que[17]:
+
+- o gerenciador pode estabelecer o número máximo de participantes, em conformidade com sua capacidade de gerenciamento;
+
+- o gerenciador pode aceitar ou recusar, justificadamente, intenção de participar do registro de preços que contenha quantitativos ínfimos; incluam novos itens; ou apresentem itens de mesma natureza com modificações em suas especificações.
+
+Organizações que não participarem do procedimento poderão aderir à ata de registro de preços na condição de não participantes[18] (“caronas”), desde que atendidos os seguintes requisitos[19]:
+
+I – apresentação de justificativa da vantagem da adesão, inclusive em situações de provável desabastecimento ou descontinuidade de serviço público;
+
+II – demonstração de que os valores registrados estão compatíveis com os valores praticados pelo mercado […];
+
+III – prévias consulta e aceitação do órgão ou entidade gerenciadora e do fornecedor. (Grifo nosso)
+
+Observa-se que, diferentemente do órgão participante, que registra sua necessidade ainda na fase de planejamento da contratação, integra a ata de registro de preços e pode exigir do fornecedor que celebre o contrato, o órgão não participante precisa comprovar a vantagem da adesão à ata, a compatibilidade dos valores registrados com os de mercado, e depende de prévia aceitação tanto por parte do gerenciador como do fornecedor.
+
+É importante ressaltar que a participação no Sistema de Registro de Preços, bem como a adesão posterior a atas de registro de preços não dispensam o planejamento prévio pelo órgão ou entidade interessada. A organização deve identificar sua necessidade, avaliar se o objeto constante da ata atende a essa necessidade, estimar os quantitativos necessários e os preços, inclusive com realização prévia de ampla pesquisa de mercado. No caso de adesão, é necessário justificar a vantagem de aderir à ata e verificar se os preços registrados estão compatíveis com os praticados pelo mercado[20].
+
+A adesão à ata de registro de preços não pode exceder, por órgão ou entidade, a 50% dos quantitativos dos itens registrados na ata para a organização gerenciadora e para as organizações participantes (50% sobre o somatório registrado para cada item).
+
+Além disso, o total dos quantitativos aderidos para cada item não pode ultrapassar o dobro do quantitativo registrado para o item, independentemente do número de organizações não participantes que aderirem[21]. O Quadro 293 a seguir exemplifica o cálculo do limite.
+
+Quadro 293 – Exemplo de cálculo do limite de adesão à ata
+
+Ata 1/2023 | Quantitativo registrado para o item X | Quantitativo registrado para o item Y
+Gerenciador | 50 | 10
+Participante A | 20 | 20
+Participante B | 30 | 30
+Participante C | 40 | 40
+Participante D | 40 | 50
+TOTAL REGISTRADO | 180 | 150
+Limite para cada adesão ao item por organização não participante | 90 | 75
+Limite para total de adesões ao item (somatório das adesões) | 360 | 300
+
+Fonte: Elaboração própria.
+
+Esse limite, porém, não se aplica para[22]:
+
+- aquisição emergencial de medicamentos e de material de consumo médico-hospitalar por órgãos e entidades da Administração Pública quando da adesão à ata de registro de preços gerenciada pelo Ministério da Saúde; e
+
+- adesão à ata de registro de preços por órgãos e entidades da Administração Pública estadual, distrital e municipal para fins de transferências voluntárias, desde que seja destinada à execução descentralizada de programa ou projeto federal e que seja comprovada a compatibilidade dos preços registrados com os valores praticados no mercado, na forma prevista pelo art. 23 da Lei 14.133/2021.
+
+Cabe mencionar que a Lei 14.133/2021 proibiu às organizações da APF aderirem à ata de registro de preços gerenciada por órgão ou entidade das outras esferas federativas[23].
+
+A existência de preços registrados implica compromisso para o fornecedor de executar ou de entregar o objeto nas condições estabelecidas, mas não obriga a Administração a contratar, ficando-lhe facultada a realização de licitação específica para a aquisição pretendida, desde que devidamente motivada[24].
+
+A Lei 14.133/2021 autoriza utilizar o SRP para contratações de obras e de serviços de engenharia, desde que haja projeto padronizado, sem complexidade técnica e operacional, além de necessidade permanente ou frequente de obra ou serviço a ser contratado[25].
+
+Sobre o assunto, há julgados recentes do TCU (embora referentes à Lei 13.303/2016), que alertam para que o SRP seja utilizado apenas para obras e serviços simples de engenharia, padronizáveis e replicáveis, e não para objeto incerto e sem prévia delimitação dos locais em que as intervenções serão realizadas ou sem prévia elaboração dos projetos básicos das obras a serem executadas[26].
+
+Como exemplos de obras sem complexidade executiva que poderiam ser modeladas de forma a atender aos pressupostos para o uso do SRP, dentro os quais a padronização e a recorrência do objeto, é possível elencar as seguintes atividades:
+
+- construção de cisternas de combate à seca;
+
+- perfuração de poços artesianos;
+
+- serviços de tapa-buraco e recapeamento asfáltico; e
+
+- obras diversas com projetos padronizados (quadras poliesportivas, postos policiais, creches, postos de atendimento etc.).
+
+O legislador admite ainda o uso do SRP para inexigibilidade e dispensa de licitação, nas hipóteses previstas pelos arts. 74 e 75 da Lei 14.133/2021, para a aquisição de bens ou para a contratação de serviços por mais de um órgão ou entidade[27]. No âmbito da Administração Pública federal direta, autárquica e fundacional do Poder Executivo, a IN – Seges/ME 67/2021 estabeleceu a obrigatoriedade de adotar a dispensa na forma eletrônica[28]. Além disso, para os órgãos e entidades da Administração Pública federal direta, autárquica e fundacional, o Decreto 11.462/2023 estipula que devem ser observados[29]:
+
+- os requisitos da instrução processual para contratação direta, previstos no art. 72 da Lei 14.133/2021;
+
+- os pressupostos para enquadramento da contratação direta, por inexigibilidade ou por dispensa de licitação, conforme previsto nos arts. 74 e 75 da Lei 14.133/2021; e
+
+- a designação da comissão de contratação como responsável pelo exame e julgamento dos documentos da proposta e dos documentos de habilitação, nos termos do disposto no inciso L do caput do art. 6º da Lei 14.133/2021.
+
+Acrescenta ainda que o registro de preços poderá ser utilizado na hipótese de contratação direta, por inexigibilidade de licitação, para a aquisição, por força de decisão judicial, de medicamentos e insumos para tratamentos médicos[30].
+
+O edital para registro de preços deve observar as regras gerais da Lei 14.133/2021 e dispor sobre[31]:
+
+- as especificidades da licitação e de seu objeto, inclusive a quantidade máxima de cada item que poderá ser adquirida, bem como a quantidade mínima a ser cotada de unidades de bens ou, no caso de serviços, de unidades de medida;
+
+- apesar de a Administração não ter a obrigação de contratar a totalidade dos quantitativos registrados (ou até mesmo de firmar o contrato), a estimativa de quantidades é necessária para balizar a estimativa de preços unitários e global, bem como estabelecer os limites para adesões à futura ata de registro de preços;
+
+- em situações excepcionais, a Lei 14.133/2021 admite o registro de preços sem indicação dos quantitativos a serem adquiridos[32]:
+I – quando for a primeira licitação para o objeto e o órgão ou entidade não tiver registro de demandas anteriores;
+II – no caso de alimento perecível;
+III – no caso em que o serviço estiver integrado ao fornecimento de bens. (Grifo nosso)
+
+- nesses casos, as propostas de preços apresentarão apenas os valores unitários. Além disso, o valor máximo da despesa deve ser indicado no processo do SRP, e será vedada a participação de outro órgão ou entidade[33];
+
+- a possibilidade de prever preços diferentes. O edital pode admitir preços diferenciados para um mesmo item, nas seguintes hipóteses:
+
+- quando o objeto for realizado ou entregue em locais diferentes;
+
+- em razão da forma e do local de acondicionamento;
+
+- quando admitida cotação variável em razão do tamanho do lote; e/ou
+
+- por outros motivos justificados no processo;
+
+- a possibilidade de o licitante oferecer ou não proposta em quantitativo inferior ao máximo previsto no edital, obrigando-se nos limites dela;
+
+- o critério de julgamento da licitação, que será o de menor preço ou o de maior desconto sobre o preço estimado ou a tabela de preços praticada no mercado[34];
+
+- as condições para alteração de preços registrados. O controle e a atualização periódica de preços integram as condições para uso do SRP[35];
+
+- o art. 25 do Decreto 11.462/2023 estabelece que os preços registrados poderão ser alterados ou atualizados em decorrência de redução dos preços praticados no mercado ou de fato que eleve o custo dos objetos registrados, nas seguintes situações:
+I – em caso de força maior, caso fortuito ou fato do príncipe ou em decorrência de fatos imprevisíveis ou previsíveis de consequências incalculáveis, que inviabilizem a execução da ata tal como pactuada, nos termos do disposto na alínea “d” do inciso II do caput do art. 124 da Lei nº 14.133, de 2021;
+II – em caso de criação, alteração ou extinção de quaisquer tributos ou encargos legais ou superveniência de disposições legais, com comprovada repercussão sobre os preços registrados; ou
+III – na hipótese de previsão no edital ou no aviso de contratação direta de cláusula de reajustamento ou repactuação sobre os preços registrados, nos termos do disposto na Lei nº 14.133, de 2021.
+
+- o registro de mais de um fornecedor ou prestador de serviço, por meio do cadastro de reserva. Esse cadastro será formado, primeiramente, pelos licitantes ou fornecedores que aceitarem cotar o objeto pelo mesmo preço do adjudicatário, respeitando a classificação na licitação. Em seguida, serão incluídos os licitantes ou os fornecedores que mantiverem sua proposta original[36].
+
+- de acordo com o Decreto 11.462/2023, a habilitação dos licitantes que comporão o cadastro de reserva só será realizada quando houver necessidade de contratação dos licitantes remanescentes. Isso pode ocorrer nas seguintes situações: quando o licitante vencedor não assinar a ata de registro de preços nos prazos e condições estabelecidas no edital; ou quando houver cancelamento do registro desse fornecedor ou do registro de preços[37];
+
+- a vedação à participação do órgão ou entidade em mais de uma ata de registro de preços com o mesmo objeto no prazo de validade daquela de que já tiver participado, salvo na ocorrência de ata que tenha registrado quantitativo inferior ao máximo previsto no edital[38]; e
+
+- as hipóteses de cancelamento da ata de registro de preços e suas consequências. O Decreto 11.462/2023 tratou dessas situações nos arts. 28 e 29[39].
+
+O edital para o SRP deve conter ainda as regras relativas à convocação, ao julgamento, à habilitação, aos recursos, às penalidades da licitação, à entrega do objeto, e às condições de pagamento[40].
+
+No SRP, a licitação por item é a regra. Assim, a adjudicação por menor preço global para grupos de itens somente será admitida quando for demonstrada a inviabilidade de se promover a adjudicação por item e for evidenciada a sua vantagem técnica e econômica. Nesse caso, o critério de aceitabilidade de preços unitários máximos deverá ser indicado no edital[41].
+
+Adicionalmente, a contratação posterior de item específico constante de grupo de itens exigirá prévia pesquisa de mercado e demonstração de sua vantagem para o órgão ou entidade[42].
+
+Nas licitações por SRP para a aquisição de bens de natureza divisível, quando houver cotas reservadas para ME/EPP, o edital deverá prever a prioridade de aquisição dos produtos das cotas reservadas, ressalvados os casos em que a cota reservada for inadequada para atender as quantidades ou as condições do pedido, justificadamente[43].
+
+A ata de registro de preços tem um prazo de vigência de um ano, podendo ser prorrogada por igual período, desde que comprovado o preço vantajoso (mesmo que reajustado)[44]. É importante mencionar que não é permitido realizar acréscimos nos quantitativos estabelecidos na ata de registro de preços[45]. No entanto, a organização gerenciadora pode remanejar as quantidades previstas para os itens com preços registrados entre as organizações participantes e não participantes, seguindo as condições estabelecidas no art. 30 do Decreto 11.462/2023.
+
+Além disso, como mencionado anteriormente, o Decreto 11.462/2023 permite a alteração ou atualização de preços nas situações estabelecidas em seu art. 25.
+
+O contrato decorrente do SRP terá sua própria vigência, de acordo com as disposições estabelecidas no edital ou no aviso de contratação direta. Além disso, o contrato pode ser alterado, desde que sejam observadas as disposições do art. 124 da Lei 14.133/2021[46].
+
+Por fim, a indicação da disponibilidade de créditos orçamentários somente será exigida para a formalização do contrato ou de outro instrumento hábil[47].
+
+Quadro 294 – Referências normativas para o sistema de registro de preços
+
+Normativos | Dispositivos
+Lei 14.133/2021 | Art. 41. No caso de licitação que envolva o fornecimento de bens, a Administração poderá excepcionalmente: […] II – exigir amostra ou prova de conceito do bem no procedimento de pré-qualificação permanente, na fase de julgamento das propostas ou de lances, ou no período de vigência do contrato ou da ata de registro de preços, desde que previsto no edital da licitação e justificada a necessidade de sua apresentação; Art. 82. O edital de licitação para registro de preços observará as regras gerais desta Lei e deverá dispor sobre: I – as especificidades da licitação e de seu objeto, inclusive a quantidade máxima de cada item que poderá ser adquirida; II – a quantidade mínima a ser cotada de unidades de bens ou, no caso de serviços, de unidades de medida; III – a possibilidade de prever preços diferentes: a) quando o objeto for realizado ou entregue em locais diferentes; b) em razão da forma e do local de acondicionamento; c) quando admitida cotação variável em razão do tamanho do lote; d) por outros motivos justificados no processo; IV – a possibilidade de o licitante oferecer ou não proposta em quantitativo inferior ao máximo previsto no edital, obrigando-se nos limites dela; V – o critério de julgamento da licitação, que será o de menor preço ou o de maior desconto sobre tabela de preços praticada no mercado; VI – as condições para alteração de preços registrados; VII – o registro de mais de um fornecedor ou prestador de serviço, desde que aceitem cotar o objeto em preço igual ao do licitante vencedor, assegurada a preferência de contratação de acordo com a ordem de classificação; VIII – a vedação à participação do órgão ou entidade em mais de uma ata de registro de preços com o mesmo objeto no prazo de validade daquela de que já tiver participado, salvo na ocorrência de ata que tenha registrado quantitativo inferior ao máximo previsto no edital; IX – as hipóteses de cancelamento da ata de registro de preços e suas consequências. § 1º O critério de julgamento de menor preço por grupo de itens somente poderá ser adotado quando for demonstrada a inviabilidade de se promover a adjudicação por item e for evidenciada a sua vantagem técnica e econômica, e o critério de aceitabilidade de preços unitários máximos deverá ser indicado no edital. § 2º Na hipótese de que trata o § 1º deste artigo, observados os parâmetros estabelecidos nos §§ 1º, 2º e 3º do art. 23 desta Lei, a contratação posterior de item específico constante de grupo de itens exigirá prévia pesquisa de mercado e demonstração de sua vantagem para o órgão ou entidade. § 3º É permitido registro de preços com indicação limitada a unidades de contratação, sem indicação do total a ser adquirido, apenas nas seguintes situações: I – quando for a primeira licitação para o objeto e o órgão ou entidade não tiver registro de demandas anteriores; II – no caso de alimento perecível; III – no caso em que o serviço estiver integrado ao fornecimento de bens. § 4º Nas situações referidas no § 3º deste artigo, é obrigatória a indicação do valor máximo da despesa e é vedada a participação de outro órgão ou entidade na ata. § 5º O sistema de registro de preços poderá ser usado para a contratação de bens e serviços, inclusive de obras e serviços de engenharia, observadas as seguintes condições: I – realização prévia de ampla pesquisa de mercado; II – seleção de acordo com os procedimentos previstos em regulamento; III – desenvolvimento obrigatório de rotina de controle; IV – atualização periódica dos preços registrados; V – definição do período de validade do registro de preços; VI – inclusão, em ata de registro de preços, do licitante que aceitar cotar os bens ou serviços em preços iguais aos do licitante vencedor na sequência de classificação da licitação e inclusão do licitante que mantiver sua proposta original. § 6º O sistema de registro de preços poderá, na forma de regulamento, ser utilizado nas hipóteses de inexigibilidade e de dispensa de licitação para a aquisição de bens ou para a contratação de serviços por mais de um órgão ou entidade. Art. 83. A existência de preços registrados implicará compromisso de fornecimento nas condições estabelecidas, mas não obrigará a Administração a contratar, facultada a realização de licitação específica para a aquisição pretendida, desde que devidamente motivada. Art. 84. O prazo de vigência da ata de registro de preços será de 1 (um) ano e poderá ser prorrogado, por igual período, desde que comprovado o preço vantajoso. Parágrafo único. O contrato decorrente da ata de registro de preços terá sua vigência estabelecida em conformidade com as disposições nela contidas. Art. 85. A Administração poderá contratar a execução de obras e serviços de engenharia pelo sistema de registro de preços, desde que atendidos os seguintes requisitos: I – existência de projeto padronizado, sem complexidade técnica e operacional; II – necessidade permanente ou frequente de obra ou serviço a ser contratado. Art. 86. O órgão ou entidade gerenciadora deverá, na fase preparatória do processo licitatório, para fins de registro de preços, realizar procedimento público de intenção de registro de preços para, nos termos de regulamento, possibilitar, pelo prazo mínimo de 8 (oito) dias úteis, a participação de outros órgãos ou entidades na respectiva ata e determinar a estimativa total de quantidades da contratação. § 1º O procedimento previsto no caput deste artigo será dispensável quando o órgão ou entidade gerenciadora for o único contratante. § 2º Se não participarem do procedimento previsto no caput deste artigo, os órgãos e entidades poderão aderir à ata de registro de preços na condição de não participantes, observados os seguintes requisitos: I – apresentação de justificativa da vantagem da adesão, inclusive em situações de provável desabastecimento ou descontinuidade de serviço público; II – demonstração de que os valores registrados estão compatíveis com os valores praticados pelo mercado na forma do art. 23 desta Lei; III – prévias consulta e aceitação do órgão ou entidade gerenciadora e do fornecedor. § 3º A faculdade de aderir à ata de registro de preços na condição de não participante poderá ser exercida: (Redação dada pela Lei nº 14.770, de 2023) I – por órgãos e entidades da Administração Pública federal, estadual, distrital e municipal, relativamente a ata de registro de preços de órgão ou entidade gerenciadora federal, estadual ou distrital; ou (Incluído pela Lei nº 14.770, de 2023) II – por órgãos e entidades da Administração Pública municipal, relativamente a ata de registro de preços de órgão ou entidade gerenciadora municipal, desde que o sistema de registro de preços tenha sido formalizado mediante licitação. (Incluído pela Lei nº 14.770, de 2023) § 4º As aquisições ou as contratações adicionais a que se refere o § 2º deste artigo não poderão exceder, por órgão ou entidade, a 50% (cinquenta por cento) dos quantitativos dos itens do instrumento convocatório registrados na ata de registro de preços para o órgão gerenciador e para os órgãos participantes. § 5º O quantitativo decorrente das adesões à ata de registro de preços a que se refere o § 2º deste artigo não poderá exceder, na totalidade, ao dobro do quantitativo de cada item registrado na ata de registro de preços para o órgão gerenciador e órgãos participantes, independentemente do número de órgãos não participantes que aderirem. § 6º A adesão à ata de registro de preços de órgão ou entidade gerenciadora do Poder Executivo federal por órgãos e entidades da Administração Pública estadual, distrital e municipal poderá ser exigida para fins de transferências voluntárias, não ficando sujeita ao limite de que trata o § 5º deste artigo se destinada à execução descentralizada de programa ou projeto federal e comprovada a compatibilidade dos preços registrados com os valores praticados no mercado na forma do art. 23 desta Lei. § 7º Para aquisição emergencial de medicamentos e material de consumo médico-hospitalar por órgãos e entidades da Administração Pública federal, estadual, distrital e municipal, a adesão à ata de registro de preços gerenciada pelo Ministério da Saúde não estará sujeita ao limite de que trata o § 5º deste artigo. § 8º Será vedada aos órgãos e entidades da Administração Pública federal a adesão à ata de registro de preços gerenciada por órgão ou entidade estadual, distrital ou municipal.
+Decreto 11.462/2023 | Art. 1º Este Decreto regulamenta os art. 82 a art. 86 da Lei nº 14.133, de 1º de abril de 2021, para dispor sobre o sistema de registro de preços – SRP para a contratação de bens e serviços, inclusive obras e serviços de engenharia, no âmbito da Administração Pública federal direta, autárquica e fundacional. […]
+IN – SGD/ME 94/2022 | Art. 1º As contratações de soluções de Tecnologia da Informação e Comunicação – TIC pelos órgãos e entidades integrantes do Sistema de Administração dos Recursos de Tecnologia da Informação – SISP serão disciplinadas por esta Instrução Normativa. […] § 3º Os órgãos ou entidades gerenciadoras deverão observar a necessidade de aprovação técnica prévia do Órgão Central do SISP para os processos que ensejarem a formação de atas de registro de preços de serviços de TIC passíveis de adesão por parte de órgãos ou entidades não participantes. […] Art. 2º Para fins desta Instrução Normativa, considera-se: […] XXXIV – órgão ou entidade gerenciadora: órgão ou entidade da Administração Pública responsável pela condução do conjunto de procedimentos para registro de preços e pelo gerenciamento da ata de registro de preços dele decorrente. […] Art. 9º A fase de Planejamento da Contratação consiste nas seguintes etapas: […] III – formação de Ata de Registro de Preços; IV – adesão à Ata de Registro de Preços; […] § 2º O órgão ou entidade interessada em participar de uma contratação conjunta no Sistema de Registro de Preços deverá fundamentar a compatibilidade do seu Estudo Técnico Preliminar e demais documentos de planejamento da contratação com o Termo de referência do órgão gerenciador. § 3º O órgão ou entidade interessada em aderir à Ata de Registro de Preços deverá registrar no Estudo Técnico Preliminar o ganho de eficiência, a viabilidade e a economicidade para a Administração Pública federal da utilização da ata de registro de preços, conforme o disposto no § 2º do art. 86 da Lei nº 14.133, de 2021. […] Art. 12. O Termo de referência será elaborado pela Equipe de Planejamento da Contratação a partir do Estudo Técnico Preliminar da Contratação, incluindo, no mínimo, as seguintes informações: […] VI – definição das responsabilidades da contratante, do contratado e do órgão gerenciador da Ata de Registro de Preços, quando aplicável, conforme art. 17; […] Art. 15. A justificativa para contratação deverá conter, pelo menos: […] V – a motivação para permitir adesões por parte de órgãos ou entidades não participantes, nos casos de formação de Ata de Registro de Preços passível de adesões. […] Art. 17. A definição das responsabilidades da contratante, do contratado e do órgão gerenciador do registro de preços, quando aplicável, deverá observar: I – a definição das obrigações da contratante contendo, pelo menos, a obrigação de: […] d) aplicar à contratada as sanções administrativas regulamentares e contratuais cabíveis, comunicando ao órgão gerenciador da Ata de Registro de Preços, quando aplicável; […] III – a definição das obrigações do órgão gerenciador do registro de preços contendo pelo menos a obrigação de: a) efetuar o registro do licitante fornecedor e firmar a correspondente Ata de Registro de Preços; […] Art. 34. O órgão ou entidade deverá providenciar a publicação de, pelo menos, os seguintes documentos em sítio eletrônico de fácil acesso, observando a legislação específica relativa à proteção de informações: I – Estudo Técnico Preliminar da Contratação e Termo de referência: […] c) até a data de assinatura do contrato, nos casos de adesão à ata de registro de preços;
+IN – Seges/ME 67/2021 | Art. 4º Os órgãos e entidades adotarão a dispensa de licitação, na forma eletrônica, nas seguintes hipóteses: […] IV – registro de preços para a contratação de bens e serviços por mais de um órgão ou entidade, nos termos do § 6º do art. 82 da Lei nº 14.133, de 2021. […] Art. 5º O procedimento de dispensa de licitação, na forma eletrônica, será instruído com os seguintes documentos, no mínimo: […] IV – demonstração da compatibilidade da previsão de recursos orçamentários com o compromisso a ser assumido; § 1º Na hipótese de registro de preços, de que dispõe o inciso IV do art. 4º, somente será exigida a previsão de recursos orçamentários, nos termos do inciso IV do caput , quando da formalização do contrato ou de outro instrumento hábil.
+Enunciado – CJF 37/2023 | Ao estabelecer o número máximo de participantes no procedimento de registro de preços, conforme art. 7º, inciso I, do Decreto n. 11.462/2023, o órgão da Justiça Federal poderá, mediante justificativa, limitar a intenção de registro de preços (IRP) aos demais órgãos da Justiça Federal ou, até mesmo, dispensá-la, caso todos tenham tido a oportunidade de manifestação prévia acerca do planejamento da contratação.
+Enunciado – CJF 42/2023 | No caso de prorrogação do prazo de vigência da ata de registro de preços, atendidas as condições previstas no art. 84 da Lei n. 14.133/2021, as quantidades registradas poderão ser renovadas, devendo o tema ser tratado na fase de planejamento da contratação e previsto no ato convocatório.
+Orientação Normativa – AGU 100/2025 | I – No regime jurídico da Lei nº 8.666/1993 e da Lei nº 10.520/2002, o reajuste em sentido estrito, a repactuação e a revisão por álea extraordinária são fenômenos próprios dos contratos administrativos, não sendo aplicáveis às atas de registro de preços. II – No regime jurídico da Lei nº 14.133/2021, o reajuste em sentido estrito, a repactuação e a revisão por álea extraordinária são aplicáveis às atas de registro de preços, conforme o inciso VI do art. 82 da Lei nº 14.133/2021 e o art. 25 do Decreto nº 11.462/2023. III – Os preços registrados poderão ser alterados, no que se refere ao reajuste em sentido estrito e à repactuação, desde que haja previsão expressa no edital. IV – O instituto da preclusão não se aplica ao reajuste em sentido estrito, desde que previsto no edital, uma vez que a medida consiste na aplicação automática (de ofício) de índice de correção por parte da Administração Pública. V – O instituto da preclusão aplica-se à repactuação na ata de registro de preços quando o fornecedor não solicitar a atualização dos valores antes da data de prorrogação da ata de registro de preços. VI – A revisão por álea extraordinária da ata de registro de preços não necessita estar prevista em edital e pode ser aplicada a qualquer momento, sempre que necessária ao reequilíbrio econômico-financeiro, nos termos dos incisos I e II do art. 25 do Decreto nº 11.462/2023. VII – Prevista a possibilidade de prorrogação no edital e na ata de registro de preços, mas não havendo cláusula de reajustamento ou repactuação sobre os preços registrados, a prorrogação poderá ser realizada sem a atualização dos valores. Nesses casos, deve-se colher formalmente a anuência do fornecedor quanto à manutenção dos preços, a fim de evitar discussões futuras.
+Orientação Normativa – AGU 89/2024 | O prazo inicial de vigência da ata de registro de preços é necessariamente de 1 (um) ano, contado do primeiro dia útil subsequente à data de sua divulgação no PNCP, podendo ocorrer a prorrogação da vigência da ata para o período de mais de um ano, desde que formalizada na vigência inicial da ata e comprovada a vantajosidade do preço registrado, tudo conforme os termos do art. 84, da Lei nº 14.133, de 2021, c/c o art. 22 do Decreto nº 11.462, de 2023.
+Orientação Normativa – AGU 21/2011 | É vedada aos órgãos públicos federais a adesão à ata de registro de preços quando a licitação tiver sido realizada pela Administração Pública estadual, municipal ou do distrito federal, bem como por entidades paraestatais.
+
+Fonte: Elaboração própria com base nas normas consultadas.
+
+Quadro 295 – Jurisprudência do TCU
+
+Acórdãos | Dispositivos
+Acórdão 1564/2025-TCU-Plenário | [Enunciado] Em licitação para registro de preços que permita cotação parcial (art. 82, inciso IV, da Lei 14.133/2021), caso a proposta de menor preço seja para quantitativo inferior ao máximo previsto no edital, é irregular a desclassificação de licitantes que apresentaram preços abaixo do valor de referência para todo o quantitativo licitado, mas que não igualaram o preço da melhor proposta. Tal procedimento impede a formação do cadastro de reserva e, na prática, inviabiliza o fornecimento do saldo remanescente.
+Acórdão 546/2024-TCU-Plenário | 1.6.1. dar ciência à [ omissis ], com fundamento no art. 9º, inciso I, da Resolução TCU 315/2020, sobre as seguintes impropriedades/falhas, identificadas no Pregão Eletrônico para Registro de Preços 90.003/2024, para que sejam adotadas medidas internas com vistas à prevenção de outras ocorrências semelhantes: […] 1.6.1.2. ausência de justificativa para a adoção do sistema de registro de preços, nos estudos preliminares da licitação em apreço, demonstrando a ocorrência de umas das hipóteses previstas no art. 3º do Decreto 11.462/2023 ou algum outro motivo pertinente, o que viola o dispositivo supramencionado e o princípio da motivação; e 1.6.1.3. utilização do sistema de registro de preços quando as peculiaridades do objeto a e a sua localização indicam que só será possível uma única contratação, exaurindo os quantitativos registrados, o que afronta a jurisprudência do TCU, em especial os Acórdão 1443/2015-TCU-Plenário e 1.712/2015-Plenário.
+Acórdão 1794/2023-TCU-Primeira Câmara | [Enunciado] A mera comparação dos valores constantes em ata de registro de preços com os obtidos junto a empresas consultadas na fase interna de licitação não é suficiente para configurar a vantajosidade da adesão à ata, haja vista que os preços informados nas consultas, por vezes superestimados, não serão, em regra, os efetivamente contratados. Deve o órgão não participante (“carona”), com o intuito de aferir a adequação dos preços praticados na ata, se socorrer de outras fontes, a exemplo de licitações e contratos similares realizados no âmbito da Administração Pública.
+Acórdão 2176/2022-TCU-Plenário | [Enunciado] O Sistema de Registro de Preços previsto na Lei 13.303/2016 (Lei das Estatais) pode ser aplicado para obras e serviços simples de engenharia, padronizáveis e replicáveis, que não exigem a realização de estudos específicos e a elaboração de projetos básicos individualizados para cada contratação.
+Acórdão 1851/2022-TCU-Plenário | [Enunciado] Não é juridicamente possível o aproveitamento, por órgão federal, de contrato já firmado por órgão estadual ou municipal. O único instrumento legal que possibilita determinado órgão se beneficiar de licitação realizada por outro é a adesão a ata de registro de preços, no âmbito do Sistema de Registro de Preços (SRP); porém é vedada, pelo art. 22, § 8º, do Decreto 7.892/2013 e pelo art. 86, § 8º, da Lei 14.133/2021, aos órgãos e entidades da Administração Pública Federal a adesão a ata de registro de preços gerenciada por órgão ou entidade estadual, distrital ou municipal.
+Acórdão 80/2022-TCU-Plenário | [Relatório] Considerando, assim, a possível prática de “barriga de aluguel”, por meio da qual as quantidades licitadas são majoradas artificialmente, de forma que a ata de registro de preços decorrente possibilite maior número de adesões e permita que a empresa vencedora comercialize seus produtos com diversos órgãos da Administração Pública sem licitar;
+Acórdão 2822/2021-TCU-Plenário | [Enunciado] A inserção de cláusula em edital licitatório prevendo a possibilidade de adesão a ata de registro de preços por órgãos ou entidades não participantes do planejamento da contratação (“carona”) exige justificativa específica, lastreada em estudo técnico referente ao objeto licitado e devidamente registrada no documento de planejamento da contratação (art. 9º, inciso III, do Decreto 7.892/2013).
+Acórdão 1668/2021-TCU-Plenário | [Voto] 116. A situação descrita acima tem recebido a denominação de “barriga de aluguel”, que é o jargão utilizado para definir a situação em que se geram atas de registro de preços com quantitativos desnecessários ou superestimados, unicamente com o intuito de favorecer determinado fornecedor, que tentará posteriormente “comercializar” os itens registrados em outros órgãos e entidades da Administração Pública para fins de adesões. 117. Não tenho dúvidas de que o Sistema de Registro de Preços é um instituto extraordinário, pois, se bem utilizado, simplifica, facilita, agiliza e racionaliza as contratações públicas. Serve para suplantar a realização de inúmeras licitações que poderiam, cada uma delas, dar origem a problemas. Ademais, proporciona economia de escala, permite o gerenciamento de bens, lida com questões de estoque de uma forma mais adequada e permite licitar e contratar mesmo quando não se estabelece uma demanda do órgão adequada. […] 120. O que temos visto mais recentemente é uma prática que considero extremamente grave, caracterizada pelo fato de alguns órgãos gerenciadores e participantes estabelecerem quantitativos muito superiores àqueles que serão demandados. Com isso, o limite para adesão passa a ser gigantesco e artificialmente criado, na prática que se intitula “barriga de aluguel”.
+Acórdão 1767/2021-TCU-Plenário | [Enunciado] Embora a Lei 13.303/2016 (Lei das Estatais) não vede expressamente o uso do sistema de registro de preços (SRP) para a contratação de obras, é indevida a utilização de ata de registro de preços como contrato do tipo “guarda-chuva”, com objeto incerto e indefinido, sem prévia delimitação dos locais em que as intervenções serão realizadas e sem prévia elaboração dos projetos básicos das obras a serem executadas.
+Acórdão 894/2021-TCU-Plenário | [Enunciado] Cabe ao órgão gerenciador da ata de registro de preços o controle das autorizações de adesão, a fim de que os quantitativos de cada item registrado contratados pelos caronas não superem os limites previstos no art. 22, §§ 3º, 4º e 4º-A, do Decreto 7.892/2013.
+Acórdão 1650/2020-TCU-Plenário | [Enunciado] Nas licitações para registro de preços, a modelagem de aquisição por preço global de grupo de itens é medida excepcional que precisa ser devidamente justificada, a ser utilizada apenas nos casos em que a Administração pretende contratar a totalidade dos itens do grupo, respeitadas as proporções de quantitativos definidos no certame. Apesar de essa modelagem ser, em regra, incompatível com a aquisição futura de itens isoladamente, admite-se tal hipótese quando o preço unitário ofertado pelo vencedor do grupo for o menor lance válido na disputa relativa ao item.
+Acórdão 7549/2019-TCU-Primeira Câmara | b) dar ciência ao [ omissis ] sobre as seguintes impropriedades identificadas na adesão à ata de registro de preços referente ao Pregão Eletrônico [ omissis ], para que sejam adotadas medidas internas com vistas à prevenção de outras ocorrências semelhantes: b.1) alteração das condições originalmente licitadas, homologadas e registradas, com inclusão de itens (materiais/equipamentos) em alguns casos e alteração de percentuais em todos os casos (lucro/custos indiretos), modificando o conteúdo das propostas registradas, em afronta à natureza do sistema de registro de preços e ao disposto no art. 22, § 2º, do Decreto 7.892/2013 c/c arts. 15, § 3º, e 54, § 1º, da Lei 8.666/1993;
+Acórdão 8340/2018-TCU-Segunda Câmara | [Enunciado] A adesão a ata de registro de preços (carona) está condicionada à comprovação da adequação do objeto registrado às reais necessidades do órgão ou da entidade aderente e à vantagem do preço registrado em relação aos preços praticados no mercado onde serão adquiridos os bens ou serviços.
+Acórdão 1347/2018-TCU-Plenário | [Enunciado] Nas licitações para registro de preços, a modelagem de aquisição por preço global de grupo de itens é medida excepcional que precisa ser devidamente justificada, a ser utilizada apenas nos casos em que a Administração pretende contratar a totalidade dos itens do grupo, respeitadas as proporções de quantitativos definidos no certame. Apesar de essa modelagem ser, em regra, incompatível com a aquisição futura de itens isoladamente, admite-se tal hipótese quando o preço unitário ofertado pelo vencedor do grupo for o menor lance válido na disputa relativa ao item.
+Acórdão 420/2018-TCU-Plenário | [Enunciado] A mera comparação dos valores constantes em ata de registro de preços com os obtidos junto a empresas consultadas na fase interna de licitação não é suficiente para configurar a vantajosidade da adesão à ata, haja vista que os preços informados nas consultas, por vezes superestimados, não serão, em regra, os efetivamente contratados. Deve o órgão não participante (“carona”) com o intuito de aferir a adequação dos preços praticados na ata, se socorrer de outras fontes, a exemplo de licitações e contratos similares realizados no âmbito da Administração Pública.
+Acórdão 2877/2017-TCU-Plenário | [Enunciado] A adesão a ata de registro de preços (carona) está condicionada, entre outros requisitos (art. 22 do Decreto 7.892/2013), à comprovação da adequação do objeto registrado às reais necessidades do órgão ou da entidade aderente e à vantagem do preço registrado em relação aos preços praticados no mercado onde o serviço será prestado.
+Acórdão 2600/2017-TCU-Plenário | 9.4.2. a adesão tardia por órgãos não participantes da intenção do registro de preços é incompatível com licitação em que foram impostos critérios e condições específicos aplicáveis ao ente gerenciador, a exemplo da indicação de marca, nos termos do Acórdão 1233/2012-TCU-Plenário.
+Acórdão 1823/2017-TCU-Plenário | [Enunciado] A adesão a ata de registro de preços deve ser justificada pelo órgão não participante mediante detalhamento das necessidades que pretende suprir por meio do contrato e demonstração da sua compatibilidade com o objeto discriminado na ata, não servindo a esse propósito a mera reprodução, parcial ou integral, do plano de trabalho do órgão gerenciador. A comprovação da vantagem da adesão deve estar evidenciada pelo confronto entre os preços unitários dos bens e serviços constantes da ata de registro de preços e referenciais válidos de mercado.
+Acórdão 248/2017-TCU-Plenário | 9.9. determinar à [ omissis ] que, no prazo de trinta dias, oriente os órgãos e entidades sob sua supervisão que: 9.9.1. na condição de participante, bem como de adquirente não participante (adesão tardia), em licitações pelo Sistema de Registro de Preços, em obediência ao art. 6º, caput , do Decreto 7.892/2013 c/c arts. 3º, caput , e 15, § 7º, I e II, da Lei 8.666/1993, faça constar de seu processo administrativo de contratação a justificativa dos quantitativos solicitados, bem como justificativa de pertinência quanto às restrições do ambiente interno do órgão gerenciador, a exemplo da limitação a representantes de um único fabricante;
+Acórdão 6638/2015-TCU-Primeira Câmara | 1.7.4. a ausência de justificativa para previsão, no edital, de adesão à ata de registro de preços por outros órgãos e entidades da administração afronta o art. 3º da Lei 8.666/1993, o princípio da motivação dos atos administrativos, o art. 9º, III, do Decreto 7.892/2013 e o Acórdão 1297/2015-TCU-Plenário;
+Acórdão 1285/2015-TCU-Plenário | [Enunciado] A ata de registro de preços caracteriza-se como um negócio jurídico em que são acordados entre as partes, Administração e licitante, apenas o objeto licitado e os respectivos preços ofertados. A formalização da ata gera apenas uma expectativa de direito ao signatário, não lhe conferindo nenhum direito subjetivo à contratação.
+Acórdão 2583/2014-TCU-Plenário | [Voto] 6. […] É que o sistema de registro de preços, pela sua própria natureza, gera apenas uma expectativa de direito em relação ao fornecimento do objeto registrado. Ou seja, o valor global da ata pode ser executado em montante significativamente inferior ou mesmo nem vir a ser executado, motivo pelo qual os requisitos de habilitação devem ser compatíveis com a ampla competitividade que se deve buscar nas licitações, principalmente aquelas realizadas para processar sistema de registro de preços, na medida em que exigências em demasia podem ser restritivas e afastar possíveis interessados nos certames.
+Acórdão 2242/2014-TCU-Plenário | [Enunciado] Nas licitações para registro de preços em que o interesse do órgão gerenciador da ata não seja o de demandar bens e serviços para si, mas sim o de viabilizar a contratação por outros órgãos, notadamente estados e municípios, que não participem do certame, é obrigatório o fornecimento dos quantitativos registrados, observadas as condições definidas no instrumento convocatório, o qual deve estabelecer com clareza essa obrigação dos licitantes vencedores. Não é possível ao fornecedor, nos limites quantitativos registrados, escolher que órgãos atender.
+Acórdão 8946/2012-TCU-Segunda Câmara | [Enunciado] Na licitação para registro de preços, a indicação da dotação orçamentária é exigível apenas antes da assinatura do contrato.
+Acórdão 1793/2011-TCU-Plenário | [Enunciado] É vedada a adesão de órgão ou entidade federal à ata de registro de preços promovida por órgão ou entidade estadual ou municipal. [Enunciado] É vedada a adesão à ata de registros de preços quando esta se encontra com validade expirada.
+Pesquisa de Jurisprudência | Execute consulta na Jurisprudência Selecionada do TCU . Selecione a “área – Licitação”, tema “registro de preços” .
+
+Fonte: Elaboração própria com base na jurisprudência do TCU.
+
+Quadro 296 – Riscos relacionados
+
+Riscos
+Ata de registro de preços com quantitativos muito superiores aos efetivamente contratados, levando os fornecedores a perderem a confiabilidade nas estimativas dos SRP e a deixarem de considerar os ganhos de escala em suas propostas, com consequente elevação de preços em SRP futuros.
+Falta de controle das adesões à ata de registro de preços, levando a contratações em limites superiores ao legalmente permitido, com consequentes pagamentos de valores mais elevados dos que os que poderiam ser obtidos se os quantitativos tivessem sido considerados durante o certame (perda de economia de escala), além da inobservância ao dever de licitar.
+Corrupção entre fornecedores e órgãos gerenciadores das atas de registro de preços, levando à geração de ARP com quantitativos superestimados e ao aumento do limite de adesões, com consequente favorecimento indevido ao licitante vencedor, que passa a “comercializar” os itens registrados com outras organizações da Administração Pública sem licitar (barriga de aluguel [48] ).
+Permissão de adesão à ata de registro de preços decorrente de licitação na qual foram impostos critérios e condições particulares às necessidades da organização gerenciadora, levando as organizações aderentes a contratarem objeto que não atende às suas necessidades, com consequente desperdício de recursos.
+Participação ou adesão a ata de registro de preços sem o planejamento adequado, levando à contratação de objeto que não atende à necessidade da organização, com consequente desperdício de recursos.
+Falha na análise quanto à vantajosidade técnica e econômica do parcelamento, levando a registro de preços com adjudicação por menor preço global para grupos de itens, com consequente potencialização do risco de contratação posterior de item específico do grupo de itens com sobrepreço.
+Quantidades estimadas muito superiores ao que se pretende contratar, levando a exigências desnecessárias para a habilitação técnica e/ou econômico-financeira, com consequente restrição indevida da competitividade da licitação.
+
+Fonte: Elaboração própria.
+
+Quadro 297 – Modelos
+
+Assunto | Modelo disponibilizados por OGS ou por órgãos de controle | OGS
+Modelos, orientações e sistemas | SRP digital Gestão de Ata SRP Modelos de edital e de ata de registro de preços Instrumento de Padronização dos Procedimentos de Contratação (Advocacia-Geral da União; Ministério da Gestão e da Inovação em Serviços Públicos em Serviços Públicos, 2023b) Vídeo explicativo Decreto do SRP | AGU, MGI
+
+Fonte: Elaboração própria.
+
+[1] Lei 14.133/2021, art. 6º, inciso XLV.
+
+[2] O Decreto em questão é aplicável às organizações da Administração Pública federal direta, autárquica e fundacional do Poder Executivo federal. Esse Decreto está fundamentado no poder regulamentar do Presidente da República, conforme disposto no artigo 84, inciso IV, da CF/1988. No entanto, a recepção desse regulamento por parte das organizações dos poderes Legislativo e Judiciário pode variar, dependendo de fatores como compatibilidade com suas competências e existência de normas específicas que regulamentam a matéria abordada pelo Decreto. Um exemplo disso é o normativo interno do Senado Federal, que estabelece que os regulamentos do Poder Executivo só serão aplicados nas contratações do Senado quando houver uma previsão expressa nesse sentido em ato normativo próprio, decisão de autoridade competente ou disposição editalícia (ADG 14/2022, art. 1º, § 1º). Por isso, é fundamental que os termos de referência e editais de licitação esclareçam qual é a fundamentação jurídica da contratação, garantindo assim que todos os envolvidos tenham conhecimento das regras do processo.
+
+[3] Lei 14.133/2021, art. 6º, inciso XLV.
+
+[4] Decreto 11.462/2023, art. 3º, e Tribunal de Contas da União, 2010, p. 244.
+
+[5] Decreto 11.462/2023, art. 2º, inciso VI, e art. 32, § 2º.
+
+[6] Tribunal de Contas da União, 2010, p. 243.
+
+[7] O Decreto em questão é aplicável às organizações da Administração Pública federal direta, autárquica e fundacional do Poder Executivo federal. Esse Decreto está fundamentado no poder regulamentar do Presidente da República, conforme disposto no artigo 84, inciso IV, da CF/1988. No entanto, a recepção desse regulamento por parte das organizações dos poderes Legislativo e Judiciário pode variar, dependendo de fatores como compatibilidade com suas competências e existência de normas específicas que regulamentam a matéria abordada pelo Decreto. Um exemplo disso é o normativo interno do Senado Federal, que estabelece que os regulamentos do Poder Executivo só serão aplicados nas contratações do Senado quando houver uma previsão expressa nesse sentido em ato normativo próprio, decisão de autoridade competente ou disposição editalícia (ADG 14/2022, art. 1º, § 1º). Por isso, é fundamental que os termos de referência e editais de licitação esclareçam qual é a fundamentação jurídica da contratação, garantindo assim que todos os envolvidos tenham conhecimento das regras do processo.
+
+[8] Decreto 11.462/2023, art. 10.
+
+[9] Decreto 11.462/2023, art. 24, estabelece que o controle e o gerenciamento das atas de registro de preços sejam realizados por meio da ferramenta de Gestão de Atas, no sistema Compras.
+
+[10] Lei 14.133/2021, art. 6º, incisos XLVII e XLVIII.
+
+[11] Decreto 11.462/2023, art. 8º, incisos VIII e IX.
+
+[12] Os conceitos de compra nacional e de compra centralizada estão no art. 2º, incisos VI e VII, do Decreto 11.462/2023.
+
+[13] Decreto 11.462/2023, art. 7º, § 3º.
+
+[14] Lei 14.133/2021, art. 86, caput.
+
+[15] Participa dos procedimentos iniciais da contratação para registro de preços e integra a ata de registro de preços (Lei 14.133/2021, art. 6º, inciso XLVIII).
+
+[16] Lei 14.133/2021, art. 86, § 1º.
+
+[17] Decreto 11.462/2023, art. 7º, incisos I e II.
+
+[18] Órgão ou entidade da Administração Pública que não participa dos procedimentos iniciais da licitação para registro de preços e não integra a ata de registro de preços (Lei 14.133/2021, art. 6º, inciso XLIX).
+
+[19] Lei 14.133/2021, art. 86, § 2º.
+
+[20] Lei 14.133/2021, art. 82, § 5º, inciso I, e art. 86, § 2º, inciso II.
+
+[21] Lei 14.133/2021, art. 86, §§ 4º e 5º.
+
+[22] Lei 14.133/2021, art. 86, §§ 7º e 8º; e Decreto 11.462/2023, art. 32, §§ 1º e 2º.
+
+[23] Lei 14.133/2021, art. 86, § 8º.
+
+[24] Lei 14.133/2021, art. 83.
+
+[25] Lei 14.133/2021, art. 85.
+
+[26] Acórdãos 2176/2022, 1767/2021, 1213/2021, 3143/2020, todos do Plenário do TCU.
+
+[27] Lei 14.133/2021, art. 82, § 6º, Decreto 11.462/2023, art. 16.
+
+[28] IN – Seges/ME 67/2021, art. 4º, inciso IV.
+
+[29] Decreto 11.462/2023, art. 16, § 1º, incisos I a III.
+
+[30] Decreto 11.462/2023, art. 16, § 2º.
+
+[31] Lei 14.133/2021, art. 82.
+
+[32] Lei 14.133/2021, art. 82, § 3º.
+
+[33] Lei 14.133/2021, art. 82, § 4º.
+
+[34] Lei 14.133/2021, art. 82, inciso V c/c Decreto 11.462/2023, art. 11.
+
+[35] Lei 14.133/2021, art. 82, inciso VI e § 5º, incisos III e IV.
+
+[36] Lei 14.133/2021, art. 82, inciso VII, e § 5º, inciso VI; Decreto 11.462/2023, art. 18, inciso II e §§ 1º e 2º.
+
+[37] Decreto 11.462/2023, art. 18, § 3º.
+
+[38] Lei 14.133/2021, art. 82, inciso VIII.
+
+[39] Lei 14.133/2021, art. 82, inciso IX.
+
+[40] Lei 14.133/2021, art. 82, caput c/c art. 25, caput.
+
+[41] Lei 14.133/2021, art. 82, § 1º.
+
+[42]Lei 14.133/2021, art. 82, § 2º.
+
+[43] Decreto 8.538/2015, art. 8º, § 4º.
+
+[44] Lei 14.133/2021, art. 82, § 5º, inciso IV, e art. 84, caput.
+
+[45] Decreto 11.462/2023, art. 23.
+
+[46] Lei 14.133/2021, art. 84, parágrafo único; e Decreto 11.462/2023, arts. 35 e 36.
+
+[47] Decreto 11.462/2023, art. 17.
+
+[48] Relatório do Acórdão 80/2022 e voto do Acórdão 1668/2021, parágrafo 116, ambos do Plenário do TCU.
