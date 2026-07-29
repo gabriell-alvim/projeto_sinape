@@ -691,6 +691,15 @@ def executar_varredura_sharepoint():
 MODELOS_IA_PERMITIDOS = {"claude-opus-5", "claude-sonnet-5"}
 ESFORCOS_IA_PERMITIDOS = {"low", "medium", "high", "xhigh", "max"}
 
+# Esforço efetivo quando a tela não manda nenhum. Ficam explícitos aqui porque o
+# esforço agora vai gravado em cada registro de gasto, e um custo só serve pra
+# comparar se dá pra saber com que esforço ele foi gasto — "em branco" no
+# relatório seria um buraco justamente nas chamadas que ninguém configurou.
+# A análise de edital usa o padrão da própria API (high); as telas interativas
+# (Sinki e concorrentes) já vinham caindo em medium.
+ESFORCO_PADRAO_ANALISE = "high"
+ESFORCO_PADRAO_INTERATIVO = "medium"
+
 # preço por 1 milhão de tokens (entrada / saída), em dólares — referência oficial.
 # Já deixo GPT aqui pra quando/se integrarmos a OpenAI (ainda não está ligada).
 PRECOS_MODELOS = {
@@ -709,10 +718,16 @@ def _custo_usd(model: str, tokens_entrada: int, tokens_saida: int) -> float:
     return (tokens_entrada * p["entrada"] + tokens_saida * p["saida"]) / 1_000_000
 
 
-def _registrar_gasto(model: str, uso: dict, processo_id=None, processo_nome: str = "", origem: str = ""):
+def _registrar_gasto(model: str, uso: dict, processo_id=None, processo_nome: str = "",
+                     origem: str = "", esforco: str = ""):
     """Registra uma chamada de IA no contador de gastos: tokens e custo em
     dólar. Usado toda vez que uma análise por IA roda, pra alimentar o Painel
-    de Gastos (total geral + por processo)."""
+    de Gastos (total geral + por processo).
+
+    O esforço vai junto porque ele é quem manda no volume de tokens de saída —
+    e saída custa 5x a entrada. Sem esse campo dá pra comparar Opus contra
+    Sonnet, mas não dá pra responder se compensa baixar o esforço, que costuma
+    ser a economia maior."""
     ent = int(uso.get("entrada", 0))
     sai = int(uso.get("saida", 0))
     custo = _custo_usd(model, ent, sai)
@@ -722,6 +737,7 @@ def _registrar_gasto(model: str, uso: dict, processo_id=None, processo_nome: str
         "processo_nome": processo_nome,
         "model": model,
         "origem": origem,
+        "esforco": esforco or uso.get("esforco") or "",
         "tokens_entrada": ent,
         "tokens_saida": sai,
         "custo_usd": round(custo, 6),
@@ -756,9 +772,12 @@ def _rodar_analise_ia(pdfs: list, model: str | None = None, effort: str | None =
         })
     content.append({"type": "text", "text": PEDIDO_ANALISE})
 
-    kwargs = {}
-    if effort in ESFORCOS_IA_PERMITIDOS:
-        kwargs["output_config"] = {"effort": effort}
+    # antes o esforço só ia quando a tela mandava um válido, e sem ele a chamada
+    # caía no padrão da API. Agora vai sempre explícito: o valor é o mesmo, mas
+    # o registro de gasto passa a saber com que esforço aquele custo foi gasto
+    # em vez de gravar em branco.
+    esforco_usado = effort if effort in ESFORCOS_IA_PERMITIDOS else ESFORCO_PADRAO_ANALISE
+    kwargs = {"output_config": {"effort": esforco_usado}}
 
     modelo_usado = model if model in MODELOS_IA_PERMITIDOS else ANTHROPIC_MODEL
     with anthropic_client.messages.stream(
@@ -784,6 +803,7 @@ def _rodar_analise_ia(pdfs: list, model: str | None = None, effort: str | None =
     u = resposta.usage
     uso = {
         "model": modelo_usado,
+        "esforco": esforco_usado,
         "entrada": (getattr(u, "input_tokens", 0) or 0)
                    + (getattr(u, "cache_creation_input_tokens", 0) or 0)
                    + (getattr(u, "cache_read_input_tokens", 0) or 0),
@@ -1640,7 +1660,8 @@ def sinki_conversar():
     modelo = request.form.get("model")
     modelo_usado = modelo if modelo in MODELOS_IA_PERMITIDOS else ANTHROPIC_MODEL
     esforco = request.form.get("effort")
-    kwargs = {"output_config": {"effort": esforco if esforco in ESFORCOS_IA_PERMITIDOS else "medium"}}
+    esforco_usado = esforco if esforco in ESFORCOS_IA_PERMITIDOS else ESFORCO_PADRAO_INTERATIVO
+    kwargs = {"output_config": {"effort": esforco_usado}}
 
     # laço de ferramentas: o Sinki pode consultar e mexer no Painel várias vezes
     # antes de responder. O teto de rodadas evita que um pedido mal formulado
@@ -1707,7 +1728,7 @@ def sinki_conversar():
 
     uso = {"model": modelo_usado, "entrada": entrada_total, "saida": saida_total}
     _registrar_gasto(modelo_usado, uso, processo_nome="Sinki: " + conversa["titulo"],
-                     origem="conversa com o Sinki")
+                     origem="conversa com o Sinki", esforco=esforco_usado)
 
     return jsonify({"conversa_id": cid, "titulo": conversa["titulo"], "resposta": texto,
                     "acoes": acoes, "anexados": [a["nome"] for a in anexados]})
@@ -1784,7 +1805,8 @@ def verificar_concorrente(pid):
     modelo = request.form.get("model")
     modelo_usado = modelo if modelo in MODELOS_IA_PERMITIDOS else ANTHROPIC_MODEL
     esforco = request.form.get("effort")
-    kwargs = {"output_config": {"effort": esforco if esforco in ESFORCOS_IA_PERMITIDOS else "medium"}}
+    esforco_usado = esforco if esforco in ESFORCOS_IA_PERMITIDOS else ESFORCO_PADRAO_INTERATIVO
+    kwargs = {"output_config": {"effort": esforco_usado}}
 
     try:
         with anthropic_client.messages.stream(
@@ -1839,7 +1861,7 @@ def verificar_concorrente(pid):
                       + (getattr(u, "cache_read_input_tokens", 0) or 0),
            "saida": getattr(u, "output_tokens", 0) or 0}
     _registrar_gasto(modelo_usado, uso, processo_id=pid, processo_nome=doc.get("nome", ""),
-                     origem="verificação de concorrente")
+                     origem="verificação de concorrente", esforco=esforco_usado)
 
     return jsonify(registro), 201
 
@@ -1866,12 +1888,38 @@ def painel_gastos():
     itens = [{
         "processo_nome": r.get("processo_nome") or "(sem nome)",
         "model": r.get("model", ""),
+        "esforco": r.get("esforco", ""),
         "origem": r.get("origem", ""),
         "tokens_entrada": r.get("tokens_entrada", 0),
         "tokens_saida": r.get("tokens_saida", 0),
         "custo_usd": round(r.get("custo_usd", 0.0), 4),
         "criadoEm": r.get("criadoEm"),
     } for r in registros]
+
+    # Comparativo por modelo + esforço: é o que responde "compensa baixar o
+    # esforço?" e "Opus no médio sai mais barato que Sonnet no máximo?".
+    # A média por chamada importa mais que o total, porque uma combinação usada
+    # 2 vezes e outra usada 50 não se comparam pelo total gasto.
+    combos = {}
+    for r in registros:
+        chave = (r.get("model", ""), r.get("esforco", ""))
+        c = combos.setdefault(chave, {"chamadas": 0, "entrada": 0, "saida": 0, "usd": 0.0})
+        c["chamadas"] += 1
+        c["entrada"] += r.get("tokens_entrada", 0)
+        c["saida"] += r.get("tokens_saida", 0)
+        c["usd"] += r.get("custo_usd", 0.0)
+    comparativo = sorted(
+        ({
+            "model": modelo,
+            "esforco": esf or "(não registrado)",
+            "chamadas": c["chamadas"],
+            "tokens_saida_media": round(c["saida"] / c["chamadas"]),
+            "custo_usd_medio": round(c["usd"] / c["chamadas"], 4),
+            "custo_usd_total": round(c["usd"], 4),
+        } for (modelo, esf), c in combos.items()),
+        key=lambda x: -x["custo_usd_total"],
+    )
+
     return jsonify({
         "total_analises": len(registros),
         "total_tokens_entrada": total_ent,
@@ -1880,6 +1928,7 @@ def painel_gastos():
         "total_usd": total_usd,
         "total_brl_aprox": round(total_usd * USD_PARA_BRL, 2),
         "cotacao_usd_brl": USD_PARA_BRL,
+        "comparativo_modelo_esforco": comparativo,
         "itens": itens,
     })
 

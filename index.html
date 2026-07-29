@@ -93,6 +93,7 @@ input, select, textarea { font-family:inherit; }
 .gastos-tabela td.num { text-align:right; white-space:nowrap; font-variant-numeric:tabular-nums; }
 .gastos-tabela tr:last-child td { border-bottom:none; }
 .gastos-modelo { font-size:.68rem; font-weight:700; background:var(--violet-l); color:var(--violet); padding:2px 8px; border-radius:10px; white-space:nowrap; }
+.gastos-subtitulo { font-size:.8rem; font-weight:700; color:var(--slate); margin:4px 0 8px; }
 
 /* ── Concorrentes (documentação de terceiros — precisa ficar visualmente
    inconfundível com os dados da própria SINAPE) ── */
@@ -2866,14 +2867,38 @@ async function abrirPainelGastos(){
     if(!g.itens || !g.itens.length){
       html += '<p class="relatorio-vazio">Nenhuma análise por IA registrada ainda. Os gastos aparecem aqui conforme você roda análises.</p>';
     } else {
-      html += '<table class="gastos-tabela"><thead><tr>' +
-        '<th>Processo</th><th>Modelo</th><th style="text-align:right;">Tokens (ent./saída)</th><th style="text-align:right;">Custo</th><th style="text-align:right;">Quando</th>' +
+      // Comparativo por modelo + esforço. A média por chamada é o número que
+      // decide se compensa baixar o esforço — o total só diz qual combinação
+      // foi mais usada.
+      const comp = g.comparativo_modelo_esforco || [];
+      if(comp.length > 1){
+        html += '<h4 class="gastos-subtitulo">Custo médio por chamada, por modelo e esforço</h4>' +
+          '<table class="gastos-tabela"><thead><tr>' +
+            '<th>Modelo</th><th>Esforço</th><th style="text-align:right;">Chamadas</th>' +
+            '<th style="text-align:right;">Saída média</th><th style="text-align:right;">Custo médio</th>' +
+            '<th style="text-align:right;">Total</th>' +
+          '</tr></thead><tbody>' +
+          comp.map(c=>'<tr>' +
+            '<td><span class="gastos-modelo">'+esc(c.model)+'</span></td>' +
+            '<td>'+esc(c.esforco)+'</td>' +
+            '<td class="num">'+c.chamadas+'</td>' +
+            '<td class="num">'+fmtTokens(c.tokens_saida_media)+'</td>' +
+            '<td class="num">$'+(c.custo_usd_medio||0).toFixed(4)+'</td>' +
+            '<td class="num">$'+(c.custo_usd_total||0).toFixed(4)+'</td>' +
+          '</tr>').join('') +
+          '</tbody></table>' +
+          '<p class="hint" style="font-size:.72rem;margin:6px 0 16px;">Compare pela coluna de custo médio, não pelo total: uma combinação usada 2 vezes e outra usada 50 não se comparam pelo total gasto.</p>';
+      }
+      html += '<h4 class="gastos-subtitulo">Todas as chamadas</h4>' +
+        '<table class="gastos-tabela"><thead><tr>' +
+        '<th>Processo</th><th>Modelo</th><th>Esforço</th><th style="text-align:right;">Tokens (ent./saída)</th><th style="text-align:right;">Custo</th><th style="text-align:right;">Quando</th>' +
         '</tr></thead><tbody>' +
         g.itens.map(it=>{
           const quando = it.criadoEm ? new Date(it.criadoEm).toLocaleString('pt-BR') : '';
           return '<tr>' +
             '<td>'+esc(it.processo_nome)+(it.origem?'<br><span class="hint" style="font-size:.68rem;">'+esc(it.origem)+'</span>':'')+'</td>' +
             '<td><span class="gastos-modelo">'+esc(it.model)+'</span></td>' +
+            '<td>'+esc(it.esforco || '—')+'</td>' +
             '<td class="num">'+fmtTokens(it.tokens_entrada)+' / '+fmtTokens(it.tokens_saida)+'</td>' +
             '<td class="num">$'+(it.custo_usd||0).toFixed(4)+'</td>' +
             '<td class="num">'+esc(quando)+'</td>' +
