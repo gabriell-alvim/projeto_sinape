@@ -1007,6 +1007,44 @@ def _analisar_upload_manual(jid, pdfs, model, effort):
     return None
 
 
+@app.route("/api/diag/pdf-por-arquivo", methods=["POST"])
+def diag_pdf_por_arquivo():
+    """TEMPORÁRIO — pra achar qual PDF da pasta da Conasa (47/2026) causa
+    'Could not process PDF' na Anthropic. Baixa os PDFs da pasta e manda cada
+    um sozinho pro Claude com max_tokens mínimo (chamada barata), reportando
+    qual falha. Remover depois de diagnosticado."""
+    corpo = request.get_json(silent=True) or {}
+    caminho_pasta = corpo.get("caminho_pasta", "")
+    if not caminho_pasta:
+        return jsonify({"erro": "informe caminho_pasta"}), 400
+    cfg = {"TENANT_ID": MONTADOR_TENANT_ID, "CLIENT_ID": MONTADOR_CLIENT_ID,
+           "CLIENT_SECRET": MONTADOR_CLIENT_SECRET}
+    pdfs_pasta = baixar_pdfs_da_pasta(cfg, caminho_pasta)
+    resultado = []
+    for p in pdfs_pasta:
+        nome, dados = p["nome"], p["bytes"]
+        item = {"nome": nome, "mb": round(len(dados) / 1024 / 1024, 2)}
+        try:
+            with anthropic_client.messages.stream(
+                model="claude-haiku-4-5-20251001",
+                max_tokens=10,
+                messages=[{"role": "user", "content": [
+                    {"type": "document", "source": {
+                        "type": "base64", "media_type": "application/pdf",
+                        "data": base64.standard_b64encode(dados).decode("ascii"),
+                    }},
+                    {"type": "text", "text": "Responda apenas 'ok'."},
+                ]}],
+            ) as stream:
+                stream.get_final_message()
+            item["status"] = "ok"
+        except anthropic.APIStatusError as e:
+            item["status"] = "falhou"
+            item["erro"] = f"{e.status_code} {getattr(e, 'body', None) or e.message}"
+        resultado.append(item)
+    return jsonify({"arquivos": resultado})
+
+
 @app.route("/api/processos/analisar-novo", methods=["POST"])
 def analisar_processo_novo():
     """A partir de um item novo já identificado na varredura do SharePoint
