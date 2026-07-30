@@ -3122,7 +3122,16 @@ async function rodarAnaliseNova(i, btn){
     await recarregarLista();
     openProcess(corpo.id);
   }catch(e){
-    toast('Erro ao analisar '+item.nome+': '+e.message);
+    // Quando o servidor derruba a conexão no meio (análise longa demais), o
+    // fetch estoura com "Failed to fetch" — mensagem que não diz nada a quem
+    // está esperando. Vale explicar o que provavelmente houve, porque o
+    // processo pode ter sido cobrado sem aparecer no Painel.
+    const caiu = /failed to fetch|networkerror|load failed/i.test(e.message || '');
+    toast(caiu
+      ? 'A análise de ' + item.nome + ' foi interrompida antes de terminar — o servidor '
+        + 'encerrou a conexão. Documento muito grande costuma ser a causa. Confira o Painel '
+        + 'de gastos: se aparecer uma chamada agora, ela foi cobrada mesmo sem gerar processo.'
+      : 'Erro ao analisar ' + item.nome + ': ' + e.message);
     btn.disabled = false;
     btn.textContent = textoOriginal;
   }

@@ -781,6 +781,14 @@ def _rodar_analise_ia(pdfs: list, model: str | None = None, effort: str | None =
     kwargs = {"output_config": {"effort": esforco_usado}}
 
     modelo_usado = model if model in MODELOS_IA_PERMITIDOS else ANTHROPIC_MODEL
+    # Sem isto, uma análise que estoura o timeout do gunicorn não deixa rastro
+    # nenhum: o worker morre esperando a resposta, o registro de gasto nunca
+    # roda e ninguém sabe quanto tempo aquilo levou nem se a API foi chamada.
+    # Estes dois prints vão pro log do Render e respondem as duas coisas.
+    mb = sum(len(d) for _, d in pdfs) / 1024 / 1024
+    print(f"[analise] inicio · modelo={modelo_usado} esforco={esforco_usado} "
+          f"{len(pdfs)} arquivo(s) {mb:.1f} MB", flush=True)
+    t0 = time.time()
     with anthropic_client.messages.stream(
         model=modelo_usado,
         # quem é o Sinki e o contrato da análise ficam no system prompt: é o
@@ -802,6 +810,8 @@ def _rodar_analise_ia(pdfs: list, model: str | None = None, effort: str | None =
         resposta = stream.get_final_message()
 
     u = resposta.usage
+    print(f"[analise] fim · {time.time() - t0:.0f}s · "
+          f"{getattr(u, 'output_tokens', 0) or 0} tokens de saida", flush=True)
     uso = {
         "model": modelo_usado,
         "esforco": esforco_usado,
