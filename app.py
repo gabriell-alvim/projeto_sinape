@@ -67,6 +67,7 @@ concorrentes entre a leitura e a escrita.
 
 import base64
 import copy
+import io
 import json
 import os
 import re
@@ -83,6 +84,7 @@ from urllib.parse import quote
 
 import anthropic
 import requests
+from pypdf import PdfReader
 from pymongo import MongoClient, ASCENDING, DESCENDING
 from pymongo.errors import DuplicateKeyError
 from flask import Flask, request, jsonify, send_from_directory, send_file, session, redirect, Response
@@ -841,6 +843,29 @@ def _rodar_analise_ia(pdfs: list, model: str | None = None, effort: str | None =
     if total_bytes > MAX_PDF_TOTAL_MB * 1024 * 1024:
         raise ValueError(f"Total dos PDFs excede {MAX_PDF_TOTAL_MB} MB")
 
+    # A Anthropic rejeita qualquer PDF com mais de 100 páginas (por documento,
+    # não pelo total da requisição) com um 400 genérico. Foi o que aconteceu
+    # com a proposta da Conasa (47/2026): um PDF de 197 páginas, aparentemente
+    # de outra pasta/projeto, travou a análise sem indicar qual arquivo era o
+    # culpado. Checar aqui antes de gastar com a chamada e apontar o nome
+    # exato do arquivo evita o mesmo mistério de novo.
+    LIMITE_PAGINAS_PDF = 100
+    grandes_demais = []
+    for nome, dados in pdfs:
+        try:
+            paginas = len(PdfReader(io.BytesIO(dados)).pages)
+        except Exception:
+            continue  # PDF ilegível: deixa a própria Anthropic reportar o erro
+        if paginas > LIMITE_PAGINAS_PDF:
+            grandes_demais.append((nome, paginas))
+    if grandes_demais:
+        detalhe = "; ".join(f"'{n}' tem {p} páginas" for n, p in grandes_demais)
+        raise ValueError(
+            f"Documento(s) passam do limite de {LIMITE_PAGINAS_PDF} páginas por PDF "
+            f"que a IA aceita: {detalhe}. Remova esse(s) arquivo(s) da pasta (pode "
+            f"estar no lugar errado) ou divida-o(s) antes de tentar de novo."
+        )
+
     nomes = []
     content = []
     for nome, dados in pdfs:
@@ -1005,44 +1030,6 @@ def _analisar_upload_manual(jid, pdfs, model, effort):
     _registrar_gasto(uso["model"], uso, processo_nome=doc.get("nome", ""), origem="upload manual")
     col_jobs.update_one({"_id": jid}, {"$set": {"documento": doc}})
     return None
-
-
-@app.route("/api/diag/pdf-por-arquivo", methods=["POST"])
-def diag_pdf_por_arquivo():
-    """TEMPORÁRIO — pra achar qual PDF da pasta da Conasa (47/2026) causa
-    'Could not process PDF' na Anthropic. Baixa os PDFs da pasta e manda cada
-    um sozinho pro Claude com max_tokens mínimo (chamada barata), reportando
-    qual falha. Remover depois de diagnosticado."""
-    corpo = request.get_json(silent=True) or {}
-    caminho_pasta = corpo.get("caminho_pasta", "")
-    if not caminho_pasta:
-        return jsonify({"erro": "informe caminho_pasta"}), 400
-    cfg = {"TENANT_ID": MONTADOR_TENANT_ID, "CLIENT_ID": MONTADOR_CLIENT_ID,
-           "CLIENT_SECRET": MONTADOR_CLIENT_SECRET}
-    pdfs_pasta = baixar_pdfs_da_pasta(cfg, caminho_pasta)
-    resultado = []
-    for p in pdfs_pasta:
-        nome, dados = p["nome"], p["bytes"]
-        item = {"nome": nome, "mb": round(len(dados) / 1024 / 1024, 2)}
-        try:
-            with anthropic_client.messages.stream(
-                model="claude-haiku-4-5-20251001",
-                max_tokens=10,
-                messages=[{"role": "user", "content": [
-                    {"type": "document", "source": {
-                        "type": "base64", "media_type": "application/pdf",
-                        "data": base64.standard_b64encode(dados).decode("ascii"),
-                    }},
-                    {"type": "text", "text": "Responda apenas 'ok'."},
-                ]}],
-            ) as stream:
-                stream.get_final_message()
-            item["status"] = "ok"
-        except anthropic.APIStatusError as e:
-            item["status"] = "falhou"
-            item["erro"] = f"{e.status_code} {getattr(e, 'body', None) or e.message}"
-        resultado.append(item)
-    return jsonify({"arquivos": resultado})
 
 
 @app.route("/api/processos/analisar-novo", methods=["POST"])
