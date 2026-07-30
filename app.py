@@ -84,7 +84,7 @@ from urllib.parse import quote
 
 import anthropic
 import requests
-from pypdf import PdfReader
+from pypdf import PdfReader, PdfWriter
 from pymongo import MongoClient, ASCENDING, DESCENDING
 from pymongo.errors import DuplicateKeyError
 from flask import Flask, request, jsonify, send_from_directory, send_file, session, redirect, Response
@@ -830,6 +830,58 @@ def ver_job(jid):
     return jsonify(resposta)
 
 
+# A API aceita no máximo 100 páginas por PDF e 600 páginas na requisição
+# inteira. Um anexo passar de 100 páginas não é anomalia: o PER — Programa de
+# Exploração da Rodovia da proposta 47/2026 (Via Brasil MT-246) tem 197 e é
+# Anexo III do próprio TR, citado no item 7.1. Recusar esse tipo de arquivo
+# seria recusar o edital; o certo é fatiar e mandar em partes.
+PAGINAS_POR_PDF = 100
+PAGINAS_POR_REQUISICAO = 600
+
+
+def _fatiar_pdfs_grandes(pdfs: list) -> list:
+    """Divide PDFs acima do limite de páginas em partes menores, preservando a
+    ordem. Cada parte carrega no nome o intervalo de páginas para que as
+    referências da análise ("página 5 do PER") continuem fazendo sentido."""
+    saida = []
+    total_paginas = 0
+    for nome, dados in pdfs:
+        try:
+            leitor = PdfReader(io.BytesIO(dados))
+            paginas = len(leitor.pages)
+        except Exception:
+            # PDF que o pypdf não abre pode muito bem ser legível pela API —
+            # manda inteiro e deixa que ela reporte, em vez de barrar aqui
+            saida.append((nome, dados))
+            continue
+
+        total_paginas += paginas
+        if paginas <= PAGINAS_POR_PDF:
+            saida.append((nome, dados))
+            continue
+
+        base, _, ext = nome.rpartition(".")
+        for inicio in range(0, paginas, PAGINAS_POR_PDF):
+            fim = min(inicio + PAGINAS_POR_PDF, paginas)
+            escritor = PdfWriter()
+            for p in range(inicio, fim):
+                escritor.add_page(leitor.pages[p])
+            buf = io.BytesIO()
+            escritor.write(buf)
+            rotulo = f"{base or nome} (páginas {inicio + 1}-{fim} de {paginas})"
+            saida.append((f"{rotulo}.{ext}" if ext else rotulo, buf.getvalue()))
+        print(f"[analise] '{nome}' tem {paginas} páginas — dividido em "
+              f"{-(-paginas // PAGINAS_POR_PDF)} partes", flush=True)
+
+    if total_paginas > PAGINAS_POR_REQUISICAO:
+        raise ValueError(
+            f"Os documentos somam {total_paginas} páginas e a IA analisa no máximo "
+            f"{PAGINAS_POR_REQUISICAO} por vez. Rode a análise com menos arquivos de "
+            f"cada vez, deixando de fora os anexos que não afetam a decisão."
+        )
+    return saida
+
+
 def _rodar_analise_ia(pdfs: list, model: str | None = None, effort: str | None = None):
     """Manda uma lista de PDFs (nome, bytes) pro Claude com o prompt padrão do
     Painel e devolve (doc, meta) — o JSON de análise pronto pra virar processo
@@ -843,28 +895,7 @@ def _rodar_analise_ia(pdfs: list, model: str | None = None, effort: str | None =
     if total_bytes > MAX_PDF_TOTAL_MB * 1024 * 1024:
         raise ValueError(f"Total dos PDFs excede {MAX_PDF_TOTAL_MB} MB")
 
-    # A Anthropic rejeita qualquer PDF com mais de 100 páginas (por documento,
-    # não pelo total da requisição) com um 400 genérico. Foi o que aconteceu
-    # com a proposta da Conasa (47/2026): um PDF de 197 páginas, aparentemente
-    # de outra pasta/projeto, travou a análise sem indicar qual arquivo era o
-    # culpado. Checar aqui antes de gastar com a chamada e apontar o nome
-    # exato do arquivo evita o mesmo mistério de novo.
-    LIMITE_PAGINAS_PDF = 100
-    grandes_demais = []
-    for nome, dados in pdfs:
-        try:
-            paginas = len(PdfReader(io.BytesIO(dados)).pages)
-        except Exception:
-            continue  # PDF ilegível: deixa a própria Anthropic reportar o erro
-        if paginas > LIMITE_PAGINAS_PDF:
-            grandes_demais.append((nome, paginas))
-    if grandes_demais:
-        detalhe = "; ".join(f"'{n}' tem {p} páginas" for n, p in grandes_demais)
-        raise ValueError(
-            f"Documento(s) passam do limite de {LIMITE_PAGINAS_PDF} páginas por PDF "
-            f"que a IA aceita: {detalhe}. Remova esse(s) arquivo(s) da pasta (pode "
-            f"estar no lugar errado) ou divida-o(s) antes de tentar de novo."
-        )
+    pdfs = _fatiar_pdfs_grandes(pdfs)
 
     nomes = []
     content = []
