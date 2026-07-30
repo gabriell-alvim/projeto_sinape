@@ -871,25 +871,45 @@ def _rodar_analise_ia(pdfs: list, model: str | None = None, effort: str | None =
     print(f"[analise] inicio · modelo={modelo_usado} esforco={esforco_usado} "
           f"{len(pdfs)} arquivo(s) {mb:.1f} MB", flush=True)
     t0 = time.time()
-    with anthropic_client.messages.stream(
-        model=modelo_usado,
-        # quem é o Sinki e o contrato da análise ficam no system prompt: é o
-        # mesmo texto usado na conversa, e o cache de prompt cobra barato por ele
-        system=[{"type": "text", "text": PROMPT_SINKI, "cache_control": {"type": "ephemeral"}}],
-        # 64k porque o "esforço" alto/máximo gasta parte do orçamento pensando:
-        # max_tokens limita raciocínio + resposta juntos, e com 32k o JSON da
-        # análise chegava a ser cortado no meio nos esforços mais altos.
-        max_tokens=64000,
-        # Sem isto o Opus 4.8 roda SEM raciocinar (no Sonnet 5 o padrão já é
-        # raciocinar) - ou seja, o modelo vendido como "mais cuidadoso" saía
-        # menos cuidadoso que o barato, e o seletor de esforço quase não
-        # surtia efeito nele. Com o raciocínio desligado o Opus também tende a
-        # escrever explicações junto do JSON, o que quebrava a leitura.
-        thinking={"type": "adaptive"},
-        messages=[{"role": "user", "content": content}],
-        **kwargs,
-    ) as stream:
-        resposta = stream.get_final_message()
+    # A API da Anthropic devolve 503 overloaded_error de vez em quando —
+    # sobrecarga momentânea do lado deles, que passa em segundos. Antes isso
+    # virava erro na hora e o usuário tinha que clicar de novo manualmente;
+    # agora que a análise roda numa thread (sem mais o relógio do gunicorn
+    # correndo), dá pra esperar um pouco e tentar de novo sozinho. Só
+    # overloaded/rate-limit se repete — erro de PDF ilegível ou de conteúdo
+    # não se resolve tentando de novo, então sobe na hora.
+    TENTATIVAS = 4
+    for tentativa in range(1, TENTATIVAS + 1):
+        try:
+            with anthropic_client.messages.stream(
+                model=modelo_usado,
+                # quem é o Sinki e o contrato da análise ficam no system prompt: é o
+                # mesmo texto usado na conversa, e o cache de prompt cobra barato por ele
+                system=[{"type": "text", "text": PROMPT_SINKI, "cache_control": {"type": "ephemeral"}}],
+                # 64k porque o "esforço" alto/máximo gasta parte do orçamento pensando:
+                # max_tokens limita raciocínio + resposta juntos, e com 32k o JSON da
+                # análise chegava a ser cortado no meio nos esforços mais altos.
+                max_tokens=64000,
+                # Sem isto o Opus 4.8 roda SEM raciocinar (no Sonnet 5 o padrão já é
+                # raciocinar) - ou seja, o modelo vendido como "mais cuidadoso" saía
+                # menos cuidadoso que o barato, e o seletor de esforço quase não
+                # surtia efeito nele. Com o raciocínio desligado o Opus também tende a
+                # escrever explicações junto do JSON, o que quebrava a leitura.
+                thinking={"type": "adaptive"},
+                messages=[{"role": "user", "content": content}],
+                **kwargs,
+            ) as stream:
+                resposta = stream.get_final_message()
+            break
+        except anthropic.APIStatusError as e:
+            transitorio = e.status_code == 503 or e.status_code == 429
+            if not transitorio or tentativa == TENTATIVAS:
+                raise
+            espera = 5 * tentativa
+            print(f"[analise] tentativa {tentativa} falhou ({e.status_code} "
+                  f"{getattr(e, 'body', None) or e.message}) — tentando de novo em {espera}s",
+                  flush=True)
+            time.sleep(espera)
 
     u = resposta.usage
     print(f"[analise] fim · {time.time() - t0:.0f}s · "
