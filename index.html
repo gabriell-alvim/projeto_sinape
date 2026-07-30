@@ -3102,6 +3102,40 @@ document.addEventListener('click', function(e){
 });
 document.addEventListener('scroll', function(){ fecharTodosAiPickers(); }, true);
 
+/* Acompanha uma análise que roda no servidor. A tela não segura mais a
+   conexão aberta: pergunta o andamento de tempos em tempos. Fechar a aba não
+   cancela nada — o processo aparece no Painel quando terminar. */
+function acompanharJob(jobId, aoProgresso){
+  return new Promise((resolve, reject)=>{
+    let falhasSeguidas = 0;
+    const tick = async ()=>{
+      try{
+        const r = await fetch(Store.base + '/jobs/' + jobId, { headers: Store.headers() });
+        if(!r.ok) throw new Error('Servidor respondeu ' + r.status);
+        const j = await r.json();
+        falhasSeguidas = 0;
+        if(j.status === 'concluido') return resolve(j);
+        if(j.status === 'erro') return reject(new Error(j.erro || 'A análise falhou.'));
+        if(aoProgresso) aoProgresso(j.segundos || 0);
+        setTimeout(tick, 3000);
+      }catch(e){
+        // Oscilação de rede não pode derrubar o acompanhamento: o trabalho
+        // continua no servidor. Só desiste depois de insistir um pouco.
+        if(++falhasSeguidas >= 5) return reject(new Error(
+          'Perdi contato com o servidor enquanto acompanhava a análise. Ela pode ter '
+          + 'continuado — atualize a página e confira se o processo apareceu.'));
+        setTimeout(tick, 5000);
+      }
+    };
+    tick();
+  });
+}
+
+function tempoDecorrido(s){
+  if(s < 60) return s + 's';
+  return Math.floor(s/60) + 'min' + (s % 60 ? ' ' + (s % 60) + 's' : '');
+}
+
 async function rodarAnaliseNova(i, btn){
   const item = ULTIMO_RELATORIO_NOVOS[i];
   if(!item) return;
@@ -3109,7 +3143,7 @@ async function rodarAnaliseNova(i, btn){
   const esforco = document.getElementById('novo-'+i+'-esforco').dataset.valor;
   const textoOriginal = btn.textContent;
   btn.disabled = true;
-  btn.textContent = 'Analisando… (pode levar alguns minutos)';
+  btn.textContent = 'Analisando…';
   try{
     const resp = await fetch(Store.base + '/processos/analisar-novo', {
       method: 'POST', headers: Store.headers(),
@@ -3117,21 +3151,18 @@ async function rodarAnaliseNova(i, btn){
     });
     const corpo = await resp.json().catch(()=>({}));
     if(!resp.ok) throw new Error(corpo.erro || ('Servidor respondeu '+resp.status));
+
+    a11yAnunciar('Análise de ' + item.nome + ' começou. Pode levar alguns minutos; '
+               + 'você pode continuar usando o Painel.');
+    const j = await acompanharJob(corpo.job_id, seg=>{
+      btn.textContent = 'Analisando… ' + tempoDecorrido(seg);
+    });
     toast('Processo criado a partir da análise automática!');
     fecharModal('modal-relatorio');
     await recarregarLista();
-    openProcess(corpo.id);
+    openProcess(j.processo_id);
   }catch(e){
-    // Quando o servidor derruba a conexão no meio (análise longa demais), o
-    // fetch estoura com "Failed to fetch" — mensagem que não diz nada a quem
-    // está esperando. Vale explicar o que provavelmente houve, porque o
-    // processo pode ter sido cobrado sem aparecer no Painel.
-    const caiu = /failed to fetch|networkerror|load failed/i.test(e.message || '');
-    toast(caiu
-      ? 'A análise de ' + item.nome + ' foi interrompida antes de terminar — o servidor '
-        + 'encerrou a conexão. Documento muito grande costuma ser a causa. Confira o Painel '
-        + 'de gastos: se aparecer uma chamada agora, ela foi cobrada mesmo sem gerar processo.'
-      : 'Erro ao analisar ' + item.nome + ': ' + e.message);
+    toast('Erro ao analisar ' + item.nome + ': ' + e.message);
     btn.disabled = false;
     btn.textContent = textoOriginal;
   }

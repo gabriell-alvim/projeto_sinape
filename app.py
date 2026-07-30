@@ -26,8 +26,9 @@ Rotas:
   GET     /api/relatorios/mais-recente        → devolve a atualização do dia mais recente publicada (inclui "novos": [{tipo,nome,status,caminho_pasta}])
   POST    /api/relatorios                     → publica uma nova atualização do dia (uso por processo automatizado)
   POST    /api/relatorios/executar-varredura  → varre o SharePoint agora, compara com a varredura anterior e publica o relatório do dia
-  POST    /api/processos/analisar-ia          → recebe PDFs (multipart, campo "arquivos") e devolve o JSON de análise via IA
-  POST    /api/processos/analisar-novo        → a partir de {caminho_pasta, tipo, model?, effort?} de um item novo da varredura, baixa os PDFs, roda a IA e já cria o processo
+  POST    /api/processos/analisar-ia          → recebe PDFs (multipart, campo "arquivos"); responde 202 {job_id} e analisa em segundo plano
+  POST    /api/processos/analisar-novo        → a partir de {caminho_pasta, tipo, model?, effort?} de um item novo da varredura, baixa os PDFs e responde 202 {job_id}; a análise e a criação do processo correm em segundo plano
+  GET     /api/jobs/<id>                      → andamento de uma análise: rodando | concluido (com processo_id ou documento) | erro
   GET     /api/gastos                         → contador de gastos de IA (total de tokens e custo em US$/R$) + detalhamento por processo
   GET     /api/correcoes                      → pares (resposta da IA / correção da equipe) — matéria-prima pra treinar um modelo especialista no futuro
   GET     /api/prazos                         → todos os prazos de todos os processos ativos, numa lista só, ordenados do mais urgente pro mais distante
@@ -72,7 +73,9 @@ import re
 import shutil
 import sys
 import tempfile
+import threading
 import time
+import traceback
 import uuid
 from datetime import date, timedelta
 from pathlib import Path
@@ -170,6 +173,7 @@ col_snapshots = db["sharepoint_snapshots"]
 col_gastos = db["gastos_ia"]
 col_sinki = db["sinki_conversas"]
 col_correcoes = db["correcoes_ia"]
+col_jobs = db["jobs_analise"]
 
 
 def _init_db():
@@ -746,6 +750,84 @@ def _registrar_gasto(model: str, uso: dict, processo_id=None, processo_nome: str
     })
 
 
+# ──────────────────────────────────────────────────────────────────
+# jobs de análise — a análise não roda mais dentro da requisição HTTP
+# ──────────────────────────────────────────────────────────────────
+# Segurar a conexão aberta enquanto o Claude lê um edital de 200 páginas não
+# funciona: o gunicorn mata o worker no --timeout (foi o que derrubou a
+# proposta 47/2026 da Conasa, duas vezes), e mesmo aumentando o teto qualquer
+# oscilação de rede ou aba fechada perde o trabalho — possivelmente já cobrado.
+# Agora a requisição só cria um job e responde na hora; a análise roda numa
+# thread e grava o resultado no banco. A tela pergunta o andamento de tempos
+# em tempos. Se o navegador cair, o job continua e o processo aparece do mesmo
+# jeito — e o gasto fica registrado, que era o pior de se perder.
+JOB_ABANDONADO_S = 30 * 60   # sem sinal de vida por tanto tempo = worker morreu
+
+
+def _job_novo(tipo: str, descricao: str) -> str:
+    jid = uuid.uuid4().hex
+    col_jobs.insert_one({
+        "_id": jid, "tipo": tipo, "descricao": descricao, "status": "rodando",
+        "criadoEm": _agora_ms(), "sinalDeVida": _agora_ms(),
+        "processo_id": None, "erro": None,
+    })
+    return jid
+
+
+def _job_encerrar(jid: str, **campos):
+    campos["sinalDeVida"] = _agora_ms()
+    col_jobs.update_one({"_id": jid}, {"$set": campos})
+
+
+def _job_rodar_em_thread(jid: str, alvo, *args, **kwargs):
+    """Executa `alvo` fora da requisição. Nada de contexto do Flask aqui
+    dentro: quem chama já extraiu tudo que precisa antes."""
+    def _tarefa():
+        t0 = time.time()
+        try:
+            processo_id = alvo(*args, **kwargs)
+            _job_encerrar(jid, status="concluido", processo_id=processo_id,
+                          duracao_s=round(time.time() - t0, 1))
+            print(f"[job {jid[:8]}] concluido em {time.time() - t0:.0f}s", flush=True)
+        except Exception as e:
+            # a mensagem vai pra tela, então tem que ser legível — e o traceback
+            # vai pro log do Render pra quem for investigar
+            _job_encerrar(jid, status="erro", erro=str(e) or e.__class__.__name__,
+                          duracao_s=round(time.time() - t0, 1))
+            print(f"[job {jid[:8]}] ERRO em {time.time() - t0:.0f}s: {e!r}", flush=True)
+            traceback.print_exc()
+
+    threading.Thread(target=_tarefa, name=f"job-{jid[:8]}", daemon=True).start()
+
+
+@app.route("/api/jobs/<jid>", methods=["GET"])
+def ver_job(jid):
+    job = col_jobs.find_one({"_id": jid})
+    if not job:
+        return jsonify({"erro": "Job não encontrado."}), 404
+    # Se o processo do servidor reiniciou no meio, a thread morreu junto e o job
+    # ficaria "rodando" pra sempre. Sem sinal de vida há muito tempo, assume-se
+    # perdido — melhor dizer isso do que deixar a tela girando sem fim.
+    if job["status"] == "rodando":
+        parado_ha = (_agora_ms() - job.get("sinalDeVida", job["criadoEm"])) / 1000
+        if parado_ha > JOB_ABANDONADO_S:
+            job["status"] = "erro"
+            job["erro"] = ("O servidor reiniciou durante a análise e ela se perdeu. "
+                           "Se aparecer uma chamada nova no Painel de gastos, ela foi "
+                           "cobrada mesmo sem gerar processo.")
+            col_jobs.update_one({"_id": jid}, {"$set": {"status": "erro", "erro": job["erro"]}})
+    resposta = {
+        "id": jid, "status": job["status"], "descricao": job.get("descricao", ""),
+        "processo_id": job.get("processo_id"), "erro": job.get("erro"),
+        "segundos": round((_agora_ms() - job["criadoEm"]) / 1000),
+        "duracao_s": job.get("duracao_s"),
+    }
+    # o upload manual não cria processo: devolve o JSON pra tela conferir
+    if job.get("documento"):
+        resposta["documento"] = job["documento"]
+    return jsonify(resposta)
+
+
 def _rodar_analise_ia(pdfs: list, model: str | None = None, effort: str | None = None):
     """Manda uma lista de PDFs (nome, bytes) pro Claude com o prompt padrão do
     Painel e devolve (doc, meta) — o JSON de análise pronto pra virar processo
@@ -885,19 +967,24 @@ def analisar_ia():
             return jsonify({"erro": f"Total dos PDFs excede {MAX_PDF_TOTAL_MB} MB"}), 400
         pdfs.append((arquivo.filename, dados))
 
-    try:
-        doc, uso = _rodar_analise_ia(pdfs)
-    except RuntimeError as e:
-        return jsonify({"erro": str(e)}), 503
-    except ValueError as e:
-        return jsonify({"erro": str(e)}), 400
-    except json.JSONDecodeError:
-        return jsonify({"erro": "A IA não devolveu um JSON válido"}), 502
-    except anthropic.APIStatusError as e:
-        return jsonify({"erro": f"Erro na API da IA: {e.message}"}), 502
+    # Mesmo motivo do fluxo do SharePoint: PDF grande passa do timeout do
+    # worker. Vai pra job. A diferença é que aqui a análise não cria processo —
+    # ela devolve o JSON pra tela conferir e importar — então o resultado fica
+    # guardado no próprio job.
+    jid = _job_novo("analise_upload", ", ".join(n for n, _ in pdfs)[:80])
+    _job_rodar_em_thread(jid, _analisar_upload_manual, jid=jid,
+                         pdfs=pdfs, model=request.form.get("model"),
+                         effort=request.form.get("effort"))
+    return jsonify({"job_id": jid, "status": "rodando"}), 202
 
+
+def _analisar_upload_manual(jid, pdfs, model, effort):
+    """Analisa PDFs enviados pela tela e guarda o JSON no job — este fluxo não
+    cria processo sozinho, quem importa é a equipe depois de conferir."""
+    doc, uso = _rodar_analise_ia(pdfs, model=model, effort=effort)
     _registrar_gasto(uso["model"], uso, processo_nome=doc.get("nome", ""), origem="upload manual")
-    return jsonify(doc)
+    col_jobs.update_one({"_id": jid}, {"$set": {"documento": doc}})
+    return None
 
 
 @app.route("/api/processos/analisar-novo", methods=["POST"])
@@ -939,17 +1026,24 @@ def analisar_processo_novo():
     if not pdfs_pasta:
         return jsonify({"erro": "Nenhum PDF encontrado nessa pasta do SharePoint."}), 404
 
+    # Daqui pra baixo é a parte demorada — vai pra uma thread. O download do
+    # SharePoint ficou acima de propósito: é rápido e os erros dele (pasta
+    # sumiu, sem PDF) valem mais respondidos na hora, com o status HTTP certo,
+    # do que escondidos dentro de um job.
     pdfs = [(p["nome"], p["bytes"]) for p in pdfs_pasta]
-    try:
-        doc, uso = _rodar_analise_ia(pdfs, model=corpo.get("model"), effort=corpo.get("effort"))
-    except RuntimeError as e:
-        return jsonify({"erro": str(e)}), 503
-    except ValueError as e:
-        return jsonify({"erro": str(e)}), 400
-    except json.JSONDecodeError:
-        return jsonify({"erro": "A IA não devolveu um JSON válido a partir desses documentos."}), 502
-    except anthropic.APIStatusError as e:
-        return jsonify({"erro": f"Erro na API da IA: {e.message}"}), 502
+    jid = _job_novo("analise_sharepoint", caminho_pasta.rsplit("/", 1)[-1] or caminho_pasta)
+    _job_rodar_em_thread(
+        jid, _analisar_e_criar_processo,
+        pdfs=pdfs, tipo=tipo, caminho_pasta=caminho_pasta,
+        model=corpo.get("model"), effort=corpo.get("effort"),
+    )
+    return jsonify({"job_id": jid, "status": "rodando"}), 202
+
+
+def _analisar_e_criar_processo(pdfs, tipo, caminho_pasta, model, effort) -> str:
+    """Roda a análise e cria o processo. Só é chamada de dentro de uma thread
+    de job — devolve o id do processo criado, e qualquer erro sobe pro job."""
+    doc, uso = _rodar_analise_ia(pdfs, model=model, effort=effort)
 
     doc["type"] = tipo
     doc.setdefault("origem", "ia")
@@ -962,10 +1056,12 @@ def analisar_processo_novo():
     try:
         doc = _preparar_e_inserir_processo(doc)
     except DuplicateKeyError:
-        return jsonify({"erro": "Já existe processo com esse id", "id": doc.get("id") or doc.get("_id")}), 409
+        raise ValueError("Já existe processo com esse id no Painel.")
+    # o gasto é registrado mesmo se ninguém estiver com a tela aberta — era
+    # justamente isso que se perdia quando o worker morria no timeout
     _registrar_gasto(uso["model"], uso, processo_id=doc.get("_id"),
                      processo_nome=doc.get("nome", ""), origem="varredura automática")
-    return jsonify(_sem_id_mongo(doc)), 201
+    return doc["_id"]
 
 
 # ──────────────────────────────────────────────────────────────────
