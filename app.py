@@ -176,6 +176,7 @@ col_gastos = db["gastos_ia"]
 col_sinki = db["sinki_conversas"]
 col_correcoes = db["correcoes_ia"]
 col_jobs = db["jobs_analise"]
+col_pendentes = db["pendentes_analise"]
 
 
 def _init_db():
@@ -187,6 +188,7 @@ def _init_db():
     col_sinki.create_index([("atualizadoEm", DESCENDING)])
     col_correcoes.create_index([("processo_id", ASCENDING)])
     col_correcoes.create_index([("atualizadoEm", DESCENDING)])
+    col_pendentes.create_index([("situacao", ASCENDING), ("detectadoEm", ASCENDING)])
 
 
 # ──────────────────────────────────────────────────────────────────
@@ -519,12 +521,104 @@ def montar_dossie(pid):
 # ──────────────────────────────────────────────────────────────────
 # relatórios ("Atualizações do dia")
 # ──────────────────────────────────────────────────────────────────
+# ──────────────────────────────────────────────────────────────────
+# fila de processos novos esperando análise
+# ──────────────────────────────────────────────────────────────────
+# Antes a lista de "novos" existia só dentro do último relatório, e a tela só
+# mostrava o mais recente. Rodar a varredura duas vezes fazia a segunda virar a
+# linha de base e os itens da primeira sumirem sem ninguém decidir nada — foi o
+# que engoliu as propostas 048 e 049 da Arteris em 31/07/2026. Agora cada item
+# detectado entra numa fila que só sai quando a equipe resolve o que fazer com
+# ele: analisar ou dispensar. Varrer de novo não apaga o que está pendente.
+
+def _registrar_pendentes(novos: list):
+    """Põe na fila os itens detectados na varredura. Item já conhecido não é
+    tocado — nem para reviver o que a equipe já dispensou, nem para perder a
+    data em que apareceu pela primeira vez."""
+    for item in novos:
+        caminho = item.get("caminho_pasta") or ""
+        if not caminho:
+            continue
+        col_pendentes.update_one(
+            {"_id": caminho},
+            {"$setOnInsert": {
+                "_id": caminho,
+                "tipo": item.get("tipo") or "",
+                "nome": item.get("nome") or "",
+                "status": item.get("status"),
+                "caminho_pasta": caminho,
+                "detectadoEm": _agora_ms(),
+                "situacao": "pendente",
+            }},
+            upsert=True,
+        )
+
+
+def _pendentes_abertos() -> list:
+    return [_sem_id_mongo(d) for d in
+            col_pendentes.find({"situacao": "pendente"}).sort("detectadoEm", ASCENDING)]
+
+
+@app.route("/api/pendentes", methods=["GET"])
+def listar_pendentes():
+    """Fila de processos novos aguardando decisão da equipe."""
+    return jsonify({"itens": _pendentes_abertos()})
+
+
+@app.route("/api/pendentes/dispensar", methods=["POST"])
+def dispensar_pendente():
+    """Tira um processo da fila sem analisar — quando a equipe julga que não
+    vale a pena. Fica registrado quem dispensou e quando, então dá para
+    reverter e o item não volta sozinho na próxima varredura."""
+    corpo = request.get_json(silent=True) or {}
+    caminho = corpo.get("caminho_pasta") or ""
+    if not caminho:
+        return jsonify({"erro": "Informe o caminho_pasta do item a dispensar."}), 400
+    r = col_pendentes.update_one(
+        {"_id": caminho, "situacao": "pendente"},
+        {"$set": {"situacao": "dispensado", "dispensadoEm": _agora_ms(),
+                  "dispensadoPor": corpo.get("autor") or "",
+                  "motivo": (corpo.get("motivo") or "").strip()}},
+    )
+    if not r.matched_count:
+        return jsonify({"erro": "Item não está na fila de pendentes."}), 404
+    return jsonify({"ok": True, "restantes": len(_pendentes_abertos())})
+
+
+@app.route("/api/pendentes/restaurar", methods=["POST"])
+def restaurar_pendente():
+    """Desfaz uma dispensa — dispensar por engano não pode ser irreversível."""
+    corpo = request.get_json(silent=True) or {}
+    caminho = corpo.get("caminho_pasta") or ""
+    r = col_pendentes.update_one(
+        {"_id": caminho, "situacao": "dispensado"},
+        {"$set": {"situacao": "pendente"},
+         "$unset": {"dispensadoEm": "", "dispensadoPor": "", "motivo": ""}},
+    )
+    if not r.matched_count:
+        return jsonify({"erro": "Item não está dispensado."}), 404
+    return jsonify({"ok": True, "restantes": len(_pendentes_abertos())})
+
+
+def _concluir_pendente(caminho: str, processo_id: str):
+    """Chamado quando a análise vira processo: o item sai da fila sozinho."""
+    col_pendentes.update_one(
+        {"_id": caminho},
+        {"$set": {"situacao": "analisado", "analisadoEm": _agora_ms(),
+                  "processo_id": processo_id}},
+    )
+
+
 @app.route("/api/relatorios/mais-recente", methods=["GET"])
 def relatorio_mais_recente():
     doc = col_relatorios.find_one(sort=[("criadoEm", DESCENDING)])
     if not doc:
         return jsonify({"erro": "Nenhum relatório publicado ainda"}), 404
-    return jsonify(_sem_id_mongo(doc))
+    doc = _sem_id_mongo(doc)
+    # "novos" passa a vir da fila, não do texto deste relatório: o que ficou
+    # pendente de varreduras anteriores continua aparecendo até ser resolvido
+    doc["novos"] = _pendentes_abertos()
+    return jsonify(doc)
 
 
 @app.route("/api/relatorios", methods=["POST"])
@@ -681,6 +775,7 @@ def executar_varredura_sharepoint():
     titulo, conteudo, novos = _gerar_relatorio_diario(atual, anterior, data_anterior)
 
     col_snapshots.insert_one({"_id": uuid.uuid4().hex, "dados": atual, "criadoEm": _agora_ms()})
+    _registrar_pendentes(novos)
 
     rid = uuid.uuid4().hex
     doc_rel = {
@@ -692,7 +787,10 @@ def executar_varredura_sharepoint():
         "criadoEm": _agora_ms(),
     }
     col_relatorios.insert_one(doc_rel)
-    return jsonify(_sem_id_mongo(doc_rel)), 201
+    resposta = _sem_id_mongo(doc_rel)
+    # a tela trabalha com a fila inteira, não só com o que esta varredura achou
+    resposta["novos"] = _pendentes_abertos()
+    return jsonify(resposta), 201
 
 
 MODELOS_IA_PERMITIDOS = {"claude-opus-5", "claude-sonnet-5"}
@@ -1137,6 +1235,7 @@ def _analisar_e_criar_processo(pdfs, tipo, caminho_pasta, model, effort) -> str:
     # justamente isso que se perdia quando o worker morria no timeout
     _registrar_gasto(uso["model"], uso, processo_id=doc.get("_id"),
                      processo_nome=doc.get("nome", ""), origem="varredura automática")
+    _concluir_pendente(caminho_pasta, doc["_id"])
     return doc["_id"]
 
 
@@ -1729,10 +1828,15 @@ def _sinki_rodar_ferramenta(nome: str, entrada: dict, modelo_usado: str = ""):
         data_anterior = _fmt_data_ms(anterior_doc["criadoEm"]) if anterior_doc else None
         titulo, conteudo, novos = _gerar_relatorio_diario(atual, anterior, data_anterior)
         col_snapshots.insert_one({"_id": uuid.uuid4().hex, "dados": atual, "criadoEm": _agora_ms()})
+        # o Sinki também varre, e antes isso podia engolir os pendentes de uma
+        # varredura anterior feita pela tela — a fila é a mesma para os dois
+        _registrar_pendentes(novos)
         col_relatorios.insert_one({"_id": uuid.uuid4().hex, "titulo": titulo, "conteudo": conteudo,
                                    "novos": novos, "autor": "Sinki", "criadoEm": _agora_ms()})
-        return ({"ok": True, "relatorio": conteudo, "processos_novos": novos},
-                f"Varreu o SharePoint e publicou o relatório ({len(novos)} processo(s) novo(s))")
+        pendentes = _pendentes_abertos()
+        return ({"ok": True, "relatorio": conteudo, "processos_novos": pendentes},
+                f"Varreu o SharePoint ({len(novos)} novo(s) nesta varredura, "
+                f"{len(pendentes)} aguardando análise no total)")
 
     return {"erro": f"Ferramenta desconhecida: {nome}"}, None
 

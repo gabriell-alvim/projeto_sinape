@@ -267,6 +267,12 @@ input, select, textarea { font-family:inherit; }
 .btn-sm.danger:hover { background:var(--red-l); }
 .btn-sm.violet { color:var(--violet); border-color:#ddd6fe; }
 .btn-sm.violet:hover { background:var(--violet-l); }
+/* dispensar é ação de descarte: fica discreta ao lado do botão de analisar,
+   e só assume o tom de alerta quando o foco/mouse está nela */
+.btn-sm.btn-dispensar { color:#6b7280; border-color:#e5e7eb; }
+.btn-sm.btn-dispensar:hover, .btn-sm.btn-dispensar:focus-visible {
+  color:#b91c1c; border-color:#fecaca; background:#fef2f2;
+}
 .btn-add-row { border:1px dashed var(--teal-mid); color:var(--teal); background:var(--teal-ll); border-radius:8px; padding:6px 12px; font-size:.75rem; font-weight:700; margin-top:8px; }
 .btn-add-row:hover { background:var(--teal-l); }
 
@@ -2986,10 +2992,55 @@ function renderizarNovosProcessos(novos){
           renderAiPicker('novo-'+i+'-modelo', 'modelo', 'claude-opus-5', 'Modelo de IA para '+n.nome) +
           renderAiPicker('novo-'+i+'-esforco', 'esforco', 'high', 'Nível de esforço para '+n.nome) +
           '<button class="btn-sm violet" onclick="rodarAnaliseNova('+i+', this)">▶ Rodar análise e preencher informações</button>' +
+          '<button class="btn-sm btn-dispensar" onclick="dispensarNovo('+i+', this)" '
+            + 'aria-label="Dispensar ' + esc(n.nome) + ' sem analisar">✕ Dispensar</button>' +
         '</div>' +
       '</div>';
     }).join('') +
   '</div>';
+}
+
+/* Tira da fila um processo que a equipe julgou não valer análise. Fica
+   registrado no servidor: varrer de novo não faz o item voltar sozinho. */
+async function dispensarNovo(i, btn){
+  const item = ULTIMO_RELATORIO_NOVOS[i];
+  if(!item) return;
+  if(!confirm('Dispensar "' + item.nome + '"?\n\nEle sai da lista de processos a analisar '
+            + 'e não volta na próxima varredura. Nenhum documento é apagado do SharePoint.')) return;
+  const textoOriginal = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = 'Dispensando…';
+  try{
+    const r = await fetch(Store.base + '/pendentes/dispensar', {
+      method:'POST', headers: Store.headers(),
+      body: JSON.stringify({ caminho_pasta: item.caminho_pasta, autor: CONFIG.USUARIO || '' })
+    });
+    const corpo = await r.json().catch(()=>({}));
+    if(!r.ok) throw new Error(corpo.erro || ('Servidor respondeu '+r.status));
+    // remonta a lista sem o item, pra numeração dos botões não sair do lugar
+    ULTIMO_RELATORIO_NOVOS.splice(i, 1);
+    const area = document.querySelector('#modal-relatorio .novos-processos');
+    if(area){
+      if(ULTIMO_RELATORIO_NOVOS.length){
+        area.outerHTML = renderizarNovosProcessos(ULTIMO_RELATORIO_NOVOS);
+      }else{
+        area.outerHTML = '<div class="sec-divider" style="margin-top:16px;">'
+          + '📦 Nenhum processo novo aguardando análise</div>';
+      }
+    }
+    // a lista foi remontada: a navegação numérica precisa reindexar, senão os
+    // números continuam apontando pros botões do item que saiu
+    a11yAtualizarItens();
+    a11yAnunciar(item.nome + ' foi dispensado. '
+      + (ULTIMO_RELATORIO_NOVOS.length
+          ? ULTIMO_RELATORIO_NOVOS.length + ' processo(s) ainda aguardando análise.'
+          : 'Nenhum processo aguardando análise.'));
+    toast('"' + item.nome + '" foi dispensado.');
+  }catch(e){
+    toast('Não consegui dispensar: ' + e.message);
+    btn.disabled = false;
+    btn.textContent = textoOriginal;
+  }
 }
 
 /* ── seletor "picker" de modelo/esforço (botão + menu, como o seletor de
@@ -3562,8 +3613,31 @@ function a11yAtualizarItens(manterNivel){
   if(modalAberto){
     A11Y.nivel = 'modal';
     if(!A11Y.ativo){ A11Y.itensAtuais = []; return; }
-    A11Y.todosItens = Array.from(modalAberto.querySelectorAll('.modal-actions button'))
-      .map(b=>({el:b, label:b.textContent.trim()}));
+    /* Cada processo novo do relatório tem os próprios controles (modelo,
+       esforço, rodar, dispensar) fora do rodapé do modal. Sem incluí-los aqui,
+       a navegação numérica só alcançava "Fechar" e "Executar análise agora" —
+       dava para chegar nos outros só tabulando às cegas pela lista. Os itens
+       vêm antes do rodapé, na mesma ordem visual. */
+    const itensModal = [];
+    modalAberto.querySelectorAll('.novo-item').forEach(item=>{
+      // o nome vem do texto do título sem o ícone, que o leitor de tela lê como
+      // "prédio"/"banco" e só atrapalha quando repetido em cada botão
+      const nome = (item.querySelector('.novo-item-nome')?.textContent || 'processo')
+        .replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/gu, '').trim();
+      // as opções dentro dos menus (.ai-picker-opt) ficam de fora: o menu está
+      // fechado, e listá-las encheria a navegação de 9 entradas por processo
+      item.querySelectorAll('.ai-picker-btn, .novo-item-acoes > button').forEach(b=>{
+        // o aria-label dos pickers já diz de qual processo é; repetir o nome
+        // depois faria o leitor de tela ler duas vezes a mesma coisa
+        const rotulo = b.getAttribute('aria-label')
+          || (b.textContent.replace(/^[▶✕]\s*/, '').trim() + ' — ' + nome);
+        itensModal.push({el:b, label: rotulo});
+      });
+    });
+    modalAberto.querySelectorAll('.modal-actions button').forEach(b=>{
+      itensModal.push({el:b, label:b.textContent.trim()});
+    });
+    A11Y.todosItens = itensModal;
     A11Y.pagina = Math.min(A11Y.pagina, Math.max(0, Math.ceil(A11Y.todosItens.length/9)-1));
     a11yRenderizarPagina();
     return;
