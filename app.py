@@ -29,6 +29,10 @@ Rotas:
   POST    /api/processos/analisar-ia          → recebe PDFs (multipart, campo "arquivos"); responde 202 {job_id} e analisa em segundo plano
   POST    /api/processos/analisar-novo        → a partir de {caminho_pasta, tipo, model?, effort?} de um item novo da varredura, baixa os PDFs e responde 202 {job_id}; a análise e a criação do processo correm em segundo plano
   GET     /api/jobs/<id>                      → andamento de uma análise: rodando | concluido (com processo_id ou documento) | erro
+  GET     /api/pendentes                      → fila de processos novos aguardando decisão (analisar ou dispensar)
+  POST    /api/pendentes                      → põe uma pasta do SharePoint na fila à mão {caminho_pasta, tipo?, nome?}
+  POST    /api/pendentes/dispensar            → tira da fila sem analisar {caminho_pasta, autor?, motivo?}
+  POST    /api/pendentes/restaurar            → desfaz a dispensa {caminho_pasta}
   GET     /api/gastos                         → contador de gastos de IA (total de tokens e custo em US$/R$) + detalhamento por processo
   GET     /api/correcoes                      → pares (resposta da IA / correção da equipe) — matéria-prima pra treinar um modelo especialista no futuro
   GET     /api/prazos                         → todos os prazos de todos os processos ativos, numa lista só, ordenados do mais urgente pro mais distante
@@ -563,6 +567,55 @@ def _pendentes_abertos() -> list:
 def listar_pendentes():
     """Fila de processos novos aguardando decisão da equipe."""
     return jsonify({"itens": _pendentes_abertos()})
+
+
+@app.route("/api/pendentes", methods=["POST"])
+def adicionar_pendente():
+    """Põe uma pasta do SharePoint na fila de análise à mão. Serve para o que a
+    varredura não pega: pasta renomeada, proposta antiga que a equipe decidiu
+    analisar agora, ou item perdido por alguma falha — foi o caso das propostas
+    048 e 049 da Arteris, que entraram na linha de base antes da fila existir.
+    A pasta é conferida no SharePoint antes de entrar: fila com caminho errado
+    só produz erro na hora de analisar."""
+    corpo = request.get_json(silent=True) or {}
+    caminho = (corpo.get("caminho_pasta") or "").strip().strip("/")
+    if not caminho:
+        return jsonify({"erro": "Informe o caminho_pasta."}), 400
+
+    ja = col_pendentes.find_one({"_id": caminho})
+    if ja and ja.get("situacao") == "pendente":
+        return jsonify({"erro": "Essa pasta já está na fila."}), 409
+
+    if not (MONTADOR_TENANT_ID and MONTADOR_CLIENT_ID and MONTADOR_CLIENT_SECRET):
+        return jsonify({"erro": "SharePoint não configurado neste servidor."}), 503
+    cfg = {"MODO_LOCAL": False, "TENANT_ID": MONTADOR_TENANT_ID,
+           "CLIENT_ID": MONTADOR_CLIENT_ID, "CLIENT_SECRET": MONTADOR_CLIENT_SECRET}
+    try:
+        pdfs = baixar_pdfs_da_pasta(cfg, caminho)
+    except requests.HTTPError as e:
+        if e.response is not None and e.response.status_code == 404:
+            return jsonify({"erro": "Essa pasta não existe no SharePoint. Confira o caminho."}), 404
+        return jsonify({"erro": f"Falha ao conferir a pasta no SharePoint: {e}"}), 502
+    except Exception as e:
+        return jsonify({"erro": f"Falha ao conferir a pasta no SharePoint: {e}"}), 502
+    if not pdfs:
+        return jsonify({"erro": "A pasta existe mas não tem nenhum PDF para analisar."}), 400
+
+    # o tipo sai do próprio caminho: as duas árvores do SharePoint já separam
+    # contratação privada de licitação pública
+    tipo = corpo.get("tipo") or ("publico" if caminho.startswith("2 - LICITACAO") else "privado")
+    item = {
+        "tipo": tipo,
+        "nome": corpo.get("nome") or caminho.rsplit("/", 1)[-1],
+        "status": corpo.get("status"),
+        "caminho_pasta": caminho,
+    }
+    # se já existia como dispensado/analisado, volta para a fila: pedir de novo
+    # à mão é uma decisão explícita da equipe
+    col_pendentes.delete_one({"_id": caminho})
+    _registrar_pendentes([item])
+    return jsonify({"ok": True, "item": item, "arquivos": len(pdfs),
+                    "restantes": len(_pendentes_abertos())}), 201
 
 
 @app.route("/api/pendentes/dispensar", methods=["POST"])
