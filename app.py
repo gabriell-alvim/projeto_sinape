@@ -990,6 +990,45 @@ PAGINAS_POR_PDF = 100
 PAGINAS_POR_REQUISICAO = 600
 
 
+def _erro_api_legivel(e) -> str:
+    """Traduz os erros da Anthropic que a equipe realmente encontra. Sem isto a
+    tela mostra o JSON cru em inglês — foi o que apareceu quando o saldo da API
+    acabou no meio da análise da proposta 048 da Arteris, e a mensagem não
+    dizia o que fazer nem que o problema era de conta, não do documento."""
+    try:
+        corpo = getattr(e, "body", None) or {}
+        detalhe = (corpo.get("error") or {}).get("message", "") or getattr(e, "message", "")
+    except Exception:
+        detalhe = getattr(e, "message", "") or str(e)
+    d = (detalhe or "").lower()
+    codigo = getattr(e, "status_code", None)
+
+    if "credit balance is too low" in d or "insufficient" in d and "credit" in d:
+        return ("O saldo da API da Anthropic acabou. Nenhuma análise roda até adicionar "
+                "créditos em Plans & Billing no console da Anthropic. A tentativa não foi "
+                "cobrada e o processo continua na fila — é só rodar de novo depois de "
+                "recarregar.")
+    if codigo == 401 or "authentication" in d or "invalid x-api-key" in d:
+        return ("A chave da API da Anthropic foi recusada. Ela pode ter sido revogada ou "
+                "trocada — confira a variável ANTHROPIC_API_KEY no servidor.")
+    if codigo == 403 or "permission" in d:
+        return "A chave da API não tem permissão para esta operação."
+    if codigo == 429:
+        return ("Limite de uso da API atingido, mesmo depois de algumas tentativas. "
+                "Espere alguns minutos e rode de novo.")
+    if codigo == 503 or "overloaded" in d:
+        return ("A API da Anthropic está sobrecarregada e não respondeu depois de várias "
+                "tentativas. É temporário — rode de novo daqui a pouco.")
+    if "could not process pdf" in d:
+        return ("A IA não conseguiu abrir um dos PDFs. Ele pode estar corrompido ou "
+                "protegido por senha — abra os arquivos da pasta e confira qual não abre.")
+    if "prompt is too long" in d or "too many tokens" in d:
+        return ("Os documentos somados passam do que a IA consegue ler de uma vez. Rode a "
+                "análise com menos arquivos, deixando de fora os anexos que não afetam a "
+                "decisão.")
+    return f"Erro na API da IA: {detalhe or e}"
+
+
 def _fatiar_pdfs_grandes(pdfs: list) -> list:
     """Divide PDFs acima do limite de páginas em partes menores, preservando a
     ordem. Cada parte carrega no nome o intervalo de páginas para que as
@@ -1111,7 +1150,9 @@ def _rodar_analise_ia(pdfs: list, model: str | None = None, effort: str | None =
         except anthropic.APIStatusError as e:
             transitorio = e.status_code == 503 or e.status_code == 429
             if not transitorio or tentativa == TENTATIVAS:
-                raise
+                # quem lê isso é a equipe na tela, não quem escreveu o código:
+                # sobe a versão em português, dizendo o que fazer
+                raise ValueError(_erro_api_legivel(e)) from e
             espera = 5 * tentativa
             print(f"[analise] tentativa {tentativa} falhou ({e.status_code} "
                   f"{getattr(e, 'body', None) or e.message}) — tentando de novo em {espera}s",
@@ -2050,7 +2091,7 @@ def sinki_conversar():
                                    "is_error": erro})
             mensagens.append({"role": "user", "content": resultados})
     except anthropic.APIStatusError as e:
-        return jsonify({"erro": f"Erro na API da IA: {e.message}"}), 502
+        return jsonify({"erro": _erro_api_legivel(e)}), 502
 
     texto = "".join(b.text for b in (resposta.content if resposta else []) if b.type == "text").strip()
     if not texto:
@@ -2160,7 +2201,7 @@ def verificar_concorrente(pid):
         ) as stream:
             resposta = stream.get_final_message()
     except anthropic.APIStatusError as e:
-        return jsonify({"erro": f"Erro na API da IA: {e.message}"}), 502
+        return jsonify({"erro": _erro_api_legivel(e)}), 502
 
     texto = "".join(b.text for b in resposta.content if b.type == "text").strip()
     texto = re.sub(r"^```(?:json)?\s*|\s*```$", "", texto.strip())
