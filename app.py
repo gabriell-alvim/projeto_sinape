@@ -92,6 +92,7 @@ from pypdf import PdfReader, PdfWriter
 from pymongo import MongoClient, ASCENDING, DESCENDING
 from pymongo.errors import DuplicateKeyError
 from flask import Flask, request, jsonify, send_from_directory, send_file, session, redirect, Response
+from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -181,6 +182,7 @@ col_sinki = db["sinki_conversas"]
 col_correcoes = db["correcoes_ia"]
 col_jobs = db["jobs_analise"]
 col_pendentes = db["pendentes_analise"]
+col_usuarios = db["usuarios"]
 
 
 def _init_db():
@@ -239,12 +241,78 @@ def _add_cors(resp):
     return resp
 
 
+# ──────────────────────────────────────────────────────────────────
+# contas por pessoa
+# ──────────────────────────────────────────────────────────────────
+# Antes havia um único usuário e senha para a empresa inteira, e o nome de quem
+# fez cada coisa era digitado à mão no navegador — ou seja, "atualizadoPor" não
+# provava nada. Agora cada pessoa cria a própria conta com o e-mail corporativo,
+# e a sessão passa a saber quem está do outro lado. O login antigo continua
+# valendo enquanto a equipe migra.
+DOMINIO_PERMITIDO = os.environ.get("DOMINIO_EMAIL", "@sinape.com.br").lower()
+SENHA_MINIMA = 10
+MAX_TENTATIVAS = 8            # por e-mail/usuário
+JANELA_TENTATIVAS_S = 15 * 60
+
+
 def _site_auth_enabled():
     return bool(SITE_USER and SITE_PASSWORD)
 
 
 def _logged_in():
     return session.get("site_auth") is True
+
+
+def _email_valido(email: str) -> bool:
+    """Aceita só e-mail do domínio da empresa. A comparação é no fim da string
+    de propósito: 'x@sinape.com.br.invasor.com' não pode passar."""
+    email = (email or "").strip().lower()
+    if not email.endswith(DOMINIO_PERMITIDO):
+        return False
+    local = email[: -len(DOMINIO_PERMITIDO)]
+    return bool(re.fullmatch(r"[a-z0-9][a-z0-9._%+-]*", local))
+
+
+def _senha_fraca(senha: str) -> str | None:
+    """Devolve o motivo da recusa, ou None se a senha serve. Regras curtas de
+    propósito: o que protege aqui é o tamanho, não exigir caractere especial."""
+    if len(senha or "") < SENHA_MINIMA:
+        return f"A senha precisa ter pelo menos {SENHA_MINIMA} caracteres."
+    if senha.isdigit():
+        return "A senha não pode ser só números."
+    if len(set(senha)) < 5:
+        return "A senha repete poucos caracteres diferentes — escolha outra."
+    if senha.lower() in ("senha123456", "1234567890", "sinape2026", "datasin123"):
+        return "Essa senha é previsível demais — escolha outra."
+    return None
+
+
+# tentativas por identificador, em memória: some quando o processo reinicia, o
+# que é aceitável para travar força bruta sem depender de mais infraestrutura
+_tentativas: dict[str, list] = {}
+
+
+def _bloqueado(chave: str) -> int:
+    """Segundos que faltam para liberar, ou 0 se pode tentar."""
+    agora = time.time()
+    marcas = [t for t in _tentativas.get(chave, []) if agora - t < JANELA_TENTATIVAS_S]
+    _tentativas[chave] = marcas
+    if len(marcas) < MAX_TENTATIVAS:
+        return 0
+    return int(JANELA_TENTATIVAS_S - (agora - marcas[0]))
+
+
+def _registrar_tentativa(chave: str):
+    _tentativas.setdefault(chave, []).append(time.time())
+
+
+def _abrir_sessao(email: str, nome: str, admin: bool = False):
+    session.permanent = True
+    session["site_auth"] = True
+    session["usuario_email"] = email
+    session["usuario_nome"] = nome
+    session["usuario_admin"] = admin
+    _tentativas.pop(email, None)
 
 
 def _safe_next_url(val):
@@ -261,7 +329,9 @@ def _auth():
     if request.path == "/api/health":
         return None
 
-    if request.path in ("/login", "/logout"):
+    # /registrar fica fora da barreira porque quem vai criar conta ainda não
+    # tem sessão; a proteção dele é o domínio do e-mail, não o login
+    if request.path in ("/login", "/logout", "/registrar"):
         return None
 
     if _site_auth_enabled() and not _logged_in():
@@ -289,14 +359,78 @@ def login():
     if _logged_in():
         return redirect(_safe_next_url(request.args.get("next")))
     if request.method == "POST":
-        usuario = request.form.get("usuario", "")
+        usuario = (request.form.get("usuario", "") or "").strip()
         senha = request.form.get("senha", "")
+        destino = _safe_next_url(request.form.get("next"))
+
+        def falhou(msg="1"):
+            return redirect(f"/login?erro={quote(msg)}&next=" + quote(destino))
+
+        chave = usuario.lower()
+        faltam = _bloqueado(chave)
+        if faltam:
+            return falhou(f"Muitas tentativas. Tente de novo em {faltam // 60 + 1} minuto(s).")
+
+        # login compartilhado antigo — segue valendo enquanto a equipe migra
         if usuario == SITE_USER and senha == SITE_PASSWORD:
-            session.permanent = True
-            session["site_auth"] = True
-            return redirect(_safe_next_url(request.form.get("next")))
-        return redirect("/login?erro=1&next=" + quote(request.form.get("next") or "/"))
+            _abrir_sessao("", SITE_USER, admin=True)
+            return redirect(destino)
+
+        u = col_usuarios.find_one({"_id": chave}) if "@" in usuario else None
+        if u and u.get("ativo", True) and check_password_hash(u["senha_hash"], senha):
+            _abrir_sessao(u["_id"], u.get("nome") or u["_id"], admin=bool(u.get("admin")))
+            col_usuarios.update_one({"_id": u["_id"]}, {"$set": {"ultimoAcesso": _agora_ms()}})
+            return redirect(destino)
+
+        _registrar_tentativa(chave)
+        return falhou()
     return send_from_directory(BASE_DIR, "login.html")
+
+
+@app.route("/registrar", methods=["POST"])
+def registrar():
+    """Cria a conta de uma pessoa. Só aceita e-mail do domínio da empresa —
+    é isso que substitui a senha única compartilhada."""
+    if not _site_auth_enabled():
+        return jsonify({"erro": "Cadastro indisponível neste servidor."}), 503
+    corpo = request.get_json(silent=True) or request.form
+    email = (corpo.get("email") or "").strip().lower()
+    nome = (corpo.get("nome") or "").strip()
+    senha = corpo.get("senha") or ""
+    senha2 = corpo.get("senha2") or ""
+
+    if not _email_valido(email):
+        return jsonify({"erro": f"Use seu e-mail corporativo, terminado em {DOMINIO_PERMITIDO}."}), 400
+    if len(nome) < 2:
+        return jsonify({"erro": "Informe seu nome — é ele que aparece no histórico do Painel."}), 400
+    if senha != senha2:
+        return jsonify({"erro": "As duas senhas não são iguais."}), 400
+    motivo = _senha_fraca(senha)
+    if motivo:
+        return jsonify({"erro": motivo}), 400
+    if col_usuarios.find_one({"_id": email}):
+        return jsonify({"erro": "Já existe conta com esse e-mail. Faça login ou peça a redefinição."}), 409
+
+    col_usuarios.insert_one({
+        "_id": email, "nome": nome,
+        "senha_hash": generate_password_hash(senha),
+        "criadoEm": _agora_ms(), "ultimoAcesso": _agora_ms(),
+        "ativo": True, "admin": False,
+    })
+    _abrir_sessao(email, nome)
+    return jsonify({"ok": True, "email": email, "nome": nome}), 201
+
+
+@app.route("/api/eu", methods=["GET"])
+def quem_sou_eu():
+    """Identidade de quem está logado — a tela usa isto em vez de perguntar o
+    nome, que antes era digitado e não provava nada."""
+    return jsonify({
+        "email": session.get("usuario_email") or "",
+        "nome": session.get("usuario_nome") or "",
+        "admin": bool(session.get("usuario_admin")),
+        "compartilhado": not session.get("usuario_email"),
+    })
 
 
 @app.route("/logout", methods=["GET", "POST"])

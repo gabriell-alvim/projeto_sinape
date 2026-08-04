@@ -69,6 +69,17 @@ button {
   cursor: pointer;
 }
 button:hover { background: var(--teal-mid); }
+.abas { display:flex; gap:4px; margin-bottom:16px; border-bottom:1px solid #e5e7eb; }
+.aba {
+  flex:1; background:none; border:none; border-bottom:2px solid transparent;
+  padding:9px 8px; font-size:.82rem; font-weight:600; color:#6b7280;
+  cursor:pointer; border-radius:0; margin:0;
+}
+.aba:hover { background:#f9fafb; color:var(--teal-mid); }
+.aba.ativa { color:var(--teal); border-bottom-color:var(--teal); }
+/* o foco precisa aparecer: quem navega por teclado tem que enxergar onde está */
+.aba:focus-visible { outline:2px solid var(--teal-mid); outline-offset:-2px; }
+.sub { font-weight:400; color:#6b7280; font-size:.72rem; }
 .erro {
   background: var(--red-l);
   border: 1px solid #fca5a5;
@@ -83,24 +94,96 @@ button:hover { background: var(--teal-mid); }
 <body>
 <div class="card">
   <div class="brand">DATA SIN · Painel de Licitações</div>
-  <h1>Entrar</h1>
-  <p class="hint">Acesso restrito à equipe. Use o usuário e a senha configurados no servidor.</p>
-  <div id="login-erro" class="erro" style="display:none;">Usuário ou senha incorretos.</div>
-  <form method="post" action="/login">
-    <input type="hidden" name="next" id="next" value="/">
-    <label for="usuario">Usuário</label>
-    <input type="text" id="usuario" name="usuario" autocomplete="username" required autofocus>
-    <label for="senha">Senha</label>
-    <input type="password" id="senha" name="senha" autocomplete="current-password" required>
-    <button type="submit">Entrar</button>
-  </form>
+
+  <div class="abas" role="tablist">
+    <button type="button" class="aba ativa" id="aba-entrar" role="tab"
+            aria-selected="true" aria-controls="painel-entrar" onclick="mostrar('entrar')">Entrar</button>
+    <button type="button" class="aba" id="aba-criar" role="tab"
+            aria-selected="false" aria-controls="painel-criar" onclick="mostrar('criar')">Criar conta</button>
+  </div>
+
+  <section id="painel-entrar" role="tabpanel" aria-labelledby="aba-entrar">
+    <p class="hint">Entre com seu e-mail corporativo. Se ainda não tem conta, use a aba <b>Criar conta</b>.</p>
+    <div id="login-erro" class="erro" style="display:none;">Usuário ou senha incorretos.</div>
+    <form method="post" action="/login">
+      <input type="hidden" name="next" id="next" value="/">
+      <label for="usuario">E-mail</label>
+      <input type="text" id="usuario" name="usuario" autocomplete="username" required autofocus>
+      <label for="senha">Senha</label>
+      <input type="password" id="senha" name="senha" autocomplete="current-password" required>
+      <button type="submit">Entrar</button>
+    </form>
+  </section>
+
+  <section id="painel-criar" role="tabpanel" aria-labelledby="aba-criar" hidden>
+    <p class="hint">Só e-mails <b id="dominio">@sinape.com.br</b>. A senha é sua — ninguém mais vê.</p>
+    <div id="criar-erro" class="erro" style="display:none;"></div>
+    <form id="form-criar" onsubmit="return criarConta(event)">
+      <label for="c-nome">Seu nome</label>
+      <input type="text" id="c-nome" autocomplete="name" required>
+      <label for="c-email">E-mail corporativo</label>
+      <input type="email" id="c-email" autocomplete="email" placeholder="nome@sinape.com.br" required>
+      <label for="c-senha">Criar senha <span class="sub">(mínimo 10 caracteres)</span></label>
+      <input type="password" id="c-senha" autocomplete="new-password" minlength="10" required>
+      <label for="c-senha2">Repetir senha</label>
+      <input type="password" id="c-senha2" autocomplete="new-password" minlength="10" required>
+      <button type="submit" id="btn-criar">Criar conta e entrar</button>
+    </form>
+  </section>
 </div>
 <script>
 const params = new URLSearchParams(window.location.search);
-if (params.get('erro')) document.getElementById('login-erro').style.display = 'block';
+const erro = params.get('erro');
+if (erro) {
+  const cx = document.getElementById('login-erro');
+  // o servidor manda "1" para credencial errada e um texto quando quer explicar
+  // (bloqueio por tentativas, por exemplo)
+  cx.textContent = (erro === '1') ? 'E-mail ou senha incorretos.' : erro;
+  cx.style.display = 'block';
+}
 const next = params.get('next');
 if (next && next.startsWith('/') && !next.startsWith('//')) {
   document.getElementById('next').value = next;
+}
+
+function mostrar(qual){
+  const entrar = qual === 'entrar';
+  document.getElementById('painel-entrar').hidden = !entrar;
+  document.getElementById('painel-criar').hidden = entrar;
+  document.getElementById('aba-entrar').classList.toggle('ativa', entrar);
+  document.getElementById('aba-criar').classList.toggle('ativa', !entrar);
+  document.getElementById('aba-entrar').setAttribute('aria-selected', entrar);
+  document.getElementById('aba-criar').setAttribute('aria-selected', !entrar);
+  document.getElementById(entrar ? 'usuario' : 'c-nome').focus();
+}
+
+async function criarConta(ev){
+  ev.preventDefault();
+  const btn = document.getElementById('btn-criar');
+  const cx = document.getElementById('criar-erro');
+  cx.style.display = 'none';
+  btn.disabled = true; btn.textContent = 'Criando…';
+  try{
+    const r = await fetch('/registrar', {
+      method: 'POST', headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        nome: document.getElementById('c-nome').value,
+        email: document.getElementById('c-email').value,
+        senha: document.getElementById('c-senha').value,
+        senha2: document.getElementById('c-senha2').value,
+      })
+    });
+    const b = await r.json();
+    if(!r.ok) throw new Error(b.erro || 'Não foi possível criar a conta.');
+    // o servidor já abre a sessão: entra direto
+    window.location.href = document.getElementById('next').value || '/';
+  }catch(e){
+    cx.textContent = e.message;
+    cx.style.display = 'block';
+    cx.setAttribute('role', 'alert');
+    btn.disabled = false; btn.textContent = 'Criar conta e entrar';
+  }
+  return false;
 }
 </script>
 </body>

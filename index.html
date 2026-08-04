@@ -3896,6 +3896,22 @@ async function init(){
   iniciarPolling();
   updateBreadcrumb();
   a11yAtualizarItens();
+  await identificarUsuario();
+}
+
+/* Quem está logado vem da sessão do servidor, não de um nome digitado. Só
+   quando o acesso é pelo login compartilhado antigo é que ainda perguntamos o
+   nome — nesse caso não há como o servidor saber quem é. */
+async function identificarUsuario(){
+  try{
+    const eu = await (await fetch('/api/eu', {headers: Store.headers()})).json();
+    if(eu.email){
+      CONFIG.USUARIO = eu.nome || eu.email;
+      CONFIG.USUARIO_EMAIL = eu.email;
+      localStorage.setItem('sinape:usuario', CONFIG.USUARIO);
+      return;
+    }
+  }catch(e){ /* sem sessão identificada: cai no comportamento antigo */ }
   if(!CONFIG.USUARIO) abrirModal('modal-usuario');
 }
 init();
