@@ -93,7 +93,6 @@ from pypdf import PdfReader, PdfWriter
 from pymongo import MongoClient, ASCENDING, DESCENDING
 from pymongo.errors import DuplicateKeyError
 from flask import Flask, request, jsonify, send_from_directory, send_file, session, redirect, Response
-from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -257,11 +256,12 @@ def _add_cors(resp):
 # ──────────────────────────────────────────────────────────────────
 # Antes havia um único usuário e senha para a empresa inteira, e o nome de quem
 # fez cada coisa era digitado à mão no navegador — ou seja, "atualizadoPor" não
-# provava nada. Agora cada pessoa cria a própria conta com o e-mail corporativo,
-# e a sessão passa a saber quem está do outro lado. O login antigo continua
-# valendo enquanto a equipe migra.
+# provava nada. Login por e-mail+senha próprio existiu por um commit e foi
+# abandonado: checar se o e-mail só TERMINA em @sinape.com.br não prova que a
+# conta é real. Quem cria e confirma a identidade agora é o login Microsoft
+# (auth_callback, abaixo) — a senha compartilhada (sinape_admin) segue valendo
+# em paralelo enquanto a equipe migra.
 DOMINIO_PERMITIDO = os.environ.get("DOMINIO_EMAIL", "@sinape.com.br").lower()
-SENHA_MINIMA = 10
 MAX_TENTATIVAS = 8            # por e-mail/usuário
 JANELA_TENTATIVAS_S = 15 * 60
 
@@ -276,26 +276,13 @@ def _logged_in():
 
 def _email_valido(email: str) -> bool:
     """Aceita só e-mail do domínio da empresa. A comparação é no fim da string
-    de propósito: 'x@sinape.com.br.invasor.com' não pode passar."""
+    de propósito: 'x@sinape.com.br.invasor.com' não pode passar. Usada como
+    segunda camada depois do login Microsoft — a primeira é o próprio tenant."""
     email = (email or "").strip().lower()
     if not email.endswith(DOMINIO_PERMITIDO):
         return False
     local = email[: -len(DOMINIO_PERMITIDO)]
     return bool(re.fullmatch(r"[a-z0-9][a-z0-9._%+-]*", local))
-
-
-def _senha_fraca(senha: str) -> str | None:
-    """Devolve o motivo da recusa, ou None se a senha serve. Regras curtas de
-    propósito: o que protege aqui é o tamanho, não exigir caractere especial."""
-    if len(senha or "") < SENHA_MINIMA:
-        return f"A senha precisa ter pelo menos {SENHA_MINIMA} caracteres."
-    if senha.isdigit():
-        return "A senha não pode ser só números."
-    if len(set(senha)) < 5:
-        return "A senha repete poucos caracteres diferentes — escolha outra."
-    if senha.lower() in ("senha123456", "1234567890", "sinape2026", "datasin123"):
-        return "Essa senha é previsível demais — escolha outra."
-    return None
 
 
 # tentativas por identificador, em memória: some quando o processo reinicia, o
@@ -349,9 +336,17 @@ def auth_entrar():
     estado = uuid.uuid4().hex
     session["auth_state"] = estado
     session["auth_next"] = _safe_next_url(request.args.get("next"))
-    url = _auth_ms_app().get_authorization_request_url(
-        scopes=["User.Read"], state=estado, redirect_uri=AUTH_REDIRECT_URI,
-    )
+    try:
+        url = _auth_ms_app().get_authorization_request_url(
+            scopes=["User.Read"], state=estado, redirect_uri=AUTH_REDIRECT_URI,
+        )
+    except Exception as e:
+        # tenant mal configurado ou a Microsoft fora do ar: quem clicou no
+        # botão não pode ver um erro 500 cru — volta pro login com explicação
+        print(f"[auth] falha ao montar a URL de login Microsoft: {e!r}", flush=True)
+        return redirect("/login?erro=" + quote(
+            "Não consegui contactar o login Microsoft agora. Tente de novo em instantes "
+            "ou entre pelo usuário compartilhado."))
     return redirect(url)
 
 
@@ -377,9 +372,13 @@ def auth_callback():
     if not codigo:
         return redirect("/login")
 
-    resultado = _auth_ms_app().acquire_token_by_authorization_code(
-        codigo, scopes=["User.Read"], redirect_uri=AUTH_REDIRECT_URI,
-    )
+    try:
+        resultado = _auth_ms_app().acquire_token_by_authorization_code(
+            codigo, scopes=["User.Read"], redirect_uri=AUTH_REDIRECT_URI,
+        )
+    except Exception as e:
+        print(f"[auth] falha ao trocar o código pelo token: {e!r}", flush=True)
+        return falhou("Não consegui confirmar seu login com a Microsoft agora. Tente de novo.")
     if "id_token_claims" not in resultado:
         return falhou("Não foi possível confirmar sua conta Microsoft. Tente de novo.")
 
@@ -424,10 +423,9 @@ def _auth():
     if request.path == "/api/health":
         return None
 
-    # /registrar e as rotas /auth/* ficam fora da barreira porque quem está
-    # entrando ainda não tem sessão — a proteção delas é outra (domínio do
-    # e-mail, ou a própria Microsoft confirmando a conta)
-    if request.path in ("/login", "/logout", "/registrar", "/auth/entrar", "/auth/callback"):
+    # as rotas /auth/* ficam fora da barreira porque quem está entrando ainda
+    # não tem sessão — a proteção delas é a própria Microsoft confirmando a conta
+    if request.path in ("/login", "/logout", "/auth/entrar", "/auth/callback"):
         return None
 
     if _site_auth_enabled() and not _logged_in():
@@ -467,54 +465,15 @@ def login():
         if faltam:
             return falhou(f"Muitas tentativas. Tente de novo em {faltam // 60 + 1} minuto(s).")
 
-        # login compartilhado antigo — segue valendo enquanto a equipe migra
+        # login compartilhado — a única porta por senha que resta. Contas por
+        # pessoa entram por /auth/entrar (Microsoft), nunca por aqui.
         if usuario == SITE_USER and senha == SITE_PASSWORD:
             _abrir_sessao("", SITE_USER, admin=True)
-            return redirect(destino)
-
-        u = col_usuarios.find_one({"_id": chave}) if "@" in usuario else None
-        if u and u.get("ativo", True) and check_password_hash(u["senha_hash"], senha):
-            _abrir_sessao(u["_id"], u.get("nome") or u["_id"], admin=bool(u.get("admin")))
-            col_usuarios.update_one({"_id": u["_id"]}, {"$set": {"ultimoAcesso": _agora_ms()}})
             return redirect(destino)
 
         _registrar_tentativa(chave)
         return falhou()
     return send_from_directory(BASE_DIR, "login.html")
-
-
-@app.route("/registrar", methods=["POST"])
-def registrar():
-    """Cria a conta de uma pessoa. Só aceita e-mail do domínio da empresa —
-    é isso que substitui a senha única compartilhada."""
-    if not _site_auth_enabled():
-        return jsonify({"erro": "Cadastro indisponível neste servidor."}), 503
-    corpo = request.get_json(silent=True) or request.form
-    email = (corpo.get("email") or "").strip().lower()
-    nome = (corpo.get("nome") or "").strip()
-    senha = corpo.get("senha") or ""
-    senha2 = corpo.get("senha2") or ""
-
-    if not _email_valido(email):
-        return jsonify({"erro": f"Use seu e-mail corporativo, terminado em {DOMINIO_PERMITIDO}."}), 400
-    if len(nome) < 2:
-        return jsonify({"erro": "Informe seu nome — é ele que aparece no histórico do Painel."}), 400
-    if senha != senha2:
-        return jsonify({"erro": "As duas senhas não são iguais."}), 400
-    motivo = _senha_fraca(senha)
-    if motivo:
-        return jsonify({"erro": motivo}), 400
-    if col_usuarios.find_one({"_id": email}):
-        return jsonify({"erro": "Já existe conta com esse e-mail. Faça login ou peça a redefinição."}), 409
-
-    col_usuarios.insert_one({
-        "_id": email, "nome": nome,
-        "senha_hash": generate_password_hash(senha),
-        "criadoEm": _agora_ms(), "ultimoAcesso": _agora_ms(),
-        "ativo": True, "admin": False,
-    })
-    _abrir_sessao(email, nome)
-    return jsonify({"ok": True, "email": email, "nome": nome}), 201
 
 
 @app.route("/api/eu", methods=["GET"])
