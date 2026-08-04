@@ -87,6 +87,7 @@ from pathlib import Path
 from urllib.parse import quote
 
 import anthropic
+import msal
 import requests
 from pypdf import PdfReader, PdfWriter
 from pymongo import MongoClient, ASCENDING, DESCENDING
@@ -117,6 +118,16 @@ TOKEN = os.environ.get("TOKEN", "")
 SITE_USER = os.environ.get("SITE_USER", "")
 SITE_PASSWORD = os.environ.get("SITE_PASSWORD", "")
 SECRET_KEY = os.environ.get("SECRET_KEY", "troque-em-producao")
+
+# Login com a conta Microsoft da empresa — reaproveita o mesmo app do Azure AD
+# já usado para o SharePoint (mesmo tenant, mesmo client). Diferente de checar
+# se o e-mail *parece* corporativo, aqui é a própria Microsoft que confirma que
+# a conta existe, tem senha certa (e MFA, se a empresa exigir) e pertence ao
+# tenant da SINAPE — desligou no Entra, perde o acesso aqui também.
+AUTH_TENANT_ID = os.environ.get("AUTH_TENANT_ID", "") or MONTADOR_TENANT_ID
+AUTH_CLIENT_ID = os.environ.get("AUTH_CLIENT_ID", "") or MONTADOR_CLIENT_ID
+AUTH_CLIENT_SECRET = os.environ.get("AUTH_CLIENT_SECRET", "") or MONTADOR_CLIENT_SECRET
+AUTH_REDIRECT_URI = os.environ.get("AUTH_REDIRECT_URI", "") or "https://projeto-sinape.onrender.com/auth/callback"
 MONGO_URL = os.environ.get("MONGO_URL", "")
 MAX_UPLOAD_MB = int(os.environ.get("MAX_UPLOAD_MB", "25"))
 
@@ -315,6 +326,90 @@ def _abrir_sessao(email: str, nome: str, admin: bool = False):
     _tentativas.pop(email, None)
 
 
+def _auth_ms_habilitado() -> bool:
+    return bool(AUTH_TENANT_ID and AUTH_CLIENT_ID and AUTH_CLIENT_SECRET and AUTH_REDIRECT_URI)
+
+
+def _auth_ms_app():
+    return msal.ConfidentialClientApplication(
+        AUTH_CLIENT_ID,
+        authority=f"https://login.microsoftonline.com/{AUTH_TENANT_ID}",
+        client_credential=AUTH_CLIENT_SECRET,
+    )
+
+
+@app.route("/auth/entrar")
+def auth_entrar():
+    """Ponto de partida do login Microsoft — manda a pessoa pro login.microsoftonline.com
+    da própria empresa. Ela nunca digita a senha da Microsoft aqui dentro."""
+    if not _auth_ms_habilitado():
+        return jsonify({"erro": "Login com Microsoft não configurado neste servidor."}), 503
+    # 'state' vai e volta pra provar que a resposta é da mesma pessoa que saiu
+    # daqui — sem isso, alguém poderia colar um "code" roubado no /auth/callback
+    estado = uuid.uuid4().hex
+    session["auth_state"] = estado
+    session["auth_next"] = _safe_next_url(request.args.get("next"))
+    url = _auth_ms_app().get_authorization_request_url(
+        scopes=["User.Read"], state=estado, redirect_uri=AUTH_REDIRECT_URI,
+    )
+    return redirect(url)
+
+
+@app.route("/auth/callback")
+def auth_callback():
+    """A Microsoft manda a pessoa de volta pra cá depois do login dela. O que
+    prova que a conta é real e do tenant certo é o token que a Microsoft
+    devolve — não é nada que a gente pediu pra pessoa digitar."""
+    def falhou(msg):
+        return redirect("/login?erro=" + quote(msg))
+
+    if not _auth_ms_habilitado():
+        return redirect("/login")
+
+    erro_ms = request.args.get("error_description") or request.args.get("error")
+    if erro_ms:
+        return falhou("A Microsoft não autorizou o login: " + erro_ms[:200])
+
+    if not request.args.get("state") or request.args.get("state") != session.pop("auth_state", None):
+        return falhou("A sessão de login expirou ou é inválida. Tente entrar de novo.")
+
+    codigo = request.args.get("code")
+    if not codigo:
+        return redirect("/login")
+
+    resultado = _auth_ms_app().acquire_token_by_authorization_code(
+        codigo, scopes=["User.Read"], redirect_uri=AUTH_REDIRECT_URI,
+    )
+    if "id_token_claims" not in resultado:
+        return falhou("Não foi possível confirmar sua conta Microsoft. Tente de novo.")
+
+    claims = resultado["id_token_claims"]
+    email = (claims.get("preferred_username") or claims.get("email") or "").strip().lower()
+    nome = claims.get("name") or email
+
+    # o tenant do app já restringe quem consegue chegar até aqui, mas confere
+    # o domínio mesmo assim — segunda camada, barata, contra um tenant mal
+    # configurado ou um convidado externo dentro da organização
+    if not _email_valido(email):
+        return falhou(f"Sua conta Microsoft não é do domínio {DOMINIO_PERMITIDO}.")
+
+    existente = col_usuarios.find_one({"_id": email})
+    if existente and not existente.get("ativo", True):
+        return falhou("Sua conta foi desativada. Fale com o administrador do Painel.")
+
+    col_usuarios.update_one(
+        {"_id": email},
+        {
+            "$set": {"nome": nome, "ultimoAcesso": _agora_ms(), "via": "microsoft"},
+            "$setOnInsert": {"criadoEm": _agora_ms(), "ativo": True, "admin": False},
+        },
+        upsert=True,
+    )
+    u = col_usuarios.find_one({"_id": email})
+    _abrir_sessao(email, nome, admin=bool(u.get("admin")))
+    return redirect(session.pop("auth_next", None) or "/")
+
+
 def _safe_next_url(val):
     if val and val.startswith("/") and not val.startswith("//"):
         return val
@@ -329,9 +424,10 @@ def _auth():
     if request.path == "/api/health":
         return None
 
-    # /registrar fica fora da barreira porque quem vai criar conta ainda não
-    # tem sessão; a proteção dele é o domínio do e-mail, não o login
-    if request.path in ("/login", "/logout", "/registrar"):
+    # /registrar e as rotas /auth/* ficam fora da barreira porque quem está
+    # entrando ainda não tem sessão — a proteção delas é outra (domínio do
+    # e-mail, ou a própria Microsoft confirmando a conta)
+    if request.path in ("/login", "/logout", "/registrar", "/auth/entrar", "/auth/callback"):
         return None
 
     if _site_auth_enabled() and not _logged_in():
