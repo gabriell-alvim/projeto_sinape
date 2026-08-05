@@ -268,6 +268,7 @@ def baixar_pdfs_da_pasta(cfg: dict, caminho_pasta: str, limite_mb: int = 24) -> 
     limite_bytes = limite_mb * 1024 * 1024
     total = 0
     resultado = []
+    ignorados = []  # nomes que passariam do limite -- não descartados em silêncio
     nomes_ja_incluidos = set()  # evita mandar o mesmo PDF 2x pra IA (ex.: solto na pasta E dentro de um zip)
 
     def _incluir(nome, dados):
@@ -277,7 +278,11 @@ def baixar_pdfs_da_pasta(cfg: dict, caminho_pasta: str, limite_mb: int = 24) -> 
             log.info(f"Ignorando {nome}: mesmo nome já incluído (evita duplicata solto/dentro de zip)")
             return
         if total + len(dados) > limite_bytes:
-            log.info(f"Ignorando {nome}: excederia o limite de {limite_mb} MB para a analise")
+            # Antes isso era só um log.info e o arquivo sumia da análise sem
+            # ninguém saber — a equipe via um resultado incompleto sem
+            # nenhum aviso. Agora acumula e a função levanta erro no final,
+            # citando os nomes, em vez de entregar uma pasta pela metade.
+            ignorados.append(nome)
             return
         nomes_ja_incluidos.add(chave)
         total += len(dados)
@@ -302,6 +307,13 @@ def baixar_pdfs_da_pasta(cfg: dict, caminho_pasta: str, limite_mb: int = 24) -> 
                             _incluir(nome_pdf, zf.read(info))
                 except zipfile.BadZipFile:
                     log.warning(f"Arquivo {it['name']} não é um .zip válido - ignorado")
+
+    if ignorados:
+        raise ValueError(
+            f"A pasta passa do limite de {limite_mb} MB para a análise: "
+            f"{', '.join(ignorados)} ficariam de fora. Aumente o limite ou remova "
+            f"algum arquivo antes de tentar de novo."
+        )
     return resultado
 
 

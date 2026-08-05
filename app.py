@@ -132,7 +132,11 @@ MAX_UPLOAD_MB = int(os.environ.get("MAX_UPLOAD_MB", "25"))
 
 ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY", "")
 ANTHROPIC_MODEL = os.environ.get("ANTHROPIC_MODEL", "claude-opus-5")
-MAX_PDF_TOTAL_MB = int(os.environ.get("MAX_PDF_TOTAL_MB", "24"))  # margem p/ limite de 32MB em base64
+# Esse teto era pensado pra uma chamada só (32 MB em base64 é o limite real da
+# API) — agora que a análise reparte em lotes quando passa disso, ele só
+# precisa segurar um exagero de verdade (pasta inteira anexada por engano),
+# não mais o tamanho normal de um edital grande com tudo junto.
+MAX_PDF_TOTAL_MB = int(os.environ.get("MAX_PDF_TOTAL_MB", "80"))
 # Prompt único do Sinki (a IA do DATA SIN): vale tanto pra conversa quanto pra
 # análise estruturada de edital — antes eram dois textos que saíam de sincronia.
 PROMPT_SINKI = (BASE_DIR / "prompt_sinki.txt").read_text(encoding="utf-8")
@@ -780,11 +784,14 @@ def adicionar_pendente():
     cfg = {"MODO_LOCAL": False, "TENANT_ID": MONTADOR_TENANT_ID,
            "CLIENT_ID": MONTADOR_CLIENT_ID, "CLIENT_SECRET": MONTADOR_CLIENT_SECRET}
     try:
-        pdfs = baixar_pdfs_da_pasta(cfg, caminho)
+        pdfs = baixar_pdfs_da_pasta(cfg, caminho, limite_mb=MAX_PDF_TOTAL_MB)
     except requests.HTTPError as e:
         if e.response is not None and e.response.status_code == 404:
             return jsonify({"erro": "Essa pasta não existe no SharePoint. Confira o caminho."}), 404
         return jsonify({"erro": f"Falha ao conferir a pasta no SharePoint: {e}"}), 502
+    except ValueError as e:
+        # pasta passa do limite de MB (a mensagem já vem pronta pra tela)
+        return jsonify({"erro": str(e)}), 400
     except Exception as e:
         return jsonify({"erro": f"Falha ao conferir a pasta no SharePoint: {e}"}), 502
     if not pdfs:
@@ -1177,6 +1184,16 @@ def ver_job(jid):
 # seria recusar o edital; o certo é fatiar e mandar em partes.
 PAGINAS_POR_PDF = 100
 PAGINAS_POR_REQUISICAO = 600
+# Acima de 600 páginas ao todo (caso real: um edital de 847 páginas com tudo
+# junto), uma chamada não basta mais. Em vez de recusar, o processo é dividido
+# em lotes de até 600 páginas cada, cada lote analisado à parte, e uma última
+# chamada (só texto, sem PDF — barata) funde os resultados num JSON só,
+# cruzando valores e prazos entre os lotes do mesmo jeito que já se cruza
+# entre documentos numa análise normal. É diferente de simplesmente "chamar
+# de novo pro resto": chamar de novo sem fundir perderia justamente esse
+# cruzamento entre o que caiu no lote 1 e o que caiu no lote 2.
+PAGINAS_MAXIMO_TOTAL = 3000  # acima disso, provavelmente pasta com lixo demais junto — barra e avisa
+MB_MAXIMO_POR_LOTE = 20      # margem de sobra pro teto de 32 MB em base64 (20 MB × 4/3 ≈ 27 MB)
 
 
 def _erro_api_legivel(e) -> str:
@@ -1221,7 +1238,9 @@ def _erro_api_legivel(e) -> str:
 def _fatiar_pdfs_grandes(pdfs: list) -> list:
     """Divide PDFs acima do limite de páginas em partes menores, preservando a
     ordem. Cada parte carrega no nome o intervalo de páginas para que as
-    referências da análise ("página 5 do PER") continuem fazendo sentido."""
+    referências da análise ("página 5 do PER") continuem fazendo sentido.
+    Não recusa mais o total: quem decide se cabe numa chamada só ou precisa
+    de vários lotes é _agrupar_em_lotes, chamado depois disso."""
     saida = []
     total_paginas = 0
     for nome, dados in pdfs:
@@ -1252,59 +1271,51 @@ def _fatiar_pdfs_grandes(pdfs: list) -> list:
         print(f"[analise] '{nome}' tem {paginas} páginas — dividido em "
               f"{-(-paginas // PAGINAS_POR_PDF)} partes", flush=True)
 
-    if total_paginas > PAGINAS_POR_REQUISICAO:
+    if total_paginas > PAGINAS_MAXIMO_TOTAL:
         raise ValueError(
-            f"Os documentos somam {total_paginas} páginas e a IA analisa no máximo "
-            f"{PAGINAS_POR_REQUISICAO} por vez. Rode a análise com menos arquivos de "
-            f"cada vez, deixando de fora os anexos que não afetam a decisão."
+            f"Os documentos somam {total_paginas} páginas — acima do teto de "
+            f"{PAGINAS_MAXIMO_TOTAL} que o Painel aceita numa análise. Confira se não "
+            f"entrou algum arquivo que não devia (versão antiga, pasta errada) antes "
+            f"de tentar de novo."
         )
     return saida
 
 
-def _rodar_analise_ia(pdfs: list, model: str | None = None, effort: str | None = None):
-    """Manda uma lista de PDFs (nome, bytes) pro Claude com o prompt padrão do
-    Painel e devolve (doc, meta) — o JSON de análise pronto pra virar processo
-    e os metadados de uso (modelo + tokens de entrada/saída) pro contador de
-    gastos. Reaproveitado tanto pelo upload manual (analisar_ia) quanto pela
-    análise automática de processos novos detectados na varredura."""
-    if not anthropic_client:
-        raise RuntimeError("ANTHROPIC_API_KEY não configurada no servidor")
+def _agrupar_em_lotes(partes: list) -> list:
+    """Agrupa as partes (já fatiadas em blocos de até 100 páginas) em lotes
+    que cabem numa chamada — até 600 páginas e até MB_MAXIMO_POR_LOTE de peso
+    cada — respeitando a ordem em que os documentos aparecem. Um documento só
+    é dividido entre lotes quando ele sozinho já passa do teto de um lote
+    (como o edital de 847 páginas junto que estourou os 600 de uma vez)."""
+    lotes = []
+    lote_atual, paginas_atual, bytes_atual = [], 0, 0
+    limite_bytes = MB_MAXIMO_POR_LOTE * 1024 * 1024
+    for nome, dados in partes:
+        try:
+            paginas = len(PdfReader(io.BytesIO(dados)).pages)
+        except Exception:
+            paginas = 1  # ilegível pro pypdf: conta como 1 pra não travar o agrupamento
+        estoura = lote_atual and (
+            paginas_atual + paginas > PAGINAS_POR_REQUISICAO
+            or bytes_atual + len(dados) > limite_bytes
+        )
+        if estoura:
+            lotes.append(lote_atual)
+            lote_atual, paginas_atual, bytes_atual = [], 0, 0
+        lote_atual.append((nome, dados))
+        paginas_atual += paginas
+        bytes_atual += len(dados)
+    if lote_atual:
+        lotes.append(lote_atual)
+    return lotes
 
-    total_bytes = sum(len(dados) for _, dados in pdfs)
-    if total_bytes > MAX_PDF_TOTAL_MB * 1024 * 1024:
-        raise ValueError(f"Total dos PDFs excede {MAX_PDF_TOTAL_MB} MB")
 
-    pdfs = _fatiar_pdfs_grandes(pdfs)
-
-    nomes = []
-    content = []
-    for nome, dados in pdfs:
-        nomes.append(nome)
-        content.append({
-            "type": "document",
-            "source": {
-                "type": "base64",
-                "media_type": "application/pdf",
-                "data": base64.standard_b64encode(dados).decode("ascii"),
-            },
-        })
-    content.append({"type": "text", "text": PEDIDO_ANALISE})
-
-    # antes o esforço só ia quando a tela mandava um válido, e sem ele a chamada
-    # caía no padrão da API. Agora vai sempre explícito: o valor é o mesmo, mas
-    # o registro de gasto passa a saber com que esforço aquele custo foi gasto
-    # em vez de gravar em branco.
-    esforco_usado = effort if effort in ESFORCOS_IA_PERMITIDOS else ESFORCO_PADRAO_ANALISE
+def _chamar_claude(content: list, modelo_usado: str, esforco_usado: str):
+    """Uma chamada ao Claude com o prompt padrão do Sinki, com retentativa em
+    erro transitório (503/429). Devolve (texto_bruto, uso) — usado tanto pra
+    analisar um lote de PDFs quanto pra fundir os resultados de vários lotes
+    (aí sem PDF nenhum no content, só texto)."""
     kwargs = {"output_config": {"effort": esforco_usado}}
-
-    modelo_usado = model if model in MODELOS_IA_PERMITIDOS else ANTHROPIC_MODEL
-    # Sem isto, uma análise que estoura o timeout do gunicorn não deixa rastro
-    # nenhum: o worker morre esperando a resposta, o registro de gasto nunca
-    # roda e ninguém sabe quanto tempo aquilo levou nem se a API foi chamada.
-    # Estes dois prints vão pro log do Render e respondem as duas coisas.
-    mb = sum(len(d) for _, d in pdfs) / 1024 / 1024
-    print(f"[analise] inicio · modelo={modelo_usado} esforco={esforco_usado} "
-          f"{len(pdfs)} arquivo(s) {mb:.1f} MB", flush=True)
     t0 = time.time()
     # A API da Anthropic devolve 503 overloaded_error de vez em quando —
     # sobrecarga momentânea do lado deles, que passa em segundos. Antes isso
@@ -1352,18 +1363,19 @@ def _rodar_analise_ia(pdfs: list, model: str | None = None, effort: str | None =
     print(f"[analise] fim · {time.time() - t0:.0f}s · "
           f"{getattr(u, 'output_tokens', 0) or 0} tokens de saida", flush=True)
     uso = {
-        "model": modelo_usado,
-        "esforco": esforco_usado,
         "entrada": (getattr(u, "input_tokens", 0) or 0)
                    + (getattr(u, "cache_creation_input_tokens", 0) or 0)
                    + (getattr(u, "cache_read_input_tokens", 0) or 0),
         "saida": getattr(u, "output_tokens", 0) or 0,
     }
-
     texto = "".join(b.text for b in resposta.content if b.type == "text").strip()
     texto = re.sub(r"^```(?:json)?\s*|\s*```$", "", texto.strip())
+    return texto, uso
+
+
+def _texto_para_json(texto: str) -> dict:
     try:
-        doc = json.loads(texto)
+        return json.loads(texto)
     except json.JSONDecodeError:
         # de vez em quando a IA escreve uma frase antes ou depois do JSON;
         # antes de desistir, recorta o objeto do meio do texto. Se nem assim
@@ -1371,10 +1383,122 @@ def _rodar_analise_ia(pdfs: list, model: str | None = None, effort: str | None =
         inicio, fim = texto.find("{"), texto.rfind("}")
         if inicio == -1 or fim <= inicio:
             raise
-        doc = json.loads(texto[inicio:fim + 1])
+        return json.loads(texto[inicio:fim + 1])
 
+
+def _analisar_um_lote(pdfs_lote: list, modelo_usado: str, esforco_usado: str) -> tuple:
+    """Manda um lote de PDFs (já dentro do teto de páginas/MB de uma
+    requisição) pro Claude e devolve (doc, uso) desse lote."""
+    nomes = [nome for nome, _ in pdfs_lote]
+    content = [
+        {"type": "document", "source": {"type": "base64", "media_type": "application/pdf",
+         "data": base64.standard_b64encode(dados).decode("ascii")}}
+        for _, dados in pdfs_lote
+    ]
+    content.append({"type": "text", "text": PEDIDO_ANALISE})
+
+    # Sem isto, uma análise que estoura o timeout do gunicorn não deixa rastro
+    # nenhum: o worker morre esperando a resposta, o registro de gasto nunca
+    # roda e ninguém sabe quanto tempo aquilo levou nem se a API foi chamada.
+    mb = sum(len(d) for _, d in pdfs_lote) / 1024 / 1024
+    print(f"[analise] inicio · modelo={modelo_usado} esforco={esforco_usado} "
+          f"{len(pdfs_lote)} arquivo(s) {mb:.1f} MB", flush=True)
+    texto, uso = _chamar_claude(content, modelo_usado, esforco_usado)
+    doc = _texto_para_json(texto)
     doc.setdefault("fontes", "; ".join(nomes))
     doc.setdefault("analise", {}).setdefault("_sourceFiles", "; ".join(nomes))
+    return doc, uso
+
+
+PEDIDO_MERGE_ANALISE = (
+    "Os blocos abaixo são análises parciais do MESMO processo — não são processos diferentes, são "
+    "pedaços do mesmo, porque os documentos juntos passavam do que a IA processa numa única chamada e "
+    "tiveram que ser analisados em grupos separados.\n\n"
+    "Funda tudo em UM único JSON, seguindo exatamente o mesmo contrato da \"ANÁLISE ESTRUTURADA DE "
+    "EDITAL\" que você já conhece:\n"
+    "- Não duplique exigência, risco ou item de checklist que apareça (com o mesmo sentido, mesmo com "
+    "texto diferente) em mais de um bloco.\n"
+    "- Cruze valores, prazos e quantitativos que aparecem em blocos diferentes: se divergirem entre si, "
+    "registre como risco citando as duas fontes, com a mesma ordem de prevalência de sempre (edital > "
+    "TR > demais anexos).\n"
+    "- Campo do modelo padrão preenchido em só um bloco: use esse valor. Preenchido em mais de um bloco "
+    "com o MESMO valor (ou equivalente): use uma vez. Preenchido em blocos diferentes com valores "
+    "DIFERENTES: aplique a mesma prevalência e registre a divergência como risco, não escolha em silêncio.\n"
+    "- Junte as seções extras e o checklist dos blocos sem repetir id/key/grupo.\n"
+    "- \"_autoFilledKeys\" e \"_sourceFiles\" do resultado final = união dos blocos.\n"
+    "Responda apenas com o JSON final, sem texto antes ou depois.\n\n"
+    "BLOCOS PARCIAIS:\n"
+)
+
+
+def _fundir_analises(parciais: list, modelo_usado: str, esforco_usado: str) -> tuple:
+    """Junta as análises de vários lotes num JSON só, cruzando entre si do
+    mesmo jeito que já se cruza entre documentos numa análise normal. Chamada
+    só de texto — sem PDF, sem custo de imagem — por isso sai barata mesmo
+    depois de várias chamadas grandes."""
+    blocos = "\n\n".join(f"--- BLOCO {i + 1} ---\n{json.dumps(p, ensure_ascii=False)}"
+                         for i, p in enumerate(parciais))
+    content = [{"type": "text", "text": PEDIDO_MERGE_ANALISE + blocos}]
+    print(f"[analise] fundindo {len(parciais)} lotes num resultado só", flush=True)
+    texto, uso = _chamar_claude(content, modelo_usado, esforco_usado)
+    return _texto_para_json(texto), uso
+
+
+def _rodar_analise_ia(pdfs: list, model: str | None = None, effort: str | None = None):
+    """Manda uma lista de PDFs (nome, bytes) pro Claude com o prompt padrão do
+    Painel e devolve (doc, meta) — o JSON de análise pronto pra virar processo
+    e os metadados de uso (modelo + tokens de entrada/saída, somados de todas
+    as chamadas feitas) pro contador de gastos. Reaproveitado tanto pelo
+    upload manual (analisar_ia) quanto pela análise automática de processos
+    novos detectados na varredura.
+
+    Documentos que juntos passam de 600 páginas (o teto de uma chamada) são
+    divididos em lotes, cada um analisado à parte, e fundidos numa chamada
+    final — só assim editais grandes de verdade (800+ páginas juntando tudo)
+    saem sem faltar nada nem perder o cruzamento entre os documentos."""
+    if not anthropic_client:
+        raise RuntimeError("ANTHROPIC_API_KEY não configurada no servidor")
+
+    total_bytes = sum(len(dados) for _, dados in pdfs)
+    if total_bytes > MAX_PDF_TOTAL_MB * 1024 * 1024:
+        raise ValueError(f"Total dos PDFs excede {MAX_PDF_TOTAL_MB} MB")
+
+    # antes o esforço só ia quando a tela mandava um válido, e sem ele a chamada
+    # caía no padrão da API. Agora vai sempre explícito: o valor é o mesmo, mas
+    # o registro de gasto passa a saber com que esforço aquele custo foi gasto
+    # em vez de gravar em branco.
+    esforco_usado = effort if effort in ESFORCOS_IA_PERMITIDOS else ESFORCO_PADRAO_ANALISE
+    modelo_usado = model if model in MODELOS_IA_PERMITIDOS else ANTHROPIC_MODEL
+    nomes_originais = [nome for nome, _ in pdfs]
+
+    partes = _fatiar_pdfs_grandes(pdfs)
+    lotes = _agrupar_em_lotes(partes)
+
+    if len(lotes) == 1:
+        doc, uso = _analisar_um_lote(lotes[0], modelo_usado, esforco_usado)
+    else:
+        total_paginas = sum(len(PdfReader(io.BytesIO(d)).pages) for _, d in partes)
+        print(f"[analise] {total_paginas} páginas ao todo, acima do teto de "
+              f"{PAGINAS_POR_REQUISICAO} por chamada — dividido em {len(lotes)} lotes, "
+              f"mais uma chamada final pra fundir os resultados", flush=True)
+        parciais = []
+        uso = {"entrada": 0, "saida": 0}
+        for i, lote in enumerate(lotes, 1):
+            doc_i, uso_i = _analisar_um_lote(lote, modelo_usado, esforco_usado)
+            parciais.append(doc_i)
+            uso["entrada"] += uso_i["entrada"]
+            uso["saida"] += uso_i["saida"]
+            print(f"[analise] lote {i}/{len(lotes)} concluído", flush=True)
+        doc, uso_fusao = _fundir_analises(parciais, modelo_usado, esforco_usado)
+        uso["entrada"] += uso_fusao["entrada"]
+        uso["saida"] += uso_fusao["saida"]
+        # "fontes" de cada bloco cita só os arquivos daquele lote; o resultado
+        # final tem que citar o conjunto inteiro, não só o do último lote
+        doc["fontes"] = "; ".join(nomes_originais)
+        doc.setdefault("analise", {})["_sourceFiles"] = "; ".join(nomes_originais)
+
+    uso["model"] = modelo_usado
+    uso["esforco"] = esforco_usado
     doc["_iaModel"] = modelo_usado
     doc["_iaEsforco"] = esforco_usado
     return doc, uso
@@ -1469,7 +1593,7 @@ def analisar_processo_novo():
         "CLIENT_SECRET": MONTADOR_CLIENT_SECRET,
     }
     try:
-        pdfs_pasta = baixar_pdfs_da_pasta(cfg, caminho_pasta)
+        pdfs_pasta = baixar_pdfs_da_pasta(cfg, caminho_pasta, limite_mb=MAX_PDF_TOTAL_MB)
     except requests.HTTPError as e:
         if e.response is not None and e.response.status_code == 404:
             return jsonify({
@@ -1478,6 +1602,9 @@ def analisar_processo_novo():
                         "\"Executar análise agora\" para atualizar a lista e tente de novo."
             }), 404
         return jsonify({"erro": f"Falha ao baixar documentos do SharePoint (erro {e.response.status_code if e.response is not None else '?'})."}), 502
+    except ValueError as e:
+        # pasta passa do limite de MB (a mensagem já vem pronta pra tela)
+        return jsonify({"erro": str(e)}), 400
     except Exception as e:
         return jsonify({"erro": f"Falha ao baixar documentos do SharePoint: {e}"}), 502
     if not pdfs_pasta:
