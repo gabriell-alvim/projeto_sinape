@@ -1128,6 +1128,18 @@ def _job_encerrar(jid: str, **campos):
     col_jobs.update_one({"_id": jid}, {"$set": campos})
 
 
+def _job_progresso(jid: str, etapa: str, atual: int = 0, total: int = 0):
+    """Anota em que pé está a análise, pra tela mostrar em vez de só um relógio
+    correndo. 'atual/total' só vem preenchido quando existe contagem de verdade
+    (os lotes de um edital grande) — no resto o progresso é indeterminado de
+    propósito, porque inventar uma porcentagem que não corresponde a nada seria
+    pior que não mostrar nenhuma."""
+    col_jobs.update_one({"_id": jid}, {"$set": {
+        "etapa": etapa, "passo_atual": atual, "passos_total": total,
+        "sinalDeVida": _agora_ms(),
+    }})
+
+
 def _job_rodar_em_thread(jid: str, alvo, *args, **kwargs):
     """Executa `alvo` fora da requisição. Nada de contexto do Flask aqui
     dentro: quem chama já extraiu tudo que precisa antes."""
@@ -1170,6 +1182,9 @@ def ver_job(jid):
         "processo_id": job.get("processo_id"), "erro": job.get("erro"),
         "segundos": round((_agora_ms() - job["criadoEm"]) / 1000),
         "duracao_s": job.get("duracao_s"),
+        "etapa": job.get("etapa") or "",
+        "passo_atual": job.get("passo_atual") or 0,
+        "passos_total": job.get("passos_total") or 0,
     }
     # o upload manual não cria processo: devolve o JSON pra tela conferir
     if job.get("documento"):
@@ -1194,6 +1209,18 @@ PAGINAS_POR_REQUISICAO = 600
 # cruzamento entre o que caiu no lote 1 e o que caiu no lote 2.
 PAGINAS_MAXIMO_TOTAL = 3000  # acima disso, provavelmente pasta com lixo demais junto — barra e avisa
 MB_MAXIMO_POR_LOTE = 20      # margem de sobra pro teto de 32 MB em base64 (20 MB × 4/3 ≈ 27 MB)
+
+# Página não mede densidade. Um edital de texto corrido gasta ~2 mil tokens por
+# página; um "Orçamento Referencial" (planilha virada PDF, tabela em cada linha)
+# gasta muito mais — e foi assim que a análise do PE 456/2026 do DNIT DF estourou
+# a janela de contexto mesmo com o lote dentro das 600 páginas. Por isso o limite
+# que vale de verdade é medido, não estimado: antes de mandar, conta os tokens do
+# lote pela própria API e reparte se passar. A janela é de 1M; o teto abaixo
+# deixa folga pro system prompt e pros 64k de saída (raciocínio + resposta).
+LIMITE_TOKENS_LOTE = 700_000
+# Contar tokens custa uma ida à API, então só vale a pena quando o lote é grande
+# o bastante pra ter chance real de estourar — abaixo disso, manda direto.
+PAGINAS_PARA_CONTAR_TOKENS = 120
 
 
 def _erro_api_legivel(e) -> str:
@@ -1386,16 +1413,72 @@ def _texto_para_json(texto: str) -> dict:
         return json.loads(texto[inicio:fim + 1])
 
 
-def _analisar_um_lote(pdfs_lote: list, modelo_usado: str, esforco_usado: str) -> tuple:
-    """Manda um lote de PDFs (já dentro do teto de páginas/MB de uma
-    requisição) pro Claude e devolve (doc, uso) desse lote."""
-    nomes = [nome for nome, _ in pdfs_lote]
+def _content_do_lote(pdfs_lote: list) -> list:
+    """Monta o content de uma chamada de análise. Isolado porque a contagem de
+    tokens precisa medir exatamente o mesmo que vai ser enviado."""
     content = [
         {"type": "document", "source": {"type": "base64", "media_type": "application/pdf",
          "data": base64.standard_b64encode(dados).decode("ascii")}}
         for _, dados in pdfs_lote
     ]
     content.append({"type": "text", "text": PEDIDO_ANALISE})
+    return content
+
+
+def _contar_tokens(content: list, modelo_usado: str):
+    """Pergunta à própria API quantos tokens o lote ocupa. Devolve None se a
+    contagem falhar — nesse caso o envio segue e, se estourar, a mensagem de
+    erro traduzida explica; melhor isso do que travar a análise por causa da
+    medição."""
+    try:
+        r = anthropic_client.messages.count_tokens(
+            model=modelo_usado,
+            system=[{"type": "text", "text": PROMPT_SINKI}],
+            messages=[{"role": "user", "content": content}],
+        )
+        return getattr(r, "input_tokens", None)
+    except Exception as e:
+        print(f"[analise] não consegui contar tokens ({e!r}) — seguindo assim mesmo", flush=True)
+        return None
+
+
+def _repartir_por_tokens(lotes: list, modelo_usado: str) -> list:
+    """Reparte os lotes que, medidos, não cabem na janela de contexto. Divide
+    ao meio e mede de novo, até caber — é o que resolve documento denso
+    (planilha virada PDF) que passa no limite de páginas mas estoura em
+    tokens."""
+    saida, fila = [], list(lotes)
+    while fila:
+        lote = fila.pop(0)
+        paginas = 0
+        for _, dados in lote:
+            try:
+                paginas += len(PdfReader(io.BytesIO(dados)).pages)
+            except Exception:
+                paginas += 1
+        # lote pequeno não tem chance de estourar: evita uma ida à API à toa
+        if paginas < PAGINAS_PARA_CONTAR_TOKENS or len(lote) == 1:
+            saida.append(lote)
+            continue
+        tokens = _contar_tokens(_content_do_lote(lote), modelo_usado)
+        if tokens is None or tokens <= LIMITE_TOKENS_LOTE:
+            if tokens:
+                print(f"[analise] lote de {paginas} páginas = {tokens} tokens, cabe", flush=True)
+            saida.append(lote)
+            continue
+        meio = len(lote) // 2
+        print(f"[analise] lote de {paginas} páginas = {tokens} tokens, acima do teto de "
+              f"{LIMITE_TOKENS_LOTE} — repartindo em dois", flush=True)
+        fila.insert(0, lote[meio:])
+        fila.insert(0, lote[:meio])
+    return saida
+
+
+def _analisar_um_lote(pdfs_lote: list, modelo_usado: str, esforco_usado: str) -> tuple:
+    """Manda um lote de PDFs (já dentro do teto de páginas/MB de uma
+    requisição) pro Claude e devolve (doc, uso) desse lote."""
+    nomes = [nome for nome, _ in pdfs_lote]
+    content = _content_do_lote(pdfs_lote)
 
     # Sem isto, uma análise que estoura o timeout do gunicorn não deixa rastro
     # nenhum: o worker morre esperando a resposta, o registro de gasto nunca
@@ -1444,7 +1527,8 @@ def _fundir_analises(parciais: list, modelo_usado: str, esforco_usado: str) -> t
     return _texto_para_json(texto), uso
 
 
-def _rodar_analise_ia(pdfs: list, model: str | None = None, effort: str | None = None):
+def _rodar_analise_ia(pdfs: list, model: str | None = None, effort: str | None = None,
+                      ao_progresso=None):
     """Manda uma lista de PDFs (nome, bytes) pro Claude com o prompt padrão do
     Painel e devolve (doc, meta) — o JSON de análise pronto pra virar processo
     e os metadados de uso (modelo + tokens de entrada/saída, somados de todas
@@ -1455,9 +1539,14 @@ def _rodar_analise_ia(pdfs: list, model: str | None = None, effort: str | None =
     Documentos que juntos passam de 600 páginas (o teto de uma chamada) são
     divididos em lotes, cada um analisado à parte, e fundidos numa chamada
     final — só assim editais grandes de verdade (800+ páginas juntando tudo)
-    saem sem faltar nada nem perder o cruzamento entre os documentos."""
+    saem sem faltar nada nem perder o cruzamento entre os documentos.
+
+    `ao_progresso(etapa, atual, total)` é chamado a cada marco, pra tela poder
+    mostrar em que pé está em vez de só um relógio correndo."""
     if not anthropic_client:
         raise RuntimeError("ANTHROPIC_API_KEY não configurada no servidor")
+
+    avisar = ao_progresso or (lambda *a, **k: None)
 
     total_bytes = sum(len(dados) for _, dados in pdfs)
     if total_bytes > MAX_PDF_TOTAL_MB * 1024 * 1024:
@@ -1471,10 +1560,18 @@ def _rodar_analise_ia(pdfs: list, model: str | None = None, effort: str | None =
     modelo_usado = model if model in MODELOS_IA_PERMITIDOS else ANTHROPIC_MODEL
     nomes_originais = [nome for nome, _ in pdfs]
 
+    avisar("Preparando os documentos", 0, 0)
     partes = _fatiar_pdfs_grandes(pdfs)
     lotes = _agrupar_em_lotes(partes)
+    # o agrupamento acima só sabe contar página e MB; esta etapa mede os tokens
+    # de verdade e reparte de novo o que não couber na janela de contexto
+    lotes = _repartir_por_tokens(lotes, modelo_usado)
 
     if len(lotes) == 1:
+        # Uma chamada só: não há marco intermediário nenhum pra medir — a IA
+        # lê tudo de uma vez. Manda total=0 pra tela mostrar barra
+        # indeterminada em vez de uma porcentagem que não quer dizer nada.
+        avisar("Lendo os documentos com a IA", 0, 0)
         doc, uso = _analisar_um_lote(lotes[0], modelo_usado, esforco_usado)
     else:
         total_paginas = sum(len(PdfReader(io.BytesIO(d)).pages) for _, d in partes)
@@ -1483,12 +1580,18 @@ def _rodar_analise_ia(pdfs: list, model: str | None = None, effort: str | None =
               f"mais uma chamada final pra fundir os resultados", flush=True)
         parciais = []
         uso = {"entrada": 0, "saida": 0}
+        # os passos contados são os lotes + a fusão: é o que existe de marco
+        # real, então a porcentagem mostrada corresponde a trabalho concluído
+        passos = len(lotes) + 1
         for i, lote in enumerate(lotes, 1):
+            avisar(f"Lendo parte {i} de {len(lotes)} ({total_paginas} páginas ao todo)",
+                   i - 1, passos)
             doc_i, uso_i = _analisar_um_lote(lote, modelo_usado, esforco_usado)
             parciais.append(doc_i)
             uso["entrada"] += uso_i["entrada"]
             uso["saida"] += uso_i["saida"]
             print(f"[analise] lote {i}/{len(lotes)} concluído", flush=True)
+        avisar("Juntando e cruzando as partes", len(lotes), passos)
         doc, uso_fusao = _fundir_analises(parciais, modelo_usado, esforco_usado)
         uso["entrada"] += uso_fusao["entrada"]
         uso["saida"] += uso_fusao["saida"]
