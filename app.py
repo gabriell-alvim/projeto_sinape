@@ -27,7 +27,8 @@ Rotas:
   POST    /api/relatorios                     → publica uma nova atualização do dia (uso por processo automatizado)
   POST    /api/relatorios/executar-varredura  → varre o SharePoint agora, compara com a varredura anterior e publica o relatório do dia
   POST    /api/processos/analisar-ia          → recebe PDFs (multipart, campo "arquivos"); responde 202 {job_id} e analisa em segundo plano
-  POST    /api/processos/analisar-novo        → a partir de {caminho_pasta, tipo, model?, effort?} de um item novo da varredura, baixa os PDFs e responde 202 {job_id}; a análise e a criação do processo correm em segundo plano
+  GET     /api/pastas/arquivos                → lista os PDFs de uma pasta do SharePoint com páginas e custo estimado, pra escolher o que entra na análise
+  POST    /api/processos/analisar-novo        → a partir de {caminho_pasta, tipo, model?, effort?, arquivos?} de um item novo da varredura, baixa os PDFs e responde 202 {job_id}; a análise e a criação do processo correm em segundo plano
   GET     /api/jobs/<id>                      → andamento de uma análise: rodando | concluido (com processo_id ou documento) | erro
   GET     /api/pendentes                      → fila de processos novos aguardando decisão (analisar ou dispensar)
   POST    /api/pendentes                      → põe uma pasta do SharePoint na fila à mão {caminho_pasta, tipo?, nome?}
@@ -1671,6 +1672,80 @@ def _analisar_upload_manual(jid, pdfs, model, effort):
     return None
 
 
+# Média medida nos documentos reais desta operação (editais, TRs e planilhas
+# orçamentárias do DNIT/concessionárias): cada página custa ~1.600 tokens de
+# imagem, que a API cobra sempre porque todo PDF também entra como imagem, mais
+# ~700 de texto. Serve pra estimativa de tela, não pra decidir corte — quem
+# decide isso é a contagem real da API em _repartir_por_tokens.
+TOKENS_POR_PAGINA_ESTIMADO = 2300
+
+
+def _medir_pdf(dados: bytes) -> tuple:
+    """(páginas, tokens estimados) de um PDF, pela contagem de páginas.
+
+    Cheguei a estimar lendo o texto de cada arquivo, o que é mais preciso, mas
+    inviável aqui: extrair texto dos três orçamentos desta licitação levava 45
+    segundos (18 mesmo amostrando 2 páginas por arquivo), porque abrir um PDF
+    de tabela densa já é caro. A tela ficaria travada quase meio minuto só pra
+    listar arquivos. Com a média por página a lista sai instantânea, e a
+    decisão que ela apoia — "este anexo de 234 páginas vale a pena?" — se
+    responde pelo número de páginas de qualquer jeito."""
+    try:
+        paginas = len(PdfReader(io.BytesIO(dados)).pages)
+        return paginas, paginas * TOKENS_POR_PAGINA_ESTIMADO
+    except Exception:
+        return 0, 0
+
+
+@app.route("/api/pastas/arquivos", methods=["GET"])
+def listar_arquivos_da_pasta():
+    """Lista os PDFs de uma pasta do SharePoint com tamanho, páginas e custo
+    estimado — pra tela deixar a equipe escolher o que entra na análise antes
+    de gastar. Sem isso, a única forma de tirar um anexo caro da análise era
+    renomear o arquivo no SharePoint."""
+    caminho = (request.args.get("caminho_pasta") or "").strip().strip("/")
+    if not caminho:
+        return jsonify({"erro": "Informe o caminho_pasta."}), 400
+    if not (MONTADOR_TENANT_ID and MONTADOR_CLIENT_ID and MONTADOR_CLIENT_SECRET):
+        return jsonify({"erro": "SharePoint não configurado neste servidor."}), 503
+
+    modelo = request.args.get("model")
+    modelo = modelo if modelo in MODELOS_IA_PERMITIDOS else ANTHROPIC_MODEL
+    cfg = {"MODO_LOCAL": False, "TENANT_ID": MONTADOR_TENANT_ID,
+           "CLIENT_ID": MONTADOR_CLIENT_ID, "CLIENT_SECRET": MONTADOR_CLIENT_SECRET}
+    try:
+        # apenas=[] não serve aqui: a listagem precisa ver TUDO que existe na
+        # pasta, inclusive o que a marca 'DATA SIN' esconderia
+        pdfs = baixar_pdfs_da_pasta(cfg, caminho, limite_mb=MAX_PDF_TOTAL_MB, apenas=None)
+    except requests.HTTPError as e:
+        if e.response is not None and e.response.status_code == 404:
+            return jsonify({"erro": "Essa pasta não foi encontrada no SharePoint."}), 404
+        return jsonify({"erro": f"Falha ao ler a pasta no SharePoint: {e}"}), 502
+    except ValueError as e:
+        return jsonify({"erro": str(e)}), 400
+    except Exception as e:
+        return jsonify({"erro": f"Falha ao ler a pasta no SharePoint: {e}"}), 502
+
+    preco_entrada = PRECOS_MODELOS.get(modelo, {}).get("entrada", 0.0)
+    arquivos = []
+    for p in pdfs:
+        paginas, tokens = _medir_pdf(p["bytes"])
+        arquivos.append({
+            "nome": p["nome"],
+            "paginas": paginas,
+            "mb": round(len(p["bytes"]) / 1024 / 1024, 2),
+            "tokens_estimados": tokens,
+            "custo_estimado_usd": round(tokens * preco_entrada / 1_000_000, 2),
+        })
+    return jsonify({
+        "caminho_pasta": caminho,
+        "model": modelo,
+        "arquivos": arquivos,
+        "total_paginas": sum(a["paginas"] for a in arquivos),
+        "total_custo_usd": round(sum(a["custo_estimado_usd"] for a in arquivos), 2),
+    })
+
+
 @app.route("/api/processos/analisar-novo", methods=["POST"])
 def analisar_processo_novo():
     """A partir de um item novo já identificado na varredura do SharePoint
@@ -1689,6 +1764,15 @@ def analisar_processo_novo():
     if not caminho_pasta or tipo not in ("publico", "privado"):
         return jsonify({"erro": "Informe 'caminho_pasta' e 'tipo' ('publico' ou 'privado')."}), 400
 
+    # arquivos escolhidos na tela; ausente = comportamento de sempre (tudo, ou
+    # só o que estiver marcado com 'DATA SIN' no nome)
+    apenas = corpo.get("arquivos")
+    if apenas is not None:
+        if not isinstance(apenas, list):
+            return jsonify({"erro": "'arquivos' precisa ser uma lista de nomes."}), 400
+        if not apenas:
+            return jsonify({"erro": "Escolha pelo menos um arquivo para analisar."}), 400
+
     cfg = {
         "MODO_LOCAL": False,
         "TENANT_ID": MONTADOR_TENANT_ID,
@@ -1696,7 +1780,8 @@ def analisar_processo_novo():
         "CLIENT_SECRET": MONTADOR_CLIENT_SECRET,
     }
     try:
-        pdfs_pasta = baixar_pdfs_da_pasta(cfg, caminho_pasta, limite_mb=MAX_PDF_TOTAL_MB)
+        pdfs_pasta = baixar_pdfs_da_pasta(cfg, caminho_pasta, limite_mb=MAX_PDF_TOTAL_MB,
+                                          apenas=apenas)
     except requests.HTTPError as e:
         if e.response is not None and e.response.status_code == 404:
             return jsonify({
@@ -1711,6 +1796,11 @@ def analisar_processo_novo():
     except Exception as e:
         return jsonify({"erro": f"Falha ao baixar documentos do SharePoint: {e}"}), 502
     if not pdfs_pasta:
+        if apenas:
+            return jsonify({
+                "erro": "Nenhum dos arquivos escolhidos foi encontrado na pasta. Ela pode ter "
+                        "mudado desde que a lista foi carregada — feche e abra de novo."
+            }), 404
         return jsonify({"erro": "Nenhum PDF encontrado nessa pasta do SharePoint."}), 404
 
     # Daqui pra baixo é a parte demorada — vai pra uma thread. O download do
@@ -1722,15 +1812,25 @@ def analisar_processo_novo():
     _job_rodar_em_thread(
         jid, _analisar_e_criar_processo,
         pdfs=pdfs, tipo=tipo, caminho_pasta=caminho_pasta,
-        model=corpo.get("model"), effort=corpo.get("effort"),
+        model=corpo.get("model"), effort=corpo.get("effort"), job_id=jid,
     )
     return jsonify({"job_id": jid, "status": "rodando"}), 202
 
 
-def _analisar_e_criar_processo(pdfs, tipo, caminho_pasta, model, effort) -> str:
+def _analisar_e_criar_processo(pdfs, tipo, caminho_pasta, model, effort, job_id=None) -> str:
     """Roda a análise e cria o processo. Só é chamada de dentro de uma thread
-    de job — devolve o id do processo criado, e qualquer erro sobe pro job."""
-    doc, uso = _rodar_analise_ia(pdfs, model=model, effort=effort)
+    de job — devolve o id do processo criado, e qualquer erro sobe pro job.
+
+    `job_id` (e não `jid`) porque _job_rodar_em_thread já recebe `jid` como
+    primeiro parâmetro: repetir o nome fazia os dois colidirem em tempo de
+    execução."""
+    # o progresso vai pro job pra tela poder mostrar a barra em vez de só um
+    # relógio correndo; sem job_id (chamada fora de job) simplesmente não reporta
+    jid = job_id
+    avisar = (lambda e, a, t: _job_progresso(jid, e, a, t)) if jid else None
+    doc, uso = _rodar_analise_ia(pdfs, model=model, effort=effort, ao_progresso=avisar)
+    if jid:
+        _job_progresso(jid, "Criando o processo no Painel", 0, 0)
 
     doc["type"] = tipo
     doc.setdefault("origem", "ia")

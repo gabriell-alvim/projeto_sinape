@@ -137,6 +137,41 @@ input, select, textarea { font-family:inherit; }
 .novo-item { background:var(--violet-l); border:1px solid #ddd6fe; border-radius:10px; padding:10px 12px; margin-bottom:8px; }
 .novo-item-nome { font-weight:700; font-size:.84rem; color:var(--slate); margin-bottom:8px; }
 .novo-item-acoes { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+
+/* escolha de arquivos antes de analisar */
+.escolha-arquivos { margin-top:10px; }
+.escolha-arquivos fieldset { border:1px solid #e5e7eb; border-radius:8px; padding:10px 12px; margin:0; }
+.escolha-arquivos legend { font-size:.78rem; font-weight:600; color:var(--teal); padding:0 6px; }
+.arq-lista { list-style:none; margin:0 0 8px; padding:0; max-height:220px; overflow-y:auto; }
+.arq-linha { border-bottom:1px solid #f1f5f9; }
+.arq-linha:last-child { border-bottom:none; }
+.arq-rotulo { display:flex; align-items:center; gap:8px; padding:6px 2px; cursor:pointer; font-size:.78rem; }
+.arq-rotulo:hover { background:#f9fafb; }
+/* o realce tem que aparecer na linha inteira: quem navega por teclado precisa
+   enxergar em qual arquivo está, não só um contorno no quadradinho */
+.arq-rotulo:has(.arq-check:focus-visible) { outline:2px solid var(--teal-mid); outline-offset:-2px; }
+.arq-check { width:16px; height:16px; flex:0 0 auto; accent-color:var(--teal); }
+.arq-nome { flex:1; min-width:0; overflow-wrap:anywhere; }
+.arq-info { flex:0 0 auto; color:var(--slate-mid); font-size:.72rem; white-space:nowrap; }
+.arq-resumo { margin:0 0 8px; font-size:.76rem; font-weight:600; color:var(--slate); }
+.arq-acoes { display:flex; gap:6px; flex-wrap:wrap; }
+
+/* barra de progresso da análise */
+.progresso-analise { margin-top:10px; }
+.pa-barra { height:10px; background:#e5e7eb; border-radius:999px; overflow:hidden; }
+.pa-preenchido { display:block; height:100%; background:var(--teal); border-radius:999px; transition:width .4s; }
+.pa-barra.indeterminada .pa-preenchido {
+  background:linear-gradient(90deg, #e5e7eb 25%, var(--teal) 50%, #e5e7eb 75%);
+  background-size:200% 100%; animation:pa-desliza 1.4s linear infinite;
+}
+@keyframes pa-desliza { from { background-position:200% 0; } to { background-position:-200% 0; } }
+/* quem prefere menos movimento não precisa da animação pra entender o estado —
+   o texto ao lado já diz em que etapa está */
+@media (prefers-reduced-motion: reduce) {
+  .pa-barra.indeterminada .pa-preenchido { animation:none; background:var(--teal-mid); }
+  .pa-preenchido { transition:none; }
+}
+.pa-texto { margin:6px 0 0; font-size:.76rem; color:var(--slate-mid); }
 /* seletor de modelo/esforço estilo "picker" (botão + menu), como o seletor de modelo do Claude */
 .ai-picker { position:relative; display:inline-block; }
 .ai-picker-btn {
@@ -3156,9 +3191,10 @@ document.addEventListener('scroll', function(){ fecharTodosAiPickers(); }, true)
 /* Acompanha uma análise que roda no servidor. A tela não segura mais a
    conexão aberta: pergunta o andamento de tempos em tempos. Fechar a aba não
    cancela nada — o processo aparece no Painel quando terminar. */
-function acompanharJob(jobId, aoProgresso){
+function acompanharJob(jobId, aoProgresso, idxBarra){
   return new Promise((resolve, reject)=>{
     let falhasSeguidas = 0;
+    let etapaAnterior = '';
     const tick = async ()=>{
       try{
         const r = await fetch(Store.base + '/jobs/' + jobId, { headers: Store.headers() });
@@ -3168,6 +3204,7 @@ function acompanharJob(jobId, aoProgresso){
         if(j.status === 'concluido') return resolve(j);
         if(j.status === 'erro') return reject(new Error(j.erro || 'A análise falhou.'));
         if(aoProgresso) aoProgresso(j.segundos || 0);
+        if(idxBarra !== undefined) etapaAnterior = pintarProgresso(idxBarra, j, etapaAnterior);
         setTimeout(tick, 3000);
       }catch(e){
         // Oscilação de rede não pode derrubar o acompanhamento: o trabalho
@@ -3182,12 +3219,76 @@ function acompanharJob(jobId, aoProgresso){
   });
 }
 
+/* Desenha a barra com o progresso que o servidor reporta. Quando existe
+   contagem de verdade (os lotes de um edital grande), a barra mostra
+   porcentagem; quando a IA lê tudo numa chamada só, não há marco intermediário
+   nenhum, e a barra fica indeterminada em vez de inventar um número que não
+   corresponde a nada. Devolve a etapa atual pra quem chama saber quando ela
+   mudou — o leitor de tela só é avisado na virada, não a cada 3 segundos. */
+function pintarProgresso(i, j, etapaAnterior){
+  const barra = document.querySelector('#novo-'+i+'-progresso .pa-barra');
+  const cheio = document.querySelector('#novo-'+i+'-progresso .pa-preenchido');
+  const txt = document.getElementById('novo-'+i+'-etapa');
+  if(!barra || !cheio || !txt) return etapaAnterior;
+
+  const etapa = j.etapa || 'Analisando';
+  const total = Number(j.passos_total || 0);
+  const atual = Number(j.passo_atual || 0);
+  const tempo = tempoDecorrido(j.segundos || 0);
+
+  if(total > 0){
+    const pct = Math.min(99, Math.round(atual / total * 100));
+    barra.classList.remove('indeterminada');
+    barra.setAttribute('aria-valuenow', pct);
+    cheio.style.width = pct + '%';
+    txt.textContent = etapa + ' — ' + pct + '% · ' + tempo;
+  }else{
+    // sem passos contáveis: barra animada, sem porcentagem falsa
+    barra.classList.add('indeterminada');
+    barra.removeAttribute('aria-valuenow');
+    cheio.style.width = '100%';
+    txt.textContent = etapa + ' · ' + tempo;
+  }
+
+  if(etapa !== etapaAnterior){
+    a11yAnunciar(total > 0 ? etapa + ', ' + Math.round(atual/total*100) + ' por cento' : etapa);
+  }
+  return etapa;
+}
+
 function tempoDecorrido(s){
   if(s < 60) return s + 's';
   return Math.floor(s/60) + 'min' + (s % 60 ? ' ' + (s % 60) + 's' : '');
 }
 
+/* Passo 1: mostra os arquivos da pasta pra equipe escolher o que entra na
+   análise. Antes ia tudo direto, e a única forma de tirar um anexo caro era
+   renomear o arquivo no SharePoint — num edital do DNIT, três planilhas de
+   orçamento eram 85% do custo e não continham exigência nenhuma. */
 async function rodarAnaliseNova(i, btn){
+  const item = ULTIMO_RELATORIO_NOVOS[i];
+  if(!item) return;
+  const modelo = document.getElementById('novo-'+i+'-modelo').dataset.valor;
+  const textoOriginal = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = 'Lendo a pasta…';
+  try{
+    const url = Store.base + '/pastas/arquivos?caminho_pasta='
+              + encodeURIComponent(item.caminho_pasta) + '&model=' + encodeURIComponent(modelo);
+    const r = await fetch(url, { headers: Store.headers() });
+    const b = await r.json().catch(()=>({}));
+    if(!r.ok) throw new Error(b.erro || ('Servidor respondeu '+r.status));
+    if(!b.arquivos || !b.arquivos.length) throw new Error('Nenhum PDF encontrado nessa pasta.');
+    mostrarEscolhaArquivos(i, b);
+  }catch(e){
+    toast('Erro ao ler a pasta de ' + item.nome + ': ' + e.message);
+    btn.disabled = false;
+    btn.textContent = textoOriginal;
+  }
+}
+
+/* Passo 2: dispara a análise só com o que foi escolhido. */
+async function confirmarAnaliseNova(i, selecionados, btn){
   const item = ULTIMO_RELATORIO_NOVOS[i];
   if(!item) return;
   const modelo = document.getElementById('novo-'+i+'-modelo').dataset.valor;
@@ -3198,7 +3299,8 @@ async function rodarAnaliseNova(i, btn){
   try{
     const resp = await fetch(Store.base + '/processos/analisar-novo', {
       method: 'POST', headers: Store.headers(),
-      body: JSON.stringify({ caminho_pasta: item.caminho_pasta, tipo: item.tipo, model: modelo, effort: esforco })
+      body: JSON.stringify({ caminho_pasta: item.caminho_pasta, tipo: item.tipo,
+                             model: modelo, effort: esforco, arquivos: selecionados })
     });
     const corpo = await resp.json().catch(()=>({}));
     if(!resp.ok) throw new Error(corpo.erro || ('Servidor respondeu '+resp.status));
@@ -3207,7 +3309,7 @@ async function rodarAnaliseNova(i, btn){
                + 'você pode continuar usando o Painel.');
     const j = await acompanharJob(corpo.job_id, seg=>{
       btn.textContent = 'Analisando… ' + tempoDecorrido(seg);
-    });
+    }, i);
     toast('Processo criado a partir da análise automática!');
     fecharModal('modal-relatorio');
     await recarregarLista();
@@ -3216,7 +3318,92 @@ async function rodarAnaliseNova(i, btn){
     toast('Erro ao analisar ' + item.nome + ': ' + e.message);
     btn.disabled = false;
     btn.textContent = textoOriginal;
+    const barra = document.getElementById('novo-'+i+'-progresso');
+    if(barra) barra.remove();
   }
+}
+
+/* Lista com um checkbox por arquivo e o custo de cada um, pra escolha ser
+   informada. Tudo vem marcado: o padrão continua sendo analisar a pasta
+   inteira, e desmarcar é a exceção consciente. */
+function mostrarEscolhaArquivos(i, dados){
+  const item = ULTIMO_RELATORIO_NOVOS[i];
+  const acoes = document.querySelectorAll('#modal-relatorio .novo-item')[i]
+                  ?.querySelector('.novo-item-acoes');
+  if(!acoes) return;
+
+  const linhas = dados.arquivos.map((a, k)=>
+    '<li class="arq-linha">'
+    + '<label class="arq-rotulo">'
+    + '<input type="checkbox" class="arq-check" data-nome="' + esc(a.nome) + '" '
+    + 'data-custo="' + a.custo_estimado_usd + '" data-paginas="' + a.paginas + '" '
+    + 'checked onchange="atualizarResumoArquivos(' + i + ')">'
+    + '<span class="arq-nome">' + esc(a.nome) + '</span> '
+    + '<span class="arq-info">' + a.paginas + ' páginas, US$ ' + a.custo_estimado_usd.toFixed(2) + '</span>'
+    + '</label></li>').join('');
+
+  acoes.insertAdjacentHTML('afterend',
+    '<div class="escolha-arquivos" id="novo-'+i+'-escolha">'
+    + '<fieldset>'
+    + '<legend>Escolha o que entra na análise — ' + dados.arquivos.length + ' arquivo(s) na pasta</legend>'
+    + '<ul class="arq-lista">' + linhas + '</ul>'
+    + '<p class="arq-resumo" id="novo-'+i+'-resumo" role="status"></p>'
+    + '<div class="arq-acoes">'
+    + '<button class="btn-sm" onclick="marcarTodosArquivos('+i+', true)">Marcar todos</button>'
+    + '<button class="btn-sm" onclick="marcarTodosArquivos('+i+', false)">Desmarcar todos</button>'
+    + '<button class="btn-sm violet" onclick="continuarAnalise('+i+', this)">▶ Continuar e analisar</button>'
+    + '<button class="btn-sm" onclick="cancelarEscolha('+i+')">Cancelar</button>'
+    + '</div></fieldset></div>');
+
+  atualizarResumoArquivos(i);
+  a11yAtualizarItens();
+  a11yAnunciar('A pasta de ' + item.nome + ' tem ' + dados.arquivos.length
+    + ' arquivo(s), somando ' + dados.total_paginas + ' páginas. Todos vêm marcados. '
+    + 'Desmarque o que não precisa e ative Continuar e analisar.');
+  document.querySelector('#novo-'+i+'-escolha .arq-check')?.focus();
+}
+
+function marcarTodosArquivos(i, marcar){
+  document.querySelectorAll('#novo-'+i+'-escolha .arq-check').forEach(c=>{ c.checked = marcar; });
+  atualizarResumoArquivos(i);
+}
+
+function atualizarResumoArquivos(i){
+  const checks = [...document.querySelectorAll('#novo-'+i+'-escolha .arq-check')];
+  const sel = checks.filter(c=>c.checked);
+  const paginas = sel.reduce((s,c)=>s + Number(c.dataset.paginas||0), 0);
+  const custo = sel.reduce((s,c)=>s + Number(c.dataset.custo||0), 0);
+  const el = document.getElementById('novo-'+i+'-resumo');
+  if(el) el.textContent = sel.length + ' de ' + checks.length + ' arquivo(s) · '
+    + paginas + ' páginas · custo estimado US$ ' + custo.toFixed(2);
+}
+
+function cancelarEscolha(i){
+  document.getElementById('novo-'+i+'-escolha')?.remove();
+  const btn = document.querySelectorAll('#modal-relatorio .novo-item')[i]
+                ?.querySelector('.novo-item-acoes button.violet');
+  if(btn){ btn.disabled = false; btn.textContent = '▶ Rodar análise e preencher informações'; btn.focus(); }
+  a11yAtualizarItens();
+  a11yAnunciar('Escolha cancelada.');
+}
+
+function continuarAnalise(i, btn){
+  const sel = [...document.querySelectorAll('#novo-'+i+'-escolha .arq-check')]
+                .filter(c=>c.checked).map(c=>c.dataset.nome);
+  if(!sel.length){
+    a11yAnunciar('Nenhum arquivo marcado. Marque ao menos um para analisar.');
+    toast('Marque ao menos um arquivo para analisar.');
+    return;
+  }
+  // troca a lista pela barra de progresso, no mesmo lugar
+  const cx = document.getElementById('novo-'+i+'-escolha');
+  if(cx) cx.innerHTML =
+      '<div class="progresso-analise" id="novo-'+i+'-progresso">'
+    + '<div class="pa-barra" role="progressbar" aria-valuemin="0" aria-valuemax="100"'
+    + ' aria-label="Progresso da análise"><span class="pa-preenchido" style="width:0%"></span></div>'
+    + '<p class="pa-texto" id="novo-'+i+'-etapa" role="status">Começando…</p></div>';
+  a11yAtualizarItens();
+  confirmarAnaliseNova(i, sel, btn);
 }
 
 async function executarAnaliseAgora(){
@@ -3632,6 +3819,19 @@ function a11yAtualizarItens(manterNivel){
         const rotulo = b.getAttribute('aria-label')
           || (b.textContent.replace(/^[▶✕]\s*/, '').trim() + ' — ' + nome);
         itensModal.push({el:b, label: rotulo});
+      });
+      // a lista de arquivos, quando aberta, é o que a pessoa precisa alcançar —
+      // sem isto o modo numerado enxergava só os botões de cima e a escolha
+      // ficava inacessível por esse caminho. O estado marcado/desmarcado não
+      // entra no rótulo de propósito: o próprio checkbox já é anunciado pelo
+      // leitor de tela, e um rótulo fixo ficaria desatualizado ao alternar.
+      item.querySelectorAll('.escolha-arquivos .arq-check').forEach(c=>{
+        const linha = c.closest('.arq-rotulo');
+        itensModal.push({el:c, label: (linha?.textContent || c.dataset.nome || 'arquivo')
+          .replace(/\s+/g, ' ').trim()});
+      });
+      item.querySelectorAll('.escolha-arquivos .arq-acoes > button').forEach(b=>{
+        itensModal.push({el:b, label: b.textContent.replace(/^[▶✕]\s*/, '').trim()});
       });
     });
     modalAberto.querySelectorAll('.modal-actions button').forEach(b=>{

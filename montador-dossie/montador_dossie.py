@@ -242,7 +242,8 @@ def baixar_arquivo(gc: GraphClient, drive_id: str, item_id: str, destino: Path) 
 _PADRAO_MARCA_ARQUIVO_ANALISE_IA = re.compile(r"data\s+sin", re.IGNORECASE)
 
 
-def baixar_pdfs_da_pasta(cfg: dict, caminho_pasta: str, limite_mb: int = 24) -> list:
+def baixar_pdfs_da_pasta(cfg: dict, caminho_pasta: str, limite_mb: int = 24,
+                         apenas: list | None = None) -> list:
     """Baixa (em memoria) os PDFs relevantes pra analise automatica por IA de
     um processo recem-chegado. Varre a pasta do processo inteira (recursivo)
     e, se algum arquivo tiver 'DATA SIN' no NOME (em qualquer posicao, ex.:
@@ -253,17 +254,32 @@ def baixar_pdfs_da_pasta(cfg: dict, caminho_pasta: str, limite_mb: int = 24) -> 
     comportamento antigo (usa tudo que achou). Um .zip só é aberto (e os PDFs
     de dentro dele extraidos) se ELE MESMO tiver a marca no nome - cobre o
     caso do pacote de editais baixado direto do portal, renomeado com a
-    marca. Retorna [{'nome': str, 'bytes': bytes}, ...]."""
+    marca. Retorna [{'nome': str, 'bytes': bytes}, ...].
+
+    `apenas` = lista de nomes escolhidos na tela. Quando vem preenchida, manda
+    nela e a marca 'DATA SIN' no nome é ignorada: escolher arquivo na hora de
+    rodar a analise é uma decisao mais explicita do que renomear no SharePoint,
+    entao ela prevalece. `apenas=[]` (lista vazia) e diferente de None: significa
+    'nada selecionado', e devolve vazio em vez de cair no comportamento padrao."""
     token = obter_token(cfg)
     gc = GraphClient(token)
     site_id = obter_site_id(gc, SITE_HOSTNAME, SITE_PATH)
     drive_id = obter_drive_id(gc, site_id)
 
     todos_itens = listar_recursivo(gc, drive_id, caminho_pasta)
-    marcados = [it for it in todos_itens if _PADRAO_MARCA_ARQUIVO_ANALISE_IA.search(it["name"])]
-    itens = marcados if marcados else todos_itens
-    if marcados:
-        log.info(f"Usando só os {len(marcados)} arquivo(s) marcados com 'DATA SIN' no nome para a análise.")
+    # Quando há seleção da tela, os zips continuam sendo abertos: o PDF escolhido
+    # pode estar dentro de um deles. Quem filtra é _incluir, pelo nome de cada
+    # PDF — assim vale igual pro que está solto na pasta e pro que veio do zip.
+    escolhidos = None
+    if apenas is not None:
+        escolhidos = {n.strip().lower() for n in apenas}
+        itens = todos_itens
+        log.info(f"Análise restrita aos {len(escolhidos)} arquivo(s) escolhidos na tela.")
+    else:
+        marcados = [it for it in todos_itens if _PADRAO_MARCA_ARQUIVO_ANALISE_IA.search(it["name"])]
+        itens = marcados if marcados else todos_itens
+        if marcados:
+            log.info(f"Usando só os {len(marcados)} arquivo(s) marcados com 'DATA SIN' no nome para a análise.")
 
     limite_bytes = limite_mb * 1024 * 1024
     total = 0
@@ -274,6 +290,8 @@ def baixar_pdfs_da_pasta(cfg: dict, caminho_pasta: str, limite_mb: int = 24) -> 
     def _incluir(nome, dados):
         nonlocal total
         chave = nome.strip().lower()
+        if escolhidos is not None and chave not in escolhidos:
+            return  # não foi escolhido na tela — fora da análise, sem alarde
         if chave in nomes_ja_incluidos:
             log.info(f"Ignorando {nome}: mesmo nome já incluído (evita duplicata solto/dentro de zip)")
             return
