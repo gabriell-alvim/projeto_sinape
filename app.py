@@ -22,6 +22,8 @@ Rotas:
   POST    /api/processos/<id>/anexos         → envia um anexo (multipart, campo "arquivo")
   GET     /api/processos/<id>/anexos/<aid>   → baixa o arquivo
   DELETE  /api/processos/<id>/anexos/<aid>   → remove o anexo (registro + arquivo em disco)
+  GET     /api/processos/<id>/pasta/arquivos → lista os arquivos da pasta DESTE processo no SharePoint (qualquer tipo), pra anexar sem caçar no computador
+  POST    /api/processos/<id>/anexos/do-sharepoint → anexa {caminho_relativo, secao?} vindo direto da pasta do processo
   GET     /api/processos/<id>/dossie         → monta o dossiê de habilitação (Montador) e devolve o .zip
   GET     /api/relatorios/mais-recente        → devolve a atualização do dia mais recente publicada (inclui "novos": [{tipo,nome,status,caminho_pasta}])
   POST    /api/relatorios                     → publica uma nova atualização do dia (uso por processo automatizado)
@@ -74,6 +76,7 @@ import base64
 import copy
 import io
 import json
+import mimetypes
 import os
 import re
 import shutil
@@ -103,7 +106,8 @@ UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 sys.path.insert(0, str(BASE_DIR / "montador-dossie"))
 from montador_dossie import (  # noqa: E402
     montar_dossie_por_processo, escanear_biblioteca, localizar_pasta_processo,
-    baixar_pdfs_da_pasta, SITE_HOSTNAME, SITE_PATH,
+    baixar_pdfs_da_pasta, listar_arquivos_do_processo, baixar_arquivo_do_processo,
+    parse_pasta_sharepoint, SITE_HOSTNAME, SITE_PATH,
 )
 
 MONTADOR_MODO_LOCAL = os.environ.get("MONTADOR_MODO_LOCAL", "").lower() in ("1", "true", "sim")
@@ -2907,6 +2911,49 @@ def listar_anexos(pid):
     return jsonify({"anexos": anexos})
 
 
+def _guardar_anexo(pid, nome_original, escrever, content_type, enviado_por, secao):
+    """Grava o arquivo em disco e o registro no banco. `escrever` recebe o
+    caminho de destino — é o que difere o upload do navegador (arquivo.save)
+    do arquivo trazido do SharePoint (write_bytes)."""
+    anexo_id = uuid.uuid4().hex
+    nome_arquivo = anexo_id + "__" + secure_filename(nome_original)
+    pasta = UPLOAD_DIR / pid
+    pasta.mkdir(parents=True, exist_ok=True)
+    destino = pasta / nome_arquivo
+    escrever(destino)
+
+    agora = _agora_ms()
+    tamanho = destino.stat().st_size
+    # só uma planilha por seção: a nova substitui a anterior, inclusive em disco
+    if secao:
+        antigo = col_anexos.find_one_and_delete({"processo_id": pid, "secao": secao})
+        if antigo:
+            try:
+                (UPLOAD_DIR / pid / antigo["nome_arquivo"]).unlink(missing_ok=True)
+            except OSError as e:
+                # o registro da planilha antiga já saiu do banco; se o arquivo
+                # em si resistir (no Windows, alguém baixando ainda o segura),
+                # não vale derrubar o anexo novo por causa de um órfão em disco
+                print(f"[anexo] não removi o arquivo da planilha anterior "
+                      f"({antigo['nome_arquivo']}): {e!r}", flush=True)
+    col_anexos.insert_one({
+        "_id": anexo_id,
+        "processo_id": pid,
+        "nome_original": nome_original,
+        "nome_arquivo": nome_arquivo,
+        "tamanho": tamanho,
+        "content_type": content_type,
+        "enviado_em": agora,
+        "enviado_por": enviado_por,
+        "secao": secao,
+    })
+    return {
+        "id": anexo_id, "nome_original": nome_original, "tamanho": tamanho,
+        "content_type": content_type, "enviado_em": agora, "enviado_por": enviado_por,
+        "secao": secao,
+    }
+
+
 @app.route("/api/processos/<pid>/anexos", methods=["POST"])
 def enviar_anexo(pid):
     if not col_processos.find_one({"_id": pid}, {"_id": 1}):
@@ -2916,41 +2963,121 @@ def enviar_anexo(pid):
     if not arquivo or not arquivo.filename:
         return jsonify({"erro": "Envie o arquivo no campo 'arquivo'"}), 400
 
-    nome_original = arquivo.filename
-    anexo_id = uuid.uuid4().hex
-    nome_arquivo = anexo_id + "__" + secure_filename(nome_original)
-    pasta = UPLOAD_DIR / pid
-    pasta.mkdir(parents=True, exist_ok=True)
-    destino = pasta / nome_arquivo
-    arquivo.save(destino)
-
-    enviado_por = request.form.get("enviadoPor", "")
     # "secao" marca o anexo como a planilha real de uma seção específica da
     # Análise Crítica (ex.: "quantitativos", "custos") — só uma por seção;
     # anexos comuns (sem seção) continuam só na aba de Anexos.
-    secao = request.form.get("secao") or None
-    agora = _agora_ms()
-    tamanho = destino.stat().st_size
-    if secao:
-        antigo = col_anexos.find_one_and_delete({"processo_id": pid, "secao": secao})
-        if antigo:
-            (UPLOAD_DIR / pid / antigo["nome_arquivo"]).unlink(missing_ok=True)
-    col_anexos.insert_one({
-        "_id": anexo_id,
-        "processo_id": pid,
-        "nome_original": nome_original,
-        "nome_arquivo": nome_arquivo,
-        "tamanho": tamanho,
-        "content_type": arquivo.content_type,
-        "enviado_em": agora,
-        "enviado_por": enviado_por,
-        "secao": secao,
-    })
-    return jsonify({
-        "id": anexo_id, "nome_original": nome_original, "tamanho": tamanho,
-        "content_type": arquivo.content_type, "enviado_em": agora, "enviado_por": enviado_por,
-        "secao": secao,
-    }), 201
+    dados = _guardar_anexo(
+        pid, arquivo.filename, arquivo.save, arquivo.content_type,
+        request.form.get("enviadoPor", ""), request.form.get("secao") or None)
+    return jsonify(dados), 201
+
+
+def _pasta_sharepoint_do_processo(pid, processo):
+    """Caminho da pasta do processo relativo à biblioteca 'Documentos'.
+
+    Sai do link já gravado em geral_pasta_sharepoint; se ele não existir,
+    procura a pasta pelos dados do processo e grava o que achou, pra próxima
+    vez sair direto. Devolve (caminho, erro_json, status) — caminho é None
+    quando não deu."""
+    if not (MONTADOR_TENANT_ID and MONTADOR_CLIENT_ID and MONTADOR_CLIENT_SECRET):
+        return None, {"erro": "SharePoint não configurado neste servidor."}, 503
+
+    analise = processo.get("analise") or {}
+    url_pasta = (analise.get("geral_pasta_sharepoint") or "").strip()
+    cfg = {"MODO_LOCAL": False, "TENANT_ID": MONTADOR_TENANT_ID,
+           "CLIENT_ID": MONTADOR_CLIENT_ID, "CLIENT_SECRET": MONTADOR_CLIENT_SECRET}
+
+    if not url_pasta:
+        try:
+            achado = localizar_pasta_processo(
+                cfg, orgao=analise.get("geral_orgao", ""),
+                numero=analise.get("geral_numero", ""),
+                objeto=analise.get("geral_objeto", ""),
+                nome=processo.get("nome", ""))
+        except Exception as e:
+            return None, {"erro": f"Falha ao procurar a pasta no SharePoint: {e}"}, 502
+        if not achado["encontrado"]:
+            proximos = [c["nome"] for c in achado["candidatos"][:5]]
+            return None, {
+                "erro": "Não consegui identificar sozinho a pasta deste processo no SharePoint. "
+                        "Preencha o campo 'Pasta do processo no SharePoint', em Dados Gerais, "
+                        "e tente de novo.",
+                "candidatos_proximos": proximos,
+            }, 404
+        url_pasta = f"https://{SITE_HOSTNAME}{SITE_PATH}/Documentos/{achado['caminho']}"
+        col_processos.update_one({"_id": pid},
+                                 {"$set": {"analise.geral_pasta_sharepoint": url_pasta}})
+
+    try:
+        # parse_pasta_sharepoint levanta SystemExit em link torto — que não é
+        # exceção comum e derrubaria o worker se subisse
+        _host, _site, caminho = parse_pasta_sharepoint(url_pasta)
+    except SystemExit as e:
+        return None, {"erro": f"O link da pasta deste processo está em formato inesperado: {e}"}, 400
+    return caminho, None, 200
+
+
+@app.route("/api/processos/<pid>/pasta/arquivos", methods=["GET"])
+def listar_arquivos_da_pasta_do_processo(pid):
+    """Arquivos que existem na pasta DESTE processo no SharePoint.
+
+    Serve pra tela de anexar: quem está no processo da Conasa precisa ver os
+    documentos da Conasa, não sair caçando no computador entre as planilhas de
+    todos os processos."""
+    processo = col_processos.find_one({"_id": pid})
+    if not processo:
+        return jsonify({"erro": "Processo não encontrado"}), 404
+
+    caminho, erro, status = _pasta_sharepoint_do_processo(pid, processo)
+    if erro:
+        return jsonify(erro), status
+    cfg = {"MODO_LOCAL": False, "TENANT_ID": MONTADOR_TENANT_ID,
+           "CLIENT_ID": MONTADOR_CLIENT_ID, "CLIENT_SECRET": MONTADOR_CLIENT_SECRET}
+    try:
+        arquivos = listar_arquivos_do_processo(cfg, caminho)
+    except requests.HTTPError as e:
+        if e.response is not None and e.response.status_code == 404:
+            return jsonify({"erro": "A pasta deste processo não foi encontrada no SharePoint."}), 404
+        return jsonify({"erro": f"Falha ao ler a pasta no SharePoint: {e}"}), 502
+    except Exception as e:
+        return jsonify({"erro": f"Falha ao ler a pasta no SharePoint: {e}"}), 502
+    return jsonify({"caminho_pasta": caminho, "arquivos": arquivos})
+
+
+@app.route("/api/processos/<pid>/anexos/do-sharepoint", methods=["POST"])
+def anexar_da_pasta_do_processo(pid):
+    """Anexa ao processo um arquivo que já está na pasta dele no SharePoint,
+    sem passar pelo computador de ninguém. Não chama IA: é cópia de arquivo."""
+    processo = col_processos.find_one({"_id": pid})
+    if not processo:
+        return jsonify({"erro": "Processo não encontrado"}), 404
+
+    corpo = request.get_json(silent=True) or {}
+    relativo = (corpo.get("caminho_relativo") or "").strip()
+    if not relativo:
+        return jsonify({"erro": "Informe o caminho_relativo do arquivo."}), 400
+
+    caminho, erro, status = _pasta_sharepoint_do_processo(pid, processo)
+    if erro:
+        return jsonify(erro), status
+    cfg = {"MODO_LOCAL": False, "TENANT_ID": MONTADOR_TENANT_ID,
+           "CLIENT_ID": MONTADOR_CLIENT_ID, "CLIENT_SECRET": MONTADOR_CLIENT_SECRET}
+    try:
+        dados = baixar_arquivo_do_processo(cfg, caminho, relativo)
+    except ValueError as e:
+        return jsonify({"erro": str(e)}), 400
+    except requests.HTTPError as e:
+        if e.response is not None and e.response.status_code == 404:
+            return jsonify({"erro": "Esse arquivo não está mais na pasta do processo."}), 404
+        return jsonify({"erro": f"Falha ao baixar o arquivo do SharePoint: {e}"}), 502
+    except Exception as e:
+        return jsonify({"erro": f"Falha ao baixar o arquivo do SharePoint: {e}"}), 502
+
+    nome = relativo.replace("\\", "/").rstrip("/").split("/")[-1]
+    tipo = mimetypes.guess_type(nome)[0] or "application/octet-stream"
+    guardado = _guardar_anexo(pid, nome, lambda destino: destino.write_bytes(dados),
+                              tipo, corpo.get("enviadoPor", ""), corpo.get("secao") or None)
+    return jsonify(guardado), 201
 
 
 @app.route("/api/processos/<pid>/anexos/<aid>", methods=["GET"])

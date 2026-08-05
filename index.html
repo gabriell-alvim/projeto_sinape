@@ -362,6 +362,15 @@ input, select, textarea { font-family:inherit; }
 .sec-body { padding:4px 16px 16px; }
 .sec-divider { font-size:.72rem; font-weight:800; color:var(--teal); text-transform:uppercase; letter-spacing:.05em; border-bottom:1px solid var(--border); padding:14px 0 6px; margin-bottom:4px; }
 
+/* ── ESCOLHER ARQUIVO DA PASTA DO PROCESSO ── */
+.pasta-escolha { border:1px solid var(--border); border-radius:10px; padding:10px 12px; margin-top:8px; background:var(--gray-ll,#f8fafc); }
+.pasta-busca-rot { display:block; font-size:.72rem; font-weight:700; color:var(--slate); margin-bottom:4px; }
+.pasta-busca { width:100%; max-width:340px; padding:6px 9px; border:1px solid var(--border); border-radius:8px; font-size:.85rem; }
+.pasta-lista { list-style:none; margin:8px 0; padding:0; max-height:270px; overflow-y:auto; }
+.pasta-lista li { padding:3px 0; font-size:.8rem; }
+.pasta-arq { text-align:left; max-width:100%; white-space:normal; }
+.pasta-erro { font-size:.82rem; color:var(--red); margin:0 0 8px; }
+
 /* ── RESUMO (aba de leitura rápida) ── */
 #painel-resumo .sec-head { cursor:default; }
 .rs-grade { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:6px 20px; padding-top:12px; }
@@ -1522,7 +1531,13 @@ const Store = {
       throw new Error('Token inválido — confira CONFIG.API_TOKEN');
     }
     if(res.status === 409){ const e = new Error('conflito'); e.conflito = true; e.doc = await res.json().catch(()=>null); throw e; }
-    if(!res.ok) throw new Error('Servidor respondeu ' + res.status);
+    if(!res.ok){
+      // o servidor explica o que houve em "erro" ("pasta não encontrada",
+      // "SharePoint não configurado"...); jogar isso fora e mostrar só o
+      // número do status deixa a pessoa sem saber o que fazer
+      const body = await res.json().catch(()=>({}));
+      throw new Error(body.erro || ('Servidor respondeu ' + res.status));
+    }
     if(res.status === 204) return null;
     return res.json();
   },
@@ -1604,6 +1619,17 @@ const Store = {
     }
     if(!res.ok){ const e = await res.json().catch(()=>({})); throw new Error(e.erro || ('Servidor respondeu ' + res.status)); }
     return res.json();
+  },
+  /* arquivos que já estão na pasta DESTE processo no SharePoint */
+  async listarArquivosDaPasta(id){
+    if(this.modo !== 'api') throw new Error('Exige o backend configurado (CONFIG.API_URL)');
+    const r = await this._req('GET','/processos/' + encodeURIComponent(id) + '/pasta/arquivos');
+    return r.arquivos || [];
+  },
+  async anexarDaPasta(id, caminhoRelativo, secao){
+    if(this.modo !== 'api') throw new Error('Exige o backend configurado (CONFIG.API_URL)');
+    return this._req('POST','/processos/' + encodeURIComponent(id) + '/anexos/do-sharepoint',
+      { caminho_relativo: caminhoRelativo, secao: secao || null, enviadoPor: CONFIG.USUARIO || '' });
   },
   urlAnexo(id, anexoId){
     return this.base + '/processos/' + encodeURIComponent(id) + '/anexos/' + encodeURIComponent(anexoId);
@@ -1881,8 +1907,11 @@ async function renderAnexos(){
     return;
   }
   area.innerHTML = '<div class="anexos-box"><b>📎 Anexos</b>'+
-    '<input type="file" id="input-anexo" style="margin-left:10px;">'+
-    '<button class="btn-sm" onclick="enviarAnexoAtual()">Enviar</button>'+
+    '<button class="btn-sm violet" type="button" style="margin-left:10px;" '+
+      'onclick="abrirEscolhaDaPasta(\'\')">📂 Escolher da pasta do processo</button>'+
+    '<div id="pasta-escolha-geral"></div>'+
+    '<div style="margin-top:8px;"><input type="file" id="input-anexo">'+
+    '<button class="btn-sm" onclick="enviarAnexoAtual()">Enviar do computador</button></div>'+
     '<div id="lista-anexos" style="margin-top:8px;">Carregando…</div></div>';
   try{
     ANEXOS_ATUAIS = await Store.listarAnexos(currentProc.id);
@@ -1919,8 +1948,117 @@ function widgetPlanilhaHTML(secaoAnexo){
   return '<div class="planilha-anexo-box pendente">' +
     '<span class="hint">(pendente de anexo)</span>' +
     '<input type="file" id="input-planilha-'+secaoAnexo+'" class="sr-only" onchange="enviarPlanilhaAnexo(\''+secaoAnexo+'\', this)">' +
-    '<button class="btn-sm violet" type="button" onclick="document.getElementById(\'input-planilha-'+secaoAnexo+'\').click()">📎 Anexar planilha</button>' +
+    '<button class="btn-sm violet" type="button" onclick="abrirEscolhaDaPasta(\''+secaoAnexo+'\')">📂 Escolher da pasta do processo</button>' +
+    '<button class="btn-sm" type="button" onclick="document.getElementById(\'input-planilha-'+secaoAnexo+'\').click()">💻 Enviar do computador</button>' +
   '</div>';
+}
+
+/* ── Anexar a partir da pasta do próprio processo ──
+   Procurar a planilha no computador significa navegar entre as pastas de
+   TODOS os processos — quem está na Conasa não tem por que esbarrar nas
+   planilhas da Arteris. A pasta do processo no SharePoint já é a resposta
+   certa, e o sistema já sabe qual é: mostra o que tem lá e pronto.
+   A listagem vai à rede, então fica em cache por processo — abrir o seletor
+   em Quantitativos e depois em Custos não precisa de duas viagens. */
+let ARQUIVOS_DA_PASTA = { procId:null, lista:null };
+
+function _caixaEscolha(secaoAnexo){
+  return document.getElementById(secaoAnexo ? 'planilha-anexo-'+secaoAnexo : 'pasta-escolha-geral');
+}
+
+function fecharEscolhaDaPasta(secaoAnexo){
+  const box = _caixaEscolha(secaoAnexo);
+  if(!box) return;
+  box.innerHTML = secaoAnexo ? widgetPlanilhaHTML(secaoAnexo) : '';
+  a11yAtualizarItens(true);
+}
+
+async function abrirEscolhaDaPasta(secaoAnexo){
+  const box = _caixaEscolha(secaoAnexo);
+  if(!box) return;
+  box.innerHTML = '<div class="pasta-escolha"><p role="status">Lendo a pasta deste processo no SharePoint…</p></div>';
+  try{
+    if(ARQUIVOS_DA_PASTA.procId !== currentProc.id || !ARQUIVOS_DA_PASTA.lista){
+      ARQUIVOS_DA_PASTA = { procId: currentProc.id, lista: await Store.listarArquivosDaPasta(currentProc.id) };
+    }
+  }catch(e){
+    box.innerHTML = '<div class="pasta-escolha"><p class="pasta-erro">'+esc(e.message)+'</p>'+
+      '<button class="btn-sm" type="button" onclick="fecharEscolhaDaPasta(\''+secaoAnexo+'\')">Fechar</button></div>';
+    a11yAnunciar('Não deu para ler a pasta do processo. '+e.message);
+    a11yAtualizarItens(true);
+    return;
+  }
+  ESCOLHA_SECAO_ATUAL = secaoAnexo;
+  pintarEscolhaDaPasta(secaoAnexo, '');
+  const n = (ARQUIVOS_DA_PASTA.lista||[]).length;
+  a11yAnunciar(n ? n+' arquivo(s) na pasta deste processo. Use o campo de busca para filtrar.'
+                 : 'A pasta deste processo não tem arquivo nenhum.');
+  const busca = document.getElementById('pasta-busca');
+  if(busca) busca.focus();
+}
+
+let ESCOLHA_SECAO_ATUAL = '';
+
+/* Planilha vem primeiro quando o destino é um slot de planilha — é o que a
+   pessoa está procurando; o resto continua na lista, só mais abaixo. */
+const _EXT_PLANILHA = /\.(xlsx|xlsm|xls|csv|ods)$/i;
+
+function pintarEscolhaDaPasta(secaoAnexo, termo){
+  const box = _caixaEscolha(secaoAnexo);
+  if(!box) return;
+  const alvo = (termo||'').trim().toLowerCase();
+  let lista = (ARQUIVOS_DA_PASTA.lista||[]).filter(a =>
+    !alvo || (a.caminho_relativo||a.nome).toLowerCase().includes(alvo));
+  if(secaoAnexo){
+    lista = lista.slice().sort((a,b) =>
+      (_EXT_PLANILHA.test(b.nome)?1:0) - (_EXT_PLANILHA.test(a.nome)?1:0));
+  }
+  const itens = lista.slice(0, 60).map((a,i) =>
+    '<li><button class="btn-sm pasta-arq" type="button" data-i="'+i+'" '+
+      'onclick="anexarDaPasta(\''+secaoAnexo+'\', this.dataset.caminho)" '+
+      'data-caminho="'+esc(a.caminho_relativo)+'">'+
+      (_EXT_PLANILHA.test(a.nome)?'📊':'📄')+' '+esc(a.nome)+'</button>'+
+      (a.subpasta ? '<span class="hint"> em '+esc(a.subpasta)+'</span>' : '')+
+      '<span class="hint"> ('+formatBytes(a.tamanho)+')</span></li>').join('');
+  const sobrando = lista.length > 60
+    ? '<p class="hint">Mostrando 60 de '+lista.length+' — refine a busca para ver o resto.</p>' : '';
+
+  box.innerHTML = '<div class="pasta-escolha">' +
+    '<label class="pasta-busca-rot" for="pasta-busca">Buscar na pasta do processo</label>' +
+    '<input type="text" id="pasta-busca" class="pasta-busca" value="'+esc(termo||'')+'" ' +
+      'placeholder="parte do nome do arquivo" ' +
+      'oninput="pintarEscolhaDaPasta(ESCOLHA_SECAO_ATUAL, this.value)">' +
+    '<p class="hint" role="status">'+lista.length+' arquivo(s) encontrados. Escolha um para anexar.</p>' +
+    (itens ? '<ul class="pasta-lista">'+itens+'</ul>'
+           : '<p class="hint">Nenhum arquivo com esse nome nesta pasta.</p>') +
+    sobrando +
+    // quem acabou de largar a planilha no SharePoint precisa de um jeito de
+    // ver o arquivo novo sem sair do processo — a lista fica em cache
+    '<button class="btn-sm" type="button" onclick="recarregarPastaDoProcesso(\''+secaoAnexo+'\')">🔄 Atualizar lista</button> ' +
+    '<button class="btn-sm" type="button" onclick="fecharEscolhaDaPasta(\''+secaoAnexo+'\')">Cancelar</button>' +
+  '</div>';
+  // repintar troca o campo de busca por um novo: devolve o foco e o cursor
+  // pro fim do texto, senão digitar a segunda letra já jogava o foco fora
+  const busca = document.getElementById('pasta-busca');
+  if(busca && termo){ busca.focus(); busca.setSelectionRange(busca.value.length, busca.value.length); }
+}
+
+function recarregarPastaDoProcesso(secaoAnexo){
+  ARQUIVOS_DA_PASTA = { procId:null, lista:null };
+  return abrirEscolhaDaPasta(secaoAnexo);
+}
+
+async function anexarDaPasta(secaoAnexo, caminhoRelativo){
+  try{
+    toast('Trazendo o arquivo do SharePoint…');
+    await Store.anexarDaPasta(currentProc.id, caminhoRelativo, secaoAnexo || null);
+    toast('Arquivo anexado.');
+    a11yAnunciar('Arquivo anexado ao processo.');
+    await renderAnexos();
+  }catch(e){
+    toast('Erro ao anexar: '+e.message);
+    a11yAnunciar('Erro ao anexar: '+e.message);
+  }
 }
 
 /* ── Concorrentes: verificação de documentação de empresa concorrente ──

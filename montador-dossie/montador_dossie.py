@@ -239,6 +239,53 @@ def baixar_arquivo(gc: GraphClient, drive_id: str, item_id: str, destino: Path) 
     log.info(f"Baixado: {destino.name} ({destino.stat().st_size/1024:.0f} KB)")
 
 
+def listar_arquivos_do_processo(cfg: dict, caminho_pasta: str) -> list:
+    """Lista TODO arquivo da pasta de um processo, de qualquer tipo. Diferente
+    de baixar_pdfs_da_pasta, que serve à analise por IA e por isso so olha PDF
+    e respeita a marca 'DATA SIN': aqui a equipe esta procurando a planilha de
+    servicos ou um documento pra anexar, e planilha nao e PDF.
+
+    Devolve [{'nome', 'caminho_relativo', 'subpasta', 'tamanho'}], sem baixar
+    nada -- o download e de um arquivo so, depois que a pessoa escolher."""
+    gc = GraphClient(obter_token(cfg))
+    site_id = obter_site_id(gc, SITE_HOSTNAME, SITE_PATH)
+    drive_id = obter_drive_id(gc, site_id)
+
+    raiz = caminho_pasta.strip("/")
+    arquivos = []
+    for item in listar_recursivo(gc, drive_id, raiz):
+        # _caminho_pasta vem absoluto (raiz incluida); o que interessa pra tela
+        # e pro download e o pedaco relativo a pasta do processo
+        sub = item.get("_caminho_pasta", raiz)[len(raiz):].strip("/")
+        arquivos.append({
+            "nome": item["name"],
+            "caminho_relativo": f"{sub}/{item['name']}" if sub else item["name"],
+            "subpasta": sub,
+            "tamanho": item.get("size", 0),
+        })
+    arquivos.sort(key=lambda a: (a["subpasta"].lower(), a["nome"].lower()))
+    return arquivos
+
+
+def baixar_arquivo_do_processo(cfg: dict, caminho_pasta: str, caminho_relativo: str) -> bytes:
+    """Baixa em memoria UM arquivo da pasta do processo, identificado pelo
+    caminho relativo que listar_arquivos_do_processo devolveu.
+
+    O caminho e reconstruido a partir da pasta do processo de proposito: assim
+    nao ha como pedir arquivo de outra pasta do SharePoint mandando um id
+    qualquer. '..' e recusado pelo mesmo motivo."""
+    rel = (caminho_relativo or "").replace("\\", "/").strip("/")
+    if not rel or any(p in ("", "..") for p in rel.split("/")):
+        raise ValueError("Caminho de arquivo inválido.")
+
+    gc = GraphClient(obter_token(cfg))
+    site_id = obter_site_id(gc, SITE_HOSTNAME, SITE_PATH)
+    drive_id = obter_drive_id(gc, site_id)
+    caminho = f"{caminho_pasta.strip('/')}/{rel}"
+    url = f"{GRAPH_BASE}/drives/{drive_id}/root:/{requests.utils.quote(caminho)}:/content"
+    return gc.get_binario(url)
+
+
 _PADRAO_MARCA_ARQUIVO_ANALISE_IA = re.compile(r"data\s+sin", re.IGNORECASE)
 
 
