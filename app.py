@@ -420,6 +420,11 @@ def _safe_next_url(val):
     return "/"
 
 
+# /api/processos/<pid>/anexos/<aid> — e só isso. Os ids não podem conter barra,
+# senão a expressão deixaria passar caminho de sub-rota que não é download.
+_PADRAO_BAIXAR_ANEXO = re.compile(r"^/api/processos/[^/]+/anexos/[^/]+$")
+
+
 @app.before_request
 def _auth():
     if request.method == "OPTIONS":
@@ -442,8 +447,16 @@ def _auth():
         return redirect("/login?next=" + quote(next_path, safe="/?=&"))
 
     if request.path.startswith("/api/"):
-        if not TOKEN or request.headers.get("x-sinape-token") != TOKEN:
-            return jsonify({"erro": "Token ausente ou inválido"}), 401
+        # Baixar anexo é a única coisa que o navegador abre por navegação (um
+        # link, ou "abrir em nova aba"), e navegação não manda header nenhum —
+        # o token só existe no fetch. Sem esta exceção, clicar no anexo dava
+        # {"erro":"Token ausente ou inválido"} como página crua, que foi o que
+        # o Bruno viu ao mexer numa planilha. A sessão continua obrigatória
+        # (checada logo acima), e vale só pro GET: excluir anexo segue exigindo
+        # token como todo o resto.
+        if not (request.method == "GET" and _PADRAO_BAIXAR_ANEXO.match(request.path)):
+            if not TOKEN or request.headers.get("x-sinape-token") != TOKEN:
+                return jsonify({"erro": "Token ausente ou inválido"}), 401
 
     return None
 
