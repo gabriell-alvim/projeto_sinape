@@ -362,6 +362,28 @@ input, select, textarea { font-family:inherit; }
 .sec-body { padding:4px 16px 16px; }
 .sec-divider { font-size:.72rem; font-weight:800; color:var(--teal); text-transform:uppercase; letter-spacing:.05em; border-bottom:1px solid var(--border); padding:14px 0 6px; margin-bottom:4px; }
 
+/* ── RESUMO (aba de leitura rápida) ── */
+#painel-resumo .sec-head { cursor:default; }
+.rs-grade { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:6px 20px; padding-top:12px; }
+.rs-bloco { padding:8px 0; border-top:1px solid var(--border); min-width:0; }
+.rs-bloco:first-child { border-top:none; }
+.rs-largo { grid-column:1 / -1; }
+.rs-bloco h4 { font-size:.7rem; font-weight:800; color:var(--teal); text-transform:uppercase; letter-spacing:.05em; margin:0 0 5px; }
+.rs-bloco p { margin:0; font-size:.86rem; line-height:1.5; color:var(--slate); }
+.rs-linha { font-size:.86rem; line-height:1.6; color:var(--slate); }
+.rs-rot { font-weight:700; }
+.rs-sub { font-size:.75rem; color:var(--slate-l); margin-top:5px; }
+.rs-vazio { color:var(--slate-l); font-style:italic; }
+.rs-lista { margin:0; padding-left:18px; font-size:.86rem; line-height:1.55; color:var(--slate); }
+.rs-lista li { margin-bottom:3px; }
+.rs-riscos { list-style:none; margin:0; padding:0; }
+.rs-riscos li { display:flex; gap:9px; align-items:flex-start; padding:7px 0; font-size:.86rem; line-height:1.5; color:var(--slate); border-top:1px solid var(--border); }
+.rs-riscos li:first-child { border-top:none; padding-top:0; }
+.rs-nivel { flex:0 0 auto; font-size:.66rem; font-weight:800; padding:2px 9px; border-radius:12px; white-space:nowrap; margin-top:2px; }
+.rs-nivel.alto  { background:#fee2e2; color:var(--red); }
+.rs-nivel.medio { background:#fde8cf; color:var(--amber); }
+@media (max-width:760px){ .rs-grade { grid-template-columns:1fr; } }
+
 /* ── CAMPOS ── */
 .field-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px 14px; padding-top:14px; }
 .field-grid.cols-2 { grid-template-columns:repeat(2,1fr); }
@@ -1880,6 +1902,9 @@ async function renderAnexos(){
     const secaoAnexo = el.id.replace('planilha-anexo-','');
     el.innerHTML = widgetPlanilhaHTML(secaoAnexo);
   });
+  // o Resumo lê a planilha desta mesma lista; se ele estiver aberto quando os
+  // anexos chegarem, sem isto ficaria dizendo "nenhuma planilha anexada"
+  if(document.getElementById('painel-resumo')) setFilter('__resumo');
 }
 
 function widgetPlanilhaHTML(secaoAnexo){
@@ -2052,7 +2077,8 @@ function buildFilterBar(){
   const bar = document.getElementById('filter-bar');
   const secs = getSecoes(currentProc);
   let html = '<span class="filter-bar-label">Visualizar:</span>' +
-    '<button class="fbtn active" data-f="all" onclick="setFilter(\'all\')">Tudo</button>';
+    '<button class="fbtn active" data-f="all" onclick="setFilter(\'all\')">Tudo</button>' +
+    '<button class="fbtn" data-f="__resumo" onclick="setFilter(\'__resumo\')">📋 Resumo</button>';
   secs.forEach(s=>{
     html += '<button class="fbtn" data-f="'+esc(s.tag||s.id)+'" onclick="setFilter(\''+esc(s.tag||s.id)+'\')">'+(s.icone||'')+' '+esc((s.badge||s.titulo).replace(/^\d+\.\s*/,''))+'</button>';
   });
@@ -2061,9 +2087,136 @@ function buildFilterBar(){
 function setFilter(f){
   currentFilter = f;
   document.querySelectorAll('.fbtn').forEach(b=>b.classList.toggle('active', b.dataset.f===f));
+  const resumo = f === '__resumo';
+  const jaAberto = !!document.getElementById('painel-resumo');
+  // o Resumo não é um filtro de seção: é uma leitura própria, montada a partir
+  // de campos que moram em seções diferentes. Por isso esconde todos os cards
+  // e mostra um painel só dele.
   document.querySelectorAll('#analise-root .sec-card').forEach(card=>{
-    card.classList.toggle('hidden', f!=='all' && card.dataset.tag!==f);
+    card.classList.toggle('hidden', resumo || (f!=='all' && card.dataset.tag!==f));
   });
+  if(jaAberto) document.getElementById('painel-resumo').remove();
+  if(resumo){
+    document.getElementById('analise-root').insertAdjacentHTML('afterbegin', resumoHTML());
+    if(!jaAberto) a11yAnunciar('Resumo do processo.');
+  }
+  /* Só quando o painel entra ou sai a lista de seções muda de verdade. Fora
+     disso não se toca na navegação numérica: setFilter('all') também é chamado
+     de dentro dela, e reconstruir ali no meio perderia o item que ela acabou
+     de ativar. O _pularRestauro é obrigatório aqui: sem ele, o "continuando de
+     onde você parou" reabriria a última seção visitada, e como reabrir seção
+     volta o filtro pra "Tudo", o Resumo era fechado no mesmo instante em que
+     acabava de ser aberto. */
+  if((resumo || jaAberto) && typeof a11yAtualizarItens === 'function'){
+    A11Y._pularRestauro = true;
+    a11yAtualizarItens(true);
+  }
+}
+
+/* Leitura curta pra quem precisa decidir sem abrir o processo inteiro: o que
+   vamos fazer, onde, por quanto, em quanto tempo e o que pode dar errado.
+   Puxa de seções diferentes de propósito — é isso que evita ter que passear
+   por seis abas pra montar a mesma resposta na cabeça. */
+function resumoHTML(){
+  const a = (currentProc && currentProc.analise) || {};
+  const nada = t => '<span class="rs-vazio">'+t+'</span>';
+  const val = (v, t) => (v && String(v).trim()) ? esc(String(v).trim()) : nada(t||'não informado no edital');
+
+  return '<section class="sec-card" id="painel-resumo" aria-labelledby="rs-titulo">'
+    + '<div class="sec-head"><span class="sec-title" id="rs-titulo">📋 Resumo</span>'
+      + '<span class="sec-badge">Visão rápida</span></div>'
+    + '<div class="sec-body rs-grade">'
+    + '<div class="rs-bloco rs-largo"><h4>Objeto</h4><p>'+val(a.geral_objeto)+'</p></div>'
+    + '<div class="rs-bloco rs-largo"><h4>Planilha de serviços</h4>'+_rsPlanilhas()+'</div>'
+    + '<div class="rs-bloco"><h4>Local de atuação</h4>'+_rsLocal(a)+'</div>'
+    + '<div class="rs-bloco"><h4>Valor</h4>'+_rsValor(a)+'</div>'
+    + '<div class="rs-bloco rs-largo"><h4>Prazos</h4>'+_rsPrazos(a)+'</div>'
+    + '<div class="rs-bloco rs-largo"><h4>Pontos de atenção do TR</h4>'+_rsAtencao(a)+'</div>'
+    + '</div></section>';
+}
+
+/* A planilha de serviços não é campo preenchido: é o arquivo que a equipe
+   anexa nas seções de Quantitativos e Custos. Aqui só se aponta pra ele. */
+function _rsPlanilhas(){
+  const anexos = (typeof ANEXOS_ATUAIS !== 'undefined' ? ANEXOS_ATUAIS : []);
+  const linhas = [['quantitativos','Quantitativos'], ['custos','Composição de custos']]
+    .map(([secao, rotulo])=>{
+      const x = anexos.find(v=>v.secao===secao);
+      if(!x) return '';
+      return '<div class="rs-linha"><span class="rs-rot">'+rotulo+':</span> 📊 '
+        + '<a href="'+esc(Store.urlAnexo(currentProc.id, x.id))+'" target="_blank">'
+        + esc(x.nome_original)+'</a></div>';
+    }).join('');
+  return linhas || '<p><span class="rs-vazio">nenhuma planilha anexada ainda — '
+    + 'anexe pela seção de Quantitativos</span></p>';
+}
+
+/* Quando há mais de um lote, o município costuma vir num texto único do tipo
+   "Lote 5: PR-407 (...). Lote 8: BR-277 (...)". Ler isso corrido é ruim de
+   ouvir e ruim de bater o olho, então quebra numa linha por lote. */
+function _rsLocal(a){
+  const uf = (a.geral_uf||'').trim();
+  const mun = (a.geral_municipios||'').trim();
+  const nLotes = (a.geral_lotes||'').toString().trim();
+  if(!mun && !uf) return '<p><span class="rs-vazio">não informado no edital</span></p>';
+
+  const partes = mun ? mun.split(/(?=\bLotes?\s*\d+\s*[:\-–])/i).map(s=>s.trim()).filter(Boolean) : [];
+  const porLote = partes.length > 1;
+  const corpo = porLote
+    ? '<ul class="rs-lista">'+partes.map(p=>'<li>'+esc(p)+'</li>').join('')+'</ul>'
+    : '<p>'+esc(mun || '—')+'</p>';
+  const rodape = [uf ? 'UF: '+uf : '', nLotes ? nLotes+' lote(s)' : ''].filter(Boolean).join(' · ');
+  return corpo + (rodape ? '<div class="rs-sub">'+esc(rodape)+'</div>' : '');
+}
+
+/* geral_valor é o campo de identificação; custo_preco_max é o teto que a
+   seção de custos guarda. Um ou outro pode estar vazio — mostra o que houver
+   e, se os dois estiverem, mostra os dois porque não significam a mesma coisa. */
+function _rsValor(a){
+  const linhas = [
+    ['Valor global estimado', a.geral_valor],
+    ['Preço máximo do edital', a.custo_preco_max],
+    ['Critério de julgamento', a.custo_criterio],
+  ].filter(([, v]) => v && String(v).trim())
+   .map(([r, v]) => '<div class="rs-linha"><span class="rs-rot">'+r+':</span> '+esc(String(v).trim())+'</div>')
+   .join('');
+  return linhas || '<p><span class="rs-vazio">não informado no edital</span></p>';
+}
+
+function _rsPrazos(a){
+  const linhas = [
+    ['Entrega da proposta', a.prazo_abertura || a.geral_abertura],
+    ['Esclarecimentos até', a.prazo_esclarecimento],
+    ['Execução', a.prazo_execucao],
+    ['Vigência do contrato', a.prazo_vigencia],
+    ['Validade da proposta', a.prazo_validade_prop ? a.prazo_validade_prop+' dias' : ''],
+  ].filter(([, v]) => v && String(v).trim())
+   .map(([r, v]) => '<div class="rs-linha"><span class="rs-rot">'+r+':</span> '
+        + esc(_dataBonita(String(v).trim()))+'</div>')
+   .join('');
+  return linhas || '<p><span class="rs-vazio">não informado no edital</span></p>';
+}
+
+/* Só o que muda uma decisão: risco Alto sempre, Médio pra completar. Baixo
+   fica de fora — quem quer a lista inteira abre a seção de Riscos. */
+function _rsAtencao(a){
+  const riscos = a.risks || [];
+  const mostrar = riscos.filter(r=>r.nivel==='Alto')
+    .concat(riscos.filter(r=>r.nivel==='Médio')).slice(0, 6);
+  if(!mostrar.length){
+    return '<p><span class="rs-vazio">nenhum ponto de atenção registrado</span></p>';
+  }
+  const restante = riscos.length - mostrar.length;
+  return '<ul class="rs-riscos">'+mostrar.map(r =>
+      '<li><span class="rs-nivel '+(r.nivel==='Alto'?'alto':'medio')+'">'+esc(r.nivel)+'</span>'
+      + '<span>'+esc(r.desc||'')+'</span></li>').join('')+'</ul>'
+    + (restante > 0 ? '<div class="rs-sub">+ '+restante+' outro(s) na seção de Riscos</div>' : '');
+}
+
+/* AAAA-MM-DD vira DD/MM/AAAA; qualquer outro formato passa intacto */
+function _dataBonita(v){
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(v);
+  return m ? m[3]+'/'+m[2]+'/'+m[1] : v;
 }
 function toggleSec(head){
   const card = head.closest('.sec-card');
@@ -3910,7 +4063,11 @@ function a11yAtualizarItens(manterNivel){
         // o texto de .sec-title começa com o ícone da seção antes do número
         // (ex.: "⚠️ 6. Riscos..."), por isso o número pode vir depois de um
         // token inicial que não é dígito — não só logo no começo da string.
-        const titulo = (tituloEl ? tituloEl.textContent.trim() : 'Seção').replace(/^(\S*\s+)?\d+[.)]\s*/, '');
+        // o ícone some junto com o número no replace abaixo; no Resumo, que não
+        // tem número, ele sobraria e o leitor de tela leria "prancheta resumo"
+        const titulo = (tituloEl ? tituloEl.textContent.trim() : 'Seção')
+          .replace(/^(\S*\s+)?\d+[.)]\s*/, '')
+          .replace(/^[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}️]+\s*/u, '');
         return { el: head, label: titulo, card };
       }).filter(i=>i.el);
       /* ativação nº1 entra na seção (expande + rola); ativação nº2, já dentro
@@ -3928,7 +4085,9 @@ function a11yAtualizarItens(manterNivel){
         item.ativar = (silencioso)=>{
           if(!item._entrou){
             item._entrou = true;
-            if(usaFiltro) setFilter('all');
+            // o Resumo só existe enquanto o filtro dele está ativo — voltar pra
+            // "Tudo" aqui apagaria justamente o card que se está tentando abrir
+            if(usaFiltro && item.card.id !== 'painel-resumo') setFilter('all');
             item.card.classList.remove('collapsed');
             item.card.scrollIntoView({block:'start', behavior:'smooth'});
             item.el.focus();
@@ -3937,9 +4096,12 @@ function a11yAtualizarItens(manterNivel){
             a11ySalvarUltimaSecao(abaAtualId, item.label);
             if(!silencioso) a11yAnunciar('Seção: '+item.label+'. Pressione Enter novamente para ver os itens.');
           } else if(!a11yEntrarItens(item)){
-            // sem itens numeráveis (Análise Crítica): pula pro primeiro campo
+            // sem itens numeráveis (Análise Crítica): pula pro primeiro campo.
+            // O Resumo não tem campo nenhum — o que se quer alcançar lá é o
+            // link da planilha, por isso links entram na busca.
             const alvo = item.card.querySelector('textarea, select, input:not([type=checkbox]):not([type=radio])')
-                      || item.card.querySelector('input[type=checkbox], input[type=radio]');
+                      || item.card.querySelector('input[type=checkbox], input[type=radio]')
+                      || item.card.querySelector('a[href]');
             if(!alvo){ a11yAnunciar('Esta seção não tem campos editáveis.'); return; }
             alvo.focus();
             let nome = alvo.getAttribute('aria-label') || '';
