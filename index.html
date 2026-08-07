@@ -362,8 +362,53 @@ input, select, textarea { font-family:inherit; }
 .sec-body { padding:4px 16px 16px; }
 .sec-divider { font-size:.72rem; font-weight:800; color:var(--teal); text-transform:uppercase; letter-spacing:.05em; border-bottom:1px solid var(--border); padding:14px 0 6px; margin-bottom:4px; }
 
+/* ── PAINEL GERENCIAL ── */
+.gr-painel { background:var(--white); border:1px solid var(--border); border-radius:12px; overflow:hidden; margin-bottom:14px; }
+.gr-painel .sec-head { cursor:default; }
+.gr-topo { display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:10px 18px; padding:12px 0 4px; }
+.gr-topo-item { min-width:0; }
+.gr-topo-rot { font-size:.68rem; font-weight:800; color:var(--teal); text-transform:uppercase; letter-spacing:.05em; }
+.gr-topo-val { font-size:.92rem; font-weight:700; color:var(--slate); margin-top:2px; line-height:1.35; }
+.gr-sub { font-size:.72rem; font-weight:800; color:var(--teal); text-transform:uppercase; letter-spacing:.05em; border-bottom:1px solid var(--border); padding:16px 0 6px; margin:0 0 8px; }
+.gr-aviso { font-size:.82rem; line-height:1.5; color:var(--amber); background:var(--amber-l); border:1px solid #fde8cf; border-radius:9px; padding:9px 12px; margin:12px 0 0; }
+.gr-geral { font-size:.82rem; color:var(--slate-l); margin:0 0 10px; }
+.gr-perguntas { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:10px 18px; }
+.gr-pergunta { min-width:0; padding:8px 0; }
+.gr-perg-txt { font-size:.8rem; color:var(--slate); line-height:1.4; }
+.gr-perg-resp { font-size:.88rem; font-weight:700; margin-top:3px; }
+.gr-perg-obs { font-size:.74rem; color:var(--slate-l); margin-top:2px; }
+.s-verde     { color:var(--green); }
+.s-amarelo   { color:var(--amber); }
+.s-vermelho  { color:var(--red); }
+.s-sem-dados { color:var(--slate-l); }
+.gr-fases { list-style:none; margin:0; padding:0; }
+.gr-fase { border-top:1px solid var(--border); padding:11px 0; }
+.gr-fase:first-child { border-top:none; }
+.gr-fase-topo { display:flex; align-items:baseline; gap:9px; flex-wrap:wrap; }
+.gr-fase-topo h4 { font-size:.9rem; font-weight:700; color:var(--slate); margin:0; }
+.gr-sinal { font-size:.66rem; font-weight:800; text-transform:uppercase; letter-spacing:.04em; white-space:nowrap; }
+.gr-fase-medida { display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin:6px 0 4px; }
+.gr-barra { flex:1 1 150px; max-width:230px; height:8px; background:var(--border); border-radius:5px; overflow:hidden; }
+.gr-barra-fill { height:100%; border-radius:5px; transition:width .3s; }
+.gr-barra-fill.s-verde     { background:var(--green); }
+.gr-barra-fill.s-amarelo   { background:var(--amber); }
+.gr-barra-fill.s-vermelho  { background:var(--red); }
+.gr-barra-fill.s-sem-dados { background:var(--slate-l); }
+.gr-pct { font-size:.78rem; font-weight:700; color:var(--slate); }
+.gr-sem-medida { font-size:.78rem; color:var(--slate-l); font-style:italic; }
+.gr-pend { margin:4px 0 0; padding-left:18px; font-size:.8rem; line-height:1.5; color:var(--slate); }
+.gr-ok { margin:4px 0 0; font-size:.8rem; color:var(--slate-l); }
+@media (prefers-reduced-motion: reduce){ .gr-barra-fill { transition:none; } }
+/* carteira (modal com todos os processos) */
+.gr-linha { border-top:1px solid var(--border); padding:10px 0; }
+.gr-linha-nome { background:none; border:none; padding:0; font-family:inherit; font-size:.9rem; font-weight:700; color:var(--teal); cursor:pointer; text-align:left; }
+.gr-linha-nome:hover { text-decoration:underline; }
+.gr-linha-meta { font-size:.76rem; color:var(--slate-l); margin-top:2px; }
+.gr-linha-probs { list-style:none; margin:5px 0 0; padding:0; font-size:.8rem; line-height:1.5; color:var(--slate); }
+.gr-linha-probs li { padding:1px 0; }
+
 /* ── ESCOLHER ARQUIVO DA PASTA DO PROCESSO ── */
-.pasta-escolha { border:1px solid var(--border); border-radius:10px; padding:10px 12px; margin-top:8px; background:var(--gray-ll,#f8fafc); }
+.pasta-escolha { border:1px solid var(--border); border-radius:10px; padding:10px 12px; margin-top:8px; background:var(--bg); }
 .pasta-busca-rot { display:block; font-size:.72rem; font-weight:700; color:var(--slate); margin-bottom:4px; }
 .pasta-busca { width:100%; max-width:340px; padding:6px 9px; border:1px solid var(--border); border-radius:8px; font-size:.85rem; }
 .pasta-lista { list-style:none; margin:8px 0; padding:0; max-height:270px; overflow-y:auto; }
@@ -569,6 +614,7 @@ input, select, textarea { font-family:inherit; }
     </div>
     <div class="home-relatorio-row" style="flex-direction:column; gap:8px;">
       <button class="btn-outline" id="btn-atualizacoes-dia" onclick="abrirRelatorioDoDia()">📋 Atualizações do dia</button>
+      <button class="btn-outline" id="btn-painel-gerencial" onclick="abrirPainelGerencial()">📈 Painel gerencial</button>
       <button class="btn-outline" id="btn-painel-prazos" onclick="abrirPainelPrazos()">⏰ Painel de prazos</button>
       <button class="btn-outline" id="btn-painel-gastos" onclick="abrirPainelGastos()">💵 Painel de gastos</button>
     </div>
@@ -604,6 +650,7 @@ input, select, textarea { font-family:inherit; }
       <button class="main-tab" id="tab-exigencias" onclick="switchProcessTab('exigencias')">📑 Exigências</button>
       <button class="main-tab" id="tab-checklist" onclick="switchProcessTab('checklist')">✅ Checklist do Edital</button>
       <button class="main-tab" id="tab-concorrentes" onclick="switchProcessTab('concorrentes')">🔎 Concorrentes</button>
+      <button class="main-tab" id="tab-gerencial" onclick="switchProcessTab('gerencial')">📈 Gerencial</button>
     </div>
     <div class="process-actions">
       <button class="btn-dossie" id="btn-montar-dossie" onclick="montarDossie()">📦 Montar dossiê de habilitação</button>
@@ -648,6 +695,10 @@ input, select, textarea { font-family:inherit; }
         <button class="btn-sm violet" onclick="abrirModalConcorrente()">＋ Analisar documentação de concorrente</button>
       </div>
       <div id="concorrentes-root"></div>
+    </div>
+
+    <div class="panel" id="panel-gerencial">
+      <div id="gerencial-root"></div>
     </div>
   </div>
 
@@ -803,6 +854,19 @@ input, select, textarea { font-family:inherit; }
     </div>
     <div class="modal-actions">
       <button class="btn-ghost" onclick="fecharModal('modal-prazos')">Fechar</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-gerencial">
+  <div class="modal-box wide" role="dialog" aria-label="Painel gerencial da carteira">
+    <h3>📈 Painel gerencial</h3>
+    <p class="hint">Onde cada processo está por fase, com o que trava cada um. Clique num processo pra abrir ele direto.</p>
+    <div id="gerencial-carteira">
+      <p class="relatorio-vazio">Carregando…</p>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-ghost" onclick="fecharModal('modal-gerencial')">Fechar</button>
     </div>
   </div>
 </div>
@@ -1862,16 +1926,16 @@ async function openProcess(id){
   setSaveStatus('Pronto','');
   a11yAtualizarItens();
 }
+const ABAS_PROCESSO = ['analise','exigencias','checklist','concorrentes','gerencial'];
 function switchProcessTab(tab, pularA11y){
-  document.getElementById('tab-analise').classList.toggle('active', tab==='analise');
-  document.getElementById('tab-exigencias').classList.toggle('active', tab==='exigencias');
-  document.getElementById('tab-checklist').classList.toggle('active', tab==='checklist');
-  document.getElementById('tab-concorrentes').classList.toggle('active', tab==='concorrentes');
-  document.getElementById('panel-analise').classList.toggle('active', tab==='analise');
-  document.getElementById('panel-exigencias').classList.toggle('active', tab==='exigencias');
-  document.getElementById('panel-checklist').classList.toggle('active', tab==='checklist');
-  document.getElementById('panel-concorrentes').classList.toggle('active', tab==='concorrentes');
+  ABAS_PROCESSO.forEach(t=>{
+    document.getElementById('tab-'+t).classList.toggle('active', tab===t);
+    document.getElementById('panel-'+t).classList.toggle('active', tab===t);
+  });
   if(tab==='concorrentes') carregarConcorrentes();
+  // o gerencial é lido, não editado: redesenha a cada entrada pra refletir o
+  // que acabou de ser preenchido nas outras abas
+  if(tab==='gerencial') buildGerencial();
   // quem entra direto no conteúdo da aba pelo modo numérico (entrarConteudo,
   // abaixo) já chama a11yAtualizarItens(true) por conta própria logo depois;
   // se essa chamada daqui rodasse também, ela recalcularia a lista no nível
@@ -1951,6 +2015,248 @@ function widgetPlanilhaHTML(secaoAnexo){
     '<button class="btn-sm violet" type="button" onclick="abrirEscolhaDaPasta(\''+secaoAnexo+'\')">📂 Escolher da pasta do processo</button>' +
     '<button class="btn-sm" type="button" onclick="document.getElementById(\'input-planilha-'+secaoAnexo+'\').click()">💻 Enviar do computador</button>' +
   '</div>';
+}
+
+/* ════════════════════════════════════════════════════════════════
+   PAINEL GERENCIAL — acompanhamento por fases
+   ════════════════════════════════════════════════════════════════
+   Leitura do que a equipe JÁ preenche nas outras abas. De propósito não tem
+   campo próprio: painel com alimentação paralela desatualiza em duas semanas
+   e vira número em que ninguém confia.
+
+   Duas medidas diferentes, que uma barra sozinha não consegue dizer:
+     · % avaliado  — quanto da fase a equipe já analisou (trabalho feito)
+     · semáforo    — do que foi avaliado, se a SINAPE atende (situação real)
+   Uma fase pode estar 100% avaliada e ser um desastre. Por isso as duas.  */
+
+const FASES_GERENCIAIS = [
+  { id:'jur',  nome:'Habilitação jurídica',             categoria:'Habilitação jurídica' },
+  { id:'fis',  nome:'Habilitação fiscal e trabalhista', categoria:'Habilitação fiscal e trabalhista' },
+  { id:'ef',   nome:'Habilitação econômico-financeira', categoria:'Habilitação econômico-financeira' },
+  { id:'tec',  nome:'Habilitação técnica',              categoria:'Habilitação técnica' },
+  { id:'prop', nome:'Proposta comercial',               categoria:'Proposta comercial' }
+];
+
+/* Campos da Análise Crítica que sozinhos travam (ou liberam) uma fase, sem
+   depender de exigência nenhuma — são as perguntas que a diretoria faz. */
+const CAMPOS_DECISIVOS = {
+  ef:  [{key:'hab_ef_lc_ok',     rotulo:'Índices contábeis'},
+        {key:'hab_ef_cap_ok',    rotulo:'Capital social / PL mínimo'}],
+  tec: [{key:'hab_tec_atestado', rotulo:'Atestado técnico compatível'}]
+};
+
+function _avaliacaoExig(ex){
+  const checks = (ex && ex.checks) || {};
+  const marcados = CHK_LABELS.filter(l => checks[l]);
+  return { avaliada: marcados.length > 0, negativa: marcados.some(l => CHK_NEG.includes(l)) };
+}
+
+/* dias entre hoje e uma data AAAA-MM-DD; null se não for data válida */
+function _diasAte(iso){
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec((iso||'').trim());
+  if(!m) return null;
+  const alvo = new Date(+m[1], +m[2]-1, +m[3]);
+  const hoje = new Date(); hoje.setHours(0,0,0,0);
+  return Math.round((alvo - hoje) / 86400000);
+}
+
+const _PIOR_SINAL = { verde:0, 'sem-dados':1, amarelo:2, vermelho:3 };
+
+function resumoGerencial(proc){
+  const a = (proc && proc.analise) || {};
+  const exigs = Array.isArray(proc && proc.exigencias) ? proc.exigencias : [];
+
+  const fases = FASES_GERENCIAIS.map(f => {
+    const doGrupo = exigs.filter(e =>
+      (e.categoria||'').trim().toLowerCase() === f.categoria.toLowerCase());
+    let avaliadas = 0, naoAvaliadas = 0, obrigNegativas = 0;
+    const naoAtendidas = [];
+    doGrupo.forEach(e => {
+      const v = _avaliacaoExig(e);
+      if(v.avaliada) avaliadas++; else naoAvaliadas++;
+      if(v.negativa && e.obrigatorio !== false){
+        obrigNegativas++;
+        // a descrição só existe quando o processo está aberto (a listagem da
+        // carteira não carrega texto); sem ela vale a contagem
+        if(e.descricao) naoAtendidas.push(e.descricao);
+      }
+    });
+
+    const decisivos = (CAMPOS_DECISIVOS[f.id]||[]).map(c =>
+      ({ rotulo:c.rotulo, valor:String(a[c.key]||'').trim() }));
+    const bloqueio    = decisivos.filter(d => d.valor === 'Não');
+    const duvida      = decisivos.filter(d => d.valor === 'Verificar' || d.valor === 'Parcialmente');
+    const semResposta = decisivos.filter(d => !d.valor);
+    const semExigencias = doGrupo.length === 0;
+
+    let sinal;
+    if(obrigNegativas || bloqueio.length) sinal = 'vermelho';
+    else if(semExigencias && !decisivos.some(d => d.valor)) sinal = 'sem-dados';
+    else if(naoAvaliadas || duvida.length || semResposta.length) sinal = 'amarelo';
+    else sinal = 'verde';
+
+    /* O que trava, em uma frase. Porcentagem sozinha não diz a ninguém o que
+       fazer a seguir — é isso que separa placar de ferramenta. */
+    const pendencias = [];
+    if(obrigNegativas){
+      pendencias.push(naoAtendidas.length === 1
+        ? 'não atende: ' + naoAtendidas[0]
+        : obrigNegativas + ' exigência(s) obrigatória(s) não atendida(s)');
+    }
+    bloqueio.forEach(d => pendencias.push(d.rotulo + ': NÃO atende'));
+    duvida.forEach(d => pendencias.push(d.rotulo + ': ' + d.valor.toLowerCase()));
+    semResposta.forEach(d => pendencias.push(d.rotulo + ': sem resposta'));
+    if(naoAvaliadas) pendencias.push(naoAvaliadas + ' exigência(s) sem avaliação');
+    if(semExigencias) pendencias.push('nenhuma exigência cadastrada nesta fase');
+
+    return {
+      id:f.id, nome:f.nome, sinal, semExigencias,
+      total:doGrupo.length, avaliadas, naoAvaliadas, obrigNegativas,
+      // null (e não 0) quando não há o que contar: 0% diria "ninguém
+      // trabalhou", quando o certo é "não há dados para medir"
+      pct: doGrupo.length ? Math.round(100*avaliadas/doGrupo.length) : null,
+      pendencias
+    };
+  });
+
+  const totalExig = exigs.length;
+  const avaliadasTotal = exigs.filter(e => _avaliacaoExig(e).avaliada).length;
+  const diasDisputa = _diasAte(a.prazo_abertura || a.geral_abertura);
+
+  /* O sinal do processo sai só das fases que têm dado. Fase sem exigência
+     cadastrada não arrasta o processo inteiro pra "não sei": como é raro um
+     edital ter exigência nas cinco categorias, isso deixaria quase tudo
+     cinza e o sinal geral não serviria pra nada. A lacuna continua visível
+     na fase, que é onde ela significa alguma coisa. */
+  const comDados = fases.filter(f => f.sinal !== 'sem-dados');
+
+  return {
+    id: proc && proc.id,
+    nome: (proc && proc.nome) || '',
+    tipo: proc && proc.type,
+    fases,
+    pior: comDados.length
+      ? comDados.reduce((p,f) => _PIOR_SINAL[f.sinal] > _PIOR_SINAL[p] ? f.sinal : p, 'verde')
+      : 'sem-dados',
+    semExigencias: totalExig === 0,
+    pctGeral: totalExig ? Math.round(100*avaliadasTotal/totalExig) : null,
+    totalExig, avaliadasTotal,
+    decisao: String(a.risco_decisao||'').trim(),
+    responsavel: String(a.risco_resp_decisao||'').trim(),
+    valor: String(a.geral_valor || a.custo_preco_max || '').trim(),
+    dataDisputa: (a.prazo_abertura || a.geral_abertura || '').trim(),
+    diasDisputa,
+    riscosAltos: ((a.risks)||[]).filter(r => r && r.nivel === 'Alto').length,
+    checklistPct: (proc && proc.progress) || 0,
+    // as três perguntas que a diretoria faz antes de decidir
+    consorcio: String(a.hab_jur_consorcio||'').trim(),
+    consorcioLider: String(a.hab_jur_lider||'').trim(),
+    atestado: String(a.hab_tec_atestado||'').trim(),
+    atestadoQuant: String(a.hab_tec_quant_min||'').trim(),
+    indices: String(a.hab_ef_lc_ok||'').trim(),
+    capital: String(a.hab_ef_cap_ok||'').trim()
+  };
+}
+
+const _ROTULO_SINAL = { verde:'em ordem', amarelo:'atenção', vermelho:'impedimento', 'sem-dados':'sem dados' };
+const _ICONE_SINAL  = { verde:'🟢', amarelo:'🟡', vermelho:'🔴', 'sem-dados':'⚪' };
+
+/* Uma resposta de campo vira sinal: "Não" trava, "Verificar"/"Parcialmente"
+   pede olhar, vazio é falta de resposta — não é um "não". */
+function _sinalDaResposta(v){
+  const s = String(v||'').trim();
+  if(!s) return 'sem-dados';
+  if(s === 'Não') return 'vermelho';
+  if(s === 'Verificar' || s === 'Parcialmente') return 'amarelo';
+  return 'verde';
+}
+
+function _blocoPergunta(pergunta, valor, complemento){
+  const sinal = _sinalDaResposta(valor);
+  const resposta = String(valor||'').trim() || 'sem resposta';
+  return '<div class="gr-pergunta">' +
+    '<div class="gr-perg-txt">' + esc(pergunta) + '</div>' +
+    '<div class="gr-perg-resp s-' + sinal + '">' +
+      _ICONE_SINAL[sinal] + ' ' + esc(resposta) + '</div>' +
+    (complemento ? '<div class="gr-perg-obs">' + esc(complemento) + '</div>' : '') +
+  '</div>';
+}
+
+function _faseHTML(f){
+  const barra = f.pct === null
+    ? '<span class="gr-sem-medida">sem exigências para medir</span>'
+    : '<div class="gr-barra" role="progressbar" aria-valuenow="'+f.pct+'" aria-valuemin="0" aria-valuemax="100" ' +
+        'aria-label="' + esc(f.nome) + ': ' + f.pct + '% avaliado">' +
+        '<div class="gr-barra-fill s-'+f.sinal+'" style="width:'+f.pct+'%"></div></div>' +
+      '<span class="gr-pct">'+f.pct+'% avaliado</span>' +
+      '<span class="hint"> ('+f.avaliadas+' de '+f.total+')</span>';
+  // tabindex -1: não entra no Tab (seriam 5 paradas a mais numa tela de
+  // leitura), mas a navegação numerada consegue focar e ler o estado
+  return '<li class="gr-fase" tabindex="-1">' +
+    '<div class="gr-fase-topo">' +
+      '<span class="gr-sinal s-'+f.sinal+'">'+_ICONE_SINAL[f.sinal]+' '+_ROTULO_SINAL[f.sinal]+'</span>' +
+      '<h4>'+esc(f.nome)+'</h4>' +
+    '</div>' +
+    '<div class="gr-fase-medida">'+barra+'</div>' +
+    (f.pendencias.length
+      ? '<ul class="gr-pend">'+f.pendencias.map(p=>'<li>'+esc(p)+'</li>').join('')+'</ul>'
+      : '<p class="gr-ok">Nada pendente nesta fase.</p>') +
+  '</li>';
+}
+
+function buildGerencial(){
+  const root = document.getElementById('gerencial-root');
+  if(!root) return;
+  if(!currentProc){ root.innerHTML = ''; return; }
+  const g = resumoGerencial(currentProc);
+
+  const dias = g.diasDisputa === null ? '' :
+    (g.diasDisputa < 0 ? ' (passou há '+Math.abs(g.diasDisputa)+' dia(s))'
+     : g.diasDisputa === 0 ? ' (é hoje)' : ' (faltam '+g.diasDisputa+' dia(s))');
+  const topo = [
+    ['Decisão da equipe', g.decisao || 'aguardando análise', g.responsavel ? 'por '+g.responsavel : ''],
+    ['Disputa / entrega', g.dataDisputa ? _dataBonita(g.dataDisputa)+dias : 'sem data', ''],
+    ['Valor', g.valor || 'não informado', ''],
+    ['Riscos altos', g.riscosAltos ? g.riscosAltos+' em aberto' : 'nenhum', '']
+  ].map(([r,v,obs]) => '<div class="gr-topo-item"><div class="gr-topo-rot">'+esc(r)+'</div>' +
+      '<div class="gr-topo-val">'+esc(v)+'</div>' +
+      (obs ? '<div class="gr-perg-obs">'+esc(obs)+'</div>' : '') + '</div>').join('');
+
+  /* Sem exigências cadastradas, toda fase daria 0% e o processo pareceria
+     abandonado — quando o real é que ninguém importou as exigências ainda.
+     Decidir em cima desse 0% seria decidir em cima de um número que não
+     existe, então o painel diz isso em vez de mostrar a conta. */
+  const avisoSemExig = g.semExigencias
+    ? '<p class="gr-aviso" role="note">⚠️ Este processo não tem exigências cadastradas, ' +
+      'então não há o que medir por fase. Use <b>Importar da IA</b> para extrair as ' +
+      'exigências do edital — o acompanhamento abaixo passa a valer a partir daí.</p>'
+    : '';
+
+  root.innerHTML =
+    '<section class="gr-painel" aria-labelledby="gr-titulo">' +
+      '<div class="sec-head"><span class="sec-title" id="gr-titulo">📈 Acompanhamento por fases</span>' +
+        '<span class="sec-badge">' + esc(_ROTULO_SINAL[g.pior]) + '</span></div>' +
+      '<div class="sec-body">' +
+        '<div class="gr-topo">'+topo+'</div>' +
+        avisoSemExig +
+        '<h3 class="gr-sub">Antes de decidir</h3>' +
+        '<div class="gr-perguntas">' +
+          _blocoPergunta('Podemos entrar em consórcio?', g.consorcio,
+            g.consorcioLider ? 'mínimo do líder: '+g.consorcioLider : '') +
+          _blocoPergunta('Temos atestado técnico compatível?', g.atestado,
+            g.atestadoQuant ? 'exigido: '+g.atestadoQuant : '') +
+          _blocoPergunta('Atendemos os índices contábeis?', g.indices, '') +
+          _blocoPergunta('Atendemos o capital social / PL?', g.capital, '') +
+        '</div>' +
+        '<h3 class="gr-sub">Fases</h3>' +
+        (g.pctGeral !== null
+          ? '<p class="gr-geral" role="status">'+g.avaliadasTotal+' de '+g.totalExig+
+            ' exigência(s) avaliada(s) — '+g.pctGeral+'% do total. '+
+            'Checklist do edital: '+g.checklistPct+'% tratado.</p>'
+          : '<p class="gr-geral" role="status">Checklist do edital: '+g.checklistPct+'% tratado.</p>') +
+        '<ul class="gr-fases">'+g.fases.map(_faseHTML).join('')+'</ul>' +
+      '</div>' +
+    '</section>';
 }
 
 /* ── Anexar a partir da pasta do próprio processo ──
@@ -3139,6 +3445,80 @@ function prazoQuandoTexto(p){
   return 'em '+p.dias+' dia'+(p.dias===1?'':'s');
 }
 
+/* A carteira inteira numa tela: provavelmente o que mais vai ser usado no
+   dia a dia — "o que está travado e o que vence essa semana" — mais do que
+   abrir processo por processo. É a mesma conta do painel de dentro do
+   processo, rodando sobre os dados crus que /api/gerencial devolve. */
+async function abrirPainelGerencial(){
+  abrirModal('modal-gerencial');
+  const area = document.getElementById('gerencial-carteira');
+  area.innerHTML = '<p class="relatorio-vazio">Carregando…</p>';
+  if(Store.modo !== 'api'){
+    area.innerHTML = '<p class="relatorio-vazio">Disponível apenas com o Painel conectado ao backend.</p>';
+    return;
+  }
+  let processos;
+  try{
+    const res = await fetch(Store.base + '/gerencial', { headers: Store.headers() });
+    if(!res.ok){
+      const b = await res.json().catch(()=>({}));
+      throw new Error(b.erro || ('Servidor respondeu ' + res.status));
+    }
+    processos = (await res.json()).processos || [];
+  }catch(e){
+    area.innerHTML = '<p class="relatorio-vazio">Erro ao carregar: '+esc(e.message)+'</p>';
+    a11yAnunciar('Erro ao carregar o painel gerencial.');
+    return;
+  }
+  if(!processos.length){
+    area.innerHTML = '<p class="relatorio-vazio">Nenhum processo cadastrado ainda.</p>';
+    return;
+  }
+
+  const resumos = processos.map(resumoGerencial);
+  /* ordem que interessa a quem acompanha: primeiro o que trava, e dentro
+     disso o que vence antes. Processo sem data vai pro fim, não pro topo —
+     data vazia não é urgência. */
+  const peso = { vermelho:0, amarelo:1, 'sem-dados':2, verde:3 };
+  resumos.sort((x,y) => (peso[x.pior] - peso[y.pior])
+    || ((x.diasDisputa === null ? 1e9 : x.diasDisputa) - (y.diasDisputa === null ? 1e9 : y.diasDisputa)));
+
+  const conta = s => resumos.filter(r => r.pior === s).length;
+  const cartoes = '<div class="gastos-cards">' +
+    '<div class="gastos-card"><div class="gc-num">'+resumos.length+'</div><div class="gc-lbl">processo(s)</div></div>' +
+    '<div class="gastos-card"><div class="gc-num">'+conta('vermelho')+'</div><div class="gc-lbl">com impedimento</div></div>' +
+    '<div class="gastos-card"><div class="gc-num">'+conta('amarelo')+'</div><div class="gc-lbl">com pendência</div></div>' +
+    '<div class="gastos-card"><div class="gc-num">'+conta('sem-dados')+'</div><div class="gc-lbl">sem exigências</div></div>' +
+  '</div>';
+
+  const linhas = resumos.map(r => {
+    const dias = r.diasDisputa === null ? 'sem data'
+      : r.diasDisputa < 0 ? 'passou há '+Math.abs(r.diasDisputa)+'d'
+      : r.diasDisputa === 0 ? 'é hoje' : 'faltam '+r.diasDisputa+'d';
+    // só as fases que exigem ação aparecem; listar as 5 sempre viraria ruído
+    const problemas = r.fases.filter(f => f.sinal === 'vermelho' || f.sinal === 'amarelo');
+    const detalhe = problemas.length
+      ? problemas.map(f => '<li><span class="s-'+f.sinal+'">'+_ICONE_SINAL[f.sinal]+'</span> '+
+          esc(f.nome)+' — '+esc(f.pendencias[0] || '')+'</li>').join('')
+      : '<li class="gr-ok">'+(r.semExigencias
+          ? 'sem exigências cadastradas — não há o que medir'
+          : 'nenhuma pendência nas fases principais')+'</li>';
+    return '<div class="gr-linha">' +
+      '<button class="gr-linha-nome" onclick="fecharModal(\'modal-gerencial\'); openProc(\''+esc(r.id)+'\')">' +
+        '<span class="s-'+r.pior+'">'+_ICONE_SINAL[r.pior]+'</span> '+esc(r.nome)+'</button>' +
+      '<div class="gr-linha-meta">'+esc(dias)+
+        (r.decisao ? ' · '+esc(r.decisao) : '')+
+        (r.pctGeral !== null ? ' · '+r.pctGeral+'% avaliado' : '')+'</div>' +
+      '<ul class="gr-linha-probs">'+detalhe+'</ul>' +
+    '</div>';
+  }).join('');
+
+  area.innerHTML = cartoes + linhas;
+  a11yAnunciar(resumos.length+' processo(s). '+conta('vermelho')+' com impedimento, '+
+               conta('amarelo')+' com pendência.');
+  a11yAtualizarItens(true);
+}
+
 async function abrirPainelPrazos(){
   abrirModal('modal-prazos');
   const area = document.getElementById('prazos-conteudo');
@@ -4148,6 +4528,7 @@ function a11yAtualizarItens(manterNivel){
       {el: document.querySelector('.home-card[onclick*="publico"]'), label:'Processos Públicos'},
       {el: document.querySelector('.home-card[onclick*="privado"]'), label:'Processos Privados'},
       {el: document.getElementById('btn-atualizacoes-dia'), label:'Atualizações do dia'},
+      {el: document.getElementById('btn-painel-gerencial'), label:'Painel gerencial'},
       {el: document.getElementById('btn-painel-prazos'), label:'Painel de prazos'},
       {el: document.getElementById('btn-painel-gastos'), label:'Painel de gastos'},
       {el: document.querySelector('.home-actions .btn-outline'), label:'Copiar prompt para IA'},
@@ -4169,7 +4550,23 @@ function a11yAtualizarItens(manterNivel){
     const painelAtivo = document.querySelector('.panel.active');
     const rootPorPainel = { 'panel-analise':'analise-root', 'panel-exigencias':'exigencias-root', 'panel-checklist':'checklist-root' };
     const rootId = painelAtivo && rootPorPainel[painelAtivo.id];
-    if(A11Y.nivel==='conteudo' && painelAtivo && painelAtivo.id==='panel-concorrentes'){
+    if(A11Y.nivel==='conteudo' && painelAtivo && painelAtivo.id==='panel-gerencial'){
+      // painel de leitura: não há campo pra editar, então a navegação numérica
+      // leva direto ao estado de cada fase e lê em voz o que trava — que é a
+      // informação que a pessoa veio buscar aqui
+      A11Y.todosItens = Array.from(document.querySelectorAll('#gerencial-root .gr-fase')).map(el=>{
+        const nome  = (el.querySelector('h4')||{}).textContent || 'Fase';
+        const sinal = (el.querySelector('.gr-sinal')||{}).textContent || '';
+        const medida = (el.querySelector('.gr-pct') || el.querySelector('.gr-sem-medida') || {}).textContent || '';
+        const pend  = Array.from(el.querySelectorAll('.gr-pend li')).map(li=>li.textContent.trim());
+        return { el, label: nome.trim() + ' — ' + sinal.trim(), ativar: ()=>{
+          el.scrollIntoView({block:'center', behavior:'smooth'});
+          el.focus();
+          a11yAnunciar(nome.trim() + '. ' + sinal.trim() + '. ' + medida.trim() + '. ' +
+                       (pend.length ? pend.join('. ') : 'Nada pendente.'));
+        }};
+      });
+    } else if(A11Y.nivel==='conteudo' && painelAtivo && painelAtivo.id==='panel-concorrentes'){
       // painel de Concorrentes não usa o formato de seções recolhíveis das
       // outras abas (Análise/Exigências/Checklist) — é uma lista simples de
       // verificações já feitas, então a navegação numérica aqui é uma lista
@@ -4268,6 +4665,7 @@ function a11yAtualizarItens(manterNivel){
         {el: document.getElementById('tab-exigencias'), label:'Aba Exigências', ativar: entrarConteudo('exigencias')},
         {el: document.getElementById('tab-checklist'), label:'Aba Checklist do Edital', ativar: entrarConteudo('checklist')},
         {el: document.getElementById('tab-concorrentes'), label:'Aba Concorrentes', ativar: entrarConteudo('concorrentes')},
+        {el: document.getElementById('tab-gerencial'), label:'Aba Gerencial', ativar: entrarConteudo('gerencial')},
         {el: document.getElementById('btn-montar-dossie'), label:'Montar dossiê de habilitação'}
       ].filter(i=>i.el);
     }

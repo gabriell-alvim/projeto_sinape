@@ -39,6 +39,7 @@ Rotas:
   GET     /api/gastos                         → contador de gastos de IA (total de tokens e custo em US$/R$) + detalhamento por processo
   GET     /api/correcoes                      → pares (resposta da IA / correção da equipe) — matéria-prima pra treinar um modelo especialista no futuro
   GET     /api/prazos                         → todos os prazos de todos os processos ativos, numa lista só, ordenados do mais urgente pro mais distante
+  GET     /api/gerencial                      → dados crus do acompanhamento por fases de todos os processos (a tela é quem calcula % e semáforo)
   POST    /api/sinki/conversar                → uma rodada de conversa com o Sinki (multipart: mensagem + arquivos + conversa_id)
   GET     /api/sinki/conversas                → lista as conversas com o Sinki (mais recentes primeiro)
   GET     /api/sinki/conversas/<cid>          → histórico completo de uma conversa
@@ -1947,6 +1948,51 @@ def _prazos_do_processo(doc):
                               else "semana" if dias <= 7 else "mes" if dias <= 30 else "depois"),
             })
     return resultado
+
+
+# campos da análise que o painel gerencial lê — mandar o documento inteiro de
+# cada processo só pra calcular isso seria desperdício de banda e de memória
+_CAMPOS_GERENCIAIS = (
+    "geral_orgao", "geral_numero", "geral_uf", "geral_valor", "geral_abertura",
+    "custo_preco_max", "prazo_abertura",
+    "hab_jur_consorcio", "hab_jur_lider", "hab_jur_sub",
+    "hab_ef_lc_ok", "hab_ef_cap_ok",
+    "hab_tec_atestado", "hab_tec_quant_min",
+    "risco_decisao", "risco_resp_decisao", "risks",
+)
+
+
+@app.route("/api/gerencial", methods=["GET"])
+def painel_gerencial():
+    """Dados crus do acompanhamento por fases de TODOS os processos, pro painel
+    gerencial mostrar a carteira inteira numa tela.
+
+    Quem calcula porcentagem e semáforo é a tela, não este endpoint: a mesma
+    conta roda dentro do processo aberto, e ter duas implementações da regra
+    (uma aqui, outra lá) é garantia de divergirem com o tempo. Daqui sai só o
+    que a conta lê — das exigências, nem o texto vai junto, só categoria,
+    obrigatoriedade e avaliação."""
+    saida = []
+    for doc in col_processos.find().sort("atualizadoEm", DESCENDING):
+        analise = doc.get("analise") or {}
+        exigencias = doc.get("exigencias")
+        saida.append({
+            "id": doc["_id"],
+            "nome": doc.get("nome") or "(sem nome)",
+            "type": doc.get("type") or "publico",
+            "status": doc.get("status") or "em_analise",
+            "progress": int(doc.get("progress") or 0),
+            "atualizadoEm": doc.get("atualizadoEm") or 0,
+            "atualizadoPor": doc.get("atualizadoPor") or "",
+            "analise": {k: analise[k] for k in _CAMPOS_GERENCIAIS if k in analise},
+            "exigencias": [
+                {"categoria": e.get("categoria") or "",
+                 "obrigatorio": e.get("obrigatorio") is not False,
+                 "checks": e.get("checks") or {}}
+                for e in (exigencias if isinstance(exigencias, list) else [])
+            ],
+        })
+    return jsonify({"processos": saida})
 
 
 @app.route("/api/prazos", methods=["GET"])
