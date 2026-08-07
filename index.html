@@ -52,6 +52,7 @@ input, select, textarea { font-family:inherit; }
   border:1px solid rgba(255,255,255,.25); border-radius:16px; padding:4px 10px;
 }
 .topbar-logout:hover { color:#fff; background:rgba(255,255,255,.12); }
+.quem-sou { font-size:.74rem; color:#bfe9e8; white-space:nowrap; }
 .sync-pill {
   display:flex; align-items:center; gap:6px; font-size:.72rem; font-weight:600;
   padding:4px 10px; border-radius:20px; background:rgba(255,255,255,.12); color:#e6fffb; white-space:nowrap;
@@ -586,6 +587,7 @@ input, select, textarea { font-family:inherit; }
 <div class="topbar">
   <div class="topbar-brand" onclick="goHome()"><span class="dot"></span> DATA SIN · Painel de Licitações</div>
   <div class="breadcrumb" id="breadcrumb"></div>
+  <span class="quem-sou" id="quem-sou" role="status"></span>
   <a class="topbar-logout" href="/logout">Sair</a>
   <div class="sync-pill" id="sync-pill"><span class="sdot"></span><span id="sync-text">Iniciando…</span></div>
 </div>
@@ -816,19 +818,6 @@ input, select, textarea { font-family:inherit; }
   </div>
 </div>
 
-<!-- MODAL: NOME DO USUÁRIO (uma vez por navegador) -->
-<div class="modal-overlay" id="modal-usuario">
-  <div class="modal-box">
-    <h3>👋 Como você se chama?</h3>
-    <p class="hint">Seu nome aparece nas atualizações dos processos que você editar (ex.: "Atualizado por Fabrício"). Fica salvo só neste navegador.</p>
-    <input type="text" id="input-usuario-nome" placeholder="Ex.: Fabrício" maxlength="60">
-    <div class="modal-actions">
-      <button class="btn-ghost" onclick="pularUsuario()">Agora não</button>
-      <button class="btn-primary" onclick="salvarUsuario()">Salvar</button>
-    </div>
-  </div>
-</div>
-
 <!-- MODAL: ATUALIZAÇÕES DO DIA -->
 <div class="modal-overlay" id="modal-relatorio">
   <div class="modal-box wide" role="dialog" aria-label="Atualizações do dia">
@@ -894,9 +883,12 @@ const CONFIG = {
   API_URL: '/api',    // backend no mesmo container (Render/Docker)
   API_TOKEN: 'sinape-2026-Xk93jf82hs',
   POLL_SEGUNDOS: 20,
-  USUARIO: ''
+  // preenchidos por identificarUsuario() a partir da sessão do servidor —
+  // nunca do navegador: nome guardado localmente é nome que qualquer um digita
+  USUARIO: '',
+  USUARIO_EMAIL: '',
+  COMPARTILHADO: false
 };
-CONFIG.USUARIO = localStorage.getItem('sinape:usuario') || '';
 </script>
 
 <script>
@@ -4775,6 +4767,11 @@ document.addEventListener('focusin', function(e){
    INICIALIZAÇÃO
    ════════════════════════════════════════════════════════════════ */
 async function init(){
+  // primeiro de tudo: a partir daqui a identidade vem do servidor, e é ela que
+  // assina toda edição. Se isso rodasse no fim (como antes, quando o nome vinha
+  // pronto do navegador), uma edição feita nos primeiros instantes da tela seria
+  // salva sem autor nenhum.
+  await identificarUsuario();
   if(Store.modo==='local'){
     setSync('', 'Modo local (sem API)');
     // garante que os processos-exemplo existem localmente
@@ -4794,34 +4791,39 @@ async function init(){
   iniciarPolling();
   updateBreadcrumb();
   a11yAtualizarItens();
-  await identificarUsuario();
 }
 
-/* Quem está logado vem da sessão do servidor, não de um nome digitado. Só
-   quando o acesso é pelo login compartilhado antigo é que ainda perguntamos o
-   nome — nesse caso não há como o servidor saber quem é. */
+/* Quem está logado vem da sessão do servidor — e só de lá.
+   Antes, quem entrasse pela conta compartilhada digitava um nome que ficava
+   salvo no navegador e assinava tudo que a pessoa fizesse. Qualquer um podia
+   digitar "Fabrício", então "atualizado por Fabrício" não provava nada. Agora
+   a conta compartilhada assina como conta compartilhada: quem precisa
+   aparecer com o próprio nome entra pela Microsoft. */
 async function identificarUsuario(){
+  // sobra de versões antigas: um nome digitado que ainda assinaria edições
+  localStorage.removeItem('sinape:usuario');
   try{
     const eu = await (await fetch('/api/eu', {headers: Store.headers()})).json();
-    if(eu.email){
-      CONFIG.USUARIO = eu.nome || eu.email;
-      CONFIG.USUARIO_EMAIL = eu.email;
-      localStorage.setItem('sinape:usuario', CONFIG.USUARIO);
-      return;
-    }
-  }catch(e){ /* sem sessão identificada: cai no comportamento antigo */ }
-  if(!CONFIG.USUARIO) abrirModal('modal-usuario');
+    CONFIG.USUARIO = eu.autor || '';
+    CONFIG.USUARIO_EMAIL = eu.email || '';
+    CONFIG.COMPARTILHADO = !!eu.compartilhado;
+  }catch(e){
+    CONFIG.USUARIO = ''; CONFIG.USUARIO_EMAIL = ''; CONFIG.COMPARTILHADO = false;
+  }
+  pintarIdentidade();
+}
+
+function pintarIdentidade(){
+  const el = document.getElementById('quem-sou');
+  if(!el) return;
+  if(!CONFIG.USUARIO){ el.textContent = ''; el.title = ''; return; }
+  el.textContent = (CONFIG.COMPARTILHADO ? '👥 ' : '👤 ') + CONFIG.USUARIO;
+  el.title = CONFIG.COMPARTILHADO
+    ? 'Você entrou pela conta compartilhada. O que você editar aparece assinado como "Conta compartilhada" — entre com sua conta Microsoft para aparecer com seu nome.'
+    : 'Conectado como ' + CONFIG.USUARIO + (CONFIG.USUARIO_EMAIL ? ' (' + CONFIG.USUARIO_EMAIL + ')' : '');
+  el.setAttribute('aria-label', el.title);
 }
 init();
-function salvarUsuario(){
-  const nome = document.getElementById('input-usuario-nome').value.trim();
-  if(!nome){ toast('Digite seu nome, ou clique em "Agora não".'); return; }
-  localStorage.setItem('sinape:usuario', nome);
-  CONFIG.USUARIO = nome;
-  fecharModal('modal-usuario');
-  toast('Prazer, '+nome+'!');
-}
-function pularUsuario(){ fecharModal('modal-usuario'); }
 </script>
 </body>
 </html>

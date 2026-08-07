@@ -40,6 +40,8 @@ Rotas:
   GET     /api/correcoes                      → pares (resposta da IA / correção da equipe) — matéria-prima pra treinar um modelo especialista no futuro
   GET     /api/prazos                         → todos os prazos de todos os processos ativos, numa lista só, ordenados do mais urgente pro mais distante
   GET     /api/gerencial                      → dados crus do acompanhamento por fases de todos os processos (a tela é quem calcula % e semáforo)
+  GET     /api/eu                             → identidade de quem está logado (inclui "autor", que assina o que a pessoa fizer)
+  GET     /api/usuarios                       → quem já entrou com conta própria — a lista de gente endereçável (notificar, atribuir)
   POST    /api/sinki/conversar                → uma rodada de conversa com o Sinki (multipart: mensagem + arquivos + conversa_id)
   GET     /api/sinki/conversas                → lista as conversas com o Sinki (mais recentes primeiro)
   GET     /api/sinki/conversas/<cid>          → histórico completo de uma conversa
@@ -499,16 +501,49 @@ def login():
     return send_from_directory(BASE_DIR, "login.html")
 
 
+NOME_CONTA_COMPARTILHADA = "Conta compartilhada"
+
+
 @app.route("/api/eu", methods=["GET"])
 def quem_sou_eu():
     """Identidade de quem está logado — a tela usa isto em vez de perguntar o
-    nome, que antes era digitado e não provava nada."""
+    nome, que antes era digitado e não provava nada.
+
+    'autor' é o que vai assinar o que a pessoa fizer, e sai daqui em vez de
+    ser decidido na tela: quem entrou pela conta compartilhada assina como
+    conta compartilhada, não como uma pessoa. Deixar essa sessão escolher um
+    nome faria qualquer um assinar como qualquer um — e aí 'atualizado por
+    Fabrício' não provaria que foi o Fabrício."""
+    email = session.get("usuario_email") or ""
+    nome = session.get("usuario_nome") or ""
     return jsonify({
-        "email": session.get("usuario_email") or "",
-        "nome": session.get("usuario_nome") or "",
+        "email": email,
+        "nome": nome,
         "admin": bool(session.get("usuario_admin")),
-        "compartilhado": not session.get("usuario_email"),
+        "compartilhado": not email,
+        "autor": nome if email else NOME_CONTA_COMPARTILHADA,
     })
+
+
+@app.route("/api/usuarios", methods=["GET"])
+def listar_usuarios():
+    """Quem já entrou no Painel com conta própria — é a lista de gente que dá
+    pra endereçar (notificar, atribuir).
+
+    A lista se preenche sozinha no primeiro login de cada pessoa pela
+    Microsoft; não há cadastro pra ninguém manter. Quem nunca entrou não
+    aparece, e é correto que não apareça: mandar recado pra uma caixa que
+    ninguém nunca abriu é o mesmo que não mandar.
+
+    A conta compartilhada fica de fora de propósito — ela não é uma pessoa."""
+    cursor = col_usuarios.find({"ativo": {"$ne": False}}, {"nome": 1, "ultimoAcesso": 1})
+    usuarios = [
+        {"email": u["_id"], "nome": u.get("nome") or u["_id"],
+         "ultimoAcesso": u.get("ultimoAcesso") or 0}
+        for u in cursor if u.get("_id")
+    ]
+    usuarios.sort(key=lambda u: u["nome"].lower())
+    return jsonify({"usuarios": usuarios})
 
 
 @app.route("/logout", methods=["GET", "POST"])
