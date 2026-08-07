@@ -53,6 +53,47 @@ input, select, textarea { font-family:inherit; }
 }
 .topbar-logout:hover { color:#fff; background:rgba(255,255,255,.12); }
 .quem-sou { font-size:.74rem; color:#bfe9e8; white-space:nowrap; }
+.topbar-sino {
+  position:relative; background:none; border:none; cursor:pointer; font-size:1rem;
+  color:#bfe9e8; padding:2px 6px; border-radius:8px; line-height:1;
+}
+.topbar-sino:hover { background:rgba(255,255,255,.12); }
+.sino-num {
+  position:absolute; top:-4px; right:-4px; min-width:16px; height:16px; padding:0 4px;
+  background:var(--red); color:#fff; border-radius:9px; font-size:.6rem; font-weight:800;
+  display:flex; align-items:center; justify-content:center;
+}
+
+/* ── NOTIFICAÇÕES ── */
+.av-lista { list-style:none; margin:8px 0; padding:0; max-height:180px; overflow-y:auto; font-size:.82rem; line-height:1.5; }
+.av-lista li { padding:3px 0; border-top:1px solid var(--border); }
+.av-lista li:first-child { border-top:none; }
+.av-antes  { color:var(--slate-l); text-decoration:line-through; }
+.av-depois { color:var(--slate); font-weight:600; }
+.av-rot { display:block; font-size:.74rem; font-weight:700; color:var(--slate); margin:10px 0 4px; }
+.av-fieldset { border:1px solid var(--border); border-radius:10px; padding:10px 12px; margin-top:12px; }
+.av-fieldset legend { font-size:.74rem; font-weight:800; color:var(--teal); padding:0 6px; }
+.av-pessoa { display:flex; align-items:center; gap:7px; padding:4px 0; font-size:.85rem; cursor:pointer; }
+.notif-abas { display:flex; gap:8px; margin:10px 0; }
+.notif-grupo { margin-bottom:14px; }
+.notif-grupo h4 { font-size:.8rem; font-weight:800; color:var(--teal); margin:0 0 4px; }
+.notif-badge { background:var(--red); color:#fff; border-radius:9px; padding:1px 7px; font-size:.64rem; }
+.notif-item { border-top:1px solid var(--border); }
+.notif-item:first-child { border-top:none; }
+.notif-cabeca { display:block; width:100%; text-align:left; background:none; border:none; cursor:pointer;
+  font-family:inherit; font-size:.83rem; line-height:1.5; color:var(--slate); padding:8px 4px; }
+.notif-cabeca:hover { background:var(--teal-ll); }
+.notif-item.nao-lida .notif-cabeca { font-weight:600; }
+.notif-ponto { color:var(--red); }
+.notif-ok { color:var(--green); font-weight:700; }
+.notif-confira { color:var(--amber); font-weight:700; }
+.notif-corpo { padding:4px 4px 12px; font-size:.82rem; }
+.notif-mud { padding:5px 0; border-top:1px solid var(--border); line-height:1.5; }
+.notif-responder { margin-top:10px; }
+.notif-respostas { margin-top:8px; font-size:.8rem; color:var(--slate-mid); line-height:1.6; }
+.notif-prefs-box { border:1px solid var(--border); border-radius:10px; padding:8px 12px; margin-top:14px; }
+.notif-prefs-box legend { font-size:.72rem; font-weight:800; color:var(--teal); padding:0 6px; }
+.notif-pref { display:flex; align-items:center; gap:7px; padding:3px 0; font-size:.82rem; cursor:pointer; }
 .sync-pill {
   display:flex; align-items:center; gap:6px; font-size:.72rem; font-weight:600;
   padding:4px 10px; border-radius:20px; background:rgba(255,255,255,.12); color:#e6fffb; white-space:nowrap;
@@ -587,6 +628,8 @@ input, select, textarea { font-family:inherit; }
 <div class="topbar">
   <div class="topbar-brand" onclick="goHome()"><span class="dot"></span> DATA SIN · Painel de Licitações</div>
   <div class="breadcrumb" id="breadcrumb"></div>
+  <button class="topbar-sino" id="btn-notificacoes" onclick="abrirNotificacoes()"
+          aria-label="Notificações">🔔<span class="sino-num" id="sino-num" hidden></span></button>
   <span class="quem-sou" id="quem-sou" role="status"></span>
   <a class="topbar-logout" href="/logout">Sair</a>
   <div class="sync-pill" id="sync-pill"><span class="sdot"></span><span id="sync-text">Iniciando…</span></div>
@@ -814,6 +857,50 @@ input, select, textarea { font-family:inherit; }
     </div>
     <div class="modal-actions">
       <button class="btn-ghost" onclick="fecharModal('modal-a11y-ajuda')">Fechar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: AVISAR A EQUIPE DO QUE MUDOU (uma vez por sessão de edição) -->
+<div class="modal-overlay" id="modal-aviso">
+  <div class="modal-box wide" role="dialog" aria-label="Avisar sobre as alterações">
+    <h3>📣 Avisar sobre o que você alterou</h3>
+    <p id="aviso-resumo" role="status"></p>
+    <ul class="av-lista" id="aviso-lista"></ul>
+
+    <label class="av-rot" for="aviso-comentario">Quer dizer alguma coisa junto? (opcional)</label>
+    <textarea id="aviso-comentario" rows="2" placeholder="Ex.: o valor mudou depois do esclarecimento nº 3."></textarea>
+
+    <fieldset class="av-fieldset">
+      <legend>Pedir conferência de quem?</legend>
+      <p class="hint">Marque as pessoas só se quiser que elas confiram e respondam. Para um aviso
+        informativo à equipe inteira, use o botão “Avisar a equipe” — ele não cobra resposta de ninguém.</p>
+      <div id="aviso-pessoas"></div>
+    </fieldset>
+
+    <div class="modal-actions">
+      <button class="btn-ghost" onclick="dispensarAviso()">Não avisar</button>
+      <button class="btn-outline" onclick="enviarAviso('equipe')">📢 Avisar a equipe</button>
+      <button class="btn-primary" onclick="enviarAviso('dirigida')">✅ Pedir conferência</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: CAIXA DE NOTIFICAÇÕES -->
+<div class="modal-overlay" id="modal-notificacoes">
+  <div class="modal-box wide" role="dialog" aria-label="Notificações">
+    <h3>🔔 Notificações</h3>
+    <div class="notif-abas" role="tablist">
+      <button class="fbtn active" id="notif-aba-pessoais" role="tab" onclick="trocarAbaNotif('pessoais')">Pessoais</button>
+      <button class="fbtn" id="notif-aba-gerais" role="tab" onclick="trocarAbaNotif('gerais')">Gerais</button>
+    </div>
+    <div id="notif-conteudo"><p class="relatorio-vazio">Carregando…</p></div>
+    <fieldset class="notif-prefs-box">
+      <legend>Como quero ser avisado</legend>
+      <div id="notif-prefs"></div>
+    </fieldset>
+    <div class="modal-actions">
+      <button class="btn-ghost" onclick="fecharModal('modal-notificacoes')">Fechar</button>
     </div>
   </div>
 </div>
@@ -1676,6 +1763,22 @@ const Store = {
     if(!res.ok){ const e = await res.json().catch(()=>({})); throw new Error(e.erro || ('Servidor respondeu ' + res.status)); }
     return res.json();
   },
+  /* — notificações entre a equipe — */
+  async listarUsuarios(){
+    if(this.modo !== 'api') return [];
+    return (await this._req('GET','/usuarios')).usuarios || [];
+  },
+  async criarNotificacao(corpo){ return this._req('POST','/notificacoes', corpo); },
+  async caixaNotificacoes(){
+    if(this.modo !== 'api') return null;
+    return this._req('GET','/notificacoes');
+  },
+  async marcarNotificacaoLida(id){
+    return this._req('POST','/notificacoes/' + encodeURIComponent(id) + '/lida');
+  },
+  async responderNotificacao(id, texto){
+    return this._req('POST','/notificacoes/' + encodeURIComponent(id) + '/responder', { texto: texto || '' });
+  },
   /* arquivos que já estão na pasta DESTE processo no SharePoint */
   async listarArquivosDaPasta(id){
     if(this.modo !== 'api') throw new Error('Exige o backend configurado (CONFIG.API_URL)');
@@ -1740,8 +1843,12 @@ function showView(id){
   document.getElementById(id).classList.add('active');
   updateBreadcrumb();
 }
-function goHome(){ currentType=null; currentProc=null; showView('view-home'); refreshHomeCounts(); a11yAtualizarItens(); }
-function openList(type){
+async function goHome(){
+  await encerrarSessaoEdicao();
+  currentType=null; currentProc=null; showView('view-home'); refreshHomeCounts(); a11yAtualizarItens();
+}
+async function openList(type){
+  await encerrarSessaoEdicao();
   currentType = type; currentProc = null;
   document.getElementById('list-title').textContent = type==='publico' ? '🏛️ Processos Públicos' : '🏢 Processos Privados';
   document.getElementById('search-box').value = '';
@@ -1899,11 +2006,13 @@ function getChecklistGrupos(proc){
 }
 
 async function openProcess(id){
+  await encerrarSessaoEdicao();   // fecha o processo anterior antes de trocar
   try{
     setSync('busy','Carregando…');
     currentProc = await Store.obter(id);
     setSync(Store.modo==='api'?'ok':'', Store.modo==='api'?'Nuvem sincronizada':'Modo local');
   }catch(e){ toast('Erro ao abrir: '+e.message); return; }
+  iniciarSessaoEdicao(currentProc);
   pend = null; salvando = false;
   currentType = currentProc.type;
   currentFilter = 'all';
@@ -2007,6 +2116,450 @@ function widgetPlanilhaHTML(secaoAnexo){
     '<button class="btn-sm violet" type="button" onclick="abrirEscolhaDaPasta(\''+secaoAnexo+'\')">📂 Escolher da pasta do processo</button>' +
     '<button class="btn-sm" type="button" onclick="document.getElementById(\'input-planilha-'+secaoAnexo+'\').click()">💻 Enviar do computador</button>' +
   '</div>';
+}
+
+/* ════════════════════════════════════════════════════════════════
+   NOTIFICAÇÕES — o que mudou numa sessão de edição
+   ════════════════════════════════════════════════════════════════
+   Um aviso cobre a SESSÃO inteira, não um campo. Editar um processo mexe em
+   dez, vinte campos numa sentada; perguntar "avisar quem?" a cada salvamento
+   cansaria em uma semana, e aí ou ninguém usa ou manda tudo pra todos — e a
+   caixa geral vira ruído que ninguém lê.
+
+   Por isso a foto do processo é tirada ao abrir e comparada ao sair: vinte
+   decisões viram uma, e o aviso passa a ser uma unidade que faz sentido ler
+   ("o que o Bruno mexeu hoje na EPR 1910"). */
+let SESSAO_EDICAO = null;
+
+function iniciarSessaoEdicao(proc){
+  SESSAO_EDICAO = proc ? { id: proc.id, antes: JSON.parse(JSON.stringify(proc)) } : null;
+}
+
+/* Rótulo legível de cada campo, tirado do próprio modelo de seções — assim
+   a notificação diz "Valor global estimado (R$)" e não "geral_valor". */
+function _rotulosDosCampos(proc){
+  const mapa = {};
+  (getSecoes(proc) || []).forEach(s => (s.campos || []).concat(s.camposDecisao || [])
+    .forEach(c => { if(c && c.key) mapa[c.key] = c.label || c.key; }));
+  return mapa;
+}
+
+function _texto(v){
+  if(v === null || v === undefined || v === '') return '';
+  if(Array.isArray(v) || typeof v === 'object') return JSON.stringify(v);
+  return String(v);
+}
+
+/* Só o que uma pessoa reconheceria como "mudou alguma coisa": campos da
+   análise, avaliação das exigências e o quanto do checklist foi tratado. */
+function mudancasDaSessao(){
+  if(!SESSAO_EDICAO || !currentProc || SESSAO_EDICAO.id !== currentProc.id) return [];
+  const antes = SESSAO_EDICAO.antes, agora = currentProc;
+  const rotulos = _rotulosDosCampos(agora);
+  const out = [];
+
+  const a1 = antes.analise || {}, a2 = agora.analise || {};
+  Object.keys(a2).forEach(k => {
+    if(k.startsWith('_')) return;               // controle interno, não é conteúdo
+    const de = _texto(a1[k]), para = _texto(a2[k]);
+    if(de === para) return;
+    out.push({ rotulo: rotulos[k] || k, antes: de, depois: para });
+  });
+
+  const e1 = antes.exigencias || [], e2 = agora.exigencias || [];
+  e2.forEach((ex, i) => {
+    const marcadas = o => CHK_LABELS.filter(l => (o && o.checks || {})[l]).join(', ');
+    const de = marcadas(e1[i]), para = marcadas(ex);
+    const tratDe = (e1[i] && e1[i].tratativa) || '', tratPara = ex.tratativa || '';
+    const nome = (ex.descricao || ex.texto || ('Exigência ' + (i+1))).slice(0, 120);
+    if(de !== para) out.push({ rotulo: 'Exigência — ' + nome, antes: de || 'sem avaliação', depois: para || 'sem avaliação' });
+    if(tratDe !== tratPara) out.push({ rotulo: 'Tratativa — ' + nome, antes: tratDe, depois: tratPara });
+  });
+
+  // o checklist tem dezenas de itens; listar um a um afogaria o resto do
+  // aviso, então entra como uma linha só dizendo o quanto andou
+  if((antes.progress || 0) !== (agora.progress || 0)){
+    out.push({ rotulo: 'Checklist do edital',
+               antes: (antes.progress || 0) + '% tratado',
+               depois: (agora.progress || 0) + '% tratado' });
+  }
+  return out;
+}
+
+let MUDANCAS_PENDENTES = null;   // o que será oferecido no modal de aviso
+
+/* Ao sair do processo: salva o que faltava e, se houve mudança, oferece
+   avisar alguém. Uma pergunta por sessão — e é só uma oferta: quem não quer
+   avisar fecha e segue. */
+async function encerrarSessaoEdicao(){
+  if(!SESSAO_EDICAO || !currentProc || SESSAO_EDICAO.id !== currentProc.id){ SESSAO_EDICAO = null; return; }
+  clearTimeout(saveTimer);
+  try{ await flushPend(); }catch(e){ /* o aviso não vale travar a navegação */ }
+  const mudancas = mudancasDaSessao();
+  const proc = currentProc;
+  SESSAO_EDICAO = null;
+  // conta compartilhada não envia: não há como saber quem avisou
+  if(!mudancas.length || Store.modo !== 'api' || CONFIG.COMPARTILHADO || !CONFIG.USUARIO_EMAIL) return;
+  MUDANCAS_PENDENTES = { processo_id: proc.id, nome: proc.nome, mudancas };
+  await abrirModalAviso();
+}
+
+async function abrirModalAviso(){
+  const m = MUDANCAS_PENDENTES;
+  if(!m) return;
+  let pessoas = [];
+  try{ pessoas = (await Store.listarUsuarios()) || []; }catch(e){ /* segue sem a lista */ }
+  pessoas = pessoas.filter(p => p.email !== CONFIG.USUARIO_EMAIL);
+
+  document.getElementById('aviso-resumo').innerHTML =
+    'Você alterou <b>' + m.mudancas.length + ' item(ns)</b> em <b>' + esc(m.nome) + '</b>.';
+  document.getElementById('aviso-lista').innerHTML =
+    m.mudancas.slice(0, 12).map(c =>
+      '<li><b>' + esc(c.rotulo) + ':</b> ' +
+      (c.antes ? '<span class="av-antes">' + esc(c.antes.slice(0,120)) + '</span> → ' : '') +
+      '<span class="av-depois">' + esc((c.depois || '(vazio)').slice(0,120)) + '</span></li>').join('') +
+    (m.mudancas.length > 12 ? '<li class="hint">+ ' + (m.mudancas.length-12) + ' outro(s)</li>' : '');
+
+  document.getElementById('aviso-pessoas').innerHTML = pessoas.length
+    ? pessoas.map((p,i) =>
+        '<label class="av-pessoa"><input type="checkbox" class="av-check" value="'+esc(p.email)+'"> ' +
+        esc(p.nome) + '</label>').join('')
+    : '<p class="hint">Ninguém mais entrou no Painel com conta própria ainda. Peça para a pessoa ' +
+      'entrar uma vez pelo botão da Microsoft — depois disso ela aparece aqui.</p>';
+  document.getElementById('aviso-comentario').value = '';
+  abrirModal('modal-aviso');
+  a11yAnunciar(m.mudancas.length + ' item(ns) alterado(s) em ' + m.nome + '. Quer avisar alguém?');
+}
+
+function dispensarAviso(){
+  MUDANCAS_PENDENTES = null;
+  fecharModal('modal-aviso');
+}
+
+async function enviarAviso(tipo){
+  const m = MUDANCAS_PENDENTES;
+  if(!m) return;
+  const destinatarios = Array.from(document.querySelectorAll('#aviso-pessoas .av-check:checked'))
+    .map(c => c.value);
+  if(tipo === 'dirigida' && !destinatarios.length){
+    toast('Marque quem deve conferir, ou use "Avisar a equipe".');
+    a11yAnunciar('Nenhuma pessoa marcada.');
+    return;
+  }
+  const extra = document.getElementById('aviso-comentario').value.trim();
+  const mudancas = extra
+    ? m.mudancas.concat([{ rotulo:'Recado de quem editou', antes:'', depois: extra }])
+    : m.mudancas;
+  try{
+    await Store.criarNotificacao({ processo_id: m.processo_id, tipo, destinatarios, mudancas });
+    toast(tipo === 'equipe' ? 'Equipe avisada.' : 'Pedido de conferência enviado.');
+    a11yAnunciar(tipo === 'equipe' ? 'Equipe avisada.' : 'Pedido de conferência enviado.');
+    MUDANCAS_PENDENTES = null;
+    fecharModal('modal-aviso');
+  }catch(e){
+    toast('Não consegui avisar: ' + e.message);
+    a11yAnunciar('Não consegui avisar: ' + e.message);
+  }
+}
+
+/* ── Aviso de chegada: som + popup do sistema ──
+   O sino sozinho só serve pra quem está olhando pra ele. O som avisa sem
+   depender de olhar — e é o sinal que funciona pra quem usa leitor de tela.
+   O popup do sistema (canto da tela, fora do navegador) é pra quando a
+   pessoa está em outra aba, que é justamente quando nada dentro da página
+   seria visto. */
+const NOTIF_PREF = {
+  som:   localStorage.getItem('sinape:notif-som')   !== '0',
+  popup: localStorage.getItem('sinape:notif-popup') !== '0'
+};
+let _totalNaoLidasAnterior = null;   // null = primeira medida; não avisa no F5
+let _audioCtx = null;
+
+function tocarSomNotificacao(){
+  if(!NOTIF_PREF.som) return;
+  try{
+    _audioCtx = _audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+    // o navegador suspende o áudio até a primeira interação da pessoa com a
+    // página; sem isto o primeiro som sairia mudo e ninguém saberia por quê
+    if(_audioCtx.state === 'suspended') _audioCtx.resume();
+    const t0 = _audioCtx.currentTime;
+    // duas notas curtas, subindo: audível sem ser alarme
+    [[880, 0], [1174.66, 0.11]].forEach(([hz, atraso])=>{
+      const osc = _audioCtx.createOscillator(), vol = _audioCtx.createGain();
+      osc.type = 'sine'; osc.frequency.value = hz;
+      vol.gain.setValueAtTime(0.0001, t0 + atraso);
+      vol.gain.exponentialRampToValueAtTime(0.11, t0 + atraso + 0.015);
+      vol.gain.exponentialRampToValueAtTime(0.0001, t0 + atraso + 0.20);
+      osc.connect(vol); vol.connect(_audioCtx.destination);
+      osc.start(t0 + atraso); osc.stop(t0 + atraso + 0.22);
+    });
+  }catch(e){ /* sem áudio disponível: o sino e o anúncio do leitor continuam */ }
+}
+
+function _resumoDaNotificacao(n){
+  if(!n) return 'Você tem uma notificação nova.';
+  if(n.tipo === 'retorno'){
+    return (n.resposta === 'ok' ? 'OK de ' : 'CONFIRA — comentário de ') +
+           n.autor_nome + ' · ' + (n.processo_rotulo || '');
+  }
+  return n.autor_nome + (n.tipo === 'dirigida' ? ' pediu sua conferência' : ' avisou a equipe') +
+         ' · ' + (n.processo_rotulo || '');
+}
+
+function avisarChegouNotificacao(quantas){
+  const naoLidas = ((CAIXA_NOTIF && CAIXA_NOTIF.pessoais) || [])
+    .concat((CAIXA_NOTIF && CAIXA_NOTIF.gerais) || [])
+    .filter(n => !n.lida)
+    .sort((a,b) => (b.criadoEm||0) - (a.criadoEm||0));
+  const resumo = _resumoDaNotificacao(naoLidas[0]);
+
+  tocarSomNotificacao();
+
+  if(document.hidden){
+    // a pessoa está em outra aba: nada dentro da página seria visto, então o
+    // aviso tem que sair do navegador
+    if(NOTIF_PREF.popup && window.Notification && Notification.permission === 'granted'){
+      try{
+        const n = new Notification('DATA SIN', {
+          body: resumo + (quantas > 1 ? ' (+' + (quantas-1) + ')' : ''),
+          tag: 'data-sin-notificacao',   // um aviso substitui o anterior, não empilha
+          renotify: false
+        });
+        n.onclick = ()=>{ window.focus(); abrirNotificacoes(); n.close(); };
+      }catch(e){ /* navegador recusou: fica o som */ }
+    }
+  } else {
+    // com a aba à frente, o leitor de tela anuncia — é o equivalente do popup
+    a11yAnunciar(quantas > 1 ? quantas + ' notificações novas. ' + resumo : 'Nova notificação: ' + resumo);
+    toast('🔔 ' + resumo);
+  }
+}
+
+function definirPrefNotif(qual, valor){
+  NOTIF_PREF[qual] = valor;
+  localStorage.setItem('sinape:notif-' + qual, valor ? '1' : '0');
+  if(qual === 'som' && valor) tocarSomNotificacao();   // prova que está audível
+  if(qual === 'popup' && valor && window.Notification && Notification.permission === 'default'){
+    // pedir permissão precisa partir de um clique — por isso mora aqui, e não
+    // no carregamento da página (onde o navegador costuma negar de saída)
+    Notification.requestPermission().then(()=>pintarPrefsNotif());
+    return;
+  }
+  pintarPrefsNotif();
+}
+
+function pintarPrefsNotif(){
+  const cx = document.getElementById('notif-prefs');
+  if(!cx) return;
+  const permitido = window.Notification ? Notification.permission : 'denied';
+  cx.innerHTML =
+    '<label class="notif-pref"><input type="checkbox" id="pref-som"' + (NOTIF_PREF.som ? ' checked' : '') +
+      ' onchange="definirPrefNotif(\'som\', this.checked)"> Tocar um som quando chegar</label>' +
+    '<label class="notif-pref"><input type="checkbox" id="pref-popup"' + (NOTIF_PREF.popup ? ' checked' : '') +
+      ' onchange="definirPrefNotif(\'popup\', this.checked)"> Avisar na tela quando eu estiver em outra aba</label>' +
+    (NOTIF_PREF.popup && permitido === 'denied'
+      ? '<p class="hint">O navegador está bloqueando avisos deste site. Libere nas permissões do site (cadeado na barra de endereço) para o aviso aparecer.</p>'
+      : '') +
+    (NOTIF_PREF.popup && permitido === 'default'
+      ? '<p class="hint">O navegador ainda vai pedir sua permissão para mostrar o aviso.</p>'
+      : '');
+}
+
+/* ── Caixa de entrada ── */
+let CAIXA_NOTIF = null;
+let ABA_NOTIF = 'pessoais';
+
+function _quando(ms){
+  if(!ms) return '';
+  const d = new Date(ms), h = String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0');
+  const hoje = new Date(); hoje.setHours(0,0,0,0);
+  const dia = new Date(d); dia.setHours(0,0,0,0);
+  const difDias = Math.round((hoje - dia) / 86400000);
+  if(difDias === 0) return 'hoje às ' + h;
+  if(difDias === 1) return 'ontem às ' + h;
+  return String(d.getDate()).padStart(2,'0') + '/' + String(d.getMonth()+1).padStart(2,'0') + ' às ' + h;
+}
+
+async function atualizarSino(){
+  const btn = document.getElementById('btn-notificacoes');
+  const num = document.getElementById('sino-num');
+  if(!btn) return;
+  // a conta compartilhada não é uma pessoa: não tem caixa de entrada
+  if(Store.modo !== 'api' || CONFIG.COMPARTILHADO || !CONFIG.USUARIO_EMAIL){ btn.hidden = true; return; }
+  btn.hidden = false;
+  try{
+    CAIXA_NOTIF = await Store.caixaNotificacoes();
+  }catch(e){ return; }
+  const total = (CAIXA_NOTIF.naoLidasPessoais || 0) + (CAIXA_NOTIF.naoLidasGerais || 0);
+  num.hidden = !total;
+  num.textContent = total > 99 ? '99+' : String(total);
+  btn.setAttribute('aria-label', total
+    ? total + ' notificação(ões) não lida(s)'
+    : 'Notificações — nenhuma não lida');
+
+  /* Avisa só quando o número SOBE. Alertar sempre que houver não lida faria
+     o som tocar a cada 20 segundos do polling, e recarregar a página viraria
+     um alarme; por isso a primeira medida (null) nunca avisa. */
+  const antes = _totalNaoLidasAnterior;
+  _totalNaoLidasAnterior = total;
+  if(antes !== null && total > antes) avisarChegouNotificacao(total - antes);
+}
+
+async function abrirNotificacoes(){
+  abrirModal('modal-notificacoes');
+  // sempre abre nas pessoais: é o que foi endereçado a você e o que pede
+  // resposta. Guardar a última aberta faria quem espiou as gerais voltar lá
+  // na próxima vez, sem ver o que estava esperando por ele.
+  ABA_NOTIF = 'pessoais';
+  document.getElementById('notif-conteudo').innerHTML = '<p class="relatorio-vazio">Carregando…</p>';
+  pintarPrefsNotif();
+  await atualizarSino();
+  pintarNotificacoes();
+}
+
+function trocarAbaNotif(aba){
+  ABA_NOTIF = aba;
+  document.getElementById('notif-aba-pessoais').classList.toggle('active', aba==='pessoais');
+  document.getElementById('notif-aba-gerais').classList.toggle('active', aba==='gerais');
+  pintarNotificacoes();
+}
+
+function _itemNotifHTML(n){
+  const quemFez = n.tipo === 'retorno'
+    ? (n.resposta === 'ok'
+        ? '<span class="notif-ok">✅ OK</span> de ' + esc(n.autor_nome)
+        : '<span class="notif-confira">⚠️ CONFIRA</span> — ' + esc(n.autor_nome) + ' comentou')
+    : esc(n.autor_nome) + (n.tipo === 'dirigida' ? ' pediu sua conferência' : ' avisou a equipe');
+  return '<div class="notif-item' + (n.lida ? '' : ' nao-lida') + '" id="notif-' + esc(n.id) + '">' +
+    '<button class="notif-cabeca" aria-expanded="false" onclick="abrirItemNotif(\'' + esc(n.id) + '\')">' +
+      (n.lida ? '' : '<span class="notif-ponto" aria-label="não lida">●</span> ') +
+      '<b>' + esc(n.processo_rotulo || '(processo)') + '</b> — ' + quemFez +
+      ' <span class="hint">' + esc(_quando(n.criadoEm)) + '</span>' +
+    '</button>' +
+    '<div class="notif-corpo" id="notif-corpo-' + esc(n.id) + '" hidden></div>' +
+  '</div>';
+}
+
+function pintarNotificacoes(){
+  const area = document.getElementById('notif-conteudo');
+  if(!CAIXA_NOTIF){ area.innerHTML = '<p class="relatorio-vazio">Não consegui carregar.</p>'; return; }
+  if(CAIXA_NOTIF.compartilhado){
+    area.innerHTML = '<p class="relatorio-vazio">A conta compartilhada não tem caixa de entrada. ' +
+      'Entre com sua conta Microsoft para receber notificações.</p>';
+    return;
+  }
+  document.getElementById('notif-aba-pessoais').textContent =
+    'Pessoais' + (CAIXA_NOTIF.naoLidasPessoais ? ' (' + CAIXA_NOTIF.naoLidasPessoais + ')' : '');
+  document.getElementById('notif-aba-gerais').textContent =
+    'Gerais' + (CAIXA_NOTIF.naoLidasGerais ? ' (' + CAIXA_NOTIF.naoLidasGerais + ')' : '');
+
+  if(ABA_NOTIF === 'gerais'){
+    const g = CAIXA_NOTIF.gerais || [];
+    area.innerHTML = g.length ? g.map(_itemNotifHTML).join('')
+      : '<p class="relatorio-vazio">Nenhum aviso geral por enquanto.</p>';
+  } else {
+    const p = CAIXA_NOTIF.pessoais || [];
+    if(!p.length){ area.innerHTML = '<p class="relatorio-vazio">Nada endereçado a você por enquanto.</p>'; }
+    else {
+      // agrupado por quem mandou, com quantas faltam ler de cada um
+      area.innerHTML = (CAIXA_NOTIF.porRemetente || []).map(g =>
+        '<div class="notif-grupo"><h4>' + esc(g.nome) +
+        ' <span class="notif-badge" data-remetente="' + esc(g.email) + '"' +
+          (g.naoLidas ? '' : ' hidden') + '>' + g.naoLidas + ' nova(s)</span>' +
+        ' <span class="hint">' + g.total + ' no total</span></h4>' +
+        p.filter(n => n.autor_email === g.email).map(_itemNotifHTML).join('') + '</div>').join('');
+    }
+  }
+  a11yAtualizarItens(true);
+}
+
+/* Abrir o item é o que marca como lido — abrir a aba não. Zerar o contador
+   só porque a pessoa espiou a caixa faria o número mentir. */
+async function abrirItemNotif(id){
+  const todas = (CAIXA_NOTIF.pessoais || []).concat(CAIXA_NOTIF.gerais || []);
+  const n = todas.find(x => x.id === id);
+  if(!n) return;
+  const corpo = document.getElementById('notif-corpo-' + id);
+  // o item pode não estar na tela (a outra prateleira está aberta, ou a lista
+  // foi redesenhada no meio) — sem esta guarda, um erro de JS travava o modal
+  if(!corpo) return;
+  const cabeca = corpo.previousElementSibling;
+  if(!corpo.hidden){
+    corpo.hidden = true; cabeca.setAttribute('aria-expanded','false');
+    return;
+  }
+
+  corpo.innerHTML =
+    (n.mudancas || []).map(c =>
+      '<div class="notif-mud"><b>' + esc(c.rotulo) + '</b><br>' +
+      (c.antes ? '<span class="av-antes">' + esc(c.antes) + '</span> → ' : '') +
+      '<span class="av-depois">' + esc(c.depois || '(vazio)') + '</span></div>').join('') +
+    (n.processo_id ? '<button class="btn-sm" onclick="irParaProcesso(\'' + esc(n.processo_id) + '\')">Abrir o processo</button> ' : '') +
+    (n.tipo === 'dirigida' && !n.respondida
+      ? '<div class="notif-responder">' +
+          '<label class="av-rot" for="resp-' + esc(id) + '">Está certo? Dê OK, ou escreva o que precisa conferir.</label>' +
+          '<textarea id="resp-' + esc(id) + '" rows="2" placeholder="Comentário (opcional)"></textarea>' +
+          '<button class="btn-primary btn-sm" onclick="responderNotif(\'' + esc(id) + '\')">Responder</button>' +
+        '</div>'
+      : '') +
+    (n.respondida ? '<p class="hint">Você já respondeu esta.</p>' : '') +
+    ((n.respostas || []).length
+      ? '<div class="notif-respostas">' + n.respostas.map(r =>
+          '<div>' + (r.resposta === 'ok' ? '✅ ' : '💬 ') + esc(r.nome) +
+          (r.texto ? ': ' + esc(r.texto) : ' deu OK') + '</div>').join('') + '</div>'
+      : '');
+  corpo.hidden = false;
+  cabeca.setAttribute('aria-expanded','true');
+
+  if(!n.lida){
+    try{
+      await Store.marcarNotificacaoLida(id);
+      n.lida = true;
+      document.getElementById('notif-' + id).classList.remove('nao-lida');
+      const ponto = cabeca.querySelector('.notif-ponto');
+      if(ponto) ponto.remove();
+      const g = (CAIXA_NOTIF.porRemetente || []).find(x => x.email === n.autor_email);
+      if(g && g.naoLidas){
+        g.naoLidas--;
+        // o selo do remetente também tem que cair — deixá-lo dizendo "1 nova"
+        // depois de a pessoa ler faria o número mentir logo no lugar mais visível
+        const selo = document.querySelector('.notif-badge[data-remetente="' + n.autor_email + '"]');
+        if(selo){ selo.textContent = g.naoLidas + ' nova(s)'; selo.hidden = !g.naoLidas; }
+      }
+      if(n.tipo === 'equipe') CAIXA_NOTIF.naoLidasGerais = Math.max(0, CAIXA_NOTIF.naoLidasGerais-1);
+      else CAIXA_NOTIF.naoLidasPessoais = Math.max(0, CAIXA_NOTIF.naoLidasPessoais-1);
+      const total = CAIXA_NOTIF.naoLidasPessoais + CAIXA_NOTIF.naoLidasGerais;
+      const num = document.getElementById('sino-num');
+      num.hidden = !total; num.textContent = total > 99 ? '99+' : String(total);
+      document.getElementById('notif-aba-pessoais').textContent =
+        'Pessoais' + (CAIXA_NOTIF.naoLidasPessoais ? ' (' + CAIXA_NOTIF.naoLidasPessoais + ')' : '');
+      document.getElementById('notif-aba-gerais').textContent =
+        'Gerais' + (CAIXA_NOTIF.naoLidasGerais ? ' (' + CAIXA_NOTIF.naoLidasGerais + ')' : '');
+      a11yAnunciar('Aberta. Faltam ' + total + ' não lida(s).');
+    }catch(e){ /* não conseguiu marcar: o item segue aberto, tenta de novo depois */ }
+  }
+}
+
+async function responderNotif(id){
+  const ta = document.getElementById('resp-' + id);
+  const texto = (ta && ta.value.trim()) || '';
+  try{
+    const r = await Store.responderNotificacao(id, texto);
+    toast(r.resposta === 'ok' ? 'OK enviado.' : 'Comentário enviado.');
+    a11yAnunciar(r.resposta === 'ok'
+      ? 'OK enviado para quem avisou.'
+      : 'Comentário enviado. Quem avisou vai receber um CONFIRA.');
+    await atualizarSino();
+    pintarNotificacoes();
+  }catch(e){
+    toast('Não consegui responder: ' + e.message);
+    a11yAnunciar('Não consegui responder: ' + e.message);
+  }
+}
+
+function irParaProcesso(id){
+  fecharModal('modal-notificacoes');
+  openProcess(id);
 }
 
 /* ════════════════════════════════════════════════════════════════
@@ -3224,6 +3777,9 @@ function iniciarPolling(){
         await recarregarLista();
       }
       setSync('ok','Nuvem sincronizada');
+      // notificação que chega enquanto a tela está aberta aparece sozinha —
+      // sem isso, só apareceria no próximo F5
+      atualizarSino();
     }catch(e){ setSync('err','Falha de conexão'); }
   }, Math.max(8, CONFIG.POLL_SEGUNDOS||20)*1000);
   window.addEventListener('focus', ()=>{ if(currentProc) sincronizarAgora(); else recarregarLista().catch(()=>{}); });
@@ -4497,6 +5053,25 @@ function a11yAtualizarItens(manterNivel){
         itensModal.push({el:b, label: b.textContent.replace(/^[▶✕]\s*/, '').trim()});
       });
     });
+    // caixa de notificações: as duas prateleiras e cada aviso da lista. Sem
+    // isto o modo numerado chegava só ao "Fechar" — e a caixa de entrada é
+    // justamente uma tela de percorrer item a item.
+    modalAberto.querySelectorAll('.notif-abas .fbtn').forEach(b=>{
+      itensModal.push({el:b, label:'Aba ' + b.textContent.trim()});
+    });
+    modalAberto.querySelectorAll('.notif-cabeca').forEach(b=>{
+      itensModal.push({el:b, label:b.textContent.replace(/\s+/g,' ').trim()});
+    });
+    // modal de avisar a equipe: as pessoas a marcar e o recado
+    modalAberto.querySelectorAll('#aviso-pessoas .av-check').forEach(c=>{
+      const lab = c.closest('label');
+      itensModal.push({el:c, label:'Pedir conferência de ' + ((lab?.textContent||'').trim())});
+    });
+    const recado = modalAberto.querySelector('#aviso-comentario');
+    if(recado) itensModal.push({el:recado, label:'Escrever um recado junto ao aviso'});
+    modalAberto.querySelectorAll('#notif-prefs input[type=checkbox]').forEach(c=>{
+      itensModal.push({el:c, label:(c.closest('label')?.textContent || '').trim()});
+    });
     modalAberto.querySelectorAll('.modal-actions button').forEach(b=>{
       itensModal.push({el:b, label:b.textContent.trim()});
     });
@@ -4519,13 +5094,16 @@ function a11yAtualizarItens(manterNivel){
     A11Y.todosItens = [
       {el: document.querySelector('.home-card[onclick*="publico"]'), label:'Processos Públicos'},
       {el: document.querySelector('.home-card[onclick*="privado"]'), label:'Processos Privados'},
+      {el: document.getElementById('btn-notificacoes'), label:'Notificações'},
       {el: document.getElementById('btn-atualizacoes-dia'), label:'Atualizações do dia'},
       {el: document.getElementById('btn-painel-gerencial'), label:'Painel gerencial'},
       {el: document.getElementById('btn-painel-prazos'), label:'Painel de prazos'},
       {el: document.getElementById('btn-painel-gastos'), label:'Painel de gastos'},
       {el: document.querySelector('.home-actions .btn-outline'), label:'Copiar prompt para IA'},
       {el: document.getElementById('btn-falar-sinki'), label:'Falar com Sinki'}
-    ].filter(i=>i.el);
+      // o sino fica escondido na conta compartilhada (que não tem caixa de
+      // entrada); numerar um botão escondido daria uma opção que não foca
+    ].filter(i=>i.el && !i.el.hidden);
   } else if(document.getElementById('view-sinki').classList.contains('active')){
     A11Y.todosItens = [
       {el: document.querySelector('#sinki-picker-modelo .ai-picker-btn'), label:'Modelo do Sinki'},
@@ -4791,6 +5369,7 @@ async function init(){
   iniciarPolling();
   updateBreadcrumb();
   a11yAtualizarItens();
+  atualizarSino();
 }
 
 /* Quem está logado vem da sessão do servidor — e só de lá.

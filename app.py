@@ -42,6 +42,10 @@ Rotas:
   GET     /api/gerencial                      → dados crus do acompanhamento por fases de todos os processos (a tela é quem calcula % e semáforo)
   GET     /api/eu                             → identidade de quem está logado (inclui "autor", que assina o que a pessoa fizer)
   GET     /api/usuarios                       → quem já entrou com conta própria — a lista de gente endereçável (notificar, atribuir)
+  POST    /api/notificacoes                   → avisa a equipe (tipo "equipe") ou pede conferência de alguém (tipo "dirigida") sobre o que mudou numa sessão de edição
+  GET     /api/notificacoes                   → caixa de entrada de quem está logado: gerais, pessoais e o agrupamento por remetente
+  POST    /api/notificacoes/<id>/lida         → marca lida ao ABRIR o item (não ao abrir a aba)
+  POST    /api/notificacoes/<id>/responder    → OK (sem texto) ou comentário; gera o retorno pra quem avisou
   POST    /api/sinki/conversar                → uma rodada de conversa com o Sinki (multipart: mensagem + arquivos + conversa_id)
   GET     /api/sinki/conversas                → lista as conversas com o Sinki (mais recentes primeiro)
   GET     /api/sinki/conversas/<cid>          → histórico completo de uma conversa
@@ -205,6 +209,7 @@ col_correcoes = db["correcoes_ia"]
 col_jobs = db["jobs_analise"]
 col_pendentes = db["pendentes_analise"]
 col_usuarios = db["usuarios"]
+col_notificacoes = db["notificacoes"]
 
 
 def _init_db():
@@ -217,6 +222,10 @@ def _init_db():
     col_correcoes.create_index([("processo_id", ASCENDING)])
     col_correcoes.create_index([("atualizadoEm", DESCENDING)])
     col_pendentes.create_index([("situacao", ASCENDING), ("detectadoEm", ASCENDING)])
+    # a caixa de entrada de cada pessoa é filtrada por destinatário e ordenada
+    # por data; e as gerais são lidas por todo mundo
+    col_notificacoes.create_index([("destinatarios", ASCENDING), ("criadoEm", DESCENDING)])
+    col_notificacoes.create_index([("tipo", ASCENDING), ("criadoEm", DESCENDING)])
 
 
 # ──────────────────────────────────────────────────────────────────
@@ -544,6 +553,263 @@ def listar_usuarios():
     ]
     usuarios.sort(key=lambda u: u["nome"].lower())
     return jsonify({"usuarios": usuarios})
+
+
+# ──────────────────────────────────────────────────────────────────
+# notificações entre a equipe
+# ──────────────────────────────────────────────────────────────────
+# siglas que aparecem no campo Órgão mas não identificam ninguém
+_SIGLAS_INUTEIS = {"CNPJ", "CPF", "LTDA", "EPP", "ME", "SA", "EIRELI", "S.A"}
+_PALAVRAS_VAZIAS = {"de", "da", "do", "das", "dos", "e"}
+
+
+def _rotulo_curto(doc):
+    """Identificação curta do processo pra caber numa notificação: algo como
+    "DNIT · PR · 17/08" ou "EPR · PR · 12/09".
+
+    O campo Órgão é longo demais pra usar inteiro — os valores reais são do
+    tipo "EPR Litoral Pioneiro S.A. (Concessionária de Rodovias — Lote 2 do
+    Paraná) — CNPJ 51.137.031/0001-20". A sigla é o que a equipe usa pra
+    falar do processo, então ela vem primeiro quando existe; sem sigla,
+    valem as duas primeiras palavras; sem órgão nenhum, o nome do processo."""
+    a = doc.get("analise") or {}
+    orgao = (a.get("geral_orgao") or "").strip()
+
+    nome = ""
+    if orgao:
+        siglas = [s for s in re.findall(r"\b[A-ZÀ-Ú]{2,}\b", orgao)
+                  if s.upper() not in _SIGLAS_INUTEIS]
+        if siglas:
+            nome = siglas[0]
+        else:
+            # sem sigla: corta no primeiro parêntese/travessão, porque dali pra
+            # frente vem razão social e CNPJ, que não ajudam a reconhecer nada
+            base = re.split(r"[(—–]|\s-\s", orgao)[0]
+            palavras = [p for p in base.split()
+                        if p.lower() not in _PALAVRAS_VAZIAS
+                        and p.strip(".").upper() not in _SIGLAS_INUTEIS]
+            nome = " ".join(palavras[:2])
+    if not nome:
+        nome = (doc.get("nome") or "Processo").strip()[:40]
+
+    partes = [nome]
+    uf = (a.get("geral_uf") or "").strip()
+    if uf:
+        partes.append(uf)
+    data = (a.get("prazo_abertura") or a.get("geral_abertura") or "").strip()
+    m = re.match(r"^(\d{4})-(\d{2})-(\d{2})$", data)
+    if m:
+        partes.append(f"{m.group(3)}/{m.group(2)}")
+    return " · ".join(partes)
+
+
+def _sessao_pessoa():
+    """(email, nome) de quem está logado. E-mail vazio = conta compartilhada,
+    que não é ninguém em particular."""
+    return (session.get("usuario_email") or "").strip().lower(), (session.get("usuario_nome") or "")
+
+
+def _emails_ativos():
+    return {u["_id"] for u in col_usuarios.find({"ativo": {"$ne": False}}, {"_id": 1}) if u.get("_id")}
+
+
+@app.route("/api/notificacoes", methods=["POST"])
+def criar_notificacao():
+    """Avisa a equipe (ou alguém específico) do que mudou num processo.
+
+    Um envio cobre a SESSÃO de edição inteira, não um campo. Perguntar
+    "avisar quem?" a cada campo salvo cansaria em uma semana — e aí ou
+    ninguém usa, ou manda tudo pra todo mundo e a caixa geral vira ruído.
+
+    O tipo é escolhido por intenção, não pelo tamanho da lista: "equipe" é
+    informativo, "dirigida" pede conferência. Deduzir isso de quantas pessoas
+    foram marcadas seria frágil — com 5 na equipe, mandar pra 4 e pra 5 cairia
+    em caixas diferentes sem ninguém perceber, e a entrada do 6º usuário mudaria
+    a classificação de envios idênticos."""
+    email, nome = _sessao_pessoa()
+    if not email:
+        return jsonify({"erro": "Entre com sua conta Microsoft para enviar notificação — "
+                                "a conta compartilhada não identifica quem está avisando."}), 403
+
+    corpo = request.get_json(silent=True) or {}
+    pid = (corpo.get("processo_id") or "").strip()
+    processo = col_processos.find_one({"_id": pid}) if pid else None
+    if not processo:
+        return jsonify({"erro": "Processo não encontrado"}), 404
+
+    mudancas = corpo.get("mudancas")
+    if not isinstance(mudancas, list) or not mudancas:
+        return jsonify({"erro": "Informe as mudanças que motivaram o aviso."}), 400
+
+    tipo = corpo.get("tipo")
+    if tipo not in ("equipe", "dirigida"):
+        return jsonify({"erro": "tipo deve ser 'equipe' ou 'dirigida'."}), 400
+
+    ativos = _emails_ativos()
+    if tipo == "dirigida":
+        pedidos = [str(d).strip().lower() for d in (corpo.get("destinatarios") or [])]
+        # quem enviou não precisa ser avisado do que ele mesmo fez
+        destinatarios = sorted({d for d in pedidos if d in ativos and d != email})
+        if not destinatarios:
+            return jsonify({"erro": "Escolha ao menos uma pessoa (fora você) para conferir."}), 400
+    else:
+        destinatarios = sorted(ativos - {email})
+
+    doc = {
+        "_id": uuid.uuid4().hex,
+        "tipo": tipo,
+        "processo_id": pid,
+        "processo_nome": processo.get("nome") or "",
+        "processo_rotulo": _rotulo_curto(processo),
+        "autor_email": email,
+        "autor_nome": nome or email,
+        "destinatarios": destinatarios,
+        # antes e depois de cada item, não só "mudou": sem isso, abrir a
+        # notificação não mostra nada útil — e se alguém editar o mesmo campo
+        # por cima, o que estava lá some pra sempre
+        "mudancas": [
+            {"rotulo": str(m.get("rotulo") or "")[:200],
+             "antes": str(m.get("antes") or "")[:800],
+             "depois": str(m.get("depois") or "")[:800]}
+            for m in mudancas[:40]
+        ],
+        "criadoEm": _agora_ms(),
+        "leituras": {},
+        "respostas": [],
+    }
+    col_notificacoes.insert_one(doc)
+    return jsonify(_sem_id_mongo(doc)), 201
+
+
+@app.route("/api/notificacoes/<nid>/responder", methods=["POST"])
+def responder_notificacao(nid):
+    """OK ou comentário numa notificação dirigida, e o retorno pra quem avisou.
+
+    O retorno só existe nas dirigidas de propósito: num aviso pra equipe
+    inteira, esperar confirmação de todo mundo daria cinco confirmações por
+    mudança — ninguém faria, e em duas semanas o "CONFIRA" não significaria
+    mais nada."""
+    email, nome = _sessao_pessoa()
+    if not email:
+        return jsonify({"erro": "Entre com sua conta Microsoft para responder."}), 403
+
+    n = col_notificacoes.find_one({"_id": nid})
+    if not n:
+        return jsonify({"erro": "Notificação não encontrada"}), 404
+    if email not in (n.get("destinatarios") or []):
+        return jsonify({"erro": "Esta notificação não foi endereçada a você."}), 403
+    if n.get("tipo") != "dirigida":
+        return jsonify({"erro": "Só notificação dirigida pede conferência."}), 400
+
+    corpo = request.get_json(silent=True) or {}
+    texto = (corpo.get("texto") or "").strip()
+    resposta = "comentario" if texto else "ok"
+
+    col_notificacoes.update_one(
+        {"_id": nid},
+        {"$set": {f"leituras.{_chave_leitura(email)}": _agora_ms()},
+         "$push": {"respostas": {"email": email, "nome": nome or email,
+                                 "resposta": resposta, "texto": texto[:2000],
+                                 "em": _agora_ms()}}},
+    )
+
+    # o retorno vira uma notificação de verdade pra quem avisou, pra caber na
+    # mesma caixa de entrada em vez de virar um segundo lugar pra olhar
+    col_notificacoes.insert_one({
+        "_id": uuid.uuid4().hex,
+        "tipo": "retorno",
+        "origem_id": nid,
+        "processo_id": n.get("processo_id"),
+        "processo_nome": n.get("processo_nome"),
+        "processo_rotulo": n.get("processo_rotulo"),
+        "autor_email": email,
+        "autor_nome": nome or email,
+        "destinatarios": [n["autor_email"]],
+        "resposta": resposta,
+        "mudancas": ([{"rotulo": "Comentário", "antes": "", "depois": texto[:2000]}]
+                     if texto else []),
+        "criadoEm": _agora_ms(),
+        "leituras": {},
+        "respostas": [],
+    })
+    return jsonify({"ok": True, "resposta": resposta})
+
+
+def _chave_leitura(email):
+    # ponto é separador de caminho no Mongo; e-mail tem ponto
+    return email.replace(".", "__")
+
+
+def _notificacao_para_tela(n, email):
+    lida = _chave_leitura(email) in (n.get("leituras") or {})
+    return {
+        "id": n["_id"],
+        "tipo": n.get("tipo"),
+        "processo_id": n.get("processo_id"),
+        "processo_rotulo": n.get("processo_rotulo") or n.get("processo_nome") or "",
+        "autor_nome": n.get("autor_nome") or "",
+        "autor_email": n.get("autor_email") or "",
+        "mudancas": n.get("mudancas") or [],
+        "resposta": n.get("resposta") or "",
+        "respostas": n.get("respostas") or [],
+        "criadoEm": n.get("criadoEm") or 0,
+        "lida": lida,
+        "respondida": any(r.get("email") == email for r in (n.get("respostas") or [])),
+    }
+
+
+@app.route("/api/notificacoes", methods=["GET"])
+def listar_notificacoes():
+    """Caixa de entrada de quem está logado, nas duas prateleiras.
+
+    Geral = avisos pra equipe. Pessoal = o que foi endereçado a você
+    (conferências pedidas e retornos das suas), agrupado por quem mandou."""
+    email, _nome = _sessao_pessoa()
+    if not email:
+        # a conta compartilhada não é ninguém: não tem caixa de entrada
+        return jsonify({"gerais": [], "pessoais": [], "porRemetente": [],
+                        "naoLidasGerais": 0, "naoLidasPessoais": 0, "compartilhado": True})
+
+    gerais = [_notificacao_para_tela(n, email) for n in col_notificacoes.find(
+        {"tipo": "equipe", "destinatarios": email}).sort("criadoEm", DESCENDING).limit(100)]
+    pessoais = [_notificacao_para_tela(n, email) for n in col_notificacoes.find(
+        {"tipo": {"$in": ["dirigida", "retorno"]}, "destinatarios": email}
+    ).sort("criadoEm", DESCENDING).limit(200)]
+
+    # agrupado por quem mandou, com quantas faltam ler de cada um — o número
+    # cai conforme a pessoa abre cada item, não ao abrir a aba
+    porRemetente = {}
+    for p in pessoais:
+        g = porRemetente.setdefault(p["autor_email"], {
+            "email": p["autor_email"], "nome": p["autor_nome"], "total": 0, "naoLidas": 0})
+        g["total"] += 1
+        if not p["lida"]:
+            g["naoLidas"] += 1
+    remetentes = sorted(porRemetente.values(), key=lambda g: (-g["naoLidas"], g["nome"].lower()))
+
+    return jsonify({
+        "gerais": gerais,
+        "pessoais": pessoais,
+        "porRemetente": remetentes,
+        "naoLidasGerais": sum(1 for g in gerais if not g["lida"]),
+        "naoLidasPessoais": sum(1 for p in pessoais if not p["lida"]),
+        "compartilhado": False,
+    })
+
+
+@app.route("/api/notificacoes/<nid>/lida", methods=["POST"])
+def marcar_notificacao_lida(nid):
+    """Marca como lida ao ABRIR o item — não ao abrir a aba. Zerar tudo só
+    porque a pessoa espiou a caixa faria o contador mentir."""
+    email, _nome = _sessao_pessoa()
+    if not email:
+        return jsonify({"erro": "Sessão sem identificação."}), 403
+    r = col_notificacoes.update_one(
+        {"_id": nid, "destinatarios": email},
+        {"$set": {f"leituras.{_chave_leitura(email)}": _agora_ms()}})
+    if not r.matched_count:
+        return jsonify({"erro": "Notificação não encontrada"}), 404
+    return jsonify({"ok": True})
 
 
 @app.route("/logout", methods=["GET", "POST"])
