@@ -54,6 +54,20 @@ Rotas:
   GET     /api/processos/<id>/concorrentes         → lista as verificações de documentação de concorrente já feitas neste processo
   POST    /api/processos/<id>/concorrentes         → confere a documentação de uma empresa concorrente (multipart: empresa, arquivos) contra as exigências já extraídas do edital
   DELETE  /api/processos/<id>/concorrentes/<cid>   → apaga uma verificação de concorrente e seus arquivos
+  GET     /api/comercial/oportunidades        → lista as oportunidades comerciais (área Comercial, separada dos processos)
+  POST    /api/comercial/oportunidades        → cria uma oportunidade
+  PUT     /api/comercial/oportunidades/<id>   → substitui a oportunidade (inclusive editar margem)
+  DELETE  /api/comercial/oportunidades/<id>   → remove a oportunidade
+  GET     /api/comercial/equipe               → lista a equipe comercial (custo mensal, alimenta os indicadores)
+  POST    /api/comercial/equipe               → cria pessoa na equipe
+  PUT     /api/comercial/equipe/<id>          → substitui
+  DELETE  /api/comercial/equipe/<id>          → remove
+  GET     /api/comercial/meta                 → meta anual de carteira (singleton)
+  PUT     /api/comercial/meta                 → substitui a meta
+  GET     /api/comercial/timesheet            → horas dedicadas por mês
+  PUT     /api/comercial/timesheet/<mes>      → upsert do total do mês (AAAA-MM)
+  DELETE  /api/comercial/timesheet/<mes>      → remove o mês
+  POST    /api/comercial/importar             → substitui TODO o módulo pelo backup {oportunidades,equipe,meta,timesheet} — rota de recuperação, não só migração
 
 Montador de Dossiê (integrado):
   Usa o módulo em montador-dossie/ (mesmo repo) para buscar a documentação de
@@ -210,6 +224,10 @@ col_jobs = db["jobs_analise"]
 col_pendentes = db["pendentes_analise"]
 col_usuarios = db["usuarios"]
 col_notificacoes = db["notificacoes"]
+col_comercial_oportunidades = db["comercial_oportunidades"]
+col_comercial_equipe = db["comercial_equipe"]
+col_comercial_meta = db["comercial_meta"]
+col_comercial_timesheet = db["comercial_timesheet"]
 
 
 def _init_db():
@@ -226,6 +244,7 @@ def _init_db():
     # por data; e as gerais são lidas por todo mundo
     col_notificacoes.create_index([("destinatarios", ASCENDING), ("criadoEm", DESCENDING)])
     col_notificacoes.create_index([("tipo", ASCENDING), ("criadoEm", DESCENDING)])
+    col_comercial_oportunidades.create_index([("data", ASCENDING)])
 
 
 # ──────────────────────────────────────────────────────────────────
@@ -3139,6 +3158,219 @@ def excluir_concorrente(pid, cid):
     col_processos.update_one({"_id": pid}, {"$pull": {"concorrentes": {"_id": cid}}})
     shutil.rmtree(CONCORRENTES_DIR / pid / cid, ignore_errors=True)
     return jsonify({"ok": True})
+
+
+# ──────────────────────────────────────────────────────────────────
+# comercial — painel de oportunidades, equipe, meta e indicadores
+# ──────────────────────────────────────────────────────────────────
+# Documento inteiro, sem schema rígido — mesma filosofia de col_processos
+# (comentário lá em cima): cada oportunidade tem ~40 campos e evita migração
+# a cada campo novo que a área comercial decidir acompanhar. Quem calcula
+# os indicadores (ROI, pipeline, eficácia...) é o front, em cima da lista
+# crua; aqui só se guarda e devolve.
+_META_ID = "atual"
+
+
+@app.route("/api/comercial/oportunidades", methods=["GET"])
+def listar_oportunidades():
+    docs = col_comercial_oportunidades.find().sort("data", DESCENDING)
+    return jsonify({"oportunidades": [_sem_id_mongo(d) for d in docs]})
+
+
+@app.route("/api/comercial/oportunidades", methods=["POST"])
+def criar_oportunidade():
+    corpo = request.get_json(silent=True)
+    if not isinstance(corpo, dict):
+        return jsonify({"erro": "Corpo deve ser um objeto JSON"}), 400
+    doc = dict(corpo)
+    doc["_id"] = uuid.uuid4().hex
+    col_comercial_oportunidades.insert_one(doc)
+    return jsonify(_sem_id_mongo(doc)), 201
+
+
+@app.route("/api/comercial/oportunidades/<oid>", methods=["PUT"])
+def salvar_oportunidade(oid):
+    corpo = request.get_json(silent=True)
+    if not isinstance(corpo, dict):
+        return jsonify({"erro": "Corpo deve ser um objeto JSON"}), 400
+    doc = dict(corpo)
+    doc.pop("id", None)
+    doc["_id"] = oid
+    # substitui o documento inteiro — sem controle de versão de propósito: é
+    # tabela editada campo a campo (ex.: margem no ROI), não um formulário
+    # longo em edição simultânea, então o risco de conflito não paga a
+    # complexidade de seVersao que col_processos usa
+    r = col_comercial_oportunidades.replace_one({"_id": oid}, doc, upsert=False)
+    if not r.matched_count:
+        return jsonify({"erro": "Oportunidade não encontrada"}), 404
+    return jsonify(_sem_id_mongo(doc))
+
+
+@app.route("/api/comercial/oportunidades/<oid>", methods=["DELETE"])
+def excluir_oportunidade(oid):
+    r = col_comercial_oportunidades.delete_one({"_id": oid})
+    if not r.deleted_count:
+        return jsonify({"erro": "Oportunidade não encontrada"}), 404
+    return jsonify({"ok": True})
+
+
+@app.route("/api/comercial/equipe", methods=["GET"])
+def listar_equipe_comercial():
+    docs = col_comercial_equipe.find().sort("nome", ASCENDING)
+    return jsonify({"equipe": [_sem_id_mongo(d) for d in docs]})
+
+
+@app.route("/api/comercial/equipe", methods=["POST"])
+def criar_pessoa_equipe():
+    corpo = request.get_json(silent=True)
+    if not isinstance(corpo, dict):
+        return jsonify({"erro": "Corpo deve ser um objeto JSON"}), 400
+    doc = dict(corpo)
+    doc["_id"] = uuid.uuid4().hex
+    col_comercial_equipe.insert_one(doc)
+    return jsonify(_sem_id_mongo(doc)), 201
+
+
+@app.route("/api/comercial/equipe/<pid>", methods=["PUT"])
+def salvar_pessoa_equipe(pid):
+    corpo = request.get_json(silent=True)
+    if not isinstance(corpo, dict):
+        return jsonify({"erro": "Corpo deve ser um objeto JSON"}), 400
+    doc = dict(corpo)
+    doc.pop("id", None)
+    doc["_id"] = pid
+    r = col_comercial_equipe.replace_one({"_id": pid}, doc, upsert=False)
+    if not r.matched_count:
+        return jsonify({"erro": "Pessoa não encontrada"}), 404
+    return jsonify(_sem_id_mongo(doc))
+
+
+@app.route("/api/comercial/equipe/<pid>", methods=["DELETE"])
+def excluir_pessoa_equipe(pid):
+    r = col_comercial_equipe.delete_one({"_id": pid})
+    if not r.deleted_count:
+        return jsonify({"erro": "Pessoa não encontrada"}), 404
+    return jsonify({"ok": True})
+
+
+@app.route("/api/comercial/meta", methods=["GET"])
+def obter_meta_comercial():
+    doc = col_comercial_meta.find_one({"_id": _META_ID})
+    if not doc:
+        return jsonify({"ano": date.today().year, "metaAnual": 0, "valorCarteiraInicial": 0})
+    return jsonify(_sem_id_mongo(doc))
+
+
+@app.route("/api/comercial/meta", methods=["PUT"])
+def salvar_meta_comercial():
+    corpo = request.get_json(silent=True)
+    if not isinstance(corpo, dict):
+        return jsonify({"erro": "Corpo deve ser um objeto JSON"}), 400
+    doc = {
+        "_id": _META_ID,
+        "ano": int(corpo.get("ano") or date.today().year),
+        "metaAnual": float(corpo.get("metaAnual") or 0),
+        "valorCarteiraInicial": float(corpo.get("valorCarteiraInicial") or 0),
+    }
+    col_comercial_meta.replace_one({"_id": _META_ID}, doc, upsert=True)
+    return jsonify(_sem_id_mongo(doc))
+
+
+@app.route("/api/comercial/timesheet", methods=["GET"])
+def listar_timesheet():
+    docs = col_comercial_timesheet.find().sort("_id", ASCENDING)
+    return jsonify({"timesheet": [{"mes": d["_id"], "total": d.get("total") or 0} for d in docs]})
+
+
+@app.route("/api/comercial/timesheet/<mes>", methods=["PUT"])
+def salvar_timesheet_mes(mes):
+    if not re.match(r"^\d{4}-\d{2}$", mes):
+        return jsonify({"erro": "Mês deve estar no formato AAAA-MM"}), 400
+    corpo = request.get_json(silent=True) or {}
+    total = float(corpo.get("total") or 0)
+    col_comercial_timesheet.replace_one({"_id": mes}, {"_id": mes, "total": total}, upsert=True)
+    return jsonify({"mes": mes, "total": total})
+
+
+@app.route("/api/comercial/timesheet/<mes>", methods=["DELETE"])
+def excluir_timesheet_mes(mes):
+    r = col_comercial_timesheet.delete_one({"_id": mes})
+    if not r.deleted_count:
+        return jsonify({"erro": "Mês não encontrado"}), 404
+    return jsonify({"ok": True})
+
+
+@app.route("/api/comercial/importar", methods=["POST"])
+def importar_backup_comercial():
+    """Substitui TODO o módulo Comercial pelo conteúdo de um backup — o mesmo
+    formato que o painel original já exportava (oportunidades/equipe/meta/
+    timesheet). Fica como rota permanente de recuperação, não só migração
+    inicial: a equipe já usa esse fluxo de exportar/importar como rede de
+    segurança, então mantê-lo dá continuidade a um hábito que já existe."""
+    corpo = request.get_json(silent=True)
+    if not isinstance(corpo, dict) or not isinstance(corpo.get("oportunidades"), list):
+        return jsonify({"erro": "Arquivo não parece ser um backup válido — falta a lista de oportunidades."}), 400
+
+    oportunidades = corpo.get("oportunidades") or []
+    equipe = corpo.get("equipe") or []
+    meta = corpo.get("meta") or {}
+    timesheet = corpo.get("timesheet") or []
+    if not isinstance(equipe, list) or not isinstance(timesheet, list) or not isinstance(meta, dict):
+        return jsonify({"erro": "Arquivo não parece ser um backup válido — equipe/meta/timesheet em formato inesperado."}), 400
+
+    col_comercial_oportunidades.delete_many({})
+    if oportunidades:
+        docs = []
+        for o in oportunidades:
+            d = dict(o)
+            # preserva o id original quando existe (mantém rastreabilidade
+            # de quem editou o quê antes da importação); gera um novo só se
+            # faltar ou vier duplicado
+            oid = str(d.pop("id", None) or d.pop("_id", None) or uuid.uuid4().hex)
+            d["_id"] = oid
+            docs.append(d)
+        vistos = set()
+        for d in docs:
+            if d["_id"] in vistos:
+                d["_id"] = uuid.uuid4().hex
+            vistos.add(d["_id"])
+        col_comercial_oportunidades.insert_many(docs)
+
+    col_comercial_equipe.delete_many({})
+    if equipe:
+        docs = []
+        for p in equipe:
+            d = dict(p)
+            d["_id"] = str(d.pop("id", None) or d.pop("_id", None) or uuid.uuid4().hex)
+            docs.append(d)
+        vistos = set()
+        for d in docs:
+            if d["_id"] in vistos:
+                d["_id"] = uuid.uuid4().hex
+            vistos.add(d["_id"])
+        col_comercial_equipe.insert_many(docs)
+
+    meta_doc = {
+        "_id": _META_ID,
+        "ano": int(meta.get("ano") or date.today().year),
+        "metaAnual": float(meta.get("metaAnual") or 0),
+        "valorCarteiraInicial": float(meta.get("valorCarteiraInicial") or 0),
+    }
+    col_comercial_meta.replace_one({"_id": _META_ID}, meta_doc, upsert=True)
+
+    col_comercial_timesheet.delete_many({})
+    if timesheet:
+        docs = [{"_id": t.get("mes"), "total": float(t.get("total") or 0)}
+                for t in timesheet if t.get("mes")]
+        if docs:
+            col_comercial_timesheet.insert_many(docs)
+
+    return jsonify({
+        "ok": True,
+        "oportunidades": len(oportunidades),
+        "equipe": len(equipe),
+        "timesheet": len(timesheet),
+    })
 
 
 @app.route("/api/gastos", methods=["GET"])
