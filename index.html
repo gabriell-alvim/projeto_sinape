@@ -2737,6 +2737,188 @@ function nossoValorLicitadoCom(o){ return (o.valorLicitado||0) * fatorParticipac
 function nossoValorGanhoCom(o){ return (o.valorGanho||0) * fatorParticipacaoCom(o); }
 function nossoValorPonderadoCom(o){ return nossoValorLicitadoCom(o) * (o.percChanceReal||0); }
 
+/* ── motor de cálculo (portado do painel original — funções puras, operam
+   sobre COM.oportunidades/COM.equipe/COM.meta/COM.timesheet, sem window.storage
+   nem DOM; cada indicador agrupa por mês do ano corrente da Meta) ── */
+function calcProspeccaoCom(){
+  const ano = calcAnoCom(); const keys = getYearMonthKeysCom(ano);
+  const rows = keys.map(k=>({mes:k, pub_qtd:0, pub_valor:0, priv_qtd:0, priv_valor:0}));
+  const idx = {}; keys.forEach((k,i)=>idx[k]=i);
+  COM.oportunidades.forEach(o=>{
+    if(!isEnviadaCom(o)) return;
+    const d = parseDateStrCom(o.dataEnvio) || parseDateStrCom(o.data);
+    if(!d) return;
+    const k = ymKeyCom(d); if(idx[k]===undefined) return;
+    const r = rows[idx[k]];
+    if(isPublicoCom(o.segmento)){ r.pub_qtd++; r.pub_valor += nossoValorLicitadoCom(o); }
+    else { r.priv_qtd++; r.priv_valor += nossoValorLicitadoCom(o); }
+  });
+  const total = rows.reduce((a,r)=>({pub_qtd:a.pub_qtd+r.pub_qtd, pub_valor:a.pub_valor+r.pub_valor,
+    priv_qtd:a.priv_qtd+r.priv_qtd, priv_valor:a.priv_valor+r.priv_valor}), {pub_qtd:0,pub_valor:0,priv_qtd:0,priv_valor:0});
+  return {rows, total};
+}
+function calcGanhoCom(){
+  const ano = calcAnoCom(); const keys = getYearMonthKeysCom(ano);
+  const rows = keys.map(k=>({mes:k, pub_qtd:0, pub_valor:0, priv_qtd:0, priv_valor:0}));
+  const idx = {}; keys.forEach((k,i)=>idx[k]=i);
+  COM.oportunidades.forEach(o=>{
+    if(!isGanhoCom(o)) return;
+    const d = parseDateStrCom(o.dataConclusao) || parseDateStrCom(o.dataEnvio);
+    if(!d) return;
+    const k = ymKeyCom(d); if(idx[k]===undefined) return;
+    const r = rows[idx[k]];
+    if(isPublicoCom(o.segmento)){ r.pub_qtd++; r.pub_valor += nossoValorGanhoCom(o); }
+    else { r.priv_qtd++; r.priv_valor += nossoValorGanhoCom(o); }
+  });
+  const total = rows.reduce((a,r)=>({pub_qtd:a.pub_qtd+r.pub_qtd, pub_valor:a.pub_valor+r.pub_valor,
+    priv_qtd:a.priv_qtd+r.priv_qtd, priv_valor:a.priv_valor+r.priv_valor}), {pub_qtd:0,pub_valor:0,priv_qtd:0,priv_valor:0});
+  return {rows, total};
+}
+function calcManutNovoCom(){
+  const ano = calcAnoCom(); const keys = getYearMonthKeysCom(ano);
+  const rows = keys.map(k=>({mes:k, pub_novo_qtd:0, pub_novo_valor:0, pub_manut_qtd:0, pub_manut_valor:0,
+                              priv_novo_qtd:0, priv_novo_valor:0, priv_manut_qtd:0, priv_manut_valor:0}));
+  const idx = {}; keys.forEach((k,i)=>idx[k]=i);
+  COM.oportunidades.forEach(o=>{
+    if(!isGanhoCom(o)) return;
+    const d = parseDateStrCom(o.dataConclusao) || parseDateStrCom(o.dataEnvio);
+    if(!d) return;
+    const k = ymKeyCom(d); if(idx[k]===undefined) return;
+    const r = rows[idx[k]];
+    const novo = (o.continuidadeOuNovo||'').trim().toLowerCase() === 'novo';
+    const pub = isPublicoCom(o.segmento);
+    const valor = nossoValorGanhoCom(o);
+    if(pub && novo){ r.pub_novo_qtd++; r.pub_novo_valor+=valor; }
+    else if(pub && !novo){ r.pub_manut_qtd++; r.pub_manut_valor+=valor; }
+    else if(!pub && novo){ r.priv_novo_qtd++; r.priv_novo_valor+=valor; }
+    else { r.priv_manut_qtd++; r.priv_manut_valor+=valor; }
+  });
+  return {rows};
+}
+function calcEficaciaCom(){
+  const ano = calcAnoCom(); const keys = getYearMonthKeysCom(ano);
+  const rows = keys.map(k=>({mes:k, enviadas:0, habilitadas:0, vencedoras:0, desclass:0, valorContratado:0}));
+  const idx = {}; keys.forEach((k,i)=>idx[k]=i);
+  COM.oportunidades.forEach(o=>{
+    const d = parseDateStrCom(o.dataEnvio);
+    if(!d) return;
+    const k = ymKeyCom(d); if(idx[k]===undefined) return;
+    const r = rows[idx[k]];
+    if(isEnviadaCom(o)){
+      r.enviadas++;
+      if(isHabilitadaCom(o)) r.habilitadas++;
+      if(isDesclassificadaCom(o)) r.desclass++;
+      if(isGanhoCom(o)){ r.vencedoras++; r.valorContratado += nossoValorGanhoCom(o); }
+    }
+  });
+  return {rows};
+}
+function calcEficienciaCom(){
+  const ano = calcAnoCom(); const keys = getYearMonthKeysCom(ano);
+  const eficacia = calcEficaciaCom().rows;
+  const custoMes = COM.equipe.reduce((a,p)=>a+(Number(p.custoMensal)||0),0);
+  const rows = keys.map((k,i)=>{
+    const enviadas = eficacia[i].enviadas, vencedoras = eficacia[i].vencedoras;
+    return { mes:k, custoEquipe: custoMes, enviadas, vencedoras,
+      custoPorProposta: enviadas>0 ? custoMes/enviadas : 0,
+      custoPorVitoria: vencedoras>0 ? custoMes/vencedoras : 0 };
+  });
+  return {rows};
+}
+function calcProdutividadeCom(){
+  const ano = calcAnoCom(); const keys = getYearMonthKeysCom(ano);
+  const rows = keys.map(k=>({mes:k, editais:0, propostas:0, processosSet:new Set(), itens:0}));
+  const idx = {}; keys.forEach((k,i)=>idx[k]=i);
+  COM.oportunidades.forEach(o=>{
+    const d = parseDateStrCom(o.data);
+    if(!d) return;
+    const k = ymKeyCom(d); if(idx[k]===undefined) return;
+    const r = rows[idx[k]];
+    r.editais++;
+    if(isEnviadaCom(o)) r.propostas++;
+    if(o.numProposta) r.processosSet.add(String(o.numProposta));
+    r.itens += (o.nItens||0);
+  });
+  const horasPorMes = {};
+  (COM.timesheet||[]).forEach(m=> horasPorMes[m.mes] = m.total);
+  return {rows: rows.map(r=>({mes:r.mes, editais:r.editais, propostas:r.propostas,
+    processos:r.processosSet.size, itens:r.itens, horas: horasPorMes[r.mes]||0}))};
+}
+function calcPipelineCom(){
+  const ano = calcAnoCom(); const keys = getYearMonthKeysCom(ano);
+  const ganho = calcGanhoCom().rows;
+  const metaAnual = (COM.meta && COM.meta.metaAnual) || 0;
+  let acumuladoGanho = (COM.meta && COM.meta.valorCarteiraInicial) || 0;
+  const rows = keys.map((k,i)=>{
+    let oport=0, oportPond=0;
+    COM.oportunidades.forEach(o=>{
+      const d = parseDateStrCom(o.dataEnvio) || parseDateStrCom(o.data);
+      if(d && ymKeyCom(d)===k){ oport += nossoValorLicitadoCom(o); oportPond += nossoValorPonderadoCom(o); }
+    });
+    acumuladoGanho += (ganho[i].pub_valor + ganho[i].priv_valor);
+    const metaRestante = Math.max(metaAnual - acumuladoGanho, 0);
+    return {mes:k, oport, oportPond, metaRestante, taxaCobertura: metaRestante>0 ? oportPond/metaRestante : 0};
+  });
+  return {rows};
+}
+function calcROICom(){
+  const ano = calcAnoCom(); const keys = getYearMonthKeysCom(ano);
+  const rows = keys.map(k=>({mes:k, contratos:[], valorContrato:0, lucroEsperado:0}));
+  const idx = {}; keys.forEach((k,i)=>idx[k]=i);
+  COM.oportunidades.forEach(o=>{
+    if(!isGanhoCom(o)) return;
+    const d = parseDateStrCom(o.dataConclusao) || parseDateStrCom(o.dataEnvio);
+    if(!d) return;
+    const k = ymKeyCom(d); if(idx[k]===undefined) return;
+    const r = rows[idx[k]];
+    const valor = nossoValorGanhoCom(o);
+    const margem = o.margemEsperada!==null && o.margemEsperada!==undefined ? o.margemEsperada : null;
+    const lucro = margem!==null ? valor*margem : 0;
+    r.contratos.push({id:o.id, nome:(o.cliente||'')+' - '+(o.objeto||''), valor, margem, lucro, prazo:o.tempoContrato});
+    r.valorContrato += valor;
+    r.lucroEsperado += lucro;
+  });
+  return {rows};
+}
+function calcNovosClientesCom(){
+  const ano = calcAnoCom(); const keys = getYearMonthKeysCom(ano);
+  const rows = keys.map(k=>({mes:k, prospVol:0, novosQtd:0, ganhoQtd:0, valorTotal:0, novosValor:0, ganhoValor:0}));
+  const idx = {}; keys.forEach((k,i)=>idx[k]=i);
+  COM.oportunidades.forEach(o=>{
+    const d = parseDateStrCom(o.dataEnvio) || parseDateStrCom(o.data);
+    if(!d || !isEnviadaCom(o)) return;
+    const k = ymKeyCom(d); if(idx[k]===undefined) return;
+    const r = rows[idx[k]];
+    r.prospVol++;
+    r.valorTotal += nossoValorLicitadoCom(o);
+    const isNovo = (o.novosClientes||'').trim().toLowerCase()==='sim';
+    if(isNovo){
+      r.novosQtd++; r.novosValor += nossoValorLicitadoCom(o);
+      if(isGanhoCom(o)){ r.ganhoQtd++; r.ganhoValor += nossoValorGanhoCom(o); }
+    }
+  });
+  return {rows};
+}
+function calcProblemasCom(){
+  const irrev = {}; const rev = {};
+  COM.oportunidades.forEach(o=>{
+    if(!isPercaCom(o)) return;
+    const causa = o.motivo || '(sem motivo registrado)';
+    if(o.classificacaoProblema === 'Irreversível'){
+      if(!irrev[causa]) irrev[causa] = {causa, ocorrencias:0, solucao:o.solucaoProposta||'', prazo:o.prazoSolucao||''};
+      irrev[causa].ocorrencias++;
+    } else if(o.classificacaoProblema === 'Reversível'){
+      if(!rev[causa]) rev[causa] = {causa, ocorrencias:0, solucao:o.solucaoProposta||'', prazo:o.prazoSolucao||''};
+      rev[causa].ocorrencias++;
+    }
+  });
+  const irrevArr = Object.values(irrev).sort((a,b)=>b.ocorrencias-a.ocorrencias);
+  const revArr = Object.values(rev).sort((a,b)=>b.ocorrencias-a.ocorrencias);
+  const totalIrrev = irrevArr.reduce((a,x)=>a+x.ocorrencias,0);
+  irrevArr.forEach(x=> x.pct = totalIrrev>0 ? x.ocorrencias/totalIrrev : 0);
+  return {irrev: irrevArr, rev: revArr};
+}
+
 /* ── carregamento e navegação ── */
 async function abrirComercial(){
   if(Store.modo!=='api'){ toast('A área Comercial precisa do Painel conectado ao backend.'); return; }
@@ -2779,8 +2961,10 @@ function comercialAbrirPagina(id, pularA11y){
     b.classList.toggle('active', b.id==='com-tab-'+id);
   });
   const fn = COM_RENDERERS[id];
+  // páginas com gráfico montam o <canvas> na hora e o Chart.js em cima dele
+  // de forma assíncrona por conta própria (ver _paginaComGrafico) — não há
+  // um segundo passo a chamar aqui
   document.getElementById('com-conteudo').innerHTML = fn ? fn() : '<p class="com-empty">Em construção.</p>';
-  if(typeof (window['comercialMontarGraficos_'+id]) === 'function') window['comercialMontarGraficos_'+id]();
   updateBreadcrumb();
   if(!pularA11y) a11yAtualizarItens();
 }
@@ -3276,6 +3460,357 @@ function a11yItensComercial_timesheet(){
     return {el: tr.querySelector('.btn-sm.danger'), label: 'Excluir horas de: '+label};
   }).filter(i=>i.el);
 }
+
+/* ── Chart.js sob demanda — só quando a área Comercial abre uma página de
+   indicador, não no carregamento normal do Painel. Hospedado dentro do
+   projeto (não CDN): o app inteiro hoje não depende de nada externo, e um
+   CDN fora do ar não pode tirar os gráficos do ar. ── */
+let _chartJsPromise = null;
+function garantirChartJs(){
+  if(window.Chart) return Promise.resolve();
+  if(_chartJsPromise) return _chartJsPromise;
+  _chartJsPromise = new Promise((resolve, reject)=>{
+    const s = document.createElement('script');
+    s.src = '/chart.umd.min.js';
+    s.onload = resolve;
+    s.onerror = ()=>{ _chartJsPromise = null; reject(new Error('Não consegui carregar a biblioteca de gráficos.')); };
+    document.head.appendChild(s);
+  });
+  return _chartJsPromise;
+}
+const CORES_COM = { teal:'#1a8a8a', tealClaro:'#3DA3A3', terra:'#bc5d31', ouro:'#b9954c', verde:'#15803d', vermelho:'#b91c1c', roxo:'#6d28d9' };
+const OPCOES_CHART_PADRAO = { responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:'bottom', labels:{boxWidth:10, font:{size:11}} } } };
+function labelsMeses(rows){ return rows.map(r=>MES_NOMES[Number(r.mes.split('-')[1])-1]); }
+/* limpa um gráfico anterior no mesmo canvas — trocar de página e voltar sem
+   isso duplicaria a instância do Chart.js em cima do mesmo <canvas> */
+function _novoChart(id, cfg){
+  const canvas = document.getElementById(id);
+  if(!canvas) return null;
+  const existente = window.Chart.getChart(canvas);
+  if(existente) existente.destroy();
+  return new window.Chart(canvas, cfg);
+}
+/* toda página de indicador segue o mesmo two-step: desenha o HTML (com
+   <canvas> vazio) na hora, e monta o gráfico depois que o Chart.js carregar
+   — assim a página nunca fica em branco esperando a biblioteca. */
+function _paginaComGrafico(html, montar){
+  garantirChartJs().then(montar).catch(e=>{
+    const avisos = document.querySelectorAll('#com-conteudo .com-chart-wrap');
+    avisos.forEach(w=> w.innerHTML = '<p class="com-empty">'+esc(e.message)+'</p>');
+  });
+  return html;
+}
+
+/* ── RESUMO EXECUTIVO ── */
+function pageResumoComercial(){
+  const m = COM.meta;
+  const carteiraInicial = m.valorCarteiraInicial||0;
+  const ganhoRows = calcGanhoCom().rows;
+  const ganhoAno = ganhoRows.reduce((a,r)=>a+r.pub_valor+r.priv_valor,0);
+  const ganhoConsiderado = carteiraInicial + ganhoAno;
+  const roi = calcROICom();
+  const lucroEsperado = roi.rows.reduce((a,r)=>a+r.lucroEsperado,0);
+  const custoAnual = COM.equipe.reduce((a,p)=>a+(Number(p.custoMensal)||0),0) * 12;
+  const roiArea = custoAnual>0 ? lucroEsperado/custoAnual : 0;
+  const pctAtingido = m.metaAnual ? ganhoConsiderado/m.metaAnual : 0;
+  const html = `
+    <div class="kpi-row">
+      <div class="kpi-item"><div class="kpi-rot">Meta Anual</div><div class="kpi-val">${fmtBRL(m.metaAnual,true)}</div></div>
+      <div class="kpi-item green"><div class="kpi-rot">% Atingido</div><div class="kpi-val">${fmtPct(pctAtingido)}</div><div class="kpi-sub">${fmtBRL(ganhoAno,true)} ganhos no ano + ${fmtBRL(carteiraInicial,true)} carteira</div></div>
+      <div class="kpi-item amber"><div class="kpi-rot">Lucro Esperado</div><div class="kpi-val">${fmtBRL(lucroEsperado,true)}</div></div>
+      <div class="kpi-item violet"><div class="kpi-rot">ROI da Área</div><div class="kpi-val">${roiArea.toFixed(2)}x</div><div class="kpi-sub">Custo anual equipe: ${fmtBRL(custoAnual,true)}</div></div>
+    </div>
+    <div class="com-grid-2">
+      <div class="sec-card"><div class="sec-head"><span class="sec-title">📈 Progresso da Meta</span></div>
+        <div class="sec-body"><div class="com-chart-wrap"><canvas id="chartMetaProg"></canvas></div></div></div>
+      <div class="sec-card"><div class="sec-head"><span class="sec-title">💰 Valor Ganho por Mês</span></div>
+        <div class="sec-body"><div class="com-chart-wrap"><canvas id="chartGanhoMes"></canvas></div></div></div>
+    </div>
+    <p class="hint">Metodologia: indicadores calculados diretamente das oportunidades cadastradas.</p>`;
+  return _paginaComGrafico(html, ()=>{
+    let acumulado = carteiraInicial;
+    const acumData = ganhoRows.map(r=>{ acumulado += r.pub_valor+r.priv_valor; return acumulado; });
+    _novoChart('chartMetaProg', { type:'line', data:{ labels: labelsMeses(ganhoRows), datasets:[
+      {label:'Acumulado (Carteira + Ganho)', data:acumData, borderColor:CORES_COM.teal, backgroundColor:'rgba(26,138,138,.15)', fill:true, tension:.3},
+      {label:'Meta Anual', data: ganhoRows.map(()=>m.metaAnual), borderColor:CORES_COM.ouro, borderDash:[6,4], pointRadius:0},
+    ]}, options: OPCOES_CHART_PADRAO });
+    _novoChart('chartGanhoMes', { type:'bar', data:{ labels: labelsMeses(ganhoRows), datasets:[
+      {label:'Público', data: ganhoRows.map(r=>r.pub_valor), backgroundColor:CORES_COM.teal},
+      {label:'Privado', data: ganhoRows.map(r=>r.priv_valor), backgroundColor:CORES_COM.terra},
+    ]}, options: {...OPCOES_CHART_PADRAO, scales:{x:{stacked:true},y:{stacked:true}}} });
+  });
+}
+COM_RENDERERS['resumo'] = pageResumoComercial;
+
+/* ── ROI DA ÁREA (analítico dos contratos ganhos) ── */
+function pageROIComercial(){
+  const {rows} = calcROICom();
+  const todosContratos = rows.flatMap(r=>r.contratos.map(c=>({...c, mes:r.mes})));
+  const totalValor = todosContratos.reduce((a,c)=>a+c.valor,0);
+  const totalLucro = todosContratos.reduce((a,c)=>a+c.lucro,0);
+  const comMargem = todosContratos.filter(c=>c.margem!==null);
+  const margemMedia = comMargem.length ? comMargem.reduce((a,c)=>a+c.margem,0)/comMargem.length : 0;
+  const custoAnualEquipe = COM.equipe.reduce((a,p)=>a+(Number(p.custoMensal)||0),0) * 12;
+  const indiceRetorno = custoAnualEquipe>0 ? totalLucro/custoAnualEquipe : 0;
+  const linhas = todosContratos.slice().sort((a,b)=>b.mes.localeCompare(a.mes));
+  return `
+  <div class="kpi-row">
+    <div class="kpi-item"><div class="kpi-rot">Contratos Ganhos</div><div class="kpi-val">${fmtNum(todosContratos.length)}</div></div>
+    <div class="kpi-item"><div class="kpi-rot">Valor Total Ganho</div><div class="kpi-val">${fmtBRL(totalValor,true)}</div></div>
+    <div class="kpi-item green"><div class="kpi-rot">Lucro Esperado Total</div><div class="kpi-val">${fmtBRL(totalLucro,true)}</div></div>
+    <div class="kpi-item violet"><div class="kpi-rot">Margem Média</div><div class="kpi-val">${fmtPct(margemMedia,0)}</div>${comMargem.length<todosContratos.length?'<div class="kpi-sub">'+(todosContratos.length-comMargem.length)+' sem margem informada</div>':''}</div>
+    <div class="kpi-item amber"><div class="kpi-rot">Índice de Retorno</div><div class="kpi-val">${indiceRetorno.toFixed(2)}x</div><div class="kpi-sub">Lucro ÷ custo anual da equipe</div></div>
+  </div>
+  <div class="sec-card"><div class="sec-head"><span class="sec-title">📄 Contratos ganhos</span></div>
+    <div class="sec-body">${linhas.length===0 ? '<p class="com-empty">Nenhum contrato ganho registrado ainda.</p>' :
+      '<div class="tbl-wrap"><table class="edit-table"><thead><tr><th>Mês</th><th>Contrato</th><th>Valor</th><th>Margem</th><th>Lucro Esperado</th><th>Prazo</th></tr></thead><tbody>' +
+      linhas.map(c=>{
+        const [ano,mesN] = c.mes.split('-');
+        return '<tr><td>'+MES_NOMES[Number(mesN)-1]+'/'+ano+'</td><td>'+esc(c.nome||'—')+'</td><td>'+fmtBRL(c.valor)+'</td>' +
+          '<td>'+(c.margem!==null?fmtPct(c.margem,0):'<span class="hint">sem margem</span>')+'</td><td>'+fmtBRL(c.lucro)+'</td>' +
+          '<td>'+(c.prazo?c.prazo+' meses':'—')+'</td></tr>';
+      }).join('') + '</tbody></table></div>'}
+    </div>
+  </div>
+  <p class="hint">Margem e Lucro Esperado usam o campo "Margem Esperada" de cada oportunidade — edite pela própria oportunidade, em Cadastros. Índice de Retorno = Lucro Esperado ÷ Custo anual da equipe.</p>`;
+}
+COM_RENDERERS['roi'] = pageROIComercial;
+
+/* ── PIPELINE ── */
+function _classificaCobertura(t){
+  if(t<1) return {label:'Risco Alto', classe:'red'};
+  if(t<2) return {label:'Apertado', classe:'amber'};
+  if(t<3) return {label:'Confortável', classe:'green'};
+  return {label:'Avaliar Qualificação', classe:'violet'};
+}
+function pagePipelineComercial(){
+  const {rows} = calcPipelineCom();
+  const totalOport = rows.reduce((a,r)=>a+r.oport,0);
+  const totalPond = rows.reduce((a,r)=>a+r.oportPond,0);
+  const comDado = rows.filter(r=>r.oport>0||r.oportPond>0);
+  const atual = comDado.length ? comDado[comDado.length-1] : null;
+  const cls = atual ? _classificaCobertura(atual.taxaCobertura) : null;
+  const html = `
+  ${atual ? '<div class="kpi-row"><div class="kpi-item '+cls.classe+'"><div class="kpi-rot">Índice de Cobertura Atual</div>' +
+    '<div class="kpi-val">'+atual.taxaCobertura.toFixed(1)+'x — '+esc(cls.label)+'</div>' +
+    '<div class="kpi-sub">Ponderada: '+fmtBRL(atual.oportPond,true)+' / Meta restante: '+fmtBRL(atual.metaRestante,true)+'</div></div></div>' : ''}
+  <div class="kpi-row">
+    <div class="kpi-item"><div class="kpi-rot">Oportunidades (ano)</div><div class="kpi-val">${fmtBRL(totalOport,true)}</div></div>
+    <div class="kpi-item amber"><div class="kpi-rot">Oportunidade Ponderada</div><div class="kpi-val">${fmtBRL(totalPond,true)}</div></div>
+  </div>
+  <div class="sec-card"><div class="sec-head"><span class="sec-title">📊 Cobertura mensal</span></div>
+    <div class="sec-body">
+      <div class="com-chart-wrap"><canvas id="chartPipeline"></canvas></div>
+      <p class="hint">&lt;1,0x risco alto · 1–2x apertado · 2–3x confortável · &gt;3x avaliar qualificação</p>
+      <div class="tbl-wrap"><table class="edit-table"><thead><tr><th>Mês</th><th>Oportunidades</th><th>Ponderada</th><th>Meta Restante</th><th>Cobertura</th></tr></thead><tbody>` +
+        rows.map(r=>'<tr><td>'+MES_NOMES[Number(r.mes.split('-')[1])-1]+'</td><td>'+fmtBRL(r.oport,true)+'</td><td>'+fmtBRL(r.oportPond,true)+'</td><td>'+fmtBRL(r.metaRestante,true)+'</td><td>'+r.taxaCobertura.toFixed(1)+'x</td></tr>').join('') +
+      `</tbody></table></div>
+    </div>
+  </div>
+  <p class="hint">Metodologia: a Taxa de Cobertura usa Oportunidade Ponderada (valor licitado × % Chance Real) frente ao saldo de meta restante.</p>`;
+  return _paginaComGrafico(html, ()=>{
+    _novoChart('chartPipeline', { type:'bar', data:{ labels: labelsMeses(rows), datasets:[
+      {label:'Oportunidade Ponderada', data:rows.map(r=>r.oportPond), backgroundColor:CORES_COM.teal},
+      {label:'Meta Restante', data:rows.map(r=>r.metaRestante), backgroundColor:CORES_COM.roxo},
+    ]}, options: OPCOES_CHART_PADRAO });
+  });
+}
+COM_RENDERERS['pipeline'] = pagePipelineComercial;
+
+/* ── PROSPECÇÃO / GANHO PÚBLICO x PRIVADO (mesmo layout, calc diferente) ── */
+function _paginaSegmento(titulo, sub, calc, idVol, idDonut){
+  const {rows, total} = calc();
+  const totalValor = total.pub_valor+total.priv_valor;
+  const pctPub = totalValor>0 ? total.pub_valor/totalValor : 0;
+  const html = `
+  <div class="kpi-row">
+    <div class="kpi-item"><div class="kpi-rot">Qtd Público</div><div class="kpi-val">${fmtNum(total.pub_qtd)}</div><div class="kpi-sub">${fmtBRL(total.pub_valor,true)}</div></div>
+    <div class="kpi-item amber"><div class="kpi-rot">Qtd Privado</div><div class="kpi-val">${fmtNum(total.priv_qtd)}</div><div class="kpi-sub">${fmtBRL(total.priv_valor,true)}</div></div>
+    <div class="kpi-item green"><div class="kpi-rot">% Valor Público</div><div class="kpi-val">${fmtPct(pctPub)}</div></div>
+  </div>
+  <div class="com-grid-2">
+    <div class="sec-card"><div class="sec-head"><span class="sec-title">📅 Volume Mensal</span></div><div class="sec-body"><div class="com-chart-wrap"><canvas id="${idVol}"></canvas></div></div></div>
+    <div class="sec-card"><div class="sec-head"><span class="sec-title">🥧 Distribuição de Valor</span></div><div class="sec-body"><div class="com-chart-wrap"><canvas id="${idDonut}"></canvas></div></div></div>
+  </div>
+  <p class="hint">${sub}</p>`;
+  return _paginaComGrafico(html, ()=>{
+    _novoChart(idVol, { type:'bar', data:{ labels: labelsMeses(rows), datasets:[
+      {label:'Público', data:rows.map(r=>r.pub_qtd), backgroundColor:CORES_COM.teal},
+      {label:'Privado', data:rows.map(r=>r.priv_qtd), backgroundColor:CORES_COM.terra},
+    ]}, options: {...OPCOES_CHART_PADRAO, scales:{x:{stacked:true},y:{stacked:true}}} });
+    _novoChart(idDonut, { type:'doughnut', data:{ labels:['Público','Privado'], datasets:[
+      {data:[total.pub_valor,total.priv_valor], backgroundColor:[CORES_COM.teal, CORES_COM.terra]} ]}, options: OPCOES_CHART_PADRAO });
+  });
+}
+COM_RENDERERS['prospe'] = () => _paginaSegmento(
+  'Prospecção Público x Privado',
+  'Metodologia: oportunidades enviadas, agrupadas pelo mês da Data de Envio. Privado inclui Privado, Concessionária e Loteamento.',
+  calcProspeccaoCom, 'chartProspeVol', 'chartProspeDonut');
+COM_RENDERERS['ganho'] = () => _paginaSegmento(
+  'Ganho Público x Privado',
+  'Metodologia: oportunidades ganhas, agrupadas pelo mês da Data de Conclusão.',
+  calcGanhoCom, 'chartGanhoVol', 'chartGanhoDonut');
+
+/* ── MANUTENÇÃO x NOVO ── */
+function pageManutComercial(){
+  const {rows} = calcManutNovoCom();
+  const t = rows.reduce((a,r)=>({
+    pub_novo:a.pub_novo+r.pub_novo_qtd, pub_manut:a.pub_manut+r.pub_manut_qtd,
+    priv_novo:a.priv_novo+r.priv_novo_qtd, priv_manut:a.priv_manut+r.priv_manut_qtd,
+  }),{pub_novo:0,pub_manut:0,priv_novo:0,priv_manut:0});
+  const html = `
+  <div class="kpi-row">
+    <div class="kpi-item"><div class="kpi-rot">Público: Novo</div><div class="kpi-val">${fmtNum(t.pub_novo)}</div></div>
+    <div class="kpi-item amber"><div class="kpi-rot">Público: Manutenção</div><div class="kpi-val">${fmtNum(t.pub_manut)}</div></div>
+    <div class="kpi-item"><div class="kpi-rot">Privado: Novo</div><div class="kpi-val">${fmtNum(t.priv_novo)}</div></div>
+    <div class="kpi-item violet"><div class="kpi-rot">Privado: Manutenção</div><div class="kpi-val">${fmtNum(t.priv_manut)}</div></div>
+  </div>
+  <div class="com-grid-2">
+    <div class="sec-card"><div class="sec-head"><span class="sec-title">🏛️ Público</span></div><div class="sec-body"><div class="com-chart-wrap"><canvas id="chartManutPub"></canvas></div></div></div>
+    <div class="sec-card"><div class="sec-head"><span class="sec-title">🏢 Privado</span></div><div class="sec-body"><div class="com-chart-wrap"><canvas id="chartManutPriv"></canvas></div></div></div>
+  </div>
+  <p class="hint">Metodologia: entre os contratos Ganhos, "Novo" = Continuidade ou Novo Processo = "Novo"; demais entram como "Manutenção".</p>`;
+  return _paginaComGrafico(html, ()=>{
+    const labels = labelsMeses(rows);
+    _novoChart('chartManutPub', { type:'bar', data:{labels, datasets:[
+      {label:'Novo', data:rows.map(r=>r.pub_novo_qtd), backgroundColor:CORES_COM.teal},
+      {label:'Manutenção', data:rows.map(r=>r.pub_manut_qtd), backgroundColor:CORES_COM.ouro},
+    ]}, options:{...OPCOES_CHART_PADRAO, scales:{x:{stacked:true},y:{stacked:true}}} });
+    _novoChart('chartManutPriv', { type:'bar', data:{labels, datasets:[
+      {label:'Novo', data:rows.map(r=>r.priv_novo_qtd), backgroundColor:CORES_COM.terra},
+      {label:'Manutenção', data:rows.map(r=>r.priv_manut_qtd), backgroundColor:CORES_COM.ouro},
+    ]}, options:{...OPCOES_CHART_PADRAO, scales:{x:{stacked:true},y:{stacked:true}}} });
+  });
+}
+COM_RENDERERS['manut'] = pageManutComercial;
+
+/* ── NOVOS CLIENTES ── */
+function pageNovosComercial(){
+  const {rows} = calcNovosClientesCom();
+  const t = rows.reduce((a,r)=>({prosp:a.prosp+r.novosQtd, ganho:a.ganho+r.ganhoQtd, valor:a.valor+r.ganhoValor}),{prosp:0,ganho:0,valor:0});
+  const html = `
+  <div class="kpi-row">
+    <div class="kpi-item"><div class="kpi-rot">Novos Clientes Prospectados</div><div class="kpi-val">${fmtNum(t.prosp)}</div></div>
+    <div class="kpi-item green"><div class="kpi-rot">Novos Clientes Ganhos</div><div class="kpi-val">${fmtNum(t.ganho)}</div><div class="kpi-sub">${fmtBRL(t.valor,true)}</div></div>
+  </div>
+  <div class="sec-card"><div class="sec-head"><span class="sec-title">🔀 Funil mensal</span></div>
+    <div class="sec-body"><div class="com-chart-wrap"><canvas id="chartNovos"></canvas></div></div></div>`;
+  return _paginaComGrafico(html, ()=>{
+    _novoChart('chartNovos', { type:'bar', data:{ labels: labelsMeses(rows), datasets:[
+      {label:'Prospecção', data:rows.map(r=>r.prospVol), backgroundColor:CORES_COM.tealClaro},
+      {label:'Novos Clientes', data:rows.map(r=>r.novosQtd), backgroundColor:CORES_COM.teal},
+      {label:'Ganho', data:rows.map(r=>r.ganhoQtd), backgroundColor:CORES_COM.verde},
+    ]}, options: OPCOES_CHART_PADRAO });
+  });
+}
+COM_RENDERERS['novos'] = pageNovosComercial;
+
+/* ── EFICÁCIA ── */
+function pageEficaciaComercial(){
+  const {rows} = calcEficaciaCom();
+  const t = rows.reduce((a,r)=>({env:a.env+r.enviadas,hab:a.hab+r.habilitadas,venc:a.venc+r.vencedoras,desc:a.desc+r.desclass,valor:a.valor+r.valorContratado}),{env:0,hab:0,venc:0,desc:0,valor:0});
+  const taxaVitoria = t.env>0 ? t.venc/t.env : 0;
+  const html = `
+  <div class="kpi-row">
+    <div class="kpi-item"><div class="kpi-rot">Enviadas</div><div class="kpi-val">${fmtNum(t.env)}</div></div>
+    <div class="kpi-item green"><div class="kpi-rot">Vencedoras</div><div class="kpi-val">${fmtNum(t.venc)}</div><div class="kpi-sub">Taxa de vitória: ${fmtPct(taxaVitoria)}</div></div>
+    <div class="kpi-item red"><div class="kpi-rot">Desclassificadas</div><div class="kpi-val">${fmtNum(t.desc)}</div></div>
+    <div class="kpi-item amber"><div class="kpi-rot">Valor Contratado</div><div class="kpi-val">${fmtBRL(t.valor,true)}</div></div>
+  </div>
+  <div class="sec-card"><div class="sec-head"><span class="sec-title">🔻 Funil de propostas por mês</span></div><div class="sec-body"><div class="com-chart-wrap"><canvas id="chartEficaciaFunil"></canvas></div></div></div>
+  <div class="sec-card"><div class="sec-head"><span class="sec-title">💵 Valor contratado por mês</span></div><div class="sec-body"><div class="com-chart-wrap"><canvas id="chartEficaciaValor"></canvas></div></div></div>
+  <p class="hint">Metodologia: agrupado pelo mês da Data de Envio. Habilitada = Habilitação "SIM"; Desclassificada = "NÃO"; Vencedora = Status de Ganho "Ganho".</p>`;
+  return _paginaComGrafico(html, ()=>{
+    const labels = labelsMeses(rows);
+    _novoChart('chartEficaciaFunil', { type:'bar', data:{labels, datasets:[
+      {label:'Enviadas', data:rows.map(r=>r.enviadas), backgroundColor:CORES_COM.tealClaro},
+      {label:'Habilitadas', data:rows.map(r=>r.habilitadas), backgroundColor:CORES_COM.teal},
+      {label:'Vencedoras', data:rows.map(r=>r.vencedoras), backgroundColor:CORES_COM.verde},
+      {label:'Desclassificadas', data:rows.map(r=>r.desclass), backgroundColor:CORES_COM.vermelho},
+    ]}, options: OPCOES_CHART_PADRAO });
+    _novoChart('chartEficaciaValor', { type:'line', data:{labels, datasets:[
+      {label:'Valor Contratado', data:rows.map(r=>r.valorContratado), borderColor:CORES_COM.ouro, backgroundColor:'rgba(185,149,76,.15)', fill:true, tension:.3},
+    ]}, options: {...OPCOES_CHART_PADRAO, plugins:{legend:{display:false}}} });
+  });
+}
+COM_RENDERERS['eficacia'] = pageEficaciaComercial;
+
+/* ── EFICIÊNCIA ── */
+function pageEficienciaComercial(){
+  const {rows} = calcEficienciaCom();
+  const custoMes = rows[0] ? rows[0].custoEquipe : 0;
+  const t = rows.reduce((a,r)=>({env:a.env+r.enviadas,venc:a.venc+r.vencedoras}),{env:0,venc:0});
+  const custoPorPropMedio = t.env>0 ? (custoMes*rows.length)/t.env : 0;
+  const custoPorVitMedio = t.venc>0 ? (custoMes*rows.length)/t.venc : 0;
+  const comDado = rows.filter(r=>r.enviadas>0||r.vencedoras>0).slice().sort((a,b)=>b.mes.localeCompare(a.mes));
+  const html = `
+  <div class="kpi-row">
+    <div class="kpi-item"><div class="kpi-rot">Custo Mensal da Equipe</div><div class="kpi-val">${fmtBRL(custoMes,true)}</div></div>
+    <div class="kpi-item amber"><div class="kpi-rot">Custo Médio por Proposta</div><div class="kpi-val">${fmtBRL(custoPorPropMedio,true)}</div></div>
+    <div class="kpi-item violet"><div class="kpi-rot">Custo Médio por Vitória</div><div class="kpi-val">${fmtBRL(custoPorVitMedio,true)}</div></div>
+  </div>
+  <div class="sec-card"><div class="sec-head"><span class="sec-title">📉 Custo por proposta e por vitória — mensal</span></div><div class="sec-body"><div class="com-chart-wrap"><canvas id="chartEficiencia"></canvas></div>
+    ${comDado.length===0 ? '<p class="com-empty">Nenhum dado no período.</p>' :
+      '<div class="tbl-wrap"><table class="edit-table"><thead><tr><th>Mês</th><th>Custo da Equipe</th><th>Enviadas</th><th>Vencedoras</th><th>Custo/Proposta</th><th>Custo/Vitória</th></tr></thead><tbody>' +
+      comDado.map(r=>{ const [ano,mesN]=r.mes.split('-'); return '<tr><td>'+MES_NOMES[Number(mesN)-1]+'/'+ano+'</td><td>'+fmtBRL(r.custoEquipe,true)+'</td><td>'+fmtNum(r.enviadas)+'</td><td>'+fmtNum(r.vencedoras)+'</td><td>'+fmtBRL(r.custoPorProposta,true)+'</td><td>'+fmtBRL(r.custoPorVitoria,true)+'</td></tr>'; }).join('') +
+      '</tbody></table></div>'}
+  </div></div>
+  <p class="hint">Metodologia: custo mensal da equipe (Equipe &amp; Custos) dividido pelas propostas enviadas/vencedoras no mesmo mês.</p>`;
+  return _paginaComGrafico(html, ()=>{
+    _novoChart('chartEficiencia', { type:'line', data:{ labels: labelsMeses(rows), datasets:[
+      {label:'Custo por Proposta', data:rows.map(r=>r.custoPorProposta), borderColor:CORES_COM.teal, tension:.3},
+      {label:'Custo por Vitória', data:rows.map(r=>r.custoPorVitoria), borderColor:CORES_COM.terra, tension:.3},
+    ]}, options: OPCOES_CHART_PADRAO });
+  });
+}
+COM_RENDERERS['eficiencia'] = pageEficienciaComercial;
+
+/* ── PRODUTIVIDADE ── */
+function pageProdutividadeComercial(){
+  const {rows} = calcProdutividadeCom();
+  const totalProcessos = rows.reduce((a,r)=>a+r.processos,0);
+  const mesesAtivos = rows.filter(r=>r.editais>0||r.propostas>0||r.processos>0||r.itens>0).length || 1;
+  const mediaProcessos = Math.round(totalProcessos/mesesAtivos);
+  const totalItens = rows.reduce((a,r)=>a+r.itens,0);
+  const totalHoras = rows.reduce((a,r)=>a+r.horas,0);
+  const html = `
+  <div class="kpi-row">
+    <div class="kpi-item"><div class="kpi-rot">Editais Analisados</div><div class="kpi-val">${fmtNum(rows.reduce((a,r)=>a+r.editais,0))}</div></div>
+    <div class="kpi-item amber"><div class="kpi-rot">Propostas Elaboradas</div><div class="kpi-val">${fmtNum(rows.reduce((a,r)=>a+r.propostas,0))}</div></div>
+    <div class="kpi-item violet"><div class="kpi-rot">Processos/Mês (méd.)</div><div class="kpi-val">${fmtNum(mediaProcessos)}</div><div class="kpi-sub">${fmtNum(totalProcessos)} no acumulado</div></div>
+    <div class="kpi-item"><div class="kpi-rot">Itens Cotados</div><div class="kpi-val">${fmtNum(totalItens)}</div></div>
+    <div class="kpi-item green"><div class="kpi-rot">Horas Dedicadas</div><div class="kpi-val">${fmtNum(totalHoras)}h</div>${totalHoras===0?'<div class="kpi-sub">Sem timesheet importado</div>':''}</div>
+  </div>
+  <div class="sec-card"><div class="sec-head"><span class="sec-title">📅 Produtividade mensal</span></div><div class="sec-body"><div class="com-chart-wrap"><canvas id="chartProdutividade"></canvas></div></div></div>
+  ${totalHoras===0 ? '<p class="hint">Horas Dedicadas ainda não tem dado — cadastre pela página Timesheet (Horas).</p>' : ''}
+  <p class="hint">Metodologia: "editais" conta oportunidades registradas no mês; "propostas" conta as Enviadas; "processos" conta números de proposta distintos; "horas" vem do Timesheet.</p>`;
+  return _paginaComGrafico(html, ()=>{
+    _novoChart('chartProdutividade', { type:'bar', data:{ labels: labelsMeses(rows), datasets:[
+      {label:'Editais', data:rows.map(r=>r.editais), backgroundColor:CORES_COM.tealClaro},
+      {label:'Propostas', data:rows.map(r=>r.propostas), backgroundColor:CORES_COM.teal},
+      {label:'Processos', data:rows.map(r=>r.processos), backgroundColor:CORES_COM.ouro},
+    ]}, options: OPCOES_CHART_PADRAO });
+  });
+}
+COM_RENDERERS['produtividade'] = pageProdutividadeComercial;
+
+/* ── PROBLEMAS & CAUSAS (sem gráfico — só tabelas) ── */
+function _tabelaProblemas(arr, mostraPct){
+  if(!arr.length) return '<p class="com-empty">Nenhum registro classificado ainda.</p>';
+  return '<div class="tbl-wrap"><table class="edit-table"><thead><tr><th>Causa</th><th>Ocorrências</th>' +
+    (mostraPct?'<th>% do Total</th>':'') + '<th>Solução Proposta</th><th>Prazo</th></tr></thead><tbody>' +
+    arr.map(x=>'<tr><td>'+esc(x.causa)+'</td><td>'+x.ocorrencias+'</td>' +
+      (mostraPct?'<td>'+fmtPct(x.pct)+'</td>':'') + '<td>'+esc(x.solucao||'—')+'</td><td>'+esc(x.prazo||'—')+'</td></tr>').join('') +
+    '</tbody></table></div>';
+}
+function pageProblemasComercial(){
+  const {irrev, rev} = calcProblemasCom();
+  return `
+  <div class="sec-card"><div class="sec-head"><span class="sec-title">⛔ Causas Irreversíveis</span></div><div class="sec-body">${_tabelaProblemas(irrev, true)}</div></div>
+  <div class="sec-card"><div class="sec-head"><span class="sec-title">🔁 Causas Reversíveis</span></div><div class="sec-body">${_tabelaProblemas(rev, false)}</div></div>
+  <p class="hint">Alimentado pelo campo "Classificação do Problema" das oportunidades perdidas (Status de Ganho = Perca), em Cadastros → Oportunidades.</p>`;
+}
+COM_RENDERERS['problemas'] = pageProblemasComercial;
 
 /* ════════════════════════════════════════════════════════════════
    PAINEL GERENCIAL — acompanhamento por fases

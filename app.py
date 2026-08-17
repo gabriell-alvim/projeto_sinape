@@ -12,6 +12,7 @@ Rotas:
   POST    /login                             → autentica e cria sessão
   GET     /logout                            → encerra sessão
   GET     /                                  → index.html
+  GET     /chart.umd.min.js                  → Chart.js hospedado localmente (indicadores do módulo Comercial)
   GET     /api/processos                     → lista resumida {"processos":[...]}
   POST    /api/processos                     → cria processo (corpo = documento completo)
   GET     /api/processos/<id>                → documento completo
@@ -845,6 +846,16 @@ def logout():
 @app.route("/")
 def index():
     return send_from_directory(BASE_DIR, "index.html")
+
+
+@app.route("/chart.umd.min.js")
+def chart_js():
+    """Chart.js hospedado dentro do projeto (v4.4.0, mesma do painel comercial
+    original) — carregado só quando a área Comercial abre uma página de
+    indicador, não no carregamento normal do Painel. Hospedado localmente,
+    e não via CDN, porque o app inteiro hoje não depende de nada externo;
+    um CDN fora do ar não pode tirar os gráficos do ar."""
+    return send_from_directory(BASE_DIR, "chart.umd.min.js", mimetype="application/javascript")
 
 
 @app.route("/api/health")
