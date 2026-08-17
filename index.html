@@ -597,6 +597,26 @@ input, select, textarea { font-family:inherit; }
 }
 #toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
 
+/* ── MÓDULO COMERCIAL ── */
+.com-navlabel { font-size:.66rem; font-weight:800; color:var(--teal); text-transform:uppercase; letter-spacing:.06em; margin:14px 0 6px; }
+.com-navlabel:first-child { margin-top:0; }
+.com-tabs { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:8px; }
+.kpi-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:10px; margin-bottom:16px; }
+.kpi-item { background:var(--white); border:1px solid var(--border); border-left:4px solid var(--teal); border-radius:10px; padding:12px 14px; }
+.kpi-item.amber { border-left-color:var(--amber); }
+.kpi-item.red   { border-left-color:var(--red); }
+.kpi-item.green { border-left-color:var(--green); }
+.kpi-item.violet{ border-left-color:var(--violet); }
+.kpi-rot { font-size:.68rem; font-weight:700; color:var(--slate-mid); text-transform:uppercase; letter-spacing:.03em; }
+.kpi-val { font-size:1.35rem; font-weight:800; color:var(--slate); margin-top:3px; line-height:1.15; }
+.kpi-sub { font-size:.72rem; color:var(--slate-l); margin-top:2px; }
+.com-chart-wrap { position:relative; height:260px; margin-top:6px; }
+.com-grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+@media (max-width:860px){ .com-grid-2 { grid-template-columns:1fr; } }
+.com-empty { padding:26px; text-align:center; color:var(--slate-l); font-size:.85rem; }
+.com-toolbar { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:12px; }
+.com-search { flex:1; min-width:180px; padding:8px 12px; border:1px solid var(--border); border-radius:8px; font-size:.82rem; }
+
 @media (max-width:860px){
   .field-grid, .field-grid.cols-2 { grid-template-columns:1fr 1fr; }
   .content { padding:14px 12px 60px; }
@@ -655,6 +675,12 @@ input, select, textarea { font-family:inherit; }
         <h3>Processos Privados</h3>
         <p>Cartas-convite, RFQs e cotações — concessionárias e empresas</p>
         <span class="hc-count" id="count-privado">0 processos</span>
+      </div>
+      <div class="home-card" onclick="abrirComercial()">
+        <div class="hc-icon">📊</div>
+        <h3>Comercial</h3>
+        <p>Oportunidades, equipe, meta e indicadores da área comercial</p>
+        <span class="hc-count" id="count-comercial">Oportunidades, ROI, pipeline…</span>
       </div>
     </div>
     <div class="home-relatorio-row" style="flex-direction:column; gap:8px;">
@@ -787,6 +813,26 @@ input, select, textarea { font-family:inherit; }
     </div>
   </div>
 
+  <!-- ═══════════ VIEW: COMERCIAL ═══════════ -->
+  <div class="view" id="view-comercial">
+    <div class="page-head">
+      <div>
+        <div class="page-title">Comercial</div>
+        <div class="page-sub" id="com-subtitulo">Carregando…</div>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button class="btn-outline" id="btn-com-importar" onclick="document.getElementById('com-input-importar').click()">📥 Importar backup</button>
+        <input type="file" id="com-input-importar" accept=".json" class="sr-only" onchange="comercialImportarArquivo(this)">
+        <button class="btn-outline" onclick="comercialExportar()">⬇ Exportar backup</button>
+      </div>
+    </div>
+    <div class="com-navlabel">Cadastros</div>
+    <div class="com-tabs" id="com-tabs-cadastros"></div>
+    <div class="com-navlabel">Indicadores</div>
+    <div class="com-tabs" id="com-tabs-indicadores"></div>
+    <div id="com-conteudo"><p class="com-empty">Carregando dados…</p></div>
+  </div>
+
 </div><!-- /content -->
 
 <!-- MODAL: NOVO PROCESSO MANUAL -->
@@ -903,6 +949,13 @@ input, select, textarea { font-family:inherit; }
       <button class="btn-ghost" onclick="fecharModal('modal-notificacoes')">Fechar</button>
     </div>
   </div>
+</div>
+
+<!-- MODAL: FORMULÁRIO GENÉRICO DO COMERCIAL (oportunidade / pessoa da equipe) —
+     conteúdo montado dinamicamente porque uma oportunidade tem ~40 campos;
+     escrever isso como HTML fixo pra cada caso duplicaria o schema. -->
+<div class="modal-overlay" id="modal-comercial-form">
+  <div class="modal-box wide" role="dialog" id="comercial-form-body"></div>
 </div>
 
 <!-- MODAL: ATUALIZAÇÕES DO DIA -->
@@ -1779,6 +1832,21 @@ const Store = {
   async responderNotificacao(id, texto){
     return this._req('POST','/notificacoes/' + encodeURIComponent(id) + '/responder', { texto: texto || '' });
   },
+  /* — módulo Comercial — */
+  async listarOportunidades(){ return (await this._req('GET','/comercial/oportunidades')).oportunidades || []; },
+  async criarOportunidade(o){ return this._req('POST','/comercial/oportunidades', o); },
+  async salvarOportunidade(id, o){ return this._req('PUT','/comercial/oportunidades/'+encodeURIComponent(id), o); },
+  async excluirOportunidade(id){ return this._req('DELETE','/comercial/oportunidades/'+encodeURIComponent(id)); },
+  async listarEquipeComercial(){ return (await this._req('GET','/comercial/equipe')).equipe || []; },
+  async criarPessoaComercial(p){ return this._req('POST','/comercial/equipe', p); },
+  async salvarPessoaComercial(id, p){ return this._req('PUT','/comercial/equipe/'+encodeURIComponent(id), p); },
+  async excluirPessoaComercial(id){ return this._req('DELETE','/comercial/equipe/'+encodeURIComponent(id)); },
+  async obterMetaComercial(){ return this._req('GET','/comercial/meta'); },
+  async salvarMetaComercial(m){ return this._req('PUT','/comercial/meta', m); },
+  async listarTimesheet(){ return (await this._req('GET','/comercial/timesheet')).timesheet || []; },
+  async salvarTimesheetMes(mes, total){ return this._req('PUT','/comercial/timesheet/'+encodeURIComponent(mes), {total}); },
+  async excluirTimesheetMes(mes){ return this._req('DELETE','/comercial/timesheet/'+encodeURIComponent(mes)); },
+  async importarBackupComercial(payload){ return this._req('POST','/comercial/importar', payload); },
   /* arquivos que já estão na pasta DESTE processo no SharePoint */
   async listarArquivosDaPasta(id){
     if(this.modo !== 'api') throw new Error('Exige o backend configurado (CONFIG.API_URL)');
@@ -1860,6 +1928,12 @@ function updateBreadcrumb(){
   let html = '<span class="link" onclick="goHome()">Início</span>';
   if(document.getElementById('view-sinki').classList.contains('active')){
     bc.innerHTML = html + '<span class="sep">/</span><span class="current">Sinki</span>';
+    return;
+  }
+  if(document.getElementById('view-comercial').classList.contains('active')){
+    const nome = (COM_PAGINAS.find(p=>p.id===COM.paginaAtiva)||{}).nome || '';
+    bc.innerHTML = html + '<span class="sep">/</span><span class="link" onclick="abrirComercial()">Comercial</span>' +
+      (nome ? '<span class="sep">/</span><span class="current">'+esc(nome)+'</span>' : '');
     return;
   }
   if(currentType){
@@ -2268,9 +2342,18 @@ async function enviarAviso(tipo){
    O popup do sistema (canto da tela, fora do navegador) é pra quando a
    pessoa está em outra aba, que é justamente quando nada dentro da página
    seria visto. */
+// localStorage pode lançar (modo privado do Safari, política de navegador
+// restrita, sandbox de preview) — e como isso rodava direto no nível
+// superior do script, uma exceção aqui abortava a execução do resto do
+// arquivo inteiro (tudo declarado depois desta linha ficava indefinido,
+// em silêncio, sem erro nenhum no console). Título ganho na prática: achado
+// só porque o módulo Comercial, bem mais adiante, parou de existir.
+function _lerPrefLocal(chave, padrao){
+  try{ return localStorage.getItem(chave) !== '0'; }catch(e){ return padrao; }
+}
 const NOTIF_PREF = {
-  som:   localStorage.getItem('sinape:notif-som')   !== '0',
-  popup: localStorage.getItem('sinape:notif-popup') !== '0'
+  som:   _lerPrefLocal('sinape:notif-som', true),
+  popup: _lerPrefLocal('sinape:notif-popup', true)
 };
 let _totalNaoLidasAnterior = null;   // null = primeira medida; não avisa no F5
 let _audioCtx = null;
@@ -2560,6 +2643,638 @@ async function responderNotif(id){
 function irParaProcesso(id){
   fecharModal('modal-notificacoes');
   openProcess(id);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   MÓDULO COMERCIAL — oportunidades, equipe, meta e indicadores
+   ════════════════════════════════════════════════════════════════
+   Área própria de topo (irmã de Processos Públicos/Privados), não uma aba
+   de processo — os indicadores aqui olham a carteira inteira da área
+   comercial, não um edital específico. Portado de um painel separado
+   ("Sistema Comercial SINAPE") que salvava em window.storage — API que só
+   existe dentro do ambiente de artifacts do claude.ai; fora dali (aqui
+   dentro) nada persistia, por isso a equipe já vinha usando exportar/
+   importar backup como rede de segurança. Essa rede continua existindo
+   (comercialExportar/comercialImportarArquivo), só que agora por cima de
+   dados que realmente persistem no Mongo. */
+
+const COM = { oportunidades:[], equipe:[], meta:{ano:new Date().getFullYear(), metaAnual:0, valorCarteiraInicial:0},
+              timesheet:[], carregado:false, paginaAtiva:'oportunidades' };
+
+const COM_PAGINAS = [
+  {id:'oportunidades', nome:'Oportunidades',                 grupo:'Cadastros'},
+  {id:'equipe',         nome:'Equipe & Custos',               grupo:'Cadastros'},
+  {id:'meta',           nome:'Meta da Área',                  grupo:'Cadastros'},
+  {id:'timesheet',      nome:'Timesheet (Horas)',              grupo:'Cadastros'},
+  {id:'resumo',         nome:'Resumo Executivo',               grupo:'Indicadores'},
+  {id:'roi',            nome:'ROI da Área (Contratos)',        grupo:'Indicadores'},
+  {id:'pipeline',       nome:'Pipeline',                       grupo:'Indicadores'},
+  {id:'prospe',         nome:'Prospecção Público x Privado',   grupo:'Indicadores'},
+  {id:'novos',          nome:'Novos Clientes',                 grupo:'Indicadores'},
+  {id:'ganho',          nome:'Ganho Público x Privado',        grupo:'Indicadores'},
+  {id:'manut',          nome:'Manutenção x Novo',               grupo:'Indicadores'},
+  {id:'eficacia',       nome:'Eficácia',                        grupo:'Indicadores'},
+  {id:'eficiencia',     nome:'Eficiência',                      grupo:'Indicadores'},
+  {id:'produtividade',  nome:'Produtividade',                   grupo:'Indicadores'},
+  {id:'problemas',      nome:'Problemas & Causas',              grupo:'Indicadores'},
+];
+
+/* ── formatação (portada do painel original — funções puras, sem window.storage) ── */
+const MES_NOMES = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+function fmtBRL(v, compact){
+  if(v===null||v===undefined||isNaN(v)) return 'R$ 0';
+  if(compact){
+    if(Math.abs(v)>=1e9) return 'R$ '+(v/1e9).toFixed(2).replace('.',',')+' bi';
+    if(Math.abs(v)>=1e6) return 'R$ '+(v/1e6).toFixed(2).replace('.',',')+' mi';
+    if(Math.abs(v)>=1e3) return 'R$ '+(v/1e3).toFixed(1).replace('.',',')+' mil';
+  }
+  return v.toLocaleString('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0});
+}
+function fmtNum(v){ if(v===null||v===undefined||isNaN(v)) return '0'; return Math.round(v).toLocaleString('pt-BR'); }
+function fmtPct(v, casas){ if(v===null||v===undefined||isNaN(v)) return '0%'; return (v*100).toFixed(casas!==undefined?casas:1).replace('.',',')+'%'; }
+function fmtDataCom(s){ if(!s) return '—'; const d=new Date(s+'T00:00:00'); if(isNaN(d)) return s; return d.toLocaleDateString('pt-BR'); }
+function parseBRNumber(str){
+  if(str===null||str===undefined||str==='') return 0;
+  const clean = String(str).replace(/\./g,'').replace(',','.');
+  const n = Number(clean);
+  return isNaN(n) ? 0 : n;
+}
+function fmtBRInput(num){
+  if(num===null||num===undefined||isNaN(num)||num===0) return '';
+  return Number(num).toLocaleString('pt-BR', {maximumFractionDigits:2});
+}
+function maskMoedaInput(el){
+  let v = el.value.replace(/[^\d,]/g,'');
+  const partes = v.split(',');
+  const intPart = (partes[0]||'').replace(/\B(?=(\d{3})+(?!\d))/g,'.');
+  const decPart = partes.length>1 ? partes.slice(1).join('').slice(0,2) : undefined;
+  el.value = decPart!==undefined ? intPart+','+decPart : intPart;
+}
+function ymKeyCom(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0'); }
+function parseDateStrCom(s){ if(!s) return null; const d = new Date(s+'T00:00:00'); return isNaN(d) ? null : d; }
+function getYearMonthKeysCom(ano){ return Array.from({length:12},(_,i)=> ano+'-'+String(i+1).padStart(2,'0')); }
+function calcAnoCom(){ return (COM.meta && COM.meta.ano) || new Date().getFullYear(); }
+
+/* ── status e consórcio (idêntico ao painel original) ── */
+function isPublicoCom(seg){ return seg === 'Público'; }
+function isEnviadaCom(o){ return (o.statusEnviadas||'').trim().toLowerCase() === 'enviada'; }
+function isGanhoCom(o){ return (o.statusGanho||'').trim().toLowerCase() === 'ganho'; }
+function isPercaCom(o){ return (o.statusGanho||'').trim().toLowerCase() === 'perca'; }
+function isHabilitadaCom(o){ return (o.habilitacao||'').trim().toUpperCase() === 'SIM'; }
+function isDesclassificadaCom(o){ const h=(o.habilitacao||'').trim().toUpperCase(); return h==='NÃO'||h==='NAO'; }
+// consórcio: o valor usado nos indicadores é só a fatia % da Sinape/York/Sinais
+// Verticais, nunca o contrato inteiro — sem isso, um consórcio de 3 empresas
+// inflaria os números da área como se o grupo tivesse ganho 100% sozinho
+const EMPRESAS_GRUPO = ['sinape','york','sinais verticais'];
+function fatorParticipacaoCom(o){
+  if((o.consorcio||'Não') !== 'Sim') return 1;
+  const comp = o.composicaoConsorcio || [];
+  const soma = comp.filter(c=> EMPRESAS_GRUPO.includes((c.empresa||'').trim().toLowerCase()))
+    .reduce((a,c)=>a+(Number(c.percentual)||0),0);
+  return soma/100;
+}
+function nossoValorLicitadoCom(o){ return (o.valorLicitado||0) * fatorParticipacaoCom(o); }
+function nossoValorGanhoCom(o){ return (o.valorGanho||0) * fatorParticipacaoCom(o); }
+function nossoValorPonderadoCom(o){ return nossoValorLicitadoCom(o) * (o.percChanceReal||0); }
+
+/* ── carregamento e navegação ── */
+async function abrirComercial(){
+  if(Store.modo!=='api'){ toast('A área Comercial precisa do Painel conectado ao backend.'); return; }
+  await encerrarSessaoEdicao();
+  showView('view-comercial');
+  document.getElementById('com-subtitulo').textContent = 'Carregando dados…';
+  document.getElementById('com-conteudo').innerHTML = '<p class="com-empty">Carregando dados…</p>';
+  try{
+    await comercialCarregarDados();
+  }catch(e){
+    document.getElementById('com-conteudo').innerHTML = '<p class="com-empty">Erro ao carregar: '+esc(e.message)+'</p>';
+    a11yAtualizarItens();
+    return;
+  }
+  comercialMontarNav();
+  comercialAbrirPagina(COM.paginaAtiva || 'oportunidades');
+}
+async function comercialCarregarDados(){
+  const [oportunidades, equipe, meta, timesheet] = await Promise.all([
+    Store.listarOportunidades(), Store.listarEquipeComercial(),
+    Store.obterMetaComercial(), Store.listarTimesheet(),
+  ]);
+  COM.oportunidades = oportunidades; COM.equipe = equipe; COM.meta = meta; COM.timesheet = timesheet;
+  COM.carregado = true;
+  document.getElementById('com-subtitulo').textContent =
+    COM.oportunidades.length+' oportunidade(s) · Meta '+calcAnoCom()+': '+
+    fmtPct(COM.meta.metaAnual ? (COM.meta.valorCarteiraInicial||0)/COM.meta.metaAnual : 0);
+}
+function comercialMontarNav(){
+  const html = grupo => COM_PAGINAS.filter(p=>p.grupo===grupo).map(p=>
+    '<button class="main-tab" id="com-tab-'+p.id+'" onclick="comercialAbrirPagina(\''+p.id+'\')">'+esc(p.nome)+'</button>'
+  ).join('');
+  document.getElementById('com-tabs-cadastros').innerHTML = html('Cadastros');
+  document.getElementById('com-tabs-indicadores').innerHTML = html('Indicadores');
+}
+const COM_RENDERERS = {};
+function comercialAbrirPagina(id, pularA11y){
+  COM.paginaAtiva = id;
+  document.querySelectorAll('#com-tabs-cadastros .main-tab, #com-tabs-indicadores .main-tab').forEach(b=>{
+    b.classList.toggle('active', b.id==='com-tab-'+id);
+  });
+  const fn = COM_RENDERERS[id];
+  document.getElementById('com-conteudo').innerHTML = fn ? fn() : '<p class="com-empty">Em construção.</p>';
+  if(typeof (window['comercialMontarGraficos_'+id]) === 'function') window['comercialMontarGraficos_'+id]();
+  updateBreadcrumb();
+  if(!pularA11y) a11yAtualizarItens();
+}
+/* delega os itens numeráveis pra função própria de cada página, quando
+   existir (tabelas de cadastro); páginas sem uma (formulário simples da
+   Meta, ou indicador ainda sem itens especiais) caem pro Tab nativo — ver
+   o "senão volta pro nível de tela" em a11yAtualizarItens */
+function a11yItensComercial(){
+  const fn = window['a11yItensComercial_'+COM.paginaAtiva];
+  return typeof fn === 'function' ? fn() : null;
+}
+
+/* ── import/export do backup (mesma rede de segurança que a equipe já usa) ── */
+function comercialExportar(){
+  const payload = {
+    exportadoEm: new Date().toISOString(), sistema: 'DATA SIN — Comercial',
+    oportunidades: COM.oportunidades, equipe: COM.equipe, meta: COM.meta, timesheet: COM.timesheet,
+  };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'backup_comercial_sinape_'+new Date().toISOString().slice(0,10)+'.json';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  toast('Backup exportado.');
+}
+function comercialImportarArquivo(input){
+  const file = input.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = async e => {
+    input.value = '';
+    let payload;
+    try{ payload = JSON.parse(e.target.result); }
+    catch(err){ toast('Arquivo não é um JSON válido.'); return; }
+    if(!Array.isArray(payload.oportunidades)){
+      toast('Arquivo não parece ser um backup deste sistema.'); return;
+    }
+    const confirmar = confirm(
+      'Este backup tem '+payload.oportunidades.length+' oportunidade(s)'+
+      (payload.exportadoEm ? ', exportado em '+new Date(payload.exportadoEm).toLocaleString('pt-BR') : '')+
+      '.\n\nIsso vai SUBSTITUIR todos os dados atuais da área Comercial. Continuar?');
+    if(!confirmar) return;
+    try{
+      await Store.importarBackupComercial(payload);
+      toast('Backup importado.');
+      await comercialCarregarDados();
+      comercialAbrirPagina(COM.paginaAtiva);
+    }catch(err){ toast('Erro ao importar: '+err.message); }
+  };
+  reader.readAsText(file);
+}
+
+/* ── campo de formulário genérico do Comercial (independente de fieldHTML,
+   que é da Análise Crítica — evita acoplar os dois schemas) ── */
+function campoComercialHTML(c, valor){
+  const fid = 'cf-' + Math.random().toString(36).slice(2,9);
+  const div = c.divisorAntes ? '<div class="sec-divider" style="grid-column:1/-1;">'+esc(c.divisorAntes)+'</div>' : '';
+  const label = c.label ? '<label for="'+fid+'">'+esc(c.label)+'</label>' : '';
+  let inner;
+  if(c.tipo==='select'){
+    inner = '<select id="'+fid+'" data-key="'+esc(c.key)+'"'+(c.onchange?' onchange="'+c.onchange+'"':'')+'>' +
+      (c.opcoes||[]).map(o=>'<option value="'+esc(o)+'"'+(String(valor==null?'':valor)===o?' selected':'')+'>'+esc(o||'—')+'</option>').join('') +
+    '</select>';
+  } else if(c.tipo==='textarea'){
+    inner = '<textarea id="'+fid+'" data-key="'+esc(c.key)+'">'+esc(valor||'')+'</textarea>';
+  } else if(c.tipo==='moeda'){
+    inner = '<input id="'+fid+'" type="text" inputmode="decimal" data-key="'+esc(c.key)+'" data-moeda="1" ' +
+      'value="'+esc(fmtBRInput(valor))+'" oninput="maskMoedaInput(this)" placeholder="0,00">';
+  } else if(c.tipo==='pct'){
+    inner = '<input id="'+fid+'" type="number" step="1" min="0" max="100" data-key="'+esc(c.key)+'" data-pct="1" ' +
+      'value="'+(valor!==null&&valor!==undefined&&valor!==''?Math.round(valor*100):'')+'" placeholder="Ex.: 25 (=25%)">';
+  } else {
+    const t = c.tipo==='date' ? 'date' : (c.tipo==='number' ? 'number' : 'text');
+    inner = '<input id="'+fid+'" type="'+t+'" data-key="'+esc(c.key)+'"'+(c.step?' step="'+c.step+'"':'')+
+      (c.placeholder?' placeholder="'+esc(c.placeholder)+'"':'')+' value="'+esc(valor==null?'':valor)+'">';
+  }
+  const span = c.span ? ' '+c.span : '';
+  return div + '<div class="field'+span+'" id="wrap-'+esc(c.key)+'">'+label+inner+'</div>';
+}
+/* lê um form de campos [data-key] de volta pra um objeto simples, convertendo
+   moeda/pct/number pro formato que o banco guarda (moeda e pct viram número
+   puro; pct de "25" vira fração 0.25, igual ao painel original) */
+function lerCamposComerciais(root){
+  const out = {};
+  root.querySelectorAll('[data-key]').forEach(el=>{
+    const k = el.dataset.key;
+    if(el.dataset.moeda) out[k] = el.value.trim()==='' ? null : parseBRNumber(el.value);
+    else if(el.dataset.pct) out[k] = el.value==='' ? null : Number(el.value)/100;
+    else if(el.type==='number') out[k] = el.value==='' ? null : Number(el.value);
+    else out[k] = el.value;
+  });
+  return out;
+}
+
+/* ── OPORTUNIDADES ── */
+const OPC_COM = {
+  segmento: ['Público','Privado','Concessionária','Loteamento'],
+  modalidade: ['Licitação','Comercial','Cotação','Dispensa','Renovação','Negociação','Aditivo'],
+  statusEnviadas: ['Enviada','Não enviada','Suspenso'],
+  statusGanho: ['Pendente','Ganho','Perca'],
+  habilitacao: ['SIM','NÃO'],
+  continuidadeOuNovo: ['Novo','Continuidade'],
+  novosClientes: ['Sim','Não'],
+  statusProcesso: ['Em andamento','Concluído','Suspenso','Em acompanhamento','Aguardando Contrato'],
+  simNao: ['Não','Sim'],
+  classificacaoProblema: ['','Irreversível','Reversível'],
+};
+const CAMPOS_OPORTUNIDADE = [
+  {key:'data', label:'Data', tipo:'date'},
+  {key:'empresa', label:'Empresa', tipo:'text'},
+  {key:'numProposta', label:'Nº da Proposta', tipo:'text'},
+  {key:'segmento', label:'Segmento', tipo:'select', opcoes:OPC_COM.segmento},
+  {key:'modalidade', label:'Modalidade', tipo:'select', opcoes:OPC_COM.modalidade},
+  {key:'cliente', label:'Cliente', tipo:'text'},
+  {key:'consorcio', label:'É consórcio?', tipo:'select', opcoes:OPC_COM.simNao, onchange:'comToggleConsorcio(this.value)'},
+  {key:'objeto', label:'Objeto', tipo:'text', span:'span-full'},
+  {key:'lote', label:'Lote', tipo:'number', step:'1'},
+  {key:'valorLicitado', label:'Valor Licitado (R$)', tipo:'moeda'},
+  {key:'vencedorLote', label:'Vencedor do Lote', tipo:'text', placeholder:'Ex.: Sinape, concorrente…'},
+  {key:'percChanceReal', label:'% Chance Real (premissa)', tipo:'pct'},
+  {key:'tempoContrato', label:'Tempo de Contrato (meses)', tipo:'number', step:'1'},
+  {key:'nItens', label:'Nº de Itens', tipo:'number', step:'1'},
+  {key:'dataEnvio', label:'Data de Envio', tipo:'date'},
+  {key:'statusEnviadas', label:'Status Enviadas', tipo:'select', opcoes:OPC_COM.statusEnviadas},
+  {key:'habilitacao', label:'Habilitação', tipo:'select', opcoes:OPC_COM.habilitacao},
+  {key:'continuidadeOuNovo', label:'Continuidade ou Novo Processo', tipo:'select', opcoes:OPC_COM.continuidadeOuNovo},
+  {key:'novosClientes', label:'Novos Clientes', tipo:'select', opcoes:OPC_COM.novosClientes},
+  {key:'statusProcesso', label:'Status do Processo', tipo:'select', opcoes:OPC_COM.statusProcesso},
+  {key:'statusGanho', label:'Status de Ganho', tipo:'select', opcoes:OPC_COM.statusGanho, onchange:'comToggleGanhoPerca(this.value)'},
+  {key:'motivo', label:'Motivo (se perda ou pendência)', tipo:'text', span:'span-full'},
+  {key:'dataConclusao', label:'Data de Conclusão', tipo:'date'},
+  {key:'valorGanho', label:'Valor Ganho (R$)', tipo:'moeda'},
+];
+const CAMPOS_OPORTUNIDADE_GANHO = [
+  {key:'margemEsperada', label:'Margem Esperada (%) — alimenta o ROI da Área', tipo:'pct'},
+];
+const CAMPOS_OPORTUNIDADE_PERCA = [
+  {key:'classificacaoProblema', label:'Classificação do problema — alimenta Problemas & Causas', tipo:'select', opcoes:OPC_COM.classificacaoProblema},
+  {key:'prazoSolucao', label:'Prazo da Solução', tipo:'text', placeholder:'Ex.: 30 dias'},
+  {key:'solucaoProposta', label:'Solução Proposta', tipo:'text', span:'span-full'},
+];
+let COM_CONSORCIO_ROWS = [];
+
+function comercialResumoOportunidades(){
+  const lst = COM.oportunidades;
+  const ganhas = lst.filter(isGanhoCom);
+  const valorGanho = ganhas.reduce((a,o)=>a+nossoValorGanhoCom(o),0);
+  const enviadas = lst.filter(isEnviadaCom).length;
+  return {total:lst.length, enviadas, ganhas:ganhas.length, valorGanho};
+}
+function pageOportunidades(){
+  const r = comercialResumoOportunidades();
+  return `
+  <div class="kpi-row">
+    <div class="kpi-item"><div class="kpi-rot">Oportunidades</div><div class="kpi-val">${fmtNum(r.total)}</div></div>
+    <div class="kpi-item"><div class="kpi-rot">Enviadas</div><div class="kpi-val">${fmtNum(r.enviadas)}</div></div>
+    <div class="kpi-item green"><div class="kpi-rot">Ganhas</div><div class="kpi-val">${fmtNum(r.ganhas)}</div></div>
+    <div class="kpi-item"><div class="kpi-rot">Valor Ganho</div><div class="kpi-val">${fmtBRL(r.valorGanho,true)}</div></div>
+  </div>
+  <div class="sec-card">
+    <div class="sec-head"><span class="sec-title">📋 Oportunidades</span>
+      <button class="btn-sm violet" onclick="comAbrirFormOportunidade()">+ Nova oportunidade</button></div>
+    <div class="sec-body">
+      <div class="com-toolbar"><input type="text" class="com-search" id="com-busca-oport" placeholder="🔎 Buscar por cliente, proposta, objeto…" oninput="comRenderTabelaOportunidades()"></div>
+      <div id="com-tabela-oportunidades">${comTabelaOportunidadesHTML()}</div>
+    </div>
+  </div>`;
+}
+/* rebuild puro (string) — chamado tanto no render inicial (síncrono, pra
+   navegação numérica já encontrar as linhas prontas) quanto na busca */
+function comTabelaOportunidadesHTML(){
+  const busca = (document.getElementById('com-busca-oport')?.value||'').toLowerCase();
+  let lst = COM.oportunidades.slice().sort((a,b)=>(b.data||'').localeCompare(a.data||''));
+  if(busca) lst = lst.filter(o => [o.cliente,o.numProposta,o.objeto,o.empresa].some(v=>(v||'').toLowerCase().includes(busca)));
+  if(!lst.length) return '<p class="com-empty">Nenhuma oportunidade encontrada.</p>';
+  return '<div class="tbl-wrap"><table class="edit-table"><thead><tr>' +
+    '<th>Data</th><th>Cliente</th><th>Segmento</th><th>Nº Proposta</th><th>Valor Licitado</th><th>Status</th><th></th>' +
+    '</tr></thead><tbody>' + lst.map(o=>{
+      const tagStatus = isGanhoCom(o) ? '<span class="chip st-vencido">Ganho</span>' : isPercaCom(o) ? '<span class="chip st-perdido">Perca</span>' : '<span class="chip st-pendente">'+esc(o.statusGanho||'Pendente')+'</span>';
+      return '<tr>' +
+        '<td>'+fmtDataCom(o.data)+'</td>' +
+        '<td>'+esc(o.cliente||'—')+'</td>' +
+        '<td>'+esc(o.segmento||'—')+'</td>' +
+        '<td>'+esc(o.numProposta||'—')+'</td>' +
+        '<td>'+fmtBRL(o.valorLicitado)+'</td>' +
+        '<td>'+tagStatus+'</td>' +
+        '<td class="row-actions"><button class="btn-sm" onclick="comAbrirFormOportunidade(\''+esc(o.id)+'\')">Editar</button>' +
+        '<button class="btn-sm danger" onclick="comExcluirOportunidade(\''+esc(o.id)+'\')">Excluir</button></td>' +
+      '</tr>';
+    }).join('') + '</tbody></table></div>';
+}
+function comToggleGanhoPerca(status){
+  const blocoGanho = document.getElementById('com-bloco-ganho');
+  const blocoPerca = document.getElementById('com-bloco-perca');
+  if(blocoGanho) blocoGanho.style.display = status==='Ganho' ? '' : 'none';
+  if(blocoPerca) blocoPerca.style.display = status==='Perca' ? '' : 'none';
+}
+function comToggleConsorcio(valor){
+  const bloco = document.getElementById('com-bloco-consorcio');
+  if(bloco) bloco.style.display = valor==='Sim' ? '' : 'none';
+}
+function comRenderLinhasConsorcio(){
+  return COM_CONSORCIO_ROWS.map((c,i)=>
+    '<div class="com-consorcio-row" style="display:flex;gap:8px;margin-bottom:6px;align-items:center;">' +
+      '<input type="text" value="'+esc(c.empresa||'')+'" placeholder="Empresa" style="flex:2;" ' +
+        'oninput="COM_CONSORCIO_ROWS['+i+'].empresa=this.value">' +
+      '<input type="number" step="1" min="0" max="100" value="'+(c.percentual??'')+'" placeholder="%" style="width:80px;" ' +
+        'oninput="COM_CONSORCIO_ROWS['+i+'].percentual=this.value">' +
+      '<button type="button" class="row-del" title="Remover" onclick="comRemoverLinhaConsorcio('+i+')">✕</button>' +
+    '</div>'
+  ).join('');
+}
+function comAdicionarLinhaConsorcio(){
+  COM_CONSORCIO_ROWS.push({empresa:'', percentual:''});
+  document.getElementById('com-consorcio-linhas').innerHTML = comRenderLinhasConsorcio();
+}
+function comRemoverLinhaConsorcio(i){
+  COM_CONSORCIO_ROWS.splice(i,1);
+  document.getElementById('com-consorcio-linhas').innerHTML = comRenderLinhasConsorcio();
+}
+function comAbrirFormOportunidade(id){
+  const o = id ? COM.oportunidades.find(x=>x.id===id) : {
+    empresa:'Sinape', segmento:'Público', modalidade:'Licitação', percChanceReal:0.5,
+    statusEnviadas:'Enviada', statusGanho:'Pendente', habilitacao:'SIM',
+    continuidadeOuNovo:'Novo', novosClientes:'Não', statusProcesso:'Em andamento', consorcio:'Não',
+  };
+  COM_CONSORCIO_ROWS = (o.composicaoConsorcio && o.composicaoConsorcio.length)
+    ? JSON.parse(JSON.stringify(o.composicaoConsorcio)) : [{empresa:'Sinape', percentual:''}];
+  const corpo = document.getElementById('comercial-form-body');
+  corpo.innerHTML =
+    '<h3>'+(id?'Editar':'Nova')+' Oportunidade</h3>' +
+    '<form id="com-form-oportunidade" onsubmit="return comSalvarOportunidade(event,'+(id?"'"+esc(id)+"'":'null')+')">' +
+      '<div class="field-grid">' + CAMPOS_OPORTUNIDADE.map(c=>campoComercialHTML(c, o[c.key])).join('') + '</div>' +
+      '<div id="com-bloco-ganho" class="field-grid" style="display:'+(o.statusGanho==='Ganho'?'':'none')+';">' +
+        '<div class="sec-divider" style="grid-column:1/-1;">Detalhe do ganho</div>' +
+        CAMPOS_OPORTUNIDADE_GANHO.map(c=>campoComercialHTML(c, o[c.key])).join('') + '</div>' +
+      '<div id="com-bloco-perca" class="field-grid" style="display:'+(o.statusGanho==='Perca'?'':'none')+';">' +
+        '<div class="sec-divider" style="grid-column:1/-1;">Classificação do problema</div>' +
+        CAMPOS_OPORTUNIDADE_PERCA.map(c=>campoComercialHTML(c, o[c.key])).join('') + '</div>' +
+      '<div id="com-bloco-consorcio" style="display:'+(o.consorcio==='Sim'?'':'none')+';margin-top:12px;">' +
+        '<div class="sec-divider">Composição do consórcio</div>' +
+        '<p class="hint">Some 100% entre os membros. Só as linhas com Sinape, York ou Sinais Verticais entram nos indicadores — parceiros externos ficam de fora automaticamente.</p>' +
+        '<div id="com-consorcio-linhas">'+comRenderLinhasConsorcio()+'</div>' +
+        '<button type="button" class="btn-sm violet" onclick="comAdicionarLinhaConsorcio()">+ Adicionar empresa</button>' +
+      '</div>' +
+      '<div class="modal-actions">' +
+        '<button type="button" class="btn-ghost" onclick="fecharModal(\'modal-comercial-form\')">Cancelar</button>' +
+        '<button type="submit" class="btn-primary">Salvar</button>' +
+      '</div>' +
+    '</form>';
+  abrirModal('modal-comercial-form');
+  const primeiro = corpo.querySelector('[data-key]');
+  if(primeiro) primeiro.focus();
+}
+async function comSalvarOportunidade(ev, id){
+  ev.preventDefault();
+  const form = document.getElementById('com-form-oportunidade');
+  const rec = lerCamposComerciais(form);
+  // consórcio: só linhas com empresa preenchida entram, e só se "É consórcio?"=Sim
+  rec.composicaoConsorcio = rec.consorcio==='Sim'
+    ? COM_CONSORCIO_ROWS.filter(c=>c.empresa && c.empresa.trim()!=='')
+        .map(c=>({empresa:c.empresa.trim(), percentual:Number(c.percentual)||0}))
+    : [];
+  // derivados calculados no salvamento, igual ao painel original
+  rec.valorPonderado = (rec.valorLicitado||0) * (rec.percChanceReal||0);
+  rec.percDesconto = (rec.valorLicitado && rec.valorGanho) ? (rec.valorLicitado-rec.valorGanho)/rec.valorLicitado : null;
+  try{
+    if(id) await Store.salvarOportunidade(id, rec);
+    else await Store.criarOportunidade(rec);
+    toast('Oportunidade salva.');
+    fecharModal('modal-comercial-form');
+    await comercialCarregarDados();
+    comercialAbrirPagina('oportunidades');
+  }catch(e){ toast('Erro ao salvar: '+e.message); }
+  return false;
+}
+async function comExcluirOportunidade(id){
+  if(!confirm('Excluir esta oportunidade? Essa ação não pode ser desfeita.')) return;
+  try{
+    await Store.excluirOportunidade(id);
+    toast('Oportunidade excluída.');
+    await comercialCarregarDados();
+    comercialAbrirPagina('oportunidades');
+  }catch(e){ toast('Erro ao excluir: '+e.message); }
+}
+function comRenderTabelaOportunidades(){
+  const area = document.getElementById('com-tabela-oportunidades');
+  if(area) area.innerHTML = comTabelaOportunidadesHTML();
+  // a busca muda quais linhas existem, então a navegação numérica (se
+  // estiver ativa nesta página) precisa recontar
+  if(typeof A11Y!=='undefined' && A11Y.ativo && COM.paginaAtiva==='oportunidades') a11yAtualizarItens(true);
+}
+COM_RENDERERS['oportunidades'] = pageOportunidades;
+function a11yItensComercial_oportunidades(){
+  return [
+    {el: document.querySelector('#com-conteudo .btn-sm.violet'), label:'Nova oportunidade'},
+    {el: document.getElementById('com-busca-oport'), label:'Buscar oportunidade'},
+    ...Array.from(document.querySelectorAll('#com-tabela-oportunidades tbody tr')).flatMap(tr=>{
+      const cliente = tr.children[1]?.textContent.trim() || 'oportunidade';
+      const data = tr.children[0]?.textContent.trim() || '';
+      const nomeBase = cliente+' — '+data;
+      return [
+        {el: tr.querySelector('.btn-sm:not(.danger)'), label: 'Editar: '+nomeBase},
+        {el: tr.querySelector('.btn-sm.danger'), label: 'Excluir: '+nomeBase},
+      ];
+    }),
+  ].filter(i=>i.el);
+}
+
+/* ── EQUIPE & CUSTOS ── */
+const CAMPOS_PESSOA_EQUIPE = [
+  {key:'classe', label:'Classe', tipo:'text', placeholder:'Mão de Obra, Ferramentas…'},
+  {key:'nome', label:'Descrição / Nome', tipo:'text'},
+  {key:'funcao', label:'Função', tipo:'text'},
+  {key:'modalidade', label:'Modalidade', tipo:'text', placeholder:'PJ, CLT, —'},
+  {key:'custoMensal', label:'Custo Mensal (R$)', tipo:'moeda'},
+];
+function pageEquipeComercial(){
+  const total = COM.equipe.reduce((a,p)=>a+(Number(p.custoMensal)||0),0);
+  const linhas = COM.equipe.slice().sort((a,b)=>(a.nome||'').localeCompare(b.nome||''));
+  return `
+  <div class="kpi-row">
+    <div class="kpi-item"><div class="kpi-rot">Pessoas / Itens</div><div class="kpi-val">${fmtNum(COM.equipe.length)}</div></div>
+    <div class="kpi-item amber"><div class="kpi-rot">Custo Mensal Total</div><div class="kpi-val">${fmtBRL(total,true)}</div><div class="kpi-sub">alimenta o indicador de Eficiência</div></div>
+  </div>
+  <div class="sec-card">
+    <div class="sec-head"><span class="sec-title">👥 Equipe & Custos</span>
+      <button class="btn-sm violet" onclick="comAbrirFormEquipe()">+ Novo item</button></div>
+    <div class="sec-body">
+      ${linhas.length===0 ? '<p class="com-empty">Nenhum item de custo cadastrado.</p>' :
+      '<div class="tbl-wrap"><table class="edit-table"><thead><tr>' +
+        '<th>Classe</th><th>Descrição</th><th>Função</th><th>Modalidade</th><th>Custo Mensal</th><th></th>' +
+      '</tr></thead><tbody>' + linhas.map(p=>
+        '<tr><td>'+esc(p.classe||'—')+'</td><td>'+esc(p.nome||'—')+'</td><td>'+esc(p.funcao||'—')+'</td>' +
+        '<td>'+esc(p.modalidade||'—')+'</td><td>'+fmtBRL(p.custoMensal)+'</td>' +
+        '<td class="row-actions"><button class="btn-sm" onclick="comAbrirFormEquipe(\''+esc(p.id)+'\')">Editar</button>' +
+        '<button class="btn-sm danger" onclick="comExcluirPessoaEquipe(\''+esc(p.id)+'\')">Excluir</button></td></tr>'
+      ).join('') + '</tbody></table></div>'}
+    </div>
+  </div>`;
+}
+function comAbrirFormEquipe(id){
+  const p = id ? COM.equipe.find(x=>x.id===id) : {classe:'Mão de Obra', modalidade:'PJ'};
+  const corpo = document.getElementById('comercial-form-body');
+  corpo.innerHTML =
+    '<h3>'+(id?'Editar':'Novo')+' Item de Custo</h3>' +
+    '<form id="com-form-equipe" onsubmit="return comSalvarPessoaEquipe(event,'+(id?"'"+esc(id)+"'":'null')+')">' +
+      '<div class="field-grid">' + CAMPOS_PESSOA_EQUIPE.map(c=>campoComercialHTML(c, p[c.key])).join('') + '</div>' +
+      '<div class="modal-actions">' +
+        '<button type="button" class="btn-ghost" onclick="fecharModal(\'modal-comercial-form\')">Cancelar</button>' +
+        '<button type="submit" class="btn-primary">Salvar</button>' +
+      '</div>' +
+    '</form>';
+  abrirModal('modal-comercial-form');
+  const primeiro = corpo.querySelector('[data-key]');
+  if(primeiro) primeiro.focus();
+}
+async function comSalvarPessoaEquipe(ev, id){
+  ev.preventDefault();
+  const rec = lerCamposComerciais(document.getElementById('com-form-equipe'));
+  if(!rec.nome || !rec.nome.trim()){ toast('Informe a descrição/nome.'); return false; }
+  try{
+    if(id) await Store.salvarPessoaComercial(id, rec);
+    else await Store.criarPessoaComercial(rec);
+    toast('Item de custo salvo.');
+    fecharModal('modal-comercial-form');
+    await comercialCarregarDados();
+    comercialAbrirPagina('equipe');
+  }catch(e){ toast('Erro ao salvar: '+e.message); }
+  return false;
+}
+async function comExcluirPessoaEquipe(id){
+  if(!confirm('Excluir este item de custo?')) return;
+  try{
+    await Store.excluirPessoaComercial(id);
+    toast('Item excluído.');
+    await comercialCarregarDados();
+    comercialAbrirPagina('equipe');
+  }catch(e){ toast('Erro ao excluir: '+e.message); }
+}
+COM_RENDERERS['equipe'] = pageEquipeComercial;
+function a11yItensComercial_equipe(){
+  return [
+    {el: document.querySelector('#com-conteudo .btn-sm.violet'), label:'Novo item de custo'},
+    ...Array.from(document.querySelectorAll('#com-conteudo tbody tr')).flatMap(tr=>{
+      const nome = tr.children[1]?.textContent.trim() || 'item';
+      return [
+        {el: tr.querySelector('.btn-sm:not(.danger)'), label: 'Editar: '+nome},
+        {el: tr.querySelector('.btn-sm.danger'), label: 'Excluir: '+nome},
+      ];
+    }),
+  ].filter(i=>i.el);
+}
+
+/* ── META DA ÁREA ── */
+function pageMetaComercial(){
+  const m = COM.meta;
+  const carteiraInicial = m.valorCarteiraInicial||0;
+  const ano = calcAnoCom();
+  const ganhoAno = COM.oportunidades.filter(o=>{
+    if(!isGanhoCom(o)) return false;
+    const d = parseDateStrCom(o.dataConclusao);
+    return d && d.getFullYear()===ano;
+  }).reduce((a,o)=>a+nossoValorGanhoCom(o),0);
+  const ganhoConsiderado = carteiraInicial + ganhoAno;
+  const saldo = Math.max((m.metaAnual||0)-ganhoConsiderado, 0);
+  const pctAtingido = m.metaAnual ? ganhoConsiderado/m.metaAnual : 0;
+  return `
+  <div class="kpi-row">
+    <div class="kpi-item"><div class="kpi-rot">Meta Anual (${ano})</div><div class="kpi-val">${fmtBRL(m.metaAnual,true)}</div></div>
+    <div class="kpi-item"><div class="kpi-rot">Carteira em 01/01/${ano}</div><div class="kpi-val">${fmtBRL(carteiraInicial,true)}</div></div>
+    <div class="kpi-item green"><div class="kpi-rot">Ganho no Ano</div><div class="kpi-val">${fmtBRL(ganhoAno,true)}</div><div class="kpi-sub">+ carteira = ${fmtBRL(ganhoConsiderado,true)}</div></div>
+    <div class="kpi-item amber"><div class="kpi-rot">Saldo Restante</div><div class="kpi-val">${fmtBRL(saldo,true)}</div></div>
+    <div class="kpi-item violet"><div class="kpi-rot">% Atingido</div><div class="kpi-val">${fmtPct(pctAtingido)}</div></div>
+  </div>
+  <div class="sec-card">
+    <div class="sec-head"><span class="sec-title">🎯 Editar meta</span></div>
+    <div class="sec-body">
+      <form id="com-form-meta" onsubmit="return comSalvarMeta(event)" class="field-grid">
+        ${campoComercialHTML({key:'ano', label:'Ano', tipo:'number', step:'1'}, m.ano)}
+        ${campoComercialHTML({key:'metaAnual', label:'Meta Anual de Carteira (R$)', tipo:'moeda'}, m.metaAnual)}
+        ${campoComercialHTML({key:'valorCarteiraInicial', label:'Valor em Carteira em 01/01/'+ano+' (R$)', tipo:'moeda'}, carteiraInicial)}
+        <div class="field span-full" style="font-size:.76rem;color:var(--slate-l);">Contratos ativos já em carteira no início do ano — contam como parte da meta anual, junto com o que for ganho ao longo do ano.</div>
+        <div class="field span-full"><button type="submit" class="btn-primary" style="width:fit-content;">Salvar Meta</button></div>
+      </form>
+    </div>
+  </div>`;
+}
+async function comSalvarMeta(ev){
+  ev.preventDefault();
+  const rec = lerCamposComerciais(document.getElementById('com-form-meta'));
+  try{
+    await Store.salvarMetaComercial(rec);
+    toast('Meta salva.');
+    await comercialCarregarDados();
+    comercialAbrirPagina('meta');
+  }catch(e){ toast('Erro ao salvar: '+e.message); }
+  return false;
+}
+COM_RENDERERS['meta'] = pageMetaComercial;
+
+/* ── TIMESHEET (HORAS) ── */
+function pageTimesheetComercial(){
+  const linhas = COM.timesheet.slice().sort((a,b)=>a.mes.localeCompare(b.mes));
+  return `
+  <div class="sec-card">
+    <div class="sec-head"><span class="sec-title">⏱ Timesheet (Horas)</span></div>
+    <div class="sec-body">
+      <p class="hint">Importa o total de horas dedicadas por mês — alimenta "Horas Dedicadas" no indicador de Produtividade.</p>
+      <form id="com-form-timesheet" onsubmit="return comSalvarTimesheetMes(event)" class="field-grid" style="margin-bottom:16px;">
+        <div class="field"><label for="com-ts-mes">Mês</label><input type="month" id="com-ts-mes" required></div>
+        <div class="field"><label for="com-ts-total">Total de horas</label><input type="number" step="0.5" min="0" id="com-ts-total" required></div>
+        <div class="field" style="justify-content:flex-end;"><button type="submit" class="btn-primary">Salvar mês</button></div>
+      </form>
+      ${linhas.length===0 ? '<p class="com-empty">Nenhum mês registrado ainda.</p>' :
+      '<div class="tbl-wrap"><table class="edit-table"><thead><tr><th>Mês</th><th>Total de horas</th><th></th></tr></thead><tbody>' +
+        linhas.map(t=>{
+          const [ano,mesNum] = t.mes.split('-');
+          const label = MES_NOMES[Number(mesNum)-1]+'/'+ano;
+          return '<tr><td>'+esc(label)+'</td><td>'+fmtNum(t.total)+'h</td>' +
+            '<td class="row-actions"><button class="btn-sm danger" onclick="comExcluirTimesheetMes(\''+esc(t.mes)+'\')">Excluir</button></td></tr>';
+        }).join('') + '</tbody></table></div>'}
+    </div>
+  </div>`;
+}
+async function comSalvarTimesheetMes(ev){
+  ev.preventDefault();
+  const mes = document.getElementById('com-ts-mes').value;
+  const total = Number(document.getElementById('com-ts-total').value);
+  if(!mes){ toast('Escolha o mês.'); return false; }
+  try{
+    await Store.salvarTimesheetMes(mes, total);
+    toast('Mês salvo.');
+    await comercialCarregarDados();
+    comercialAbrirPagina('timesheet');
+  }catch(e){ toast('Erro ao salvar: '+e.message); }
+  return false;
+}
+async function comExcluirTimesheetMes(mes){
+  if(!confirm('Excluir o registro de horas de '+mes+'?')) return;
+  try{
+    await Store.excluirTimesheetMes(mes);
+    toast('Mês excluído.');
+    await comercialCarregarDados();
+    comercialAbrirPagina('timesheet');
+  }catch(e){ toast('Erro ao excluir: '+e.message); }
+}
+COM_RENDERERS['timesheet'] = pageTimesheetComercial;
+function a11yItensComercial_timesheet(){
+  return Array.from(document.querySelectorAll('#com-conteudo tbody tr')).map(tr=>{
+    const label = tr.children[0]?.textContent.trim() || 'mês';
+    return {el: tr.querySelector('.btn-sm.danger'), label: 'Excluir horas de: '+label};
+  }).filter(i=>i.el);
 }
 
 /* ════════════════════════════════════════════════════════════════
@@ -4863,7 +5578,14 @@ async function sinkiEnviar(){
      Ctrl+Alt+R   repete o último anúncio
      Ctrl+Alt+H   abre/fecha a lista de atalhos na tela (texto, não só fala)
    ════════════════════════════════════════════════════════════════ */
-const A11Y = { ativo: localStorage.getItem('sinape:a11y')==='1', foco:null, pagina:0, nivel:'tela', todosItens:[], itensAtuais:[], avisoCampoDado:false, ultimoAnuncio:'', _semTab:[] };
+// mesmo cuidado de _lerPrefLocal (index.html:~2350): localStorage pode
+// lançar, e isso roda no nível superior do script — sem o try/catch, uma
+// exceção aqui já teria interrompido a inicialização bem antes de chegar
+// nesta linha, então o defensivo teria que estar lá, não aqui; mesmo assim
+// blindado aqui também, para o dia em que algo mudar de ordem no arquivo.
+let _a11yAtivoSalvo = false;
+try{ _a11yAtivoSalvo = localStorage.getItem('sinape:a11y')==='1'; }catch(e){ /* localStorage indisponível: começa desligado */ }
+const A11Y = { ativo: _a11yAtivoSalvo, foco:null, pagina:0, nivel:'tela', todosItens:[], itensAtuais:[], avisoCampoDado:false, ultimoAnuncio:'', _semTab:[] };
 
 function a11yAnunciar(msg){
   A11Y.ultimoAnuncio = msg;
@@ -4900,6 +5622,11 @@ function a11yOndeEstou(){
     if(A11Y.nivel==='conteudo') msg += ' Navegando pelas seções.';
     if(A11Y.nivel==='itens') msg += ' Navegando pelos itens de uma seção.';
     a11yAnunciar(msg);
+    return;
+  }
+  if(document.getElementById('view-comercial').classList.contains('active')){
+    const nome = (COM_PAGINAS.find(p=>p.id===COM.paginaAtiva)||{}).nome || 'Comercial';
+    a11yAnunciar('Você está na área Comercial, página: '+nome+'.');
     return;
   }
   a11yAnunciar('Não foi possível identificar a tela atual.');
@@ -4989,6 +5716,17 @@ function a11yVoltar(){
     return;
   }
   if(document.getElementById('view-list').classList.contains('active')){
+    a11yAnunciar('Voltar para: Início.');
+    goHome();
+    return;
+  }
+  if(document.getElementById('view-comercial').classList.contains('active')){
+    if(A11Y.nivel==='conteudo'){
+      a11yAnunciar('Voltar para: páginas do Comercial.');
+      A11Y.nivel = 'tela';
+      a11yAtualizarItens(true);
+      return;
+    }
     a11yAnunciar('Voltar para: Início.');
     goHome();
     return;
@@ -5116,6 +5854,24 @@ function a11yAtualizarItens(manterNivel){
   } else if(document.getElementById('view-list').classList.contains('active')){
     A11Y.todosItens = Array.from(document.querySelectorAll('#process-grid .proc-card'))
       .map(c=>({el:c, label:(c.querySelector('.pc-nome')?.textContent)||'Processo'}));
+  } else if(document.getElementById('view-comercial').classList.contains('active')){
+    if(A11Y.nivel==='conteudo' && typeof a11yItensComercial==='function'){
+      const itens = a11yItensComercial();
+      // páginas sem itens especiais (ex.: formulário simples da Meta) caem
+      // pro Tab nativo dentro do conteúdo — a navegação numérica só cobre
+      // a troca de página nesse caso
+      if(itens && itens.length){ A11Y.todosItens = itens; }
+      else { A11Y.nivel = 'tela'; }
+    }
+    if(A11Y.nivel !== 'conteudo'){
+      A11Y.nivel = 'tela';
+      const entrarPagina = id => ()=>{ comercialAbrirPagina(id, true); A11Y.nivel='conteudo'; a11yAtualizarItens(true); };
+      A11Y.todosItens = COM_PAGINAS.map(p=>({
+        el: document.getElementById('com-tab-'+p.id),
+        label: (p.grupo==='Cadastros'?'Cadastro ':'Indicador ')+p.nome,
+        ativar: entrarPagina(p.id)
+      })).filter(i=>i.el);
+    }
   } else if(document.getElementById('view-process').classList.contains('active')){
     const painelAtivo = document.querySelector('.panel.active');
     const rootPorPainel = { 'panel-analise':'analise-root', 'panel-exigencias':'exigencias-root', 'panel-checklist':'checklist-root' };
