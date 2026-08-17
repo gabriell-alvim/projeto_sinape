@@ -116,6 +116,7 @@ input, select, textarea { font-family:inherit; }
   padding:28px 24px; text-align:center; cursor:pointer; transition:all .15s;
 }
 .home-card:hover { border-color:var(--teal-mid); box-shadow:0 6px 18px rgba(13,92,99,.12); transform:translateY(-2px); }
+.home-card:focus-visible { outline:3px solid var(--teal-mid); outline-offset:2px; }
 .home-card .hc-icon { font-size:2rem; }
 .home-card h3 { margin-top:10px; color:var(--teal); }
 .home-card p { font-size:.8rem; color:var(--slate-mid); margin-top:6px; }
@@ -664,20 +665,23 @@ input, select, textarea { font-family:inherit; }
       <p>Painel colaborativo — licitações públicas (Lei 14.133/2021) e contratações privadas (concessionárias)</p>
     </div>
     <div class="home-grid">
-      <div class="home-card" onclick="openList('publico')">
-        <div class="hc-icon">🏛️</div>
+      <div class="home-card" role="button" tabindex="0" aria-label="Processos Públicos"
+           onclick="openList('publico')" onkeydown="a11yAtivarComEnter(event, ()=>openList('publico'))">
+        <div class="hc-icon" aria-hidden="true">🏛️</div>
         <h3>Processos Públicos</h3>
         <p>Pregões, concorrências e dispensas — órgãos e entidades públicas</p>
         <span class="hc-count" id="count-publico">0 processos</span>
       </div>
-      <div class="home-card" onclick="openList('privado')">
-        <div class="hc-icon">🏢</div>
+      <div class="home-card" role="button" tabindex="0" aria-label="Processos Privados"
+           onclick="openList('privado')" onkeydown="a11yAtivarComEnter(event, ()=>openList('privado'))">
+        <div class="hc-icon" aria-hidden="true">🏢</div>
         <h3>Processos Privados</h3>
         <p>Cartas-convite, RFQs e cotações — concessionárias e empresas</p>
         <span class="hc-count" id="count-privado">0 processos</span>
       </div>
-      <div class="home-card" onclick="abrirPainelGerencial()">
-        <div class="hc-icon">📈</div>
+      <div class="home-card" role="button" tabindex="0" aria-label="Painel Gerencial"
+           onclick="abrirPainelGerencial()" onkeydown="a11yAtivarComEnter(event, abrirPainelGerencial)">
+        <div class="hc-icon" aria-hidden="true">📈</div>
         <h3>Painel Gerencial</h3>
         <p>Acompanhamento de demandas, oportunidades, equipe, meta e indicadores</p>
         <span class="hc-count" id="count-comercial">Demandas, oportunidades, ROI, pipeline…</span>
@@ -1879,6 +1883,13 @@ function uid(nome){
   return slug + '-' + Date.now().toString(36);
 }
 function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+/* pra div[role=button] (card clicável) responder a Enter/Espaço igual a um
+   <button> de verdade — sem isto, quem navega só de teclado nem alcança
+   nem ativa o card, mesmo com tabindex. Espaço precisa de preventDefault,
+   senão rola a página em vez de ativar. */
+function a11yAtivarComEnter(event, fn){
+  if(event.key==='Enter' || event.key===' '){ event.preventDefault(); fn(); }
+}
 function toast(msg){
   const t = document.getElementById('toast');
   t.textContent = msg; t.classList.add('show');
@@ -6576,7 +6587,14 @@ function a11yRestaurarTab(){
   // devolve ao Tab nativo os itens numerados em telas/páginas anteriores —
   // sem isso, um botão numerado uma vez ficava fora da ordem de Tab pra
   // sempre (mesmo desligando o modo), até a página ser recarregada.
-  A11Y._semTab.forEach(el=>el.removeAttribute('tabindex'));
+  A11Y._semTab.forEach(el=>{
+    // div[role=button] (ex.: os cards da home) não é focável por natureza —
+    // sem tabindex nenhum, ela simplesmente some do Tab nativo pra sempre.
+    // Elementos nativos (input, button, a href...) voltam ao normal só
+    // removendo o atributo; estes precisam do tabindex=0 de volta.
+    if(el.getAttribute('role')==='button') el.tabIndex = 0;
+    else el.removeAttribute('tabindex');
+  });
   A11Y._semTab = [];
 }
 function a11yRenderizarPagina(){
