@@ -676,16 +676,15 @@ input, select, textarea { font-family:inherit; }
         <p>Cartas-convite, RFQs e cotações — concessionárias e empresas</p>
         <span class="hc-count" id="count-privado">0 processos</span>
       </div>
-      <div class="home-card" onclick="abrirComercial()">
-        <div class="hc-icon">📊</div>
-        <h3>Comercial</h3>
-        <p>Oportunidades, equipe, meta e indicadores da área comercial</p>
-        <span class="hc-count" id="count-comercial">Oportunidades, ROI, pipeline…</span>
+      <div class="home-card" onclick="abrirPainelGerencial()">
+        <div class="hc-icon">📈</div>
+        <h3>Painel Gerencial</h3>
+        <p>Acompanhamento de demandas, oportunidades, equipe, meta e indicadores</p>
+        <span class="hc-count" id="count-comercial">Demandas, oportunidades, ROI, pipeline…</span>
       </div>
     </div>
     <div class="home-relatorio-row" style="flex-direction:column; gap:8px;">
       <button class="btn-outline" id="btn-atualizacoes-dia" onclick="abrirRelatorioDoDia()">📋 Atualizações do dia</button>
-      <button class="btn-outline" id="btn-painel-gerencial" onclick="abrirPainelGerencial()">📈 Painel gerencial</button>
       <button class="btn-outline" id="btn-painel-prazos" onclick="abrirPainelPrazos()">⏰ Painel de prazos</button>
       <button class="btn-outline" id="btn-painel-gastos" onclick="abrirPainelGastos()">💵 Painel de gastos</button>
     </div>
@@ -817,7 +816,7 @@ input, select, textarea { font-family:inherit; }
   <div class="view" id="view-comercial">
     <div class="page-head">
       <div>
-        <div class="page-title">Comercial</div>
+        <div class="page-title">Painel Gerencial</div>
         <div class="page-sub" id="com-subtitulo">Carregando…</div>
       </div>
       <div style="display:flex;gap:8px;">
@@ -826,6 +825,8 @@ input, select, textarea { font-family:inherit; }
         <button class="btn-outline" onclick="comercialExportar()">⬇ Exportar backup</button>
       </div>
     </div>
+    <div class="com-navlabel">Acompanhamento</div>
+    <div class="com-tabs" id="com-tabs-demandas"></div>
     <div class="com-navlabel">Cadastros</div>
     <div class="com-tabs" id="com-tabs-cadastros"></div>
     <div class="com-navlabel">Indicadores</div>
@@ -983,19 +984,6 @@ input, select, textarea { font-family:inherit; }
     </div>
     <div class="modal-actions">
       <button class="btn-ghost" onclick="fecharModal('modal-prazos')">Fechar</button>
-    </div>
-  </div>
-</div>
-
-<div class="modal-overlay" id="modal-gerencial">
-  <div class="modal-box wide" role="dialog" aria-label="Painel gerencial da carteira">
-    <h3>📈 Painel gerencial</h3>
-    <p class="hint">Onde cada processo está por fase, com o que trava cada um. Clique num processo pra abrir ele direto.</p>
-    <div id="gerencial-carteira">
-      <p class="relatorio-vazio">Carregando…</p>
-    </div>
-    <div class="modal-actions">
-      <button class="btn-ghost" onclick="fecharModal('modal-gerencial')">Fechar</button>
     </div>
   </div>
 </div>
@@ -1932,7 +1920,7 @@ function updateBreadcrumb(){
   }
   if(document.getElementById('view-comercial').classList.contains('active')){
     const nome = (COM_PAGINAS.find(p=>p.id===COM.paginaAtiva)||{}).nome || '';
-    bc.innerHTML = html + '<span class="sep">/</span><span class="link" onclick="abrirComercial()">Comercial</span>' +
+    bc.innerHTML = html + '<span class="sep">/</span><span class="link" onclick="abrirPainelGerencial()">Painel Gerencial</span>' +
       (nome ? '<span class="sep">/</span><span class="current">'+esc(nome)+'</span>' : '');
     return;
   }
@@ -2659,9 +2647,10 @@ function irParaProcesso(id){
    dados que realmente persistem no Mongo. */
 
 const COM = { oportunidades:[], equipe:[], meta:{ano:new Date().getFullYear(), metaAnual:0, valorCarteiraInicial:0},
-              timesheet:[], carregado:false, paginaAtiva:'oportunidades' };
+              timesheet:[], carregado:false, paginaAtiva:'demandas' };
 
 const COM_PAGINAS = [
+  {id:'demandas',       nome:'Acompanhamento de Demandas',      grupo:'Demandas'},
   {id:'oportunidades', nome:'Oportunidades',                 grupo:'Cadastros'},
   {id:'equipe',         nome:'Equipe & Custos',               grupo:'Cadastros'},
   {id:'meta',           nome:'Meta da Área',                  grupo:'Cadastros'},
@@ -2919,9 +2908,13 @@ function calcProblemasCom(){
   return {irrev: irrevArr, rev: revArr};
 }
 
-/* ── carregamento e navegação ── */
-async function abrirComercial(){
-  if(Store.modo!=='api'){ toast('A área Comercial precisa do Painel conectado ao backend.'); return; }
+/* ── carregamento e navegação ──
+   Área única que reúne o acompanhamento por fases da carteira inteira
+   ("Acompanhamento de Demandas" — era o antigo modal "Painel gerencial") e
+   o módulo Comercial (Cadastros/Indicadores). Abre direto em Demandas: é o
+   que dá o nome à área e o que mais gente vai olhar primeiro. */
+async function abrirPainelGerencial(){
+  if(Store.modo!=='api'){ toast('O Painel Gerencial precisa do Painel conectado ao backend.'); return; }
   await encerrarSessaoEdicao();
   showView('view-comercial');
   document.getElementById('com-subtitulo').textContent = 'Carregando dados…';
@@ -2934,7 +2927,7 @@ async function abrirComercial(){
     return;
   }
   comercialMontarNav();
-  comercialAbrirPagina(COM.paginaAtiva || 'oportunidades');
+  comercialAbrirPagina(COM.paginaAtiva || 'demandas');
 }
 async function comercialCarregarDados(){
   const [oportunidades, equipe, meta, timesheet] = await Promise.all([
@@ -2951,13 +2944,14 @@ function comercialMontarNav(){
   const html = grupo => COM_PAGINAS.filter(p=>p.grupo===grupo).map(p=>
     '<button class="main-tab" id="com-tab-'+p.id+'" onclick="comercialAbrirPagina(\''+p.id+'\')">'+esc(p.nome)+'</button>'
   ).join('');
+  document.getElementById('com-tabs-demandas').innerHTML = html('Demandas');
   document.getElementById('com-tabs-cadastros').innerHTML = html('Cadastros');
   document.getElementById('com-tabs-indicadores').innerHTML = html('Indicadores');
 }
 const COM_RENDERERS = {};
 function comercialAbrirPagina(id, pularA11y){
   COM.paginaAtiva = id;
-  document.querySelectorAll('#com-tabs-cadastros .main-tab, #com-tabs-indicadores .main-tab').forEach(b=>{
+  document.querySelectorAll('#com-tabs-demandas .main-tab, #com-tabs-cadastros .main-tab, #com-tabs-indicadores .main-tab').forEach(b=>{
     b.classList.toggle('active', b.id==='com-tab-'+id);
   });
   const fn = COM_RENDERERS[id];
@@ -5247,12 +5241,28 @@ function prazoQuandoTexto(p){
    dia a dia — "o que está travado e o que vence essa semana" — mais do que
    abrir processo por processo. É a mesma conta do painel de dentro do
    processo, rodando sobre os dados crus que /api/gerencial devolve. */
-async function abrirPainelGerencial(){
-  abrirModal('modal-gerencial');
-  const area = document.getElementById('gerencial-carteira');
-  area.innerHTML = '<p class="relatorio-vazio">Carregando…</p>';
+/* ── ACOMPANHAMENTO DE DEMANDAS (era o antigo modal "Painel gerencial") ──
+   Carteira inteira por fase, agora como página dentro do Painel Gerencial
+   em vez de modal — o layout HTML mudou, a conta é a mesma de sempre
+   (resumoGerencial, já usado dentro de cada processo). Busca é assíncrona,
+   então a página nasce com um "Carregando…" e se preenche depois: segue o
+   mesmo padrão dos gráficos do Comercial (_paginaComGrafico). */
+function pageDemandasComercial(){
+  _carregarDemandas();
+  return '<div id="com-demandas-box"><p class="com-empty">Carregando…</p></div>';
+}
+async function _carregarDemandas(){
+  // pageDemandasComercial() chama esta função ANTES de devolver o HTML que
+  // cria #com-demandas-box — no instante em que esta linha roda, o container
+  // ainda não foi colado no DOM (só é colado quando comercialAbrirPagina
+  // atribui o retorno a innerHTML, logo depois). Um await, mesmo trivial,
+  // adia o resto da função pro próximo microtask, depois desse innerHTML já
+  // ter acontecido — sem isso, o primeiro getElementById sempre vinha null
+  // e a função saía sem nunca buscar os dados.
+  await Promise.resolve();
   if(Store.modo !== 'api'){
-    area.innerHTML = '<p class="relatorio-vazio">Disponível apenas com o Painel conectado ao backend.</p>';
+    const areaModo = document.getElementById('com-demandas-box');
+    if(areaModo) areaModo.innerHTML = '<p class="com-empty">Disponível apenas com o Painel conectado ao backend.</p>';
     return;
   }
   let processos;
@@ -5264,12 +5274,16 @@ async function abrirPainelGerencial(){
     }
     processos = (await res.json()).processos || [];
   }catch(e){
-    area.innerHTML = '<p class="relatorio-vazio">Erro ao carregar: '+esc(e.message)+'</p>';
-    a11yAnunciar('Erro ao carregar o painel gerencial.');
+    // a pessoa pode ter trocado de página do Painel Gerencial enquanto isso
+    // carregava — o container pode não existir mais
+    const box = document.getElementById('com-demandas-box');
+    if(box) box.innerHTML = '<p class="com-empty">Erro ao carregar: '+esc(e.message)+'</p>';
     return;
   }
+  const boxAtual = document.getElementById('com-demandas-box');
+  if(!boxAtual) return;
   if(!processos.length){
-    area.innerHTML = '<p class="relatorio-vazio">Nenhum processo cadastrado ainda.</p>';
+    boxAtual.innerHTML = '<p class="com-empty">Nenhum processo cadastrado ainda.</p>';
     return;
   }
 
@@ -5282,11 +5296,11 @@ async function abrirPainelGerencial(){
     || ((x.diasDisputa === null ? 1e9 : x.diasDisputa) - (y.diasDisputa === null ? 1e9 : y.diasDisputa)));
 
   const conta = s => resumos.filter(r => r.pior === s).length;
-  const cartoes = '<div class="gastos-cards">' +
-    '<div class="gastos-card"><div class="gc-num">'+resumos.length+'</div><div class="gc-lbl">processo(s)</div></div>' +
-    '<div class="gastos-card"><div class="gc-num">'+conta('vermelho')+'</div><div class="gc-lbl">com impedimento</div></div>' +
-    '<div class="gastos-card"><div class="gc-num">'+conta('amarelo')+'</div><div class="gc-lbl">com pendência</div></div>' +
-    '<div class="gastos-card"><div class="gc-num">'+conta('sem-dados')+'</div><div class="gc-lbl">sem exigências</div></div>' +
+  const cartoes = '<div class="kpi-row">' +
+    '<div class="kpi-item"><div class="kpi-rot">Processos</div><div class="kpi-val">'+resumos.length+'</div></div>' +
+    '<div class="kpi-item red"><div class="kpi-rot">Com impedimento</div><div class="kpi-val">'+conta('vermelho')+'</div></div>' +
+    '<div class="kpi-item amber"><div class="kpi-rot">Com pendência</div><div class="kpi-val">'+conta('amarelo')+'</div></div>' +
+    '<div class="kpi-item"><div class="kpi-rot">Sem exigências</div><div class="kpi-val">'+conta('sem-dados')+'</div></div>' +
   '</div>';
 
   const linhas = resumos.map(r => {
@@ -5301,8 +5315,10 @@ async function abrirPainelGerencial(){
       : '<li class="gr-ok">'+(r.semExigencias
           ? 'sem exigências cadastradas — não há o que medir'
           : 'nenhuma pendência nas fases principais')+'</li>';
+    // era openProc(...) no modal antigo — função que não existe (o nome certo
+    // é openProcess); clicar numa linha nunca funcionava. Corrigido aqui.
     return '<div class="gr-linha">' +
-      '<button class="gr-linha-nome" onclick="fecharModal(\'modal-gerencial\'); openProc(\''+esc(r.id)+'\')">' +
+      '<button class="gr-linha-nome" onclick="openProcess(\''+esc(r.id)+'\')">' +
         '<span class="s-'+r.pior+'">'+_ICONE_SINAL[r.pior]+'</span> '+esc(r.nome)+'</button>' +
       '<div class="gr-linha-meta">'+esc(dias)+
         (r.decisao ? ' · '+esc(r.decisao) : '')+
@@ -5311,10 +5327,24 @@ async function abrirPainelGerencial(){
     '</div>';
   }).join('');
 
-  area.innerHTML = cartoes + linhas;
-  a11yAnunciar(resumos.length+' processo(s). '+conta('vermelho')+' com impedimento, '+
-               conta('amarelo')+' com pendência.');
-  a11yAtualizarItens(true);
+  boxAtual.innerHTML = '<div class="sec-card"><div class="sec-head"><span class="sec-title">📈 Acompanhamento de Demandas</span></div>' +
+    '<div class="sec-body">'+cartoes+linhas+'</div></div>';
+  // só anuncia/recalcula a navegação numérica se a pessoa ainda estiver
+  // nesta página quando os dados chegarem — trocar de aba antes disso não
+  // deve interromper com uma fala fora de contexto
+  if(COM.paginaAtiva === 'demandas'){
+    a11yAnunciar(resumos.length+' processo(s). '+conta('vermelho')+' com impedimento, '+
+                 conta('amarelo')+' com pendência.');
+    a11yAtualizarItens(true);
+  }
+}
+COM_RENDERERS['demandas'] = pageDemandasComercial;
+function a11yItensComercial_demandas(){
+  return Array.from(document.querySelectorAll('#com-demandas-box .gr-linha')).map(linha=>{
+    const btn = linha.querySelector('.gr-linha-nome');
+    const meta = (linha.querySelector('.gr-linha-meta')||{}).textContent || '';
+    return { el: btn, label: (btn?btn.textContent.trim():'processo') + ' — ' + meta.trim() };
+  }).filter(i=>i.el);
 }
 
 async function abrirPainelPrazos(){
@@ -6160,8 +6190,8 @@ function a11yOndeEstou(){
     return;
   }
   if(document.getElementById('view-comercial').classList.contains('active')){
-    const nome = (COM_PAGINAS.find(p=>p.id===COM.paginaAtiva)||{}).nome || 'Comercial';
-    a11yAnunciar('Você está na área Comercial, página: '+nome+'.');
+    const nome = (COM_PAGINAS.find(p=>p.id===COM.paginaAtiva)||{}).nome || 'Painel Gerencial';
+    a11yAnunciar('Você está no Painel Gerencial, página: '+nome+'.');
     return;
   }
   a11yAnunciar('Não foi possível identificar a tela atual.');
@@ -6367,9 +6397,9 @@ function a11yAtualizarItens(manterNivel){
     A11Y.todosItens = [
       {el: document.querySelector('.home-card[onclick*="publico"]'), label:'Processos Públicos'},
       {el: document.querySelector('.home-card[onclick*="privado"]'), label:'Processos Privados'},
+      {el: document.querySelector('.home-card[onclick*="abrirPainelGerencial"]'), label:'Painel Gerencial'},
       {el: document.getElementById('btn-notificacoes'), label:'Notificações'},
       {el: document.getElementById('btn-atualizacoes-dia'), label:'Atualizações do dia'},
-      {el: document.getElementById('btn-painel-gerencial'), label:'Painel gerencial'},
       {el: document.getElementById('btn-painel-prazos'), label:'Painel de prazos'},
       {el: document.getElementById('btn-painel-gastos'), label:'Painel de gastos'},
       {el: document.querySelector('.home-actions .btn-outline'), label:'Copiar prompt para IA'},
@@ -6392,18 +6422,22 @@ function a11yAtualizarItens(manterNivel){
   } else if(document.getElementById('view-comercial').classList.contains('active')){
     if(A11Y.nivel==='conteudo' && typeof a11yItensComercial==='function'){
       const itens = a11yItensComercial();
-      // páginas sem itens especiais (ex.: formulário simples da Meta) caem
-      // pro Tab nativo dentro do conteúdo — a navegação numérica só cobre
-      // a troca de página nesse caso
-      if(itens && itens.length){ A11Y.todosItens = itens; }
-      else { A11Y.nivel = 'tela'; }
+      // null = página sem itens especiais (ex.: formulário simples da Meta) —
+      // cai pro Tab nativo dentro do conteúdo. Array vazio é diferente: é o
+      // Acompanhamento de Demandas ainda buscando os processos (assíncrono);
+      // fica no nível conteúdo mesmo com 0 itens por ora, e quando os dados
+      // chegam a própria página manda recalcular — cair pra 'tela' aqui
+      // perderia essa segunda chamada.
+      if(itens === null){ A11Y.nivel = 'tela'; }
+      else { A11Y.todosItens = itens; }
     }
     if(A11Y.nivel !== 'conteudo'){
       A11Y.nivel = 'tela';
       const entrarPagina = id => ()=>{ comercialAbrirPagina(id, true); A11Y.nivel='conteudo'; a11yAtualizarItens(true); };
+      const prefixo = { Cadastros:'Cadastro ', Indicadores:'Indicador ' };
       A11Y.todosItens = COM_PAGINAS.map(p=>({
         el: document.getElementById('com-tab-'+p.id),
-        label: (p.grupo==='Cadastros'?'Cadastro ':'Indicador ')+p.nome,
+        label: (prefixo[p.grupo]||'')+p.nome,
         ativar: entrarPagina(p.id)
       })).filter(i=>i.el);
     }
