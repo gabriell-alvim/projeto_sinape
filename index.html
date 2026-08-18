@@ -833,6 +833,7 @@ input, select, textarea { font-family:inherit; }
         <button class="btn-outline" id="btn-com-importar" onclick="document.getElementById('com-input-importar').click()">📥 Importar backup</button>
         <input type="file" id="com-input-importar" accept=".json" class="sr-only" onchange="comercialImportarArquivo(this)">
         <button class="btn-outline" onclick="comercialExportar()">⬇ Exportar backup</button>
+        <button class="btn-outline" id="btn-com-restaurar" onclick="comercialRestaurarAnterior()" hidden>↩ Restaurar para o backup anterior</button>
       </div>
     </div>
     <div class="com-navlabel">Acompanhamento</div>
@@ -1845,6 +1846,8 @@ const Store = {
   async salvarTimesheetMes(mes, total){ return this._req('PUT','/comercial/timesheet/'+encodeURIComponent(mes), {total}); },
   async excluirTimesheetMes(mes){ return this._req('DELETE','/comercial/timesheet/'+encodeURIComponent(mes)); },
   async importarBackupComercial(payload){ return this._req('POST','/comercial/importar', payload); },
+  async snapshotAnteriorComercial(){ return this._req('GET','/comercial/snapshot-anterior'); },
+  async restaurarAnteriorComercial(){ return this._req('POST','/comercial/restaurar-anterior'); },
   async listarAtasComercial(){ return (await this._req('GET','/comercial/atas')).atas || []; },
   async criarAtaComercial(a){ return this._req('POST','/comercial/atas', a); },
   async salvarAtaComercial(id, a){ return this._req('PUT','/comercial/atas/'+encodeURIComponent(id), a); },
@@ -2995,6 +2998,22 @@ async function comercialCarregarDados(){
   document.getElementById('com-subtitulo').textContent =
     COM.oportunidades.length+' oportunidade(s) · Meta '+calcAnoCom()+': '+
     fmtPct(COM.meta.metaAnual ? (COM.meta.valorCarteiraInicial||0)/COM.meta.metaAnual : 0);
+  comercialAtualizarBotaoRestaurar();
+}
+/* botão de segurança: só aparece quando existe uma foto de "antes do
+   último import" pra restaurar — não adianta mostrar sempre, ninguém
+   nunca importou nada ainda na maioria das visitas */
+async function comercialAtualizarBotaoRestaurar(){
+  const btn = document.getElementById('btn-com-restaurar');
+  if(!btn) return;
+  try{
+    const s = await Store.snapshotAnteriorComercial();
+    btn.hidden = !s.existe;
+    if(s.existe && s.criadoEm){
+      btn.title = 'Volta o Painel Gerencial pro estado de antes do último import, feito em '+
+        new Date(s.criadoEm).toLocaleString('pt-BR');
+    }
+  }catch(e){ /* sem isso o botão só fica escondido — não é crítico */ }
 }
 function comercialMontarNav(){
   const html = grupo => COM_PAGINAS.filter(p=>p.grupo===grupo).map(p=>
@@ -3077,6 +3096,39 @@ function comercialImportarArquivo(input){
     }catch(err){ toast('Erro ao importar: '+err.message); }
   };
   reader.readAsText(file);
+}
+/* ── botão de segurança "Restaurar para o backup anterior" ──
+   Guarda uma foto do módulo Comercial automaticamente antes de todo import
+   (servidor faz isso sozinho, ver /api/comercial/importar). Apertar este
+   botão troca o que está no ar agora pela foto — e a troca é um SWAP: o que
+   estava no ar antes de apertar vira a nova foto guardada, então apertar de
+   novo desfaz a restauração. Pensado pro cenário "acabei de importar um
+   backup, não tenho certeza se está certo, quero poder voltar com um clique
+   só" — sem precisar já ter o arquivo antigo salvo em algum lugar. */
+async function comercialRestaurarAnterior(){
+  let quando = '';
+  try{
+    const s = await Store.snapshotAnteriorComercial();
+    if(s.existe && s.criadoEm) quando = ' (de '+new Date(s.criadoEm).toLocaleString('pt-BR')+')';
+  }catch(e){ /* segue sem a data no aviso, não é bloqueante */ }
+  const confirmar = confirm(
+    'Isso vai SUBSTITUIR os dados atuais da área Comercial pelo estado de antes do último import'+quando+'.\n\n'+
+    'Se você apertar este botão de novo depois, a restauração é desfeita e volta pro que está no ar agora. Continuar?');
+  if(!confirmar) return;
+  toast('Verificando o servidor…');
+  const acordado = await acordarServidor((tentativa,total)=>
+    toast('Servidor inativo — acordando… (tentativa '+tentativa+' de '+total+')'));
+  if(!acordado){
+    toast('Não consegui contactar o servidor. Tente de novo em instantes.');
+    return;
+  }
+  try{
+    toast('Restaurando…');
+    await Store.restaurarAnteriorComercial();
+    toast('Restaurado para o backup anterior.');
+    await comercialCarregarDados();
+    comercialAbrirPagina(COM.paginaAtiva);
+  }catch(err){ toast('Erro ao restaurar: '+err.message); }
 }
 
 /* ── campo de formulário genérico do Comercial (independente de fieldHTML,

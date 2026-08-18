@@ -75,7 +75,11 @@ Rotas:
   POST    /api/comercial/atas                 → cria uma ata {data, participantes, assuntos:[...]}
   PUT     /api/comercial/atas/<id>            → substitui a ata (inclusive editar/adicionar assuntos)
   DELETE  /api/comercial/atas/<id>            → remove a ata
-  POST    /api/comercial/importar             → substitui TODO o módulo pelo backup {oportunidades,equipe,meta,timesheet} — rota de recuperação, não só migração
+  POST    /api/comercial/importar             → substitui TODO o módulo pelo backup {oportunidades,equipe,meta,timesheet} — rota de recuperação, não só migração;
+                                                guarda uma foto do estado atual antes de sobrescrever (botão de segurança abaixo)
+  GET     /api/comercial/snapshot-anterior     → {existe, criadoEm} — se há uma foto de "antes do último import" pra restaurar
+  POST    /api/comercial/restaurar-anterior    → botão de segurança: volta pro estado de antes do último import (é um swap —
+                                                apertar de novo desfaz a restauração)
 
 Montador de Dossiê (integrado):
   Usa o módulo em montador-dossie/ (mesmo repo) para buscar a documentação de
@@ -237,6 +241,7 @@ col_comercial_equipe = db["comercial_equipe"]
 col_comercial_meta = db["comercial_meta"]
 col_comercial_timesheet = db["comercial_timesheet"]
 col_comercial_atas = db["comercial_atas"]
+col_comercial_snapshot_anterior = db["comercial_snapshot_anterior"]
 
 
 def _init_db():
@@ -3460,23 +3465,32 @@ def excluir_ata_comercial(aid):
     return jsonify({"ok": True})
 
 
-@app.route("/api/comercial/importar", methods=["POST"])
-def importar_backup_comercial():
-    """Substitui TODO o módulo Comercial pelo conteúdo de um backup — o mesmo
-    formato que o painel original já exportava (oportunidades/equipe/meta/
-    timesheet). Fica como rota permanente de recuperação, não só migração
-    inicial: a equipe já usa esse fluxo de exportar/importar como rede de
-    segurança, então mantê-lo dá continuidade a um hábito que já existe."""
-    corpo = request.get_json(silent=True)
-    if not isinstance(corpo, dict) or not isinstance(corpo.get("oportunidades"), list):
-        return jsonify({"erro": "Arquivo não parece ser um backup válido — falta a lista de oportunidades."}), 400
+def _capturar_estado_comercial_atual() -> dict:
+    """Tira uma 'foto' de tudo que está no módulo Comercial agora, no mesmo
+    formato que /api/comercial/importar aceita de volta — usada pra guardar
+    o botão de segurança 'Restaurar para o backup anterior' antes de aplicar
+    um backup novo por cima."""
+    return {
+        "oportunidades": [_sem_id_mongo(d) for d in col_comercial_oportunidades.find()],
+        "equipe": [_sem_id_mongo(d) for d in col_comercial_equipe.find()],
+        "meta": _sem_id_mongo(col_comercial_meta.find_one({"_id": _META_ID})
+                               or {"_id": _META_ID, "ano": date.today().year,
+                                   "metaAnual": 0, "valorCarteiraInicial": 0}),
+        "timesheet": [{"mes": d["_id"], "total": d.get("total") or 0} for d in col_comercial_timesheet.find()],
+        "atas": [_sem_id_mongo(d) for d in col_comercial_atas.find()],
+    }
 
+
+def _aplicar_backup_comercial(corpo: dict) -> dict:
+    """Substitui TODO o módulo Comercial (oportunidades/equipe/meta/timesheet/
+    atas) pelo conteúdo de 'corpo' — mesma lógica usada tanto por
+    /api/comercial/importar (arquivo escolhido pela pessoa) quanto por
+    /api/comercial/restaurar-anterior (a foto guardada automaticamente antes
+    do último import)."""
     oportunidades = corpo.get("oportunidades") or []
     equipe = corpo.get("equipe") or []
     meta = corpo.get("meta") or {}
     timesheet = corpo.get("timesheet") or []
-    if not isinstance(equipe, list) or not isinstance(timesheet, list) or not isinstance(meta, dict):
-        return jsonify({"erro": "Arquivo não parece ser um backup válido — equipe/meta/timesheet em formato inesperado."}), 400
 
     col_comercial_oportunidades.delete_many({})
     if oportunidades:
@@ -3548,13 +3562,72 @@ def importar_backup_comercial():
             col_comercial_atas.insert_many(docs)
         n_atas = len(atas)
 
-    return jsonify({
+    return {
         "ok": True,
         "oportunidades": len(oportunidades),
         "equipe": len(equipe),
         "timesheet": len(timesheet),
         "atas": n_atas,
-    })
+    }
+
+
+@app.route("/api/comercial/importar", methods=["POST"])
+def importar_backup_comercial():
+    """Substitui TODO o módulo Comercial pelo conteúdo de um backup — o mesmo
+    formato que o painel original já exportava (oportunidades/equipe/meta/
+    timesheet). Fica como rota permanente de recuperação, não só migração
+    inicial: a equipe já usa esse fluxo de exportar/importar como rede de
+    segurança, então mantê-lo dá continuidade a um hábito que já existe."""
+    corpo = request.get_json(silent=True)
+    if not isinstance(corpo, dict) or not isinstance(corpo.get("oportunidades"), list):
+        return jsonify({"erro": "Arquivo não parece ser um backup válido — falta a lista de oportunidades."}), 400
+
+    equipe = corpo.get("equipe") or []
+    meta = corpo.get("meta") or {}
+    timesheet = corpo.get("timesheet") or []
+    if not isinstance(equipe, list) or not isinstance(timesheet, list) or not isinstance(meta, dict):
+        return jsonify({"erro": "Arquivo não parece ser um backup válido — equipe/meta/timesheet em formato inesperado."}), 400
+
+    # tira a foto do que está no ar AGORA, antes de sobrescrever — é o que o
+    # botão "Restaurar para o backup anterior" devolve se este import novo
+    # se revelar errado
+    col_comercial_snapshot_anterior.replace_one(
+        {"_id": "anterior"},
+        dict(_capturar_estado_comercial_atual(), _id="anterior", criadoEm=_agora_ms()),
+        upsert=True,
+    )
+    return jsonify(_aplicar_backup_comercial(corpo))
+
+
+@app.route("/api/comercial/snapshot-anterior", methods=["GET"])
+def obter_snapshot_anterior():
+    """Diz se existe uma foto de 'antes do último import' pra restaurar, e de
+    quando é — o front usa isso pra mostrar (ou não) o botão de segurança."""
+    doc = col_comercial_snapshot_anterior.find_one({"_id": "anterior"})
+    if not doc:
+        return jsonify({"existe": False})
+    return jsonify({"existe": True, "criadoEm": doc.get("criadoEm")})
+
+
+@app.route("/api/comercial/restaurar-anterior", methods=["POST"])
+def restaurar_backup_anterior():
+    """Botão de segurança: devolve o módulo Comercial pro estado de
+    imediatamente antes do último import. A troca é uma TESTE (swap), não uma
+    via de mão única — o estado atual (o import que a pessoa achou que
+    estava errado) vira a nova foto guardada, então apertar o botão de novo
+    desfaz a restauração e volta pro que tinha antes de restaurar."""
+    snapshot = col_comercial_snapshot_anterior.find_one({"_id": "anterior"})
+    if not snapshot:
+        return jsonify({"erro": "Não há nenhum backup anterior guardado pra restaurar."}), 404
+
+    estado_atual = _capturar_estado_comercial_atual()
+    resultado = _aplicar_backup_comercial(snapshot)
+    col_comercial_snapshot_anterior.replace_one(
+        {"_id": "anterior"},
+        dict(estado_atual, _id="anterior", criadoEm=_agora_ms()),
+        upsert=True,
+    )
+    return jsonify(resultado)
 
 
 @app.route("/api/gastos", methods=["GET"])
