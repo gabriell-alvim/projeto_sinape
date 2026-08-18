@@ -14,10 +14,13 @@ Rotas:
   GET     /                                  → index.html
   GET     /chart.umd.min.js                  → Chart.js hospedado localmente (indicadores do módulo Comercial)
   GET     /api/processos                     → lista resumida {"processos":[...]}
-  POST    /api/processos                     → cria processo (corpo = documento completo)
+  POST    /api/processos                     → cria processo (corpo = documento completo); cria também a Oportunidade
+                                                ligada no Painel Gerencial (_sync_oportunidade_do_processo) — só pra
+                                                processo novo, processo já existente antes disso não é tocado
   GET     /api/processos/<id>                → documento completo
-  PUT     /api/processos/<id>                → substitui documento completo
-  PATCH   /api/processos/<id>                → mescla {metaPatch, analisePatch, checklistPatch, exigencias, seVersao}
+  PUT     /api/processos/<id>                → substitui documento completo; se já houver Oportunidade ligada, atualiza
+  PATCH   /api/processos/<id>                → mescla {metaPatch, analisePatch, checklistPatch, exigencias, seVersao};
+                                                se já houver Oportunidade ligada, sincroniza cliente/objeto/valor/status
   DELETE  /api/processos/<id>                → remove (e seus anexos)
   GET     /api/processos/<id>/anexos         → lista anexos do processo
   POST    /api/processos/<id>/anexos         → envia um anexo (multipart, campo "arquivo")
@@ -911,6 +914,7 @@ def substituir(pid):
     doc["_id"] = pid
     del doc["id"]
     col_processos.replace_one({"_id": pid}, doc, upsert=True)
+    _sync_oportunidade_do_processo(doc)
     return jsonify(_sem_id_mongo(doc))
 
 
@@ -980,6 +984,7 @@ def patch(pid):
         atual = col_processos.find_one({"_id": pid})
         return jsonify(_sem_id_mongo(atual)), 409  # alterado por outra requisição nesse meio-tempo
 
+    _sync_oportunidade_do_processo(doc)
     return jsonify({"versao": nova_versao, "atualizadoEm": agora})
 
 
@@ -1991,7 +1996,98 @@ def _preparar_e_inserir_processo(doc: dict) -> dict:
     doc["_id"] = pid
     del doc["id"]
     col_processos.insert_one(doc)
+    _sync_oportunidade_do_processo(doc, criar_se_faltar=True)
     return doc
+
+
+# ──────────────────────────────────────────────────────────────────
+# Ligação Processos → Painel Gerencial (Comercial)
+# ──────────────────────────────────────────────────────────────────
+# Decisão explícita do Gabriel: só processo criado a partir de agora ganha
+# Oportunidade ligada automaticamente — processo já cadastrado antes disso
+# não é tocado nem retroativamente migrado, mesmo que seja editado depois.
+# Por isso _sync_oportunidade_do_processo só CRIA quando criar_se_faltar=True
+# (chamado apenas no momento da criação do processo); toda atualização
+# posterior (PATCH/PUT) só mexe numa Oportunidade que já existir ligada.
+_MAPA_STATUS_PROCESSO_OPORTUNIDADE = {
+    # status do processo -> (statusGanho, statusEnviadas, motivo)
+    "pendente":       ("Pendente", "Não enviada", None),
+    "em_analise":     ("Pendente", "Não enviada", None),
+    "participar":     ("Pendente", "Enviada", None),
+    "nao_participar": ("Perca", "Não enviada", "Decisão de não participar"),
+    "em_disputa":     ("Pendente", "Enviada", None),
+    "vencido":        ("Ganho", "Enviada", None),
+    "perdido":        ("Perca", "Enviada", None),
+}
+
+
+def _parse_valor_processo(txt):
+    """Extrai um número de um campo de texto livre tipo 'R$ 1.234.567,89' ou
+    'até R$ 500 mil, a confirmar' — se não achar nada que pareça número,
+    devolve None (não sobrescreve o que a Oportunidade já tinha)."""
+    if not txt:
+        return None
+    m = re.search(r"[\d.,]+", str(txt))
+    if not m:
+        return None
+    raw = m.group(0).strip(".,")
+    if not raw:
+        return None
+    if "," in raw:
+        raw = raw.replace(".", "").replace(",", ".")
+    else:
+        raw = raw.replace(".", "")
+    try:
+        valor = float(raw)
+    except ValueError:
+        return None
+    return valor or None
+
+
+def _sync_oportunidade_do_processo(doc: dict, criar_se_faltar: bool = False):
+    """Mantém a Oportunidade ligada a este processo (col_comercial_oportunidades,
+    campo processoId) em dia com nome/órgão/valor/status do processo. Chamada
+    depois de toda escrita em col_processos (criação, PATCH, PUT) — sozinha,
+    sem exigir nada da equipe nos dois cadastros."""
+    oport = col_comercial_oportunidades.find_one({"processoId": doc["_id"]})
+    if not oport and not criar_se_faltar:
+        return
+
+    status_ganho, status_enviadas, motivo = _MAPA_STATUS_PROCESSO_OPORTUNIDADE.get(
+        doc.get("status") or "pendente", ("Pendente", "Não enviada", None))
+    a = doc.get("analise") or {}
+    hoje = date.today().isoformat()
+
+    campos = {
+        "cliente": a.get("geral_orgao") or (oport or {}).get("cliente") or "",
+        "objeto": a.get("geral_objeto") or (oport or {}).get("objeto") or "",
+        "numProposta": a.get("geral_numero") or (oport or {}).get("numProposta") or "",
+        "segmento": "Público" if doc.get("type") == "publico" else "Privado",
+        "statusEnviadas": status_enviadas,
+        "statusGanho": status_ganho,
+        "motivo": motivo or "",
+    }
+    valor = _parse_valor_processo(a.get("geral_valor") or a.get("custo_preco_max") or "")
+    if valor:
+        campos["valorLicitado"] = valor
+    if status_ganho == "Ganho":
+        campos["valorGanho"] = valor or (oport or {}).get("valorLicitado") or 0
+        campos["dataConclusao"] = hoje
+    elif status_ganho == "Perca":
+        campos["dataConclusao"] = hoje
+
+    if oport:
+        oport.update(campos)
+        col_comercial_oportunidades.replace_one({"_id": oport["_id"]}, oport)
+    else:
+        novo = dict(campos)
+        novo.update({
+            "_id": uuid.uuid4().hex, "processoId": doc["_id"],
+            "empresa": "Sinape", "data": hoje, "percChanceReal": 0.5,
+            "habilitacao": "SIM", "continuidadeOuNovo": "Novo",
+            "novosClientes": "Não", "statusProcesso": "Em andamento", "consorcio": "Não",
+        })
+        col_comercial_oportunidades.insert_one(novo)
 
 
 @app.route("/api/processos/analisar-ia", methods=["POST"])

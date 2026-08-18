@@ -3213,8 +3213,10 @@ function comTabelaOportunidadesHTML(){
         '<td>'+esc(o.numProposta||'—')+'</td>' +
         '<td>'+fmtBRL(o.valorLicitado)+'</td>' +
         '<td>'+tagStatus+'</td>' +
-        '<td class="row-actions"><button class="btn-sm" onclick="comAbrirFormOportunidade(\''+esc(o.id)+'\')">Editar</button>' +
-        '<button class="btn-sm danger" onclick="comExcluirOportunidade(\''+esc(o.id)+'\')">Excluir</button></td>' +
+        '<td class="row-actions">' +
+          (o.processoId ? '<button class="btn-sm violet" onclick="openProcess(\''+esc(o.processoId)+'\')" title="Esta oportunidade é ligada a um processo — cliente, objeto, valor e status vêm de lá automaticamente">🔗 Ver processo</button>' : '') +
+          '<button class="btn-sm" onclick="comAbrirFormOportunidade(\''+esc(o.id)+'\')">Editar</button>' +
+          '<button class="btn-sm danger" onclick="comExcluirOportunidade(\''+esc(o.id)+'\')">Excluir</button></td>' +
       '</tr>';
     }).join('') + '</tbody></table></div>';
 }
@@ -3293,6 +3295,14 @@ async function comSalvarOportunidade(ev, id){
   // derivados calculados no salvamento, igual ao painel original
   rec.valorPonderado = (rec.valorLicitado||0) * (rec.percChanceReal||0);
   rec.percDesconto = (rec.valorLicitado && rec.valorGanho) ? (rec.valorLicitado-rec.valorGanho)/rec.valorLicitado : null;
+  // processoId não é um campo do formulário (não tem [data-key]) — sem
+  // reincluir aqui, editar à mão um campo qualquer desta oportunidade
+  // apagaria a ligação com o processo, porque o PUT substitui o documento
+  // inteiro pelo que o formulário devolve
+  if(id){
+    const original = COM.oportunidades.find(x=>x.id===id);
+    if(original && original.processoId) rec.processoId = original.processoId;
+  }
   try{
     if(id) await Store.salvarOportunidade(id, rec);
     else await Store.criarOportunidade(rec);
@@ -3329,7 +3339,8 @@ function a11yItensComercial_oportunidades(){
       const data = tr.children[0]?.textContent.trim() || '';
       const nomeBase = cliente+' — '+data;
       return [
-        {el: tr.querySelector('.btn-sm:not(.danger)'), label: 'Editar: '+nomeBase},
+        {el: tr.querySelector('.btn-sm.violet'), label: 'Ver processo ligado: '+nomeBase},
+        {el: tr.querySelector('.btn-sm:not(.danger):not(.violet)'), label: 'Editar: '+nomeBase},
         {el: tr.querySelector('.btn-sm.danger'), label: 'Excluir: '+nomeBase},
       ];
     }),
