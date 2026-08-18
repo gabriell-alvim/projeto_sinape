@@ -68,6 +68,10 @@ Rotas:
   GET     /api/comercial/timesheet            → horas dedicadas por mês
   PUT     /api/comercial/timesheet/<mes>      → upsert do total do mês (AAAA-MM)
   DELETE  /api/comercial/timesheet/<mes>      → remove o mês
+  GET     /api/comercial/atas                 → lista as atas de reunião da área (mais recente primeiro)
+  POST    /api/comercial/atas                 → cria uma ata {data, participantes, assuntos:[...]}
+  PUT     /api/comercial/atas/<id>            → substitui a ata (inclusive editar/adicionar assuntos)
+  DELETE  /api/comercial/atas/<id>            → remove a ata
   POST    /api/comercial/importar             → substitui TODO o módulo pelo backup {oportunidades,equipe,meta,timesheet} — rota de recuperação, não só migração
 
 Montador de Dossiê (integrado):
@@ -229,6 +233,7 @@ col_comercial_oportunidades = db["comercial_oportunidades"]
 col_comercial_equipe = db["comercial_equipe"]
 col_comercial_meta = db["comercial_meta"]
 col_comercial_timesheet = db["comercial_timesheet"]
+col_comercial_atas = db["comercial_atas"]
 
 
 def _init_db():
@@ -246,6 +251,7 @@ def _init_db():
     col_notificacoes.create_index([("destinatarios", ASCENDING), ("criadoEm", DESCENDING)])
     col_notificacoes.create_index([("tipo", ASCENDING), ("criadoEm", DESCENDING)])
     col_comercial_oportunidades.create_index([("data", ASCENDING)])
+    col_comercial_atas.create_index([("data", DESCENDING)])
 
 
 # ──────────────────────────────────────────────────────────────────
@@ -3311,6 +3317,49 @@ def excluir_timesheet_mes(mes):
     return jsonify({"ok": True})
 
 
+@app.route("/api/comercial/atas", methods=["GET"])
+def listar_atas_comercial():
+    docs = col_comercial_atas.find().sort("data", DESCENDING)
+    return jsonify({"atas": [_sem_id_mongo(d) for d in docs]})
+
+
+@app.route("/api/comercial/atas", methods=["POST"])
+def criar_ata_comercial():
+    corpo = request.get_json(silent=True)
+    if not isinstance(corpo, dict):
+        return jsonify({"erro": "Corpo deve ser um objeto JSON"}), 400
+    doc = dict(corpo)
+    if not isinstance(doc.get("assuntos"), list):
+        doc["assuntos"] = []
+    doc["_id"] = uuid.uuid4().hex
+    col_comercial_atas.insert_one(doc)
+    return jsonify(_sem_id_mongo(doc)), 201
+
+
+@app.route("/api/comercial/atas/<aid>", methods=["PUT"])
+def salvar_ata_comercial(aid):
+    corpo = request.get_json(silent=True)
+    if not isinstance(corpo, dict):
+        return jsonify({"erro": "Corpo deve ser um objeto JSON"}), 400
+    doc = dict(corpo)
+    doc.pop("id", None)
+    if not isinstance(doc.get("assuntos"), list):
+        doc["assuntos"] = []
+    doc["_id"] = aid
+    r = col_comercial_atas.replace_one({"_id": aid}, doc, upsert=False)
+    if not r.matched_count:
+        return jsonify({"erro": "Ata não encontrada"}), 404
+    return jsonify(_sem_id_mongo(doc))
+
+
+@app.route("/api/comercial/atas/<aid>", methods=["DELETE"])
+def excluir_ata_comercial(aid):
+    r = col_comercial_atas.delete_one({"_id": aid})
+    if not r.deleted_count:
+        return jsonify({"erro": "Ata não encontrada"}), 404
+    return jsonify({"ok": True})
+
+
 @app.route("/api/comercial/importar", methods=["POST"])
 def importar_backup_comercial():
     """Substitui TODO o módulo Comercial pelo conteúdo de um backup — o mesmo
@@ -3376,11 +3425,35 @@ def importar_backup_comercial():
         if docs:
             col_comercial_timesheet.insert_many(docs)
 
+    # atas é opcional (backups antigos não tinham) — só mexe na coleção
+    # quando o campo vem no arquivo, pra não apagar atas já cadastradas
+    # ao importar um backup gerado antes dessa área existir
+    atas = corpo.get("atas")
+    n_atas = 0
+    if isinstance(atas, list):
+        col_comercial_atas.delete_many({})
+        if atas:
+            docs = []
+            for a in atas:
+                d = dict(a)
+                d["_id"] = str(d.pop("id", None) or d.pop("_id", None) or uuid.uuid4().hex)
+                if not isinstance(d.get("assuntos"), list):
+                    d["assuntos"] = []
+                docs.append(d)
+            vistos = set()
+            for d in docs:
+                if d["_id"] in vistos:
+                    d["_id"] = uuid.uuid4().hex
+                vistos.add(d["_id"])
+            col_comercial_atas.insert_many(docs)
+        n_atas = len(atas)
+
     return jsonify({
         "ok": True,
         "oportunidades": len(oportunidades),
         "equipe": len(equipe),
         "timesheet": len(timesheet),
+        "atas": n_atas,
     })
 
 

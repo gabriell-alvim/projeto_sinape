@@ -1839,6 +1839,10 @@ const Store = {
   async salvarTimesheetMes(mes, total){ return this._req('PUT','/comercial/timesheet/'+encodeURIComponent(mes), {total}); },
   async excluirTimesheetMes(mes){ return this._req('DELETE','/comercial/timesheet/'+encodeURIComponent(mes)); },
   async importarBackupComercial(payload){ return this._req('POST','/comercial/importar', payload); },
+  async listarAtasComercial(){ return (await this._req('GET','/comercial/atas')).atas || []; },
+  async criarAtaComercial(a){ return this._req('POST','/comercial/atas', a); },
+  async salvarAtaComercial(id, a){ return this._req('PUT','/comercial/atas/'+encodeURIComponent(id), a); },
+  async excluirAtaComercial(id){ return this._req('DELETE','/comercial/atas/'+encodeURIComponent(id)); },
   /* arquivos que já estão na pasta DESTE processo no SharePoint */
   async listarArquivosDaPasta(id){
     if(this.modo !== 'api') throw new Error('Exige o backend configurado (CONFIG.API_URL)');
@@ -1980,7 +1984,7 @@ function refreshHomeCounts(){
 /* ════════════════════════════════════════════════════════════════
    LISTA DE PROCESSOS
    ════════════════════════════════════════════════════════════════ */
-function renderProcessGrid(){
+function renderProcessGrid(silencioso){
   const grid = document.getElementById('process-grid');
   const empty = document.getElementById('empty-state');
   const busca = (document.getElementById('search-box').value||'').toLowerCase();
@@ -2012,7 +2016,7 @@ function renderProcessGrid(){
     grid.appendChild(card);
   });
   renderListBanner();
-  a11yAtualizarItens();
+  a11yAtualizarItens(undefined, silencioso);
 }
 function renderListBanner(){
   const area = document.getElementById('list-banner-area');
@@ -2038,10 +2042,10 @@ async function enviarSeeds(){
   }catch(e){ setSync('err','Falha de conexão'); toast('Erro ao enviar: '+e.message); }
 }
 
-async function recarregarLista(){
+async function recarregarLista(silencioso){
   listaResumos = await Store.listar();
   refreshHomeCounts();
-  if(document.getElementById('view-list').classList.contains('active')) renderProcessGrid();
+  if(document.getElementById('view-list').classList.contains('active')) renderProcessGrid(silencioso);
 }
 
 /* ── novo processo manual ── */
@@ -2682,10 +2686,11 @@ function irParaProcesso(id){
    dados que realmente persistem no Mongo. */
 
 const COM = { oportunidades:[], equipe:[], meta:{ano:new Date().getFullYear(), metaAnual:0, valorCarteiraInicial:0},
-              timesheet:[], carregado:false, paginaAtiva:'demandas' };
+              timesheet:[], atas:[], carregado:false, paginaAtiva:'demandas' };
 
 const COM_PAGINAS = [
   {id:'demandas',       nome:'Acompanhamento de Demandas',      grupo:'Demandas'},
+  {id:'atas',           nome:'Atas de Reunião',                 grupo:'Demandas'},
   {id:'oportunidades', nome:'Oportunidades',                 grupo:'Cadastros'},
   {id:'equipe',         nome:'Equipe & Custos',               grupo:'Cadastros'},
   {id:'meta',           nome:'Meta da Área',                  grupo:'Cadastros'},
@@ -2975,11 +2980,11 @@ async function abrirPainelGerencial(){
   comercialAbrirPagina(COM.paginaAtiva || 'demandas');
 }
 async function comercialCarregarDados(){
-  const [oportunidades, equipe, meta, timesheet] = await Promise.all([
+  const [oportunidades, equipe, meta, timesheet, atas] = await Promise.all([
     Store.listarOportunidades(), Store.listarEquipeComercial(),
-    Store.obterMetaComercial(), Store.listarTimesheet(),
+    Store.obterMetaComercial(), Store.listarTimesheet(), Store.listarAtasComercial(),
   ]);
-  COM.oportunidades = oportunidades; COM.equipe = equipe; COM.meta = meta; COM.timesheet = timesheet;
+  COM.oportunidades = oportunidades; COM.equipe = equipe; COM.meta = meta; COM.timesheet = timesheet; COM.atas = atas;
   COM.carregado = true;
   document.getElementById('com-subtitulo').textContent =
     COM.oportunidades.length+' oportunidade(s) · Meta '+calcAnoCom()+': '+
@@ -3020,7 +3025,7 @@ function a11yItensComercial(){
 function comercialExportar(){
   const payload = {
     exportadoEm: new Date().toISOString(), sistema: 'DATA SIN — Comercial',
-    oportunidades: COM.oportunidades, equipe: COM.equipe, meta: COM.meta, timesheet: COM.timesheet,
+    oportunidades: COM.oportunidades, equipe: COM.equipe, meta: COM.meta, timesheet: COM.timesheet, atas: COM.atas,
   };
   const blob = new Blob([JSON.stringify(payload, null, 2)], {type:'application/json'});
   const url = URL.createObjectURL(blob);
@@ -5074,7 +5079,10 @@ function iniciarPolling(){
         const remoto = await Store.obter(currentProc.id);
         if(remoto.versao > currentProc.versao) mesclarRemoto(remoto);
       } else {
-        await recarregarLista();
+        // silencioso=true: é uma atualização de fundo (a cada ~20s), não uma
+        // navegação da pessoa — sem isso o NVDA repetia "N opções disponíveis"
+        // periodicamente enquanto a pessoa só estava parada na lista.
+        await recarregarLista(true);
       }
       setSync('ok','Nuvem sincronizada');
       // notificação que chega enquanto a tela está aberta aparece sozinha —
@@ -5401,6 +5409,202 @@ function a11yItensComercial_demandas(){
     const meta = (linha.querySelector('.gr-linha-meta')||{}).textContent || '';
     return { el: btn, label: (btn?btn.textContent.trim():'processo') + ' — ' + meta.trim() };
   }).filter(i=>i.el);
+}
+
+/* ── ATAS DE REUNIÃO (Comercial) ──
+   Pauta semanal da área: por reunião (uma data), uma lista de assuntos com
+   área, responsável, ações combinadas, providências, prazo e status — o
+   mesmo formato da planilha "Ata de Reunião - Comercial.xlsx" que a equipe
+   já usa (SharePoint, 1 - COMERCIAL/02.11 - Atas de Reunião), portado pra cá
+   pra virar histórico consultável e editável dentro do DATA SIN. Fica logo
+   abaixo do Acompanhamento de Demandas (mesmo grupo de nav) porque é a
+   mesma lógica: acompanhar o que está em aberto na área.
+   Cada assunto NÃO é um documento próprio — vive dentro de ata.assuntos
+   (array), então criar/editar/excluir um assunto sempre reescreve a ata
+   inteira (PUT). É a mesma folha de cálculo por reunião do arquivo
+   original: poucos assuntos por reunião, edição não concorrente pesada,
+   então o custo de reescrever o array inteiro a cada mudança não pesa —
+   evita criar uma 5ª coleção só pra isso. */
+const OPC_ATA_STATUS = ['Em andamento','Em andamento (prazo prorrogado)','Pendente (em atraso)','Concluído'];
+const CAMPOS_ATA = [
+  {key:'data', label:'Data da reunião', tipo:'date'},
+  {key:'participantes', label:'Participantes', tipo:'text', span:'span-full', placeholder:'Ex.: Mendelson, Bruno, Gabriel…'},
+];
+const CAMPOS_ASSUNTO = [
+  {key:'area', label:'Área', tipo:'text'},
+  {key:'responsaveis', label:'Responsável(is)', tipo:'text'},
+  {key:'tema', label:'Tema', tipo:'text', span:'span-full'},
+  {key:'acoes', label:'Ações combinadas', tipo:'textarea', span:'span-full'},
+  {key:'providencias', label:'Providências / andamento', tipo:'textarea', span:'span-full'},
+  {key:'prazo', label:'Prazo', tipo:'text', placeholder:'Ex.: 21-ago'},
+  {key:'status', label:'Status', tipo:'select', opcoes:OPC_ATA_STATUS},
+];
+function _chipStatusAta(status){
+  const s = (status||'').toLowerCase();
+  if(s.startsWith('conclu')) return '<span class="chip st-vencido">'+esc(status)+'</span>';
+  if(s.startsWith('pendente')) return '<span class="chip st-perdido">'+esc(status)+'</span>';
+  return '<span class="chip st-pendente">'+esc(status||'Em andamento')+'</span>';
+}
+function pageAtasComercial(){
+  return '<div class="com-toolbar"><button class="btn-sm violet" onclick="comAbrirFormAta()">+ Nova reunião</button></div>' +
+    '<div id="com-atas-lista">'+comAtasListaHTML()+'</div>';
+}
+function comAtasListaHTML(){
+  const atas = COM.atas.slice().sort((a,b)=>(b.data||'').localeCompare(a.data||''));
+  if(!atas.length) return '<p class="com-empty">Nenhuma ata cadastrada ainda.</p>';
+  return atas.map(ata=>{
+    const assuntos = ata.assuntos || [];
+    const concluidos = assuntos.filter(a=>(a.status||'').toLowerCase().startsWith('conclu')).length;
+    const pendentes = assuntos.filter(a=>(a.status||'').toLowerCase().startsWith('pendente')).length;
+    const andamento = assuntos.length - concluidos - pendentes;
+    return '<div class="sec-card">' +
+      '<div class="sec-head">' +
+        '<span class="sec-title">📅 '+fmtDataCom(ata.data)+'</span>' +
+        '<div class="row-actions">' +
+          '<button class="btn-sm" onclick="comAbrirFormAta(\''+esc(ata.id)+'\')">Editar reunião</button>' +
+          '<button class="btn-sm danger" onclick="comExcluirAta(\''+esc(ata.id)+'\')">Excluir reunião</button>' +
+        '</div>' +
+      '</div>' +
+      '<div class="sec-body">' +
+        (ata.participantes ? '<p class="hint">👥 '+esc(ata.participantes)+'</p>' : '') +
+        '<div class="kpi-row">' +
+          '<div class="kpi-item"><div class="kpi-rot">Assuntos</div><div class="kpi-val">'+assuntos.length+'</div></div>' +
+          '<div class="kpi-item green"><div class="kpi-rot">Concluídos</div><div class="kpi-val">'+concluidos+'</div></div>' +
+          '<div class="kpi-item"><div class="kpi-rot">Em andamento</div><div class="kpi-val">'+andamento+'</div></div>' +
+          '<div class="kpi-item"><div class="kpi-rot">Pendentes</div><div class="kpi-val">'+pendentes+'</div></div>' +
+        '</div>' +
+        '<div class="com-toolbar"><button class="btn-sm violet" onclick="comAbrirFormAssunto(\''+esc(ata.id)+'\')">+ Novo assunto</button></div>' +
+        (assuntos.length ? '<div class="tbl-wrap"><table class="edit-table"><thead><tr>' +
+          '<th>Área</th><th>Responsável(is)</th><th>Tema</th><th>Prazo</th><th>Status</th><th></th>' +
+          '</tr></thead><tbody>' + assuntos.map((a,i)=>
+            '<tr>' +
+              '<td>'+esc(a.area||'—')+'</td>' +
+              '<td>'+esc(a.responsaveis||'—')+'</td>' +
+              '<td>'+esc(a.tema||'—')+'</td>' +
+              '<td>'+esc(a.prazo||'—')+'</td>' +
+              '<td>'+_chipStatusAta(a.status)+'</td>' +
+              '<td class="row-actions"><button class="btn-sm" onclick="comAbrirFormAssunto(\''+esc(ata.id)+'\','+i+')">Editar</button>' +
+              '<button class="btn-sm danger" onclick="comExcluirAssunto(\''+esc(ata.id)+'\','+i+')">Excluir</button></td>' +
+            '</tr>'
+          ).join('') + '</tbody></table></div>'
+        : '<p class="com-empty">Nenhum assunto registrado nesta reunião ainda.</p>') +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+function comAbrirFormAta(id){
+  const ata = id ? COM.atas.find(x=>x.id===id) : { data:new Date().toISOString().slice(0,10), participantes:'' };
+  const corpo = document.getElementById('comercial-form-body');
+  corpo.innerHTML =
+    '<h3>'+(id?'Editar':'Nova')+' reunião</h3>' +
+    '<form id="com-form-ata" onsubmit="return comSalvarAta(event,'+(id?"'"+esc(id)+"'":'null')+')">' +
+      '<div class="field-grid">' + CAMPOS_ATA.map(c=>campoComercialHTML(c, ata[c.key])).join('') + '</div>' +
+      '<div class="modal-actions">' +
+        '<button type="button" class="btn-ghost" onclick="fecharModal(\'modal-comercial-form\')">Cancelar</button>' +
+        '<button type="submit" class="btn-primary">Salvar</button>' +
+      '</div>' +
+    '</form>';
+  abrirModal('modal-comercial-form');
+  const primeiro = corpo.querySelector('[data-key]');
+  if(primeiro) primeiro.focus();
+}
+async function comSalvarAta(ev, id){
+  ev.preventDefault();
+  const form = document.getElementById('com-form-ata');
+  const rec = lerCamposComerciais(form);
+  try{
+    if(id){
+      const atual = COM.atas.find(x=>x.id===id);
+      rec.assuntos = (atual && atual.assuntos) || [];
+      await Store.salvarAtaComercial(id, rec);
+    } else {
+      rec.assuntos = [];
+      await Store.criarAtaComercial(rec);
+    }
+    toast('Reunião salva.');
+    fecharModal('modal-comercial-form');
+    await comercialCarregarDados();
+    comercialAbrirPagina('atas');
+  }catch(e){ toast('Erro ao salvar: '+e.message); }
+  return false;
+}
+async function comExcluirAta(id){
+  if(!confirm('Excluir esta ata de reunião inteira, com todos os assuntos dela? Essa ação não pode ser desfeita.')) return;
+  try{
+    await Store.excluirAtaComercial(id);
+    toast('Reunião excluída.');
+    await comercialCarregarDados();
+    comercialAbrirPagina('atas');
+  }catch(e){ toast('Erro ao excluir: '+e.message); }
+}
+function comAbrirFormAssunto(ataId, idx){
+  const ata = COM.atas.find(x=>x.id===ataId);
+  if(!ata) return;
+  const editando = idx!==undefined && idx!==null;
+  const assunto = editando ? ata.assuntos[idx] : {area:'Comercial', status:'Em andamento'};
+  const corpo = document.getElementById('comercial-form-body');
+  corpo.innerHTML =
+    '<h3>'+(editando?'Editar':'Novo')+' assunto</h3>' +
+    '<form id="com-form-assunto" onsubmit="return comSalvarAssunto(event,\''+esc(ataId)+'\','+(editando?idx:'null')+')">' +
+      '<div class="field-grid">' + CAMPOS_ASSUNTO.map(c=>campoComercialHTML(c, assunto[c.key])).join('') + '</div>' +
+      '<div class="modal-actions">' +
+        '<button type="button" class="btn-ghost" onclick="fecharModal(\'modal-comercial-form\')">Cancelar</button>' +
+        '<button type="submit" class="btn-primary">Salvar</button>' +
+      '</div>' +
+    '</form>';
+  abrirModal('modal-comercial-form');
+  const primeiro = corpo.querySelector('[data-key]');
+  if(primeiro) primeiro.focus();
+}
+async function comSalvarAssunto(ev, ataId, idx){
+  ev.preventDefault();
+  const form = document.getElementById('com-form-assunto');
+  const rec = lerCamposComerciais(form);
+  const ata = COM.atas.find(x=>x.id===ataId);
+  if(!ata) return false;
+  const assuntos = (ata.assuntos || []).slice();
+  if(idx===null || idx===undefined) assuntos.push(rec);
+  else assuntos[idx] = rec;
+  try{
+    await Store.salvarAtaComercial(ataId, Object.assign({}, ata, {assuntos}));
+    toast('Assunto salvo.');
+    fecharModal('modal-comercial-form');
+    await comercialCarregarDados();
+    comercialAbrirPagina('atas');
+  }catch(e){ toast('Erro ao salvar: '+e.message); }
+  return false;
+}
+async function comExcluirAssunto(ataId, idx){
+  if(!confirm('Excluir este assunto da ata? Essa ação não pode ser desfeita.')) return;
+  const ata = COM.atas.find(x=>x.id===ataId);
+  if(!ata) return;
+  const assuntos = (ata.assuntos || []).slice();
+  assuntos.splice(idx,1);
+  try{
+    await Store.salvarAtaComercial(ataId, Object.assign({}, ata, {assuntos}));
+    toast('Assunto excluído.');
+    await comercialCarregarDados();
+    comercialAbrirPagina('atas');
+  }catch(e){ toast('Erro ao excluir: '+e.message); }
+}
+COM_RENDERERS['atas'] = pageAtasComercial;
+function a11yItensComercial_atas(){
+  const itens = [{el: document.querySelector('#com-conteudo > .com-toolbar .btn-sm.violet'), label:'Nova reunião'}];
+  document.querySelectorAll('#com-atas-lista .sec-card').forEach(card=>{
+    const titulo = ((card.querySelector('.sec-title')||{}).textContent||'Reunião').trim();
+    const acoesHead = card.querySelectorAll('.sec-head .row-actions .btn-sm');
+    if(acoesHead[0]) itens.push({el:acoesHead[0], label:'Editar reunião: '+titulo});
+    if(acoesHead[1]) itens.push({el:acoesHead[1], label:'Excluir reunião: '+titulo});
+    const btnNovoAssunto = card.querySelector('.com-toolbar .btn-sm.violet');
+    if(btnNovoAssunto) itens.push({el:btnNovoAssunto, label:'Novo assunto em: '+titulo});
+    card.querySelectorAll('tbody tr').forEach(tr=>{
+      const tema = ((tr.children[2]||{}).textContent||'assunto').trim();
+      const acoesLinha = tr.querySelectorAll('.row-actions .btn-sm');
+      if(acoesLinha[0]) itens.push({el:acoesLinha[0], label:'Editar assunto: '+tema+' — '+titulo});
+      if(acoesLinha[1]) itens.push({el:acoesLinha[1], label:'Excluir assunto: '+tema+' — '+titulo});
+    });
+  });
+  return itens.filter(i=>i.el);
 }
 
 async function abrirPainelPrazos(){
@@ -6369,7 +6573,7 @@ function a11yToggle(){
 /* recalcula os itens navegáveis da tela atual — chamado após toda troca de tela/re-render.
    manterNivel=true preserva A11Y.nivel (usado ao entrar no conteúdo de uma aba); caso
    contrário volta sempre para o nível de tela (abas/cards). */
-function a11yAtualizarItens(manterNivel){
+function a11yAtualizarItens(manterNivel, silencioso){
   document.querySelectorAll('.a11y-num').forEach(n=>n.remove());
   a11yRestaurarTab();
   A11Y.todosItens = [];
@@ -6436,7 +6640,7 @@ function a11yAtualizarItens(manterNivel){
     });
     A11Y.todosItens = itensModal;
     A11Y.pagina = Math.min(A11Y.pagina, Math.max(0, Math.ceil(A11Y.todosItens.length/9)-1));
-    a11yRenderizarPagina();
+    a11yRenderizarPagina(silencioso);
     return;
   }
   if(!manterNivel) A11Y.nivel = 'tela';
@@ -6622,7 +6826,7 @@ function a11yAtualizarItens(manterNivel){
     }
   }
   A11Y.pagina = Math.min(A11Y.pagina, Math.max(0, Math.ceil(A11Y.todosItens.length/9)-1));
-  a11yRenderizarPagina();
+  a11yRenderizarPagina(silencioso);
   if(_restaurarSecao){
     _restaurarSecao.ativar(true);
     a11yAnunciar('Continuando de onde você parou: '+_restaurarSecao.label+'. Pressione Enter novamente para ver os itens.');
@@ -6642,7 +6846,7 @@ function a11yRestaurarTab(){
   });
   A11Y._semTab = [];
 }
-function a11yRenderizarPagina(){
+function a11yRenderizarPagina(silencioso){
   document.querySelectorAll('.a11y-num').forEach(n=>n.remove());
   a11yRestaurarTab();
   if(!A11Y.ativo){ A11Y.itensAtuais = []; return; }
@@ -6663,7 +6867,7 @@ function a11yRenderizarPagina(){
   // (o caso mais comum, ex.: as abas do processo ou as seções de uma aba) o
   // usuário não ouvia nada ao entrar numa tela nova, só silêncio. Agora
   // sempre anuncia quantas opções existem.
-  if(!A11Y.itensAtuais.length){ return; }
+  if(!A11Y.itensAtuais.length || silencioso) return;
   if(totalPaginas>1) a11yAnunciar('Página '+(A11Y.pagina+1)+' de '+totalPaginas+'. Opções de 1 a '+A11Y.itensAtuais.length+'.');
   else a11yAnunciar(A11Y.itensAtuais.length+' opção(ões) disponível(is).');
 }
