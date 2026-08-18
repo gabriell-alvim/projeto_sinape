@@ -104,7 +104,7 @@ input, select, textarea { font-family:inherit; }
   display:flex; align-items:center; gap:6px; font-size:.72rem; font-weight:600;
   padding:4px 10px; border-radius:20px; background:rgba(255,255,255,.12); color:#e6fffb; white-space:nowrap;
 }
-.sync-pill .sdot { width:8px; height:8px; border-radius:50%; background:#94a3b8; flex:none; }
+.sync-pill .sdot { width:8px; height:8px; border-radius:50%; background:var(--slate-l); flex:none; }
 .sync-pill.ok .sdot   { background:#4ade80; box-shadow:0 0 6px #4ade80; }
 .sync-pill.err .sdot  { background:#f87171; box-shadow:0 0 6px #f87171; }
 .sync-pill.busy .sdot { background:#fbbf24; }
@@ -5063,6 +5063,13 @@ function mesclarRemoto(remoto){
   aplicarChecklist();
   if(document.querySelector('.exig-table')) aplicarExigencias();
   else buildExigencias();
+  // as funções acima recriam o DOM das tabelas/checklist/exigências — sem
+  // recalcular aqui, a navegação numérica (se ativa) ficava com referências
+  // pra elementos que a mesclagem já substituiu, e um número parava de
+  // ativar qualquer coisa até a pessoa trocar de tela. silencioso=true
+  // porque isto pode disparar no meio do polling de fundo, sem ação da
+  // pessoa — não é hora de anunciar nada em voz.
+  if(typeof A11Y!=='undefined' && A11Y.ativo) a11yAtualizarItens(true, true);
 }
 async function sincronizarAgora(){
   if(!currentProc) return;

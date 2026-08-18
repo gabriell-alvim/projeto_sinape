@@ -993,6 +993,10 @@ def excluir(pid):
         (UPLOAD_DIR / pid).rmdir()
     except OSError:
         pass
+    # documentos de concorrente verificados neste processo (verificar_concorrente,
+    # mais abaixo) ficam numa pasta própria por pid — sem isto, excluir o
+    # processo deixava esses arquivos órfãos em disco pra sempre
+    shutil.rmtree(CONCORRENTES_DIR / pid, ignore_errors=True)
     return jsonify({"ok": True})
 
 
