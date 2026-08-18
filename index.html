@@ -1890,6 +1890,30 @@ function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,
 function a11yAtivarComEnter(event, fn){
   if(event.key==='Enter' || event.key===' '){ event.preventDefault(); fn(); }
 }
+/* O plano gratuito do Render "dorme" o serviço depois de um tempo sem uso e
+   leva 50s+ pra acordar (o próprio Render avisa isso na pílula de sync). Sem
+   isto, a PRIMEIRA requisição depois de um tempo parado falhava por timeout
+   de rede antes de sequer chegar no Flask — sem log nenhum do lado do
+   servidor (foi assim que o Painel gerencial ficou "não consegui carregar
+   as informações" num backup real sem erro visível em lugar nenhum: o
+   pedido nunca chegou a existir pro servidor). /api/health não exige sessão
+   nem token — é o ping mais barato que existe pra descobrir se já acordou.
+   aoProgresso(tentativa, total), se passado, é chamado a cada nova tentativa
+   (não na primeira, que é imediata). */
+async function acordarServidor(aoProgresso){
+  const tentativas = 7; // ~1min de tolerância, folga sobre os "50s ou mais" que o Render avisa
+  for(let i=0; i<tentativas; i++){
+    if(i>0){
+      if(aoProgresso) aoProgresso(i, tentativas);
+      await new Promise(res=>setTimeout(res, 8000));
+    }
+    try{
+      const r = await fetch(Store.base + '/health', {cache:'no-store'});
+      if(r.ok) return true;
+    }catch(e){ /* ainda dormindo, ou rede instável — tenta de novo */ }
+  }
+  return false;
+}
 function toast(msg){
   const t = document.getElementById('toast');
   t.textContent = msg; t.classList.add('show');
@@ -2930,6 +2954,16 @@ async function abrirPainelGerencial(){
   showView('view-comercial');
   document.getElementById('com-subtitulo').textContent = 'Carregando dados…';
   document.getElementById('com-conteudo').innerHTML = '<p class="com-empty">Carregando dados…</p>';
+  const acordado = await acordarServidor((tentativa,total)=>{
+    const msg = 'O servidor estava inativo — acordando… (tentativa '+tentativa+' de '+total+')';
+    document.getElementById('com-conteudo').innerHTML = '<p class="com-empty">'+esc(msg)+'</p>';
+  });
+  if(!acordado){
+    document.getElementById('com-conteudo').innerHTML =
+      '<p class="com-empty">Não consegui contactar o servidor. Confira sua conexão e tente de novo em instantes.</p>';
+    a11yAnunciar('Não consegui contactar o servidor.');
+    return;
+  }
   try{
     await comercialCarregarDados();
   }catch(e){
@@ -3013,7 +3047,18 @@ function comercialImportarArquivo(input){
       (payload.exportadoEm ? ', exportado em '+new Date(payload.exportadoEm).toLocaleString('pt-BR') : '')+
       '.\n\nIsso vai SUBSTITUIR todos os dados atuais da área Comercial. Continuar?');
     if(!confirmar) return;
+    // acorda o servidor ANTES do POST grande — importar 146 oportunidades é
+    // justamente o tipo de requisição que não pode falhar silenciosa por
+    // timeout de rede num servidor ainda dormindo
+    toast('Verificando o servidor…');
+    const acordado = await acordarServidor((tentativa,total)=>
+      toast('Servidor inativo — acordando… (tentativa '+tentativa+' de '+total+')'));
+    if(!acordado){
+      toast('Não consegui contactar o servidor. Tente de novo em instantes.');
+      return;
+    }
     try{
+      toast('Importando…');
       await Store.importarBackupComercial(payload);
       toast('Backup importado.');
       await comercialCarregarDados();
