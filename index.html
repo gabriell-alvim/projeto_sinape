@@ -2079,6 +2079,16 @@ async function recarregarLista(silencioso){
 /* ── novo processo manual ── */
 function openNewProcessModal(){ document.getElementById('input-novo-nome').value=''; abrirModal('modal-novo'); }
 function abrirModal(id){ document.getElementById(id).classList.add('open'); a11yAtualizarItens(); }
+/* Para modais cujo conteúdo chega depois, por um fetch (Atualizações do dia,
+   Lixeira): abrir e numerar juntos criava uma numeração "de mentira" baseada
+   no "Carregando…", que TROCAVA de posição assim que o conteúdo de verdade
+   chegava — item novo entra ANTES do rodapé, empurrando "Fechar"/"Executar
+   análise agora" pro fim da lista. Quem já tinha apertado um número (ex.:
+   pro Fechar, que era a opção 1) via aquele número virar outra coisa, e
+   tinha que reencontrar o botão que queria lá embaixo. Esta variante só abre
+   visualmente; numerar fica por conta de quem chama, uma única vez, quando o
+   conteúdo real (sucesso OU erro) já estiver na tela. */
+function abrirModalAdiarNumeracao(id){ document.getElementById(id).classList.add('open'); }
 function fecharModal(id){ document.getElementById(id).classList.remove('open'); a11yAtualizarItens(); }
 async function confirmNewProcess(){
   const nome = document.getElementById('input-novo-nome').value.trim();
@@ -5845,18 +5855,20 @@ async function abrirPainelGastos(){
 }
 
 async function abrirRelatorioDoDia(){
-  abrirModal('modal-relatorio');
+  abrirModalAdiarNumeracao('modal-relatorio');
   const area = document.getElementById('relatorio-conteudo');
   area.innerHTML = '<p class="relatorio-vazio">Carregando…</p>';
   ULTIMO_RELATORIO_NOVOS = [];
   if(Store.modo!=='api'){
     area.innerHTML = '<p class="relatorio-vazio">Disponível apenas com o Painel conectado ao backend (modo local não tem esse recurso).</p>';
+    a11yAtualizarItens();
     return;
   }
   try{
     const res = await fetch(Store.base + '/relatorios/mais-recente', { headers: Store.headers() });
     if(res.status===404){
       area.innerHTML = '<p class="relatorio-vazio">Nenhuma atualização publicada ainda. As atualizações diárias começam a partir de hoje.</p>';
+      a11yAtualizarItens();
       return;
     }
     if(!res.ok) throw new Error('Servidor respondeu ' + res.status);
@@ -5871,6 +5883,7 @@ async function abrirRelatorioDoDia(){
     a11yAtualizarItens();
   }catch(e){
     area.innerHTML = '<p class="relatorio-vazio">Não foi possível carregar as atualizações: '+esc(e.message)+'</p>';
+    a11yAtualizarItens();
   }
 }
 
@@ -5879,12 +5892,12 @@ async function abrirRelatorioDoDia(){
    Antes vinha embutida no relatório do dia; ganhou entrada própria na home
    porque conferir o que dá pra restaurar não devia depender de abrir outra tela. */
 async function abrirLixeira(){
-  abrirModal('modal-lixeira');
+  abrirModalAdiarNumeracao('modal-lixeira');
   const area = document.getElementById('lixeira-conteudo');
   area.innerHTML = '<div id="dispensados-wrap"></div><div id="lixeira-processos-wrap"></div>';
-  a11yAtualizarItens();
-  await Promise.all([carregarDispensados(), carregarLixeiraProcessos()]);
+  await Promise.all([carregarDispensados(true), carregarLixeiraProcessos(true)]);
   _lixeiraChecarVazio();
+  a11yAtualizarItens();
 }
 function _lixeiraChecarVazio(){
   const area = document.getElementById('lixeira-conteudo');
@@ -5900,7 +5913,7 @@ function _lixeiraChecarVazio(){
    não em "Atualizações do dia" — conferir o que dá pra restaurar não devia
    depender de abrir outra tela. */
 let ULTIMO_DISPENSADOS = [];
-async function carregarDispensados(){
+async function carregarDispensados(semNumerar){
   const wrap = document.getElementById('dispensados-wrap');
   if(!wrap) return;
   try{
@@ -5909,7 +5922,12 @@ async function carregarDispensados(){
     ULTIMO_DISPENSADOS = (await r.json()).itens || [];
   }catch(e){ ULTIMO_DISPENSADOS = []; }
   wrap.outerHTML = renderizarDispensados(ULTIMO_DISPENSADOS);
-  if(document.getElementById('modal-lixeira').classList.contains('open')) a11yAtualizarItens(true);
+  /* semNumerar: abrirLixeira() carrega isto e carregarLixeiraProcessos() em
+     paralelo e numera uma vez só, depois que os dois terminam — numerar aqui
+     também renumeraria no meio do carregamento (às vezes antes, às vezes
+     depois do outro fetch terminar), empurrando "Fechar" de posição sem
+     ninguém ter mexido em nada. */
+  if(!semNumerar && document.getElementById('modal-lixeira').classList.contains('open')) a11yAtualizarItens(true);
 }
 function renderizarDispensados(itens){
   if(!itens || !itens.length) return '<div id="dispensados-wrap"></div>';
@@ -5988,7 +6006,7 @@ async function apagarDispensado(i, btn){
    "Restaurar". Mesmo padrão de carregamento à parte usado pros dispensados
    logo acima: lista tipicamente vazia, não atrasa a abertura do modal. */
 let ULTIMA_LIXEIRA_PROCESSOS = [];
-async function carregarLixeiraProcessos(){
+async function carregarLixeiraProcessos(semNumerar){
   const wrap = document.getElementById('lixeira-processos-wrap');
   if(!wrap) return;
   try{
@@ -5997,7 +6015,7 @@ async function carregarLixeiraProcessos(){
     ULTIMA_LIXEIRA_PROCESSOS = (await r.json()).processos || [];
   }catch(e){ ULTIMA_LIXEIRA_PROCESSOS = []; }
   wrap.outerHTML = renderizarLixeiraProcessos(ULTIMA_LIXEIRA_PROCESSOS);
-  if(document.getElementById('modal-lixeira').classList.contains('open')) a11yAtualizarItens(true);
+  if(!semNumerar && document.getElementById('modal-lixeira').classList.contains('open')) a11yAtualizarItens(true);
 }
 function renderizarLixeiraProcessos(itens){
   if(!itens || !itens.length) return '<div id="lixeira-processos-wrap"></div>';
