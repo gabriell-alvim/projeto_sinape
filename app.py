@@ -24,6 +24,7 @@ Rotas:
   DELETE  /api/processos/<id>                → manda pra lixeira (não apaga anexos nem arquivo nenhum — ver /excluidos)
   GET     /api/processos/excluidos           → lixeira: processos excluídos, disponíveis pra restaurar
   POST    /api/processos/excluidos/<id>/restaurar → desfaz a exclusão, com anexos e tudo intacto
+  DELETE  /api/processos/excluidos/<id>       → expurgo definitivo: apaga o registro E os arquivos (anexos, pasta de concorrente) — sem volta
   GET     /api/processos/<id>/anexos         → lista anexos do processo
   POST    /api/processos/<id>/anexos         → envia um anexo (multipart, campo "arquivo")
   GET     /api/processos/<id>/anexos/<aid>   → baixa o arquivo
@@ -43,6 +44,7 @@ Rotas:
   POST    /api/pendentes/dispensar            → tira da fila sem analisar {caminho_pasta, autor?, motivo?}
   GET     /api/pendentes/dispensados          → lista quem foi dispensado (pra oferecer "Restaurar" na tela)
   POST    /api/pendentes/restaurar            → desfaz a dispensa {caminho_pasta}
+  DELETE  /api/pendentes/dispensados          → apaga de vez um item dispensado {caminho_pasta} — some da fila, sem volta
   GET     /api/gastos                         → contador de gastos de IA (total de tokens e custo em US$/R$) + detalhamento por processo
   GET     /api/correcoes                      → pares (resposta da IA / correção da equipe) — matéria-prima pra treinar um modelo especialista no futuro
   GET     /api/prazos                         → todos os prazos de todos os processos ativos, numa lista só, ordenados do mais urgente pro mais distante
@@ -1047,6 +1049,24 @@ def restaurar_processo(pid):
     return jsonify(_sem_id_mongo(doc))
 
 
+@app.route("/api/processos/excluidos/<pid>", methods=["DELETE"])
+def expurgar_processo(pid):
+    """Apaga de vez um processo que já estava na lixeira — esse, sim, sem
+    volta: some o registro e todo arquivo associado (anexos e pasta de
+    verificação de concorrente). Só se aplica a quem já passou pela lixeira;
+    excluir() nunca apaga direto, sempre passa por aqui antes."""
+    doc = col_processos_excluidos.find_one({"_id": pid})
+    if not doc:
+        return jsonify({"erro": "Processo não está na lixeira."}), 404
+    for anexo in col_anexos.find({"processo_id": pid}):
+        (UPLOAD_DIR / pid / anexo["nome_arquivo"]).unlink(missing_ok=True)
+    col_anexos.delete_many({"processo_id": pid})
+    shutil.rmtree(UPLOAD_DIR / pid, ignore_errors=True)
+    shutil.rmtree(CONCORRENTES_DIR / pid, ignore_errors=True)
+    col_processos_excluidos.delete_one({"_id": pid})
+    return jsonify({"ok": True})
+
+
 @app.route("/api/processos/<pid>/dossie", methods=["GET"])
 def montar_dossie(pid):
     """Monta o dossie de habilitacao do processo (Montador de Dossie,
@@ -1269,6 +1289,22 @@ def restaurar_pendente():
     if not r.matched_count:
         return jsonify({"erro": "Item não está dispensado."}), 404
     return jsonify({"ok": True, "restantes": len(_pendentes_abertos())})
+
+
+@app.route("/api/pendentes/dispensados", methods=["DELETE"])
+def apagar_dispensado():
+    """Apaga de vez um item dispensado — até aqui só dava pra restaurar; isso
+    aqui esquece o item de verdade (some do banco, não fica nem como
+    'dispensado' nem como 'pendente'). Não mexe em processo nenhum, é só a
+    entrada na fila de análise."""
+    corpo = request.get_json(silent=True) or {}
+    caminho = corpo.get("caminho_pasta") or ""
+    if not caminho:
+        return jsonify({"erro": "Informe o caminho_pasta."}), 400
+    r = col_pendentes.delete_one({"_id": caminho, "situacao": "dispensado"})
+    if not r.deleted_count:
+        return jsonify({"erro": "Item não está dispensado."}), 404
+    return jsonify({"ok": True})
 
 
 def _concluir_pendente(caminho: str, processo_id: str):

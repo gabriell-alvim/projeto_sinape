@@ -5896,7 +5896,8 @@ function renderizarDispensados(itens){
         '<div class="novo-item-nome">'+icone+' '+esc(d.nome)+'</div>' +
         '<div class="hint" style="margin:-4px 0 8px;">'+detalhe+'</div>' +
         '<div class="novo-item-acoes">' +
-          '<button class="btn-sm violet" onclick="restaurarDispensado('+i+', this)">↩ Restaurar</button>' +
+          '<button class="btn-sm violet" onclick="restaurarDispensado('+i+', this)">↩ Restaurar</button> ' +
+          '<button class="btn-sm danger" onclick="apagarDispensado('+i+', this)">🗑 Apagar definitivamente</button>' +
         '</div>' +
       '</div>';
     }).join('') +
@@ -5922,6 +5923,31 @@ async function restaurarDispensado(i, btn){
     toast('"'+item.nome+'" volta a aparecer na próxima varredura.');
   }catch(e){
     toast('Erro ao restaurar: '+e.message);
+    btn.disabled = false;
+    btn.textContent = textoOriginal;
+  }
+}
+async function apagarDispensado(i, btn){
+  const item = ULTIMO_DISPENSADOS[i];
+  if(!item) return;
+  if(!confirm('Apagar definitivamente "'+item.nome+'" da lista de dispensados? Essa ação não pode ser desfeita — se quiser recuperar depois, a única forma será adicionar a pasta de novo à mão.')) return;
+  const textoOriginal = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = 'Apagando…';
+  try{
+    const r = await fetch(Store.base + '/pendentes/dispensados', {
+      method:'DELETE', headers: Store.headers(),
+      body: JSON.stringify({ caminho_pasta: item.caminho_pasta })
+    });
+    const corpo = await r.json().catch(()=>({}));
+    if(!r.ok) throw new Error(corpo.erro || ('Servidor respondeu '+r.status));
+    ULTIMO_DISPENSADOS.splice(i, 1);
+    const wrap = document.getElementById('dispensados-wrap');
+    if(wrap) wrap.outerHTML = renderizarDispensados(ULTIMO_DISPENSADOS);
+    if(document.getElementById('modal-relatorio').classList.contains('open')) a11yAtualizarItens(true);
+    toast('"'+item.nome+'" apagado definitivamente.');
+  }catch(e){
+    toast('Erro ao apagar: '+e.message);
     btn.disabled = false;
     btn.textContent = textoOriginal;
   }
@@ -5955,7 +5981,8 @@ function renderizarLixeiraProcessos(itens){
         '<div class="novo-item-nome">'+icone+' '+esc(p.nome)+'</div>' +
         '<div class="hint" style="margin:-4px 0 8px;">'+detalhe+'</div>' +
         '<div class="novo-item-acoes">' +
-          '<button class="btn-sm violet" onclick="restaurarProcessoExcluido('+i+', this)">↩ Restaurar</button>' +
+          '<button class="btn-sm violet" onclick="restaurarProcessoExcluido('+i+', this)">↩ Restaurar</button> ' +
+          '<button class="btn-sm danger" onclick="expurgarProcessoExcluido('+i+', this)">🗑 Apagar definitivamente</button>' +
         '</div>' +
       '</div>';
     }).join('') +
@@ -5981,6 +6008,30 @@ async function restaurarProcessoExcluido(i, btn){
     toast('"'+item.nome+'" restaurado.');
   }catch(e){
     toast('Erro ao restaurar: '+e.message);
+    btn.disabled = false;
+    btn.textContent = textoOriginal;
+  }
+}
+async function expurgarProcessoExcluido(i, btn){
+  const item = ULTIMA_LIXEIRA_PROCESSOS[i];
+  if(!item) return;
+  if(!confirm('Apagar "'+item.nome+'" definitivamente? Essa ação NÃO pode ser desfeita — o processo, seus anexos e as verificações de concorrente somem de vez.')) return;
+  const textoOriginal = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = 'Apagando…';
+  try{
+    const r = await fetch(Store.base + '/processos/excluidos/' + encodeURIComponent(item.id), {
+      method:'DELETE', headers: Store.headers()
+    });
+    const corpo = await r.json().catch(()=>({}));
+    if(!r.ok) throw new Error(corpo.erro || ('Servidor respondeu '+r.status));
+    ULTIMA_LIXEIRA_PROCESSOS.splice(i, 1);
+    const wrap = document.getElementById('lixeira-processos-wrap');
+    if(wrap) wrap.outerHTML = renderizarLixeiraProcessos(ULTIMA_LIXEIRA_PROCESSOS);
+    if(document.getElementById('modal-relatorio').classList.contains('open')) a11yAtualizarItens(true);
+    toast('"'+item.nome+'" apagado definitivamente.');
+  }catch(e){
+    toast('Erro ao apagar: '+e.message);
     btn.disabled = false;
     btn.textContent = textoOriginal;
   }
