@@ -343,6 +343,12 @@ input, select, textarea { font-family:inherit; }
 .btn-primary:hover { background:var(--teal-mid); }
 .btn-outline { background:var(--white); color:var(--teal); border:1px solid var(--teal-mid); border-radius:8px; padding:8px 14px; font-weight:700; font-size:.8rem; }
 .btn-outline:hover { background:var(--teal-ll); }
+/* ação de ATENÇÃO: não apaga nada, mas SUBSTITUI/SOBRESCREVE dado em massa
+   (importar backup, restaurar backup anterior, confirmar import de
+   processos) — precisa se destacar do botão de rotina ao lado, senão a
+   pessoa não nota que essa é diferente até já ter clicado */
+.btn-warn { background:var(--amber-l); color:var(--amber); border:1px solid var(--amber); border-radius:8px; padding:8px 14px; font-weight:700; font-size:.8rem; }
+.btn-warn:hover { background:var(--amber); color:#fff; }
 .btn-ghost { background:none; color:var(--slate-mid); border:1px solid var(--border); border-radius:8px; padding:8px 14px; font-size:.8rem; }
 .btn-ghost:hover { background:var(--surface); }
 .btn-sm { border:1px solid var(--border); background:var(--white); color:var(--slate-mid); border-radius:7px; padding:5px 10px; font-size:.72rem; font-weight:600; }
@@ -711,7 +717,7 @@ input, select, textarea { font-family:inherit; }
       <h2 id="list-title">Processos</h2>
       <div class="lh-actions">
         <input type="text" class="search-box" id="search-box" placeholder="🔎 Buscar por nome, órgão, nº…" oninput="renderProcessGrid()">
-        <button class="btn-outline" onclick="openImportModal()">📥 Importar da IA (JSON)</button>
+        <button class="btn-warn" onclick="openImportModal()">📥 Importar da IA (JSON)</button>
         <button class="btn-primary" onclick="openNewProcessModal()">+ Novo processo</button>
       </div>
     </div>
@@ -830,10 +836,10 @@ input, select, textarea { font-family:inherit; }
         <div class="page-sub" id="com-subtitulo">Carregando…</div>
       </div>
       <div style="display:flex;gap:8px;">
-        <button class="btn-outline" id="btn-com-importar" onclick="document.getElementById('com-input-importar').click()">📥 Importar backup</button>
+        <button class="btn-warn" id="btn-com-importar" onclick="document.getElementById('com-input-importar').click()">📥 Importar backup</button>
         <input type="file" id="com-input-importar" accept=".json" class="sr-only" onchange="comercialImportarArquivo(this)">
         <button class="btn-outline" onclick="comercialExportar()">⬇ Exportar backup</button>
-        <button class="btn-outline" id="btn-com-restaurar" onclick="comercialRestaurarAnterior()" hidden>↩ Restaurar para o backup anterior</button>
+        <button class="btn-warn" id="btn-com-restaurar" onclick="comercialRestaurarAnterior()" hidden>↩ Restaurar para o backup anterior</button>
       </div>
     </div>
     <div class="com-navlabel">Acompanhamento</div>
@@ -892,7 +898,7 @@ input, select, textarea { font-family:inherit; }
     <div class="modal-actions">
       <button class="btn-ghost" onclick="fecharModal('modal-import')">Cancelar</button>
       <button class="btn-outline" onclick="validarImport()">Validar</button>
-      <button class="btn-primary" id="btn-confirm-import" onclick="confirmarImport()">Importar</button>
+      <button class="btn-warn" id="btn-confirm-import" onclick="confirmarImport()">Importar</button>
     </div>
   </div>
 </div>
