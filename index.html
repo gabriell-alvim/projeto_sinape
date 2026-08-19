@@ -2201,7 +2201,8 @@ async function renderAnexos(){
     if(!gerais.length){ lista.innerHTML = '<span class="hint">Nenhum anexo enviado ainda.</span>'; }
     else lista.innerHTML = gerais.map(a =>
       '<div class="anexo-item">📄 <a href="'+esc(Store.urlAnexo(currentProc.id, a.id))+'" target="_blank">'+esc(a.nome_original)+'</a>'+
-      ' <span class="hint">('+formatBytes(a.tamanho)+(a.enviado_por?' — '+esc(a.enviado_por):'')+')</span></div>'
+      ' <span class="hint">('+formatBytes(a.tamanho)+(a.enviado_por?' — '+esc(a.enviado_por):'')+')</span>'+
+      ' <button class="btn-sm danger" onclick="excluirAnexoAtual(\''+esc(a.id)+'\')">Remover</button></div>'
     ).join('');
   }catch(e){
     ANEXOS_ATUAIS = [];
@@ -4440,6 +4441,7 @@ async function enviarAnexoAtual(){
   }catch(e){ toast('Erro ao enviar: ' + e.message); }
 }
 async function excluirAnexoAtual(anexoId){
+  if(!confirm('Remover este anexo? Essa ação não pode ser desfeita.')) return;
   try{
     await Store.excluirAnexo(currentProc.id, anexoId);
     toast('Anexo removido');
@@ -5852,10 +5854,74 @@ async function abrirRelatorioDoDia(){
       '<div class="relatorio-meta">'+esc(rel.titulo||'Atualização')+(quando?' — '+esc(quando):'')+
       (rel.autor?' · por '+esc(rel.autor):'')+'</div>' +
       '<div class="relatorio-corpo">'+esc(rel.conteudo||'')+'</div>' +
-      renderizarNovosProcessos(ULTIMO_RELATORIO_NOVOS);
+      renderizarNovosProcessos(ULTIMO_RELATORIO_NOVOS) +
+      '<div id="dispensados-wrap"></div>';
     a11yAtualizarItens();
+    carregarDispensados();
   }catch(e){
     area.innerHTML = '<p class="relatorio-vazio">Não foi possível carregar as atualizações: '+esc(e.message)+'</p>';
+  }
+}
+
+/* itens que a equipe tirou da fila (dispensarNovo) sem nunca analisar — sem
+   isto, "Dispensar" era uma via de mão única na prática: o endpoint de
+   desfazer já existia (POST /pendentes/restaurar), mas nada na tela mostrava
+   QUEM estava dispensado pra poder restaurar. Carregado à parte dos "novos"
+   porque é uma lista tipicamente vazia — não vale atrasar a abertura do
+   modal esperando por ela. */
+let ULTIMO_DISPENSADOS = [];
+async function carregarDispensados(){
+  const wrap = document.getElementById('dispensados-wrap');
+  if(!wrap) return;
+  try{
+    const r = await fetch(Store.base + '/pendentes/dispensados', { headers: Store.headers() });
+    if(!r.ok) throw new Error('Servidor respondeu ' + r.status);
+    ULTIMO_DISPENSADOS = (await r.json()).itens || [];
+  }catch(e){ ULTIMO_DISPENSADOS = []; }
+  wrap.outerHTML = renderizarDispensados(ULTIMO_DISPENSADOS);
+  if(document.getElementById('modal-relatorio').classList.contains('open')) a11yAtualizarItens(true);
+}
+function renderizarDispensados(itens){
+  if(!itens || !itens.length) return '<div id="dispensados-wrap"></div>';
+  return '<div class="novos-processos" id="dispensados-wrap">' +
+    '<div class="sec-divider" style="margin-top:16px;">↩ Itens dispensados</div>' +
+    itens.map((d,i)=>{
+      const icone = d.tipo==='publico' ? '🏛️' : '🏢';
+      const quando = d.dispensadoEm ? new Date(d.dispensadoEm).toLocaleDateString('pt-BR') : '';
+      const detalhe = 'Dispensado'+(quando?' em '+esc(quando):'')+(d.dispensadoPor?' por '+esc(d.dispensadoPor):'')+
+        (d.motivo?' — "'+esc(d.motivo)+'"':'');
+      return '<div class="novo-item">' +
+        '<div class="novo-item-nome">'+icone+' '+esc(d.nome)+'</div>' +
+        '<div class="hint" style="margin:-4px 0 8px;">'+detalhe+'</div>' +
+        '<div class="novo-item-acoes">' +
+          '<button class="btn-sm violet" onclick="restaurarDispensado('+i+', this)">↩ Restaurar</button>' +
+        '</div>' +
+      '</div>';
+    }).join('') +
+  '</div>';
+}
+async function restaurarDispensado(i, btn){
+  const item = ULTIMO_DISPENSADOS[i];
+  if(!item) return;
+  const textoOriginal = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = 'Restaurando…';
+  try{
+    const r = await fetch(Store.base + '/pendentes/restaurar', {
+      method:'POST', headers: Store.headers(),
+      body: JSON.stringify({ caminho_pasta: item.caminho_pasta })
+    });
+    const corpo = await r.json().catch(()=>({}));
+    if(!r.ok) throw new Error(corpo.erro || ('Servidor respondeu '+r.status));
+    ULTIMO_DISPENSADOS.splice(i, 1);
+    const wrap = document.getElementById('dispensados-wrap');
+    if(wrap) wrap.outerHTML = renderizarDispensados(ULTIMO_DISPENSADOS);
+    if(document.getElementById('modal-relatorio').classList.contains('open')) a11yAtualizarItens(true);
+    toast('"'+item.nome+'" volta a aparecer na próxima varredura.');
+  }catch(e){
+    toast('Erro ao restaurar: '+e.message);
+    btn.disabled = false;
+    btn.textContent = textoOriginal;
   }
 }
 

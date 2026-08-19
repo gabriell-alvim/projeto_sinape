@@ -39,6 +39,7 @@ Rotas:
   GET     /api/pendentes                      → fila de processos novos aguardando decisão (analisar ou dispensar)
   POST    /api/pendentes                      → põe uma pasta do SharePoint na fila à mão {caminho_pasta, tipo?, nome?}
   POST    /api/pendentes/dispensar            → tira da fila sem analisar {caminho_pasta, autor?, motivo?}
+  GET     /api/pendentes/dispensados          → lista quem foi dispensado (pra oferecer "Restaurar" na tela)
   POST    /api/pendentes/restaurar            → desfaz a dispensa {caminho_pasta}
   GET     /api/gastos                         → contador de gastos de IA (total de tokens e custo em US$/R$) + detalhamento por processo
   GET     /api/correcoes                      → pares (resposta da IA / correção da equipe) — matéria-prima pra treinar um modelo especialista no futuro
@@ -1202,6 +1203,21 @@ def dispensar_pendente():
     if not r.matched_count:
         return jsonify({"erro": "Item não está na fila de pendentes."}), 404
     return jsonify({"ok": True, "restantes": len(_pendentes_abertos())})
+
+
+@app.route("/api/pendentes/dispensados", methods=["GET"])
+def listar_dispensados():
+    """Itens que a equipe tirou da fila sem analisar — a tela usa isto pra
+    oferecer 'Restaurar' de quem foi dispensado por engano. Sem esta rota,
+    o único jeito de saber o que estava dispensado era olhar direto no banco:
+    /api/pendentes só devolve a fila aberta (situacao=pendente)."""
+    itens = [
+        {"caminho_pasta": d["_id"], "tipo": d.get("tipo"), "nome": d.get("nome") or d["_id"].rsplit("/", 1)[-1],
+         "dispensadoEm": d.get("dispensadoEm"), "dispensadoPor": d.get("dispensadoPor") or "",
+         "motivo": d.get("motivo") or ""}
+        for d in col_pendentes.find({"situacao": "dispensado"}).sort("dispensadoEm", DESCENDING)
+    ]
+    return jsonify({"itens": itens})
 
 
 @app.route("/api/pendentes/restaurar", methods=["POST"])
