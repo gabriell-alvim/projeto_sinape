@@ -707,6 +707,7 @@ input, select, textarea { font-family:inherit; }
     <div class="home-actions" style="flex-direction:column; align-items:center;">
       <button class="btn-outline" onclick="copiarPromptIA()">🤖 Copiar prompt p/ IA</button>
       <button class="btn-outline" id="btn-falar-sinki" onclick="abrirSinki()">💬 Falar com Sinki</button>
+      <button class="btn-outline" id="btn-lixeira" onclick="abrirLixeira()">🗑️ Lixeira</button>
     </div>
   </div>
 
@@ -986,6 +987,19 @@ input, select, textarea { font-family:inherit; }
     <div class="modal-actions">
       <button class="btn-ghost" onclick="fecharModal('modal-relatorio')">Fechar</button>
       <button class="btn-primary" id="btn-executar-analise" onclick="executarAnaliseAgora()">▶ Executar análise agora</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: LIXEIRA -->
+<div class="modal-overlay" id="modal-lixeira">
+  <div class="modal-box wide" role="dialog" aria-label="Lixeira">
+    <h3>🗑️ Lixeira</h3>
+    <div id="lixeira-conteudo">
+      <p class="relatorio-vazio">Carregando…</p>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-ghost" onclick="fecharModal('modal-lixeira')">Fechar</button>
     </div>
   </div>
 </div>
@@ -5854,23 +5868,38 @@ async function abrirRelatorioDoDia(){
       '<div class="relatorio-meta">'+esc(rel.titulo||'Atualização')+(quando?' — '+esc(quando):'')+
       (rel.autor?' · por '+esc(rel.autor):'')+'</div>' +
       '<div class="relatorio-corpo">'+esc(rel.conteudo||'')+'</div>' +
-      renderizarNovosProcessos(ULTIMO_RELATORIO_NOVOS) +
-      '<div id="dispensados-wrap"></div>' +
-      '<div id="lixeira-processos-wrap"></div>';
+      renderizarNovosProcessos(ULTIMO_RELATORIO_NOVOS);
     a11yAtualizarItens();
-    carregarDispensados();
-    carregarLixeiraProcessos();
   }catch(e){
     area.innerHTML = '<p class="relatorio-vazio">Não foi possível carregar as atualizações: '+esc(e.message)+'</p>';
+  }
+}
+
+/* Lixeira própria (fora de "Atualizações do dia") — itens dispensados da fila
+   de análise e processos excluídos, cada um com Restaurar/Apagar definitivamente.
+   Antes vinha embutida no relatório do dia; ganhou entrada própria na home
+   porque conferir o que dá pra restaurar não devia depender de abrir outra tela. */
+async function abrirLixeira(){
+  abrirModal('modal-lixeira');
+  const area = document.getElementById('lixeira-conteudo');
+  area.innerHTML = '<div id="dispensados-wrap"></div><div id="lixeira-processos-wrap"></div>';
+  a11yAtualizarItens();
+  await Promise.all([carregarDispensados(), carregarLixeiraProcessos()]);
+  _lixeiraChecarVazio();
+}
+function _lixeiraChecarVazio(){
+  const area = document.getElementById('lixeira-conteudo');
+  if(area && document.getElementById('modal-lixeira').classList.contains('open') && !area.querySelector('.novo-item')){
+    area.innerHTML = '<p class="relatorio-vazio">Nada na lixeira no momento — processos excluídos e itens dispensados aparecem aqui.</p>';
   }
 }
 
 /* itens que a equipe tirou da fila (dispensarNovo) sem nunca analisar — sem
    isto, "Dispensar" era uma via de mão única na prática: o endpoint de
    desfazer já existia (POST /pendentes/restaurar), mas nada na tela mostrava
-   QUEM estava dispensado pra poder restaurar. Carregado à parte dos "novos"
-   porque é uma lista tipicamente vazia — não vale atrasar a abertura do
-   modal esperando por ela. */
+   QUEM estava dispensado pra poder restaurar. Vive na Lixeira (modal-lixeira),
+   não em "Atualizações do dia" — conferir o que dá pra restaurar não devia
+   depender de abrir outra tela. */
 let ULTIMO_DISPENSADOS = [];
 async function carregarDispensados(){
   const wrap = document.getElementById('dispensados-wrap');
@@ -5881,7 +5910,7 @@ async function carregarDispensados(){
     ULTIMO_DISPENSADOS = (await r.json()).itens || [];
   }catch(e){ ULTIMO_DISPENSADOS = []; }
   wrap.outerHTML = renderizarDispensados(ULTIMO_DISPENSADOS);
-  if(document.getElementById('modal-relatorio').classList.contains('open')) a11yAtualizarItens(true);
+  if(document.getElementById('modal-lixeira').classList.contains('open')) a11yAtualizarItens(true);
 }
 function renderizarDispensados(itens){
   if(!itens || !itens.length) return '<div id="dispensados-wrap"></div>';
@@ -5919,7 +5948,8 @@ async function restaurarDispensado(i, btn){
     ULTIMO_DISPENSADOS.splice(i, 1);
     const wrap = document.getElementById('dispensados-wrap');
     if(wrap) wrap.outerHTML = renderizarDispensados(ULTIMO_DISPENSADOS);
-    if(document.getElementById('modal-relatorio').classList.contains('open')) a11yAtualizarItens(true);
+    if(document.getElementById('modal-lixeira').classList.contains('open')) a11yAtualizarItens(true);
+    _lixeiraChecarVazio();
     toast('"'+item.nome+'" volta a aparecer na próxima varredura.');
   }catch(e){
     toast('Erro ao restaurar: '+e.message);
@@ -5944,7 +5974,8 @@ async function apagarDispensado(i, btn){
     ULTIMO_DISPENSADOS.splice(i, 1);
     const wrap = document.getElementById('dispensados-wrap');
     if(wrap) wrap.outerHTML = renderizarDispensados(ULTIMO_DISPENSADOS);
-    if(document.getElementById('modal-relatorio').classList.contains('open')) a11yAtualizarItens(true);
+    if(document.getElementById('modal-lixeira').classList.contains('open')) a11yAtualizarItens(true);
+    _lixeiraChecarVazio();
     toast('"'+item.nome+'" apagado definitivamente.');
   }catch(e){
     toast('Erro ao apagar: '+e.message);
@@ -5967,7 +5998,7 @@ async function carregarLixeiraProcessos(){
     ULTIMA_LIXEIRA_PROCESSOS = (await r.json()).processos || [];
   }catch(e){ ULTIMA_LIXEIRA_PROCESSOS = []; }
   wrap.outerHTML = renderizarLixeiraProcessos(ULTIMA_LIXEIRA_PROCESSOS);
-  if(document.getElementById('modal-relatorio').classList.contains('open')) a11yAtualizarItens(true);
+  if(document.getElementById('modal-lixeira').classList.contains('open')) a11yAtualizarItens(true);
 }
 function renderizarLixeiraProcessos(itens){
   if(!itens || !itens.length) return '<div id="lixeira-processos-wrap"></div>';
@@ -6003,7 +6034,8 @@ async function restaurarProcessoExcluido(i, btn){
     ULTIMA_LIXEIRA_PROCESSOS.splice(i, 1);
     const wrap = document.getElementById('lixeira-processos-wrap');
     if(wrap) wrap.outerHTML = renderizarLixeiraProcessos(ULTIMA_LIXEIRA_PROCESSOS);
-    if(document.getElementById('modal-relatorio').classList.contains('open')) a11yAtualizarItens(true);
+    if(document.getElementById('modal-lixeira').classList.contains('open')) a11yAtualizarItens(true);
+    _lixeiraChecarVazio();
     await recarregarLista(true); // atualiza os contadores/lista de Processos Públicos/Privados, silencioso (fora de foco agora)
     toast('"'+item.nome+'" restaurado.');
   }catch(e){
@@ -6028,7 +6060,8 @@ async function expurgarProcessoExcluido(i, btn){
     ULTIMA_LIXEIRA_PROCESSOS.splice(i, 1);
     const wrap = document.getElementById('lixeira-processos-wrap');
     if(wrap) wrap.outerHTML = renderizarLixeiraProcessos(ULTIMA_LIXEIRA_PROCESSOS);
-    if(document.getElementById('modal-relatorio').classList.contains('open')) a11yAtualizarItens(true);
+    if(document.getElementById('modal-lixeira').classList.contains('open')) a11yAtualizarItens(true);
+    _lixeiraChecarVazio();
     toast('"'+item.nome+'" apagado definitivamente.');
   }catch(e){
     toast('Erro ao apagar: '+e.message);
@@ -6927,7 +6960,8 @@ function a11yAtualizarItens(manterNivel, silencioso){
       {el: document.getElementById('btn-painel-prazos'), label:'Painel de prazos'},
       {el: document.getElementById('btn-painel-gastos'), label:'Painel de gastos'},
       {el: document.querySelector('.home-actions .btn-outline'), label:'Copiar prompt para IA'},
-      {el: document.getElementById('btn-falar-sinki'), label:'Falar com Sinki'}
+      {el: document.getElementById('btn-falar-sinki'), label:'Falar com Sinki'},
+      {el: document.getElementById('btn-lixeira'), label:'Lixeira'}
       // o sino fica escondido na conta compartilhada (que não tem caixa de
       // entrada); numerar um botão escondido daria uma opção que não foca
     ].filter(i=>i.el && !i.el.hidden);
