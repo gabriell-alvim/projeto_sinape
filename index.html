@@ -4396,6 +4396,10 @@ function renderConcorrentes(lista){
 }
 
 async function excluirConcorrente(cid){
+  // única exclusão do sistema que não pedia confirmação — todas as outras
+  // (processo, oportunidade, item de equipe, mês de timesheet, ata, anexo de
+  // planilha) já passam por confirm() antes de apagar de vez
+  if(!confirm('Excluir esta verificação de documentação de concorrente? Essa ação não pode ser desfeita.')) return;
   try{
     const res = await fetch(Store.base + '/processos/' + currentProc.id + '/concorrentes/' + cid,
       { method: 'DELETE', headers: Store.headers() });
