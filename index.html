@@ -113,10 +113,7 @@ input, select, textarea { font-family:inherit; }
 .view.active { display:block; }
 
 /* ── HOME ── */
-.home-hero { text-align:center; margin:34px 0 26px; }
-.home-hero h1 { font-family:var(--font-display); font-weight:600; font-size:1.6rem; color:var(--teal); }
-.home-hero p  { color:var(--slate-mid); margin-top:6px; font-size:.9rem; }
-.home-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; max-width:760px; margin:0 auto; }
+.home-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; max-width:760px; margin:28px auto 0; }
 .home-card {
   background:var(--white); border:1px solid var(--border); border-radius:14px;
   padding:28px 24px; text-align:center; cursor:pointer; transition:all .15s;
@@ -672,24 +669,18 @@ input, select, textarea { font-family:inherit; }
 
   <!-- ═══════════ VIEW: HOME ═══════════ -->
   <div class="view active" id="view-home">
-    <div class="home-hero">
-      <h1>Portfólio de Processos Comerciais</h1>
-      <p>Painel colaborativo — licitações públicas (Lei 14.133/2021) e contratações privadas (concessionárias)</p>
-    </div>
     <div class="home-grid">
       <div class="home-card" role="button" tabindex="0" aria-label="Processos Públicos"
            onclick="openList('publico')" onkeydown="a11yAtivarComEnter(event, ()=>openList('publico'))">
         <div class="hc-icon" aria-hidden="true">🏛️</div>
-        <h3>Processos Públicos</h3>
+        <h3>Processos Públicos: <span id="count-publico">0</span></h3>
         <p>Pregões, concorrências e dispensas — órgãos e entidades públicas</p>
-        <span class="hc-count" id="count-publico">0 processos</span>
       </div>
       <div class="home-card" role="button" tabindex="0" aria-label="Processos Privados"
            onclick="openList('privado')" onkeydown="a11yAtivarComEnter(event, ()=>openList('privado'))">
         <div class="hc-icon" aria-hidden="true">🏢</div>
-        <h3>Processos Privados</h3>
+        <h3>Processos Privados: <span id="count-privado">0</span></h3>
         <p>Cartas-convite, RFQs e cotações — concessionárias e empresas</p>
-        <span class="hc-count" id="count-privado">0 processos</span>
       </div>
       <div class="home-card" role="button" tabindex="0" aria-label="Painel Gerencial"
            onclick="abrirPainelGerencial()" onkeydown="a11yAtivarComEnter(event, abrirPainelGerencial)">
@@ -2006,8 +1997,8 @@ function updateBreadcrumb(){
 function refreshHomeCounts(){
   const pub = listaResumos.filter(p=>p.type==='publico').length;
   const pri = listaResumos.filter(p=>p.type==='privado').length;
-  document.getElementById('count-publico').textContent = pub + (pub===1?' processo':' processos');
-  document.getElementById('count-privado').textContent = pri + (pri===1?' processo':' processos');
+  document.getElementById('count-publico').textContent = pub;
+  document.getElementById('count-privado').textContent = pri;
 }
 
 /* ════════════════════════════════════════════════════════════════
@@ -6952,8 +6943,8 @@ function a11yAtualizarItens(manterNivel, silencioso){
 
   if(document.getElementById('view-home').classList.contains('active')){
     A11Y.todosItens = [
-      {el: document.querySelector('.home-card[onclick*="publico"]'), label:'Processos Públicos'},
-      {el: document.querySelector('.home-card[onclick*="privado"]'), label:'Processos Privados'},
+      {el: document.querySelector('.home-card[onclick*="publico"]'), label:'Processos Públicos: '+(document.getElementById('count-publico')?document.getElementById('count-publico').textContent:'0')},
+      {el: document.querySelector('.home-card[onclick*="privado"]'), label:'Processos Privados: '+(document.getElementById('count-privado')?document.getElementById('count-privado').textContent:'0')},
       {el: document.querySelector('.home-card[onclick*="abrirPainelGerencial"]'), label:'Painel Gerencial'},
       {el: document.getElementById('btn-notificacoes'), label:'Notificações'},
       {el: document.getElementById('btn-atualizacoes-dia'), label:'Atualizações do dia'},
