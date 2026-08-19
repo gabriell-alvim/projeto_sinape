@@ -1999,6 +1999,14 @@ function refreshHomeCounts(){
   const pri = listaResumos.filter(p=>p.type==='privado').length;
   document.getElementById('count-publico').textContent = pub;
   document.getElementById('count-privado').textContent = pri;
+  /* aria-label sobrescreve o texto visível pro leitor de tela -- sem
+     atualizar aqui também, o NVDA continuaria anunciando só "Processos
+     Públicos" (sem a contagem) ao tabular pelo card, mesmo com o número
+     certo na tela. */
+  const cardPub = document.querySelector('.home-card[onclick*="publico"]');
+  const cardPri = document.querySelector('.home-card[onclick*="privado"]');
+  if(cardPub) cardPub.setAttribute('aria-label', 'Processos Públicos: '+pub);
+  if(cardPri) cardPri.setAttribute('aria-label', 'Processos Privados: '+pri);
 }
 
 /* ════════════════════════════════════════════════════════════════
