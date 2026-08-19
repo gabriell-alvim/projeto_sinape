@@ -21,7 +21,9 @@ Rotas:
   PUT     /api/processos/<id>                → substitui documento completo; se já houver Oportunidade ligada, atualiza
   PATCH   /api/processos/<id>                → mescla {metaPatch, analisePatch, checklistPatch, exigencias, seVersao};
                                                 se já houver Oportunidade ligada, sincroniza cliente/objeto/valor/status
-  DELETE  /api/processos/<id>                → remove (e seus anexos)
+  DELETE  /api/processos/<id>                → manda pra lixeira (não apaga anexos nem arquivo nenhum — ver /excluidos)
+  GET     /api/processos/excluidos           → lixeira: processos excluídos, disponíveis pra restaurar
+  POST    /api/processos/excluidos/<id>/restaurar → desfaz a exclusão, com anexos e tudo intacto
   GET     /api/processos/<id>/anexos         → lista anexos do processo
   POST    /api/processos/<id>/anexos         → envia um anexo (multipart, campo "arquivo")
   GET     /api/processos/<id>/anexos/<aid>   → baixa o arquivo
@@ -243,6 +245,7 @@ col_comercial_meta = db["comercial_meta"]
 col_comercial_timesheet = db["comercial_timesheet"]
 col_comercial_atas = db["comercial_atas"]
 col_comercial_snapshot_anterior = db["comercial_snapshot_anterior"]
+col_processos_excluidos = db["processos_excluidos"]
 
 
 def _init_db():
@@ -546,6 +549,12 @@ def login():
 
 
 NOME_CONTA_COMPARTILHADA = "Conta compartilhada"
+
+
+def _autor_da_sessao():
+    """Mesma regra de /api/eu: quem assina uma ação é decidido no servidor,
+    não digitado na tela — conta compartilhada nunca assina como pessoa."""
+    return session.get("usuario_nome") or NOME_CONTA_COMPARTILHADA
 
 
 @app.route("/api/eu", methods=["GET"])
@@ -996,19 +1005,46 @@ def patch(pid):
 
 @app.route("/api/processos/<pid>", methods=["DELETE"])
 def excluir(pid):
-    for anexo in col_anexos.find({"processo_id": pid}):
-        (UPLOAD_DIR / pid / anexo["nome_arquivo"]).unlink(missing_ok=True)
-    col_anexos.delete_many({"processo_id": pid})
+    """Exclusão vai pra lixeira (col_processos_excluidos), não some de vez —
+    só assim dá pra oferecer 'Restaurar' na tela sem perder nada. Por isso,
+    diferente de antes, NÃO apaga anexos nem a pasta de documentos de
+    concorrente aqui: ficam esperando no disco, prontos pra voltar junto se
+    o processo for restaurado. Só um expurgo de verdade (que não existe
+    ainda — ninguém pediu) apagaria esses arquivos."""
+    doc = col_processos.find_one({"_id": pid})
+    if not doc:
+        return jsonify({"erro": "Processo não encontrado"}), 404
+    doc["excluidoEm"] = _agora_ms()
+    doc["excluidoPor"] = _autor_da_sessao()
+    col_processos_excluidos.replace_one({"_id": pid}, doc, upsert=True)
     col_processos.delete_one({"_id": pid})
-    try:
-        (UPLOAD_DIR / pid).rmdir()
-    except OSError:
-        pass
-    # documentos de concorrente verificados neste processo (verificar_concorrente,
-    # mais abaixo) ficam numa pasta própria por pid — sem isto, excluir o
-    # processo deixava esses arquivos órfãos em disco pra sempre
-    shutil.rmtree(CONCORRENTES_DIR / pid, ignore_errors=True)
     return jsonify({"ok": True})
+
+
+@app.route("/api/processos/excluidos", methods=["GET"])
+def listar_processos_excluidos():
+    """Lixeira: processos excluídos, disponíveis pra restaurar."""
+    docs = col_processos_excluidos.find().sort("excluidoEm", DESCENDING)
+    itens = [{"id": d["_id"], "nome": d.get("nome"), "type": d.get("type"),
+              "excluidoEm": d.get("excluidoEm"), "excluidoPor": d.get("excluidoPor") or ""}
+             for d in docs]
+    return jsonify({"processos": itens})
+
+
+@app.route("/api/processos/excluidos/<pid>/restaurar", methods=["POST"])
+def restaurar_processo(pid):
+    """Desfaz a exclusão. Anexos e verificações de concorrente voltam juntos
+    intactos, porque excluir() nunca chegou a tocar neles."""
+    doc = col_processos_excluidos.find_one({"_id": pid})
+    if not doc:
+        return jsonify({"erro": "Processo não está na lixeira."}), 404
+    doc.pop("excluidoEm", None)
+    doc.pop("excluidoPor", None)
+    doc["versao"] = int(doc.get("versao") or 1) + 1
+    doc["atualizadoEm"] = _agora_ms()
+    col_processos.replace_one({"_id": pid}, doc, upsert=True)
+    col_processos_excluidos.delete_one({"_id": pid})
+    return jsonify(_sem_id_mongo(doc))
 
 
 @app.route("/api/processos/<pid>/dossie", methods=["GET"])

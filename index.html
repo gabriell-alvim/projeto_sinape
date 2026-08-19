@@ -5855,9 +5855,11 @@ async function abrirRelatorioDoDia(){
       (rel.autor?' · por '+esc(rel.autor):'')+'</div>' +
       '<div class="relatorio-corpo">'+esc(rel.conteudo||'')+'</div>' +
       renderizarNovosProcessos(ULTIMO_RELATORIO_NOVOS) +
-      '<div id="dispensados-wrap"></div>';
+      '<div id="dispensados-wrap"></div>' +
+      '<div id="lixeira-processos-wrap"></div>';
     a11yAtualizarItens();
     carregarDispensados();
+    carregarLixeiraProcessos();
   }catch(e){
     area.innerHTML = '<p class="relatorio-vazio">Não foi possível carregar as atualizações: '+esc(e.message)+'</p>';
   }
@@ -5918,6 +5920,65 @@ async function restaurarDispensado(i, btn){
     if(wrap) wrap.outerHTML = renderizarDispensados(ULTIMO_DISPENSADOS);
     if(document.getElementById('modal-relatorio').classList.contains('open')) a11yAtualizarItens(true);
     toast('"'+item.nome+'" volta a aparecer na próxima varredura.');
+  }catch(e){
+    toast('Erro ao restaurar: '+e.message);
+    btn.disabled = false;
+    btn.textContent = textoOriginal;
+  }
+}
+
+/* lixeira de processos excluídos — DELETE /api/processos/<id> hoje só manda
+   pra lá (não apaga anexo nem arquivo nenhum), pra dar suporte a este
+   "Restaurar". Mesmo padrão de carregamento à parte usado pros dispensados
+   logo acima: lista tipicamente vazia, não atrasa a abertura do modal. */
+let ULTIMA_LIXEIRA_PROCESSOS = [];
+async function carregarLixeiraProcessos(){
+  const wrap = document.getElementById('lixeira-processos-wrap');
+  if(!wrap) return;
+  try{
+    const r = await fetch(Store.base + '/processos/excluidos', { headers: Store.headers() });
+    if(!r.ok) throw new Error('Servidor respondeu ' + r.status);
+    ULTIMA_LIXEIRA_PROCESSOS = (await r.json()).processos || [];
+  }catch(e){ ULTIMA_LIXEIRA_PROCESSOS = []; }
+  wrap.outerHTML = renderizarLixeiraProcessos(ULTIMA_LIXEIRA_PROCESSOS);
+  if(document.getElementById('modal-relatorio').classList.contains('open')) a11yAtualizarItens(true);
+}
+function renderizarLixeiraProcessos(itens){
+  if(!itens || !itens.length) return '<div id="lixeira-processos-wrap"></div>';
+  return '<div class="novos-processos" id="lixeira-processos-wrap">' +
+    '<div class="sec-divider" style="margin-top:16px;">🗑️ Processos excluídos</div>' +
+    itens.map((p,i)=>{
+      const icone = p.type==='publico' ? '🏛️' : '🏢';
+      const quando = p.excluidoEm ? new Date(p.excluidoEm).toLocaleString('pt-BR') : '';
+      const detalhe = 'Excluído'+(quando?' em '+esc(quando):'')+(p.excluidoPor?' por '+esc(p.excluidoPor):'');
+      return '<div class="novo-item">' +
+        '<div class="novo-item-nome">'+icone+' '+esc(p.nome)+'</div>' +
+        '<div class="hint" style="margin:-4px 0 8px;">'+detalhe+'</div>' +
+        '<div class="novo-item-acoes">' +
+          '<button class="btn-sm violet" onclick="restaurarProcessoExcluido('+i+', this)">↩ Restaurar</button>' +
+        '</div>' +
+      '</div>';
+    }).join('') +
+  '</div>';
+}
+async function restaurarProcessoExcluido(i, btn){
+  const item = ULTIMA_LIXEIRA_PROCESSOS[i];
+  if(!item) return;
+  const textoOriginal = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = 'Restaurando…';
+  try{
+    const r = await fetch(Store.base + '/processos/excluidos/' + encodeURIComponent(item.id) + '/restaurar', {
+      method:'POST', headers: Store.headers()
+    });
+    const corpo = await r.json().catch(()=>({}));
+    if(!r.ok) throw new Error(corpo.erro || ('Servidor respondeu '+r.status));
+    ULTIMA_LIXEIRA_PROCESSOS.splice(i, 1);
+    const wrap = document.getElementById('lixeira-processos-wrap');
+    if(wrap) wrap.outerHTML = renderizarLixeiraProcessos(ULTIMA_LIXEIRA_PROCESSOS);
+    if(document.getElementById('modal-relatorio').classList.contains('open')) a11yAtualizarItens(true);
+    await recarregarLista(true); // atualiza os contadores/lista de Processos Públicos/Privados, silencioso (fora de foco agora)
+    toast('"'+item.nome+'" restaurado.');
   }catch(e){
     toast('Erro ao restaurar: '+e.message);
     btn.disabled = false;
