@@ -115,20 +115,17 @@ input, select, textarea { font-family:inherit; }
 .sync-pill.busy .sdot { background:#fbbf24; }
 .content { padding:20px 24px 60px; max-width:1160px; margin:0 auto; }
 .view { display:none; }
+/* ── BARRA DE ABAS (fixa, substitui os cards da home) ── */
+.tabs-nav { background:var(--white); border-bottom:1px solid var(--border); padding:0 20px; display:flex; gap:0; overflow-x:auto; position:sticky; top:52px; z-index:90; }
+.tab-btn { padding:12px 18px; font-size:.82rem; font-weight:600; color:var(--slate-mid); border-bottom:2.5px solid transparent; white-space:nowrap; display:inline-flex; align-items:center; gap:6px; background:none; }
+.tab-btn:hover { color:var(--slate); background:var(--bg); }
+.tab-btn.active { color:var(--teal); border-bottom-color:var(--teal-mid); }
+.tab-btn .badge { background:var(--amber-l); color:var(--amber); font-size:.62rem; font-weight:700; padding:2px 7px; border-radius:10px; }
+.tab-btn.active .badge { background:var(--teal-l); color:var(--teal); }
+@media(max-width:640px){ .tabs-nav{ padding:0 8px; } .tab-btn{ padding:10px 12px; font-size:.76rem; } }
 .view.active { display:block; }
 
 /* ── HOME ── */
-.home-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; max-width:760px; margin:28px auto 0; }
-.home-card {
-  background:var(--white); border:1px solid var(--border); border-radius:14px;
-  padding:28px 24px; text-align:center; cursor:pointer; transition:all .15s;
-}
-.home-card:hover { border-color:var(--teal-mid); box-shadow:0 6px 18px rgba(11,61,69,.12); transform:translateY(-2px); }
-.home-card:focus-visible { outline:3px solid var(--teal-mid); outline-offset:2px; }
-.home-card .hc-icon { font-size:2rem; }
-.home-card h3 { font-family:var(--font-display); font-weight:600; margin-top:10px; color:var(--teal); }
-.home-card p { font-size:.8rem; color:var(--slate-mid); margin-top:6px; }
-.home-card .hc-count { display:inline-block; margin-top:12px; background:var(--teal-l); color:var(--teal); font-weight:700; padding:3px 12px; border-radius:14px; font-size:.78rem; }
 .home-actions { display:flex; justify-content:center; margin-top:18px; gap:8px; flex-wrap:wrap; }
 .home-relatorio-row { display:flex; justify-content:center; margin-top:16px; }
 .relatorio-meta { font-size:.76rem; color:var(--slate-mid); margin-bottom:12px; padding-bottom:10px; border-bottom:1px solid var(--border); }
@@ -652,7 +649,6 @@ th.sortable:hover { color:var(--teal-mid); }
   .content { padding:14px 12px 60px; }
 }
 @media (max-width:620px){
-  .home-grid { grid-template-columns:1fr; }
   .field-grid, .field-grid.cols-2 { grid-template-columns:1fr; }
   .field.span2 { grid-column:auto; }
   .breadcrumb { display:none; }
@@ -685,31 +681,26 @@ th.sortable:hover { color:var(--teal-mid); }
   <div class="sync-pill" id="sync-pill"><span class="sdot"></span><span id="sync-text">Iniciando…</span></div>
 </div>
 
+<!-- Barra de abas fixa — substitui os 3 cards que ficavam soltos na home.
+     Sempre visível (menos atrás de um modal aberto), numerada 1-4 em toda
+     tela via a11yAtualizarItens(): dá pra pular direto pra outra área de
+     dentro de um processo aberto, sem precisar apertar Backspace primeiro. -->
+<!-- ids prefixados com "tabnav-" de propósito: "tab-gerencial" já existe como
+     id da aba interna "Gerencial" de dentro de um processo aberto
+     (ABAS_PROCESSO/switchProcessTab) -- reaproveitar o mesmo id aqui ia
+     colidir e quebrar um dos dois silenciosamente (getElementById só acha
+     o primeiro). -->
+<nav class="tabs-nav" id="tabs-nav">
+  <button class="tab-btn" id="tabnav-inicio" onclick="goHome()"><span aria-hidden="true">🏠</span> Início</button>
+  <button class="tab-btn" id="tabnav-publicos" onclick="openList('publico')"><span aria-hidden="true">🏛️</span> Processos Públicos <span class="badge" id="tabcount-publico">0</span></button>
+  <button class="tab-btn" id="tabnav-privados" onclick="openList('privado')"><span aria-hidden="true">🏢</span> Processos Privados <span class="badge" id="tabcount-privado">0</span></button>
+  <button class="tab-btn" id="tabnav-gerencial" onclick="abrirPainelGerencial()"><span aria-hidden="true">📈</span> Painel Gerencial</button>
+</nav>
+
 <div class="content">
 
   <!-- ═══════════ VIEW: HOME ═══════════ -->
   <div class="view active" id="view-home">
-    <div class="home-grid">
-      <div class="home-card" role="button" tabindex="0" aria-label="Processos Públicos"
-           onclick="openList('publico')" onkeydown="a11yAtivarComEnter(event, ()=>openList('publico'))">
-        <div class="hc-icon" aria-hidden="true">🏛️</div>
-        <h3>Processos Públicos: <span id="count-publico">0</span></h3>
-        <p>Pregões, concorrências e dispensas — órgãos e entidades públicas</p>
-      </div>
-      <div class="home-card" role="button" tabindex="0" aria-label="Processos Privados"
-           onclick="openList('privado')" onkeydown="a11yAtivarComEnter(event, ()=>openList('privado'))">
-        <div class="hc-icon" aria-hidden="true">🏢</div>
-        <h3>Processos Privados: <span id="count-privado">0</span></h3>
-        <p>Cartas-convite, RFQs e cotações — concessionárias e empresas</p>
-      </div>
-      <div class="home-card" role="button" tabindex="0" aria-label="Painel Gerencial"
-           onclick="abrirPainelGerencial()" onkeydown="a11yAtivarComEnter(event, abrirPainelGerencial)">
-        <div class="hc-icon" aria-hidden="true">📈</div>
-        <h3>Painel Gerencial</h3>
-        <p>Acompanhamento de demandas, oportunidades, equipe, meta e indicadores</p>
-        <span class="hc-count" id="count-comercial">Demandas, oportunidades, ROI, pipeline…</span>
-      </div>
-    </div>
     <div class="home-relatorio-row" style="flex-direction:column; gap:8px;">
       <button class="btn-outline" id="btn-atualizacoes-dia" onclick="abrirRelatorioDoDia()">📋 Atualizações do dia</button>
       <button class="btn-outline" id="btn-painel-prazos" onclick="abrirPainelPrazos()">⏰ Painel de prazos</button>
@@ -1977,6 +1968,23 @@ function showView(id){
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   updateBreadcrumb();
+  atualizarAbaAtiva();
+}
+/* Marca qual das 4 abas fixas do topo corresponde à tela atual -- chamado
+   de dentro de showView() (ponto único, toda troca de tela passa por ali),
+   então basta 1 lugar pra manter em vez de mexer em cada função que abre
+   uma tela. view-process herda a aba de currentType (setado antes do
+   showView em openProcess) -- abrir um processo público mantém "Processos
+   Públicos" marcada, por exemplo. Sinki não tem aba própria: fica em
+   Início, de onde o botão "Falar com Sinki" vive. */
+function atualizarAbaAtiva(){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  let ativa = 'tabnav-inicio';
+  if(document.getElementById('view-comercial').classList.contains('active')) ativa = 'tabnav-gerencial';
+  else if(currentType==='publico') ativa = 'tabnav-publicos';
+  else if(currentType==='privado') ativa = 'tabnav-privados';
+  const el = document.getElementById(ativa);
+  if(el) el.classList.add('active');
 }
 async function goHome(){
   await encerrarSessaoEdicao();
@@ -2017,16 +2025,12 @@ function updateBreadcrumb(){
 function refreshHomeCounts(){
   const pub = listaResumos.filter(p=>p.type==='publico').length;
   const pri = listaResumos.filter(p=>p.type==='privado').length;
-  document.getElementById('count-publico').textContent = pub;
-  document.getElementById('count-privado').textContent = pri;
-  /* aria-label sobrescreve o texto visível pro leitor de tela -- sem
-     atualizar aqui também, o NVDA continuaria anunciando só "Processos
-     Públicos" (sem a contagem) ao tabular pelo card, mesmo com o número
-     certo na tela. */
-  const cardPub = document.querySelector('.home-card[onclick*="publico"]');
-  const cardPri = document.querySelector('.home-card[onclick*="privado"]');
-  if(cardPub) cardPub.setAttribute('aria-label', 'Processos Públicos: '+pub);
-  if(cardPri) cardPri.setAttribute('aria-label', 'Processos Privados: '+pri);
+  /* As abas agora são <button> de verdade, então o texto visível (nome +
+     badge) já É o nome acessível -- sem o truque de aria-label que os
+     antigos home-cards (divs com role="button") precisavam pra o NVDA não
+     ler o card inteiro. */
+  document.getElementById('tabcount-publico').textContent = pub;
+  document.getElementById('tabcount-privado').textContent = pri;
 }
 
 /* ════════════════════════════════════════════════════════════════
@@ -6988,10 +6992,10 @@ function a11yAtualizarItens(manterNivel, silencioso){
   }
 
   if(document.getElementById('view-home').classList.contains('active')){
+    // Processos Públicos/Privados e Painel Gerencial saíram daqui -- viram
+    // as abas fixas do topo, já cobertas pelo prepend genérico logo abaixo
+    // (fora deste if/else, entra em toda tela). O que sobra é só os atalhos.
     A11Y.todosItens = [
-      {el: document.querySelector('.home-card[onclick*="publico"]'), label:'Processos Públicos: '+(document.getElementById('count-publico')?document.getElementById('count-publico').textContent:'0')},
-      {el: document.querySelector('.home-card[onclick*="privado"]'), label:'Processos Privados: '+(document.getElementById('count-privado')?document.getElementById('count-privado').textContent:'0')},
-      {el: document.querySelector('.home-card[onclick*="abrirPainelGerencial"]'), label:'Painel Gerencial'},
       {el: document.getElementById('btn-notificacoes'), label:'Notificações'},
       {el: document.getElementById('btn-atualizacoes-dia'), label:'Atualizações do dia'},
       {el: document.getElementById('btn-painel-prazos'), label:'Painel de prazos'},
@@ -7160,6 +7164,21 @@ function a11yAtualizarItens(manterNivel, silencioso){
       ].filter(i=>i.el);
     }
   }
+  /* As 4 abas fixas do topo entram numeradas em QUALQUER tela (fora de
+     modal, que já teve seu "return" mais acima) -- de dentro de um processo,
+     ou no meio de uma seção da Análise Crítica, dá pra pular direto pra
+     "Processos Privados" com um número só, sem precisar apertar Backspace
+     repetido até voltar pra Início primeiro. Fica antes do conteúdo
+     específico da tela, então os números do conteúdo sobem 4 posições —
+     mudança de comportamento pedida e confirmada com o Gabriel, não
+     acidental. */
+  const itensAbas = [
+    {el: document.getElementById('tabnav-inicio'), label:'Início'},
+    {el: document.getElementById('tabnav-publicos'), label:'Processos Públicos: '+(document.getElementById('tabcount-publico')?document.getElementById('tabcount-publico').textContent:'0')},
+    {el: document.getElementById('tabnav-privados'), label:'Processos Privados: '+(document.getElementById('tabcount-privado')?document.getElementById('tabcount-privado').textContent:'0')},
+    {el: document.getElementById('tabnav-gerencial'), label:'Painel Gerencial'},
+  ].filter(i=>i.el);
+  A11Y.todosItens = itensAbas.concat(A11Y.todosItens);
   A11Y.pagina = Math.min(A11Y.pagina, Math.max(0, Math.ceil(A11Y.todosItens.length/9)-1));
   a11yRenderizarPagina(silencioso);
   if(_restaurarSecao){
@@ -7295,6 +7314,7 @@ async function init(){
   }
   iniciarPolling();
   updateBreadcrumb();
+  atualizarAbaAtiva();
   a11yAtualizarItens();
   atualizarSino();
 }
