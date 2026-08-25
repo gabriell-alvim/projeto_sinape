@@ -307,7 +307,25 @@ input, select, textarea { font-family:inherit; }
 .list-header h2 { font-family:var(--font-display); font-weight:600; color:var(--teal); font-size:1.25rem; }
 .list-header .lh-actions { display:flex; gap:8px; flex-wrap:wrap; }
 .search-box { border:1px solid var(--border); border-radius:8px; padding:8px 12px; font-size:.82rem; min-width:220px; background:var(--white); }
-.process-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:14px; }
+/* ── KANBAN (lista de processos por fase) ── */
+.kanban-board { display:flex; gap:14px; overflow-x:auto; padding-bottom:10px; align-items:flex-start; }
+.kanban-col {
+  flex:0 0 280px; width:280px; background:var(--surface); border-radius:12px;
+  border-top:4px solid var(--slate-l); padding:12px 10px 10px; max-height:75vh;
+  display:flex; flex-direction:column; transition:outline-color .1s;
+}
+.kanban-col[data-status="em_analise"]     { border-top-color:var(--amber); }
+.kanban-col[data-status="participar"]     { border-top-color:var(--green); }
+.kanban-col[data-status="em_disputa"]     { border-top-color:#0369a1; }
+.kanban-col[data-status="vencido"]        { border-top-color:var(--green); }
+.kanban-col[data-status="perdido"]        { border-top-color:var(--red); }
+.kanban-col.drag-over { outline:2px dashed var(--teal-mid); outline-offset:-2px; }
+.kanban-col-head { display:flex; align-items:center; justify-content:space-between; gap:8px; padding:0 2px 10px; }
+.kanban-col-head h4 { font-size:.8rem; font-weight:700; color:var(--slate); }
+.kanban-col-count { font-size:.66rem; font-weight:700; color:var(--slate-mid); background:var(--white); padding:1px 8px; border-radius:10px; flex-shrink:0; }
+.kanban-col-cards { display:flex; flex-direction:column; gap:10px; overflow-y:auto; min-height:40px; }
+.proc-card.dragging { opacity:.45; }
+.pc-mover { width:100%; font-size:.7rem; border:1px solid var(--border); border-radius:6px; padding:4px 6px; background:var(--white); color:var(--slate-mid); }
 .proc-card {
   background:var(--white); border:1px solid var(--border); border-radius:14px; padding:16px;
   cursor:pointer; transition:all .15s; position:relative; display:flex; flex-direction:column; gap:8px;
@@ -724,7 +742,7 @@ th.sortable:hover { color:var(--teal-mid); }
         <button class="btn-primary" onclick="openNewProcessModal()">+ Novo processo</button>
       </div>
     </div>
-    <div class="process-grid" id="process-grid"></div>
+    <div class="kanban-board" id="process-grid"></div>
     <div class="empty-state" id="empty-state" style="display:none;">
       <div class="icon">📂</div>
       <p>Nenhum processo cadastrado nesta categoria.</p>
@@ -2036,6 +2054,38 @@ function refreshHomeCounts(){
 /* ════════════════════════════════════════════════════════════════
    LISTA DE PROCESSOS
    ════════════════════════════════════════════════════════════════ */
+/* Ordem das colunas do Kanban -- funil natural do processo, com "Não
+   participar" no fim por ser um estado terminal à parte do funil principal. */
+const ORDEM_STATUS_KANBAN = ['pendente','em_analise','participar','em_disputa','vencido','perdido','nao_participar'];
+
+function _procCardHTML(p){
+  const stLabel = STATUS_LABELS[p.status] || (p.status||'—');
+  const dt = p.atualizadoEm ? new Date(p.atualizadoEm) : null;
+  const dataStr = dt ? dt.toLocaleDateString('pt-BR') : '';
+  const horaStr = dt ? dt.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}) : '';
+  const porStr = p.atualizadoPor ? ', por: '+p.atualizadoPor : '';
+  const resumoAtualizacao = dataStr
+    ? 'Atualizado em '+dataStr+' às '+horaStr+'h · '+(p.progress||0)+'% do checklist tratado'+porStr+'.'
+    : (p.progress||0)+'% do checklist tratado.';
+  const opcoesMover = ORDEM_STATUS_KANBAN.map(s=>
+    '<option value="'+s+'"'+(s===(p.status||'pendente')?' selected':'')+'>'+esc(STATUS_LABELS[s])+'</option>'
+  ).join('');
+  return '<button class="pc-del" type="button" aria-label="Excluir processo '+esc(p.nome)+'" title="Excluir processo" onclick="event.stopPropagation();deleteProcess(\''+p.id+'\')">✕</button>' +
+    '<div class="pc-nome">'+esc(p.nome)+'</div>' +
+    '<div class="pc-meta">' +
+      '<span class="chip st-'+esc(p.status||'pendente')+'">'+esc(stLabel)+'</span>' +
+    '</div>' +
+    '<div class="pc-prog"><div class="fill" style="width:'+(p.progress||0)+'%"></div></div>' +
+    '<div class="pc-resumo">'+esc(resumoAtualizacao)+'</div>' +
+    // "Mover para" -- <select> nativo, funciona por teclado/NVDA sem nenhum
+    // código de acessibilidade extra. stopPropagation nos dois eventos pra
+    // não deixar o clique/toque no controle abrir o processo (mesmo cuidado
+    // que o botão de excluir acima já tem).
+    '<select class="pc-mover" aria-label="Mover \''+esc(p.nome)+'\' para outra fase" ' +
+      'onclick="event.stopPropagation()" onmousedown="event.stopPropagation()" ' +
+      'onchange="moverProcessoDeStatus(\''+p.id+'\', this.value)">'+opcoesMover+'</select>';
+}
+
 function renderProcessGrid(silencioso){
   const grid = document.getElementById('process-grid');
   const empty = document.getElementById('empty-state');
@@ -2045,30 +2095,73 @@ function renderProcessGrid(silencioso){
   list.sort((a,b)=>(b.atualizadoEm||0)-(a.atualizadoEm||0));
   grid.innerHTML = '';
   empty.style.display = list.length ? 'none' : 'block';
-  list.forEach(p=>{
-    const card = document.createElement('div');
-    card.className = 'proc-card';
-    card.onclick = ()=>openProcess(p.id);
-    const stLabel = STATUS_LABELS[p.status] || (p.status||'—');
-    const dt = p.atualizadoEm ? new Date(p.atualizadoEm) : null;
-    const dataStr = dt ? dt.toLocaleDateString('pt-BR') : '';
-    const horaStr = dt ? dt.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}) : '';
-    const porStr = p.atualizadoPor ? ', por: '+p.atualizadoPor : '';
-    const resumoAtualizacao = dataStr
-      ? 'Atualizado em '+dataStr+' às '+horaStr+'h · '+(p.progress||0)+'% do checklist tratado'+porStr+'.'
-      : (p.progress||0)+'% do checklist tratado.';
-    card.innerHTML =
-      '<button class="pc-del" type="button" aria-label="Excluir processo '+esc(p.nome)+'" title="Excluir processo" onclick="event.stopPropagation();deleteProcess(\''+p.id+'\')">✕</button>' +
-      '<div class="pc-nome">'+esc(p.nome)+'</div>' +
-      '<div class="pc-meta">' +
-        '<span class="chip st-'+esc(p.status||'pendente')+'">'+esc(stLabel)+'</span>' +
-      '</div>' +
-      '<div class="pc-prog"><div class="fill" style="width:'+(p.progress||0)+'%"></div></div>' +
-      '<div class="pc-resumo">'+esc(resumoAtualizacao)+'</div>';
-    grid.appendChild(card);
+
+  const porStatus = {};
+  ORDEM_STATUS_KANBAN.forEach(s=>{ porStatus[s] = []; });
+  list.forEach(p=>{ (porStatus[p.status] || porStatus.pendente).push(p); });
+
+  ORDEM_STATUS_KANBAN.forEach(status=>{
+    const col = document.createElement('div');
+    col.className = 'kanban-col';
+    col.dataset.status = status;
+    col.ondragover = (e)=>{ e.preventDefault(); col.classList.add('drag-over'); };
+    col.ondragleave = ()=>col.classList.remove('drag-over');
+    col.ondrop = (e)=>{
+      e.preventDefault();
+      col.classList.remove('drag-over');
+      const pid = e.dataTransfer.getData('text/plain');
+      if(pid) moverProcessoDeStatus(pid, status);
+    };
+    const itens = porStatus[status];
+    col.innerHTML =
+      '<div class="kanban-col-head"><h4>'+esc(STATUS_LABELS[status])+'</h4>' +
+        '<span class="kanban-col-count">'+itens.length+'</span></div>' +
+      '<div class="kanban-col-cards"></div>';
+    const wrap = col.querySelector('.kanban-col-cards');
+    itens.forEach(p=>{
+      const card = document.createElement('div');
+      card.className = 'proc-card';
+      card.draggable = true;
+      card.onclick = ()=>openProcess(p.id);
+      card.ondragstart = (e)=>{ e.dataTransfer.setData('text/plain', p.id); card.classList.add('dragging'); };
+      card.ondragend = ()=>card.classList.remove('dragging');
+      card.innerHTML = _procCardHTML(p);
+      wrap.appendChild(card);
+    });
+    grid.appendChild(col);
   });
   renderListBanner();
   a11yAtualizarItens(undefined, silencioso);
+}
+/* Muda a fase de um processo -- pelo <select> "Mover para" (teclado/NVDA)
+   ou soltando o card numa coluna (arrastar com mouse). Atualização
+   otimista (muda local e re-renderiza na hora, desfaz se a API recusar)
+   mesmo padrão já usado nesta sessão pra lixeira/expurgo. PATCH
+   /api/processos/<id> com metaPatch+seVersao já existe e já dispara
+   _sync_oportunidade_do_processo sozinho -- a Oportunidade do Painel
+   Gerencial acompanha sem nenhum código novo no backend. */
+async function moverProcessoDeStatus(pid, novoStatus){
+  const p = listaResumos.find(x=>x.id===pid);
+  if(!p || p.status===novoStatus) return;
+  if(Store.modo!=='api'){ toast('Mover de fase requer o Painel conectado ao backend.'); renderProcessGrid(true); return; }
+  const statusAntigo = p.status;
+  p.status = novoStatus;
+  renderProcessGrid(true);
+  try{
+    const r = await fetch(Store.base + '/processos/' + encodeURIComponent(pid), {
+      method:'PATCH', headers: Store.headers(),
+      body: JSON.stringify({ seVersao: p.versao, metaPatch: { status: novoStatus } })
+    });
+    const corpo = await r.json().catch(()=>({}));
+    if(!r.ok) throw new Error(corpo.erro || ('Servidor respondeu '+r.status));
+    p.versao = corpo.versao;
+    p.atualizadoEm = corpo.atualizadoEm;
+    toast('"'+p.nome+'" movido para "'+STATUS_LABELS[novoStatus]+'".');
+  }catch(e){
+    p.status = statusAntigo;
+    renderProcessGrid(true);
+    toast('Erro ao mover: '+e.message);
+  }
 }
 function renderListBanner(){
   const area = document.getElementById('list-banner-area');
@@ -7016,8 +7109,14 @@ function a11yAtualizarItens(manterNivel, silencioso){
       {el: document.querySelector('.sinki-nova'), label:'Nova conversa'}
     ].filter(i=>i.el);
   } else if(document.getElementById('view-list').classList.contains('active')){
+    // lista achatada, mesma ordem visual (coluna por coluna) -- o Kanban
+    // organiza os cards em colunas por fase, mas ativar um item aqui sempre
+    // fez a mesma coisa (abrir o processo), então a navegação numérica
+    // continua uma lista só. A fase entra no rótulo porque, sem colunas
+    // visuais, é a única forma de saber qual fase cada item está sem abrir.
     A11Y.todosItens = Array.from(document.querySelectorAll('#process-grid .proc-card'))
-      .map(c=>({el:c, label:(c.querySelector('.pc-nome')?.textContent)||'Processo'}));
+      .map(c=>({el:c, label:(c.querySelector('.pc-nome')?.textContent||'Processo') +
+        ' — '+(c.querySelector('.chip')?.textContent||'')}));
   } else if(document.getElementById('view-comercial').classList.contains('active')){
     if(A11Y.nivel==='conteudo' && typeof a11yItensComercial==='function'){
       const itens = a11yItensComercial();
