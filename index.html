@@ -133,6 +133,20 @@ input, select, textarea { font-family:inherit; }
 .tab-btn.active .badge { background:var(--teal-l); color:var(--teal); }
 @media(max-width:640px){ .tabs-nav{ padding:0 8px; } .tab-btn{ padding:10px 12px; font-size:.76rem; } }
 .view.active { display:block; }
+/* ── INÍCIO (view-home) ── */
+.home-hero { text-align:center; padding:32px 20px 8px; }
+.home-hero h1 { font-family:var(--font-display); font-weight:600; color:var(--teal); font-size:1.5rem; margin-bottom:6px; }
+.home-hero p { color:var(--slate-mid); font-size:.9rem; }
+.home-grid { display:flex; flex-wrap:wrap; justify-content:center; gap:18px; padding:24px 20px 40px; max-width:920px; margin:0 auto; }
+.home-card {
+  flex:1 1 240px; max-width:280px; background:var(--white); border:1px solid var(--border); border-radius:14px;
+  padding:26px 20px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:8px;
+  transition:border-color .12s, transform .12s;
+}
+.home-card:hover, .home-card:focus-visible { border-color:var(--teal-mid); transform:translateY(-2px); }
+.home-card-icon { font-size:2.2rem; }
+.home-card-titulo { font-family:var(--font-display); font-weight:600; color:var(--teal); font-size:1.05rem; }
+.home-card-sub { color:var(--slate-mid); font-size:.78rem; line-height:1.5; }
 
 .relatorio-meta { font-size:.76rem; color:var(--slate-mid); margin-bottom:12px; padding-bottom:10px; border-bottom:1px solid var(--border); }
 .relatorio-corpo { font-size:.86rem; color:var(--slate); line-height:1.6; white-space:pre-wrap; }
@@ -746,8 +760,38 @@ th.sortable:hover { color:var(--teal-mid); }
 
 <div class="content">
 
+  <!-- ═══════════ VIEW: INÍCIO ═══════════
+       Tela de entrada de verdade -- só os 3 destinos, nada de conteúdo de
+       nenhum deles junto (nem a barra de fases, que showView() já esconde
+       sozinho por esta view não estar em VIEWS_DATA_SIN). Clicar em DATA SIN
+       aqui é o mesmo abrirDataSin() do app-nav -- os cards só existem pra
+       dar um "onde eu clico primeiro" mais óbvio que só a barra do topo. -->
+  <div class="view active" id="view-home">
+    <div class="home-hero">
+      <h1>DATA SIN · Painel de Licitações</h1>
+      <p>Escolha uma área para continuar.</p>
+    </div>
+    <div class="home-grid">
+      <button class="home-card" onclick="abrirDataSin()">
+        <span class="home-card-icon" aria-hidden="true">🗂️</span>
+        <span class="home-card-titulo">DATA SIN</span>
+        <span class="home-card-sub">Prospecção, validação e documentação dos processos licitatórios</span>
+      </button>
+      <button class="home-card" onclick="abrirPainelGerencial()">
+        <span class="home-card-icon" aria-hidden="true">📈</span>
+        <span class="home-card-titulo">Painel Gerencial</span>
+        <span class="home-card-sub">Oportunidades, indicadores e acompanhamento comercial</span>
+      </button>
+      <button class="home-card" onclick="abrirPainelAtestados()">
+        <span class="home-card-icon" aria-hidden="true">📋</span>
+        <span class="home-card-titulo">Painel de Atestados</span>
+        <span class="home-card-sub">Capacidade técnica da SINAPE (em construção)</span>
+      </button>
+    </div>
+  </div>
+
   <!-- ═══════════ VIEW: LISTA ═══════════ -->
-  <div class="view active" id="view-list">
+  <div class="view" id="view-list">
     <div id="list-banner-area"></div>
     <div class="list-header">
       <h2 id="list-title">Processos</h2>
@@ -2097,7 +2141,16 @@ async function abrirFase(n){
    assim que os outros dois botões do app-nav (Painel Gerencial, Painel de
    Atestados) já se comportam, cada clique leva pro mesmo lugar sempre. */
 async function abrirDataSin(){ await abrirFase(1); }
-async function goHome(){ await abrirFase(1); }
+/* Tela inicial de verdade (view-home) -- só o logo no topbar chega aqui.
+   Diferente de abrirDataSin(): esta NÃO entra em nenhuma das 3 áreas, só
+   mostra os 3 cards de escolha (a barra de fases fica escondida também,
+   por view-home não estar em VIEWS_DATA_SIN). */
+async function goHome(){
+  await encerrarSessaoEdicao();
+  currentType=null; currentProc=null;
+  showView('view-home');
+  a11yAtualizarItens();
+}
 async function abrirPainelAtestados(){
   await encerrarSessaoEdicao();
   currentType=null; currentProc=null;
@@ -2122,6 +2175,10 @@ async function openList(type){
 }
 function updateBreadcrumb(){
   const bc = document.getElementById('breadcrumb');
+  if(document.getElementById('view-home').classList.contains('active')){
+    bc.innerHTML = '';
+    return;
+  }
   if(document.getElementById('view-sinki').classList.contains('active')){
     bc.innerHTML = '<span class="current">Sinki</span>';
     return;
@@ -7018,6 +7075,10 @@ function a11yOndeEstou(){
     a11yAnunciar('Você está numa janela: '+(titulo?titulo.textContent.trim():'sem título')+'.');
     return;
   }
+  if(document.getElementById('view-home').classList.contains('active')){
+    a11yAnunciar('Você está na tela inicial. Escolha DATA SIN, Painel Gerencial ou Painel de Atestados.');
+    return;
+  }
   const nomesFase = { 'view-fase2':'Fase 2 · Validação', 'view-fase3':'Fase 3 · Documentação', 'view-fase4':'Fase 4' };
   const viewAtivo = document.querySelector('.view.active');
   if(viewAtivo && nomesFase[viewAtivo.id]){ a11yAnunciar('Você está na '+nomesFase[viewAtivo.id]+', ainda em construção.'); return; }
@@ -7254,11 +7315,13 @@ function a11yAtualizarItens(manterNivel, silencioso){
     A11Y.nivel = 'conteudo';
   }
 
-  if(document.getElementById('view-fase2').classList.contains('active') ||
+  if(document.getElementById('view-home').classList.contains('active') ||
+     document.getElementById('view-fase2').classList.contains('active') ||
      document.getElementById('view-fase3').classList.contains('active') ||
-     document.getElementById('view-fase4').classList.contains('active')){
-    // telas provisórias, só texto explicando o que vai morar ali -- nada
-    // pra numerar; as abas do prepend genérico logo abaixo já bastam.
+     document.getElementById('view-fase4').classList.contains('active') ||
+     document.getElementById('view-atestados').classList.contains('active')){
+    // telas sem conteúdo próprio pra numerar (início e as provisórias) --
+    // as abas do prepend genérico logo abaixo já bastam.
     A11Y.todosItens = [];
   } else if(document.getElementById('view-sinki').classList.contains('active')){
     A11Y.todosItens = [
@@ -7588,12 +7651,11 @@ async function init(){
   } else {
     setSync('busy','Conectando…');
   }
-  // view-list já vem "active" fixo no HTML (é a tela padrão agora, Fase 1) --
-  // sem isto, currentType ficaria null no primeiro carregamento (só é setado
-  // dentro de openList/abrirFase, que nunca rodam sozinhos aqui) e o filtro
-  // de renderProcessGrid (p.type===currentType) nunca bateria com nada.
-  currentType = 'todos';
-  document.getElementById('list-title').textContent = '🔍 Fase 1 · Prospecção';
+  // view-home é a tela padrão agora (só os 3 cards de escolha) -- currentType
+  // fica null até a pessoa entrar de fato no DATA SIN; recarregarLista()
+  // ainda roda aqui pra badge de contagem (tabcount-fase1) já vir certa
+  // antes mesmo de abrir a Fase 1, mas não desenha o Kanban (view-list nem
+  // está ativa ainda -- renderProcessGrid só roda quando openList chamar).
   try{
     await recarregarLista();
     if(Store.modo==='api') setSync('ok','Nuvem sincronizada');
@@ -7601,8 +7663,11 @@ async function init(){
     if(Store.modo==='api'){ setSync('err','Falha de conexão'); toast('Não foi possível conectar à API: '+e.message); }
   }
   iniciarPolling();
-  updateBreadcrumb();
-  atualizarAbaAtiva();
+  // view-home já vem "active" fixo no HTML, mas só a classe CSS não basta:
+  // é showView() quem esconde o #fases-nav fora do DATA SIN (via
+  // VIEWS_DATA_SIN) e recalcula breadcrumb/aba ativa -- sem chamá-la aqui,
+  // a barra de fases aparecia por cima da tela inicial no primeiro carregamento.
+  showView('view-home');
   a11yAtualizarItens();
   atualizarSino();
 }
