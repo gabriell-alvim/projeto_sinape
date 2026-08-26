@@ -307,25 +307,35 @@ input, select, textarea { font-family:inherit; }
 .list-header h2 { font-family:var(--font-display); font-weight:600; color:var(--teal); font-size:1.25rem; }
 .list-header .lh-actions { display:flex; gap:8px; flex-wrap:wrap; }
 .search-box { border:1px solid var(--border); border-radius:8px; padding:8px 12px; font-size:.82rem; min-width:220px; background:var(--white); }
-/* ── KANBAN (lista de processos por fase) ── */
-.kanban-board { display:flex; gap:14px; overflow-x:auto; padding-bottom:10px; align-items:flex-start; }
+/* ── KANBAN (lista de processos por fase) ──
+   Cabeçalho de cada coluna usa a MESMA cor do chip daquele status (fundo
+   claro + texto na cor forte) -- reaproveita a linguagem visual que já
+   existia em vez de inventar paleta nova, e faz a cor "carregar" a coluna
+   inteira em vez de só uma tarja fininha, que é o que dava a sensação de
+   bagunça (7 caixas cinzas iguais, sem hierarquia nenhuma). Coluna vazia
+   ganha um textinho no lugar de ficar em branco. */
+.kanban-board { display:flex; gap:12px; overflow-x:auto; padding-bottom:10px; align-items:flex-start; }
 .kanban-col {
-  flex:0 0 280px; width:280px; background:var(--surface); border-radius:12px;
-  border-top:4px solid var(--slate-l); padding:12px 10px 10px; max-height:75vh;
+  flex:0 0 264px; width:264px; background:var(--white); border:1px solid var(--border);
+  border-radius:12px; overflow:hidden; max-height:78vh;
   display:flex; flex-direction:column; transition:outline-color .1s;
 }
-.kanban-col[data-status="em_analise"]     { border-top-color:var(--amber); }
-.kanban-col[data-status="participar"]     { border-top-color:var(--green); }
-.kanban-col[data-status="em_disputa"]     { border-top-color:#0369a1; }
-.kanban-col[data-status="vencido"]        { border-top-color:var(--green); }
-.kanban-col[data-status="perdido"]        { border-top-color:var(--red); }
-.kanban-col.drag-over { outline:2px dashed var(--teal-mid); outline-offset:-2px; }
-.kanban-col-head { display:flex; align-items:center; justify-content:space-between; gap:8px; padding:0 2px 10px; }
-.kanban-col-head h4 { font-size:.8rem; font-weight:700; color:var(--slate); }
-.kanban-col-count { font-size:.66rem; font-weight:700; color:var(--slate-mid); background:var(--white); padding:1px 8px; border-radius:10px; flex-shrink:0; }
-.kanban-col-cards { display:flex; flex-direction:column; gap:10px; overflow-y:auto; min-height:40px; }
+.kanban-col-head {
+  display:flex; align-items:center; justify-content:space-between; gap:8px;
+  padding:10px 12px; background:var(--surface); color:var(--slate-mid); flex-shrink:0;
+}
+.kanban-col[data-status="em_analise"]     .kanban-col-head { background:var(--amber-l); color:var(--amber); }
+.kanban-col[data-status="participar"]     .kanban-col-head { background:var(--green-l); color:var(--green); }
+.kanban-col[data-status="em_disputa"]     .kanban-col-head { background:#e0f2fe; color:#0369a1; }
+.kanban-col[data-status="vencido"]        .kanban-col-head { background:var(--green-l); color:var(--green); }
+.kanban-col[data-status="perdido"]        .kanban-col-head { background:var(--red-l); color:var(--red); }
+.kanban-col.drag-over { outline:2px solid var(--teal-mid); outline-offset:-2px; }
+.kanban-col-head h4 { font-size:.78rem; font-weight:700; }
+.kanban-col-count { font-size:.64rem; font-weight:700; background:rgba(255,255,255,.6); padding:1px 8px; border-radius:10px; flex-shrink:0; }
+.kanban-col-cards { display:flex; flex-direction:column; gap:8px; overflow-y:auto; padding:10px; flex:1; }
+.kanban-col-vazia { font-size:.72rem; color:var(--slate-l); text-align:center; padding:14px 4px; }
 .proc-card.dragging { opacity:.45; }
-.pc-mover { width:100%; font-size:.7rem; border:1px solid var(--border); border-radius:6px; padding:4px 6px; background:var(--white); color:var(--slate-mid); }
+.pc-mover { width:100%; font-size:.68rem; border:1px solid var(--border); border-radius:6px; padding:4px 6px; background:var(--surface); color:var(--slate-mid); margin-top:2px; }
 .proc-card {
   background:var(--white); border:1px solid var(--border); border-radius:14px; padding:16px;
   cursor:pointer; transition:all .15s; position:relative; display:flex; flex-direction:column; gap:8px;
@@ -2059,7 +2069,9 @@ function refreshHomeCounts(){
 const ORDEM_STATUS_KANBAN = ['pendente','em_analise','participar','em_disputa','vencido','perdido','nao_participar'];
 
 function _procCardHTML(p){
-  const stLabel = STATUS_LABELS[p.status] || (p.status||'—');
+  // Sem o chip de status aqui de propósito: a COLUNA já diz a fase (cor do
+  // cabeçalho + posição), repetir no card é a mesma informação duas vezes
+  // e foi uma das coisas que deixava o quadro poluído.
   const dt = p.atualizadoEm ? new Date(p.atualizadoEm) : null;
   const dataStr = dt ? dt.toLocaleDateString('pt-BR') : '';
   const horaStr = dt ? dt.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}) : '';
@@ -2072,9 +2084,6 @@ function _procCardHTML(p){
   ).join('');
   return '<button class="pc-del" type="button" aria-label="Excluir processo '+esc(p.nome)+'" title="Excluir processo" onclick="event.stopPropagation();deleteProcess(\''+p.id+'\')">✕</button>' +
     '<div class="pc-nome">'+esc(p.nome)+'</div>' +
-    '<div class="pc-meta">' +
-      '<span class="chip st-'+esc(p.status||'pendente')+'">'+esc(stLabel)+'</span>' +
-    '</div>' +
     '<div class="pc-prog"><div class="fill" style="width:'+(p.progress||0)+'%"></div></div>' +
     '<div class="pc-resumo">'+esc(resumoAtualizacao)+'</div>' +
     // "Mover para" -- <select> nativo, funciona por teclado/NVDA sem nenhum
@@ -2118,6 +2127,9 @@ function renderProcessGrid(silencioso){
         '<span class="kanban-col-count">'+itens.length+'</span></div>' +
       '<div class="kanban-col-cards"></div>';
     const wrap = col.querySelector('.kanban-col-cards');
+    if(!itens.length){
+      wrap.innerHTML = '<div class="kanban-col-vazia">Nenhum processo aqui</div>';
+    }
     itens.forEach(p=>{
       const card = document.createElement('div');
       card.className = 'proc-card';
@@ -7109,14 +7121,18 @@ function a11yAtualizarItens(manterNivel, silencioso){
       {el: document.querySelector('.sinki-nova'), label:'Nova conversa'}
     ].filter(i=>i.el);
   } else if(document.getElementById('view-list').classList.contains('active')){
-    // lista achatada, mesma ordem visual (coluna por coluna) -- o Kanban
-    // organiza os cards em colunas por fase, mas ativar um item aqui sempre
-    // fez a mesma coisa (abrir o processo), então a navegação numérica
-    // continua uma lista só. A fase entra no rótulo porque, sem colunas
-    // visuais, é a única forma de saber qual fase cada item está sem abrir.
+    // lista achatada, coluna por coluna -- ativar um item aqui sempre fez a
+    // mesma coisa (abrir o processo), então a navegação numérica continua
+    // uma lista só. O card não mostra mais o status visualmente (a coluna
+    // já diz isso pela cor/posição), então o rótulo busca a fase no
+    // data-status da própria coluna -- sem isso, quem usa o NVDA perderia
+    // essa informação, que só sighted vê pela cor.
     A11Y.todosItens = Array.from(document.querySelectorAll('#process-grid .proc-card'))
-      .map(c=>({el:c, label:(c.querySelector('.pc-nome')?.textContent||'Processo') +
-        ' — '+(c.querySelector('.chip')?.textContent||'')}));
+      .map(c=>{
+        const col = c.closest('.kanban-col');
+        const fase = col ? (STATUS_LABELS[col.dataset.status] || '') : '';
+        return {el:c, label:(c.querySelector('.pc-nome')?.textContent||'Processo') + (fase?' — '+fase:'')};
+      });
   } else if(document.getElementById('view-comercial').classList.contains('active')){
     if(A11Y.nivel==='conteudo' && typeof a11yItensComercial==='function'){
       const itens = a11yItensComercial();
