@@ -125,9 +125,6 @@ input, select, textarea { font-family:inherit; }
 @media(max-width:640px){ .tabs-nav{ padding:0 8px; } .tab-btn{ padding:10px 12px; font-size:.76rem; } }
 .view.active { display:block; }
 
-/* ── HOME ── */
-.home-actions { display:flex; justify-content:center; margin-top:18px; gap:8px; flex-wrap:wrap; }
-.home-relatorio-row { display:flex; justify-content:center; margin-top:16px; }
 .relatorio-meta { font-size:.76rem; color:var(--slate-mid); margin-bottom:12px; padding-bottom:10px; border-bottom:1px solid var(--border); }
 .relatorio-corpo { font-size:.86rem; color:var(--slate); line-height:1.6; white-space:pre-wrap; }
 .relatorio-vazio { font-size:.86rem; color:var(--slate-mid); text-align:center; padding:24px 10px; }
@@ -709,40 +706,26 @@ th.sortable:hover { color:var(--teal-mid); }
   <div class="sync-pill" id="sync-pill"><span class="sdot"></span><span id="sync-text">Iniciando…</span></div>
 </div>
 
-<!-- Barra de abas fixa — substitui os 3 cards que ficavam soltos na home.
-     Sempre visível (menos atrás de um modal aberto), numerada 1-4 em toda
-     tela via a11yAtualizarItens(): dá pra pular direto pra outra área de
-     dentro de um processo aberto, sem precisar apertar Backspace primeiro. -->
-<!-- ids prefixados com "tabnav-" de propósito: "tab-gerencial" já existe como
-     id da aba interna "Gerencial" de dentro de um processo aberto
-     (ABAS_PROCESSO/switchProcessTab) -- reaproveitar o mesmo id aqui ia
-     colidir e quebrar um dos dois silenciosamente (getElementById só acha
-     o primeiro). -->
+<!-- Barra de abas fixa — organizada pelas FASES do processo de licitação
+     (não mais por tipo público/privado, nem por uma home separada).
+     Sempre visível (menos atrás de um modal aberto), numerada 1-5 em toda
+     tela via a11yAtualizarItens(): dá pra pular direto pra outra fase de
+     dentro de um processo aberto, sem precisar apertar Backspace primeiro.
+     "Opções" reúne o que antes eram os botões soltos da home — é um botão
+     de abrir modal, não uma view; reaproveita o sistema de modal que já
+     existe (inclusive a navegação numérica dele), sem código novo. -->
 <nav class="tabs-nav" id="tabs-nav">
-  <button class="tab-btn" id="tabnav-inicio" onclick="goHome()"><span aria-hidden="true">🏠</span> Início</button>
-  <button class="tab-btn" id="tabnav-publicos" onclick="openList('publico')"><span aria-hidden="true">🏛️</span> Processos Públicos <span class="badge" id="tabcount-publico">0</span></button>
-  <button class="tab-btn" id="tabnav-privados" onclick="openList('privado')"><span aria-hidden="true">🏢</span> Processos Privados <span class="badge" id="tabcount-privado">0</span></button>
-  <button class="tab-btn" id="tabnav-gerencial" onclick="abrirPainelGerencial()"><span aria-hidden="true">📈</span> Painel Gerencial</button>
+  <button class="tab-btn" id="tabnav-fase1" onclick="abrirFase(1)"><span aria-hidden="true">🔍</span> Fase 1 · Prospecção <span class="badge" id="tabcount-fase1">0</span></button>
+  <button class="tab-btn" id="tabnav-fase2" onclick="abrirFase(2)"><span aria-hidden="true">✅</span> Fase 2 · Validação</button>
+  <button class="tab-btn" id="tabnav-fase3" onclick="abrirFase(3)"><span aria-hidden="true">📑</span> Fase 3 · Documentação</button>
+  <button class="tab-btn" id="tabnav-fase4" onclick="abrirFase(4)"><span aria-hidden="true">📌</span> Fase 4</button>
+  <button class="tab-btn" id="tabnav-opcoes" onclick="abrirModal('modal-opcoes')"><span aria-hidden="true">⚙️</span> Opções</button>
 </nav>
 
 <div class="content">
 
-  <!-- ═══════════ VIEW: HOME ═══════════ -->
-  <div class="view active" id="view-home">
-    <div class="home-relatorio-row" style="flex-direction:column; gap:8px;">
-      <button class="btn-outline" id="btn-atualizacoes-dia" onclick="abrirRelatorioDoDia()">📋 Atualizações do dia</button>
-      <button class="btn-outline" id="btn-painel-prazos" onclick="abrirPainelPrazos()">⏰ Painel de prazos</button>
-      <button class="btn-outline" id="btn-painel-gastos" onclick="abrirPainelGastos()">💵 Painel de gastos</button>
-    </div>
-    <div class="home-actions" style="flex-direction:column; align-items:center;">
-      <button class="btn-outline" onclick="copiarPromptIA()">🤖 Copiar prompt p/ IA</button>
-      <button class="btn-outline" id="btn-falar-sinki" onclick="abrirSinki()">💬 Falar com Sinki</button>
-      <button class="btn-outline" id="btn-lixeira" onclick="abrirLixeira()">🗑️ Lixeira</button>
-    </div>
-  </div>
-
   <!-- ═══════════ VIEW: LISTA ═══════════ -->
-  <div class="view" id="view-list">
+  <div class="view active" id="view-list">
     <div id="list-banner-area"></div>
     <div class="list-header">
       <h2 id="list-title">Processos</h2>
@@ -755,9 +738,30 @@ th.sortable:hover { color:var(--teal-mid); }
     <div class="kanban-board" id="process-grid"></div>
     <div class="empty-state" id="empty-state" style="display:none;">
       <div class="icon">📂</div>
-      <p>Nenhum processo cadastrado nesta categoria.</p>
+      <p>Nenhum processo cadastrado ainda.</p>
       <p style="font-size:.76rem;margin-top:6px;">Crie manualmente ou importe um JSON gerado pela IA a partir do edital.</p>
     </div>
+  </div>
+
+  <!-- ═══════════ VIEWS: FASES 2-4 (provisório) ═══════════
+       Ainda não existe um campo de "fase" gravado por processo, nem a
+       lógica de aprovação do Fabrício / comparação de atestados -- isso
+       depende do modelo de atestados que o Gabriel vai trazer. Por ora
+       cada fase é só uma tela explicando o que vai morar ali. -->
+  <div class="view" id="view-fase2">
+    <div class="list-header"><h2>✅ Fase 2 · Validação</h2></div>
+    <p class="relatorio-vazio">Em construção. Aqui vai ficar o que o Fabrício precisa ver pra decidir se a SINAPE participa —
+      incluindo, assim que os atestados estiverem cadastrados, uma comparação automática entre o quantitativo exigido
+      no edital e o que a SINAPE já tem atestado.</p>
+  </div>
+  <div class="view" id="view-fase3">
+    <div class="list-header"><h2>📑 Fase 3 · Documentação</h2></div>
+    <p class="relatorio-vazio">Em construção. É onde a equipe entra depois que o Fabrício aprova a participação, preparando a
+      documentação de habilitação do processo.</p>
+  </div>
+  <div class="view" id="view-fase4">
+    <div class="list-header"><h2>📌 Fase 4</h2></div>
+    <p class="relatorio-vazio">Em construção.</p>
   </div>
 
   <!-- ═══════════ VIEW: PROCESSO ═══════════ -->
@@ -1017,6 +1021,26 @@ th.sortable:hover { color:var(--teal-mid); }
     <div class="modal-actions">
       <button class="btn-ghost" onclick="fecharModal('modal-relatorio')">Fechar</button>
       <button class="btn-primary" id="btn-executar-analise" onclick="executarAnaliseAgora()">▶ Executar análise agora</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: OPÇÕES -- reúne os atalhos que antes ficavam soltos na home.
+     Todos dentro de .modal-actions de propósito: a navegação numérica de
+     modal (a11yAtualizarItens) já lista qualquer botão ali dentro
+     automaticamente, sem precisar de nenhum código de acessibilidade novo. -->
+<div class="modal-overlay" id="modal-opcoes">
+  <div class="modal-box" role="dialog" aria-label="Opções">
+    <h3>⚙️ Opções</h3>
+    <div class="modal-actions" style="flex-direction:column; align-items:stretch; gap:8px;">
+      <button class="btn-outline" onclick="fecharModal('modal-opcoes');abrirPainelGerencial()">📈 Painel Gerencial</button>
+      <button class="btn-outline" onclick="fecharModal('modal-opcoes');abrirRelatorioDoDia()">📋 Atualizações do dia</button>
+      <button class="btn-outline" onclick="fecharModal('modal-opcoes');abrirPainelPrazos()">⏰ Painel de prazos</button>
+      <button class="btn-outline" onclick="fecharModal('modal-opcoes');abrirPainelGastos()">💵 Painel de gastos</button>
+      <button class="btn-outline" onclick="fecharModal('modal-opcoes');copiarPromptIA()">🤖 Copiar prompt p/ IA</button>
+      <button class="btn-outline" onclick="fecharModal('modal-opcoes');abrirSinki()">💬 Falar com Sinki</button>
+      <button class="btn-outline" onclick="fecharModal('modal-opcoes');abrirLixeira()">🗑️ Lixeira</button>
+      <button class="btn-ghost" onclick="fecharModal('modal-opcoes')">Fechar</button>
     </div>
   </div>
 </div>
@@ -1998,37 +2022,47 @@ function showView(id){
   updateBreadcrumb();
   atualizarAbaAtiva();
 }
-/* Marca qual das 4 abas fixas do topo corresponde à tela atual -- chamado
-   de dentro de showView() (ponto único, toda troca de tela passa por ali),
-   então basta 1 lugar pra manter em vez de mexer em cada função que abre
-   uma tela. view-process herda a aba de currentType (setado antes do
-   showView em openProcess) -- abrir um processo público mantém "Processos
-   Públicos" marcada, por exemplo. Sinki não tem aba própria: fica em
-   Início, de onde o botão "Falar com Sinki" vive. */
+/* Marca qual das abas de fase corresponde à tela atual -- chamado de
+   dentro de showView() (ponto único, toda troca de tela passa por ali).
+   Não existe ainda um campo de "fase" gravado por processo (depende do
+   fluxo de aprovação do Fabrício, que ainda vai ser desenhado), então
+   por ora view-list e view-process caem sempre em Fase 1 -- é de lá que
+   se chega neles hoje. Painel Gerencial e Sinki vivem fora das fases
+   (acessados pela janela Opções), então nenhuma aba fica marcada ativa
+   nesses casos. */
 function atualizarAbaAtiva(){
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  let ativa = 'tabnav-inicio';
-  if(document.getElementById('view-comercial').classList.contains('active')) ativa = 'tabnav-gerencial';
-  else if(currentType==='publico') ativa = 'tabnav-publicos';
-  else if(currentType==='privado') ativa = 'tabnav-privados';
-  const el = document.getElementById(ativa);
-  if(el) el.classList.add('active');
+  const porView = { 'view-fase2':'tabnav-fase2', 'view-fase3':'tabnav-fase3', 'view-fase4':'tabnav-fase4' };
+  let ativa = null;
+  const viewAtivo = document.querySelector('.view.active');
+  if(viewAtivo && porView[viewAtivo.id]) ativa = porView[viewAtivo.id];
+  else if(viewAtivo && (viewAtivo.id==='view-list' || viewAtivo.id==='view-process')) ativa = 'tabnav-fase1';
+  if(ativa){ const el = document.getElementById(ativa); if(el) el.classList.add('active'); }
 }
-async function goHome(){
+/* Fase 1 é a lista de processos (todos, público+privado juntos -- o tipo
+   deixou de ser o eixo principal de navegação, é só uma etiqueta no
+   card). Fases 2-4 ainda não têm conteúdo de verdade por trás, só uma
+   tela explicando o que vai morar ali (ver comentário nas views). */
+async function abrirFase(n){
+  if(n===1){ await openList('todos'); return; }
   await encerrarSessaoEdicao();
-  currentType=null; currentProc=null; showView('view-home'); refreshHomeCounts(); a11yAtualizarItens();
+  currentType=null; currentProc=null;
+  showView('view-fase'+n);
+  a11yAtualizarItens();
 }
+async function goHome(){ await abrirFase(1); }
 async function openList(type){
   await encerrarSessaoEdicao();
   currentType = type; currentProc = null;
-  document.getElementById('list-title').textContent = type==='publico' ? '🏛️ Processos Públicos' : '🏢 Processos Privados';
+  document.getElementById('list-title').textContent =
+    type==='todos' ? '🔍 Fase 1 · Prospecção' : (type==='publico' ? '🏛️ Processos Públicos' : '🏢 Processos Privados');
   document.getElementById('search-box').value = '';
   showView('view-list');
   renderProcessGrid();
 }
 function updateBreadcrumb(){
   const bc = document.getElementById('breadcrumb');
-  let html = '<span class="link" onclick="goHome()">Início</span>';
+  let html = '<span class="link" onclick="abrirFase(1)">Fase 1</span>';
   if(document.getElementById('view-sinki').classList.contains('active')){
     bc.innerHTML = html + '<span class="sep">/</span><span class="current">Sinki</span>';
     return;
@@ -2039,7 +2073,14 @@ function updateBreadcrumb(){
       (nome ? '<span class="sep">/</span><span class="current">'+esc(nome)+'</span>' : '');
     return;
   }
-  if(currentType){
+  const porFasePlaceholder = { 'view-fase2':['2','Validação'], 'view-fase3':['3','Documentação'], 'view-fase4':['4',''] };
+  const viewAtivo = document.querySelector('.view.active');
+  if(viewAtivo && porFasePlaceholder[viewAtivo.id]){
+    const [n, nome] = porFasePlaceholder[viewAtivo.id];
+    bc.innerHTML = html + '<span class="sep">/</span><span class="current">Fase '+n+(nome?' · '+nome:'')+'</span>';
+    return;
+  }
+  if(currentType && currentType!=='todos'){
     const label = currentType==='publico' ? 'Processos Públicos' : 'Processos Privados';
     if(currentProc){
       html += '<span class="sep">/</span><span class="link" onclick="openList(\''+currentType+'\')">'+label+'</span>';
@@ -2047,18 +2088,15 @@ function updateBreadcrumb(){
     } else {
       html += '<span class="sep">/</span><span class="current">'+label+'</span>';
     }
+  } else if(currentProc){
+    html += '<span class="sep">/</span><span class="current">'+esc(currentProc.nome)+'</span>';
   }
   bc.innerHTML = html;
 }
 function refreshHomeCounts(){
-  const pub = listaResumos.filter(p=>p.type==='publico').length;
-  const pri = listaResumos.filter(p=>p.type==='privado').length;
-  /* As abas agora são <button> de verdade, então o texto visível (nome +
-     badge) já É o nome acessível -- sem o truque de aria-label que os
-     antigos home-cards (divs com role="button") precisavam pra o NVDA não
-     ler o card inteiro. */
-  document.getElementById('tabcount-publico').textContent = pub;
-  document.getElementById('tabcount-privado').textContent = pri;
+  // Fase 1 mostra todos os processos juntos agora -- um contador só,
+  // não mais um pra público e outro pra privado.
+  document.getElementById('tabcount-fase1').textContent = listaResumos.length;
 }
 
 /* ════════════════════════════════════════════════════════════════
@@ -2082,8 +2120,13 @@ function _procCardHTML(p){
   const opcoesMover = ORDEM_STATUS_KANBAN.map(s=>
     '<option value="'+s+'"'+(s===(p.status||'pendente')?' selected':'')+'>'+esc(STATUS_LABELS[s])+'</option>'
   ).join('');
+  // ícone de tipo no nome -- desde que Fase 1 mistura público e privado
+  // na mesma coluna, é a única pista visual que sobrou de qual é qual
+  // (antes disso ficava implícito por estar na tela "Processos Públicos"
+  // ou "Processos Privados", que não existem mais como telas separadas).
+  const iconeTipo = p.type==='privado' ? '🏢' : '🏛️';
   return '<button class="pc-del" type="button" aria-label="Excluir processo '+esc(p.nome)+'" title="Excluir processo" onclick="event.stopPropagation();deleteProcess(\''+p.id+'\')">✕</button>' +
-    '<div class="pc-nome">'+esc(p.nome)+'</div>' +
+    '<div class="pc-nome"><span aria-hidden="true">'+iconeTipo+'</span> '+esc(p.nome)+'</div>' +
     '<div class="pc-prog"><div class="fill" style="width:'+(p.progress||0)+'%"></div></div>' +
     '<div class="pc-resumo">'+esc(resumoAtualizacao)+'</div>' +
     // "Mover para" -- <select> nativo, funciona por teclado/NVDA sem nenhum
@@ -2099,7 +2142,7 @@ function renderProcessGrid(silencioso){
   const grid = document.getElementById('process-grid');
   const empty = document.getElementById('empty-state');
   const busca = (document.getElementById('search-box').value||'').toLowerCase();
-  let list = listaResumos.filter(p=>p.type===currentType);
+  let list = currentType==='todos' ? listaResumos.slice() : listaResumos.filter(p=>p.type===currentType);
   if(busca) list = list.filter(p => (p.nome+' '+(p.fontes||'')).toLowerCase().includes(busca));
   list.sort((a,b)=>(b.atualizadoEm||0)-(a.atualizadoEm||0));
   grid.innerHTML = '';
@@ -6879,9 +6922,12 @@ function a11yOndeEstou(){
     a11yAnunciar('Você está numa janela: '+(titulo?titulo.textContent.trim():'sem título')+'.');
     return;
   }
-  if(document.getElementById('view-home').classList.contains('active')){ a11yAnunciar('Você está na tela inicial.'); return; }
+  const nomesFase = { 'view-fase2':'Fase 2 · Validação', 'view-fase3':'Fase 3 · Documentação', 'view-fase4':'Fase 4' };
+  const viewAtivo = document.querySelector('.view.active');
+  if(viewAtivo && nomesFase[viewAtivo.id]){ a11yAnunciar('Você está na '+nomesFase[viewAtivo.id]+', ainda em construção.'); return; }
   if(document.getElementById('view-list').classList.contains('active')){
-    a11yAnunciar('Você está na lista de '+(currentType==='publico'?'Processos Públicos':'Processos Privados')+'.');
+    const label = currentType==='publico' ? 'Processos Públicos' : currentType==='privado' ? 'Processos Privados' : 'Fase 1, todos os processos';
+    a11yAnunciar('Você está na lista de '+label+'.');
     return;
   }
   if(document.getElementById('view-process').classList.contains('active')){
@@ -6979,13 +7025,14 @@ function a11yVoltar(){
       a11yAtualizarItens();
       return;
     }
-    a11yAnunciar('Voltar para: '+(currentType==='publico'?'Processos Públicos':'Processos Privados')+'.');
+    const labelTipo = currentType==='publico' ? 'Processos Públicos' : currentType==='privado' ? 'Processos Privados' : 'Fase 1';
+    a11yAnunciar('Voltar para: '+labelTipo+'.');
     openList(currentType);
     return;
   }
   if(document.getElementById('view-list').classList.contains('active')){
-    a11yAnunciar('Voltar para: Início.');
-    goHome();
+    a11yAnunciar('Voltar para: Fase 1.');
+    abrirFase(1);
     return;
   }
   if(document.getElementById('view-comercial').classList.contains('active')){
@@ -6995,11 +7042,17 @@ function a11yVoltar(){
       a11yAtualizarItens(true);
       return;
     }
-    a11yAnunciar('Voltar para: Início.');
-    goHome();
+    a11yAnunciar('Voltar para: Fase 1.');
+    abrirFase(1);
     return;
   }
-  a11yAnunciar('Você já está na tela inicial.');
+  const viewAtivoVoltar = document.querySelector('.view.active');
+  if(viewAtivoVoltar && ['view-fase2','view-fase3','view-fase4'].includes(viewAtivoVoltar.id)){
+    a11yAnunciar('Voltar para: Fase 1.');
+    abrirFase(1);
+    return;
+  }
+  a11yAnunciar('Você já está na Fase 1.');
 }
 function a11yEstaEmCampoEditavel(el){
   if(!el) return false;
@@ -7096,21 +7149,12 @@ function a11yAtualizarItens(manterNivel, silencioso){
     A11Y.nivel = 'conteudo';
   }
 
-  if(document.getElementById('view-home').classList.contains('active')){
-    // Processos Públicos/Privados e Painel Gerencial saíram daqui -- viram
-    // as abas fixas do topo, já cobertas pelo prepend genérico logo abaixo
-    // (fora deste if/else, entra em toda tela). O que sobra é só os atalhos.
-    A11Y.todosItens = [
-      {el: document.getElementById('btn-notificacoes'), label:'Notificações'},
-      {el: document.getElementById('btn-atualizacoes-dia'), label:'Atualizações do dia'},
-      {el: document.getElementById('btn-painel-prazos'), label:'Painel de prazos'},
-      {el: document.getElementById('btn-painel-gastos'), label:'Painel de gastos'},
-      {el: document.querySelector('.home-actions .btn-outline'), label:'Copiar prompt para IA'},
-      {el: document.getElementById('btn-falar-sinki'), label:'Falar com Sinki'},
-      {el: document.getElementById('btn-lixeira'), label:'Lixeira'}
-      // o sino fica escondido na conta compartilhada (que não tem caixa de
-      // entrada); numerar um botão escondido daria uma opção que não foca
-    ].filter(i=>i.el && !i.el.hidden);
+  if(document.getElementById('view-fase2').classList.contains('active') ||
+     document.getElementById('view-fase3').classList.contains('active') ||
+     document.getElementById('view-fase4').classList.contains('active')){
+    // telas provisórias, só texto explicando o que vai morar ali -- nada
+    // pra numerar; as abas do prepend genérico logo abaixo já bastam.
+    A11Y.todosItens = [];
   } else if(document.getElementById('view-sinki').classList.contains('active')){
     A11Y.todosItens = [
       {el: document.querySelector('#sinki-picker-modelo .ai-picker-btn'), label:'Modelo do Sinki'},
@@ -7131,7 +7175,12 @@ function a11yAtualizarItens(manterNivel, silencioso){
       .map(c=>{
         const col = c.closest('.kanban-col');
         const fase = col ? (STATUS_LABELS[col.dataset.status] || '') : '';
-        return {el:c, label:(c.querySelector('.pc-nome')?.textContent||'Processo') + (fase?' — '+fase:'')};
+        // tira o ícone de tipo (🏛️/🏢) do nome -- o leitor de tela lê
+        // como "prédio"/"banco" e só atrapalha, mesmo cuidado já tomado
+        // em outros rótulos deste arquivo.
+        const nome = (c.querySelector('.pc-nome')?.textContent || 'Processo')
+          .replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}]/gu, '').trim();
+        return {el:c, label:nome + (fase?' — '+fase:'')};
       });
   } else if(document.getElementById('view-comercial').classList.contains('active')){
     if(A11Y.nivel==='conteudo' && typeof a11yItensComercial==='function'){
@@ -7288,11 +7337,13 @@ function a11yAtualizarItens(manterNivel, silencioso){
      mudança de comportamento pedida e confirmada com o Gabriel, não
      acidental. */
   const itensAbas = [
-    {el: document.getElementById('tabnav-inicio'), label:'Início'},
-    {el: document.getElementById('tabnav-publicos'), label:'Processos Públicos: '+(document.getElementById('tabcount-publico')?document.getElementById('tabcount-publico').textContent:'0')},
-    {el: document.getElementById('tabnav-privados'), label:'Processos Privados: '+(document.getElementById('tabcount-privado')?document.getElementById('tabcount-privado').textContent:'0')},
-    {el: document.getElementById('tabnav-gerencial'), label:'Painel Gerencial'},
-  ].filter(i=>i.el);
+    {el: document.getElementById('tabnav-fase1'), label:'Fase 1, Prospecção: '+(document.getElementById('tabcount-fase1')?document.getElementById('tabcount-fase1').textContent:'0')+' processo(s)'},
+    {el: document.getElementById('tabnav-fase2'), label:'Fase 2, Validação'},
+    {el: document.getElementById('tabnav-fase3'), label:'Fase 3, Documentação'},
+    {el: document.getElementById('tabnav-fase4'), label:'Fase 4'},
+    {el: document.getElementById('btn-notificacoes'), label:'Notificações'},
+    {el: document.getElementById('tabnav-opcoes'), label:'Opções'},
+  ].filter(i=>i.el && !i.el.hidden);
   A11Y.todosItens = itensAbas.concat(A11Y.todosItens);
   A11Y.pagina = Math.min(A11Y.pagina, Math.max(0, Math.ceil(A11Y.todosItens.length/9)-1));
   a11yRenderizarPagina(silencioso);
@@ -7421,6 +7472,12 @@ async function init(){
   } else {
     setSync('busy','Conectando…');
   }
+  // view-list já vem "active" fixo no HTML (é a tela padrão agora, Fase 1) --
+  // sem isto, currentType ficaria null no primeiro carregamento (só é setado
+  // dentro de openList/abrirFase, que nunca rodam sozinhos aqui) e o filtro
+  // de renderProcessGrid (p.type===currentType) nunca bateria com nada.
+  currentType = 'todos';
+  document.getElementById('list-title').textContent = '🔍 Fase 1 · Prospecção';
   try{
     await recarregarLista();
     if(Store.modo==='api') setSync('ok','Nuvem sincronizada');
