@@ -2065,10 +2065,13 @@ def _rodar_analise_ia(pdfs: list, model: str | None = None, effort: str | None =
     return doc, uso
 
 
-def _preparar_e_inserir_processo(doc: dict) -> dict:
+def _preparar_e_inserir_processo(doc: dict, criar_oportunidade: bool = True) -> dict:
     """Mesma preparação (id, timestamps, versão, defaults) que POST
     /api/processos faz — reaproveitada pela criação manual e pela criação
-    automática a partir da análise de um processo novo do SharePoint."""
+    automática a partir da análise de um processo novo do SharePoint.
+    criar_oportunidade=False é usado por "promover" (Painel Gerencial → DATA
+    SIN): a Oportunidade de origem já existe, então não faz sentido criar uma
+    segunda — quem chama liga o processo novo a ELA na sequência."""
     pid = doc.get("id") or (_slug(doc.get("nome", "")) + "-" + uuid.uuid4().hex[:6])
     agora = _agora_ms()
     doc["id"] = pid
@@ -2089,7 +2092,7 @@ def _preparar_e_inserir_processo(doc: dict) -> dict:
     doc["_id"] = pid
     del doc["id"]
     col_processos.insert_one(doc)
-    _sync_oportunidade_do_processo(doc, criar_se_faltar=True)
+    _sync_oportunidade_do_processo(doc, criar_se_faltar=criar_oportunidade)
     return doc
 
 
@@ -3422,6 +3425,46 @@ def excluir_oportunidade(oid):
     if not r.deleted_count:
         return jsonify({"erro": "Oportunidade não encontrada"}), 404
     return jsonify({"ok": True})
+
+
+@app.route("/api/comercial/oportunidades/<oid>/promover", methods=["POST"])
+def promover_oportunidade(oid):
+    """Caminho inverso de _sync_oportunidade_do_processo: cria um processo na
+    Fase 1 do DATA SIN a partir de uma Oportunidade que nasceu direto no
+    Painel Gerencial (sem processo por trás) e liga os dois pelo processoId —
+    dali em diante, editar o processo atualiza esta MESMA Oportunidade
+    sozinho, como já acontece com quem nasce do lado do processo."""
+    oport = col_comercial_oportunidades.find_one({"_id": oid})
+    if not oport:
+        return jsonify({"erro": "Oportunidade não encontrada"}), 404
+    if oport.get("processoId") and col_processos.find_one({"_id": oport["processoId"]}):
+        # 400, não 409: o front trata status 409 genericamente como conflito de
+        # versão otimista (usado no PATCH de processos) e jogaria fora esta
+        # mensagem específica, mostrando só "conflito" pro usuário
+        return jsonify({"erro": "Esta oportunidade já está ligada a um processo"}), 400
+
+    doc = {
+        "nome": oport.get("objeto") or oport.get("cliente") or "Processo sem nome",
+        "type": "privado" if oport.get("segmento") == "Privado" else "publico",
+        "status": "em_analise",
+        "origem": "comercial",
+        "analise": {
+            "geral_orgao": oport.get("cliente") or "",
+            "geral_objeto": oport.get("objeto") or "",
+            "geral_numero": oport.get("numProposta") or "",
+            "geral_valor": (f"R$ {oport['valorLicitado']:.2f}".replace(".", ",")
+                            if oport.get("valorLicitado") else ""),
+        },
+    }
+    # criar_oportunidade=False: a Oportunidade de origem já existe (é esta
+    # aqui) — sem isto, _preparar_e_inserir_processo criaria uma segunda,
+    # deixando a original órfã e duplicando a linha no Painel Gerencial
+    doc = _preparar_e_inserir_processo(doc, criar_oportunidade=False)
+
+    oport["processoId"] = doc["_id"]
+    col_comercial_oportunidades.replace_one({"_id": oid}, oport)
+
+    return jsonify(_sem_id_mongo(doc)), 201
 
 
 @app.route("/api/comercial/equipe", methods=["GET"])

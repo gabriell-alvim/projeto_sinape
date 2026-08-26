@@ -1942,6 +1942,7 @@ const Store = {
   async criarOportunidade(o){ return this._req('POST','/comercial/oportunidades', o); },
   async salvarOportunidade(id, o){ return this._req('PUT','/comercial/oportunidades/'+encodeURIComponent(id), o); },
   async excluirOportunidade(id){ return this._req('DELETE','/comercial/oportunidades/'+encodeURIComponent(id)); },
+  async promoverOportunidade(id){ return this._req('POST','/comercial/oportunidades/'+encodeURIComponent(id)+'/promover'); },
   async listarEquipeComercial(){ return (await this._req('GET','/comercial/equipe')).equipe || []; },
   async criarPessoaComercial(p){ return this._req('POST','/comercial/equipe', p); },
   async salvarPessoaComercial(id, p){ return this._req('PUT','/comercial/equipe/'+encodeURIComponent(id), p); },
@@ -3539,7 +3540,9 @@ function comTabelaOportunidadesHTML(){
         '<td>'+fmtBRL(o.valorLicitado)+'</td>' +
         '<td>'+tagStatus+'</td>' +
         '<td class="row-actions">' +
-          (o.processoId ? '<button class="btn-sm violet" onclick="openProcess(\''+esc(o.processoId)+'\')" title="Esta oportunidade é ligada a um processo — cliente, objeto, valor e status vêm de lá automaticamente">🔗 Ver processo</button>' : '') +
+          (o.processoId
+            ? '<button class="btn-sm violet" onclick="openProcess(\''+esc(o.processoId)+'\')" title="Esta oportunidade é ligada a um processo — cliente, objeto, valor e status vêm de lá automaticamente">🔗 Ver processo</button>'
+            : '<button class="btn-sm violet" onclick="comPromoverOportunidade(\''+esc(o.id)+'\')" title="Cria um processo na Fase 1 do DATA SIN a partir desta oportunidade e liga os dois — dali em diante, editar o processo atualiza esta linha sozinho">🚀 Promover a processo</button>') +
           '<button class="btn-sm" onclick="comAbrirFormOportunidade(\''+esc(o.id)+'\')">Editar</button>' +
           '<button class="btn-sm danger" onclick="comExcluirOportunidade(\''+esc(o.id)+'\')">Excluir</button></td>' +
       '</tr>';
@@ -3647,6 +3650,23 @@ async function comExcluirOportunidade(id){
     comercialAbrirPagina('oportunidades');
   }catch(e){ toast('Erro ao excluir: '+e.message); }
 }
+/* Caminho inverso do "Ver processo": cria o processo na Fase 1 do DATA SIN
+   a partir desta oportunidade e liga os dois. Fica no Painel Gerencial
+   depois (mesmo padrão de comExcluirOportunidade/comSalvarOportunidade,
+   acima) -- a linha só troca o botão pra "Ver processo"; quem quiser
+   preencher o processo agora clica nele, sem navegação forçada. */
+async function comPromoverOportunidade(id){
+  const o = COM.oportunidades.find(x=>x.id===id);
+  if(!o) return;
+  if(!confirm('Criar um processo na Fase 1 do DATA SIN a partir de "'+(o.objeto||o.cliente||'esta oportunidade')+'"? Ela ficará ligada a ele — editar o processo depois atualiza esta linha sozinho.')) return;
+  try{
+    await Store.promoverOportunidade(id);
+    toast('Processo criado na Fase 1 e ligado a esta oportunidade.');
+    await recarregarLista();
+    await comercialCarregarDados();
+    comercialAbrirPagina('oportunidades');
+  }catch(e){ toast('Erro ao promover: '+e.message); }
+}
 function comRenderTabelaOportunidades(){
   const area = document.getElementById('com-tabela-oportunidades');
   if(area) area.innerHTML = comTabelaOportunidadesHTML();
@@ -3663,8 +3683,13 @@ function a11yItensComercial_oportunidades(){
       const cliente = tr.children[1]?.textContent.trim() || 'oportunidade';
       const data = tr.children[0]?.textContent.trim() || '';
       const nomeBase = cliente+' — '+data;
+      // o mesmo botão .btn-sm.violet vira "Ver processo" OU "Promover a
+      // processo" dependendo se já existe ligação -- o texto dele mesmo
+      // diz qual dos dois é, sem precisar cruzar com COM.oportunidades aqui
+      const botaoLigacao = tr.querySelector('.btn-sm.violet');
+      const jaLigado = botaoLigacao && botaoLigacao.textContent.includes('Ver processo');
       return [
-        {el: tr.querySelector('.btn-sm.violet'), label: 'Ver processo ligado: '+nomeBase},
+        {el: botaoLigacao, label: (jaLigado ? 'Ver processo ligado: ' : 'Promover a processo: ')+nomeBase},
         {el: tr.querySelector('.btn-sm:not(.danger):not(.violet)'), label: 'Editar: '+nomeBase},
         {el: tr.querySelector('.btn-sm.danger'), label: 'Excluir: '+nomeBase},
       ];
