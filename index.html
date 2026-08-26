@@ -2105,6 +2105,13 @@ async function abrirPainelAtestados(){
 }
 async function openList(type){
   await encerrarSessaoEdicao();
+  // 'publico'/'privado' não têm mais tela própria (viraram só o ícone do
+  // card) -- qualquer valor que não seja exatamente um desses dois cai em
+  // 'todos' (Fase 1). Sem essa proteção, um currentType incorreto (ex.: null,
+  // de quando se abre um processo vindo do Painel Gerencial) fazia esta tela
+  // aparecer com o título "Processos Privados" mas a lista vazia, porque o
+  // filtro comparava p.type com um valor que nenhum processo tem.
+  if(type!=='publico' && type!=='privado') type = 'todos';
   currentType = type; currentProc = null;
   document.getElementById('list-title').textContent =
     type==='todos' ? '🔍 Fase 1 · Prospecção' : (type==='publico' ? '🏛️ Processos Públicos' : '🏢 Processos Privados');
@@ -2385,7 +2392,11 @@ async function openProcess(id){
   }catch(e){ toast('Erro ao abrir: '+e.message); return; }
   iniciarSessaoEdicao(currentProc);
   pend = null; salvando = false;
-  currentType = currentProc.type;
+  // currentType NÃO vira o tipo do processo (público/privado): ele é o filtro
+  // da lista de onde se veio (hoje sempre 'todos', a Fase 1). Sobrescrever
+  // aqui fazia "Voltar" (Backspace) e o breadcrumb caírem numa lista
+  // filtrada por tipo que não existe mais como tela própria -- ninguém
+  // conseguia voltar de fato pra Fase 1 depois de abrir um processo.
   currentFilter = 'all';
   showView('view-process');
   switchProcessTab('analise');
@@ -5549,7 +5560,7 @@ async function confirmarImport(){
     fecharModal('modal-import');
     await recarregarLista();
     toast(importPronto.length===1 ? 'Processo importado.' : importPronto.length+' processos importados.');
-    if(importPronto.length===1){ currentType = importPronto[0].type; openProcess(importPronto[0].id); }
+    if(importPronto.length===1){ openProcess(importPronto[0].id); }
     else if(currentType) renderProcessGrid();
   }catch(e){ toast('Erro ao importar: '+e.message); }
   finally{ btn.disabled = false; }
