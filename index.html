@@ -117,6 +117,15 @@ input, select, textarea { font-family:inherit; }
 .view { display:none; }
 /* ── BARRA DE ABAS (fixa, substitui os cards da home) ── */
 .tabs-nav { background:var(--white); border-bottom:1px solid var(--border); padding:0 20px; display:flex; gap:0; overflow-x:auto; position:sticky; top:52px; z-index:90; }
+/* Duas barras empilhadas: #app-nav (as 3 áreas do sistema) fica em cima,
+   #fases-nav (só dentro do DATA SIN) logo abaixo -- position:sticky com
+   top diferente pra não sobrepor uma na outra ao rolar a página. .sub é
+   visualmente mais discreta (fundo cinza claro, texto menor) pra ficar
+   claro que é um nível secundário, subordinado ao app-nav. */
+#app-nav { top:52px; }
+#fases-nav { top:97px; }
+.tabs-nav.sub { background:var(--surface); }
+.tabs-nav.sub .tab-btn { padding:9px 14px; font-size:.76rem; }
 .tab-btn { padding:12px 18px; font-size:.82rem; font-weight:600; color:var(--slate-mid); border-bottom:2.5px solid transparent; white-space:nowrap; display:inline-flex; align-items:center; gap:6px; background:none; }
 .tab-btn:hover { color:var(--slate); background:var(--bg); }
 .tab-btn.active { color:var(--teal); border-bottom-color:var(--teal-mid); }
@@ -714,7 +723,20 @@ th.sortable:hover { color:var(--teal-mid); }
      "Opções" reúne o que antes eram os botões soltos da home — é um botão
      de abrir modal, não uma view; reaproveita o sistema de modal que já
      existe (inclusive a navegação numérica dele), sem código novo. -->
-<nav class="tabs-nav" id="tabs-nav">
+<!-- Nível principal — as 3 grandes áreas do sistema. DATA SIN é quem contém
+     a barra de fases (logo abaixo, só visível quando essa área está ativa);
+     Painel Gerencial e Painel de Atestados são independentes das fases,
+     sempre alcançáveis daqui, sem precisar passar pelo DATA SIN primeiro. -->
+<nav class="tabs-nav" id="app-nav">
+  <button class="tab-btn" id="appnav-datasin" onclick="abrirDataSin()"><span aria-hidden="true">🗂️</span> DATA SIN</button>
+  <button class="tab-btn" id="appnav-gerencial" onclick="abrirPainelGerencial()"><span aria-hidden="true">📈</span> Painel Gerencial</button>
+  <button class="tab-btn" id="appnav-atestados" onclick="abrirPainelAtestados()"><span aria-hidden="true">📋</span> Painel de Atestados</button>
+</nav>
+
+<!-- Barra de fases — só existe dentro do DATA SIN; showView() esconde/mostra
+     sozinho conforme a view ativa (view-list/fase2/3/4/process = mostra;
+     view-comercial/atestados/sinki = esconde). -->
+<nav class="tabs-nav sub" id="fases-nav">
   <button class="tab-btn" id="tabnav-fase1" onclick="abrirFase(1)"><span aria-hidden="true">🔍</span> Fase 1 · Prospecção <span class="badge" id="tabcount-fase1">0</span></button>
   <button class="tab-btn" id="tabnav-fase2" onclick="abrirFase(2)"><span aria-hidden="true">✅</span> Fase 2 · Validação</button>
   <button class="tab-btn" id="tabnav-fase3" onclick="abrirFase(3)"><span aria-hidden="true">📑</span> Fase 3 · Documentação</button>
@@ -762,6 +784,16 @@ th.sortable:hover { color:var(--teal-mid); }
   <div class="view" id="view-fase4">
     <div class="list-header"><h2>📌 Fase 4</h2></div>
     <p class="relatorio-vazio">Em construção.</p>
+  </div>
+
+  <!-- ═══════════ VIEW: PAINEL DE ATESTADOS ═══════════
+       Área própria, fora das fases -- o Gabriel vai trazer o modelo depois.
+       Por enquanto só a tela existe, pra já ter onde chegar pelo menu
+       principal. -->
+  <div class="view" id="view-atestados">
+    <div class="list-header"><h2>📋 Painel de Atestados</h2></div>
+    <p class="relatorio-vazio">Em construção. Vai guardar os atestados de capacidade técnica da SINAPE — o que
+      alimenta a comparação automática com o quantitativo exigido em cada edital, lá na Fase 2 do DATA SIN.</p>
   </div>
 
   <!-- ═══════════ VIEW: PROCESSO ═══════════ -->
@@ -1033,8 +1065,8 @@ th.sortable:hover { color:var(--teal-mid); }
   <div class="modal-box" role="dialog" aria-label="Opções">
     <h3>⚙️ Opções</h3>
     <div class="modal-actions" style="flex-direction:column; align-items:stretch; gap:8px;">
-      <button class="btn-outline" onclick="fecharModal('modal-opcoes');abrirPainelGerencial()">📈 Painel Gerencial</button>
       <button class="btn-outline" onclick="fecharModal('modal-opcoes');abrirRelatorioDoDia()">📋 Atualizações do dia</button>
+      <button class="btn-outline" onclick="fecharModal('modal-opcoes');abrirNotificacoes()">🔔 Notificações</button>
       <button class="btn-outline" onclick="fecharModal('modal-opcoes');abrirPainelPrazos()">⏰ Painel de prazos</button>
       <button class="btn-outline" onclick="fecharModal('modal-opcoes');abrirPainelGastos()">💵 Painel de gastos</button>
       <button class="btn-outline" onclick="fecharModal('modal-opcoes');copiarPromptIA()">🤖 Copiar prompt p/ IA</button>
@@ -2016,28 +2048,37 @@ function setSync(estado, texto){
 /* ════════════════════════════════════════════════════════════════
    NAVEGAÇÃO
    ════════════════════════════════════════════════════════════════ */
+const VIEWS_DATA_SIN = ['view-list','view-fase2','view-fase3','view-fase4','view-process'];
 function showView(id){
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
   document.getElementById(id).classList.add('active');
+  // a barra de fases só faz sentido dentro do DATA SIN -- Painel Gerencial,
+  // Painel de Atestados e Sinki não têm fase nenhuma, então ela some.
+  document.getElementById('fases-nav').style.display = VIEWS_DATA_SIN.includes(id) ? 'flex' : 'none';
   updateBreadcrumb();
   atualizarAbaAtiva();
 }
-/* Marca qual das abas de fase corresponde à tela atual -- chamado de
-   dentro de showView() (ponto único, toda troca de tela passa por ali).
-   Não existe ainda um campo de "fase" gravado por processo (depende do
-   fluxo de aprovação do Fabrício, que ainda vai ser desenhado), então
-   por ora view-list e view-process caem sempre em Fase 1 -- é de lá que
-   se chega neles hoje. Painel Gerencial e Sinki vivem fora das fases
-   (acessados pela janela Opções), então nenhuma aba fica marcada ativa
-   nesses casos. */
+/* Marca a aba ativa nas DUAS barras -- chamado de dentro de showView()
+   (ponto único, toda troca de tela passa por ali). Não existe ainda um
+   campo de "fase" gravado por processo (depende do fluxo de aprovação do
+   Fabrício, que ainda vai ser desenhado), então por ora view-list e
+   view-process caem sempre em Fase 1 -- é de lá que se chega neles hoje. */
 function atualizarAbaAtiva(){
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  const porView = { 'view-fase2':'tabnav-fase2', 'view-fase3':'tabnav-fase3', 'view-fase4':'tabnav-fase4' };
-  let ativa = null;
   const viewAtivo = document.querySelector('.view.active');
-  if(viewAtivo && porView[viewAtivo.id]) ativa = porView[viewAtivo.id];
-  else if(viewAtivo && (viewAtivo.id==='view-list' || viewAtivo.id==='view-process')) ativa = 'tabnav-fase1';
-  if(ativa){ const el = document.getElementById(ativa); if(el) el.classList.add('active'); }
+  if(!viewAtivo) return;
+  if(VIEWS_DATA_SIN.includes(viewAtivo.id)){
+    document.getElementById('appnav-datasin').classList.add('active');
+    const porView = { 'view-fase2':'tabnav-fase2', 'view-fase3':'tabnav-fase3', 'view-fase4':'tabnav-fase4' };
+    const ativaFase = porView[viewAtivo.id] || 'tabnav-fase1'; // view-list e view-process caem aqui
+    const el = document.getElementById(ativaFase);
+    if(el) el.classList.add('active');
+  } else if(viewAtivo.id==='view-comercial'){
+    document.getElementById('appnav-gerencial').classList.add('active');
+  } else if(viewAtivo.id==='view-atestados'){
+    document.getElementById('appnav-atestados').classList.add('active');
+  }
+  // view-sinki não pertence a nenhuma das 3 áreas -- nenhuma aba marcada.
 }
 /* Fase 1 é a lista de processos (todos, público+privado juntos -- o tipo
    deixou de ser o eixo principal de navegação, é só uma etiqueta no
@@ -2050,7 +2091,18 @@ async function abrirFase(n){
   showView('view-fase'+n);
   a11yAtualizarItens();
 }
+/* Entrada da área DATA SIN -- sempre volta pra Fase 1, mesmo que a última
+   coisa vista tenha sido a Fase 3, por exemplo. Simples e previsível: é
+   assim que os outros dois botões do app-nav (Painel Gerencial, Painel de
+   Atestados) já se comportam, cada clique leva pro mesmo lugar sempre. */
+async function abrirDataSin(){ await abrirFase(1); }
 async function goHome(){ await abrirFase(1); }
+async function abrirPainelAtestados(){
+  await encerrarSessaoEdicao();
+  currentType=null; currentProc=null;
+  showView('view-atestados');
+  a11yAtualizarItens();
+}
 async function openList(type){
   await encerrarSessaoEdicao();
   currentType = type; currentProc = null;
@@ -2062,17 +2114,24 @@ async function openList(type){
 }
 function updateBreadcrumb(){
   const bc = document.getElementById('breadcrumb');
-  let html = '<span class="link" onclick="abrirFase(1)">Fase 1</span>';
   if(document.getElementById('view-sinki').classList.contains('active')){
-    bc.innerHTML = html + '<span class="sep">/</span><span class="current">Sinki</span>';
+    bc.innerHTML = '<span class="current">Sinki</span>';
     return;
   }
   if(document.getElementById('view-comercial').classList.contains('active')){
     const nome = (COM_PAGINAS.find(p=>p.id===COM.paginaAtiva)||{}).nome || '';
-    bc.innerHTML = html + '<span class="sep">/</span><span class="link" onclick="abrirPainelGerencial()">Painel Gerencial</span>' +
+    bc.innerHTML = '<span class="link" onclick="abrirPainelGerencial()">Painel Gerencial</span>' +
       (nome ? '<span class="sep">/</span><span class="current">'+esc(nome)+'</span>' : '');
     return;
   }
+  if(document.getElementById('view-atestados').classList.contains('active')){
+    bc.innerHTML = '<span class="current">Painel de Atestados</span>';
+    return;
+  }
+  // daqui pra baixo, sempre dentro do DATA SIN -- raiz do breadcrumb é
+  // "DATA SIN", não mais "Fase 1", já que agora é uma das 3 áreas do app,
+  // não a tela inicial única de antes.
+  let html = '<span class="link" onclick="abrirDataSin()">DATA SIN</span>';
   const porFasePlaceholder = { 'view-fase2':['2','Validação'], 'view-fase3':['3','Documentação'], 'view-fase4':['4',''] };
   const viewAtivo = document.querySelector('.view.active');
   if(viewAtivo && porFasePlaceholder[viewAtivo.id]){
@@ -2088,8 +2147,9 @@ function updateBreadcrumb(){
     } else {
       html += '<span class="sep">/</span><span class="current">'+label+'</span>';
     }
-  } else if(currentProc){
-    html += '<span class="sep">/</span><span class="current">'+esc(currentProc.nome)+'</span>';
+  } else {
+    html += '<span class="sep">/</span><span class="link" onclick="abrirFase(1)">Fase 1</span>';
+    if(currentProc) html += '<span class="sep">/</span><span class="current">'+esc(currentProc.nome)+'</span>';
   }
   bc.innerHTML = html;
 }
@@ -6943,6 +7003,10 @@ function a11yOndeEstou(){
     a11yAnunciar('Você está no Painel Gerencial, página: '+nome+'.');
     return;
   }
+  if(document.getElementById('view-atestados').classList.contains('active')){
+    a11yAnunciar('Você está no Painel de Atestados, ainda em construção.');
+    return;
+  }
   a11yAnunciar('Não foi possível identificar a tela atual.');
 }
 /* lembra, por processo+aba, a última seção visitada (persiste entre sessões) */
@@ -7042,8 +7106,9 @@ function a11yVoltar(){
       a11yAtualizarItens(true);
       return;
     }
-    a11yAnunciar('Voltar para: Fase 1.');
-    abrirFase(1);
+    // Painel Gerencial é uma área irmã do DATA SIN agora, não uma sub-tela
+    // dele -- não tem "voltar" nenhum daqui, é o próprio nível principal.
+    a11yAnunciar('Você já está no nível principal do Painel Gerencial.');
     return;
   }
   const viewAtivoVoltar = document.querySelector('.view.active');
@@ -7052,7 +7117,11 @@ function a11yVoltar(){
     abrirFase(1);
     return;
   }
-  a11yAnunciar('Você já está na Fase 1.');
+  if(viewAtivoVoltar && viewAtivoVoltar.id==='view-atestados'){
+    a11yAnunciar('Você já está no nível principal do Painel de Atestados.');
+    return;
+  }
+  a11yAnunciar('Você já está no nível principal desta área.');
 }
 function a11yEstaEmCampoEditavel(el){
   if(!el) return false;
@@ -7336,13 +7405,24 @@ function a11yAtualizarItens(manterNivel, silencioso){
      específico da tela, então os números do conteúdo sobem 4 posições —
      mudança de comportamento pedida e confirmada com o Gabriel, não
      acidental. */
+  // As 3 áreas (app-nav) entram numeradas em QUALQUER tela. A barra de
+  // fases só existe dentro do DATA SIN, então só entra aqui também quando
+  // é ali que se está -- em Painel Gerencial/Atestados ela nem aparece na
+  // tela (display:none via showView), não faz sentido numerar.
+  const viewAtivoPrepend = document.querySelector('.view.active');
+  const dentroDataSin = viewAtivoPrepend && VIEWS_DATA_SIN.includes(viewAtivoPrepend.id);
   const itensAbas = [
-    {el: document.getElementById('tabnav-fase1'), label:'Fase 1, Prospecção: '+(document.getElementById('tabcount-fase1')?document.getElementById('tabcount-fase1').textContent:'0')+' processo(s)'},
-    {el: document.getElementById('tabnav-fase2'), label:'Fase 2, Validação'},
-    {el: document.getElementById('tabnav-fase3'), label:'Fase 3, Documentação'},
-    {el: document.getElementById('tabnav-fase4'), label:'Fase 4'},
+    {el: document.getElementById('appnav-datasin'), label:'DATA SIN'},
+    {el: document.getElementById('appnav-gerencial'), label:'Painel Gerencial'},
+    {el: document.getElementById('appnav-atestados'), label:'Painel de Atestados'},
+    ...(dentroDataSin ? [
+      {el: document.getElementById('tabnav-fase1'), label:'Fase 1, Prospecção: '+(document.getElementById('tabcount-fase1')?document.getElementById('tabcount-fase1').textContent:'0')+' processo(s)'},
+      {el: document.getElementById('tabnav-fase2'), label:'Fase 2, Validação'},
+      {el: document.getElementById('tabnav-fase3'), label:'Fase 3, Documentação'},
+      {el: document.getElementById('tabnav-fase4'), label:'Fase 4'},
+      {el: document.getElementById('tabnav-opcoes'), label:'Opções'},
+    ] : []),
     {el: document.getElementById('btn-notificacoes'), label:'Notificações'},
-    {el: document.getElementById('tabnav-opcoes'), label:'Opções'},
   ].filter(i=>i.el && !i.el.hidden);
   A11Y.todosItens = itensAbas.concat(A11Y.todosItens);
   A11Y.pagina = Math.min(A11Y.pagina, Math.max(0, Math.ceil(A11Y.todosItens.length/9)-1));
