@@ -290,6 +290,10 @@ def _resumo_do_doc(doc):
         "nome": doc.get("nome") or "(sem nome)",
         "type": doc.get("type") or "publico",
         "status": doc.get("status") or "em_analise",
+        # 1 Prospecção / 2 Validação (Fabrício) / 3 Documentação / 4 (indefinido
+        # ainda) -- processo antigo, gravado antes deste campo existir, entra
+        # como 1 (mesma regra de fallback usada nos outros campos aqui).
+        "fase": int(doc.get("fase") or 1),
         "progress": int(doc.get("progress") or 0),
         "origem": doc.get("origem") or "manual",
         "fontes": doc.get("fontes") or "",

@@ -414,6 +414,16 @@ input, select, textarea { font-family:inherit; }
 .pc-del:hover { background:var(--red-l); color:var(--red); }
 .empty-state { text-align:center; padding:60px 20px; color:var(--slate-l); }
 .empty-state .icon { font-size:2.4rem; margin-bottom:10px; }
+/* ── LISTA DE FASE (Fase 2 · Validação / Fase 3 · Documentação) ──
+   Mais simples que o Kanban da Fase 1 de propósito: aqui não tem sub-status,
+   é só "quem está esperando o quê" -- uma lista vertical de cards com as
+   ações da fase (aprovar/rejeitar/devolver) já à mão, sem precisar abrir
+   o processo pra decidir. */
+.fase-lista { display:flex; flex-direction:column; gap:10px; }
+.fase-item { background:var(--white); border:1px solid var(--border); border-radius:10px; padding:14px 16px; display:flex; flex-direction:column; gap:8px; }
+.fase-item-topo { display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+.fase-item-nome { font-family:var(--font-display); font-weight:600; color:var(--slate); }
+.fase-item-acoes { display:flex; gap:8px; flex-wrap:wrap; }
 .banner-info {
   background:var(--teal-ll); border:1px solid var(--teal-mid); color:var(--teal);
   border-radius:10px; padding:12px 16px; font-size:.82rem; margin-bottom:16px;
@@ -789,8 +799,8 @@ th.sortable:hover { color:var(--teal-mid); }
      view-comercial/atestados/sinki = esconde). -->
 <nav class="tabs-nav sub" id="fases-nav">
   <button class="tab-btn" id="tabnav-fase1" onclick="abrirFase(1)"><span aria-hidden="true">🔍</span> Fase 1 · Prospecção <span class="badge" id="tabcount-fase1">0</span></button>
-  <button class="tab-btn" id="tabnav-fase2" onclick="abrirFase(2)"><span aria-hidden="true">✅</span> Fase 2 · Validação</button>
-  <button class="tab-btn" id="tabnav-fase3" onclick="abrirFase(3)"><span aria-hidden="true">📑</span> Fase 3 · Documentação</button>
+  <button class="tab-btn" id="tabnav-fase2" onclick="abrirFase(2)"><span aria-hidden="true">✅</span> Fase 2 · Validação <span class="badge" id="tabcount-fase2">0</span></button>
+  <button class="tab-btn" id="tabnav-fase3" onclick="abrirFase(3)"><span aria-hidden="true">📑</span> Fase 3 · Documentação <span class="badge" id="tabcount-fase3">0</span></button>
   <button class="tab-btn" id="tabnav-fase4" onclick="abrirFase(4)"><span aria-hidden="true">📌</span> Fase 4</button>
 </nav>
 
@@ -845,22 +855,29 @@ th.sortable:hover { color:var(--teal-mid); }
     </div>
   </div>
 
-  <!-- ═══════════ VIEWS: FASES 2-4 (provisório) ═══════════
-       Ainda não existe um campo de "fase" gravado por processo, nem a
-       lógica de aprovação do Fabrício / comparação de atestados -- isso
-       depende do modelo de atestados que o Gabriel vai trazer. Por ora
-       cada fase é só uma tela explicando o que vai morar ali. -->
+  <!-- ═══════════ VIEW: FASE 2 · VALIDAÇÃO ═══════════
+       Lista os processos que a Fase 1 já mandou pro Fabrício decidir. A
+       comparação automática de quantitativo do edital × atestados da SINAPE
+       ainda depende do modelo de atestados (Gabriel vai trazer depois) --
+       por ora o Fabrício decide olhando o processo, sem esse apoio automático. -->
   <div class="view" id="view-fase2">
     <div class="list-header"><h2>✅ Fase 2 · Validação</h2></div>
-    <p class="relatorio-vazio">Em construção. Aqui vai ficar o que o Fabrício precisa ver pra decidir se a SINAPE participa —
-      incluindo, assim que os atestados estiverem cadastrados, uma comparação automática entre o quantitativo exigido
-      no edital e o que a SINAPE já tem atestado.</p>
+    <p class="relatorio-vazio" id="fase2-vazio" style="display:none;">Nenhum processo aguardando validação no momento.</p>
+    <div class="fase-lista" id="fase2-lista"></div>
   </div>
+
+  <!-- ═══════════ VIEW: FASE 3 · DOCUMENTAÇÃO ═══════════
+       Processos com participação já aprovada pelo Fabrício -- a equipe entra
+       aqui pra preparar a documentação de habilitação (via "Montar dossiê",
+       já dentro do processo). -->
   <div class="view" id="view-fase3">
     <div class="list-header"><h2>📑 Fase 3 · Documentação</h2></div>
-    <p class="relatorio-vazio">Em construção. É onde a equipe entra depois que o Fabrício aprova a participação, preparando a
-      documentação de habilitação do processo.</p>
+    <p class="relatorio-vazio" id="fase3-vazio" style="display:none;">Nenhum processo em documentação no momento.</p>
+    <div class="fase-lista" id="fase3-lista"></div>
   </div>
+
+  <!-- ═══════════ VIEW: FASE 4 (provisório) ═══════════
+       Ainda sem definição do que vai morar aqui. -->
   <div class="view" id="view-fase4">
     <div class="list-header"><h2>📌 Fase 4</h2></div>
     <p class="relatorio-vazio">Em construção.</p>
@@ -885,6 +902,10 @@ th.sortable:hover { color:var(--teal-mid); }
       <button class="main-tab" id="tab-concorrentes" onclick="switchProcessTab('concorrentes')">🔎 Concorrentes</button>
       <button class="main-tab" id="tab-gerencial" onclick="switchProcessTab('gerencial')">📈 Gerencial</button>
     </div>
+    <!-- ações de fase (enviar pra validação / aprovar / rejeitar / devolver) --
+         preenchido por renderFaseActions() conforme o campo "fase" do
+         processo (1=Prospecção, 2=Validação, 3=Documentação). -->
+    <div class="process-actions" id="process-fase-actions"></div>
     <div class="process-actions">
       <button class="btn-dossie" id="btn-montar-dossie" onclick="montarDossie()">📦 Montar dossiê de habilitação</button>
       <span class="dossie-hint" id="dossie-hint">Baixa e organiza a documentação de habilitação do processo em um arquivo .zip.</span>
@@ -2166,16 +2187,18 @@ function atualizarAbaAtiva(){
   }
   // view-sinki não pertence a nenhuma das 3 áreas -- nenhuma aba marcada.
 }
-/* Fase 1 é a lista de processos (todos, público+privado juntos -- o tipo
-   deixou de ser o eixo principal de navegação, é só uma etiqueta no
-   card). Fases 2-4 ainda não têm conteúdo de verdade por trás, só uma
-   tela explicando o que vai morar ali (ver comentário nas views). */
+/* Fase 1 é a lista de processos (público+privado juntos -- o tipo deixou de
+   ser o eixo principal de navegação, é só uma etiqueta no card), filtrada
+   pelo campo fase===1. Fases 2 e 3 têm lista de verdade agora (ver
+   renderFase2/renderFase3); Fase 4 continua sem conteúdo definido. */
 async function abrirFase(n){
   if(n===1){ await openList('todos'); return; }
   await encerrarSessaoEdicao();
   currentType=null; currentProc=null;
   showView('view-fase'+n);
-  a11yAtualizarItens();
+  if(n===2) renderFase2();
+  else if(n===3) renderFase3();
+  else a11yAtualizarItens();
 }
 /* Entrada da área DATA SIN -- sempre volta pra Fase 1, mesmo que a última
    coisa vista tenha sido a Fase 3, por exemplo. Simples e previsível: é
@@ -2260,9 +2283,11 @@ function updateBreadcrumb(){
   bc.innerHTML = html;
 }
 function refreshHomeCounts(){
-  // Fase 1 mostra todos os processos juntos agora -- um contador só,
-  // não mais um pra público e outro pra privado.
-  document.getElementById('tabcount-fase1').textContent = listaResumos.length;
+  // Cada fase mostra só os processos que estão nela de fato (campo "fase",
+  // 1 por padrão pra processo antigo que nunca teve esse campo gravado).
+  document.getElementById('tabcount-fase1').textContent = listaResumos.filter(p=>(p.fase||1)===1).length;
+  document.getElementById('tabcount-fase2').textContent = listaResumos.filter(p=>(p.fase||1)===2).length;
+  document.getElementById('tabcount-fase3').textContent = listaResumos.filter(p=>(p.fase||1)===3).length;
 }
 
 /* ════════════════════════════════════════════════════════════════
@@ -2298,8 +2323,10 @@ function _procCardHTML(p){
     // "Mover para" -- <select> nativo, funciona por teclado/NVDA sem nenhum
     // código de acessibilidade extra. stopPropagation nos dois eventos pra
     // não deixar o clique/toque no controle abrir o processo (mesmo cuidado
-    // que o botão de excluir acima já tem).
-    '<select class="pc-mover" aria-label="Mover \''+esc(p.nome)+'\' para outra fase" ' +
+    // que o botão de excluir acima já tem). Rótulo diz "status", não "fase"
+    // de propósito -- fase agora é outro campo (1-4, topo da tela), esse
+    // select só muda a coluna do Kanban (pendente/em análise/participar/...).
+    '<select class="pc-mover" aria-label="Mudar status de \''+esc(p.nome)+'\'" ' +
       'onclick="event.stopPropagation()" onmousedown="event.stopPropagation()" ' +
       'onchange="moverProcessoDeStatus(\''+p.id+'\', this.value)">'+opcoesMover+'</select>';
 }
@@ -2308,7 +2335,10 @@ function renderProcessGrid(silencioso){
   const grid = document.getElementById('process-grid');
   const empty = document.getElementById('empty-state');
   const busca = (document.getElementById('search-box').value||'').toLowerCase();
-  let list = currentType==='todos' ? listaResumos.slice() : listaResumos.filter(p=>p.type===currentType);
+  // Fase 1 mostra só quem está na fase 1 -- processo enviado pra validação
+  // (fase 2) ou aprovado (fase 3) sai daqui, não fica duplicado nas duas telas.
+  let list = listaResumos.filter(p=>(p.fase||1)===1);
+  if(currentType && currentType!=='todos') list = list.filter(p=>p.type===currentType);
   if(busca) list = list.filter(p => (p.nome+' '+(p.fontes||'')).toLowerCase().includes(busca));
   list.sort((a,b)=>(b.atualizadoEm||0)-(a.atualizadoEm||0));
   grid.innerHTML = '';
@@ -2364,7 +2394,7 @@ function renderProcessGrid(silencioso){
 async function moverProcessoDeStatus(pid, novoStatus){
   const p = listaResumos.find(x=>x.id===pid);
   if(!p || p.status===novoStatus) return;
-  if(Store.modo!=='api'){ toast('Mover de fase requer o Painel conectado ao backend.'); renderProcessGrid(true); return; }
+  if(Store.modo!=='api'){ toast('Mudar de status requer o Painel conectado ao backend.'); renderProcessGrid(true); return; }
   const statusAntigo = p.status;
   p.status = novoStatus;
   renderProcessGrid(true);
@@ -2384,6 +2414,137 @@ async function moverProcessoDeStatus(pid, novoStatus){
     toast('Erro ao mover: '+e.message);
   }
 }
+
+/* ════════════════════════════════════════════════════════════════
+   FASES DO PROCESSO (1 Prospecção → 2 Validação → 3 Documentação)
+   ════════════════════════════════════════════════════════════════
+   Campo novo no processo: "fase" (1-4, padrão 1 pra quem nunca teve esse
+   campo gravado). Reaproveita o mesmo PATCH .../metaPatch que o Kanban já
+   usa pra status -- sem endpoint novo no backend. As 3 funções de ação
+   (enviar/aprovar-ou-rejeitar/devolver) são só um "de-para" de fase (e, na
+   rejeição, também de status) por cima de _mudarFaseProcesso(). */
+function renderFase2(){
+  const area = document.getElementById('fase2-lista');
+  const vazio = document.getElementById('fase2-vazio');
+  const lista = listaResumos.filter(p=>(p.fase||1)===2);
+  vazio.style.display = lista.length ? 'none' : 'block';
+  area.innerHTML = lista.map(p=>{
+    const iconeTipo = p.type==='privado' ? '🏢' : '🏛️';
+    return '<div class="fase-item">' +
+      '<div class="fase-item-topo">' +
+        '<span class="fase-item-nome">'+iconeTipo+' '+esc(p.nome)+'</span>' +
+        '<span class="chip st-'+esc(p.status||'pendente')+'">'+esc(STATUS_LABELS[p.status]||p.status||'')+'</span>' +
+      '</div>' +
+      '<div class="fase-item-acoes">' +
+        '<button class="btn-sm" onclick="openProcess(\''+p.id+'\')">Ver processo</button>' +
+        '<button class="btn-sm violet" onclick="aprovarParticipacao(\''+p.id+'\')">✅ Aprovar — enviar pra Fase 3</button>' +
+        '<button class="btn-sm danger" onclick="rejeitarParticipacao(\''+p.id+'\')">❌ Rejeitar — volta pra Fase 1</button>' +
+      '</div></div>';
+  }).join('');
+  a11yAtualizarItens(undefined, true);
+}
+function renderFase3(){
+  const area = document.getElementById('fase3-lista');
+  const vazio = document.getElementById('fase3-vazio');
+  const lista = listaResumos.filter(p=>(p.fase||1)===3);
+  vazio.style.display = lista.length ? 'none' : 'block';
+  area.innerHTML = lista.map(p=>{
+    const iconeTipo = p.type==='privado' ? '🏢' : '🏛️';
+    return '<div class="fase-item">' +
+      '<div class="fase-item-topo">' +
+        '<span class="fase-item-nome">'+iconeTipo+' '+esc(p.nome)+'</span>' +
+        '<span class="chip st-'+esc(p.status||'pendente')+'">'+esc(STATUS_LABELS[p.status]||p.status||'')+'</span>' +
+      '</div>' +
+      '<div class="fase-item-acoes">' +
+        '<button class="btn-sm" onclick="openProcess(\''+p.id+'\')">Ver processo</button>' +
+        '<button class="btn-sm violet" onclick="devolverParaValidacao(\''+p.id+'\')">🔙 Devolver para validação (Fase 2)</button>' +
+      '</div></div>';
+  }).join('');
+  a11yAtualizarItens(undefined, true);
+}
+/* Mostra, dentro do processo aberto, a ação certa pra fase em que ele está --
+   assim dá pra decidir sem precisar sair do processo e voltar pra lista da
+   fase. Chamado por openProcess() e sempre que a própria fase muda. */
+function renderFaseActions(){
+  const area = document.getElementById('process-fase-actions');
+  if(!area || !currentProc) return;
+  const fase = currentProc.fase || 1;
+  const id = currentProc.id;
+  if(fase===1){
+    area.innerHTML = '<button class="btn-outline" onclick="enviarParaValidacao(\''+id+'\')">➡️ Enviar para validação (Fase 2)</button>';
+  } else if(fase===2){
+    area.innerHTML =
+      '<button class="btn-outline" onclick="aprovarParticipacao(\''+id+'\')">✅ Aprovar — enviar pra Fase 3</button> ' +
+      '<button class="btn-outline" onclick="rejeitarParticipacao(\''+id+'\')">❌ Rejeitar — volta pra Fase 1</button>';
+  } else if(fase===3){
+    area.innerHTML = '<button class="btn-outline" onclick="devolverParaValidacao(\''+id+'\')">🔙 Devolver para validação (Fase 2)</button>';
+  } else {
+    area.innerHTML = '';
+  }
+}
+function refreshTudoFases(){
+  if(document.getElementById('view-list').classList.contains('active')) renderProcessGrid(true);
+  if(document.getElementById('view-fase2').classList.contains('active')) renderFase2();
+  if(document.getElementById('view-fase3').classList.contains('active')) renderFase3();
+  refreshHomeCounts();
+}
+/* Atualização otimista (mesmo padrão do resto do arquivo): muda local +
+   re-renderiza na hora, desfaz e mostra erro se o PATCH falhar. Atualiza
+   tanto a cópia em listaResumos (usada pelas listas) quanto currentProc,
+   caso a mudança tenha vindo de dentro do próprio processo aberto. */
+async function _mudarFaseProcesso(pid, novaFase, msgSucesso, novoStatus){
+  if(Store.modo!=='api'){ toast('Mudar de fase requer o Painel conectado ao backend.'); return; }
+  const p = listaResumos.find(x=>x.id===pid);
+  const noProcessoAberto = currentProc && currentProc.id===pid;
+  const versao = p ? p.versao : (noProcessoAberto ? currentProc.versao : null);
+  if(versao==null) return;
+  const faseAntiga = p ? p.fase : (noProcessoAberto ? currentProc.fase : null);
+  const statusAntigo = p ? p.status : (noProcessoAberto ? currentProc.status : null);
+  if(p){ p.fase = novaFase; if(novoStatus) p.status = novoStatus; }
+  if(noProcessoAberto){ currentProc.fase = novaFase; if(novoStatus) currentProc.status = novoStatus; }
+  refreshTudoFases();
+  if(noProcessoAberto) renderFaseActions();
+  try{
+    const metaPatch = { fase: novaFase };
+    if(novoStatus) metaPatch.status = novoStatus;
+    const r = await fetch(Store.base + '/processos/' + encodeURIComponent(pid), {
+      method:'PATCH', headers: Store.headers(),
+      body: JSON.stringify({ seVersao: versao, metaPatch })
+    });
+    const corpo = await r.json().catch(()=>({}));
+    if(!r.ok) throw new Error(corpo.erro || ('Servidor respondeu '+r.status));
+    if(p){ p.versao = corpo.versao; p.atualizadoEm = corpo.atualizadoEm; }
+    if(noProcessoAberto){ currentProc.versao = corpo.versao; currentProc.atualizadoEm = corpo.atualizadoEm; }
+    toast(msgSucesso);
+  }catch(e){
+    if(p){ p.fase = faseAntiga; p.status = statusAntigo; }
+    if(noProcessoAberto){ currentProc.fase = faseAntiga; currentProc.status = statusAntigo; }
+    refreshTudoFases();
+    if(noProcessoAberto) renderFaseActions();
+    toast('Erro ao mudar de fase: '+e.message);
+  }
+}
+function _nomeDoProcesso(pid){
+  const p = listaResumos.find(x=>x.id===pid) || (currentProc && currentProc.id===pid ? currentProc : null);
+  return p ? p.nome : 'este processo';
+}
+async function enviarParaValidacao(pid){
+  if(!confirm('Enviar "'+_nomeDoProcesso(pid)+'" para a Fase 2 (Validação do Fabrício)?')) return;
+  await _mudarFaseProcesso(pid, 2, 'Processo enviado para a Fase 2 (Validação).');
+}
+async function aprovarParticipacao(pid){
+  if(!confirm('Aprovar a participação em "'+_nomeDoProcesso(pid)+'" e enviar para a Fase 3 (Documentação)?')) return;
+  await _mudarFaseProcesso(pid, 3, 'Participação aprovada — processo enviado para a Fase 3.');
+}
+async function rejeitarParticipacao(pid){
+  if(!confirm('Rejeitar a participação em "'+_nomeDoProcesso(pid)+'"? O processo volta para a Fase 1, marcado como "Não participar".')) return;
+  await _mudarFaseProcesso(pid, 1, 'Participação rejeitada — processo voltou para a Fase 1.', 'nao_participar');
+}
+async function devolverParaValidacao(pid){
+  if(!confirm('Devolver "'+_nomeDoProcesso(pid)+'" para a Fase 2 (Validação)?')) return;
+  await _mudarFaseProcesso(pid, 2, 'Processo devolvido para a Fase 2 (Validação).');
+}
+
 function renderListBanner(){
   const area = document.getElementById('list-banner-area');
   area.innerHTML = '';
@@ -2446,7 +2607,7 @@ async function confirmNewProcess(){
   }catch(e){ toast('Erro ao criar: '+e.message); }
 }
 function novoProcessoVazio(nome, tipo, origem){
-  return { id: uid(nome), nome, type: tipo, status:'em_analise', progress:0, origem: origem||'manual',
+  return { id: uid(nome), nome, type: tipo, status:'em_analise', fase:1, progress:0, origem: origem||'manual',
            fontes:'', criadoEm:Date.now(), atualizadoEm:Date.now(), atualizadoPor:CONFIG.USUARIO||'',
            versao:1, schemaCustom:null, analise:{}, checklist:{}, exigencias:[] };
 }
@@ -2510,6 +2671,7 @@ async function openProcess(id){
   buildAnalise();
   buildExigencias();
   buildChecklist();
+  renderFaseActions();
   setSaveStatus('Pronto','');
   a11yAtualizarItens();
 }
@@ -7133,9 +7295,20 @@ function a11yOndeEstou(){
     a11yAnunciar('Você está na tela inicial. Escolha DATA SIN, Painel Gerencial ou Painel de Atestados.');
     return;
   }
-  const nomesFase = { 'view-fase2':'Fase 2 · Validação', 'view-fase3':'Fase 3 · Documentação', 'view-fase4':'Fase 4' };
-  const viewAtivo = document.querySelector('.view.active');
-  if(viewAtivo && nomesFase[viewAtivo.id]){ a11yAnunciar('Você está na '+nomesFase[viewAtivo.id]+', ainda em construção.'); return; }
+  if(document.getElementById('view-fase2').classList.contains('active')){
+    const n = document.querySelectorAll('#fase2-lista .fase-item').length;
+    a11yAnunciar('Você está na Fase 2, Validação. '+n+' processo(s) aguardando decisão do Fabrício.');
+    return;
+  }
+  if(document.getElementById('view-fase3').classList.contains('active')){
+    const n = document.querySelectorAll('#fase3-lista .fase-item').length;
+    a11yAnunciar('Você está na Fase 3, Documentação. '+n+' processo(s) em preparação de documentos.');
+    return;
+  }
+  if(document.getElementById('view-fase4').classList.contains('active')){
+    a11yAnunciar('Você está na Fase 4, ainda em construção.');
+    return;
+  }
   if(document.getElementById('view-list').classList.contains('active')){
     const label = currentType==='publico' ? 'Processos Públicos' : currentType==='privado' ? 'Processos Privados' : 'Fase 1, todos os processos';
     a11yAnunciar('Você está na lista de '+label+'.');
@@ -7415,10 +7588,11 @@ function a11yAtualizarItens(manterNivel, silencioso){
     return;
   }
   if(A11Y.navMode === 'fases'){
+    const contagem = id => document.getElementById(id) ? document.getElementById(id).textContent : '0';
     A11Y.todosItens = [
-      {el: document.getElementById('tabnav-fase1'), label:'Fase 1, Prospecção: '+(document.getElementById('tabcount-fase1')?document.getElementById('tabcount-fase1').textContent:'0')+' processo(s)'},
-      {el: document.getElementById('tabnav-fase2'), label:'Fase 2, Validação'},
-      {el: document.getElementById('tabnav-fase3'), label:'Fase 3, Documentação'},
+      {el: document.getElementById('tabnav-fase1'), label:'Fase 1, Prospecção: '+contagem('tabcount-fase1')+' processo(s)'},
+      {el: document.getElementById('tabnav-fase2'), label:'Fase 2, Validação: '+contagem('tabcount-fase2')+' processo(s)'},
+      {el: document.getElementById('tabnav-fase3'), label:'Fase 3, Documentação: '+contagem('tabcount-fase3')+' processo(s)'},
       {el: document.getElementById('tabnav-fase4'), label:'Fase 4'},
     ].filter(i=>i.el && !i.el.hidden);
     a11yRenderizarPagina(silencioso);
@@ -7440,9 +7614,32 @@ function a11yAtualizarItens(manterNivel, silencioso){
     A11Y.todosItens = Array.from(document.querySelectorAll('#view-home .home-card')).map(el=>({
       el, label: (el.querySelector('.home-card-titulo')||{}).textContent || 'Área'
     }));
-  } else if(document.getElementById('view-fase2').classList.contains('active') ||
-     document.getElementById('view-fase3').classList.contains('active') ||
-     document.getElementById('view-fase4').classList.contains('active') ||
+  } else if(document.getElementById('view-fase2').classList.contains('active')){
+    // um item por processo esperando validação: abrir/aprovar/rejeitar --
+    // igual ao padrão já usado nas linhas de tabela (Oportunidades, Equipe).
+    A11Y.todosItens = Array.from(document.querySelectorAll('#fase2-lista .fase-item')).flatMap(item=>{
+      // tira o ícone de tipo (🏛️/🏢) do nome -- mesmo cuidado já tomado em
+      // outros rótulos deste arquivo, senão o leitor de tela lê "prédio"/"banco"
+      const nome = ((item.querySelector('.fase-item-nome')||{}).textContent || 'Processo')
+        .replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}]/gu, '').trim();
+      return [
+        {el: item.querySelector('.btn-sm:not(.violet):not(.danger)'), label:'Ver processo: '+nome},
+        {el: item.querySelector('.btn-sm.violet'), label:'Aprovar participação: '+nome},
+        {el: item.querySelector('.btn-sm.danger'), label:'Rejeitar participação: '+nome},
+      ];
+    }).filter(i=>i.el);
+  } else if(document.getElementById('view-fase3').classList.contains('active')){
+    A11Y.todosItens = Array.from(document.querySelectorAll('#fase3-lista .fase-item')).flatMap(item=>{
+      // tira o ícone de tipo (🏛️/🏢) do nome -- mesmo cuidado já tomado em
+      // outros rótulos deste arquivo, senão o leitor de tela lê "prédio"/"banco"
+      const nome = ((item.querySelector('.fase-item-nome')||{}).textContent || 'Processo')
+        .replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}]/gu, '').trim();
+      return [
+        {el: item.querySelector('.btn-sm:not(.violet)'), label:'Ver processo: '+nome},
+        {el: item.querySelector('.btn-sm.violet'), label:'Devolver para validação: '+nome},
+      ];
+    }).filter(i=>i.el);
+  } else if(document.getElementById('view-fase4').classList.contains('active') ||
      document.getElementById('view-atestados').classList.contains('active')){
     // telas provisórias de verdade, sem conteúdo nenhum ainda -- pra chegar
     // na topbar/fases dali é Ctrl+Espaço, não numeração direta.
@@ -7460,19 +7657,21 @@ function a11yAtualizarItens(manterNivel, silencioso){
     // lista achatada, coluna por coluna -- ativar um item aqui sempre fez a
     // mesma coisa (abrir o processo), então a navegação numérica continua
     // uma lista só. O card não mostra mais o status visualmente (a coluna
-    // já diz isso pela cor/posição), então o rótulo busca a fase no
+    // já diz isso pela cor/posição), então o rótulo busca o status no
     // data-status da própria coluna -- sem isso, quem usa o NVDA perderia
-    // essa informação, que só sighted vê pela cor.
+    // essa informação, que só sighted vê pela cor. Chama de "status", não
+    // "fase", pra não confundir com o campo fase (1-4) que agora existe
+    // de verdade no processo.
     A11Y.todosItens = Array.from(document.querySelectorAll('#process-grid .proc-card'))
       .map(c=>{
         const col = c.closest('.kanban-col');
-        const fase = col ? (STATUS_LABELS[col.dataset.status] || '') : '';
+        const statusLabel = col ? (STATUS_LABELS[col.dataset.status] || '') : '';
         // tira o ícone de tipo (🏛️/🏢) do nome -- o leitor de tela lê
         // como "prédio"/"banco" e só atrapalha, mesmo cuidado já tomado
         // em outros rótulos deste arquivo.
         const nome = (c.querySelector('.pc-nome')?.textContent || 'Processo')
           .replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}]/gu, '').trim();
-        return {el:c, label:nome + (fase?' — '+fase:'')};
+        return {el:c, label:nome + (statusLabel?' — '+statusLabel:'')};
       });
   } else if(document.getElementById('view-comercial').classList.contains('active')){
     if(A11Y.nivel==='conteudo' && typeof a11yItensComercial==='function'){
