@@ -2983,6 +2983,16 @@ def _sinki_rodar_ferramenta(nome: str, entrada: dict, modelo_usado: str = ""):
         if entrada.get("status"):
             mudanca["status"] = entrada["status"]
         col_processos.update_one({"_id": doc["_id"]}, {"$set": mudanca})
+        # a Oportunidade ligada (se houver) também precisa saber -- é a mesma
+        # sincronia que o PATCH da tela já dispara sozinho a cada escrita em
+        # col_processos; esta ferramenta escrevia direto no Mongo por fora
+        # dela, então o Sinki mudando status/campos aqui deixava a Oportunidade
+        # do Painel Gerencial desatualizada (nome/valor/status defasados) sem
+        # nenhum aviso.
+        doc.setdefault("analise", {}).update(campos)
+        if entrada.get("status"):
+            doc["status"] = entrada["status"]
+        _sync_oportunidade_do_processo(doc)
         quais = ", ".join(list(campos)[:6]) + ("…" if len(campos) > 6 else "")
         return ({"ok": True, "campos_gravados": list(campos)},
                 f"Preencheu {len(campos)} campo(s) em “{doc.get('nome')}”: {quais}")
