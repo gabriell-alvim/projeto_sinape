@@ -7427,13 +7427,20 @@ function a11yAtualizarItens(manterNivel, silencioso){
     A11Y.nivel = 'conteudo';
   }
 
-  if(document.getElementById('view-home').classList.contains('active') ||
-     document.getElementById('view-fase2').classList.contains('active') ||
+  if(document.getElementById('view-home').classList.contains('active')){
+    // a tela inicial só TEM os 3 cards -- ao contrário das telas provisórias
+    // abaixo, aqui não faz sentido ficar sem nada numerado (era exatamente
+    // isso que causava "0 opções disponíveis" ao sair do modo de navegação
+    // bem na tela inicial): os cards SÃO o conteúdo desta tela.
+    A11Y.todosItens = Array.from(document.querySelectorAll('#view-home .home-card')).map(el=>({
+      el, label: (el.querySelector('.home-card-titulo')||{}).textContent || 'Área'
+    }));
+  } else if(document.getElementById('view-fase2').classList.contains('active') ||
      document.getElementById('view-fase3').classList.contains('active') ||
      document.getElementById('view-fase4').classList.contains('active') ||
      document.getElementById('view-atestados').classList.contains('active')){
-    // telas sem conteúdo próprio pra numerar (início e as provisórias) --
-    // pra chegar na topbar/fases agora é Ctrl+Espaço, não numeração direta.
+    // telas provisórias de verdade, sem conteúdo nenhum ainda -- pra chegar
+    // na topbar/fases dali é Ctrl+Espaço, não numeração direta.
     A11Y.todosItens = [];
   } else if(document.getElementById('view-sinki').classList.contains('active')){
     A11Y.todosItens = [
