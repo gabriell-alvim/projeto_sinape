@@ -761,6 +761,7 @@ th.sortable:hover { color:var(--teal-mid); }
     <span class="quem-sou" id="quem-sou" role="status"></span>
     <button class="btn-tb topbar-sino" id="btn-notificacoes" onclick="abrirNotificacoes()"
             aria-label="Notificações">🔔<span class="sino-num" id="sino-num" hidden></span></button>
+    <button class="btn-tb" id="btn-opcoes" onclick="abrirModal('modal-opcoes')">⚙️ Opções</button>
     <a class="btn-tb" href="/logout">🚪 Sair</a>
   </div>
 </div>
@@ -791,7 +792,6 @@ th.sortable:hover { color:var(--teal-mid); }
   <button class="tab-btn" id="tabnav-fase2" onclick="abrirFase(2)"><span aria-hidden="true">✅</span> Fase 2 · Validação</button>
   <button class="tab-btn" id="tabnav-fase3" onclick="abrirFase(3)"><span aria-hidden="true">📑</span> Fase 3 · Documentação</button>
   <button class="tab-btn" id="tabnav-fase4" onclick="abrirFase(4)"><span aria-hidden="true">📌</span> Fase 4</button>
-  <button class="tab-btn" id="tabnav-opcoes" onclick="abrirModal('modal-opcoes')"><span aria-hidden="true">⚙️</span> Opções</button>
 </nav>
 
 <div class="content">
@@ -1059,6 +1059,7 @@ th.sortable:hover { color:var(--teal-mid); }
       <b>1–9</b> — 1º toque seleciona, 2º toque (ou Enter) ativa<br>
       <b>Enter</b> — ativa a opção selecionada / avança pro próximo nível<br>
       <b>Backspace</b> — volta um nível (ou fecha esta janela)<br>
+      <b>Ctrl+Espaço</b> — modo de navegação: 1º toque numera os itens principais (DATA SIN, Painel Gerencial, Painel de Atestados, Notificações, Opções); 2º toque, dentro do DATA SIN, numera as fases; Backspace sai do modo<br>
       <b>, do numérico</b> — próxima página (mais de 9 opções)<br>
       <b>0 do numérico</b> — página anterior<br>
       <b>Ctrl+Alt+I</b> — identificação do processo aberto<br>
@@ -2136,6 +2137,10 @@ function showView(id){
   // a barra de fases só faz sentido dentro do DATA SIN -- Painel Gerencial,
   // Painel de Atestados e Sinki não têm fase nenhuma, então ela some.
   document.getElementById('fases-nav').style.display = VIEWS_DATA_SIN.includes(id) ? 'flex' : 'none';
+  // toda troca de tela de verdade sai do modo de navegação (Ctrl+Espaço) --
+  // selecionar um destino ali é a própria navegação; ficar "preso" nesse
+  // modo depois de já ter chegado onde queria não serviria pra nada.
+  A11Y.navMode = null;
   updateBreadcrumb();
   atualizarAbaAtiva();
 }
@@ -7085,7 +7090,10 @@ async function sinkiEnviar(){
 // blindado aqui também, para o dia em que algo mudar de ordem no arquivo.
 let _a11yAtivoSalvo = false;
 try{ _a11yAtivoSalvo = localStorage.getItem('sinape:a11y')==='1'; }catch(e){ /* localStorage indisponível: começa desligado */ }
-const A11Y = { ativo: _a11yAtivoSalvo, foco:null, pagina:0, nivel:'tela', todosItens:[], itensAtuais:[], avisoCampoDado:false, ultimoAnuncio:'', _semTab:[] };
+/* navMode: null (padrão -- números numeram o CONTEÚDO da tela atual) |
+   'principal' (números viram os itens fixos da topbar) | 'fases' (números
+   viram Fase 1-4, só existe dentro do DATA SIN) -- ver a11yCicloNav(). */
+const A11Y = { ativo: _a11yAtivoSalvo, navMode:null, foco:null, pagina:0, nivel:'tela', todosItens:[], itensAtuais:[], avisoCampoDado:false, ultimoAnuncio:'', _semTab:[] };
 
 function a11yAnunciar(msg){
   A11Y.ultimoAnuncio = msg;
@@ -7106,6 +7114,11 @@ function a11yAjuda(){
   else { abrirModal('modal-a11y-ajuda'); a11yAnunciar('Lista de atalhos aberta na tela.'); }
 }
 function a11yOndeEstou(){
+  if(A11Y.navMode){
+    const nomes = { principal:'itens principais (DATA SIN, Painel Gerencial, Painel de Atestados, Notificações, Opções)', fases:'fases do DATA SIN' };
+    a11yAnunciar('Você está no modo de navegação, percorrendo os '+nomes[A11Y.navMode]+'. Backspace volta ao conteúdo da tela.');
+    return;
+  }
   if(document.querySelector('.modal-overlay.open')){
     const titulo = document.querySelector('.modal-overlay.open h3');
     a11yAnunciar('Você está numa janela: '+(titulo?titulo.textContent.trim():'sem título')+'.');
@@ -7200,8 +7213,15 @@ function a11yEntrarItens(secaoItem){
   a11yAnunciar(subItens.length+' item(ns) nesta seção. Use os números para navegar, ou Backspace para voltar às seções.');
   return true;
 }
-/* sobe um nível: itens→seções→abas→lista→início; ou fecha um modal aberto */
+/* sobe um nível: itens→seções→abas→lista→início; ou fecha um modal aberto;
+   ou sai do modo de navegação (Ctrl+Espaço) de volta pro conteúdo da tela */
 function a11yVoltar(){
+  if(A11Y.navMode){
+    A11Y.navMode = null;
+    a11yAtualizarItens(false, true);
+    a11yAnunciar('Saindo do modo de navegação. Voltando ao conteúdo desta tela.');
+    return;
+  }
   const modalAberto = document.querySelector('.modal-overlay.open');
   if(modalAberto){
     modalAberto.classList.remove('open');
@@ -7264,9 +7284,37 @@ function a11yEstaEmCampoEditavel(el){
 function a11yToggle(){
   A11Y.ativo = !A11Y.ativo;
   localStorage.setItem('sinape:a11y', A11Y.ativo ? '1' : '0');
-  A11Y.foco = null; A11Y.pagina = 0;
+  A11Y.foco = null; A11Y.pagina = 0; A11Y.navMode = null;
   a11yAnunciar(A11Y.ativo ? 'Modo acessibilidade ativado. Navegação numérica disponível.' : 'Modo acessibilidade desativado.');
   a11yAtualizarItens();
+}
+/* Ctrl+Espaço: entra/percorre o modo de navegação da topbar/fases -- ver
+   comentário em A11Y.navMode e no ramo correspondente de a11yAtualizarItens().
+   Dentro do DATA SIN o ciclo é principal -> fases -> principal -> ... (nunca
+   volta sozinho pro conteúdo, isso é o Backspace que faz, ver a11yVoltar());
+   fora do DATA SIN não existe "fases", então o ciclo é só
+   principal -> conteúdo -> principal -> ... */
+function a11yCicloNav(){
+  if(!A11Y.ativo) return;
+  if(document.querySelector('.modal-overlay.open')) return; // modal já tem numeração própria
+  const viewAtivo = document.querySelector('.view.active');
+  const dentroDataSin = viewAtivo && VIEWS_DATA_SIN.includes(viewAtivo.id);
+  if(A11Y.navMode === null){
+    A11Y.navMode = 'principal';
+  } else if(A11Y.navMode === 'principal'){
+    A11Y.navMode = dentroDataSin ? 'fases' : null;
+  } else {
+    A11Y.navMode = 'principal';
+  }
+  A11Y.foco = null; A11Y.pagina = 0;
+  a11yAtualizarItens(false, true);
+  if(A11Y.navMode === 'principal'){
+    a11yAnunciar('Modo de navegação: itens principais. DATA SIN, Painel Gerencial, Painel de Atestados, Notificações e Opções.');
+  } else if(A11Y.navMode === 'fases'){
+    a11yAnunciar('Modo de navegação: fases do DATA SIN.');
+  } else {
+    a11yAnunciar('Saindo do modo de navegação. Voltando ao conteúdo desta tela.');
+  }
 }
 /* recalcula os itens navegáveis da tela atual — chamado após toda troca de tela/re-render.
    manterNivel=true preserva A11Y.nivel (usado ao entrar no conteúdo de uma aba); caso
@@ -7344,6 +7392,34 @@ function a11yAtualizarItens(manterNivel, silencioso){
   if(!manterNivel) A11Y.nivel = 'tela';
   if(!A11Y.ativo){ A11Y.itensAtuais = []; return; }
 
+  /* Modo de navegação (Ctrl+Espaço, ver a11yCicloNav()) substitui INTEIRAMENTE
+     a numeração do conteúdo -- antes, os itens da topbar/fases ficavam
+     PREPENDED em toda tela sempre (1/2/3 nunca eram o conteúdo de verdade da
+     tela, mesmo fora de qualquer intenção de trocar de área), o que
+     confundia quem só queria numerar o que estava vendo. Agora esses itens
+     só aparecem quando pedidos de propósito. */
+  if(A11Y.navMode === 'principal'){
+    A11Y.todosItens = [
+      {el: document.getElementById('appnav-datasin'), label:'DATA SIN'},
+      {el: document.getElementById('appnav-gerencial'), label:'Painel Gerencial'},
+      {el: document.getElementById('appnav-atestados'), label:'Painel de Atestados'},
+      {el: document.getElementById('btn-notificacoes'), label:'Notificações'},
+      {el: document.getElementById('btn-opcoes'), label:'Opções'},
+    ].filter(i=>i.el && !i.el.hidden);
+    a11yRenderizarPagina(silencioso);
+    return;
+  }
+  if(A11Y.navMode === 'fases'){
+    A11Y.todosItens = [
+      {el: document.getElementById('tabnav-fase1'), label:'Fase 1, Prospecção: '+(document.getElementById('tabcount-fase1')?document.getElementById('tabcount-fase1').textContent:'0')+' processo(s)'},
+      {el: document.getElementById('tabnav-fase2'), label:'Fase 2, Validação'},
+      {el: document.getElementById('tabnav-fase3'), label:'Fase 3, Documentação'},
+      {el: document.getElementById('tabnav-fase4'), label:'Fase 4'},
+    ].filter(i=>i.el && !i.el.hidden);
+    a11yRenderizarPagina(silencioso);
+    return;
+  }
+
   if(A11Y.nivel==='itens'){
     /* nível de itens é montado sob demanda por a11yEntrarItens() a partir de
        uma seção específica; se chegarmos aqui sem esse contexto (ex.: F5 na
@@ -7357,7 +7433,7 @@ function a11yAtualizarItens(manterNivel, silencioso){
      document.getElementById('view-fase4').classList.contains('active') ||
      document.getElementById('view-atestados').classList.contains('active')){
     // telas sem conteúdo próprio pra numerar (início e as provisórias) --
-    // as abas do prepend genérico logo abaixo já bastam.
+    // pra chegar na topbar/fases agora é Ctrl+Espaço, não numeração direta.
     A11Y.todosItens = [];
   } else if(document.getElementById('view-sinki').classList.contains('active')){
     A11Y.todosItens = [
@@ -7532,34 +7608,8 @@ function a11yAtualizarItens(manterNivel, silencioso){
       ].filter(i=>i.el);
     }
   }
-  /* As 4 abas fixas do topo entram numeradas em QUALQUER tela (fora de
-     modal, que já teve seu "return" mais acima) -- de dentro de um processo,
-     ou no meio de uma seção da Análise Crítica, dá pra pular direto pra
-     "Processos Privados" com um número só, sem precisar apertar Backspace
-     repetido até voltar pra Início primeiro. Fica antes do conteúdo
-     específico da tela, então os números do conteúdo sobem 4 posições —
-     mudança de comportamento pedida e confirmada com o Gabriel, não
-     acidental. */
-  // As 3 áreas (app-nav) entram numeradas em QUALQUER tela. A barra de
-  // fases só existe dentro do DATA SIN, então só entra aqui também quando
-  // é ali que se está -- em Painel Gerencial/Atestados ela nem aparece na
-  // tela (display:none via showView), não faz sentido numerar.
-  const viewAtivoPrepend = document.querySelector('.view.active');
-  const dentroDataSin = viewAtivoPrepend && VIEWS_DATA_SIN.includes(viewAtivoPrepend.id);
-  const itensAbas = [
-    {el: document.getElementById('appnav-datasin'), label:'DATA SIN'},
-    {el: document.getElementById('appnav-gerencial'), label:'Painel Gerencial'},
-    {el: document.getElementById('appnav-atestados'), label:'Painel de Atestados'},
-    ...(dentroDataSin ? [
-      {el: document.getElementById('tabnav-fase1'), label:'Fase 1, Prospecção: '+(document.getElementById('tabcount-fase1')?document.getElementById('tabcount-fase1').textContent:'0')+' processo(s)'},
-      {el: document.getElementById('tabnav-fase2'), label:'Fase 2, Validação'},
-      {el: document.getElementById('tabnav-fase3'), label:'Fase 3, Documentação'},
-      {el: document.getElementById('tabnav-fase4'), label:'Fase 4'},
-      {el: document.getElementById('tabnav-opcoes'), label:'Opções'},
-    ] : []),
-    {el: document.getElementById('btn-notificacoes'), label:'Notificações'},
-  ].filter(i=>i.el && !i.el.hidden);
-  A11Y.todosItens = itensAbas.concat(A11Y.todosItens);
+  // (a topbar/fases não entram mais prependadas aqui -- ver os dois ramos de
+  // A11Y.navMode logo no início da function, e a11yCicloNav()/Ctrl+Espaço)
   A11Y.pagina = Math.min(A11Y.pagina, Math.max(0, Math.ceil(A11Y.todosItens.length/9)-1));
   a11yRenderizarPagina(silencioso);
   if(_restaurarSecao){
@@ -7648,6 +7698,9 @@ document.addEventListener('keydown', function(e){
   }
   if(e.ctrlKey && e.altKey && (e.key==='o' || e.key==='O')){
     e.preventDefault(); a11yOndeEstou(); return;
+  }
+  if(e.ctrlKey && !e.altKey && e.code==='Space'){
+    e.preventDefault(); a11yCicloNav(); return;
   }
   if(a11yEstaEmCampoEditavel(document.activeElement)) return;
   if(e.key>='1' && e.key<='9' && !e.altKey && !e.ctrlKey && !e.metaKey){
