@@ -7876,6 +7876,10 @@ function a11yPaginaAnterior(){
 }
 function a11ySelecionar(n){
   const total = A11Y.itensAtuais.length;
+  // total===0 é uma frase à parte -- "as opções vão até 0" soa como um erro
+  // confuso; "não há nada numerado" deixa claro que a tela é assim mesmo
+  // (Fase 4, Atestados, ou Fase 2/3 vazias ainda não têm o que numerar).
+  if(total===0){ a11yAnunciar('Não há nada numerado nesta tela.'); return; }
   if(n<1 || n>total){ a11yAnunciar('As opções disponíveis vão até '+total+'.'); return; }
   if(A11Y.foco===n){ a11yAtivarItem(n); return; }
   A11Y.foco = n;
