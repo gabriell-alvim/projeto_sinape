@@ -44,33 +44,46 @@ body {
 button { font-family:inherit; cursor:pointer; }
 input, select, textarea { font-family:inherit; }
 
-/* ── TOPBAR ── */
+/* ── TOPBAR ──
+   Estrutura portada de perto do painel "Controle de Logística" (mesma
+   referência já usada pro reskin de cores): ícone da marca numa caixa
+   branca arredondada + título/subtítulo em duas linhas à esquerda, e as
+   ações da direita como "pill buttons" translúcidos (.btn-tb) -- lá é
+   Backup/Restaurar, aqui é Notificações/Sair. Cresce de 52px pra ~64px
+   pra caber a segunda linha do subtítulo; #app-nav/#fases-nav (abaixo)
+   têm o `top` do sticky ajustado no mesmo tanto. */
 .topbar {
   background: linear-gradient(135deg, var(--teal), var(--teal-mid)); color:#fff;
-  display:flex; align-items:center; justify-content:space-between; gap:12px;
-  padding:0 20px; height:52px; position:sticky; top:0; z-index:100;
+  display:flex; align-items:center; justify-content:space-between; gap:14px;
+  padding:10px 20px; position:sticky; top:0; z-index:100;
   box-shadow:0 2px 16px rgba(11,61,69,.25);
 }
-.topbar-brand { font-family:var(--font-display); font-weight:700; font-size:1.05rem; letter-spacing:.04em; display:flex; align-items:center; gap:10px; cursor:pointer; white-space:nowrap; }
-.topbar-brand .dot { width:8px; height:8px; border-radius:50%; background:#5eead4; }
+.topbar-brand { display:flex; align-items:center; gap:12px; cursor:pointer; white-space:nowrap; }
+.topbar-brand-icon {
+  background:#fff; border-radius:10px; width:38px; height:38px; flex-shrink:0;
+  display:flex; align-items:center; justify-content:center; font-size:1.15rem;
+  box-shadow:0 2px 10px rgba(0,0,0,.18);
+}
+.topbar-brand-txt h1 { font-family:var(--font-display); font-weight:600; font-size:1.05rem; color:#fff; line-height:1.25; }
+.topbar-brand-txt p { font-size:.68rem; color:rgba(255,255,255,.65); margin-top:1px; }
 .breadcrumb { font-size:.8rem; color:#bfe9e8; display:flex; align-items:center; gap:6px; flex:1; min-width:0; overflow:hidden; }
 .breadcrumb span.sep { opacity:.5; }
 .breadcrumb span.current { color:#fff; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .breadcrumb span.link { cursor:pointer; white-space:nowrap; }
 .breadcrumb span.link:hover { text-decoration:underline; }
-.topbar-logout {
-  font-size:.76rem; color:#bfe9e8; text-decoration:none; white-space:nowrap;
-  border:1px solid rgba(255,255,255,.25); border-radius:16px; padding:4px 10px;
+.topbar-right { display:flex; align-items:center; gap:10px; flex-shrink:0; }
+/* .btn-tb == o botão-pílula translúcido do topbar da referência (lá:
+   "💾 Backup"/"📤 Restaurar"); aqui reaproveitado pro sino e pro Sair. */
+.btn-tb {
+  background:rgba(255,255,255,.12); color:#fff; border:1px solid rgba(255,255,255,.25);
+  border-radius:7px; padding:6px 12px; font-size:.72rem; font-weight:600;
+  display:inline-flex; align-items:center; gap:5px; white-space:nowrap; text-decoration:none;
 }
-.topbar-logout:hover { color:#fff; background:rgba(255,255,255,.12); }
+.btn-tb:hover { background:rgba(255,255,255,.22); color:#fff; }
 .quem-sou { font-size:.74rem; color:#bfe9e8; white-space:nowrap; }
-.topbar-sino {
-  position:relative; background:none; border:none; cursor:pointer; font-size:1rem;
-  color:#bfe9e8; padding:2px 6px; border-radius:8px; line-height:1;
-}
-.topbar-sino:hover { background:rgba(255,255,255,.12); }
+.topbar-sino { position:relative; font-size:.9rem; line-height:1; }
 .sino-num {
-  position:absolute; top:-4px; right:-4px; min-width:16px; height:16px; padding:0 4px;
+  position:absolute; top:-6px; right:-6px; min-width:16px; height:16px; padding:0 4px;
   background:var(--red); color:#fff; border-radius:9px; font-size:.6rem; font-weight:800;
   display:flex; align-items:center; justify-content:center;
 }
@@ -116,14 +129,18 @@ input, select, textarea { font-family:inherit; }
 .content { padding:20px 24px 60px; max-width:1160px; margin:0 auto; }
 .view { display:none; }
 /* ── BARRA DE ABAS (fixa, substitui os cards da home) ── */
-.tabs-nav { background:var(--white); border-bottom:1px solid var(--border); padding:0 20px; display:flex; gap:0; overflow-x:auto; position:sticky; top:52px; z-index:90; }
+.tabs-nav { background:var(--white); border-bottom:1px solid var(--border); padding:0 20px; display:flex; gap:0; overflow-x:auto; position:sticky; top:var(--topbar-h, 58px); z-index:90; }
 /* Duas barras empilhadas: #app-nav (as 3 áreas do sistema) fica em cima,
    #fases-nav (só dentro do DATA SIN) logo abaixo -- position:sticky com
    top diferente pra não sobrepor uma na outra ao rolar a página. .sub é
    visualmente mais discreta (fundo cinza claro, texto menor) pra ficar
-   claro que é um nível secundário, subordinado ao app-nav. */
-#app-nav { top:52px; }
-#fases-nav { top:97px; }
+   claro que é um nível secundário, subordinado ao app-nav. As variáveis
+   --topbar-h/--appnav-h são medidas de verdade por ajustarOffsetsSticky()
+   (chamada no init() e no resize) -- não são um número fixo chutado: já
+   deu problema nesta sessão quando o topbar mudou de altura e ninguém
+   lembrou de atualizar o pixel escondido aqui. */
+#app-nav { top:var(--topbar-h, 58px); }
+#fases-nav { top:calc(var(--topbar-h, 58px) + var(--appnav-h, 41px)); }
 .tabs-nav.sub { background:var(--surface); }
 .tabs-nav.sub .tab-btn { padding:9px 14px; font-size:.76rem; }
 .tab-btn { padding:12px 18px; font-size:.82rem; font-weight:600; color:var(--slate-mid); border-bottom:2.5px solid transparent; white-space:nowrap; display:inline-flex; align-items:center; gap:6px; background:none; }
@@ -131,7 +148,18 @@ input, select, textarea { font-family:inherit; }
 .tab-btn.active { color:var(--teal); border-bottom-color:var(--teal-mid); }
 .tab-btn .badge { background:var(--amber-l); color:var(--amber); font-size:.62rem; font-weight:700; padding:2px 7px; border-radius:10px; }
 .tab-btn.active .badge { background:var(--teal-l); color:var(--teal); }
-@media(max-width:640px){ .tabs-nav{ padding:0 8px; } .tab-btn{ padding:10px 12px; font-size:.76rem; } }
+@media(max-width:640px){
+  .tabs-nav{ padding:0 8px; } .tab-btn{ padding:10px 12px; font-size:.76rem; }
+  /* topbar não cabe tudo numa linha só em tela estreita -- quebra em duas
+     (marca em cima, ações embaixo) em vez de deixar o botão Sair/sino
+     empurrados pra fora da tela sem rolagem nenhuma pra alcançar. */
+  .topbar{ flex-wrap:wrap; padding:10px 14px; }
+  .topbar-brand{ flex:1 1 100%; }
+  .topbar-brand-txt p{ display:none; }
+  .breadcrumb{ order:3; flex:1 1 100%; }
+  .topbar-right{ flex:1 1 100%; justify-content:flex-end; }
+  .quem-sou{ display:none; }
+}
 .view.active { display:block; }
 /* ── INÍCIO (view-home) ── */
 .home-hero { text-align:center; padding:32px 20px 8px; }
@@ -720,13 +748,21 @@ th.sortable:hover { color:var(--teal-mid); }
 <body>
 
 <div class="topbar">
-  <div class="topbar-brand" onclick="goHome()"><span class="dot"></span> DATA SIN · Painel de Licitações</div>
+  <div class="topbar-brand" onclick="goHome()">
+    <span class="topbar-brand-icon" aria-hidden="true">🗂️</span>
+    <div class="topbar-brand-txt">
+      <h1>DATA SIN</h1>
+      <p>Painel de Licitações — Prospecção · Validação · Documentação</p>
+    </div>
+  </div>
   <div class="breadcrumb" id="breadcrumb"></div>
-  <button class="topbar-sino" id="btn-notificacoes" onclick="abrirNotificacoes()"
-          aria-label="Notificações">🔔<span class="sino-num" id="sino-num" hidden></span></button>
-  <span class="quem-sou" id="quem-sou" role="status"></span>
-  <a class="topbar-logout" href="/logout">Sair</a>
-  <div class="sync-pill" id="sync-pill"><span class="sdot"></span><span id="sync-text">Iniciando…</span></div>
+  <div class="topbar-right">
+    <div class="sync-pill" id="sync-pill"><span class="sdot"></span><span id="sync-text">Iniciando…</span></div>
+    <span class="quem-sou" id="quem-sou" role="status"></span>
+    <button class="btn-tb topbar-sino" id="btn-notificacoes" onclick="abrirNotificacoes()"
+            aria-label="Notificações">🔔<span class="sino-num" id="sino-num" hidden></span></button>
+    <a class="btn-tb" href="/logout">🚪 Sair</a>
+  </div>
 </div>
 
 <!-- Barra de abas fixa — organizada pelas FASES do processo de licitação
@@ -7635,6 +7671,23 @@ document.addEventListener('focusin', function(e){
 /* ════════════════════════════════════════════════════════════════
    INICIALIZAÇÃO
    ════════════════════════════════════════════════════════════════ */
+/* Mede a altura de verdade do topbar e do #app-nav e grava em variáveis CSS
+   -- é o que #fases-nav e o próprio #app-nav usam pro `top` do sticky (ver
+   comentário perto de ".tabs-nav" no <style>). Sem isto, qualquer mudança
+   de altura do topbar (subtítulo quebrando linha, fonte carregando
+   atrasada, tela estreita) desalinha a barra de fases por cima do app-nav
+   -- foi exatamente o que aconteceu ao redesenhar o topbar hoje. Chamada no
+   fim do init() e de novo a cada resize/orientationchange. */
+function ajustarOffsetsSticky(){
+  const topbar = document.querySelector('.topbar');
+  const appnav = document.getElementById('app-nav');
+  if(!topbar || !appnav) return;
+  document.documentElement.style.setProperty('--topbar-h', topbar.offsetHeight+'px');
+  document.documentElement.style.setProperty('--appnav-h', appnav.offsetHeight+'px');
+}
+window.addEventListener('resize', ajustarOffsetsSticky);
+window.addEventListener('orientationchange', ajustarOffsetsSticky);
+
 async function init(){
   // primeiro de tudo: a partir daqui a identidade vem do servidor, e é ela que
   // assina toda edição. Se isso rodasse no fim (como antes, quando o nome vinha
@@ -7668,6 +7721,7 @@ async function init(){
   // VIEWS_DATA_SIN) e recalcula breadcrumb/aba ativa -- sem chamá-la aqui,
   // a barra de fases aparecia por cima da tela inicial no primeiro carregamento.
   showView('view-home');
+  ajustarOffsetsSticky();
   a11yAtualizarItens();
   atualizarSino();
 }
