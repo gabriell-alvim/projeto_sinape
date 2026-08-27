@@ -2416,7 +2416,12 @@ async function recarregarLista(silencioso){
 
 /* ── novo processo manual ── */
 function openNewProcessModal(){ document.getElementById('input-novo-nome').value=''; abrirModal('modal-novo'); }
-function abrirModal(id){ document.getElementById(id).classList.add('open'); a11yAtualizarItens(); }
+/* Sai do modo de navegação (Ctrl+Espaço) ao abrir um modal -- sem isto, abrir
+   "Opções" enquanto o modo estava ativo e depois fechá-la deixava a
+   numeração PRESA nos itens principais/fases em vez de voltar pro conteúdo
+   da tela: fecharModal() também chama a11yAtualizarItens(), e sem o modal
+   aberto pra "esconder" o navMode, ele reaparecia sozinho. */
+function abrirModal(id){ document.getElementById(id).classList.add('open'); A11Y.navMode = null; a11yAtualizarItens(); }
 /* Para modais cujo conteúdo chega depois, por um fetch (Atualizações do dia,
    Lixeira): abrir e numerar juntos criava uma numeração "de mentira" baseada
    no "Carregando…", que TROCAVA de posição assim que o conteúdo de verdade
@@ -2426,7 +2431,7 @@ function abrirModal(id){ document.getElementById(id).classList.add('open'); a11y
    tinha que reencontrar o botão que queria lá embaixo. Esta variante só abre
    visualmente; numerar fica por conta de quem chama, uma única vez, quando o
    conteúdo real (sucesso OU erro) já estiver na tela. */
-function abrirModalAdiarNumeracao(id){ document.getElementById(id).classList.add('open'); }
+function abrirModalAdiarNumeracao(id){ document.getElementById(id).classList.add('open'); A11Y.navMode = null; }
 function fecharModal(id){ document.getElementById(id).classList.remove('open'); a11yAtualizarItens(); }
 async function confirmNewProcess(){
   const nome = document.getElementById('input-novo-nome').value.trim();
