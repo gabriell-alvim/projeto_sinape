@@ -49,6 +49,8 @@ Rotas:
   GET     /api/correcoes                      → pares (resposta da IA / correção da equipe) — matéria-prima pra treinar um modelo especialista no futuro
   GET     /api/prazos                         → todos os prazos de todos os processos ativos, numa lista só, ordenados do mais urgente pro mais distante
   GET     /api/gerencial                      → dados crus do acompanhamento por fases de todos os processos (a tela é quem calcula % e semáforo)
+  POST    /api/emails/varredura               → varre o Inbox do Outlook do usuário logado (Mail.Read), classifica e cruza com processos
+  GET     /api/emails/ultima-varredura        → devolve a última varredura de e-mail já feita, sem rodar de novo
   GET     /api/eu                             → identidade de quem está logado (inclui "autor", que assina o que a pessoa fizer)
   GET     /api/usuarios                       → quem já entrou com conta própria — a lista de gente endereçável (notificar, atribuir)
   POST    /api/notificacoes                   → avisa a equipe (tipo "equipe") ou pede conferência de alguém (tipo "dirigida") sobre o que mudou numa sessão de edição
@@ -124,7 +126,7 @@ import threading
 import time
 import traceback
 import uuid
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta
 from pathlib import Path
 from urllib.parse import quote
 
@@ -248,10 +250,12 @@ col_comercial_timesheet = db["comercial_timesheet"]
 col_comercial_atas = db["comercial_atas"]
 col_comercial_snapshot_anterior = db["comercial_snapshot_anterior"]
 col_processos_excluidos = db["processos_excluidos"]
+col_varreduras_email = db["varreduras_email"]
 
 
 def _init_db():
     col_processos.create_index([("atualizadoEm", DESCENDING)])
+    col_varreduras_email.create_index([("criadoEm", DESCENDING)])
     col_anexos.create_index([("processo_id", ASCENDING), ("enviado_em", DESCENDING)])
     col_relatorios.create_index([("criadoEm", DESCENDING)])
     col_snapshots.create_index([("criadoEm", DESCENDING)])
@@ -382,12 +386,46 @@ def _auth_ms_habilitado() -> bool:
     return bool(AUTH_TENANT_ID and AUTH_CLIENT_ID and AUTH_CLIENT_SECRET and AUTH_REDIRECT_URI)
 
 
-def _auth_ms_app():
+def _auth_ms_app(token_cache=None):
     return msal.ConfidentialClientApplication(
         AUTH_CLIENT_ID,
         authority=f"https://login.microsoftonline.com/{AUTH_TENANT_ID}",
         client_credential=AUTH_CLIENT_SECRET,
+        token_cache=token_cache,
     )
+
+
+# Escopo extra (além do User.Read, que só confirma identidade) usado só pelo
+# Painel de E-mails — pedido no mesmo login, com consentimento próprio do
+# usuário (Mail.Read delegado não exige admin do Azure). Fica junto do
+# User.Read porque o MSAL guarda os dois no mesmo token cache por conta.
+ESCOPOS_LOGIN_MS = ["User.Read", "Mail.Read"]
+
+
+def _token_graph_mail(email):
+    """Devolve um access token com escopo Mail.Read pra ESTE usuário, renovando
+    sozinho via refresh token quando o access token já expirou (acquire_token_silent).
+    None quando o usuário nunca concedeu Mail.Read ainda (login antigo, antes
+    deste escopo existir, ou entrou pela conta compartilhada) -- nesse caso
+    precisa logar de novo uma vez pra ver a tela de consentimento."""
+    if not email:
+        return None
+    u = col_usuarios.find_one({"_id": email}) or {}
+    cache_serializado = u.get("msTokenCache")
+    if not cache_serializado:
+        return None
+    cache = msal.SerializableTokenCache()
+    cache.deserialize(cache_serializado)
+    app_ms = _auth_ms_app(token_cache=cache)
+    contas = app_ms.get_accounts()
+    if not contas:
+        return None
+    resultado = app_ms.acquire_token_silent(["Mail.Read"], account=contas[0])
+    if cache.has_state_changed:
+        col_usuarios.update_one({"_id": email}, {"$set": {"msTokenCache": cache.serialize()}})
+    if not resultado or "access_token" not in resultado:
+        return None
+    return resultado["access_token"]
 
 
 @app.route("/auth/entrar")
@@ -403,7 +441,7 @@ def auth_entrar():
     session["auth_next"] = _safe_next_url(request.args.get("next"))
     try:
         url = _auth_ms_app().get_authorization_request_url(
-            scopes=["User.Read"], state=estado, redirect_uri=AUTH_REDIRECT_URI,
+            scopes=ESCOPOS_LOGIN_MS, state=estado, redirect_uri=AUTH_REDIRECT_URI,
         )
     except Exception as e:
         # tenant mal configurado ou a Microsoft fora do ar: quem clicou no
@@ -437,9 +475,12 @@ def auth_callback():
     if not codigo:
         return redirect("/login")
 
+    # cache próprio pra esta troca -- é ele que vai carregar o refresh token
+    # que o Painel de E-mails usa depois, silenciosamente, sem pedir login de novo
+    cache = msal.SerializableTokenCache()
     try:
-        resultado = _auth_ms_app().acquire_token_by_authorization_code(
-            codigo, scopes=["User.Read"], redirect_uri=AUTH_REDIRECT_URI,
+        resultado = _auth_ms_app(token_cache=cache).acquire_token_by_authorization_code(
+            codigo, scopes=ESCOPOS_LOGIN_MS, redirect_uri=AUTH_REDIRECT_URI,
         )
     except Exception as e:
         print(f"[auth] falha ao trocar o código pelo token: {e!r}", flush=True)
@@ -461,10 +502,16 @@ def auth_callback():
     if existente and not existente.get("ativo", True):
         return falhou("Sua conta foi desativada. Fale com o administrador do Painel.")
 
+    # o Mail.Read pode não ter sido concedido (ex.: usuário recusou naquela
+    # tela específica de consentimento, mesmo aceitando o login) -- nesse caso
+    # não sobrescreve um cache anterior válido com um sem o escopo
+    campos_set = {"nome": nome, "ultimoAcesso": _agora_ms(), "via": "microsoft"}
+    if "access_token" in resultado:
+        campos_set["msTokenCache"] = cache.serialize()
     col_usuarios.update_one(
         {"_id": email},
         {
-            "$set": {"nome": nome, "ultimoAcesso": _agora_ms(), "via": "microsoft"},
+            "$set": campos_set,
             "$setOnInsert": {"criadoEm": _agora_ms(), "ativo": True, "admin": False},
         },
         upsert=True,
@@ -1502,6 +1549,170 @@ def executar_varredura_sharepoint():
     # a tela trabalha com a fila inteira, não só com o que esta varredura achou
     resposta["novos"] = _pendentes_abertos()
     return jsonify(resposta), 201
+
+
+# ──────────────────────────────────────────────────────────────────
+# Painel de E-mails — triagem de volume alto no Outlook
+# ──────────────────────────────────────────────────────────────────
+# Domínios (ou o pai deles -- "boletim.conlicitacao.com.br" bate em
+# "conlicitacao.com.br") de portal de licitação: aviso automático de
+# publicação/esclarecimento/impugnação/republicação de edital. Sozinhos não
+# interessa ler um por um; só sobem de prioridade quando batem com um
+# processo que a Sinape já acompanha (ver _casar_email_com_processo).
+DOMINIOS_PORTAL_LICITACAO = {
+    "procergs.rs.gov.br", "boletimconlicitacao.com.br", "saeb.ba.gov.br",
+    "comprasnet.ba.gov.br", "comprasnet.gov.br", "compras.gov.br",
+    "licitacoes-e.com.br", "bll.org.br", "portaldecompraspublicas.com.br",
+    "bnc.org.br", "pncp.gov.br", "tce.rs.gov.br",
+}
+_PADRAO_PORTAL_PALAVRA = re.compile(r"compras|licitac|licitaç|edital|pncp", re.I)
+
+# Ruído puro: marketing/newsletter, nunca precisa entrar no resumo, só contar.
+DOMINIOS_RUIDO_CONHECIDOS = {"pinterest.com", "laiob.com"}
+_PADRAO_RUIDO_REMETENTE = re.compile(
+    r"^(no-?reply|newsletter|notifica|recommendations|marketing|comunicacao)", re.I
+)
+
+_PADRAO_EDITAL_NUM = re.compile(r"Edital:\s*([0-9./-]+)", re.I)
+_PADRAO_ORGAO = re.compile(r"Central de compras:\s*([^\n\r]+)", re.I)
+
+
+def _dominio_email(endereco):
+    return (endereco or "").strip().lower().rsplit("@", 1)[-1]
+
+
+def _dominio_ou_pai_em(dominio, conjunto):
+    """'sub.boletimconlicitacao.com.br' bate em {'boletimconlicitacao.com.br'}
+    -- confere o domínio inteiro e cada sufixo dele, não só a igualdade exata."""
+    partes = dominio.split(".")
+    return any(".".join(partes[i:]) in conjunto for i in range(len(partes)))
+
+
+def _classificar_email(remetente, corpo_preview):
+    """Bucket determinístico, sem IA -- rápido e barato, roda pra cada e-mail da
+    varredura. 'correspondencia' é o padrão: só sai dali quem bate com um padrão
+    CONHECIDO de automação (portal ou ruído) -- e-mail desconhecido é tratado
+    como possivelmente importante, nunca como ruído por omissão."""
+    dominio = _dominio_email(remetente)
+    local = (remetente or "").split("@")[0]
+    if _dominio_ou_pai_em(dominio, DOMINIOS_PORTAL_LICITACAO) or _PADRAO_PORTAL_PALAVRA.search(dominio):
+        return "portal"
+    if _dominio_ou_pai_em(dominio, DOMINIOS_RUIDO_CONHECIDOS) or _PADRAO_RUIDO_REMETENTE.search(local):
+        return "ruido"
+    return "correspondencia"
+
+
+def _casar_email_com_processo(corpo_preview):
+    """Tenta casar um aviso de portal com um processo já cadastrado, pelo número
+    do edital ou pelo nome do órgão citados no corpo do aviso -- é um cruzamento
+    de melhor esforço (o texto do aviso não segue o mesmo formato do cadastro),
+    não precisa ser perfeito pra já ajudar a priorizar o resumo."""
+    m_num = _PADRAO_EDITAL_NUM.search(corpo_preview or "")
+    m_org = _PADRAO_ORGAO.search(corpo_preview or "")
+    ou = []
+    if m_num:
+        ou.append({"analise.geral_numero": {"$regex": re.escape(m_num.group(1).strip()), "$options": "i"}})
+    if m_org:
+        ou.append({"analise.geral_orgao": {"$regex": re.escape(m_org.group(1).strip()[:40]), "$options": "i"}})
+    if not ou:
+        return None
+    doc = col_processos.find_one({"$or": ou}, {"nome": 1})
+    if not doc:
+        return None
+    return {"processo_id": doc["_id"], "processo_nome": doc.get("nome") or "(sem nome)"}
+
+
+GRAPH_BASE = "https://graph.microsoft.com/v1.0"
+
+
+@app.route("/api/emails/varredura", methods=["POST"])
+def executar_varredura_email():
+    """Varre a caixa de entrada do usuário logado via Microsoft Graph (Mail.Read
+    delegado -- token do próprio usuário, nunca a caixa de outra pessoa),
+    classifica cada mensagem e cruza aviso de portal com processo já cadastrado.
+    Só roda sob demanda (clique em "Executar varredura") -- sem varredura
+    automática de manhã por enquanto, decisão do Gabriel pra não mexer em
+    permissão de app-only/admin do Azure agora (ver _token_graph_mail)."""
+    email = session.get("usuario_email") or ""
+    token = _token_graph_mail(email)
+    if not token:
+        return jsonify({
+            "erro": "Leitura de e-mail ainda não autorizada para esta conta. Saia e "
+                    "entre de novo pela Microsoft para conceder a permissão (aparece "
+                    "uma tela de consentimento do Outlook uma única vez)."
+        }), 400
+
+    ultima = col_varreduras_email.find_one(sort=[("criadoEm", DESCENDING)])
+    if ultima and ultima.get("criadoEm"):
+        # 2h de folga sobre a última varredura -- evita buraco quando um e-mail
+        # chega atrasado na indexação do Graph
+        desde = datetime.utcfromtimestamp(ultima["criadoEm"] / 1000 - 2 * 60 * 60)
+    else:
+        desde = datetime.utcnow() - timedelta(hours=24)
+    desde_iso = desde.strftime("%Y-%m-%dT%H:%M:%SZ")
+
+    headers = {"Authorization": f"Bearer {token}"}
+    params = {
+        "$top": "50",
+        "$orderby": "receivedDateTime desc",
+        "$select": "subject,from,receivedDateTime,isRead,webLink,bodyPreview",
+        "$filter": f"receivedDateTime ge {desde_iso}",
+    }
+    url = f"{GRAPH_BASE}/me/mailFolders/Inbox/messages"
+    brutos = []
+    try:
+        paginas = 0
+        while url and paginas < 6:  # teto de ~300 mensagens por varredura
+            r = requests.get(url, headers=headers, params=(params if paginas == 0 else None), timeout=20)
+            if r.status_code != 200:
+                return jsonify({"erro": f"Microsoft Graph respondeu {r.status_code}: {r.text[:300]}"}), 502
+            corpo = r.json()
+            brutos.extend(corpo.get("value") or [])
+            url = corpo.get("@odata.nextLink")
+            paginas += 1
+    except requests.RequestException as e:
+        return jsonify({"erro": f"Falha ao contactar o Microsoft Graph: {e}"}), 502
+
+    itens = []
+    contagens = {"portal": 0, "correspondencia": 0, "ruido": 0}
+    for m in brutos:
+        remetente = ((m.get("from") or {}).get("emailAddress") or {}).get("address") or ""
+        preview = m.get("bodyPreview") or ""
+        categoria = _classificar_email(remetente, preview)
+        contagens[categoria] += 1
+        item = {
+            "assunto": m.get("subject") or "(sem assunto)",
+            "remetente": remetente,
+            "recebidoEm": m.get("receivedDateTime"),
+            "lido": bool(m.get("isRead")),
+            "webLink": m.get("webLink"),
+            "categoria": categoria,
+        }
+        if categoria == "portal":
+            casado = _casar_email_com_processo(preview)
+            if casado:
+                item.update(casado)
+        itens.append(item)
+
+    doc = {
+        "_id": uuid.uuid4().hex,
+        "criadoEm": _agora_ms(),
+        "autor": _autor_da_sessao(),
+        "desde": desde_iso,
+        "total_verificado": len(itens),
+        "contagens": contagens,
+        "itens": itens,
+    }
+    col_varreduras_email.insert_one(doc)
+    return jsonify(_sem_id_mongo(doc)), 201
+
+
+@app.route("/api/emails/ultima-varredura", methods=["GET"])
+def ultima_varredura_email():
+    doc = col_varreduras_email.find_one(sort=[("criadoEm", DESCENDING)])
+    if not doc:
+        return jsonify({}), 200
+    return jsonify(_sem_id_mongo(doc)), 200
 
 
 MODELOS_IA_PERMITIDOS = {"claude-opus-5", "claude-sonnet-5"}

@@ -223,6 +223,7 @@ input, select, textarea { font-family:inherit; }
   display:flex; align-items:center; justify-content:space-between; gap:10px;
   width:100%; text-align:left; border:none; border-left:4px solid var(--border);
   background:var(--surface); border-radius:8px; padding:9px 12px; margin-bottom:6px; cursor:pointer; font-size:.82rem;
+  text-decoration:none; color:inherit; /* também usado como <a> no Painel de e-mails */
 }
 .prazo-item:hover { background:var(--teal-ll); }
 .prazo-item.atrasado { border-left-color:var(--red, #B23A3A); }
@@ -233,6 +234,12 @@ input, select, textarea { font-family:inherit; }
 .prazo-item-campo { font-size:.74rem; color:var(--slate-mid); }
 .prazo-item-quando { font-size:.74rem; font-weight:700; white-space:nowrap; flex-shrink:0; }
 .prazo-item.atrasado .prazo-item-quando { color:var(--red, #B23A3A); }
+
+/* ── Painel de e-mails ── */
+.email-filtros { display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin:10px 0 14px; }
+.email-filtros select, .email-filtros input[type=text] { padding:6px 10px; border:1px solid var(--border); border-radius:6px; font-size:.8rem; }
+.email-filtros input[type=text] { flex:1; min-width:180px; }
+.check-inline { display:inline-flex; align-items:center; gap:5px; font-size:.78rem; color:var(--slate-mid); white-space:nowrap; }
 .prazo-item.hoje .prazo-item-quando { color:var(--amber); }
 .novos-processos { margin-top:6px; }
 .novo-item { background:var(--violet-l); border:1px solid #DFC5D6; border-radius:10px; padding:10px 12px; margin-bottom:8px; }
@@ -1171,6 +1178,7 @@ th.sortable:hover { color:var(--teal-mid); }
       <button class="btn-outline" onclick="fecharModal('modal-opcoes');abrirNotificacoes()">🔔 Notificações</button>
       <button class="btn-outline" onclick="fecharModal('modal-opcoes');abrirPainelPrazos()">⏰ Painel de prazos</button>
       <button class="btn-outline" onclick="fecharModal('modal-opcoes');abrirPainelGastos()">💵 Painel de gastos</button>
+      <button class="btn-outline" onclick="fecharModal('modal-opcoes');abrirPainelEmails()">📧 Painel de e-mails</button>
       <button class="btn-outline" onclick="fecharModal('modal-opcoes');copiarPromptIA()">🤖 Copiar prompt p/ IA</button>
       <button class="btn-outline" onclick="fecharModal('modal-opcoes');abrirSinki()">💬 Falar com Sinki</button>
       <button class="btn-outline" onclick="fecharModal('modal-opcoes');abrirLixeira()">🗑️ Lixeira</button>
@@ -1215,6 +1223,36 @@ th.sortable:hover { color:var(--teal-mid); }
     </div>
     <div class="modal-actions">
       <button class="btn-ghost" onclick="fecharModal('modal-gastos')">Fechar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: PAINEL DE E-MAILS -- resumo diário + varredura sob demanda do
+     Outlook, agrupado em portal de licitação / correspondência / ruído.
+     Filtros são só client-side sobre a última lista carregada (sem chamada
+     nova ao servidor a cada troca de filtro). -->
+<div class="modal-overlay" id="modal-emails">
+  <div class="modal-box wide" role="dialog" aria-label="Painel de e-mails">
+    <h3>📧 Painel de e-mails</h3>
+    <p class="hint">Resumo da caixa do Outlook, agrupado por categoria. Avisos de portal de licitação só aparecem em destaque quando batem com um processo que você já acompanha.</p>
+    <div id="email-cards"></div>
+    <div class="email-filtros" id="email-filtros" style="display:none;">
+      <select id="email-filtro-categoria" onchange="renderizarListaEmails()" aria-label="Filtrar por categoria">
+        <option value="">Todas as categorias</option>
+        <option value="portal">Portal de licitação</option>
+        <option value="correspondencia">Correspondência</option>
+        <option value="ruido">Ruído</option>
+      </select>
+      <input type="text" id="email-busca" placeholder="Buscar por assunto ou remetente…" oninput="renderizarListaEmails()" aria-label="Buscar por assunto ou remetente">
+      <label class="check-inline"><input type="checkbox" id="email-so-nao-lidos" onchange="renderizarListaEmails()"> Só não lidos</label>
+      <label class="check-inline"><input type="checkbox" id="email-so-com-processo" onchange="renderizarListaEmails()"> Só com processo vinculado</label>
+    </div>
+    <div id="email-conteudo">
+      <p class="relatorio-vazio">Carregando…</p>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-ghost" onclick="fecharModal('modal-emails')">Fechar</button>
+      <button class="btn-primary" id="btn-varredura-email" onclick="rodarVarreduraEmails()">🔄 Executar varredura</button>
     </div>
   </div>
 </div>
@@ -6385,6 +6423,121 @@ async function abrirPainelGastos(){
   }catch(e){
     area.innerHTML = '<p class="relatorio-vazio">Não foi possível carregar os gastos: '+esc(e.message)+'</p>';
   }
+}
+
+// Guarda a última varredura carregada -- os filtros (categoria/busca/lido/
+// vinculado a processo) trabalham em cima dela sem chamada nova ao servidor.
+let EMAILS_ULTIMA = null;
+
+const EMAIL_CATEGORIA_INFO = {
+  portal:          { titulo: '🏛️ Portal de licitação', classe: 'mes' },
+  correspondencia: { titulo: '✉️ Correspondência',      classe: 'hoje' },
+  ruido:           { titulo: '🔕 Ruído',                classe: 'depois' },
+};
+
+async function abrirPainelEmails(){
+  abrirModalAdiarNumeracao('modal-emails');
+  document.getElementById('email-filtros').style.display = 'none';
+  document.getElementById('email-cards').innerHTML = '';
+  const area = document.getElementById('email-conteudo');
+  area.innerHTML = '<p class="relatorio-vazio">Carregando…</p>';
+  if(Store.modo!=='api'){
+    area.innerHTML = '<p class="relatorio-vazio">Disponível apenas com o Painel conectado ao backend.</p>';
+    a11yAtualizarItens();
+    return;
+  }
+  try{
+    const res = await fetch(Store.base + '/emails/ultima-varredura', { headers: Store.headers() });
+    if(!res.ok) throw new Error('Servidor respondeu ' + res.status);
+    const g = await res.json();
+    EMAILS_ULTIMA = (g && g.itens) ? g : null;
+    renderizarPainelEmails();
+  }catch(e){
+    area.innerHTML = '<p class="relatorio-vazio">Não foi possível carregar a última varredura: '+esc(e.message)+'</p>';
+    a11yAtualizarItens();
+  }
+}
+
+async function rodarVarreduraEmails(){
+  const btn = document.getElementById('btn-varredura-email');
+  const original = btn.textContent;
+  btn.disabled = true; btn.textContent = '⏳ Varrendo…';
+  try{
+    const res = await fetch(Store.base + '/emails/varredura', { method:'POST', headers: Store.headers() });
+    const g = await res.json();
+    if(!res.ok) throw new Error(g.erro || ('Servidor respondeu ' + res.status));
+    EMAILS_ULTIMA = g;
+    renderizarPainelEmails();
+    toast('Varredura concluída: '+(g.total_verificado||0)+' e-mail(s) verificado(s).');
+  }catch(e){
+    toast('Não foi possível rodar a varredura: '+e.message);
+  }finally{
+    btn.disabled = false; btn.textContent = original;
+  }
+}
+
+function renderizarPainelEmails(){
+  const cards = document.getElementById('email-cards');
+  const filtros = document.getElementById('email-filtros');
+  if(!EMAILS_ULTIMA){
+    cards.innerHTML = '';
+    filtros.style.display = 'none';
+    document.getElementById('email-conteudo').innerHTML =
+      '<p class="relatorio-vazio">Nenhuma varredura ainda. Clique em "Executar varredura" pra ler o Outlook agora.</p>';
+    a11yAtualizarItens();
+    return;
+  }
+  const c = EMAILS_ULTIMA.contagens || {};
+  const quando = EMAILS_ULTIMA.criadoEm ? new Date(EMAILS_ULTIMA.criadoEm).toLocaleString('pt-BR') : '';
+  cards.innerHTML =
+    '<div class="gastos-cards">' +
+      '<div class="gastos-card"><div class="gc-num">'+(c.portal||0)+'</div><div class="gc-lbl">🏛️ portal de licitação</div></div>' +
+      '<div class="gastos-card"><div class="gc-num">'+(c.correspondencia||0)+'</div><div class="gc-lbl">✉️ correspondência</div></div>' +
+      '<div class="gastos-card"><div class="gc-num">'+(c.ruido||0)+'</div><div class="gc-lbl">🔕 ruído</div></div>' +
+    '</div>' +
+    '<p class="hint" style="margin-top:-6px;">Última varredura: '+esc(quando)+' · '+(EMAILS_ULTIMA.total_verificado||0)+' e-mail(s) verificado(s) desde '+esc(EMAILS_ULTIMA.desde||'')+'.</p>';
+  filtros.style.display = 'flex';
+  renderizarListaEmails();
+}
+
+function renderizarListaEmails(){
+  const area = document.getElementById('email-conteudo');
+  if(!EMAILS_ULTIMA) return;
+  const cat = document.getElementById('email-filtro-categoria').value;
+  const busca = (document.getElementById('email-busca').value || '').toLowerCase().trim();
+  const soNaoLidos = document.getElementById('email-so-nao-lidos').checked;
+  const soComProcesso = document.getElementById('email-so-com-processo').checked;
+  let itens = EMAILS_ULTIMA.itens || [];
+  if(cat) itens = itens.filter(i=>i.categoria===cat);
+  if(busca) itens = itens.filter(i=>(i.assunto+' '+i.remetente).toLowerCase().includes(busca));
+  if(soNaoLidos) itens = itens.filter(i=>!i.lido);
+  if(soComProcesso) itens = itens.filter(i=>!!i.processo_id);
+
+  if(!itens.length){
+    area.innerHTML = '<p class="relatorio-vazio">Nenhum e-mail bate com esse filtro.</p>';
+    a11yAtualizarItens();
+    return;
+  }
+  let html = '';
+  for(const categoria of ['portal','correspondencia','ruido']){
+    const doGrupo = itens.filter(i=>i.categoria===categoria);
+    if(!doGrupo.length) continue;
+    const info = EMAIL_CATEGORIA_INFO[categoria];
+    html += '<div class="prazos-grupo"><div class="prazos-grupo-titulo">'+info.titulo+' ('+doGrupo.length+')</div>';
+    html += doGrupo.map(i=>{
+      const quando = i.recebidoEm ? new Date(i.recebidoEm).toLocaleString('pt-BR') : '';
+      const selo = i.processo_id ? ' <span class="chip st-participar">🔗 '+esc(i.processo_nome)+'</span>' : '';
+      const naoLido = !i.lido ? ' <span class="chip st-em_disputa">não lido</span>' : '';
+      return '<a class="prazo-item '+info.classe+'" href="'+esc(i.webLink||'#')+'" target="_blank" rel="noopener">' +
+        '<span><span class="prazo-item-nome">'+esc(i.assunto)+'</span><br>' +
+        '<span class="prazo-item-campo">'+esc(i.remetente)+selo+naoLido+'</span></span>' +
+        '<span class="prazo-item-quando">'+esc(quando)+'</span>' +
+      '</a>';
+    }).join('');
+    html += '</div>';
+  }
+  area.innerHTML = html;
+  a11yAtualizarItens();
 }
 
 async function abrirRelatorioDoDia(){
