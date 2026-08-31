@@ -51,6 +51,7 @@ Rotas:
   GET     /api/gerencial                      → dados crus do acompanhamento por fases de todos os processos (a tela é quem calcula % e semáforo)
   POST    /api/emails/varredura               → varre o Inbox do Outlook do usuário logado (Mail.Read), classifica e cruza com processos
   GET     /api/emails/ultima-varredura        → devolve a última varredura de e-mail já feita, sem rodar de novo
+  POST    /api/emails/responder               → responde um e-mail da varredura na própria thread (Mail.Send) {graph_id, texto}
   GET     /api/eu                             → identidade de quem está logado (inclui "autor", que assina o que a pessoa fizer)
   GET     /api/usuarios                       → quem já entrou com conta própria — a lista de gente endereçável (notificar, atribuir)
   POST    /api/notificacoes                   → avisa a equipe (tipo "equipe") ou pede conferência de alguém (tipo "dirigida") sobre o que mudou numa sessão de edição
@@ -395,19 +396,22 @@ def _auth_ms_app(token_cache=None):
     )
 
 
-# Escopo extra (além do User.Read, que só confirma identidade) usado só pelo
-# Painel de E-mails — pedido no mesmo login, com consentimento próprio do
-# usuário (Mail.Read delegado não exige admin do Azure). Fica junto do
-# User.Read porque o MSAL guarda os dois no mesmo token cache por conta.
-ESCOPOS_LOGIN_MS = ["User.Read", "Mail.Read"]
+# Escopos extras (além do User.Read, que só confirma identidade) usados só
+# pelo Painel de E-mails — pedidos no mesmo login, com consentimento próprio
+# do usuário (delegado, não exige admin do Azure, ao contrário de permissão
+# app-only). Ficam junto do User.Read porque o MSAL guarda tudo no mesmo
+# token cache por conta. Mail.Send entrou depois do Mail.Read -- quem já
+# tinha logado antes vê a tela de consentimento de novo uma vez, porque o
+# conjunto de permissões pedido mudou.
+ESCOPOS_LOGIN_MS = ["User.Read", "Mail.Read", "Mail.Send"]
 
 
-def _token_graph_mail(email):
-    """Devolve um access token com escopo Mail.Read pra ESTE usuário, renovando
+def _token_graph_mail(email, escopos):
+    """Devolve um access token com os escopos pedidos pra ESTE usuário, renovando
     sozinho via refresh token quando o access token já expirou (acquire_token_silent).
-    None quando o usuário nunca concedeu Mail.Read ainda (login antigo, antes
-    deste escopo existir, ou entrou pela conta compartilhada) -- nesse caso
-    precisa logar de novo uma vez pra ver a tela de consentimento."""
+    None quando o usuário nunca concedeu esses escopos ainda (login antigo, antes
+    deles existirem, ou entrou pela conta compartilhada) -- nesse caso precisa
+    logar de novo uma vez pra ver a tela de consentimento."""
     if not email:
         return None
     u = col_usuarios.find_one({"_id": email}) or {}
@@ -420,7 +424,7 @@ def _token_graph_mail(email):
     contas = app_ms.get_accounts()
     if not contas:
         return None
-    resultado = app_ms.acquire_token_silent(["Mail.Read"], account=contas[0])
+    resultado = app_ms.acquire_token_silent(escopos, account=contas[0])
     if cache.has_state_changed:
         col_usuarios.update_one({"_id": email}, {"$set": {"msTokenCache": cache.serialize()}})
     if not resultado or "access_token" not in resultado:
@@ -1634,7 +1638,7 @@ def executar_varredura_email():
     automática de manhã por enquanto, decisão do Gabriel pra não mexer em
     permissão de app-only/admin do Azure agora (ver _token_graph_mail)."""
     email = session.get("usuario_email") or ""
-    token = _token_graph_mail(email)
+    token = _token_graph_mail(email, ["Mail.Read"])
     if not token:
         return jsonify({
             "erro": "Leitura de e-mail ainda não autorizada para esta conta. Saia e "
@@ -1655,7 +1659,7 @@ def executar_varredura_email():
     params = {
         "$top": "50",
         "$orderby": "receivedDateTime desc",
-        "$select": "subject,from,receivedDateTime,isRead,webLink,bodyPreview",
+        "$select": "id,subject,from,receivedDateTime,isRead,webLink,bodyPreview",
         "$filter": f"receivedDateTime ge {desde_iso}",
     }
     url = f"{GRAPH_BASE}/me/mailFolders/Inbox/messages"
@@ -1681,12 +1685,14 @@ def executar_varredura_email():
         categoria = _classificar_email(remetente, preview)
         contagens[categoria] += 1
         item = {
+            "graph_id": m.get("id"),  # precisa do id de verdade da mensagem pra responder (ver /api/emails/responder)
             "assunto": m.get("subject") or "(sem assunto)",
             "remetente": remetente,
             "recebidoEm": m.get("receivedDateTime"),
             "lido": bool(m.get("isRead")),
             "webLink": m.get("webLink"),
             "categoria": categoria,
+            "respondido": False,
         }
         if categoria == "portal":
             casado = _casar_email_com_processo(preview)
@@ -1713,6 +1719,51 @@ def ultima_varredura_email():
     if not doc:
         return jsonify({}), 200
     return jsonify(_sem_id_mongo(doc)), 200
+
+
+@app.route("/api/emails/responder", methods=["POST"])
+def responder_email():
+    """Responde um e-mail direto na thread original (mesmo destinatário e
+    assunto "RE: ..." que o Outlook já monta sozinho -- Graph cuida disso,
+    não precisamos remontar cabeçalho nem citação). O texto sempre vem
+    pronto da tela, escrito ou revisado pela pessoa -- esta rota nunca decide
+    sozinha o que mandar, só dispara o que já chegou pronto."""
+    email = session.get("usuario_email") or ""
+    token = _token_graph_mail(email, ["Mail.Send"])
+    if not token:
+        return jsonify({
+            "erro": "Envio de e-mail ainda não autorizado para esta conta. Saia e "
+                    "entre de novo pela Microsoft para conceder a permissão (aparece "
+                    "uma tela de consentimento do Outlook uma única vez)."
+        }), 400
+
+    corpo = request.get_json(silent=True) or {}
+    graph_id = (corpo.get("graph_id") or "").strip()
+    texto = (corpo.get("texto") or "").strip()
+    if not graph_id or not texto:
+        return jsonify({"erro": "Informe graph_id e texto."}), 400
+
+    try:
+        r = requests.post(
+            f"{GRAPH_BASE}/me/messages/{graph_id}/reply",
+            headers={"Authorization": f"Bearer {token}"},
+            json={"comment": texto},
+            timeout=20,
+        )
+    except requests.RequestException as e:
+        return jsonify({"erro": f"Falha ao contactar o Microsoft Graph: {e}"}), 502
+    if r.status_code not in (200, 202):
+        return jsonify({"erro": f"Microsoft Graph respondeu {r.status_code}: {r.text[:300]}"}), 502
+
+    col_varreduras_email.update_one(
+        {"itens.graph_id": graph_id},
+        {"$set": {
+            "itens.$.respondido": True,
+            "itens.$.respondidoEm": _agora_ms(),
+            "itens.$.respondidoPor": _autor_da_sessao(),
+        }},
+    )
+    return jsonify({"ok": True}), 200
 
 
 MODELOS_IA_PERMITIDOS = {"claude-opus-5", "claude-sonnet-5"}

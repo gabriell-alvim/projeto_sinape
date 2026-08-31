@@ -230,7 +230,8 @@ input, select, textarea { font-family:inherit; }
 .prazo-item.hoje { border-left-color:var(--amber); }
 .prazo-item.semana { border-left-color:var(--teal-mid); }
 .prazo-item.mes, .prazo-item.depois { border-left-color:var(--slate-l); }
-.prazo-item-nome { font-weight:700; color:var(--slate); }
+.prazo-item-nome { font-weight:700; color:var(--slate); text-decoration:none; }
+.prazo-item-nome[href]:hover { text-decoration:underline; }
 .prazo-item-campo { font-size:.74rem; color:var(--slate-mid); }
 .prazo-item-quando { font-size:.74rem; font-weight:700; white-space:nowrap; flex-shrink:0; }
 .prazo-item.atrasado .prazo-item-quando { color:var(--red, #B23A3A); }
@@ -240,6 +241,15 @@ input, select, textarea { font-family:inherit; }
 .email-filtros select, .email-filtros input[type=text] { padding:6px 10px; border:1px solid var(--border); border-radius:6px; font-size:.8rem; }
 .email-filtros input[type=text] { flex:1; min-width:180px; }
 .check-inline { display:inline-flex; align-items:center; gap:5px; font-size:.78rem; color:var(--slate-mid); white-space:nowrap; }
+.email-item { cursor:default; } /* .prazo-item base tem cursor:pointer (é um <button> nos outros usos); aqui o card não é mais o alvo do clique, só o título e os botões dentro */
+.email-item-topo { display:flex; align-items:center; justify-content:space-between; gap:10px; }
+.email-item-acoes { margin-top:8px; }
+.email-resposta-area { margin-top:8px; padding-top:8px; border-top:1px dashed var(--border); }
+.email-resposta-area textarea {
+  width:100%; min-height:90px; border:1px solid var(--border); border-radius:8px; padding:8px 10px;
+  font-size:.8rem; font-family:inherit; resize:vertical; margin-bottom:8px;
+}
+.email-resposta-botoes { display:flex; justify-content:flex-end; gap:8px; }
 .prazo-item.hoje .prazo-item-quando { color:var(--amber); }
 .novos-processos { margin-top:6px; }
 .novo-item { background:var(--violet-l); border:1px solid #DFC5D6; border-radius:10px; padding:10px 12px; margin-bottom:8px; }
@@ -6528,16 +6538,84 @@ function renderizarListaEmails(){
       const quando = i.recebidoEm ? new Date(i.recebidoEm).toLocaleString('pt-BR') : '';
       const selo = i.processo_id ? ' <span class="chip st-participar">🔗 '+esc(i.processo_nome)+'</span>' : '';
       const naoLido = !i.lido ? ' <span class="chip st-em_disputa">não lido</span>' : '';
-      return '<a class="prazo-item '+info.classe+'" href="'+esc(i.webLink||'#')+'" target="_blank" rel="noopener">' +
-        '<span><span class="prazo-item-nome">'+esc(i.assunto)+'</span><br>' +
-        '<span class="prazo-item-campo">'+esc(i.remetente)+selo+naoLido+'</span></span>' +
-        '<span class="prazo-item-quando">'+esc(quando)+'</span>' +
-      '</a>';
+      const respondidoBadge = i.respondido ? ' <span class="chip st-vencido">✅ respondido</span>' : '';
+      const gid = esc(i.graph_id || '');
+      // .prazo-item vira um <div> (não mais <a>) porque agora tem controles
+      // interativos DENTRO do card -- botão dentro de link é HTML inválido e
+      // quebra o clique. Abrir no Outlook continua um clique, só que no
+      // título, não no card inteiro.
+      return '<div class="prazo-item email-item '+info.classe+'" style="display:block;">' +
+        '<div class="email-item-topo">' +
+          '<a href="'+esc(i.webLink||'#')+'" target="_blank" rel="noopener" class="prazo-item-nome">'+esc(i.assunto)+'</a>' +
+          '<span class="prazo-item-quando">'+esc(quando)+'</span>' +
+        '</div>' +
+        '<div class="prazo-item-campo">'+esc(i.remetente)+selo+naoLido+respondidoBadge+'</div>' +
+        (i.graph_id ? (
+          '<div class="email-item-acoes">' +
+            '<button type="button" class="btn-sm" onclick="toggleRespostaEmail(\''+gid+'\')">↩️ Responder</button>' +
+          '</div>' +
+          '<div class="email-resposta-area" id="resp-area-'+gid+'" style="display:none;">' +
+            '<textarea id="resp-texto-'+gid+'" placeholder="Escreva sua resposta…"></textarea>' +
+            '<div class="email-resposta-botoes">' +
+              '<button type="button" class="btn-outline btn-sm" onclick="usarRespostaPronta(\''+gid+'\')">Usar resposta pronta</button>' +
+              '<button type="button" class="btn-primary btn-sm" id="btn-enviar-'+gid+'" onclick="enviarRespostaEmail(\''+gid+'\')">Enviar</button>' +
+            '</div>' +
+          '</div>'
+        ) : '') +
+      '</div>';
     }).join('');
     html += '</div>';
   }
   area.innerHTML = html;
   a11yAtualizarItens();
+}
+
+// Ponto de partida do atalho "Usar resposta pronta" -- a pessoa sempre revisa
+// (e pode reescrever à vontade) antes de clicar em Enviar; esta rota nunca
+// dispara nada sozinha. Cobre o caso mais comum do dia a dia da comercial:
+// agradecer um contato e informar que a Sinape não vai seguir com a oportunidade.
+const RESPOSTA_PRONTA_RECUSA =
+  'Olá!\n\nAgradecemos muito o contato e o interesse em contar com a Sinape.\n\n' +
+  'Depois de avaliar internamente, optamos por não seguir com esta oportunidade no momento.\n' +
+  'Ficamos à disposição para futuras parcerias.\n\nAtenciosamente,\nEquipe Comercial — Sinape';
+
+function toggleRespostaEmail(gid){
+  const area = document.getElementById('resp-area-'+gid);
+  if(!area) return;
+  const abrindo = area.style.display === 'none';
+  area.style.display = abrindo ? 'block' : 'none';
+  if(abrindo) document.getElementById('resp-texto-'+gid)?.focus();
+}
+
+function usarRespostaPronta(gid){
+  const campo = document.getElementById('resp-texto-'+gid);
+  if(campo) campo.value = RESPOSTA_PRONTA_RECUSA;
+}
+
+async function enviarRespostaEmail(gid){
+  const campo = document.getElementById('resp-texto-'+gid);
+  const texto = (campo?.value || '').trim();
+  if(!texto){ toast('Escreva (ou use a resposta pronta) antes de enviar.'); return; }
+  const btn = document.getElementById('btn-enviar-'+gid);
+  const original = btn.textContent;
+  btn.disabled = true; btn.textContent = 'Enviando…';
+  try{
+    const res = await fetch(Store.base + '/emails/responder', {
+      method: 'POST', headers: Store.headers(),
+      body: JSON.stringify({ graph_id: gid, texto }),
+    });
+    const g = await res.json();
+    if(!res.ok) throw new Error(g.erro || ('Servidor respondeu ' + res.status));
+    // reflete no EMAILS_ULTIMA em memória -- sobrevive a filtrar a lista de
+    // novo sem precisar recarregar do servidor
+    const item = (EMAILS_ULTIMA?.itens || []).find(i=>i.graph_id===gid);
+    if(item) item.respondido = true;
+    toast('Resposta enviada.');
+    renderizarListaEmails();
+  }catch(e){
+    toast('Não foi possível enviar a resposta: '+e.message);
+    btn.disabled = false; btn.textContent = original;
+  }
 }
 
 async function abrirRelatorioDoDia(){
