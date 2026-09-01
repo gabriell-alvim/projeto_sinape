@@ -1263,9 +1263,10 @@ th.sortable:hover { color:var(--teal-mid); }
         <option value="ruido">Ruído</option>
       </select>
       <input type="text" id="email-busca" placeholder="Buscar por assunto ou remetente…" oninput="renderizarListaEmails()" aria-label="Buscar por assunto ou remetente">
-      <label class="check-inline"><input type="checkbox" id="email-so-nao-lidos" onchange="renderizarListaEmails()"> Só não lidos</label>
-      <label class="check-inline"><input type="checkbox" id="email-so-com-processo" onchange="renderizarListaEmails()"> Só com processo vinculado</label>
-      <label class="check-inline"><input type="checkbox" id="email-so-propostas" onchange="renderizarListaEmails()"> 📝 Só propostas recebidas</label>
+      <label class="check-inline"><input type="checkbox" id="email-so-nao-lidos" onchange="emailFiltroCheckboxMudou(this,'Só não lidos')"> Só não lidos</label>
+      <label class="check-inline"><input type="checkbox" id="email-so-com-processo" onchange="emailFiltroCheckboxMudou(this,'Só com processo vinculado')"> Só com processo vinculado</label>
+      <label class="check-inline"><input type="checkbox" id="email-so-propostas" onchange="emailFiltroCheckboxMudou(this,'Só propostas recebidas')"> 📝 Só propostas recebidas</label>
+      <button type="button" class="btn-sm" onclick="limparFiltrosEmails()">🧹 Limpar filtros</button>
     </div>
     <div id="email-conteudo">
       <p class="relatorio-vazio">Carregando…</p>
@@ -6537,7 +6538,21 @@ function renderizarListaEmails(){
   if(soPropostas) itens = itens.filter(i=>!!i.proposta);
 
   if(!itens.length){
-    area.innerHTML = '<p class="relatorio-vazio">Nenhum e-mail bate com esse filtro.</p>';
+    // Lista os filtros que estão ligados agora -- sem isso a mensagem some no
+    // vazio: a pessoa não tem como saber SE tem filtro ativo, nem qual, só
+    // que "não achou nada" (foi exatamente essa falta de contexto que gerou
+    // confusão quando vários filtros ficaram marcados ao mesmo tempo sem
+    // querer, via navegação numérica).
+    const ativos = [];
+    if(cat) ativos.push('categoria "'+esc({portal:'Portal de licitação',correspondencia:'Correspondência',ruido:'Ruído'}[cat]||cat)+'"');
+    if(busca) ativos.push('busca "'+esc(busca)+'"');
+    if(soNaoLidos) ativos.push('só não lidos');
+    if(soComProcesso) ativos.push('só com processo vinculado');
+    if(soPropostas) ativos.push('só propostas recebidas');
+    area.innerHTML = '<p class="relatorio-vazio">Nenhum e-mail bate com esse filtro.' +
+      (ativos.length ? ' Filtro(s) ativo(s): '+ativos.join(', ')+'.' : '') +
+      '</p>' +
+      (ativos.length ? '<button type="button" class="btn-sm" onclick="limparFiltrosEmails()">🧹 Limpar filtros</button>' : '');
     a11yAtualizarItens();
     return;
   }
@@ -6582,6 +6597,28 @@ function renderizarListaEmails(){
   }
   area.innerHTML = html;
   a11yAtualizarItens();
+}
+
+// Cada checkbox de filtro passa por aqui em vez de chamar renderizarListaEmails()
+// direto -- sem o anúncio, quem usa NVDA marca/desmarca um filtro (inclusive
+// pela navegação numerada, que ativa no segundo "Enter"/número) e não tem
+// como saber se ligou ou desligou até reparar (ou não) na lista mudando.
+// Foi exatamente essa falta de retorno que deixava vários filtros marcados
+// ao mesmo tempo sem a pessoa perceber -- "não lidos" + "com processo" +
+// "propostas" juntos quase nunca bate com e-mail nenhum.
+function emailFiltroCheckboxMudou(el, nome){
+  a11yAnunciar(nome + ': ' + (el.checked ? 'ativado' : 'desativado') + '.');
+  renderizarListaEmails();
+}
+
+function limparFiltrosEmails(){
+  document.getElementById('email-filtro-categoria').value = '';
+  document.getElementById('email-busca').value = '';
+  document.getElementById('email-so-nao-lidos').checked = false;
+  document.getElementById('email-so-com-processo').checked = false;
+  document.getElementById('email-so-propostas').checked = false;
+  a11yAnunciar('Filtros limpos.');
+  renderizarListaEmails();
 }
 
 // Ponto de partida do atalho "Usar resposta pronta" -- a pessoa sempre revisa
@@ -7815,8 +7852,14 @@ function a11yAtualizarItens(manterNivel, silencioso){
       const busca = modalAberto.querySelector('#email-busca');
       if(busca) itensModal.push({el:busca, label:'Buscar por assunto ou remetente'});
       modalAberto.querySelectorAll('#email-filtros input[type=checkbox]').forEach(c=>{
-        itensModal.push({el:c, label:(c.closest('label')?.textContent || '').trim()});
+        // o rótulo inclui o estado atual -- sem isso, apertar o número de novo
+        // pra "ativar" o checkbox vira uma armadilha: a pessoa não sabe se vai
+        // ligar ou desligar o filtro até ouvir o resultado (ou a falta dele).
+        const nome = (c.closest('label')?.textContent || '').trim();
+        itensModal.push({el:c, label:nome+' ('+(c.checked?'marcado':'desmarcado')+')'});
       });
+      const btnLimpar = modalAberto.querySelector('#email-filtros .btn-sm');
+      if(btnLimpar) itensModal.push({el:btnLimpar, label:'Limpar filtros'});
     }
     modalAberto.querySelectorAll('.modal-actions button').forEach(b=>{
       itensModal.push({el:b, label:b.textContent.trim()});
