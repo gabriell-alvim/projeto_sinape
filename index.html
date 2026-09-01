@@ -1197,7 +1197,7 @@ th.sortable:hover { color:var(--teal-mid); }
       <button class="btn-outline" onclick="fecharModal('modal-opcoes');abrirNotificacoes()">🔔 Notificações</button>
       <button class="btn-outline" onclick="fecharModal('modal-opcoes');abrirPainelPrazos()">⏰ Painel de prazos</button>
       <button class="btn-outline" onclick="fecharModal('modal-opcoes');abrirPainelGastos()">💵 Painel de gastos</button>
-      <button class="btn-outline" onclick="fecharModal('modal-opcoes');abrirPainelEmails()">📧 Painel de e-mails</button>
+      <button class="btn-outline" onclick="fecharModal('modal-opcoes');abrirPainelEmails()">📧 Painel de e-mails <span class="badge" id="badge-emails-pendentes" style="display:none;">0</span></button>
       <button class="btn-outline" onclick="fecharModal('modal-opcoes');copiarPromptIA()">🤖 Copiar prompt p/ IA</button>
       <button class="btn-outline" onclick="fecharModal('modal-opcoes');abrirSinki()">💬 Falar com Sinki</button>
       <button class="btn-outline" onclick="fecharModal('modal-opcoes');abrirLixeira()">🗑️ Lixeira</button>
@@ -3902,12 +3902,12 @@ function comRemoverLinhaConsorcio(i){
   COM_CONSORCIO_ROWS.splice(i,1);
   document.getElementById('com-consorcio-linhas').innerHTML = comRenderLinhasConsorcio();
 }
-function comAbrirFormOportunidade(id){
-  const o = id ? COM.oportunidades.find(x=>x.id===id) : {
+function comAbrirFormOportunidade(id, prefill){
+  const o = id ? COM.oportunidades.find(x=>x.id===id) : Object.assign({
     empresa:'Sinape', segmento:'Público', modalidade:'Licitação', percChanceReal:0.5,
     statusEnviadas:'Enviada', statusGanho:'Pendente', habilitacao:'SIM',
     continuidadeOuNovo:'Novo', novosClientes:'Não', statusProcesso:'Em andamento', consorcio:'Não',
-  };
+  }, prefill || {});
   COM_CONSORCIO_ROWS = (o.composicaoConsorcio && o.composicaoConsorcio.length)
     ? JSON.parse(JSON.stringify(o.composicaoConsorcio)) : [{empresa:'Sinape', percentual:''}];
   const corpo = document.getElementById('comercial-form-body');
@@ -6457,6 +6457,27 @@ const EMAIL_CATEGORIA_INFO = {
   ruido:           { titulo: '🔕 Ruído',                classe: 'depois' },
 };
 
+// Badge no botão "Painel de e-mails" (dentro de Opções) -- não usa o sino de
+// notificações (col_notificacoes é aviso pessoa-a-pessoa, semântica
+// diferente de "contagem derivada da última varredura"). Silencioso em
+// qualquer falha -- é um extra, não pode travar a tela por causa dele.
+async function atualizarBadgeEmails(){
+  const badge = document.getElementById('badge-emails-pendentes');
+  if(!badge || Store.modo!=='api') return;
+  try{
+    let dados = EMAILS_ULTIMA;
+    if(!dados){
+      const res = await fetch(Store.base + '/emails/ultima-varredura', { headers: Store.headers() });
+      if(!res.ok) return;
+      const g = await res.json();
+      dados = (g && g.itens) ? g : null;
+    }
+    const pendentes = dados ? (dados.itens||[]).filter(i=>!i.respondido && i.categoria!=='ruido').length : 0;
+    if(pendentes > 0){ badge.textContent = pendentes; badge.style.display = ''; }
+    else { badge.style.display = 'none'; }
+  }catch(e){ /* silencioso de propósito */ }
+}
+
 async function abrirPainelEmails(){
   abrirModalAdiarNumeracao('modal-emails');
   document.getElementById('email-filtros').style.display = 'none';
@@ -6474,6 +6495,7 @@ async function abrirPainelEmails(){
     const g = await res.json();
     EMAILS_ULTIMA = (g && g.itens) ? g : null;
     renderizarPainelEmails();
+    atualizarBadgeEmails();
   }catch(e){
     area.innerHTML = '<p class="relatorio-vazio">Não foi possível carregar a última varredura: '+esc(e.message)+'</p>';
     a11yAtualizarItens();
@@ -6490,6 +6512,7 @@ async function rodarVarreduraEmails(){
     if(!res.ok) throw new Error(g.erro || ('Servidor respondeu ' + res.status));
     EMAILS_ULTIMA = g;
     renderizarPainelEmails();
+    atualizarBadgeEmails();
     toast('Varredura concluída: '+(g.total_verificado||0)+' e-mail(s) verificado(s).');
   }catch(e){
     toast('Não foi possível rodar a varredura: '+e.message);
@@ -6585,9 +6608,13 @@ function renderizarListaEmails(){
       const quando = i.recebidoEm ? new Date(i.recebidoEm).toLocaleString('pt-BR') : '';
       const selo = i.processo_id ? ' <span class="chip st-participar">🔗 '+esc(i.processo_nome)+'</span>' : '';
       const naoLido = !i.lido ? ' <span class="chip st-em_disputa">não lido</span>' : '';
-      const respondidoBadge = i.respondido ? ' <span class="chip st-vencido">✅ respondido</span>' : '';
+      const respondidoBadge = i.respondido
+        ? ' <span class="chip st-vencido">✅ respondido'+(i.respondido_fora_do_painel?' (fora do painel)':'')+'</span>'
+        : '';
       const propostaBadge = i.proposta ? ' <span class="chip st-em_analise">📝 proposta recebida</span>' : '';
       const gid = esc(i.graph_id || '');
+      const remetenteEsc = esc(i.remetente||'').replace(/'/g,"\\'");
+      const assuntoEsc = esc(i.assunto||'').replace(/'/g,"\\'");
       // .prazo-item vira um <div> (não mais <a>) porque agora tem controles
       // interativos DENTRO do card -- botão dentro de link é HTML inválido e
       // quebra o clique. Abrir no Outlook continua um clique, só que no
@@ -6598,15 +6625,27 @@ function renderizarListaEmails(){
           '<span class="prazo-item-quando">'+esc(quando)+'</span>' +
         '</div>' +
         '<div class="prazo-item-campo">'+esc(i.remetente)+selo+propostaBadge+naoLido+respondidoBadge+'</div>' +
+        '<div class="email-item-acoes">' +
+          (i.graph_id ? '<button type="button" class="btn-sm" onclick="toggleRespostaEmail(\''+gid+'\')">↩️ Responder</button>' : '') +
+          (i.proposta ? '<button type="button" class="btn-sm violet" onclick="criarOportunidadeDoEmail(\''+remetenteEsc+'\',\''+assuntoEsc+'\')">🚀 Criar oportunidade</button>' : '') +
+          (i.graph_id ? (
+            '<select class="btn-sm" aria-label="Reclassificar este e-mail" onchange="reclassificarEmail(\''+gid+'\', this.value)">' +
+              ['portal','correspondencia','ruido'].map(c=>
+                '<option value="'+c+'"'+(c===i.categoria?' selected':'')+'>'+esc(EMAIL_CATEGORIA_INFO[c].titulo)+'</option>'
+              ).join('') +
+            '</select>'
+          ) : '') +
+        '</div>' +
         (i.graph_id ? (
-          '<div class="email-item-acoes">' +
-            '<button type="button" class="btn-sm" onclick="toggleRespostaEmail(\''+gid+'\')">↩️ Responder</button>' +
-          '</div>' +
           '<div class="email-resposta-area" id="resp-area-'+gid+'" style="display:none;">' +
             '<p class="hint" style="margin-bottom:6px;">📋 Cópia automática para '+esc(EMAIL_CC_RESPOSTAS)+'.</p>' +
             '<textarea id="resp-texto-'+gid+'" placeholder="Escreva sua resposta…" aria-label="Escreva sua resposta. Vai em cópia automática para '+esc(EMAIL_CC_RESPOSTAS)+'."></textarea>' +
             '<div class="email-resposta-botoes">' +
-              '<button type="button" class="btn-outline btn-sm" onclick="usarRespostaPronta(\''+gid+'\')">Usar resposta pronta</button>' +
+              '<select id="resp-modelo-'+gid+'" class="btn-sm" aria-label="Escolher resposta pronta">' +
+                '<option value="">Escolher resposta pronta…</option>' +
+                RESPOSTAS_PRONTAS.map(r=>'<option value="'+esc(r.id)+'">'+esc(r.titulo)+'</option>').join('') +
+              '</select>' +
+              '<button type="button" class="btn-outline btn-sm" onclick="usarRespostaPronta(\''+gid+'\')">Usar</button>' +
               '<button type="button" class="btn-primary btn-sm" id="btn-enviar-'+gid+'" onclick="enviarRespostaEmail(\''+gid+'\')">Enviar</button>' +
             '</div>' +
           '</div>'
@@ -6646,14 +6685,24 @@ function limparFiltrosEmails(){
 // é o backend (EMAIL_CC_RESPOSTAS em app.py), sempre, sem depender do front.
 const EMAIL_CC_RESPOSTAS = 'comercial@sinape.com.br';
 
-// Ponto de partida do atalho "Usar resposta pronta" -- a pessoa sempre revisa
-// (e pode reescrever à vontade) antes de clicar em Enviar; esta rota nunca
-// dispara nada sozinha. Cobre o caso mais comum do dia a dia da comercial:
-// agradecer um contato e informar que a Sinape não vai seguir com a oportunidade.
-const RESPOSTA_PRONTA_RECUSA =
-  'Olá!\n\nAgradecemos muito o contato e o interesse em contar com a Sinape.\n\n' +
-  'Depois de avaliar internamente, optamos por não seguir com esta oportunidade no momento.\n' +
-  'Ficamos à disposição para futuras parcerias.\n\nAtenciosamente,\nEquipe Comercial — Sinape';
+// Pontos de partida do menu "resposta pronta" -- a pessoa sempre revisa (e
+// pode reescrever à vontade) antes de clicar em Enviar; nenhum desses dispara
+// nada sozinho. Cobrem os casos mais comuns do dia a dia da comercial.
+const RESPOSTAS_PRONTAS = [
+  { id:'recusa', titulo:'Agradecer e recusar', texto:
+    'Olá!\n\nAgradecemos muito o contato e o interesse em contar com a Sinape.\n\n' +
+    'Depois de avaliar internamente, optamos por não seguir com esta oportunidade no momento.\n' +
+    'Ficamos à disposição para futuras parcerias.\n\nAtenciosamente,\nEquipe Comercial — Sinape' },
+  { id:'analisando', titulo:'Vamos analisar e retornamos', texto:
+    'Olá!\n\nRecebemos seu contato, muito obrigado.\n\n' +
+    'Vamos analisar internamente e retornamos em breve com uma posição.\n\n' +
+    'Atenciosamente,\nEquipe Comercial — Sinape' },
+  { id:'mais-detalhes', titulo:'Pedir mais detalhes', texto:
+    'Olá!\n\nAgradecemos o contato.\n\n' +
+    'Para conseguirmos avaliar corretamente, poderia nos enviar mais detalhes ' +
+    '(escopo, prazo e documentação de referência, se houver)?\n\n' +
+    'Atenciosamente,\nEquipe Comercial — Sinape' },
+];
 
 function toggleRespostaEmail(gid){
   const area = document.getElementById('resp-area-'+gid);
@@ -6664,8 +6713,11 @@ function toggleRespostaEmail(gid){
 }
 
 function usarRespostaPronta(gid){
+  const escolha = document.getElementById('resp-modelo-'+gid)?.value;
   const campo = document.getElementById('resp-texto-'+gid);
-  if(campo) campo.value = RESPOSTA_PRONTA_RECUSA;
+  if(!escolha){ toast('Escolha uma resposta pronta na lista primeiro.'); return; }
+  const modelo = RESPOSTAS_PRONTAS.find(r=>r.id===escolha);
+  if(campo && modelo) campo.value = modelo.texto;
 }
 
 async function enviarRespostaEmail(gid){
@@ -6685,13 +6737,44 @@ async function enviarRespostaEmail(gid){
     // reflete no EMAILS_ULTIMA em memória -- sobrevive a filtrar a lista de
     // novo sem precisar recarregar do servidor
     const item = (EMAILS_ULTIMA?.itens || []).find(i=>i.graph_id===gid);
-    if(item) item.respondido = true;
+    if(item){ item.respondido = true; delete item.respondido_fora_do_painel; }
     toast('Resposta enviada.');
     renderizarListaEmails();
+    atualizarBadgeEmails();
   }catch(e){
     toast('Não foi possível enviar a resposta: '+e.message);
     btn.disabled = false; btn.textContent = original;
   }
+}
+
+async function reclassificarEmail(gid, novaCategoria){
+  const item = (EMAILS_ULTIMA?.itens || []).find(i=>i.graph_id===gid);
+  const antiga = item?.categoria;
+  try{
+    const res = await fetch(Store.base + '/emails/reclassificar', {
+      method: 'POST', headers: Store.headers(),
+      body: JSON.stringify({ graph_id: gid, categoria: novaCategoria }),
+    });
+    const g = await res.json();
+    if(!res.ok) throw new Error(g.erro || ('Servidor respondeu ' + res.status));
+    EMAILS_ULTIMA = g;
+    toast('Categoria corrigida'+(antiga?' (era "'+esc(EMAIL_CATEGORIA_INFO[antiga]?.titulo||antiga)+'")':'')+'.');
+    renderizarPainelEmails();
+    atualizarBadgeEmails();
+  }catch(e){
+    toast('Não foi possível reclassificar: '+e.message);
+    renderizarListaEmails(); // desfaz visualmente o select, já que o servidor não aceitou
+  }
+}
+
+// Abre o formulário de Nova Oportunidade (mesmo do Painel Gerencial) já
+// preenchido com o que dá pra aproveitar do e-mail -- a pessoa completa o
+// resto (segmento, valor, etc.) e revisa antes de salvar, igual a qualquer
+// oportunidade criada à mão. Sai do Painel de e-mails ao salvar (mesmo
+// comportamento que salvar qualquer oportunidade nova já tem hoje).
+function criarOportunidadeDoEmail(remetente, assunto){
+  fecharModal('modal-emails');
+  comAbrirFormOportunidade(null, { cliente: remetente, objeto: assunto });
 }
 
 async function abrirRelatorioDoDia(){
@@ -8320,6 +8403,7 @@ async function init(){
   ajustarOffsetsSticky();
   a11yAtualizarItens();
   atualizarSino();
+  atualizarBadgeEmails();
 }
 
 /* Quem está logado vem da sessão do servidor — e só de lá.

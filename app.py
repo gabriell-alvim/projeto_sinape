@@ -50,8 +50,10 @@ Rotas:
   GET     /api/prazos                         → todos os prazos de todos os processos ativos, numa lista só, ordenados do mais urgente pro mais distante
   GET     /api/gerencial                      → dados crus do acompanhamento por fases de todos os processos (a tela é quem calcula % e semáforo)
   POST    /api/emails/varredura               → varre o Inbox do Outlook do usuário logado (Mail.Read), classifica e cruza com processos
+                                                (a mesma varredura também dispara sozinha no 1º acesso do dia — ver /api/eu)
   GET     /api/emails/ultima-varredura        → devolve a última varredura de e-mail já feita, sem rodar de novo
   POST    /api/emails/responder               → responde um e-mail da varredura na própria thread (Mail.Send) {graph_id, texto}
+  POST    /api/emails/reclassificar           → corrige a categoria de um e-mail já varrido {graph_id, categoria}
   GET     /api/eu                             → identidade de quem está logado (inclui "autor", que assina o que a pessoa fizer)
   GET     /api/usuarios                       → quem já entrou com conta própria — a lista de gente endereçável (notificar, atribuir)
   POST    /api/notificacoes                   → avisa a equipe (tipo "equipe") ou pede conferência de alguém (tipo "dirigida") sobre o que mudou numa sessão de edição
@@ -252,6 +254,10 @@ col_comercial_atas = db["comercial_atas"]
 col_comercial_snapshot_anterior = db["comercial_snapshot_anterior"]
 col_processos_excluidos = db["processos_excluidos"]
 col_varreduras_email = db["varreduras_email"]
+# trava do disparo automático de manhã (ver _talvez_disparar_varredura_automatica)
+# -- _id é a data (GMT-3) já processada; insert_one falhando com chave
+# duplicada É o mecanismo de "só uma vez por dia", não um efeito colateral.
+col_varreduras_email_ctrl = db["varreduras_email_ctrl"]
 
 
 def _init_db():
@@ -626,6 +632,10 @@ def quem_sou_eu():
     Fabrício' não provaria que foi o Fabrício."""
     email = session.get("usuario_email") or ""
     nome = session.get("usuario_nome") or ""
+    # /api/eu é chamada em toda carga de página (init() do front) -- gancho
+    # barato pra disparar a varredura de e-mail sozinha na primeira vez que
+    # alguém com Mail.Read abre o painel no dia (ver _talvez_disparar_varredura_automatica).
+    _talvez_disparar_varredura_automatica(email)
     return jsonify({
         "email": email,
         "nome": nome,
@@ -1650,23 +1660,68 @@ GRAPH_BASE = "https://graph.microsoft.com/v1.0"
 # depender da pessoa lembrar de colocar CC na mão toda vez.
 EMAIL_CC_RESPOSTAS = "comercial@sinape.com.br"
 
+CATEGORIAS_EMAIL_VALIDAS = {"portal", "correspondencia", "ruido"}
 
-@app.route("/api/emails/varredura", methods=["POST"])
-def executar_varredura_email():
-    """Varre a caixa de entrada do usuário logado via Microsoft Graph (Mail.Read
-    delegado -- token do próprio usuário, nunca a caixa de outra pessoa),
-    classifica cada mensagem e cruza aviso de portal com processo já cadastrado.
-    Só roda sob demanda (clique em "Executar varredura") -- sem varredura
-    automática de manhã por enquanto, decisão do Gabriel pra não mexer em
-    permissão de app-only/admin do Azure agora (ver _token_graph_mail)."""
-    email = session.get("usuario_email") or ""
+
+def _corpo_completo_email(token, graph_id):
+    """Corpo inteiro da mensagem (texto puro), só usado quando o resumo curto
+    (bodyPreview, ~255 caracteres) não bastou pra classificar direito --
+    cruzamento com processo ou detecção de proposta que deu negativo no
+    preview ganham uma segunda chance aqui. Uma chamada extra por item
+    ambíguo, não em massa. None em qualquer falha -- quem chama já sabe
+    tratar 'não achei nada' sem quebrar a varredura inteira por isso."""
+    if not graph_id:
+        return None
+    try:
+        r = requests.get(
+            f"{GRAPH_BASE}/me/messages/{graph_id}",
+            headers={"Authorization": f"Bearer {token}", "Prefer": 'outlook.body-content-type="text"'},
+            params={"$select": "body"},
+            timeout=15,
+        )
+        if r.status_code != 200:
+            return None
+        return ((r.json().get("body") or {}).get("content")) or None
+    except requests.RequestException:
+        return None
+
+
+def _ja_respondida_no_outlook(token, conversation_id):
+    """True quando já existe algo enviado (por quem está logado) nesta mesma
+    conversa -- cobre quem responde direto no Outlook, fora do painel. Só
+    vale a pena checar pra correspondência (portal/ruído nunca esperam
+    resposta manual), e é 1 chamada por item dessa categoria, não em massa."""
+    if not conversation_id:
+        return False
+    try:
+        r = requests.get(
+            f"{GRAPH_BASE}/me/mailFolders('SentItems')/messages",
+            headers={"Authorization": f"Bearer {token}"},
+            params={"$filter": f"conversationId eq '{conversation_id}'", "$top": "1", "$select": "id"},
+            timeout=15,
+        )
+        if r.status_code != 200:
+            return False
+        return bool(r.json().get("value"))
+    except requests.RequestException:
+        return False
+
+
+def _rodar_varredura_email(email, autor=None):
+    """O miolo de verdade da varredura -- chamado tanto pela rota HTTP
+    (clique em "Executar varredura", autor vem da sessão) quanto pelo
+    disparo automático do primeiro acesso do dia (autor=None, sem contexto
+    de sessão -- roda numa thread solta, não dá pra ler `session` ali).
+    Levanta RuntimeError com mensagem pronta pra tela quando falta permissão
+    -- outra exceção qualquer é falha de rede/Graph (quem chama decide o
+    código HTTP certo pra cada caso)."""
     token = _token_graph_mail(email, ["Mail.Read"])
     if not token:
-        return jsonify({
-            "erro": "Leitura de e-mail ainda não autorizada para esta conta. Saia e "
-                    "entre de novo pela Microsoft para conceder a permissão (aparece "
-                    "uma tela de consentimento do Outlook uma única vez)."
-        }), 400
+        raise RuntimeError(
+            "Leitura de e-mail ainda não autorizada para esta conta. Saia e "
+            "entre de novo pela Microsoft para conceder a permissão (aparece "
+            "uma tela de consentimento do Outlook uma única vez)."
+        )
 
     ultima = col_varreduras_email.find_one(sort=[("criadoEm", DESCENDING)])
     if ultima and ultima.get("criadoEm"):
@@ -1681,7 +1736,7 @@ def executar_varredura_email():
     params = {
         "$top": "50",
         "$orderby": "receivedDateTime desc",
-        "$select": "id,subject,from,receivedDateTime,isRead,webLink,bodyPreview",
+        "$select": "id,subject,from,receivedDateTime,isRead,webLink,bodyPreview,conversationId",
         "$filter": f"receivedDateTime ge {desde_iso}",
     }
     url = f"{GRAPH_BASE}/me/mailFolders/Inbox/messages"
@@ -1691,13 +1746,13 @@ def executar_varredura_email():
         while url and paginas < 6:  # teto de ~300 mensagens por varredura
             r = requests.get(url, headers=headers, params=(params if paginas == 0 else None), timeout=20)
             if r.status_code != 200:
-                return jsonify({"erro": f"Microsoft Graph respondeu {r.status_code}: {r.text[:300]}"}), 502
+                raise Exception(f"Microsoft Graph respondeu {r.status_code}: {r.text[:300]}")
             corpo = r.json()
             brutos.extend(corpo.get("value") or [])
             url = corpo.get("@odata.nextLink")
             paginas += 1
     except requests.RequestException as e:
-        return jsonify({"erro": f"Falha ao contactar o Microsoft Graph: {e}"}), 502
+        raise Exception(f"Falha ao contactar o Microsoft Graph: {e}")
 
     itens = []
     contagens = {"portal": 0, "correspondencia": 0, "ruido": 0, "propostas": 0}
@@ -1707,11 +1762,10 @@ def executar_varredura_email():
         categoria = _classificar_email(remetente, preview)
         contagens[categoria] += 1
         assunto = m.get("subject") or "(sem assunto)"
+        graph_id = m.get("id")
         eh_proposta = _eh_proposta_recebida(assunto, preview)
-        if eh_proposta:
-            contagens["propostas"] += 1
         item = {
-            "graph_id": m.get("id"),  # precisa do id de verdade da mensagem pra responder (ver /api/emails/responder)
+            "graph_id": graph_id,  # precisa do id de verdade da mensagem pra responder (ver /api/emails/responder)
             "assunto": assunto,
             "remetente": remetente,
             "recebidoEm": m.get("receivedDateTime"),
@@ -1723,20 +1777,86 @@ def executar_varredura_email():
         }
         if categoria == "portal":
             casado = _casar_email_com_processo(preview)
+            if not casado:
+                corpo_completo = _corpo_completo_email(token, graph_id)
+                if corpo_completo:
+                    casado = _casar_email_com_processo(corpo_completo)
             if casado:
                 item.update(casado)
+        elif categoria == "correspondencia":
+            if not eh_proposta:
+                corpo_completo = _corpo_completo_email(token, graph_id)
+                if corpo_completo and _eh_proposta_recebida(assunto, corpo_completo):
+                    eh_proposta = True
+                    item["proposta"] = True
+            conversation_id = m.get("conversationId")
+            if conversation_id and _ja_respondida_no_outlook(token, conversation_id):
+                item["respondido"] = True
+                item["respondido_fora_do_painel"] = True
+        if eh_proposta:
+            contagens["propostas"] += 1
         itens.append(item)
 
     doc = {
         "_id": uuid.uuid4().hex,
         "criadoEm": _agora_ms(),
-        "autor": _autor_da_sessao(),
+        "autor": autor or email,
         "desde": desde_iso,
         "total_verificado": len(itens),
         "contagens": contagens,
         "itens": itens,
     }
     col_varreduras_email.insert_one(doc)
+    return doc
+
+
+def _talvez_disparar_varredura_automatica(email):
+    """Dispara a varredura sozinha na primeira vez, no dia, que ALGUÉM com
+    Mail.Read válido carrega o painel -- sem horário fixo, porque a instância
+    do Render dorme sem tráfego e um agendador de relógio simplesmente não
+    dispararia se ninguém tivesse acessado nesse horário. A checagem barata
+    (find_one) vem antes da cara (_token_graph_mail, que pode envolver
+    refresh do token) só pra não pagar esse custo em todo /api/eu do dia
+    depois que já disparou. A trava de verdade é o insert_one -- com os 2
+    workers do gunicorn, só quem inserir primeiro dispara; o outro esbarra em
+    DuplicateKeyError e sai calado."""
+    if not email:
+        return
+    hoje = (datetime.utcnow() - timedelta(hours=3)).strftime("%Y-%m-%d")  # GMT-3, sem horário de verão
+    if col_varreduras_email_ctrl.find_one({"_id": hoje}):
+        return
+    token = _token_graph_mail(email, ["Mail.Read"])
+    if not token:
+        return
+    try:
+        col_varreduras_email_ctrl.insert_one({"_id": hoje, "disparadaEm": _agora_ms(), "por": email})
+    except DuplicateKeyError:
+        return
+
+    def _tarefa():
+        try:
+            _rodar_varredura_email(email)
+            print(f"[emails] varredura automática do dia disparada por {email}", flush=True)
+        except Exception as e:
+            print(f"[emails] varredura automática falhou: {e!r}", flush=True)
+
+    threading.Thread(target=_tarefa, name="varredura-email-auto", daemon=True).start()
+
+
+@app.route("/api/emails/varredura", methods=["POST"])
+def executar_varredura_email():
+    """Varre a caixa de entrada do usuário logado via Microsoft Graph (Mail.Read
+    delegado -- token do próprio usuário, nunca a caixa de outra pessoa),
+    classifica cada mensagem e cruza aviso de portal com processo já
+    cadastrado. Clique manual ("Executar varredura") -- o disparo sozinho de
+    manhã usa a mesma _rodar_varredura_email, ver _talvez_disparar_varredura_automatica."""
+    email = session.get("usuario_email") or ""
+    try:
+        doc = _rodar_varredura_email(email, autor=_autor_da_sessao())
+    except RuntimeError as e:
+        return jsonify({"erro": str(e)}), 400
+    except Exception as e:
+        return jsonify({"erro": str(e)}), 502
     return jsonify(_sem_id_mongo(doc)), 201
 
 
@@ -1745,6 +1865,35 @@ def ultima_varredura_email():
     doc = col_varreduras_email.find_one(sort=[("criadoEm", DESCENDING)])
     if not doc:
         return jsonify({}), 200
+    return jsonify(_sem_id_mongo(doc)), 200
+
+
+@app.route("/api/emails/reclassificar", methods=["POST"])
+def reclassificar_email():
+    """Corrige a categoria que a heurística errou, direto na tela -- não muda
+    a heurística (isso é código, fica pra mim ajustar depois com o exemplo
+    real), só o item já gravado desta varredura."""
+    corpo = request.get_json(silent=True) or {}
+    graph_id = (corpo.get("graph_id") or "").strip()
+    nova = (corpo.get("categoria") or "").strip()
+    if nova not in CATEGORIAS_EMAIL_VALIDAS:
+        return jsonify({"erro": "Categoria inválida."}), 400
+    doc = col_varreduras_email.find_one({"itens.graph_id": graph_id})
+    if not doc:
+        return jsonify({"erro": "E-mail não encontrado na varredura mais recente."}), 404
+    item = next((i for i in doc["itens"] if i["graph_id"] == graph_id), None)
+    antiga = (item or {}).get("categoria")
+    if antiga != nova:
+        contagens = dict(doc.get("contagens") or {})
+        if antiga in contagens:
+            contagens[antiga] = max(0, contagens[antiga] - 1)
+        contagens[nova] = contagens.get(nova, 0) + 1
+        col_varreduras_email.update_one({"_id": doc["_id"]}, {"$set": {"contagens": contagens}})
+        col_varreduras_email.update_one(
+            {"_id": doc["_id"], "itens.graph_id": graph_id},
+            {"$set": {"itens.$.categoria": nova}},
+        )
+        doc = col_varreduras_email.find_one({"_id": doc["_id"]})
     return jsonify(_sem_id_mongo(doc)), 200
 
 
