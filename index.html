@@ -1256,6 +1256,7 @@ th.sortable:hover { color:var(--teal-mid); }
       <input type="text" id="email-busca" placeholder="Buscar por assunto ou remetente…" oninput="renderizarListaEmails()" aria-label="Buscar por assunto ou remetente">
       <label class="check-inline"><input type="checkbox" id="email-so-nao-lidos" onchange="renderizarListaEmails()"> Só não lidos</label>
       <label class="check-inline"><input type="checkbox" id="email-so-com-processo" onchange="renderizarListaEmails()"> Só com processo vinculado</label>
+      <label class="check-inline"><input type="checkbox" id="email-so-propostas" onchange="renderizarListaEmails()"> 📝 Só propostas recebidas</label>
     </div>
     <div id="email-conteudo">
       <p class="relatorio-vazio">Carregando…</p>
@@ -6504,6 +6505,7 @@ function renderizarPainelEmails(){
       '<div class="gastos-card"><div class="gc-num">'+(c.portal||0)+'</div><div class="gc-lbl">🏛️ portal de licitação</div></div>' +
       '<div class="gastos-card"><div class="gc-num">'+(c.correspondencia||0)+'</div><div class="gc-lbl">✉️ correspondência</div></div>' +
       '<div class="gastos-card"><div class="gc-num">'+(c.ruido||0)+'</div><div class="gc-lbl">🔕 ruído</div></div>' +
+      '<div class="gastos-card"><div class="gc-num">'+(c.propostas||0)+'</div><div class="gc-lbl">📝 propostas recebidas</div></div>' +
     '</div>' +
     '<p class="hint" style="margin-top:-6px;">Última varredura: '+esc(quando)+' · '+(EMAILS_ULTIMA.total_verificado||0)+' e-mail(s) verificado(s) desde '+esc(EMAILS_ULTIMA.desde||'')+'.</p>';
   filtros.style.display = 'flex';
@@ -6517,11 +6519,13 @@ function renderizarListaEmails(){
   const busca = (document.getElementById('email-busca').value || '').toLowerCase().trim();
   const soNaoLidos = document.getElementById('email-so-nao-lidos').checked;
   const soComProcesso = document.getElementById('email-so-com-processo').checked;
+  const soPropostas = document.getElementById('email-so-propostas').checked;
   let itens = EMAILS_ULTIMA.itens || [];
   if(cat) itens = itens.filter(i=>i.categoria===cat);
   if(busca) itens = itens.filter(i=>(i.assunto+' '+i.remetente).toLowerCase().includes(busca));
   if(soNaoLidos) itens = itens.filter(i=>!i.lido);
   if(soComProcesso) itens = itens.filter(i=>!!i.processo_id);
+  if(soPropostas) itens = itens.filter(i=>!!i.proposta);
 
   if(!itens.length){
     area.innerHTML = '<p class="relatorio-vazio">Nenhum e-mail bate com esse filtro.</p>';
@@ -6539,6 +6543,7 @@ function renderizarListaEmails(){
       const selo = i.processo_id ? ' <span class="chip st-participar">🔗 '+esc(i.processo_nome)+'</span>' : '';
       const naoLido = !i.lido ? ' <span class="chip st-em_disputa">não lido</span>' : '';
       const respondidoBadge = i.respondido ? ' <span class="chip st-vencido">✅ respondido</span>' : '';
+      const propostaBadge = i.proposta ? ' <span class="chip st-em_analise">📝 proposta recebida</span>' : '';
       const gid = esc(i.graph_id || '');
       // .prazo-item vira um <div> (não mais <a>) porque agora tem controles
       // interativos DENTRO do card -- botão dentro de link é HTML inválido e
@@ -6549,7 +6554,7 @@ function renderizarListaEmails(){
           '<a href="'+esc(i.webLink||'#')+'" target="_blank" rel="noopener" class="prazo-item-nome">'+esc(i.assunto)+'</a>' +
           '<span class="prazo-item-quando">'+esc(quando)+'</span>' +
         '</div>' +
-        '<div class="prazo-item-campo">'+esc(i.remetente)+selo+naoLido+respondidoBadge+'</div>' +
+        '<div class="prazo-item-campo">'+esc(i.remetente)+selo+propostaBadge+naoLido+respondidoBadge+'</div>' +
         (i.graph_id ? (
           '<div class="email-item-acoes">' +
             '<button type="button" class="btn-sm" onclick="toggleRespostaEmail(\''+gid+'\')">↩️ Responder</button>' +

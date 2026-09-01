@@ -1580,6 +1580,22 @@ _PADRAO_RUIDO_REMETENTE = re.compile(
 _PADRAO_EDITAL_NUM = re.compile(r"Edital:\s*([0-9./-]+)", re.I)
 _PADRAO_ORGAO = re.compile(r"Central de compras:\s*([^\n\r]+)", re.I)
 
+# Proposta recebida: pedido de orçamento/cotação vindo direto de um cliente em
+# potencial (não é aviso de portal nem newsletter) -- é o caso que o Gabriel
+# citou (ex.: "SOLICITAÇÃO DE ORÇAMENTO" da Unicamp). É uma marcação (booleana)
+# em cima da categoria, não uma categoria nova -- um e-mail de proposta É
+# correspondência, só que com esse destaque a mais pra filtrar rápido.
+_PADRAO_PROPOSTA = re.compile(
+    r"solicita\w*\s+de\s+or[çc]amento|pedido de cota[çc][ãa]o|solicita[çc][ãa]o de cota[çc][ãa]o|"
+    r"solicita[çc][ãa]o de proposta|termo de refer[êe]ncia|pedido de or[çc]amento|\bRFP\b|"
+    r"cota[çc][ãa]o de pre[çc]os?",
+    re.I,
+)
+
+
+def _eh_proposta_recebida(assunto, corpo_preview):
+    return bool(_PADRAO_PROPOSTA.search((assunto or "") + " " + (corpo_preview or "")))
+
 
 def _dominio_email(endereco):
     return (endereco or "").strip().lower().rsplit("@", 1)[-1]
@@ -1678,20 +1694,25 @@ def executar_varredura_email():
         return jsonify({"erro": f"Falha ao contactar o Microsoft Graph: {e}"}), 502
 
     itens = []
-    contagens = {"portal": 0, "correspondencia": 0, "ruido": 0}
+    contagens = {"portal": 0, "correspondencia": 0, "ruido": 0, "propostas": 0}
     for m in brutos:
         remetente = ((m.get("from") or {}).get("emailAddress") or {}).get("address") or ""
         preview = m.get("bodyPreview") or ""
         categoria = _classificar_email(remetente, preview)
         contagens[categoria] += 1
+        assunto = m.get("subject") or "(sem assunto)"
+        eh_proposta = _eh_proposta_recebida(assunto, preview)
+        if eh_proposta:
+            contagens["propostas"] += 1
         item = {
             "graph_id": m.get("id"),  # precisa do id de verdade da mensagem pra responder (ver /api/emails/responder)
-            "assunto": m.get("subject") or "(sem assunto)",
+            "assunto": assunto,
             "remetente": remetente,
             "recebidoEm": m.get("receivedDateTime"),
             "lido": bool(m.get("isRead")),
             "webLink": m.get("webLink"),
             "categoria": categoria,
+            "proposta": eh_proposta,
             "respondido": False,
         }
         if categoria == "portal":
