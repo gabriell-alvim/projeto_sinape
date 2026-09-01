@@ -850,6 +850,15 @@ th.sortable:hover { color:var(--teal-mid); }
         <span class="home-card-titulo">Painel de Atestados</span>
         <span class="home-card-sub">Capacidade técnica da SINAPE (em construção)</span>
       </button>
+      <!-- Mesmo destino do botão "⚙️ Opções" da topbar (id="btn-opcoes") -- só
+           que também como card principal aqui, pra não depender de achar o
+           botão pequeno lá em cima pra chegar em Atualizações do dia,
+           Notificações, Painel de prazos/gastos/e-mails, Sinki e Lixeira. -->
+      <button class="home-card" onclick="abrirModal('modal-opcoes')">
+        <span class="home-card-icon" aria-hidden="true">⚙️</span>
+        <span class="home-card-titulo">Opções</span>
+        <span class="home-card-sub">Atualizações do dia, notificações, painéis de prazos/gastos/e-mails, Sinki e lixeira</span>
+      </button>
     </div>
   </div>
 
@@ -7843,7 +7852,8 @@ function a11yAtualizarItens(manterNivel, silencioso){
   }
 
   if(document.getElementById('view-home').classList.contains('active')){
-    // a tela inicial só TEM os 3 cards -- ao contrário das telas provisórias
+    // a tela inicial só TEM os cards (hoje 4: DATA SIN, Painel Gerencial,
+    // Painel de Atestados, Opções) -- ao contrário das telas provisórias
     // abaixo, aqui não faz sentido ficar sem nada numerado (era exatamente
     // isso que causava "0 opções disponíveis" ao sair do modo de navegação
     // bem na tela inicial): os cards SÃO o conteúdo desta tela.
