@@ -1266,6 +1266,7 @@ th.sortable:hover { color:var(--teal-mid); }
       <label class="check-inline"><input type="checkbox" id="email-so-nao-lidos" onchange="emailFiltroCheckboxMudou(this,'Só não lidos')"> Só não lidos</label>
       <label class="check-inline"><input type="checkbox" id="email-so-com-processo" onchange="emailFiltroCheckboxMudou(this,'Só com processo vinculado')"> Só com processo vinculado</label>
       <label class="check-inline"><input type="checkbox" id="email-so-propostas" onchange="emailFiltroCheckboxMudou(this,'Só propostas recebidas')"> 📝 Só propostas recebidas</label>
+      <label class="check-inline"><input type="checkbox" id="email-so-sinape" onchange="emailFiltroCheckboxMudou(this,'SINAPE')"> 🏢 SINAPE</label>
       <label class="check-inline"><input type="checkbox" id="email-mostrar-respondidos" onchange="emailFiltroCheckboxMudou(this,'Mostrar já respondidos')"> 👁️ Mostrar já respondidos</label>
       <button type="button" class="btn-sm" onclick="limparFiltrosEmails()">🧹 Limpar filtros</button>
     </div>
@@ -6554,6 +6555,7 @@ function renderizarListaEmails(){
   const soNaoLidos = document.getElementById('email-so-nao-lidos').checked;
   const soComProcesso = document.getElementById('email-so-com-processo').checked;
   const soPropostas = document.getElementById('email-so-propostas').checked;
+  const soSinape = document.getElementById('email-so-sinape').checked;
   const mostrarRespondidos = document.getElementById('email-mostrar-respondidos').checked;
   let itens = EMAILS_ULTIMA.itens || [];
   if(cat) itens = itens.filter(i=>i.categoria===cat);
@@ -6561,6 +6563,9 @@ function renderizarListaEmails(){
   if(soNaoLidos) itens = itens.filter(i=>!i.lido);
   if(soComProcesso) itens = itens.filter(i=>!!i.processo_id);
   if(soPropostas) itens = itens.filter(i=>!!i.proposta);
+  // domínio @sinape.com.br do remetente -- e-mail interno, de colega, não
+  // aviso de portal nem contato externo
+  if(soSinape) itens = itens.filter(i=>(i.remetente||'').toLowerCase().trim().endsWith('@'+DOMINIO_SINAPE));
 
   // E-mail já respondido pelo painel some da lista por padrão -- já foi
   // tratado, não precisa disputar atenção de novo. "Mostrar já respondidos"
@@ -6580,6 +6585,7 @@ function renderizarListaEmails(){
     if(soNaoLidos) ativos.push('só não lidos');
     if(soComProcesso) ativos.push('só com processo vinculado');
     if(soPropostas) ativos.push('só propostas recebidas');
+    if(soSinape) ativos.push('SINAPE');
     // caso especial: sobrou 0 só por causa do "esconder respondidos" -- a
     // pessoa precisa saber que TEM e-mail ali, só que já foi tratado, senão
     // parece que a varredura sumiu com tudo.
@@ -6676,6 +6682,7 @@ function limparFiltrosEmails(){
   document.getElementById('email-so-nao-lidos').checked = false;
   document.getElementById('email-so-com-processo').checked = false;
   document.getElementById('email-so-propostas').checked = false;
+  document.getElementById('email-so-sinape').checked = false;
   document.getElementById('email-mostrar-respondidos').checked = false;
   a11yAnunciar('Filtros limpos.');
   renderizarListaEmails();
@@ -6684,6 +6691,10 @@ function limparFiltrosEmails(){
 // Só pra mostrar na tela ANTES de enviar -- quem realmente adiciona a cópia
 // é o backend (EMAIL_CC_RESPOSTAS em app.py), sempre, sem depender do front.
 const EMAIL_CC_RESPOSTAS = 'comercial@sinape.com.br';
+
+// Filtro "SINAPE" -- e-mail interno, de colega, não aviso de portal nem
+// contato externo. Client-side puro, mesmo padrão dos outros filtros.
+const DOMINIO_SINAPE = 'sinape.com.br';
 
 // Pontos de partida do menu "resposta pronta" -- a pessoa sempre revisa (e
 // pode reescrever à vontade) antes de clicar em Enviar; nenhum desses dispara
