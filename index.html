@@ -165,9 +165,15 @@ input, select, textarea { font-family:inherit; }
 .home-hero { text-align:center; padding:32px 20px 8px; }
 .home-hero h1 { font-family:var(--font-display); font-weight:600; color:var(--teal); font-size:1.5rem; margin-bottom:6px; }
 .home-hero p { color:var(--slate-mid); font-size:.9rem; }
-.home-grid { display:flex; flex-wrap:wrap; justify-content:center; gap:18px; padding:24px 20px 40px; max-width:920px; margin:0 auto; }
+/* Grade 2×2 fixa (4 cards: DATA SIN/Painel Gerencial/Painel de Atestados/
+   Opções) -- com flex-wrap simples, o container ficava largo o bastante pra
+   caber 3 numa linha só e o 4º sobrava sozinho na linha de baixo, um
+   desalinho visual. Grid com 2 colunas garante sempre 2+2, em qualquer
+   largura de tela razoável (só vira 1 coluna no media query mobile abaixo). */
+.home-grid { display:grid; grid-template-columns:repeat(2, minmax(220px, 1fr)); gap:18px; padding:24px 20px 40px; max-width:620px; margin:0 auto; }
+@media (max-width:560px) { .home-grid { grid-template-columns:1fr; } }
 .home-card {
-  flex:1 1 240px; max-width:280px; background:var(--white); border:1px solid var(--border); border-radius:14px;
+  background:var(--white); border:1px solid var(--border); border-radius:14px;
   padding:26px 20px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:8px;
   transition:border-color .12s, transform .12s;
 }
@@ -730,7 +736,21 @@ th.sortable:hover { color:var(--teal-mid); }
 /* ── MÓDULO COMERCIAL ── */
 .com-navlabel { font-size:.66rem; font-weight:800; color:var(--teal); text-transform:uppercase; letter-spacing:.06em; margin:14px 0 6px; }
 .com-navlabel:first-child { margin-top:0; }
-.com-tabs { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:8px; }
+.com-tabs { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:8px; }
+/* .main-tab (definido em "PROCESSO: ABAS") foi pensado pra viver dentro de
+   .main-tabs -- uma faixa curta (5 itens, cabe numa linha só) com uma borda
+   inferior contínua unindo tudo visualmente. Aqui dentro de .com-tabs são
+   bem mais itens (chegam a quebrar em 4 linhas) e não tem essa borda pra
+   segurar o conjunto -- sem chapa própria, o item inativo (background:none,
+   border:none) começa a parecer texto solto em vez de botão. Dá chapa
+   própria só aqui, sem mexer no .main-tab original (que já funciona bem
+   onde está).*/
+.com-tabs .main-tab {
+  border:1px solid var(--border); border-radius:8px; background:var(--white); color:var(--slate-mid);
+  padding:8px 14px; margin-bottom:0;
+}
+.com-tabs .main-tab:hover { background:var(--surface); border-color:var(--teal-mid); }
+.com-tabs .main-tab.active { background:var(--teal); color:#fff; border-color:var(--teal); }
 .kpi-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:10px; margin-bottom:16px; }
 .kpi-item { background:var(--white); border:1px solid var(--border); border-left:4px solid var(--teal); border-radius:10px; padding:12px 14px; }
 .kpi-item.amber { border-left-color:var(--amber); }
