@@ -1644,6 +1644,12 @@ def _casar_email_com_processo(corpo_preview):
 
 GRAPH_BASE = "https://graph.microsoft.com/v1.0"
 
+# Toda resposta enviada pelo Painel de E-mails vai em cópia pra esta conta --
+# decisão do Gabriel, pra área comercial ter visibilidade de contato que
+# alguém respondeu direto por aqui (ex.: recusar uma oportunidade), sem
+# depender da pessoa lembrar de colocar CC na mão toda vez.
+EMAIL_CC_RESPOSTAS = "comercial@sinape.com.br"
+
 
 @app.route("/api/emails/varredura", methods=["POST"])
 def executar_varredura_email():
@@ -1768,7 +1774,10 @@ def responder_email():
         r = requests.post(
             f"{GRAPH_BASE}/me/messages/{graph_id}/reply",
             headers={"Authorization": f"Bearer {token}"},
-            json={"comment": texto},
+            json={
+                "comment": texto,
+                "message": {"ccRecipients": [{"emailAddress": {"address": EMAIL_CC_RESPOSTAS}}]},
+            },
             timeout=20,
         )
     except requests.RequestException as e:

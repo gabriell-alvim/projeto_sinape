@@ -6584,7 +6584,8 @@ function renderizarListaEmails(){
             '<button type="button" class="btn-sm" onclick="toggleRespostaEmail(\''+gid+'\')">↩️ Responder</button>' +
           '</div>' +
           '<div class="email-resposta-area" id="resp-area-'+gid+'" style="display:none;">' +
-            '<textarea id="resp-texto-'+gid+'" placeholder="Escreva sua resposta…"></textarea>' +
+            '<p class="hint" style="margin-bottom:6px;">📋 Cópia automática para '+esc(EMAIL_CC_RESPOSTAS)+'.</p>' +
+            '<textarea id="resp-texto-'+gid+'" placeholder="Escreva sua resposta…" aria-label="Escreva sua resposta. Vai em cópia automática para '+esc(EMAIL_CC_RESPOSTAS)+'."></textarea>' +
             '<div class="email-resposta-botoes">' +
               '<button type="button" class="btn-outline btn-sm" onclick="usarRespostaPronta(\''+gid+'\')">Usar resposta pronta</button>' +
               '<button type="button" class="btn-primary btn-sm" id="btn-enviar-'+gid+'" onclick="enviarRespostaEmail(\''+gid+'\')">Enviar</button>' +
@@ -6620,6 +6621,10 @@ function limparFiltrosEmails(){
   a11yAnunciar('Filtros limpos.');
   renderizarListaEmails();
 }
+
+// Só pra mostrar na tela ANTES de enviar -- quem realmente adiciona a cópia
+// é o backend (EMAIL_CC_RESPOSTAS em app.py), sempre, sem depender do front.
+const EMAIL_CC_RESPOSTAS = 'comercial@sinape.com.br';
 
 // Ponto de partida do atalho "Usar resposta pronta" -- a pessoa sempre revisa
 // (e pode reescrever à vontade) antes de clicar em Enviar; esta rota nunca
