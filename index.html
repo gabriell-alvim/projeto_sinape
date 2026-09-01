@@ -1266,6 +1266,7 @@ th.sortable:hover { color:var(--teal-mid); }
       <label class="check-inline"><input type="checkbox" id="email-so-nao-lidos" onchange="emailFiltroCheckboxMudou(this,'Só não lidos')"> Só não lidos</label>
       <label class="check-inline"><input type="checkbox" id="email-so-com-processo" onchange="emailFiltroCheckboxMudou(this,'Só com processo vinculado')"> Só com processo vinculado</label>
       <label class="check-inline"><input type="checkbox" id="email-so-propostas" onchange="emailFiltroCheckboxMudou(this,'Só propostas recebidas')"> 📝 Só propostas recebidas</label>
+      <label class="check-inline"><input type="checkbox" id="email-mostrar-respondidos" onchange="emailFiltroCheckboxMudou(this,'Mostrar já respondidos')"> 👁️ Mostrar já respondidos</label>
       <button type="button" class="btn-sm" onclick="limparFiltrosEmails()">🧹 Limpar filtros</button>
     </div>
     <div id="email-conteudo">
@@ -6530,12 +6531,19 @@ function renderizarListaEmails(){
   const soNaoLidos = document.getElementById('email-so-nao-lidos').checked;
   const soComProcesso = document.getElementById('email-so-com-processo').checked;
   const soPropostas = document.getElementById('email-so-propostas').checked;
+  const mostrarRespondidos = document.getElementById('email-mostrar-respondidos').checked;
   let itens = EMAILS_ULTIMA.itens || [];
   if(cat) itens = itens.filter(i=>i.categoria===cat);
   if(busca) itens = itens.filter(i=>(i.assunto+' '+i.remetente).toLowerCase().includes(busca));
   if(soNaoLidos) itens = itens.filter(i=>!i.lido);
   if(soComProcesso) itens = itens.filter(i=>!!i.processo_id);
   if(soPropostas) itens = itens.filter(i=>!!i.proposta);
+
+  // E-mail já respondido pelo painel some da lista por padrão -- já foi
+  // tratado, não precisa disputar atenção de novo. "Mostrar já respondidos"
+  // (desmarcado por padrão) traz eles de volta quando precisar conferir.
+  const escondidosPorResposta = !mostrarRespondidos ? itens.filter(i=>i.respondido).length : 0;
+  if(!mostrarRespondidos) itens = itens.filter(i=>!i.respondido);
 
   if(!itens.length){
     // Lista os filtros que estão ligados agora -- sem isso a mensagem some no
@@ -6549,8 +6557,19 @@ function renderizarListaEmails(){
     if(soNaoLidos) ativos.push('só não lidos');
     if(soComProcesso) ativos.push('só com processo vinculado');
     if(soPropostas) ativos.push('só propostas recebidas');
+    // caso especial: sobrou 0 só por causa do "esconder respondidos" -- a
+    // pessoa precisa saber que TEM e-mail ali, só que já foi tratado, senão
+    // parece que a varredura sumiu com tudo.
+    if(!ativos.length && escondidosPorResposta > 0){
+      area.innerHTML = '<p class="relatorio-vazio">Todo mundo aqui já foi respondido ('+escondidosPorResposta+' e-mail(s)). '+
+        'Nada pendente no momento.</p>' +
+        '<button type="button" class="btn-sm" onclick="document.getElementById(\'email-mostrar-respondidos\').checked=true; renderizarListaEmails();">👁️ Mostrar os já respondidos</button>';
+      a11yAtualizarItens();
+      return;
+    }
     area.innerHTML = '<p class="relatorio-vazio">Nenhum e-mail bate com esse filtro.' +
       (ativos.length ? ' Filtro(s) ativo(s): '+ativos.join(', ')+'.' : '') +
+      (escondidosPorResposta ? ' ('+escondidosPorResposta+' e-mail(s) escondido(s) por já estarem respondidos.)' : '') +
       '</p>' +
       (ativos.length ? '<button type="button" class="btn-sm" onclick="limparFiltrosEmails()">🧹 Limpar filtros</button>' : '');
     a11yAtualizarItens();
@@ -6618,6 +6637,7 @@ function limparFiltrosEmails(){
   document.getElementById('email-so-nao-lidos').checked = false;
   document.getElementById('email-so-com-processo').checked = false;
   document.getElementById('email-so-propostas').checked = false;
+  document.getElementById('email-mostrar-respondidos').checked = false;
   a11yAnunciar('Filtros limpos.');
   renderizarListaEmails();
 }
