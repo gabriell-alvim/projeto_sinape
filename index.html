@@ -7804,6 +7804,20 @@ function a11yAtualizarItens(manterNivel, silencioso){
     modalAberto.querySelectorAll('#notif-prefs input[type=checkbox]').forEach(c=>{
       itensModal.push({el:c, label:(c.closest('label')?.textContent || '').trim()});
     });
+    // Painel de e-mails: os filtros (categoria/busca/checkboxes) ficavam de
+    // fora da numeração -- só o "Fechar"/"Executar varredura" apareciam.
+    // Sem isto o NVDA não achava os filtros de jeito nenhum por número, só
+    // tabulando às cegas. Só entram depois de uma varredura (a barra de
+    // filtro fica escondida até lá -- entrar antes numeraria campo invisível).
+    if(modalAberto.id === 'modal-emails' && document.getElementById('email-filtros').style.display !== 'none'){
+      const catSel = modalAberto.querySelector('#email-filtro-categoria');
+      if(catSel) itensModal.push({el:catSel, label:'Filtrar por categoria'});
+      const busca = modalAberto.querySelector('#email-busca');
+      if(busca) itensModal.push({el:busca, label:'Buscar por assunto ou remetente'});
+      modalAberto.querySelectorAll('#email-filtros input[type=checkbox]').forEach(c=>{
+        itensModal.push({el:c, label:(c.closest('label')?.textContent || '').trim()});
+      });
+    }
     modalAberto.querySelectorAll('.modal-actions button').forEach(b=>{
       itensModal.push({el:b, label:b.textContent.trim()});
     });
