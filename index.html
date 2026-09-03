@@ -248,6 +248,11 @@ input, select, textarea { font-family:inherit; }
 .email-filtros input[type=text] { flex:1; min-width:180px; }
 .check-inline { display:inline-flex; align-items:center; gap:5px; font-size:.78rem; color:var(--slate-mid); white-space:nowrap; }
 .varredura-janela-area { display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin-top:10px; padding-top:10px; border-top:1px dashed var(--border); }
+.atestados-busca-form { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
+.atestados-busca-form select, .atestados-busca-form input { padding:7px 10px; border:1px solid var(--border); border-radius:6px; font-size:.8rem; }
+.atestados-busca-form input[type=text] { flex:1; min-width:220px; }
+.exig-atestado { margin-top:8px; display:flex; flex-direction:column; gap:6px; align-items:flex-start; }
+.exig-atestado-form { width:100%; }
 .varredura-janela-area select { padding:6px 10px; border:1px solid var(--border); border-radius:6px; font-size:.8rem; }
 #varredura-dias-custom { width:90px; padding:6px 10px; border:1px solid var(--border); border-radius:6px; font-size:.8rem; }
 .email-item { cursor:default; } /* .prazo-item base tem cursor:pointer (é um <button> nos outros usos); aqui o card não é mais o alvo do clique, só o título e os botões dentro */
@@ -937,9 +942,61 @@ th.sortable:hover { color:var(--teal-mid); }
        Por enquanto só a tela existe, pra já ter onde chegar pelo menu
        principal. -->
   <div class="view" id="view-atestados">
-    <div class="list-header"><h2>📋 Painel de Atestados</h2></div>
-    <p class="relatorio-vazio">Em construção. Vai guardar os atestados de capacidade técnica da SINAPE — o que
-      alimenta a comparação automática com o quantitativo exigido em cada edital, lá na Fase 2 do DATA SIN.</p>
+    <div class="list-header">
+      <h2>📋 Painel de Atestados</h2>
+      <div class="lh-actions">
+        <button class="btn-outline" onclick="document.getElementById('atestados-input-importar').click()">📥 Importar base de atestados</button>
+        <input type="file" id="atestados-input-importar" accept=".json" class="sr-only" onchange="atestadosImportarArquivo(this)">
+      </div>
+    </div>
+    <p class="hint">Capacidade técnica da SINAPE (atestados de serviço já executado) — alimenta a comparação
+      automática com o quantitativo exigido em cada edital, na aba Exigências de cada processo (Fase 2).</p>
+    <div id="atestados-resumo-cards"></div>
+
+    <div class="sec-card">
+      <div class="sec-head violet" onclick="this.parentElement.classList.toggle('collapsed')">
+        <span class="sec-title">🔎 Buscar capacidade por exigência</span><span class="sec-chevron">▾</span>
+      </div>
+      <div class="sec-body">
+        <p class="hint">Escolha o grupo de serviço exigido no edital, a unidade e a quantidade — o sistema soma tudo que a
+          empresa já executou naquele grupo (convertendo unidade quando precisa) e mostra quais profissionais atendem sozinhos.
+          Tudo calculado aqui mesmo, sem nenhuma chamada de IA.</p>
+        <div class="atestados-busca-form">
+          <select id="atb-classe" aria-label="Classe" onchange="atestadosAtualizarGruposDaClasse()">
+            <option value="">Classe…</option>
+          </select>
+          <select id="atb-grupo" aria-label="Grupo de serviço">
+            <option value="">Grupo…</option>
+          </select>
+          <input type="text" id="atb-unidade" placeholder="Unidade (ex.: m²)" aria-label="Unidade">
+          <input type="number" step="0.01" id="atb-quantidade" placeholder="Qtd. exigida" aria-label="Quantidade exigida">
+          <button type="button" class="btn-primary" onclick="atestadosExecutarBusca()">Buscar</button>
+        </div>
+        <div id="atestados-busca-resultado"></div>
+      </div>
+    </div>
+
+    <div class="sec-card">
+      <div class="sec-head violet" onclick="this.parentElement.classList.toggle('collapsed')">
+        <span class="sec-title">📚 Consultar atestados</span><span class="sec-chevron">▾</span>
+      </div>
+      <div class="sec-body">
+        <div class="atestados-busca-form">
+          <input type="text" id="atl-busca" placeholder="Buscar por serviço, grupo, órgão, responsável, CAT…" aria-label="Buscar atestados" oninput="atestadosListarDebounced()">
+          <select id="atl-classe" aria-label="Filtrar por classe" onchange="atestadosListar()">
+            <option value="">Todas as classes</option>
+          </select>
+        </div>
+        <div id="atestados-lista-resultado"></div>
+      </div>
+    </div>
+
+    <div class="sec-card collapsed">
+      <div class="sec-head violet" onclick="this.parentElement.classList.toggle('collapsed')">
+        <span class="sec-title">📄 Certidões e documentos habilitatórios</span><span class="sec-chevron">▾</span>
+      </div>
+      <div class="sec-body" id="atestados-certidoes-corpo"></div>
+    </div>
   </div>
 
   <!-- ═══════════ VIEW: PROCESSO ═══════════ -->
@@ -2314,7 +2371,176 @@ async function abrirPainelAtestados(){
   await encerrarSessaoEdicao();
   currentType=null; currentProc=null;
   showView('view-atestados');
+  atestadosCarregarDados();
   a11yAtualizarItens();
+}
+
+// Cache local de {classe: [grupo,...]} -- carregado uma vez ao abrir o
+// painel, reaproveitado tanto pelos selects da Busca de Capacidade quanto
+// pelo filtro de Consultar Atestados.
+let ATESTADOS_CLASSES_GRUPOS = {};
+
+async function atestadosCarregarDados(){
+  if(Store.modo!=='api') return;
+  try{
+    const [resumo, classesGrupos] = await Promise.all([
+      fetch(Store.base + '/atestados/resumo', { headers: Store.headers() }).then(r=>r.json()),
+      fetch(Store.base + '/atestados/classes-grupos', { headers: Store.headers() }).then(r=>r.json()),
+    ]);
+    ATESTADOS_CLASSES_GRUPOS = classesGrupos || {};
+    atestadosRenderResumo(resumo);
+    atestadosPopularSelectsClasse();
+    atestadosListar();
+    atestadosCarregarCertidoes();
+  }catch(e){
+    document.getElementById('atestados-resumo-cards').innerHTML =
+      '<p class="relatorio-vazio">Não foi possível carregar o Painel de Atestados: '+esc(e.message)+'</p>';
+  }
+}
+
+function atestadosRenderResumo(r){
+  document.getElementById('atestados-resumo-cards').innerHTML =
+    '<div class="gastos-cards">' +
+      '<div class="gastos-card"><div class="gc-num">'+((r.atestados_empresa||0)+(r.atestados_prof||0))+'</div><div class="gc-lbl">atestados no total</div></div>' +
+      '<div class="gastos-card"><div class="gc-num">'+(r.grupos||0)+'</div><div class="gc-lbl">grupos de serviço</div></div>' +
+      '<div class="gastos-card"><div class="gc-num">'+(r.profissionais||0)+'</div><div class="gc-lbl">profissionais com histórico</div></div>' +
+      '<div class="gastos-card"><div class="gc-num">'+(r.certidoes||0)+'</div><div class="gc-lbl">certidões cadastradas</div></div>' +
+    '</div>';
+}
+
+function atestadosPopularSelectsClasse(){
+  const classes = Object.keys(ATESTADOS_CLASSES_GRUPOS).sort();
+  const opts = '<option value="">Classe…</option>' + classes.map(c=>'<option value="'+esc(c)+'">'+esc(c)+'</option>').join('');
+  document.getElementById('atb-classe').innerHTML = opts;
+  document.getElementById('atl-classe').innerHTML = '<option value="">Todas as classes</option>' +
+    classes.map(c=>'<option value="'+esc(c)+'">'+esc(c)+'</option>').join('');
+  atestadosAtualizarGruposDaClasse();
+}
+
+function atestadosAtualizarGruposDaClasse(){
+  const classe = document.getElementById('atb-classe').value;
+  const grupos = ATESTADOS_CLASSES_GRUPOS[classe] || [];
+  document.getElementById('atb-grupo').innerHTML = '<option value="">Grupo…</option>' +
+    grupos.map(g=>'<option value="'+esc(g)+'">'+esc(g)+'</option>').join('');
+}
+
+async function atestadosExecutarBusca(){
+  const grupo = document.getElementById('atb-grupo').value;
+  const unidade = document.getElementById('atb-unidade').value.trim();
+  const qtd = Number(document.getElementById('atb-quantidade').value);
+  const area = document.getElementById('atestados-busca-resultado');
+  if(!grupo || !unidade || !qtd){
+    area.innerHTML = '<p class="relatorio-vazio">Escolha o grupo, a unidade e a quantidade exigida.</p>';
+    return;
+  }
+  area.innerHTML = '<p class="relatorio-vazio">Calculando…</p>';
+  try{
+    const res = await fetch(Store.base + '/atestados/buscar-capacidade', {
+      method:'POST', headers: Store.headers(),
+      body: JSON.stringify({ grupo, unidade, quantidade_exigida: qtd }),
+    });
+    const g = await res.json();
+    if(!res.ok) throw new Error(g.erro || ('Servidor respondeu '+res.status));
+    let html = '<div class="gastos-cards" style="margin-top:12px;">' +
+      '<div class="gastos-card"><div class="gc-num">'+fmtNum(g.total_empresa)+' '+esc(unidade)+'</div>' +
+        '<div class="gc-lbl">total da empresa em "'+esc(grupo)+'"</div></div>' +
+      '<div class="gastos-card"><div class="gc-num">'+(g.atende_empresa?'✅ Sim':'❌ Não')+'</div><div class="gc-lbl">a empresa atende sozinha?</div></div>' +
+      '<div class="gastos-card"><div class="gc-num">'+g.profissionais_aptos.length+' de '+g.profissionais.length+'</div><div class="gc-lbl">profissionais atendem sozinhos</div></div>' +
+    '</div>';
+    if(g.profissionais.length){
+      html += '<div class="table-wrap"><table class="edit-table"><thead><tr><th>Profissional</th><th style="text-align:right;">Quantitativo</th><th>Atende?</th></tr></thead><tbody>' +
+        g.profissionais.map(p=>'<tr><td>'+esc(p.nome)+'</td><td class="num">'+fmtNum(p.valor)+' '+esc(unidade)+'</td>' +
+          '<td>'+(p.atende?'<span class="chip st-participar">Sim</span>':'<span class="chip st-nao_participar">Não</span>')+'</td></tr>').join('') +
+        '</tbody></table></div>';
+    }
+    area.innerHTML = html;
+  }catch(e){
+    area.innerHTML = '<p class="relatorio-vazio">Não foi possível calcular: '+esc(e.message)+'</p>';
+  }
+}
+
+let ATESTADOS_LISTAR_TIMER = null;
+function atestadosListarDebounced(){
+  clearTimeout(ATESTADOS_LISTAR_TIMER);
+  ATESTADOS_LISTAR_TIMER = setTimeout(atestadosListar, 350);
+}
+
+async function atestadosListar(){
+  const busca = document.getElementById('atl-busca').value.trim();
+  const classe = document.getElementById('atl-classe').value;
+  const area = document.getElementById('atestados-lista-resultado');
+  area.innerHTML = '<p class="relatorio-vazio">Carregando…</p>';
+  try{
+    const params = new URLSearchParams();
+    if(busca) params.set('busca', busca);
+    if(classe) params.set('classe', classe);
+    const res = await fetch(Store.base + '/atestados?' + params.toString(), { headers: Store.headers() });
+    const g = await res.json();
+    if(!res.ok) throw new Error(g.erro || ('Servidor respondeu '+res.status));
+    if(!g.itens.length){ area.innerHTML = '<p class="relatorio-vazio">Nenhum atestado bate com essa busca.</p>'; return; }
+    area.innerHTML = '<p class="hint">'+g.total+' resultado(s) — mostrando '+g.itens.length+'.</p>' +
+      '<div class="table-wrap"><table class="edit-table"><thead><tr>' +
+        '<th>Serviço</th><th>Grupo</th><th>Qtd.</th><th>Órgão/UF</th><th>Ano</th><th>Responsável</th><th>CAT</th>' +
+      '</tr></thead><tbody>' +
+      g.itens.map(it=>'<tr>' +
+        '<td>'+esc(it.servico||'')+'</td>' +
+        '<td>'+esc(it.grupo||'')+'</td>' +
+        '<td class="num">'+fmtNum(it.quantidade||0)+' '+esc(it.unidade||'')+'</td>' +
+        '<td>'+esc(it.orgao||'')+' / '+esc(it.uf||'')+'</td>' +
+        '<td>'+esc(it.ano||'')+'</td>' +
+        '<td>'+esc(it.responsavel||'')+'</td>' +
+        '<td>'+esc(it.cat||'—')+'</td>' +
+      '</tr>').join('') +
+      '</tbody></table></div>';
+  }catch(e){
+    area.innerHTML = '<p class="relatorio-vazio">Não foi possível buscar: '+esc(e.message)+'</p>';
+  }
+}
+
+async function atestadosCarregarCertidoes(){
+  const area = document.getElementById('atestados-certidoes-corpo');
+  try{
+    const res = await fetch(Store.base + '/atestados/certidoes', { headers: Store.headers() });
+    const g = await res.json();
+    if(!g.itens.length){ area.innerHTML = '<p class="relatorio-vazio">Nenhuma certidão importada ainda.</p>'; return; }
+    area.innerHTML = '<div class="table-wrap"><table class="edit-table"><thead><tr>' +
+      '<th>Documento</th><th>Utilização</th><th>Validade</th><th>Observações</th>' +
+      '</tr></thead><tbody>' +
+      g.itens.map(it=>'<tr>' +
+        '<td>'+esc(it.nome||'')+'</td>' +
+        '<td>'+esc(it.utilizacao||'')+'</td>' +
+        '<td>'+esc(it.dataValidade||'—')+'</td>' +
+        '<td>'+esc(it.observacoes||'')+'</td>' +
+      '</tr>').join('') +
+      '</tbody></table></div>';
+  }catch(e){
+    area.innerHTML = '<p class="relatorio-vazio">Não foi possível carregar as certidões: '+esc(e.message)+'</p>';
+  }
+}
+
+function atestadosImportarArquivo(input){
+  const file = input.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = async e => {
+    input.value = '';
+    let payload;
+    try{ payload = JSON.parse(e.target.result); }
+    catch(err){ toast('Arquivo não é um JSON válido.'); return; }
+    if(!Array.isArray(payload.empresa) || !Array.isArray(payload.prof)){
+      toast('Arquivo não parece ser uma base de atestados — esperado {empresa:[...], prof:[...]}.'); return;
+    }
+    if(!confirm('Isso vai SUBSTITUIR toda a base de atestados atual por '+payload.empresa.length+' (empresa) + '+payload.prof.length+' (profissional). Continuar?')) return;
+    try{
+      toast('Importando…');
+      const res = await fetch(Store.base + '/atestados/importar', { method:'POST', headers: Store.headers(), body: JSON.stringify(payload) });
+      const g = await res.json();
+      if(!res.ok) throw new Error(g.erro || ('Servidor respondeu '+res.status));
+      toast('Base de atestados importada: '+g.empresa+' + '+g.prof+' registros.');
+      atestadosCarregarDados();
+    }catch(err){ toast('Erro ao importar: '+err.message); }
+  };
+  reader.readAsText(file);
 }
 async function openList(type){
   await encerrarSessaoEdicao();
@@ -5551,6 +5777,15 @@ function buildExigencias(){
       const tr = document.createElement('tr');
       const desc = document.createElement('td'); desc.className='exig-desc';
       desc.textContent = ex.descricao || ex.texto || '';
+      // "Conferir atestado" só faz sentido em Habilitação técnica -- é onde
+      // moram as exigências quantitativas de capacidade (o resto, ex.
+      // Habilitação jurídica, não tem o que cruzar com o Painel de Atestados).
+      if(cat === 'Habilitação técnica'){
+        const atArea = document.createElement('div');
+        atArea.className = 'exig-atestado';
+        atArea.innerHTML = exigAtestadoHTML(item, idx);
+        desc.appendChild(atArea);
+      }
       const ref = document.createElement('td'); ref.className='exig-ref';
       ref.innerHTML = ex.ref ? '<span class="chip ref">📎 '+esc(ex.ref)+'</span>' : '—';
       const ob = document.createElement('td'); ob.className='exig-ob';
@@ -5600,6 +5835,98 @@ function aplicarExigencias(){
     const ta = document.querySelector('.exig-tratativa[data-exig="'+idx+'"]');
     if(ta && document.activeElement !== ta) ta.value = ex.tratativa || '';
   });
+}
+
+/* ── conferir atestado (Habilitação técnica) ──
+   Cruza a exigência quantitativa com o Painel de Atestados -- sugestão de
+   grupo por palavra-chave (sem IA, ver /api/atestados/sugerir-grupo) +
+   confirmação manual antes de calcular. Reaproveita o mesmo cache
+   ATESTADOS_CLASSES_GRUPOS do Painel de Atestados (carrega na hora se a
+   pessoa ainda não abriu aquele painel nesta sessão). */
+function exigAtestadoHTML(item, idx){
+  const at = item.atestado;
+  const badge = at
+    ? '<div><span class="chip '+(at.atende_empresa?'st-participar':'st-nao_participar')+'">'+
+        (at.atende_empresa?'✅ Atende — ':'❌ Não atende — ')+esc(at.grupo)+' ('+fmtNum(at.total_empresa)+' '+esc(at.unidade)+
+        (at.profissionais_aptos&&at.profissionais_aptos.length?', '+at.profissionais_aptos.length+' profissional(is) apto(s)':'')+')</span></div>'
+    : '';
+  return badge +
+    '<button type="button" class="btn-sm" onclick="exigAbrirConferirAtestado('+idx+')">🔎 '+(at?'Conferir de novo':'Conferir atestado')+'</button>' +
+    '<div class="exig-atestado-form" id="exig-at-form-'+idx+'" style="display:none;"></div>';
+}
+
+async function exigAbrirConferirAtestado(idx){
+  const div = document.getElementById('exig-at-form-'+idx);
+  if(!div) return;
+  const abrindo = div.style.display === 'none';
+  div.style.display = abrindo ? 'block' : 'none';
+  if(!abrindo) return;
+  div.innerHTML = '<p class="relatorio-vazio">Carregando sugestão…</p>';
+  if(!Object.keys(ATESTADOS_CLASSES_GRUPOS).length){
+    try{ ATESTADOS_CLASSES_GRUPOS = await fetch(Store.base+'/atestados/classes-grupos', {headers:Store.headers()}).then(r=>r.json()); }
+    catch(e){ /* segue sem cache -- o select de classe fica vazio, mas não trava a tela */ }
+  }
+  const item = currentProc.exigencias[idx];
+  const texto = item.descricao || item.texto || '';
+  let sugestao = { sugestoes: [], extraido: null };
+  try{
+    const res = await fetch(Store.base+'/atestados/sugerir-grupo', {method:'POST', headers:Store.headers(), body:JSON.stringify({texto})});
+    sugestao = await res.json();
+  }catch(e){ /* sem sugestão, a pessoa escolhe manualmente */ }
+  const top = sugestao.sugestoes[0] || {};
+  const classes = Object.keys(ATESTADOS_CLASSES_GRUPOS).sort();
+  div.innerHTML =
+    '<div class="atestados-busca-form" style="margin-top:8px;">' +
+      '<select id="exig-at-classe-'+idx+'" aria-label="Classe do atestado" onchange="exigAtualizarGrupos('+idx+')">' +
+        '<option value="">Classe…</option>' + classes.map(c=>'<option value="'+esc(c)+'"'+(c===top.classe?' selected':'')+'>'+esc(c)+'</option>').join('') +
+      '</select>' +
+      '<select id="exig-at-grupo-'+idx+'" aria-label="Grupo de serviço"><option value="">Grupo…</option></select>' +
+      '<input type="text" id="exig-at-unidade-'+idx+'" placeholder="Unidade" aria-label="Unidade" value="'+esc((sugestao.extraido&&sugestao.extraido.unidade)||'')+'">' +
+      '<input type="number" step="0.01" id="exig-at-qtd-'+idx+'" placeholder="Qtd. exigida" aria-label="Quantidade exigida" value="'+((sugestao.extraido&&sugestao.extraido.quantidade)||'')+'">' +
+      '<button type="button" class="btn-primary btn-sm" onclick="exigCalcularAtestado('+idx+')">Calcular</button>' +
+    '</div>' +
+    (sugestao.sugestoes.length
+      ? '<p class="hint">Sugestão automática (por palavra-chave, sem IA) — confira antes de calcular.'+
+        (sugestao.sugestoes.length>1?' Outras opções: '+sugestao.sugestoes.slice(1).map(s=>esc(s.grupo)).join(', ')+'.':'')+'</p>'
+      : '<p class="hint">Não achei uma sugestão automática pra este texto — escolha classe e grupo manualmente.</p>') +
+    '<div id="exig-at-resultado-'+idx+'"></div>';
+  exigAtualizarGrupos(idx, top.grupo);
+}
+
+function exigAtualizarGrupos(idx, grupoPreSelecionado){
+  const classe = document.getElementById('exig-at-classe-'+idx).value;
+  const grupos = ATESTADOS_CLASSES_GRUPOS[classe] || [];
+  const sel = document.getElementById('exig-at-grupo-'+idx);
+  sel.innerHTML = '<option value="">Grupo…</option>' +
+    grupos.map(g=>'<option value="'+esc(g)+'"'+(g===grupoPreSelecionado?' selected':'')+'>'+esc(g)+'</option>').join('');
+}
+
+async function exigCalcularAtestado(idx){
+  const grupo = document.getElementById('exig-at-grupo-'+idx).value;
+  const classe = document.getElementById('exig-at-classe-'+idx).value;
+  const unidade = document.getElementById('exig-at-unidade-'+idx).value.trim();
+  const qtd = Number(document.getElementById('exig-at-qtd-'+idx).value);
+  const area = document.getElementById('exig-at-resultado-'+idx);
+  if(!grupo || !unidade || !qtd){ area.innerHTML = '<p class="relatorio-vazio">Escolha o grupo, a unidade e a quantidade exigida.</p>'; return; }
+  area.innerHTML = '<p class="relatorio-vazio">Calculando…</p>';
+  try{
+    const res = await fetch(Store.base+'/atestados/buscar-capacidade', {
+      method:'POST', headers:Store.headers(), body:JSON.stringify({grupo, unidade, quantidade_exigida: qtd}),
+    });
+    const g = await res.json();
+    if(!res.ok) throw new Error(g.erro || ('Servidor respondeu '+res.status));
+    const item = currentProc.exigencias[idx];
+    item.atestado = {
+      classe, grupo, unidade, quantidade_exigida: qtd,
+      total_empresa: g.total_empresa, atende_empresa: g.atende_empresa,
+      profissionais_aptos: g.profissionais_aptos,
+    };
+    marcarPendExigencias();
+    toast('Atestado conferido: a empresa '+(g.atende_empresa?'atende':'não atende')+' sozinha esta exigência.');
+    buildExigencias(); // re-renderiza a aba inteira, já com o selo novo no lugar do formulário
+  }catch(e){
+    area.innerHTML = '<p class="relatorio-vazio">Não foi possível calcular: '+esc(e.message)+'</p>';
+  }
 }
 
 /* ── checklist ── */

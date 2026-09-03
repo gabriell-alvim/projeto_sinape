@@ -54,6 +54,13 @@ Rotas:
   GET     /api/emails/ultima-varredura        → devolve a última varredura de e-mail já feita, sem rodar de novo
   POST    /api/emails/responder               → responde um e-mail da varredura na própria thread (Mail.Send) {graph_id, texto}
   POST    /api/emails/reclassificar           → corrige a categoria de um e-mail já varrido {graph_id, categoria}
+  POST    /api/atestados/importar             → substitui a base de capacidade técnica {empresa:[...], prof:[...]}
+  GET     /api/atestados/resumo               → contadores pros cards do Painel de Atestados
+  GET     /api/atestados/classes-grupos       → {classe: [grupo_pai,...]} pros selects em cascata
+  GET     /api/atestados                      → busca/filtro paginado {busca?, classe?, pagina?, por_pagina?}
+  POST    /api/atestados/buscar-capacidade    → soma a empresa e lista profissionais aptos {grupo, unidade, quantidade_exigida}
+  POST    /api/atestados/sugerir-grupo        → sugestão de classe/grupo + quantidade/unidade extraída de um texto de exigência (sem IA)
+  GET     /api/atestados/certidoes            → lista de documentos habilitatórios (CND, contrato social...)
   GET     /api/eu                             → identidade de quem está logado (inclui "autor", que assina o que a pessoa fizer)
   GET     /api/usuarios                       → quem já entrou com conta própria — a lista de gente endereçável (notificar, atribuir)
   POST    /api/notificacoes                   → avisa a equipe (tipo "equipe") ou pede conferência de alguém (tipo "dirigida") sobre o que mudou numa sessão de edição
@@ -259,10 +266,26 @@ col_varreduras_email = db["varreduras_email"]
 # duplicada É o mecanismo de "só uma vez por dia", não um efeito colateral.
 col_varreduras_email_ctrl = db["varreduras_email_ctrl"]
 
+# ── Painel de Atestados ──────────────────────────────────────────
+# Base de capacidade técnica da SINAPE (histórico de serviço por atestado),
+# migrada da ferramenta paralela "Sistema Comercial SINAPE" -- alimenta o
+# cruzamento automático com as exigências de edital (ver _sugerir_grupo_atestado
+# e /api/atestados/buscar-capacidade). col_atestados_empresa é o agregado da
+# empresa; col_atestados_prof é o mesmo histórico, mas atribuível a um
+# profissional nomeado (RT) -- mesmo schema nas duas.
+col_atestados_empresa = db["atestados_empresa"]
+col_atestados_prof = db["atestados_prof"]
+col_atestados_certidoes = db["atestados_certidoes"]      # documentos habilitatórios (CND, contrato social...) -- não é atestado técnico
+col_atestados_conversoes = db["atestados_conversoes"]     # fator de conversão de unidade por grupo (ex.: m -> m²)
+col_atestados_locais = db["atestados_locais"]             # lista de praças/rodovias onde a SINAPE já atuou
+col_atestados_premissas = db["atestados_premissas"]       # doc singleton: regra de pré-filtro de oportunidade (valor mínimo, UFs, palavras do objeto)
+
 
 def _init_db():
     col_processos.create_index([("atualizadoEm", DESCENDING)])
     col_varreduras_email.create_index([("criadoEm", DESCENDING)])
+    col_atestados_empresa.create_index([("grupo", ASCENDING)])
+    col_atestados_prof.create_index([("grupo", ASCENDING), ("responsavel", ASCENDING)])
     col_anexos.create_index([("processo_id", ASCENDING), ("enviado_em", DESCENDING)])
     col_relatorios.create_index([("criadoEm", DESCENDING)])
     col_snapshots.create_index([("criadoEm", DESCENDING)])
@@ -4085,6 +4108,38 @@ def excluir_ata_comercial(aid):
     return jsonify({"ok": True})
 
 
+def _substituir_colecao_opcional(colecao, itens, item_e_string=False) -> int:
+    """Troca o conteúdo de 'colecao' pelo que vier em 'itens', só quando o
+    campo realmente veio no backup -- None (campo ausente) não mexe em nada;
+    lista vazia (campo veio, mas sem itens) esvazia a coleção mesmo assim.
+    Usada pelos campos "extras" do backup comercial que nem todo backup
+    antigo tem (certidões, conversões de unidade, locais de atuação).
+    item_e_string=True é pro caso de locaisAtuacao, que vem como lista de
+    texto solto, não de objeto com id."""
+    if not isinstance(itens, list):
+        return 0
+    colecao.delete_many({})
+    if not itens:
+        return 0
+    docs, vistos = [], set()
+    for i, item in enumerate(itens):
+        if item_e_string:
+            d = {"nome": item}
+            base_id = _slug(str(item)) or f"item-{i}"
+        else:
+            d = dict(item)
+            base_id = str(d.pop("id", None) or d.pop("_id", None) or uuid.uuid4().hex)
+        oid, n = base_id, 1
+        while oid in vistos:
+            n += 1
+            oid = f"{base_id}-{n}"
+        vistos.add(oid)
+        d["_id"] = oid
+        docs.append(d)
+    colecao.insert_many(docs)
+    return len(docs)
+
+
 def _capturar_estado_comercial_atual() -> dict:
     """Tira uma 'foto' de tudo que está no módulo Comercial agora, no mesmo
     formato que /api/comercial/importar aceita de volta — usada pra guardar
@@ -4098,6 +4153,11 @@ def _capturar_estado_comercial_atual() -> dict:
                                    "metaAnual": 0, "valorCarteiraInicial": 0}),
         "timesheet": [{"mes": d["_id"], "total": d.get("total") or 0} for d in col_comercial_timesheet.find()],
         "atas": [_sem_id_mongo(d) for d in col_comercial_atas.find()],
+        "certidoes": [_sem_id_mongo(d) for d in col_atestados_certidoes.find()],
+        "conversoesUnidade": [_sem_id_mongo(d) for d in col_atestados_conversoes.find()],
+        "locaisAtuacao": [d.get("nome") for d in col_atestados_locais.find()],
+        "premissasEnquadramento": _sem_id_mongo(col_atestados_premissas.find_one({"_id": "premissas"})
+                                                 or {"_id": "premissas", "valorMinimo": 0, "ufsAtendidas": [], "palavrasObjeto": []}),
     }
 
 
@@ -4182,12 +4242,31 @@ def _aplicar_backup_comercial(corpo: dict) -> dict:
             col_comercial_atas.insert_many(docs)
         n_atas = len(atas)
 
+    # certidoes/conversoesUnidade/locaisAtuacao/premissasEnquadramento vieram
+    # do backup do "Sistema Comercial SINAPE" (a base de atestados propriamente
+    # dita é maior demais pro backup de rotina -- ver /api/atestados/importar).
+    # Mesmo cuidado de "atas": só mexe na coleção quando o campo vem no
+    # arquivo, pra um backup antigo (sem esses campos) não apagar dado já
+    # importado antes.
+    n_certidoes = _substituir_colecao_opcional(col_atestados_certidoes, corpo.get("certidoes"))
+    n_conversoes = _substituir_colecao_opcional(col_atestados_conversoes, corpo.get("conversoesUnidade"))
+    n_locais = _substituir_colecao_opcional(col_atestados_locais, corpo.get("locaisAtuacao"), item_e_string=True)
+    premissas = corpo.get("premissasEnquadramento")
+    n_premissas = 0
+    if isinstance(premissas, dict):
+        col_atestados_premissas.replace_one({"_id": "premissas"}, dict(premissas, _id="premissas"), upsert=True)
+        n_premissas = 1
+
     return {
         "ok": True,
         "oportunidades": len(oportunidades),
         "equipe": len(equipe),
         "timesheet": len(timesheet),
         "atas": n_atas,
+        "certidoes": n_certidoes,
+        "conversoesUnidade": n_conversoes,
+        "locaisAtuacao": n_locais,
+        "premissasEnquadramento": n_premissas,
     }
 
 
@@ -4248,6 +4327,292 @@ def restaurar_backup_anterior():
         upsert=True,
     )
     return jsonify(resultado)
+
+
+# ──────────────────────────────────────────────────────────────────
+# Painel de Atestados -- capacidade técnica da SINAPE + cruzamento
+# automático com as exigências de edital, tudo por código (sem IA)
+# ──────────────────────────────────────────────────────────────────
+OBRIGATORIEDADES_ATESTADO = ["Fornecimento e Implantação", "Fornecimento", "Implantação"]
+
+
+def _grupo_pai_atestado(grupo):
+    """Tira o sufixo de obrigatoriedade (' - Fornecimento', ' - Implantação',
+    ' - Fornecimento e Implantação') do nome do grupo, pra agrupar atestado
+    de fornecimento e de implantação do mesmo serviço quando a exigência do
+    edital não distingue -- ex.: 'Placas - Fornecimento' e 'Placas -
+    Implantação' viram 'Placas' pro cálculo de "a empresa atende esta
+    exigência". Devolve (pai, variante) -- variante é None quando o grupo já
+    não tinha sufixo nenhum."""
+    if grupo:
+        for suf in OBRIGATORIEDADES_ATESTADO:
+            marcador = f" - {suf}"
+            if grupo.endswith(marcador):
+                return grupo[: -len(marcador)], suf
+    return grupo, None
+
+
+def _somar_por_unidade(registros):
+    somas = {}
+    for r in registros:
+        u = r.get("unidade")
+        if not u:
+            continue
+        somas[u] = somas.get(u, 0.0) + float(r.get("quantidade") or 0)
+    return somas
+
+
+def _total_convertido_para(grupo_pai, quantidades_por_unidade, unidade_alvo):
+    """Soma quantidades_por_unidade (dict {unidade: total}) na unidade_alvo,
+    convertendo pela tabela de conversoesUnidade cadastrada pra este grupo."""
+    total = quantidades_por_unidade.get(unidade_alvo, 0.0)
+    faltantes = {u: q for u, q in quantidades_por_unidade.items() if u != unidade_alvo}
+    if not faltantes:
+        return total
+    conversoes = list(col_atestados_conversoes.find({"grupo": grupo_pai}))
+    for u, q in faltantes.items():
+        conv = next((c for c in conversoes if c.get("deUnidade") == u and c.get("paraUnidade") == unidade_alvo), None)
+        if conv:
+            total += q * (conv.get("fator") or 0)
+    return total
+
+
+def _tokens_atestado(texto):
+    """Normaliza pra comparação de palavras -- minúsculo, sem acento, sem
+    pontuação, ignora palavra curta demais pra ser um termo útil. NÃO
+    reaproveita _slug: aquela função trunca em 60 caracteres (pensada pra
+    virar id curto, não pra tokenizar uma frase de exigência inteira -- uma
+    frase de edital típica já estoura 60 caracteres antes de chegar na
+    palavra que interessa) e cai num fallback aleatório quando o texto fica
+    vazio, o que faria a pontuação variar de uma chamada pra outra."""
+    s = (texto or "").lower()
+    s = re.sub(r"[àáâãä]", "a", s); s = re.sub(r"[èéêë]", "e", s)
+    s = re.sub(r"[ìíîï]", "i", s);  s = re.sub(r"[òóôõö]", "o", s)
+    s = re.sub(r"[ùúûü]", "u", s);  s = re.sub(r"[ç]", "c", s)
+    s = re.sub(r"[^a-z0-9]+", " ", s)
+    return set(t for t in s.split() if len(t) > 2)
+
+
+def _sugerir_grupo_atestado(texto_exigencia, top_n=3):
+    """Sugestão de classe+grupo de atestado pra uma exigência de edital, só
+    por comparação de palavras -- NENHUMA chamada de IA. Duas camadas:
+    primeiro acha a(s) classe(s) mais prováveis (17 opções), depois pontua
+    os grupos só dentro delas -- evita a classe errada "roubar" a sugestão
+    (edital de defensa/placa nunca sugere algo de Semafórica, porque nem
+    entra na classe certa). Sempre devolve candidatos pra confirmar, nunca
+    decide sozinho."""
+    termos = _tokens_atestado(texto_exigencia)
+    if not termos:
+        return []
+    todos = list(col_atestados_empresa.find({}, {"classe": 1, "grupo": 1})) + \
+            list(col_atestados_prof.find({}, {"classe": 1, "grupo": 1}))
+    por_classe = {}
+    for r in todos:
+        c, g = r.get("classe"), r.get("grupo")
+        if not c or not g:
+            continue
+        por_classe.setdefault(c, set()).add(g)
+    if not por_classe:
+        return []
+
+    pontos_classe = {}
+    for classe, grupos in por_classe.items():
+        alvo = _tokens_atestado(classe)
+        for g in grupos:
+            alvo |= _tokens_atestado(g)
+        pontos_classe[classe] = len(termos & alvo)
+    melhor_pontos = max(pontos_classe.values(), default=0)
+    classes_candidatas = [c for c, p in pontos_classe.items() if p == melhor_pontos and p > 0] or list(por_classe.keys())
+
+    melhores = {}  # (classe, grupo_pai) -> (pontos, cobertura)
+    for classe in classes_candidatas:
+        for grupo in por_classe.get(classe, []):
+            pai, _variante = _grupo_pai_atestado(grupo)
+            tokens_pai = _tokens_atestado(pai)
+            pontos = len(termos & tokens_pai)
+            # desempate: "Placas" com as 2 palavras batendo (100% de
+            # cobertura do nome do grupo) vem antes de "Manutenção de
+            # placas" que só bateu 1 de 2 -- sem isso um grupo mais
+            # comprido e só parcialmente parecido podia ganhar de um nome
+            # curto que bate inteiro.
+            cobertura = pontos / len(tokens_pai) if tokens_pai else 0
+            chave = (classe, pai)
+            if chave not in melhores or (pontos, cobertura) > melhores[chave]:
+                melhores[chave] = (pontos, cobertura)
+    ranking = sorted(melhores.items(), key=lambda kv: (-kv[1][0], -kv[1][1]))[:top_n]
+    return [{"classe": c, "grupo": g, "pontuacao": p} for (c, g), (p, _cov) in ranking]
+
+
+_PADRAO_QTD_UNIDADE_ATESTADO = re.compile(
+    r"(\d{1,3}(?:\.\d{3})*(?:,\d+)?|\d+(?:,\d+)?)\s*(m²|m2|m³|m3|km|kg|ha|un|vb|t)\b", re.I
+)
+
+
+def _extrair_quantidade_unidade(texto):
+    """Melhor esforço: acha o primeiro número seguido de uma unidade conhecida
+    no texto da exigência -- só pra pré-preencher o formulário, a pessoa
+    sempre confere/corrige antes de calcular. None quando não achou nada."""
+    m = _PADRAO_QTD_UNIDADE_ATESTADO.search(texto or "")
+    if not m:
+        return None
+    bruto = m.group(1).replace(".", "").replace(",", ".")
+    try:
+        qtd = float(bruto)
+    except ValueError:
+        return None
+    unidade = m.group(2).lower().replace("m2", "m²").replace("m3", "m³")
+    return {"quantidade": qtd, "unidade": unidade}
+
+
+@app.route("/api/atestados/importar", methods=["POST"])
+def importar_atestados():
+    """Substitui toda a base de capacidade técnica -- formato próprio
+    {empresa:[...], prof:[...]}, não vem no backup de rotina do módulo
+    Comercial (é grande demais e muda raramente). Mesmo padrão de
+    'substitui tudo' já usado em /api/comercial/importar."""
+    corpo = request.get_json(silent=True) or {}
+    empresa = corpo.get("empresa")
+    prof = corpo.get("prof")
+    if not isinstance(empresa, list) or not isinstance(prof, list):
+        return jsonify({"erro": "Formato esperado: {empresa:[...], prof:[...]}."}), 400
+
+    def _gravar(colecao, itens):
+        colecao.delete_many({})
+        if not itens:
+            return 0
+        docs = []
+        for it in itens:
+            d = dict(it)
+            d["_id"] = uuid.uuid4().hex
+            docs.append(d)
+        colecao.insert_many(docs)
+        return len(docs)
+
+    n_empresa = _gravar(col_atestados_empresa, empresa)
+    n_prof = _gravar(col_atestados_prof, prof)
+    return jsonify({"ok": True, "empresa": n_empresa, "prof": n_prof})
+
+
+@app.route("/api/atestados/resumo", methods=["GET"])
+def resumo_atestados():
+    """Números pros cards de topo do Painel de Atestados."""
+    n_empresa = col_atestados_empresa.count_documents({})
+    n_prof = col_atestados_prof.count_documents({})
+    n_grupos = len({_grupo_pai_atestado(r.get("grupo"))[0]
+                     for r in col_atestados_empresa.find({}, {"grupo": 1})
+                     if r.get("grupo")})
+    n_profissionais = len({r.get("responsavel") for r in col_atestados_prof.find({}, {"responsavel": 1})
+                            if r.get("responsavel") and r["responsavel"] != "Sinape"})
+    n_certidoes = col_atestados_certidoes.count_documents({})
+    return jsonify({
+        "atestados_empresa": n_empresa, "atestados_prof": n_prof,
+        "grupos": n_grupos, "profissionais": n_profissionais,
+        "certidoes": n_certidoes,
+    })
+
+
+@app.route("/api/atestados/classes-grupos", methods=["GET"])
+def classes_grupos_atestados():
+    """{classe: [grupo_pai, ...]} -- alimenta os selects em cascata da busca
+    de capacidade e do formulário de sugestão."""
+    por_classe = {}
+    for r in list(col_atestados_empresa.find({}, {"classe": 1, "grupo": 1})) + \
+              list(col_atestados_prof.find({}, {"classe": 1, "grupo": 1})):
+        c, g = r.get("classe"), r.get("grupo")
+        if not c or not g:
+            continue
+        pai, _ = _grupo_pai_atestado(g)
+        por_classe.setdefault(c, set()).add(pai)
+    return jsonify({c: sorted(gs) for c, gs in sorted(por_classe.items())})
+
+
+@app.route("/api/atestados", methods=["GET"])
+def listar_atestados():
+    """Busca/filtro paginado sobre os atestados (empresa + profissional
+    juntos) -- pra tela de consulta do Painel de Atestados."""
+    busca = (request.args.get("busca") or "").strip()
+    classe = (request.args.get("classe") or "").strip()
+    pagina = max(1, int(request.args.get("pagina") or 1))
+    por_pagina = min(100, max(1, int(request.args.get("por_pagina") or 30)))
+
+    consulta = {}
+    if classe:
+        consulta["classe"] = classe
+    if busca:
+        termos = _tokens_atestado(busca)
+        if termos:
+            regexes = [{"$or": [
+                {campo: {"$regex": re.escape(t), "$options": "i"}}
+                for campo in ("servico", "grupo", "orgao", "responsavel", "cat", "contrato")
+            ]} for t in termos]
+            consulta["$and"] = regexes
+
+    docs = [dict(_sem_id_mongo(d), origem="empresa") for d in col_atestados_empresa.find(consulta)] + \
+           [dict(_sem_id_mongo(d), origem="profissional") for d in col_atestados_prof.find(consulta)]
+    docs.sort(key=lambda d: (d.get("ano") or 0), reverse=True)
+    total = len(docs)
+    inicio = (pagina - 1) * por_pagina
+    return jsonify({
+        "total": total, "pagina": pagina, "por_pagina": por_pagina,
+        "itens": docs[inicio: inicio + por_pagina],
+    })
+
+
+@app.route("/api/atestados/buscar-capacidade", methods=["POST"])
+def buscar_capacidade_atestado():
+    """Confere se a SINAPE atende uma exigência quantitativa de edital --
+    soma tudo que a empresa já fez naquele grupo de serviço (convertendo
+    unidade quando precisa) e mostra quais profissionais atendem sozinhos.
+    100% Mongo/Python, nenhuma chamada de IA."""
+    corpo = request.get_json(silent=True) or {}
+    grupo = (corpo.get("grupo") or "").strip()
+    unidade = (corpo.get("unidade") or "").strip()
+    try:
+        qtd_exigida = float(corpo.get("quantidade_exigida") or 0)
+    except (TypeError, ValueError):
+        qtd_exigida = 0
+    if not grupo or not unidade or not qtd_exigida:
+        return jsonify({"erro": "Informe grupo, unidade e quantidade exigida."}), 400
+
+    empresa_regs = [r for r in col_atestados_empresa.find() if _grupo_pai_atestado(r.get("grupo"))[0] == grupo]
+    total_empresa = _total_convertido_para(grupo, _somar_por_unidade(empresa_regs), unidade)
+
+    prof_regs = [r for r in col_atestados_prof.find()
+                 if _grupo_pai_atestado(r.get("grupo"))[0] == grupo and r.get("responsavel") and r["responsavel"] != "Sinape"]
+    por_prof = {}
+    for r in prof_regs:
+        por_prof.setdefault(r["responsavel"], []).append(r)
+    linhas = []
+    for nome, regs in por_prof.items():
+        valor = _total_convertido_para(grupo, _somar_por_unidade(regs), unidade)
+        linhas.append({"nome": nome, "valor": round(valor, 4), "atende": valor >= qtd_exigida})
+    linhas.sort(key=lambda l: -l["valor"])
+
+    return jsonify({
+        "grupo": grupo, "unidade": unidade, "quantidade_exigida": qtd_exigida,
+        "total_empresa": round(total_empresa, 4),
+        "atende_empresa": total_empresa >= qtd_exigida,
+        "profissionais": linhas,
+        "profissionais_aptos": [l["nome"] for l in linhas if l["atende"]],
+    })
+
+
+@app.route("/api/atestados/sugerir-grupo", methods=["POST"])
+def sugerir_grupo_atestado_rota():
+    """Sugestão de classe/grupo + quantidade/unidade extraída do texto de uma
+    exigência de edital -- só apoio pro formulário, a pessoa sempre confirma
+    antes de calcular (ver _sugerir_grupo_atestado)."""
+    corpo = request.get_json(silent=True) or {}
+    texto = corpo.get("texto") or ""
+    return jsonify({
+        "sugestoes": _sugerir_grupo_atestado(texto),
+        "extraido": _extrair_quantidade_unidade(texto),
+    })
+
+
+@app.route("/api/atestados/certidoes", methods=["GET"])
+def listar_certidoes_atestados():
+    return jsonify({"itens": [_sem_id_mongo(d) for d in col_atestados_certidoes.find()]})
 
 
 @app.route("/api/gastos", methods=["GET"])
