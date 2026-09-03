@@ -1723,13 +1723,14 @@ def _rodar_varredura_email(email, autor=None):
             "uma tela de consentimento do Outlook uma única vez)."
         )
 
-    ultima = col_varreduras_email.find_one(sort=[("criadoEm", DESCENDING)])
-    if ultima and ultima.get("criadoEm"):
-        # 2h de folga sobre a última varredura -- evita buraco quando um e-mail
-        # chega atrasado na indexação do Graph
-        desde = datetime.utcfromtimestamp(ultima["criadoEm"] / 1000 - 2 * 60 * 60)
-    else:
-        desde = datetime.utcnow() - timedelta(hours=24)
+    # Sempre as últimas 24h a partir de agora -- não "desde a varredura
+    # anterior". Isso era uma janela que ia encolhendo a cada rodada nova
+    # (resumia de onde a última parou, só com 2h de folga), e um e-mail que
+    # chegasse fora dessa janela estreita nunca aparecia em varredura
+    # nenhuma daí pra frente, mesmo estando na caixa. 24h fixas é mais
+    # trabalho pro Graph a cada clique, mas garante que ontem o dia inteiro
+    # sempre está coberto.
+    desde = datetime.utcnow() - timedelta(hours=24)
     desde_iso = desde.strftime("%Y-%m-%dT%H:%M:%SZ")
 
     headers = {"Authorization": f"Bearer {token}"}
