@@ -5873,24 +5873,34 @@ async function exigAbrirConferirAtestado(idx){
     const res = await fetch(Store.base+'/atestados/sugerir-grupo', {method:'POST', headers:Store.headers(), body:JSON.stringify({texto})});
     sugestao = await res.json();
   }catch(e){ /* sem sugestão, a pessoa escolhe manualmente */ }
+  // pontuacao 0 = a busca não achou NENHUMA palavra em comum -- os "top 3"
+  // que voltam nesse caso são só o que sobrou no fallback (sem nenhum sinal
+  // real), não uma sugestão de verdade. Rótulo real de edital confirmou isso
+  // na prática: a exigência de Habilitação técnica costuma ser um texto
+  // genérico ("comprovação de sinalização horizontal e vertical..."), sem
+  // citar o serviço específico -- não tem palavra-chave nenhuma pra achar.
+  // Só pré-seleciona classe/grupo e anuncia "sugestão" quando teve pontuação
+  // de verdade; caso contrário deixa os selects em branco pra não passar a
+  // falsa impressão de que o sistema decidiu algo.
   const top = sugestao.sugestoes[0] || {};
+  const teveSugestaoReal = (top.pontuacao || 0) > 0;
   const classes = Object.keys(ATESTADOS_CLASSES_GRUPOS).sort();
   div.innerHTML =
     '<div class="atestados-busca-form" style="margin-top:8px;">' +
       '<select id="exig-at-classe-'+idx+'" aria-label="Classe do atestado" onchange="exigAtualizarGrupos('+idx+')">' +
-        '<option value="">Classe…</option>' + classes.map(c=>'<option value="'+esc(c)+'"'+(c===top.classe?' selected':'')+'>'+esc(c)+'</option>').join('') +
+        '<option value="">Classe…</option>' + classes.map(c=>'<option value="'+esc(c)+'"'+(teveSugestaoReal && c===top.classe?' selected':'')+'>'+esc(c)+'</option>').join('') +
       '</select>' +
       '<select id="exig-at-grupo-'+idx+'" aria-label="Grupo de serviço"><option value="">Grupo…</option></select>' +
       '<input type="text" id="exig-at-unidade-'+idx+'" placeholder="Unidade" aria-label="Unidade" value="'+esc((sugestao.extraido&&sugestao.extraido.unidade)||'')+'">' +
       '<input type="number" step="0.01" id="exig-at-qtd-'+idx+'" placeholder="Qtd. exigida" aria-label="Quantidade exigida" value="'+((sugestao.extraido&&sugestao.extraido.quantidade)||'')+'">' +
       '<button type="button" class="btn-primary btn-sm" onclick="exigCalcularAtestado('+idx+')">Calcular</button>' +
     '</div>' +
-    (sugestao.sugestoes.length
+    (teveSugestaoReal
       ? '<p class="hint">Sugestão automática (por palavra-chave, sem IA) — confira antes de calcular.'+
         (sugestao.sugestoes.length>1?' Outras opções: '+sugestao.sugestoes.slice(1).map(s=>esc(s.grupo)).join(', ')+'.':'')+'</p>'
-      : '<p class="hint">Não achei uma sugestão automática pra este texto — escolha classe e grupo manualmente.</p>') +
+      : '<p class="hint">O texto desta exigência é genérico demais pra sugerir sozinho (não cita um serviço específico) — escolha classe e grupo manualmente.</p>') +
     '<div id="exig-at-resultado-'+idx+'"></div>';
-  exigAtualizarGrupos(idx, top.grupo);
+  exigAtualizarGrupos(idx, teveSugestaoReal ? top.grupo : null);
 }
 
 function exigAtualizarGrupos(idx, grupoPreSelecionado){
