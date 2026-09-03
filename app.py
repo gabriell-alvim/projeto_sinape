@@ -1707,11 +1707,41 @@ def _ja_respondida_no_outlook(token, conversation_id):
         return False
 
 
-def _rodar_varredura_email(email, autor=None):
+# Opções de período que a tela oferece pro clique em "Executar varredura"
+# (mais "dias", com um número escolhido à parte -- ver _calcular_desde_varredura).
+JANELAS_VARREDURA_EMAIL = {"24h", "12h", "hoje6h", "dias"}
+
+
+def _calcular_desde_varredura(janela, dias=None):
+    """Data/hora (UTC) de onde a varredura deve começar a buscar, conforme a
+    opção escolhida na tela. 'hoje6h' usa GMT-3 sem horário de verão (o
+    Brasil não usa mais desde 2019) -- se ainda não deu 6h da manhã local,
+    conta a partir das 6h de ONTEM (senão a janela ficaria de minutos só,
+    logo depois da meia-noite)."""
+    agora_utc = datetime.utcnow()
+    if janela == "12h":
+        return agora_utc - timedelta(hours=12)
+    if janela == "hoje6h":
+        agora_local = agora_utc - timedelta(hours=3)
+        data_corte = agora_local.date() if agora_local.hour >= 6 else (agora_local - timedelta(days=1)).date()
+        seis_da_manha_local = datetime.combine(data_corte, datetime.min.time()) + timedelta(hours=6)
+        return seis_da_manha_local + timedelta(hours=3)  # volta pra UTC
+    if janela == "dias":
+        try:
+            n = int(dias)
+        except (TypeError, ValueError):
+            n = 1
+        n = max(1, min(90, n))  # teto de segurança -- nada impede alguém digitar 9999
+        return agora_utc - timedelta(days=n)
+    return agora_utc - timedelta(hours=24)  # "24h" e qualquer valor desconhecido caem aqui
+
+
+def _rodar_varredura_email(email, autor=None, janela="24h", dias=None):
     """O miolo de verdade da varredura -- chamado tanto pela rota HTTP
     (clique em "Executar varredura", autor vem da sessão) quanto pelo
     disparo automático do primeiro acesso do dia (autor=None, sem contexto
-    de sessão -- roda numa thread solta, não dá pra ler `session` ali).
+    de sessão -- roda numa thread solta, não dá pra ler `session` ali; usa o
+    padrão 24h, não a escolha de ninguém em particular).
     Levanta RuntimeError com mensagem pronta pra tela quando falta permissão
     -- outra exceção qualquer é falha de rede/Graph (quem chama decide o
     código HTTP certo pra cada caso)."""
@@ -1723,14 +1753,12 @@ def _rodar_varredura_email(email, autor=None):
             "uma tela de consentimento do Outlook uma única vez)."
         )
 
-    # Sempre as últimas 24h a partir de agora -- não "desde a varredura
-    # anterior". Isso era uma janela que ia encolhendo a cada rodada nova
-    # (resumia de onde a última parou, só com 2h de folga), e um e-mail que
-    # chegasse fora dessa janela estreita nunca aparecia em varredura
-    # nenhuma daí pra frente, mesmo estando na caixa. 24h fixas é mais
-    # trabalho pro Graph a cada clique, mas garante que ontem o dia inteiro
-    # sempre está coberto.
-    desde = datetime.utcnow() - timedelta(hours=24)
+    # Sempre a partir de um ponto fixo no tempo (24h/12h/hoje 6h/N dias),
+    # nunca "desde a varredura anterior" -- essa lógica antiga ia encolhendo
+    # a janela a cada rodada nova (resumia de onde a última parou, só com 2h
+    # de folga), e um e-mail que chegasse fora dela nunca mais aparecia em
+    # varredura nenhuma daí pra frente, mesmo estando na caixa.
+    desde = _calcular_desde_varredura(janela, dias)
     desde_iso = desde.strftime("%Y-%m-%dT%H:%M:%SZ")
 
     headers = {"Authorization": f"Bearer {token}"}
@@ -1850,10 +1878,15 @@ def executar_varredura_email():
     delegado -- token do próprio usuário, nunca a caixa de outra pessoa),
     classifica cada mensagem e cruza aviso de portal com processo já
     cadastrado. Clique manual ("Executar varredura") -- o disparo sozinho de
-    manhã usa a mesma _rodar_varredura_email, ver _talvez_disparar_varredura_automatica."""
+    manhã usa a mesma _rodar_varredura_email, ver _talvez_disparar_varredura_automatica.
+    Corpo opcional {janela, dias} -- ver JANELAS_VARREDURA_EMAIL/_calcular_desde_varredura."""
     email = session.get("usuario_email") or ""
+    corpo_req = request.get_json(silent=True) or {}
+    janela = corpo_req.get("janela") or "24h"
+    if janela not in JANELAS_VARREDURA_EMAIL:
+        janela = "24h"
     try:
-        doc = _rodar_varredura_email(email, autor=_autor_da_sessao())
+        doc = _rodar_varredura_email(email, autor=_autor_da_sessao(), janela=janela, dias=corpo_req.get("dias"))
     except RuntimeError as e:
         return jsonify({"erro": str(e)}), 400
     except Exception as e:

@@ -247,6 +247,9 @@ input, select, textarea { font-family:inherit; }
 .email-filtros select, .email-filtros input[type=text] { padding:6px 10px; border:1px solid var(--border); border-radius:6px; font-size:.8rem; }
 .email-filtros input[type=text] { flex:1; min-width:180px; }
 .check-inline { display:inline-flex; align-items:center; gap:5px; font-size:.78rem; color:var(--slate-mid); white-space:nowrap; }
+.varredura-janela-area { display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin-top:10px; padding-top:10px; border-top:1px dashed var(--border); }
+.varredura-janela-area select { padding:6px 10px; border:1px solid var(--border); border-radius:6px; font-size:.8rem; }
+#varredura-dias-custom { width:90px; padding:6px 10px; border:1px solid var(--border); border-radius:6px; font-size:.8rem; }
 .email-item { cursor:default; } /* .prazo-item base tem cursor:pointer (é um <button> nos outros usos); aqui o card não é mais o alvo do clique, só o título e os botões dentro */
 .email-item-topo { display:flex; align-items:center; justify-content:space-between; gap:10px; }
 .email-item-acoes { margin-top:8px; }
@@ -1292,6 +1295,17 @@ th.sortable:hover { color:var(--teal-mid); }
     </div>
     <div id="email-conteudo">
       <p class="relatorio-vazio">Carregando…</p>
+    </div>
+    <div class="varredura-janela-area">
+      <select id="varredura-email-janela" class="btn-sm" aria-label="Período da varredura" onchange="fecharVarreduraDiasCustom()">
+        <option value="24h" selected>Últimas 24h</option>
+        <option value="12h">Últimas 12h</option>
+        <option value="hoje6h">Hoje (desde 06:00)</option>
+      </select>
+      <button type="button" class="btn-sm" id="btn-varredura-dias-toggle" onclick="toggleVarreduraDiasCustom()" aria-label="Escolher outro número de dias pra varredura">➕ Outro período</button>
+      <span id="varredura-dias-custom-wrap" style="display:none;">
+        <input type="number" id="varredura-dias-custom" min="1" max="90" step="1" placeholder="Nº de dias" aria-label="Quantidade de dias da varredura, no lugar das opções acima">
+      </span>
     </div>
     <div class="modal-actions">
       <button class="btn-ghost" onclick="fecharModal('modal-emails')">Fechar</button>
@@ -6523,12 +6537,44 @@ async function abrirPainelEmails(){
   }
 }
 
+// Alterna o campo "Nº de dias" -- fica escondido por padrão, só some quando
+// a pessoa clica em "➕ Outro período". Escolher uma das opções prontas do
+// select fecha esse campo de novo (fecharVarreduraDiasCustom), pra não ficar
+// um número velho esquecido ali competindo com a escolha nova.
+function toggleVarreduraDiasCustom(){
+  const wrap = document.getElementById('varredura-dias-custom-wrap');
+  const abrindo = wrap.style.display === 'none';
+  wrap.style.display = abrindo ? 'inline-block' : 'none';
+  if(abrindo) document.getElementById('varredura-dias-custom').focus();
+  else document.getElementById('varredura-dias-custom').value = '';
+}
+function fecharVarreduraDiasCustom(){
+  document.getElementById('varredura-dias-custom-wrap').style.display = 'none';
+  document.getElementById('varredura-dias-custom').value = '';
+}
+
 async function rodarVarreduraEmails(){
   const btn = document.getElementById('btn-varredura-email');
   const original = btn.textContent;
+  // o campo de dias personalizado, quando visível E preenchido, manda por
+  // cima da opção pronta selecionada no <select> -- é a forma de "outro
+  // período" ganhar do 24h/12h/hoje sem precisar de um terceiro controle
+  // pra dizer "qual dos dois vale".
+  const diasWrap = document.getElementById('varredura-dias-custom-wrap');
+  const diasInput = document.getElementById('varredura-dias-custom');
+  const usarDiasCustom = diasWrap.style.display !== 'none' && diasInput.value.trim() !== '';
+  let corpo;
+  if(usarDiasCustom){
+    const dias = Math.max(1, Math.min(90, parseInt(diasInput.value, 10) || 1));
+    corpo = { janela: 'dias', dias };
+  } else {
+    corpo = { janela: document.getElementById('varredura-email-janela').value };
+  }
   btn.disabled = true; btn.textContent = '⏳ Varrendo…';
   try{
-    const res = await fetch(Store.base + '/emails/varredura', { method:'POST', headers: Store.headers() });
+    const res = await fetch(Store.base + '/emails/varredura', {
+      method:'POST', headers: Store.headers(), body: JSON.stringify(corpo),
+    });
     const g = await res.json();
     if(!res.ok) throw new Error(g.erro || ('Servidor respondeu ' + res.status));
     EMAILS_ULTIMA = g;
@@ -7999,6 +8045,19 @@ function a11yAtualizarItens(manterNivel, silencioso){
       });
       const btnLimpar = modalAberto.querySelector('#email-filtros .btn-sm');
       if(btnLimpar) itensModal.push({el:btnLimpar, label:'Limpar filtros'});
+    }
+    // Período da varredura (select + "outro período" + campo de dias) --
+    // ao contrário dos filtros acima, fica sempre visível (não depende de
+    // já ter rodado uma varredura), então entra sempre que o modal é este.
+    if(modalAberto.id === 'modal-emails'){
+      const janelaSel = modalAberto.querySelector('#varredura-email-janela');
+      if(janelaSel) itensModal.push({el:janelaSel, label:'Período da varredura'});
+      const btnOutroPeriodo = modalAberto.querySelector('#btn-varredura-dias-toggle');
+      if(btnOutroPeriodo) itensModal.push({el:btnOutroPeriodo, label:'Outro período (escolher nº de dias)'});
+      const diasInput = modalAberto.querySelector('#varredura-dias-custom');
+      if(diasInput && diasInput.closest('#varredura-dias-custom-wrap').style.display !== 'none'){
+        itensModal.push({el:diasInput, label:'Número de dias da varredura'});
+      }
     }
     modalAberto.querySelectorAll('.modal-actions button').forEach(b=>{
       itensModal.push({el:b, label:b.textContent.trim()});
