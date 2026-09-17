@@ -2206,6 +2206,10 @@ const Store = {
   async listarTimesheet(){ return (await this._req('GET','/comercial/timesheet')).timesheet || []; },
   async salvarTimesheetMes(mes, total){ return this._req('PUT','/comercial/timesheet/'+encodeURIComponent(mes), {total}); },
   async excluirTimesheetMes(mes){ return this._req('DELETE','/comercial/timesheet/'+encodeURIComponent(mes)); },
+  async listarLancamentosTimesheet(){ return (await this._req('GET','/comercial/timesheet/lancamentos')).lancamentos || []; },
+  async criarLancamentoTimesheet(l){ return this._req('POST','/comercial/timesheet/lancamentos', l); },
+  async salvarLancamentoTimesheet(id, l){ return this._req('PUT','/comercial/timesheet/lancamentos/'+encodeURIComponent(id), l); },
+  async excluirLancamentoTimesheet(id){ return this._req('DELETE','/comercial/timesheet/lancamentos/'+encodeURIComponent(id)); },
   async importarBackupComercial(payload){ return this._req('POST','/comercial/importar', payload); },
   async snapshotAnteriorComercial(){ return this._req('GET','/comercial/snapshot-anterior'); },
   async restaurarAnteriorComercial(){ return this._req('POST','/comercial/restaurar-anterior'); },
@@ -3555,7 +3559,7 @@ function irParaProcesso(id){
    dados que realmente persistem no Mongo. */
 
 const COM = { oportunidades:[], equipe:[], meta:{ano:new Date().getFullYear(), metaAnual:0, valorCarteiraInicial:0},
-              timesheet:[], atas:[], carregado:false, paginaAtiva:'demandas' };
+              timesheet:[], timesheetLanc:[], atas:[], carregado:false, paginaAtiva:'demandas' };
 
 const COM_PAGINAS = [
   {id:'demandas',       nome:'Acompanhamento de Demandas',      grupo:'Demandas'},
@@ -3849,11 +3853,12 @@ async function abrirPainelGerencial(){
   comercialAbrirPagina(COM.paginaAtiva || 'demandas');
 }
 async function comercialCarregarDados(){
-  const [oportunidades, equipe, meta, timesheet, atas] = await Promise.all([
+  const [oportunidades, equipe, meta, timesheet, timesheetLanc, atas] = await Promise.all([
     Store.listarOportunidades(), Store.listarEquipeComercial(),
-    Store.obterMetaComercial(), Store.listarTimesheet(), Store.listarAtasComercial(),
+    Store.obterMetaComercial(), Store.listarTimesheet(), Store.listarLancamentosTimesheet(), Store.listarAtasComercial(),
   ]);
-  COM.oportunidades = oportunidades; COM.equipe = equipe; COM.meta = meta; COM.timesheet = timesheet; COM.atas = atas;
+  COM.oportunidades = oportunidades; COM.equipe = equipe; COM.meta = meta; COM.timesheet = timesheet;
+  COM.timesheetLanc = timesheetLanc; COM.atas = atas;
   COM.carregado = true;
   document.getElementById('com-subtitulo').textContent =
     COM.oportunidades.length+' oportunidade(s) · Meta '+calcAnoCom()+': '+
@@ -3910,7 +3915,8 @@ function a11yItensComercial(){
 function comercialExportar(){
   const payload = {
     exportadoEm: new Date().toISOString(), sistema: 'DATA SIN — Comercial',
-    oportunidades: COM.oportunidades, equipe: COM.equipe, meta: COM.meta, timesheet: COM.timesheet, atas: COM.atas,
+    oportunidades: COM.oportunidades, equipe: COM.equipe, meta: COM.meta, timesheet: COM.timesheet,
+    timesheetLancamentos: COM.timesheetLanc, atas: COM.atas,
   };
   const blob = new Blob([JSON.stringify(payload, null, 2)], {type:'application/json'});
   const url = URL.createObjectURL(blob);
@@ -4415,29 +4421,137 @@ async function comSalvarMeta(ev){
 }
 COM_RENDERERS['meta'] = pageMetaComercial;
 
-/* ── TIMESHEET (HORAS) ── */
+/* ── TIMESHEET (HORAS) ──
+   Lançamento diário (Data/Colaborador/Modalidade/Atividade/Cliente/Processo/
+   Horas...) -- mesmas colunas do Controle de Produtividade.xlsx do setor,
+   ver [[timesheet-controle-produtividade]] na memória. Cada lançamento salvo
+   aqui já soma sozinho no total do mês que /api/comercial/timesheet devolve
+   (o backend agrega, não o front) -- por isso "Horas Dedicadas" em
+   Produtividade se atualiza sem nenhum passo extra. O antigo formulário de
+   "mês + total manual" continua existindo, recolhido, só como ajuste pros
+   meses que não tiverem nenhum lançamento (histórico anterior a esta versão). */
+const OPC_TIMESHEET = {
+  tipo: ['', 'Público', 'Privado'],
+  retrabalho: ['Não', 'Sim'],
+  status: ['Concluída', 'Em andamento', 'Pendente'],
+};
+const CAMPOS_LANCAMENTO_TIMESHEET = [
+  {key:'data', label:'Data', tipo:'date'},
+  {key:'colaborador', label:'Colaborador', tipo:'text'},
+  {key:'modalidade', label:'Modalidade', tipo:'text', placeholder:'Ex.: Novos contratos, Reunião, Desenvolvimento do Setor…'},
+  {key:'atividade', label:'Atividade', tipo:'text', span:'span-full'},
+  {key:'cliente', label:'Cliente', tipo:'text', placeholder:'Deixe em branco se for atividade interna'},
+  {key:'tipo', label:'Tipo', tipo:'select', opcoes:OPC_TIMESHEET.tipo},
+  {key:'processoId', label:'Processo (ID)', tipo:'text'},
+  {key:'horas', label:'Horas', tipo:'number', step:'0.25', placeholder:'Ex.: 3.5'},
+  {key:'retrabalho', label:'Retrabalho?', tipo:'select', opcoes:OPC_TIMESHEET.retrabalho, onchange:'comToggleRetrabalhoTs(this.value)'},
+  {key:'motivoRetrabalho', label:'Motivo do retrabalho', tipo:'text', span:'span-full'},
+  {key:'unidade', label:'Unidade', tipo:'text'},
+  {key:'status', label:'Status', tipo:'select', opcoes:OPC_TIMESHEET.status},
+  {key:'observacoes', label:'Observações', tipo:'textarea', span:'span-full'},
+];
+function comToggleRetrabalhoTs(valor){
+  const w = document.getElementById('wrap-motivoRetrabalho');
+  if(w) w.style.display = valor==='Sim' ? '' : 'none';
+}
+let COM_TS_FILTRO_MES = '';
 function pageTimesheetComercial(){
-  const linhas = COM.timesheet.slice().sort((a,b)=>a.mes.localeCompare(b.mes));
+  const meses = [...new Set(COM.timesheetLanc.map(l=>l.data.slice(0,7)))].sort().reverse();
+  const lancamentos = COM.timesheetLanc
+    .filter(l=> !COM_TS_FILTRO_MES || l.data.slice(0,7)===COM_TS_FILTRO_MES)
+    .slice().sort((a,b)=> b.data.localeCompare(a.data));
+  const totalFiltro = lancamentos.reduce((a,l)=>a+(Number(l.horas)||0),0);
+  const manuais = COM.timesheet.slice().sort((a,b)=>a.mes.localeCompare(b.mes));
   return `
+  <div class="kpi-row">
+    <div class="kpi-item green"><div class="kpi-rot">${COM_TS_FILTRO_MES?'Horas no mês filtrado':'Horas lançadas (todos os meses)'}</div><div class="kpi-val">${fmtNum(totalFiltro)}h</div><div class="kpi-sub">alimenta "Horas Dedicadas" em Produtividade</div></div>
+  </div>
   <div class="sec-card">
-    <div class="sec-head"><span class="sec-title">⏱ Timesheet (Horas)</span></div>
+    <div class="sec-head"><span class="sec-title">⏱ Lançamentos diários</span>
+      <button class="btn-sm violet" onclick="comAbrirFormLancamentoTs()">+ Novo lançamento</button></div>
     <div class="sec-body">
-      <p class="hint">Importa o total de horas dedicadas por mês — alimenta "Horas Dedicadas" no indicador de Produtividade.</p>
+      <div class="field-grid" style="margin-bottom:14px;">
+        <div class="field"><label for="com-ts-filtro-mes">Filtrar por mês</label>
+          <select id="com-ts-filtro-mes" onchange="COM_TS_FILTRO_MES=this.value; comercialAbrirPagina('timesheet');">
+            <option value="">Todos os meses</option>
+            ${meses.map(m=>{ const [ano,mn]=m.split('-'); return '<option value="'+esc(m)+'"'+(m===COM_TS_FILTRO_MES?' selected':'')+'>'+MES_NOMES[Number(mn)-1]+'/'+ano+'</option>'; }).join('')}
+          </select>
+        </div>
+      </div>
+      ${lancamentos.length===0 ? '<p class="com-empty">Nenhum lançamento '+(COM_TS_FILTRO_MES?'neste mês':'registrado ainda')+'.</p>' :
+      '<div class="tbl-wrap"><table class="edit-table"><thead><tr><th>Data</th><th>Colaborador</th><th>Atividade</th><th>Cliente</th><th>Horas</th><th>Retrab.</th><th></th></tr></thead><tbody id="ts-lancamentos-tbody">' +
+        lancamentos.map(l=>{
+          const dataBR = l.data.split('-').reverse().join('/');
+          return '<tr><td>'+esc(dataBR)+'</td><td>'+esc(l.colaborador)+'</td><td>'+esc(l.atividade||'—')+'</td>' +
+            '<td>'+esc(l.cliente||'—')+'</td><td>'+fmtNum(l.horas)+'h</td><td>'+(l.retrabalho?'Sim':'—')+'</td>' +
+            '<td class="row-actions"><button class="btn-sm" onclick="comAbrirFormLancamentoTs(\''+esc(l.id)+'\')">Editar</button>' +
+            '<button class="btn-sm danger" onclick="comExcluirLancamentoTs(\''+esc(l.id)+'\')">Excluir</button></td></tr>';
+        }).join('') + '</tbody></table></div>'}
+    </div>
+  </div>
+  <details class="sec-card">
+    <summary style="cursor:pointer;padding:14px 16px;font-family:var(--font-display);font-weight:600;color:var(--slate);">🛠 Ajuste manual (só pros meses sem nenhum lançamento)</summary>
+    <div class="sec-body">
+      <p class="hint">Serve pra registrar um total já conhecido de um mês antigo, anterior a existir o lançamento diário. Assim que um mês tiver pelo menos um lançamento diário, o ajuste manual dele deixa de valer — o total passa a vir da soma dos lançamentos.</p>
       <form id="com-form-timesheet" onsubmit="return comSalvarTimesheetMes(event)" class="field-grid" style="margin-bottom:16px;">
         <div class="field"><label for="com-ts-mes">Mês</label><input type="month" id="com-ts-mes" required></div>
         <div class="field"><label for="com-ts-total">Total de horas</label><input type="number" step="0.5" min="0" id="com-ts-total" required></div>
         <div class="field" style="justify-content:flex-end;"><button type="submit" class="btn-primary">Salvar mês</button></div>
       </form>
-      ${linhas.length===0 ? '<p class="com-empty">Nenhum mês registrado ainda.</p>' :
-      '<div class="tbl-wrap"><table class="edit-table"><thead><tr><th>Mês</th><th>Total de horas</th><th></th></tr></thead><tbody>' +
-        linhas.map(t=>{
+      ${manuais.length===0 ? '<p class="com-empty">Nenhum ajuste manual registrado.</p>' :
+      '<div class="tbl-wrap"><table class="edit-table"><thead><tr><th>Mês</th><th>Total de horas</th><th></th></tr></thead><tbody id="ts-manual-tbody">' +
+        manuais.map(t=>{
           const [ano,mesNum] = t.mes.split('-');
           const label = MES_NOMES[Number(mesNum)-1]+'/'+ano;
           return '<tr><td>'+esc(label)+'</td><td>'+fmtNum(t.total)+'h</td>' +
             '<td class="row-actions"><button class="btn-sm danger" onclick="comExcluirTimesheetMes(\''+esc(t.mes)+'\')">Excluir</button></td></tr>';
         }).join('') + '</tbody></table></div>'}
     </div>
-  </div>`;
+  </details>`;
+}
+function comAbrirFormLancamentoTs(id){
+  const l = id ? COM.timesheetLanc.find(x=>x.id===id) : {data: new Date().toISOString().slice(0,10), retrabalho:'Não', status:'Concluída', unidade:'Sinape'};
+  const valores = Object.assign({}, l, {retrabalho: l.retrabalho===true||l.retrabalho==='Sim' ? 'Sim' : 'Não'});
+  const corpo = document.getElementById('comercial-form-body');
+  corpo.innerHTML =
+    '<h3>'+(id?'Editar':'Novo')+' Lançamento de Horas</h3>' +
+    '<form id="com-form-lancamento-ts" onsubmit="return comSalvarLancamentoTs(event,'+(id?"'"+esc(id)+"'":'null')+')">' +
+      '<div class="field-grid">' + CAMPOS_LANCAMENTO_TIMESHEET.map(c=>campoComercialHTML(c, valores[c.key])).join('') + '</div>' +
+      '<div class="modal-actions">' +
+        '<button type="button" class="btn-ghost" onclick="fecharModal(\'modal-comercial-form\')">Cancelar</button>' +
+        '<button type="submit" class="btn-primary">Salvar</button>' +
+      '</div>' +
+    '</form>';
+  abrirModal('modal-comercial-form');
+  comToggleRetrabalhoTs(valores.retrabalho);
+  const primeiro = corpo.querySelector('[data-key]');
+  if(primeiro) primeiro.focus();
+}
+async function comSalvarLancamentoTs(ev, id){
+  ev.preventDefault();
+  const rec = lerCamposComerciais(document.getElementById('com-form-lancamento-ts'));
+  rec.retrabalho = rec.retrabalho === 'Sim';
+  if(!rec.data){ toast('Informe a data.'); return false; }
+  if(!rec.colaborador || !rec.colaborador.trim()){ toast('Informe o colaborador.'); return false; }
+  if(!rec.horas || Number(rec.horas)<=0){ toast('Informe as horas (maior que zero).'); return false; }
+  try{
+    if(id) await Store.salvarLancamentoTimesheet(id, rec);
+    else await Store.criarLancamentoTimesheet(rec);
+    toast('Lançamento salvo.');
+    fecharModal('modal-comercial-form');
+    await comercialCarregarDados();
+    comercialAbrirPagina('timesheet');
+  }catch(e){ toast('Erro ao salvar: '+e.message); }
+  return false;
+}
+async function comExcluirLancamentoTs(id){
+  if(!confirm('Excluir este lançamento de horas?')) return;
+  try{
+    await Store.excluirLancamentoTimesheet(id);
+    toast('Lançamento excluído.');
+    await comercialCarregarDados();
+    comercialAbrirPagina('timesheet');
+  }catch(e){ toast('Erro ao excluir: '+e.message); }
 }
 async function comSalvarTimesheetMes(ev){
   ev.preventDefault();
@@ -4453,20 +4567,34 @@ async function comSalvarTimesheetMes(ev){
   return false;
 }
 async function comExcluirTimesheetMes(mes){
-  if(!confirm('Excluir o registro de horas de '+mes+'?')) return;
+  if(!confirm('Excluir o ajuste manual de '+mes+'?')) return;
   try{
     await Store.excluirTimesheetMes(mes);
-    toast('Mês excluído.');
+    toast('Ajuste excluído.');
     await comercialCarregarDados();
     comercialAbrirPagina('timesheet');
   }catch(e){ toast('Erro ao excluir: '+e.message); }
 }
 COM_RENDERERS['timesheet'] = pageTimesheetComercial;
 function a11yItensComercial_timesheet(){
-  return Array.from(document.querySelectorAll('#com-conteudo tbody tr')).map(tr=>{
-    const label = tr.children[0]?.textContent.trim() || 'mês';
-    return {el: tr.querySelector('.btn-sm.danger'), label: 'Excluir horas de: '+label};
+  const filtro = document.getElementById('com-ts-filtro-mes');
+  const lancamentos = Array.from(document.querySelectorAll('#ts-lancamentos-tbody tr')).flatMap(tr=>{
+    const label = (tr.children[1]?.textContent.trim()||'lançamento') + ' em ' + (tr.children[0]?.textContent.trim()||'');
+    return [
+      {el: tr.querySelector('.btn-sm:not(.danger)'), label: 'Editar: '+label},
+      {el: tr.querySelector('.btn-sm.danger'), label: 'Excluir: '+label},
+    ];
   }).filter(i=>i.el);
+  const manuais = Array.from(document.querySelectorAll('#ts-manual-tbody tr')).map(tr=>{
+    const label = tr.children[0]?.textContent.trim() || 'mês';
+    return {el: tr.querySelector('.btn-sm.danger'), label: 'Excluir ajuste manual de: '+label};
+  }).filter(i=>i.el);
+  return [
+    {el: document.querySelector('#com-conteudo .btn-sm.violet'), label:'Novo lançamento de horas'},
+    ...(filtro ? [{el: filtro, label:'Filtrar lançamentos por mês'}] : []),
+    ...lancamentos,
+    ...manuais,
+  ].filter(i=>i.el);
 }
 
 /* ── Chart.js sob demanda — só quando a área Comercial abre uma página de

@@ -85,9 +85,13 @@ Rotas:
   DELETE  /api/comercial/equipe/<id>          → remove
   GET     /api/comercial/meta                 → meta anual de carteira (singleton)
   PUT     /api/comercial/meta                 → substitui a meta
-  GET     /api/comercial/timesheet            → horas dedicadas por mês
-  PUT     /api/comercial/timesheet/<mes>      → upsert do total do mês (AAAA-MM)
-  DELETE  /api/comercial/timesheet/<mes>      → remove o mês
+  GET     /api/comercial/timesheet            → horas dedicadas por mês (soma dos lançamentos diários; cai pro total manual só nos meses sem nenhum lançamento)
+  PUT     /api/comercial/timesheet/<mes>      → ajuste manual do total do mês (AAAA-MM) -- só vale enquanto o mês não tiver lançamento
+  DELETE  /api/comercial/timesheet/<mes>      → remove o ajuste manual do mês
+  GET     /api/comercial/timesheet/lancamentos       → lista os apontamentos diários de horas (?mes=AAAA-MM filtra)
+  POST    /api/comercial/timesheet/lancamentos       → cria um apontamento {data, colaborador, modalidade, atividade, cliente, tipo, processoId, horas, retrabalho, motivoRetrabalho, unidade, status, observacoes}
+  PUT     /api/comercial/timesheet/lancamentos/<id>  → substitui um apontamento
+  DELETE  /api/comercial/timesheet/lancamentos/<id>  → remove um apontamento
   GET     /api/comercial/atas                 → lista as atas de reunião da área (mais recente primeiro)
   POST    /api/comercial/atas                 → cria uma ata {data, participantes, assuntos:[...]}
   PUT     /api/comercial/atas/<id>            → substitui a ata (inclusive editar/adicionar assuntos)
@@ -257,6 +261,11 @@ col_comercial_oportunidades = db["comercial_oportunidades"]
 col_comercial_equipe = db["comercial_equipe"]
 col_comercial_meta = db["comercial_meta"]
 col_comercial_timesheet = db["comercial_timesheet"]
+# lançamentos diários do timesheet (um por apontamento de horas) -- fonte
+# de verdade nova; col_comercial_timesheet (mês/total) vira fallback manual
+# só usado nos meses que não têm nenhum lançamento (ver listar_timesheet)
+col_comercial_timesheet_lanc = db["comercial_timesheet_lancamentos"]
+col_comercial_timesheet_lanc.create_index([("data", ASCENDING)])
 col_comercial_atas = db["comercial_atas"]
 col_comercial_snapshot_anterior = db["comercial_snapshot_anterior"]
 col_processos_excluidos = db["processos_excluidos"]
@@ -4043,12 +4052,29 @@ def salvar_meta_comercial():
 
 @app.route("/api/comercial/timesheet", methods=["GET"])
 def listar_timesheet():
-    docs = col_comercial_timesheet.find().sort("_id", ASCENDING)
-    return jsonify({"timesheet": [{"mes": d["_id"], "total": d.get("total") or 0} for d in docs]})
+    """Total de horas por mês -- fonte primária é a soma dos lançamentos
+    diários (col_comercial_timesheet_lanc); o registro manual antigo
+    (col_comercial_timesheet, mês/total) só é usado como fallback nos meses
+    que ainda não têm nenhum lançamento, pra não perder histórico anterior
+    a essa funcionalidade."""
+    somas = {}
+    for d in col_comercial_timesheet_lanc.find({}, {"data": 1, "horas": 1}):
+        mes = (d.get("data") or "")[:7]
+        if mes:
+            somas[mes] = somas.get(mes, 0) + float(d.get("horas") or 0)
+    manuais = {d["_id"]: float(d.get("total") or 0) for d in col_comercial_timesheet.find()}
+    meses = sorted(set(somas) | set(manuais))
+    return jsonify({"timesheet": [
+        {"mes": m, "total": somas.get(m, manuais.get(m, 0)),
+         "origem": "lancamentos" if m in somas else "manual"}
+        for m in meses
+    ]})
 
 
 @app.route("/api/comercial/timesheet/<mes>", methods=["PUT"])
 def salvar_timesheet_mes(mes):
+    """Ajuste manual de um mês -- só vale enquanto aquele mês não tiver
+    nenhum lançamento diário lançado (ver listar_timesheet)."""
     if not re.match(r"^\d{4}-\d{2}$", mes):
         return jsonify({"erro": "Mês deve estar no formato AAAA-MM"}), 400
     corpo = request.get_json(silent=True) or {}
@@ -4062,6 +4088,93 @@ def excluir_timesheet_mes(mes):
     r = col_comercial_timesheet.delete_one({"_id": mes})
     if not r.deleted_count:
         return jsonify({"erro": "Mês não encontrado"}), 404
+    return jsonify({"ok": True})
+
+
+CAMPOS_LANCAMENTO_TIMESHEET = (
+    "data", "colaborador", "modalidade", "atividade", "cliente", "tipo",
+    "processoId", "horas", "retrabalho", "motivoRetrabalho", "unidade",
+    "status", "observacoes",
+)
+
+
+def _validar_lancamento_timesheet(corpo):
+    data = (corpo.get("data") or "").strip()
+    if not re.match(r"^\d{4}-\d{2}-\d{2}$", data):
+        return None, jsonify({"erro": "Informe 'data' no formato AAAA-MM-DD"}), 400
+    colaborador = (corpo.get("colaborador") or "").strip()
+    if not colaborador:
+        return None, jsonify({"erro": "Informe 'colaborador'"}), 400
+    try:
+        horas = float(corpo.get("horas") or 0)
+    except (TypeError, ValueError):
+        return None, jsonify({"erro": "'horas' inválido"}), 400
+    if horas <= 0:
+        return None, jsonify({"erro": "'horas' deve ser maior que zero"}), 400
+    doc = {
+        "data": data,
+        "colaborador": colaborador,
+        "modalidade": (corpo.get("modalidade") or "").strip(),
+        "atividade": (corpo.get("atividade") or "").strip(),
+        "cliente": (corpo.get("cliente") or "").strip(),
+        "tipo": (corpo.get("tipo") or "").strip(),
+        "processoId": (corpo.get("processoId") or "").strip(),
+        "horas": horas,
+        "retrabalho": bool(corpo.get("retrabalho")),
+        "motivoRetrabalho": (corpo.get("motivoRetrabalho") or "").strip(),
+        "unidade": (corpo.get("unidade") or "Sinape").strip(),
+        "status": (corpo.get("status") or "Concluída").strip(),
+        "observacoes": (corpo.get("observacoes") or "").strip(),
+    }
+    return doc, None, None
+
+
+@app.route("/api/comercial/timesheet/lancamentos", methods=["GET"])
+def listar_lancamentos_timesheet():
+    """Lista os apontamentos diários; ?mes=AAAA-MM filtra por mês."""
+    mes = (request.args.get("mes") or "").strip()
+    filtro = {}
+    if mes:
+        if not re.match(r"^\d{4}-\d{2}$", mes):
+            return jsonify({"erro": "'mes' deve estar no formato AAAA-MM"}), 400
+        filtro = {"data": {"$regex": "^" + re.escape(mes)}}
+    docs = col_comercial_timesheet_lanc.find(filtro).sort("data", DESCENDING)
+    return jsonify({"lancamentos": [_sem_id_mongo(d) for d in docs]})
+
+
+@app.route("/api/comercial/timesheet/lancamentos", methods=["POST"])
+def criar_lancamento_timesheet():
+    doc, erro, codigo = _validar_lancamento_timesheet(request.get_json(silent=True) or {})
+    if erro:
+        return erro, codigo
+    doc["_id"] = str(uuid.uuid4())
+    doc["autor"] = _autor_da_sessao()
+    doc["criadoEm"] = datetime.utcnow().isoformat()
+    col_comercial_timesheet_lanc.insert_one(doc)
+    return jsonify(_sem_id_mongo(doc)), 201
+
+
+@app.route("/api/comercial/timesheet/lancamentos/<lid>", methods=["PUT"])
+def editar_lancamento_timesheet(lid):
+    atual = col_comercial_timesheet_lanc.find_one({"_id": lid})
+    if not atual:
+        return jsonify({"erro": "Lançamento não encontrado"}), 404
+    doc, erro, codigo = _validar_lancamento_timesheet(request.get_json(silent=True) or {})
+    if erro:
+        return erro, codigo
+    doc["autor"] = atual.get("autor")
+    doc["criadoEm"] = atual.get("criadoEm")
+    doc["editadoPor"] = _autor_da_sessao()
+    doc["editadoEm"] = datetime.utcnow().isoformat()
+    col_comercial_timesheet_lanc.replace_one({"_id": lid}, {**doc, "_id": lid})
+    return jsonify(_sem_id_mongo({**doc, "_id": lid}))
+
+
+@app.route("/api/comercial/timesheet/lancamentos/<lid>", methods=["DELETE"])
+def excluir_lancamento_timesheet(lid):
+    r = col_comercial_timesheet_lanc.delete_one({"_id": lid})
+    if not r.deleted_count:
+        return jsonify({"erro": "Lançamento não encontrado"}), 404
     return jsonify({"ok": True})
 
 
@@ -4152,6 +4265,7 @@ def _capturar_estado_comercial_atual() -> dict:
                                or {"_id": _META_ID, "ano": date.today().year,
                                    "metaAnual": 0, "valorCarteiraInicial": 0}),
         "timesheet": [{"mes": d["_id"], "total": d.get("total") or 0} for d in col_comercial_timesheet.find()],
+        "timesheetLancamentos": [_sem_id_mongo(d) for d in col_comercial_timesheet_lanc.find()],
         "atas": [_sem_id_mongo(d) for d in col_comercial_atas.find()],
         "certidoes": [_sem_id_mongo(d) for d in col_atestados_certidoes.find()],
         "conversoesUnidade": [_sem_id_mongo(d) for d in col_atestados_conversoes.find()],
@@ -4248,6 +4362,7 @@ def _aplicar_backup_comercial(corpo: dict) -> dict:
     # Mesmo cuidado de "atas": só mexe na coleção quando o campo vem no
     # arquivo, pra um backup antigo (sem esses campos) não apagar dado já
     # importado antes.
+    n_lancamentos = _substituir_colecao_opcional(col_comercial_timesheet_lanc, corpo.get("timesheetLancamentos"))
     n_certidoes = _substituir_colecao_opcional(col_atestados_certidoes, corpo.get("certidoes"))
     n_conversoes = _substituir_colecao_opcional(col_atestados_conversoes, corpo.get("conversoesUnidade"))
     n_locais = _substituir_colecao_opcional(col_atestados_locais, corpo.get("locaisAtuacao"), item_e_string=True)
@@ -4262,6 +4377,7 @@ def _aplicar_backup_comercial(corpo: dict) -> dict:
         "oportunidades": len(oportunidades),
         "equipe": len(equipe),
         "timesheet": len(timesheet),
+        "timesheetLancamentos": n_lancamentos,
         "atas": n_atas,
         "certidoes": n_certidoes,
         "conversoesUnidade": n_conversoes,
