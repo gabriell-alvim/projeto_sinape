@@ -1741,16 +1741,25 @@ def _ja_respondida_no_outlook(token, conversation_id):
 
 # Opções de período que a tela oferece pro clique em "Executar varredura"
 # (mais "dias", com um número escolhido à parte -- ver _calcular_desde_varredura).
-JANELAS_VARREDURA_EMAIL = {"24h", "12h", "hoje6h", "dias"}
+JANELAS_VARREDURA_EMAIL = {"ultima", "24h", "12h", "hoje6h", "dias"}
 
 
-def _calcular_desde_varredura(janela, dias=None):
+def _calcular_desde_varredura(janela, dias=None, email=None):
     """Data/hora (UTC) de onde a varredura deve começar a buscar, conforme a
-    opção escolhida na tela. 'hoje6h' usa GMT-3 sem horário de verão (o
+    opção escolhida na tela. 'ultima' retoma de onde a última varredura DESTA
+    caixa (email) rodou, com 5 min de folga pra não perder e-mail que chegou
+    durante ela; sem varredura anterior (ou anterior a esse campo existir)
+    cai em 24h, e nunca vai além de 90 dias atrás. 'hoje6h' usa GMT-3 sem horário de verão (o
     Brasil não usa mais desde 2019) -- se ainda não deu 6h da manhã local,
     conta a partir das 6h de ONTEM (senão a janela ficaria de minutos só,
     logo depois da meia-noite)."""
     agora_utc = datetime.utcnow()
+    if janela == "ultima":
+        ultima = col_varreduras_email.find_one({"email": email}, sort=[("criadoEm", DESCENDING)]) if email else None
+        if ultima and ultima.get("criadoEm"):
+            inicio = datetime.utcfromtimestamp(ultima["criadoEm"] / 1000) - timedelta(minutes=5)
+            return max(inicio, agora_utc - timedelta(days=90))
+        return agora_utc - timedelta(hours=24)
     if janela == "12h":
         return agora_utc - timedelta(hours=12)
     if janela == "hoje6h":
@@ -1785,12 +1794,11 @@ def _rodar_varredura_email(email, autor=None, janela="24h", dias=None):
             "uma tela de consentimento do Outlook uma única vez)."
         )
 
-    # Sempre a partir de um ponto fixo no tempo (24h/12h/hoje 6h/N dias),
-    # nunca "desde a varredura anterior" -- essa lógica antiga ia encolhendo
-    # a janela a cada rodada nova (resumia de onde a última parou, só com 2h
-    # de folga), e um e-mail que chegasse fora dela nunca mais aparecia em
-    # varredura nenhuma daí pra frente, mesmo estando na caixa.
-    desde = _calcular_desde_varredura(janela, dias)
+    # "ultima" é escolha explícita da pessoa na tela; as demais opções são
+    # pontos fixos no tempo. A lógica antiga (retomar SEMPRE da anterior, sem
+    # a pessoa escolher) encolhia a janela sozinha a cada rodada e escondia
+    # e-mail que ainda estava na caixa -- por isso só vale quando pedida.
+    desde = _calcular_desde_varredura(janela, dias, email)
     desde_iso = desde.strftime("%Y-%m-%dT%H:%M:%SZ")
 
     headers = {"Authorization": f"Bearer {token}"}
@@ -1862,6 +1870,8 @@ def _rodar_varredura_email(email, autor=None, janela="24h", dias=None):
         "_id": uuid.uuid4().hex,
         "criadoEm": _agora_ms(),
         "autor": autor or email,
+        "email": email,
+        "janela": janela,
         "desde": desde_iso,
         "total_verificado": len(itens),
         "contagens": contagens,
